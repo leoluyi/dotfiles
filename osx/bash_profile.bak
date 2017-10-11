@@ -1,0 +1,39 @@
+# https://zlargon.github.io/blog/MAC/tools/mac-terminal/
+# http://misc.flogisoft.com/bash/tip_colors_and_formatting
+# add file ~/.bash_profile
+
+# enables color in the terminal bash shell
+export CLICOLOR=1
+
+# sets up the color scheme for list
+#export LSCOLORS=ExFxCxDxBxegedabagacad
+#export LSCOLORS=Gxfxcxdxbxegedabagacad
+export LSCOLORS=Exgxcxdxbxegedabagacad
+
+# enables color for iTerm
+export TERM=xterm-256color
+#export PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
+export PS1='\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]\$ '
+
+# sets up proper alias commands when called
+alias ls='ls -vG'
+alias ll='ls -laFhH'
+alias la='ls -ah'
+alias l='ls -CF'
+alias vi='vim'
+
+function mkcd {
+  if [ ! -n "$1" ]; then
+    echo "Enter a directory name"
+  elif [ -d $1 ]; then
+    echo "\`$1' already exists"
+  else
+    mkdir $1 && cd $1
+  fi
+}
+
+# source the users bashrc if it exists
+if [ -f ~/.bashrc ]; then
+   source ~/.bashrc
+fi
+

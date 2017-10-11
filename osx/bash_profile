@@ -1,0 +1,83 @@
+# https://zlargon.github.io/blog/MAC/tools/mac-terminal/
+# add file ~/.bash_profile
+# enables color in the terminal bash shell
+export CLICOLOR=1
+
+# sets up the color scheme for list
+export LSCOLORS=Exgxcxdxbxegedabagacad
+
+# enables color for iTerm
+export TERM=xterm-256color
+
+# The various escape codes that we can use to color our prompt.
+#   Based on work by woods
+#
+#   https://gist.github.com/31967
+
+        RED="\[\033[0;31m\]"
+     YELLOW="\[\033[0;33m\]"
+      GREEN="\[\033[0;32m\]"
+       BLUE="\[\033[0;34m\]"
+  LIGHT_RED="\[\033[1;31m\]"
+LIGHT_GREEN="\[\033[1;32m\]"
+      WHITE="\[\033[1;37m\]"
+ LIGHT_GRAY="\[\033[0;37m\]"
+ COLOR_NONE="\[\e[0m\]"
+
+#PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
+
+# bash-git-prompt
+# https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
+if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+  #GIT_PROMPT_START='\[\e]0;\u@\h:\w\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[0m\]'
+  GIT_PROMPT_THEME=Custom
+  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+fi
+
+# sets up proper alias commands when called
+alias ls='ls -hG'
+alias ll='ls -laFhH'
+alias la='ls -Ah'
+alias vi='vim'
+alias l='ls -CF'
+
+function mkcd {
+  if [ ! -n "$1" ]; then
+    echo "Enter a directory name"
+  elif [ -d $1 ]; then
+    echo "\`$1' already exists"
+  else
+    mkdir $1 && cd $1
+  fi
+}
+
+# Bash Completion
+# https://github.com/scop/bash-completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
+fi
+
+# Powerline Settings
+#. ~/anaconda/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
+#. /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+
+# added by Anaconda3 4.2.0 installer
+# export PATH="/Users/leoluyi/anaconda/bin:$PATH"
+
+# The fuck
+eval $(thefuck --alias)
+
+# gitignore api
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# pyenv-virtualenv
+if which pyenv-virtualenv-init > /dev/null; then
+  eval "$(pyenv virtualenv-init -)"
+fi
+

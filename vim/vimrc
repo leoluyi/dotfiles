@@ -1,0 +1,79 @@
+" Turn on Color Syntax Highlighting 
+syntax on
+filetype off
+
+colorscheme elflord
+
+" Backspace
+"http://stackoverflow.com/questions/11560201/backspace-key-not-working-in-vim-vi
+set backspace=indent,eol,start
+
+set autoindent
+set textwidth=80
+
+" Spaces are better than a tab character
+set expandtab
+set smarttab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" line number, use "set nonumber" to take off
+set number
+
+" Necesary  for lots of cool vim things
+set nocompatible
+
+set ruler
+set encoding=utf-8
+set fileencoding=utf-8
+
+" mouse scroll
+"set mouse=a
+
+
+" Vundle settings ------------------------------------
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-scripts/Vim-R-plugin'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" ----------------------------------------------------
+
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
+let vimrplugin_applescript=0
+let vimrplugin_vsplit=1
+let vimrplugin_assign = 0
+
+" ---------------------------------------------------
+
+let g:airline_theme="powerlineish" 
+
+"这个是安装字体后 必须设置此项" 
+let g:airline_powerline_fonts = 1   
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
+
+
