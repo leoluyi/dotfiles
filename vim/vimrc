@@ -28,9 +28,12 @@ set ruler
 set encoding=utf-8
 set fileencoding=utf-8
 
-" mouse scroll
+" Mouse scroll
 "set mouse=a
 
+" Finding files
+" Display all matchng files when using :find tab autocompletion
+set wildmenu
 
 " Vundle settings ------------------------------------
 
