@@ -1,6 +1,6 @@
 {
     "python_interpreter": "python",
-    "anaconda_linting": true,
+    "anaconda_linting": false,
     "swallow_startup_errors": true,
 
     /*
@@ -45,8 +45,9 @@
         "E309",
         "E501",
         "W291",
+        "W293",
         "W391"
     ],
 
-    "anaconda_linter_phantoms": true
+    "anaconda_linter_phantoms": false
 }
