@@ -1,6 +1,6 @@
 {
 	"centurion_folder_icons": true,
-	"color_scheme": "Packages/Color Scheme - Default/Mariana.tmTheme",
+	"color_scheme": "Packages/User/SublimeLinter/Mariana (SL).tmTheme",
 	"contrasted_quick_panel": true,
 	"contrasted_sidebar": true,
 	"contrasted_tabs": true,
@@ -29,7 +29,7 @@
 	"show_definitions": true,
 	"show_encoding": true,
 	"show_line_endings": true,
-	"theme": "Flatland Dark.sublime-theme",
+	"theme": "Adaptive.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"word_wrap": false
 }
