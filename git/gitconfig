@@ -1,0 +1,14 @@
+[core]
+	autocrlf = input
+	excludesfile = /Users/leoluyi/.gitignore_global
+[user]
+	name = leoluyi
+	email = leo0650@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[alias]
+	unstage = reset HEAD --
+	st = status -s
+	lg = log --graph --decorate --oneline
