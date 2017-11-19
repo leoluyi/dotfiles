@@ -41,6 +41,7 @@ alias ll='ls -laFhH'
 alias la='ls -Ah'
 alias vi='vim'
 alias l='ls -CF'
+alias sourcetree='open -a SourceTree'
 
 function mkcd {
   if [ ! -n "$1" ]; then
