@@ -32,7 +32,6 @@ SublimeLinter-flake8,
 SublimeLinter,
 TerminalView,
 Theme - Flatland,
-Themes Menu Switcher,
 Tomorrow Color Schemes,
 Zen Tabs
 ```
