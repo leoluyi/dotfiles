@@ -1,5 +1,8 @@
 # Package Control
 
+Use **Package Control: Advanced Install Package** and paste following:
+
+```
 A File Icon,
 Anaconda,
 AutoFileName,
@@ -32,4 +35,4 @@ Theme - Flatland,
 Themes Menu Switcher,
 Tomorrow Color Schemes,
 Zen Tabs
-
+```
