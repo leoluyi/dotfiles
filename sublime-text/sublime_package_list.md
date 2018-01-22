@@ -21,6 +21,7 @@ LiveReload,
 Markdown Preview,
 MarkdownEditing,
 Open Folder,
+OpenPath
 Open URL,
 OpenHere,
 Pretty JSON,
