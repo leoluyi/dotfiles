@@ -12,7 +12,9 @@ $ brew list
 $ brew install \
 tmux \
 libxml2 \
+bash \
 bash-completion \
+coreutils \
 vim \
 wget \
 grep \
