@@ -36,9 +36,9 @@ if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
 fi
 
 # sets up proper alias commands when called
-alias ls='ls -hG'
-alias ll='ls -laFhH'
-alias la='ls -Ah'
+alias ls='/usr/local/bin/gls --color --group-directories-first'
+alias ll='ls -lhaFH'
+alias la='ls -A'
 alias vi='vim'
 alias l='ls -CF'
 alias sourcetree='open -a SourceTree'
