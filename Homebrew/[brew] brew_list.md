@@ -10,33 +10,34 @@ $ brew list
 
 ```
 $ brew install \
-tmux \
-libxml2 \
 bash \
 bash-completion \
+bfg \
 coreutils \
-vim \
-wget \
-grep \
-git \
-openssl \
-tree \
-htop-osx \
+czmq \
+ffmpeg \
+gcc \
 gdal \
-proj \
-libzip \
+git \
+gnupg \
+grep \
+grip \
+highlight \
+htop-osx \
 libpng \
 libsvg \
-highlight \
-grip \
-tldr \
-czmq \
-bfg \
-gcc \
-youtube-dl \
-ffmpeg \
+libxml2 \
+libzip \
+openssl \
+proj \
 pyenv \
 pyenv-virtualenv
+tldr \
+tmux \
+tree \
+vim \
+wget \
+youtube-dl \
 ```
 
 ### Update
