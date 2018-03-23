@@ -102,7 +102,7 @@ sourcetree \
 java \
 transmission \
 xquartz \
-qlcolorcode qlstephen qlmarkdown quicklook-json quicklook-csv qlimagesize qlvideo
+qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
 ```
 
 ### References
