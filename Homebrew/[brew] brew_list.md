@@ -97,6 +97,7 @@ $ brew cask uninstall <PGMNAME>
 
 ```
 $ brew cask install \
+iina \
 iterm2 \
 sourcetree \
 java \
