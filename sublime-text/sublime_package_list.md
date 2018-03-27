@@ -32,6 +32,7 @@ SideBarEnhancements,
 SublimeLinter-flake8,
 SublimeLinter,
 TerminalView,
+Text Pastry
 Theme - Flatland,
 Tomorrow Color Schemes,
 Zen Tabs
