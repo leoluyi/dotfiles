@@ -10,6 +10,7 @@ $ brew list
 
 ```
 $ brew install \
+asciinema  # record terminal sessions \
 bash \
 bash-completion \
 bfg \
