@@ -29,10 +29,12 @@ libpng \
 libsvg \
 libxml2 \
 libzip \
+npm \
 openssl \
 proj \
 pyenv \
 pyenv-virtualenv
+terminal-notifier \
 tldr \
 tmux \
 tree \
