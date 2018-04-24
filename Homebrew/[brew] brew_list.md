@@ -102,8 +102,9 @@ $ brew cask uninstall <PGMNAME>
 $ brew cask install \
 iina \
 iterm2 \
-sourcetree \
 java \
+keycastr
+sourcetree \
 transmission \
 xquartz \
 qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
