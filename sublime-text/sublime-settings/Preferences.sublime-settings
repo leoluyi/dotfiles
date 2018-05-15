@@ -1,35 +1,27 @@
 {
-	"centurion_folder_icons": true,
-	"color_scheme": "Packages/User/SublimeLinter/Mariana (SL).tmTheme",
-	"contrasted_quick_panel": true,
-	"contrasted_sidebar": true,
-	"contrasted_tabs": true,
-	"detect_indentation": false,
-	"ensure_newline_at_eof_on_save": true,
-	"find_selected_text": true,
-	"font_face": "MesloLGMDZ-RegularForPowerline",
-	"font_size": 17,
-	"highlight_modified_tabs": true,
-	"icon_file_type_enable": true,
-	"ignored_packages":
-	[
-		"Icon Fonts",
-		"Kite",
-		"Vintage"
-	],
-	"material_theme_big_fileicons": true,
-	"mdpopups.sublime_user_lang_map": null,
-	"mdpopups.use_sublime_highlighter": true,
-	"open_files_in_new_window": false,
-	"preview_on_click": false,
-	"rulers":
-	[
-		80
-	],
-	"show_definitions": true,
-	"show_encoding": true,
-	"show_line_endings": true,
-	"theme": "Adaptive.sublime-theme",
-	"translate_tabs_to_spaces": true,
-	"word_wrap": false
+    "color_scheme": "Packages/User/SublimeLinter/Mariana (SL).tmTheme",
+    "detect_indentation": false,
+    "ensure_newline_at_eof_on_save": true,
+    "find_selected_text": false,
+    "font_face": "MesloLGMDZ-RegularForPowerline",
+    "font_size": 18,
+    "highlight_modified_tabs": true,
+    "ignored_packages":
+    [
+        "Icon Fonts",
+        "Vintage"
+    ],
+    "open_files_in_new_window": false,
+    "preview_on_click": false,
+    "rulers":
+    [
+        80
+    ],
+    "show_definitions": true,
+    "show_encoding": true,
+    "show_line_endings": true,
+    "theme": "Default.sublime-theme",
+    "translate_tabs_to_spaces": true,
+    "word_wrap": false,
+    "update_check": false
 }
