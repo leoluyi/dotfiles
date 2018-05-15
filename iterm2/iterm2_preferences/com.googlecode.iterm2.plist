@@ -826,6 +826,8 @@
 	<false/>
 	<key>DimOnlyText</key>
 	<false/>
+	<key>HideTab</key>
+	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
@@ -870,9 +872,9 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>781 176 584 253 0 0 1440 878 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>346 312 796 473 0 0 1440 878 </string>
+	<string>346 404 796 473 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>377 149 865 575 0 0 1440 900 </string>
+	<string>368 208 865 552 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>176 71 865 552 0 0 1440 878 </string>
 	<key>New Bookmarks</key>
@@ -1613,7 +1615,7 @@
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -1668,9 +1670,11 @@
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.39098557692307701</real>
+	<key>StretchTabsToFillBar</key>
+	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
