@@ -31,6 +31,7 @@ libxml2 \
 libzip \
 npm \
 openssl \
+pipenv \
 proj \
 pyenv \
 pyenv-virtualenv
