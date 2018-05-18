@@ -22,6 +22,6 @@
     "show_line_endings": true,
     "theme": "Default.sublime-theme",
     "translate_tabs_to_spaces": true,
-    "word_wrap": false,
-    "update_check": false
+    "update_check": false,
+    "word_wrap": false
 }
