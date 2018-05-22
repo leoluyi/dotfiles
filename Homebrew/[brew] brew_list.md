@@ -32,6 +32,7 @@ libzip \
 npm \
 openssl \
 pipenv \
+plowshare \  # 免空神器
 proj \
 pyenv \
 pyenv-virtualenv
