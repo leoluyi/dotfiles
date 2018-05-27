@@ -29,8 +29,10 @@ libpng \
 libsvg \
 libxml2 \
 libzip \
+john-jumbo \ # password crack
 npm \
 openssl \
+pdfcrack \   # pdf password crack
 pipenv \
 plowshare \  # 免空神器
 proj \
