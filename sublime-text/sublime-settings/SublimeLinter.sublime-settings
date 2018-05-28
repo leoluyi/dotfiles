@@ -1,7 +1,14 @@
 // SublimeLinter Settings - User
 {
-    "gutter_theme": "Knob",
+    "debug": true,
+    
+    "paths": {
+        "linux": [],
+        "osx": ["/Users/leoluyi/.pyenv/shims/"],
+        "windows": []
+    },
 
+    "gutter_theme": "Knob",
     "linters": {
         "flake8": {
             "disable": false,
