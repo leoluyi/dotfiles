@@ -42,6 +42,7 @@ alias la='ls -A'
 alias vi='vim'
 alias l='ls -CF'
 alias sourcetree='open -a SourceTree'
+alias pipenv-subl='pipenv run subl'
 
 function mkcd {
   if [ ! -n "$1" ]; then
