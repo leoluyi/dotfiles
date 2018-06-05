@@ -29,6 +29,7 @@ OpenHere,
 OpenPath
 Pretty JSON,
 R-Box,
+Remote​Subl,
 requirementstxt,
 SendCode,
 PyYapf,
