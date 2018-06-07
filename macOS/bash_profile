@@ -1,11 +1,9 @@
-# https://zlargon.github.io/blog/MAC/tools/mac-terminal/
-# add file ~/.bash_profile
+# .bash_profile
+
 # enables color in the terminal bash shell
 export CLICOLOR=1
-
 # sets up the color scheme for list
 export LSCOLORS=Exgxcxdxbxegedabagacad
-
 # enables color for iTerm
 export TERM=xterm-256color
 
@@ -26,13 +24,13 @@ LIGHT_GREEN="\[\033[1;32m\]"
 
 #PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
 
-# bash-git-prompt
-# https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
-if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-  #GIT_PROMPT_START='\[\e]0;\u@\h:\w\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[0m\]'
-  GIT_PROMPT_THEME=Custom
-  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+ . ~/.bash_aliases
 fi
 
 # sets up proper alias commands when called
@@ -44,6 +42,7 @@ alias l='ls -CF'
 alias sourcetree='open -a SourceTree'
 alias pipenv-subl='pipenv run subl'
 
+# custom functions
 function mkcd {
   if [ ! -n "$1" ]; then
     echo "Enter a directory name"
@@ -54,24 +53,27 @@ function mkcd {
   fi
 }
 
+# gitignore api
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# bash-git-prompt
+# https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
+if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+  GIT_PROMPT_ONLY_IN_REPO=0
+  GIT_PROMPT_THEME=Custom
+  #GIT_PROMPT_START='\[\e]0;\u@\h:\w\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[0m\]'
+fi
+
 # Bash Completion
 # https://github.com/scop/bash-completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-. $(brew --prefix)/etc/bash_completion
+  . $(brew --prefix)/etc/bash_completion
 fi
-
-# Powerline Settings
-#. ~/anaconda/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
-#. /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-
-# added by Anaconda3 4.2.0 installer
-# export PATH="/Users/leoluyi/anaconda/bin:$PATH"
 
 # The fuck
 eval $(thefuck --alias)
-
-# gitignore api
-function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
