@@ -4,7 +4,7 @@
     
     "paths": {
         "linux": [],
-        "osx": ["/Users/leoluyi/.pyenv/shims/"],
+        "osx": ["~/.pyenv/shims/"],
         "windows": []
     },
 
