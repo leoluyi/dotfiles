@@ -3,7 +3,7 @@
     "debug": true,
     
     "paths": {
-        "linux": [],
+        "linux": ["~/.pyenv/shims/"],
         "osx": ["~/.pyenv/shims/"],
         "windows": []
     },
