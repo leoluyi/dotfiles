@@ -23,3 +23,14 @@ $ brew install tmux
 # Ubuntu
 $ sudo wget -O /usr/share/bash-completion/tmux_completion https://github.com/imomaliev/tmux-bash-completion/raw/master/completions/tmux
 ```
+
+## Set copy-mode-vi
+
+https://sanctum.geek.nz/arabesque/vi-mode-in-tmux/
+
+Add the following line in `~/.tmux/.tmux.conf`
+
+```
+# ~/.tmux/.tmux.conf
+set-window-option -g mode-keys vi
+```
