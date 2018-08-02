@@ -1,4 +1,3 @@
-
 # tmux settings
 
 ## Oh My Tmux!
@@ -28,9 +27,11 @@ $ sudo wget -O /usr/share/bash-completion/tmux_completion https://github.com/imo
 
 https://sanctum.geek.nz/arabesque/vi-mode-in-tmux/
 
-Add the following line in `~/.tmux/.tmux.conf`
+Add the following line in `~/.tmux/.tmux.conf.local`
 
 ```
-# ~/.tmux/.tmux.conf
-set-window-option -g mode-keys vi
+# ~/.tmux/.tmux.conf.local
+set -g status-keys vi
+set -g mode-keys vi
 ```
+
