@@ -35,6 +35,8 @@ set fileencoding=utf-8
 " Display all matchng files when using :find tab autocompletion
 set wildmenu
 
+set autoread
+
 " Vundle settings ------------------------------------
 
 set nocompatible              " be iMproved, required
@@ -74,7 +76,7 @@ let vimrplugin_assign = 0
 
 let g:airline_theme="powerlineish" 
 
-"这个是安装字体后 必须设置此项" 
+" Fonts 
 let g:airline_powerline_fonts = 1   
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
