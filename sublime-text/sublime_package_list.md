@@ -42,7 +42,6 @@ Super Calculator,
 TerminalView,
 Text Pastry
 Theme - Flatland,
-Tomorrow Color Schemes,
 Virtualenv,
 Zen Tabs
 ```
