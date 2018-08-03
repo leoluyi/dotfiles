@@ -2,6 +2,8 @@
 
 Use **Package Control: Advanced Install Package** and paste following:
 
+__macOS__
+
 ```
 A File Icon,
 Anaconda,
@@ -28,20 +30,26 @@ MarkdownEditing,
 Open Folder,
 Open URL,
 OpenHere,
-OpenPath
+OpenPath,
 Pretty JSON,
+PyYapf Python Formatter,
 R-Box,
 RemoteSubl,
 requirementstxt,
 SendCode,
-PyYapf Python Formatter,
 SideBarEnhancements,
 SublimeLinter,
 SublimeLinter-flake8,
 Super Calculator,
 TerminalView,
-Text Pastry
+Text Pastry,
 Theme - Flatland,
 Virtualenv,
-Zen Tabs
+Zen Tabs,
+```
+
+__Windows__
+
+```
+Terminal
 ```
