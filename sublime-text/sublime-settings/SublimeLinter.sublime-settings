@@ -5,7 +5,7 @@
     "paths": {
         "linux": ["~/.pyenv/shims/"],
         "osx": ["~/.pyenv/shims/"],
-        "windows": []
+        "windows": ["C:/Anaconda3/Scripts/"]
     },
 
     "gutter_theme": "Knob",
