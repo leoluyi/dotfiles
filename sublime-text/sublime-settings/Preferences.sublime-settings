@@ -8,6 +8,7 @@
     "highlight_modified_tabs": true,
     "ignored_packages":
     [
+        "Flask Completions",
         "Icon Fonts",
         "Vintage"
     ],
