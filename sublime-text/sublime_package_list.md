@@ -58,6 +58,7 @@ Text Pastry,
 Theme - Flatland,
 URLEncode,
 Virtualenv,
+Whitespace,
 WordCount,
 Zen Tabs,
 ```

@@ -40,6 +40,7 @@ plowshare \  # 免空神器
 proj \
 pyenv \
 pyenv-virtualenv
+rename \
 terminal-notifier \
 tldr \
 tmux \
