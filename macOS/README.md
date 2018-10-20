@@ -1,4 +1,12 @@
-# Upgrade to bash 4 in Mac OS X
+# macOS bash_profile
+
+Download bash_profile:
+
+```
+$ wget -O ~/.bash_profile https://github.com/leoluyi/dotfiles/raw/master/macOS/bash_profile
+```
+
+## Upgrade to bash 4 in Mac OS X
 
 http://clubmate.fi/upgrade-to-bash-4-in-mac-os-x/
 
@@ -17,7 +25,7 @@ Update homebrew packet database and install bash:
 $ brew update && brew install bash
 ```
 
-`$ bash --version` might show 4.x, but bash might be using 3.x still, it’s straightforward to test, the global variable `$BASH_VERSION` returns bash version.
+`$ bash --version` might show 4.x, but bash might be using 3.x still, it's straightforward to test, the global variable `$BASH_VERSION` returns bash version.
 
 ### Configure terminal to use it 
 

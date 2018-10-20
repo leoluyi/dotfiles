@@ -1,6 +1,6 @@
 {
     "bold_folder_labels": true,
-    "color_scheme": "Packages/User/SublimeLinter/Mariana (SL).tmTheme",
+    "color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
     "detect_indentation": false,
     "ensure_newline_at_eof_on_save": true,
     "find_selected_text": false,
@@ -11,6 +11,7 @@
     "ignored_packages":
     [
         "Flask Completions",
+        "Highlight Dodgy Chars",
         "Icon Fonts",
         "Vintage"
     ],

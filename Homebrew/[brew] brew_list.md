@@ -10,10 +10,11 @@ $ brew list
 
 ```
 $ brew install \
-asciinema  # record terminal sessions \
+asciinema \ # record terminal sessions
 atomicparsley \ # setting metadata into MPEG-4
 bash \
 bash-completion \
+bash-git-prompt \
 bfg \
 coreutils \
 czmq \
@@ -26,22 +27,23 @@ grep \
 grip \
 highlight \
 htop-osx \
+john-jumbo \ # password crack
 libpng \
 libsvg \
 libxml2 \
 libzip \
-john-jumbo \ # password crack
 npm \
 openssl \
-pdfcrack \   # pdf password crack
+pdfcrack \  # pdf password crack
 pip-completion \
 pipenv \
-plowshare \  # 免空神器
+plowshare \ # 免空神器
 proj \
 pyenv \
-pyenv-virtualenv
+pyenv-virtualenv \
 rename \
 terminal-notifier \
+thefuck \
 tldr \
 tmux \
 tree \
@@ -49,8 +51,7 @@ vim \
 wget \
 youtube-dl \
 
-$ brew tap eddieantonio/eddieantonio
-$ brew install imgcat
+$ brew tap eddieantonio/eddieantonio && brew install imgcat
 ```
 
 ### Update
@@ -113,7 +114,7 @@ $ brew cask install \
 iina \
 iterm2 \
 java \
-keycastr
+keycastr \
 sourcetree \
 transmission \
 xquartz \
