@@ -115,6 +115,7 @@ deckset \
 iina \
 iterm2 \
 java \
+jupyter-notebook-viewer \
 keycastr \
 sourcetree \
 transmission \
