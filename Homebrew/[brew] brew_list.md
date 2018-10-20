@@ -111,6 +111,7 @@ $ brew cask uninstall <PGMNAME>
 
 ```
 $ brew cask install \
+deckset \
 iina \
 iterm2 \
 java \
