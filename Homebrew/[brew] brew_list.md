@@ -16,6 +16,7 @@ bash \
 bash-completion \
 bash-git-prompt \
 bfg \
+cmatrix \
 coreutils \
 czmq \
 ffmpeg \
@@ -42,6 +43,7 @@ proj \
 pyenv \
 pyenv-virtualenv \
 rename \
+shellcheck \
 terminal-notifier \
 thefuck \
 tldr \
