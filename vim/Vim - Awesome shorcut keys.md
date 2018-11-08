@@ -180,8 +180,9 @@ http://vim.wikia.com/wiki/Moving_around
 - cuts to the end of the line `d$` 
 - cuts to the beginning `d0`
 - cuts to first non-whitespace character `df `
-- paste from last yanked text `"0p`
 - copy to the system clipboard `"+y<CR>`
+- paste from last yanked text `"0p`
+- paste from the system clipboard `"+p`
 - replace a word with yanked text: `yiw` in "first" then `viwp` on "second"
 - select to next char "w" `vfw`, select 'til next char "w" `vtw`
 - select in word `viw`
@@ -230,23 +231,23 @@ i vs a:
 
 ### Files
 
-- (special variables) `%` means "the current file"
-- revert to last save `:e!`
-- save `:w new.txt` (save content to `new.txt` while keeping `original.txt` as the opened buffe)
-- save all `:wall` (save all changed buffers)
-- save as `:sav new.txt` (first write content to the file `new.txt`, then hide buffer `original.txt`, finally open `new.txt` as the current buffer)
-- rename files: `:sav new_name` then `:!rm <C-r>#`
-- `<C-r>#` will instantly expand to an alternate-file 
-- open recently opened files (mru) `<leader>f`
-- (NERDTree) toggle `<leader>nn`
-- (NERDTree) open/close folder `o`
-- Switch CWD to the directory of the open buffer `<leader>cd`
+- `:w !sudo tee %` force write with sudo trick. `%` (special variables) "the current file"
+- `:w!` force write
+- `:e!` revert to last save
+- `:w new.txt` save (save content to `new.txt` while keeping `original.txt` as the opened buffe)
+- `:wall` save all (save all changed buffers)
+- `:sav new.txt` save as (first write content to the file `new.txt`, then hide buffer `original.txt`, finally open `new.txt` as the current buffer)
+- `:sav new_name` + `:!rm <C-r>#` rename files
+- `<C-r>#`     will instantly expand to an alternate-file 
+- `<leader>f`  open recently opened files (mru)
+- `<leader>nn` (NERDTree) toggle nerdtree
+- `o`          (NERDTree) open/close folder
+- `<leader>cd` Switch CWD to the directory of the open buffer
 
 > Note that filename with "space" must be escaped with backslash `\`.
 
 ### Commands
 
-- force write `:w!`
 - `!` will turn a command into a toggle command `:set cursorline <-> :set nocursorline` == `:set cursorline!`
 
 ### Registers
