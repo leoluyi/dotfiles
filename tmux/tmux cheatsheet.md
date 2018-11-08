@@ -11,7 +11,8 @@
 
 ## Oh My Tmux Features
 
-`C-a` acts as secondary prefix, while keeping default `C-b` prefix
+- `C-a` acts as secondary prefix, while keeping default `C-b` prefix
+- `<prefix> Enter` enters copy-mode; `<esc>` exits copy-mode
 
 **With prefix: `C-a`**
 
@@ -40,7 +41,6 @@ m             toggles mouse mode on or off
 U             launches Urlview (if available)
 F             launches Facebook PathPicker (if available)
 
-Enter         enters copy-mode
 b             lists the paste-buffers
 p             pastes from the top paste-buffer
 P             lets you choose the paste-buffer to paste from
