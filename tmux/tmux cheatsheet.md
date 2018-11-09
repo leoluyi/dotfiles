@@ -2,6 +2,18 @@
 
 - [Oh My Tmux](https://github.com/gpakosz/.tmux)
 - [cheat sheet](https://gist.github.com/henrik/1967800)
+- [tmux command cheat sheet](https://gist.github.com/leoluyi/484f70a9f46040355452e9c40f9109b4)
+
+## Basic Commands
+
+- `tmux` start new
+- `tmux ls` list sessions
+- `tmux new -s <session-name>` start new with session name
+- `tmux a -t <target-session>` attach to named session
+- `tmux a  #` attach to session number
+- `tmux kill-session -t <target-session>` kill session
+- `tmux kill-session -a` close all other sessions
+- `tmux kill-server` or `<C-a> k` kill all tmux windows and sessions
 
 ## Key bindings
 
@@ -46,20 +58,9 @@ p             pastes from the top paste-buffer
 P             lets you choose the paste-buffer to paste from
 ```
 
-## Basic Commands
-
-- `tmux` start new
-- `tmux ls` list sessions
-- `tmux new -s <session-name>` start new with session name
-- `tmux a -t <target-session>` attach to named session
-- `tmux a  #` attach to session number
-- `tmux kill-session -t <target-session>` kill session
-- `tmux kill-session -a` close all other sessions
-- `tmux kill-server` or `<C-a> k` kill all tmux windows and sessions
-
 ## Shorcut keys
 
-**With prefix: `C-a`**
+**With prefix `C-a`**:
 
 ### Sessions
 
@@ -93,6 +94,10 @@ f       find window
 .       move window - prompted for a new number
 i       Display some information about the current window.
 ```
+
+**With command mode `<prefix> :`
+
+- `swap-window -s 3 -t 1` swap (move) window number 3 and window 1. `swap-window -t 0` swap the current window with the top window
 
 ### Panes
 
