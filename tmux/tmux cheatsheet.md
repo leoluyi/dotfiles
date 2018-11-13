@@ -95,7 +95,7 @@ f       find window
 i       Display some information about the current window.
 ```
 
-**With command mode `<prefix> :`
+**With command mode `<prefix>`**:
 
 - `swap-window -s 3 -t 1` swap (move) window number 3 and window 1. `swap-window -t 0` swap the current window with the top window
 
