@@ -113,6 +113,7 @@ $ brew cask uninstall <PGMNAME>
 
 ```
 $ brew cask install \
+dash \
 deckset \
 iina \
 iterm2 \
