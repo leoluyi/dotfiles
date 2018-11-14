@@ -122,7 +122,52 @@
 	<key>DHUserRepo</key>
 	<dict>
 		<key>installed</key>
-		<dict/>
+		<dict>
+			<key>Bokeh</key>
+			<dict>
+				<key>date</key>
+				<date>2018-11-13T15:07:41Z</date>
+				<key>entry</key>
+				<dict>
+					<key>aliases</key>
+					<array>
+						<string>Python interactive visualization library</string>
+						<string>Bokeh Scientific plots</string>
+						<string>web browser visualization</string>
+					</array>
+					<key>authorLinkHref</key>
+					<string>https://github.com/Kapeli/Dash-User-Contributions/tree/master/docsets/Bokeh#readme</string>
+					<key>authorLinkText</key>
+					<string>Joseph Crail</string>
+					<key>name</key>
+					<string>Bokeh</string>
+					<key>platform</key>
+					<string>usercontribBokeh</string>
+					<key>uniqueIdentifier</key>
+					<string>Bokeh</string>
+				</dict>
+			</dict>
+			<key>Scikit</key>
+			<dict>
+				<key>date</key>
+				<date>2018-11-13T15:08:10Z</date>
+				<key>entry</key>
+				<dict>
+					<key>aliases</key>
+					<array/>
+					<key>authorLinkHref</key>
+					<string>https://github.com/Kapeli/Dash-User-Contributions/tree/master/docsets/Scikit#readme</string>
+					<key>authorLinkText</key>
+					<string>Aziz Alto, Josh Devlin, Christian Stade-Schuldt, Joel Nothman</string>
+					<key>name</key>
+					<string>scikit-learn</string>
+					<key>platform</key>
+					<string>usercontribScikit</string>
+					<key>uniqueIdentifier</key>
+					<string>Scikit</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>uninstalled</key>
 		<dict/>
 	</dict>
@@ -160,6 +205,11 @@
 				<key>date</key>
 				<date>2018-11-13T14:31:41Z</date>
 			</dict>
+			<key>http://kapeli.com/feeds/Man_Pages.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2018-11-14T14:50:35Z</date>
+			</dict>
 			<key>http://kapeli.com/feeds/MatPlotLib.xml</key>
 			<dict>
 				<key>date</key>
@@ -186,6 +236,8 @@
 	</dict>
 	<key>isPinned</key>
 	<false/>
+	<key>menuIconBehavior</key>
+	<integer>1</integer>
 	<key>placeholderDelimiter</key>
 	<string>__</string>
 	<key>profiles</key>
@@ -226,6 +278,8 @@
 	<key>shouldRestoreTabs</key>
 	<true/>
 	<key>shouldShowStatusIcon</key>
+	<true/>
+	<key>shouldStartAtLogin</key>
 	<true/>
 	<key>shouldSyncDocsets</key>
 	<true/>
