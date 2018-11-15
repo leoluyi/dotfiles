@@ -11,12 +11,13 @@
     smudge = git-lfs smudge %f
     required = true
 [alias]
-    ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+    ignore = !"gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi $@"
     unstage = reset HEAD --
     st = status -s
     # lg = log --graph --decorate --oneline
     lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    lg3 = !"git lg2 --name-status --find-renames"
     lg = !"git lg1"
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
