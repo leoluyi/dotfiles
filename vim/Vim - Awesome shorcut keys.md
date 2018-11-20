@@ -38,19 +38,7 @@ Motions: `wWbBeEfFtT`
 - `[n]t<o>` Forward until (nth) (o)  (Exclusive)
 - `[n]T<o>` Backward until (nth) (o) (Exclusive)
 
-### Nouns in Vim - Text Objects
-
-- Text Objects: `{}[]()w<>t'"`
-
-- `iw` inner word
-- `it` inner tag
-- `i"` inner quotes
-- `ip` inner paragraph
-- `i(` inner parentheses
-- `as` around sentence
-- select to next char "w" `vfw`, select 'til next char "w" `vtw`
-
-### Advanced motions
+Advanced motions
 
 - `()` Next sentences  ("." delimited words)
 - `{}` Next paragraphs (Next empty line)
@@ -60,6 +48,19 @@ Motions: `wWbBeEfFtT`
 - `^` Front of line (first non-blank)
 - `%` Matching brace/bracket/paren/tag (with matchtag plugin)
 - `$` End of line
+
+### Nouns in Vim - Text Objects
+
+Text Objects: `{}[]()w<>t'"`
+
+- `iw` inner word
+- `it` inner tag
+- `i"` inner quotes
+- `ip` inner paragraph
+- `i(` inner parentheses
+- `i[` inner bracket
+- `as` around sentence
+- select to next char "w" `vfw`, select 'til next char "w" `vtw`
 
 ### Pen to the page
 
