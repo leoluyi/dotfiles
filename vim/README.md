@@ -43,7 +43,7 @@ Install packages
 ```
 $ cd ~/.vim_runtime/my_plugins
 $ git clone https://github.com/tweekmonster/braceless.vim
-$ git clone https://github.com/davidhalter/jedi-vim
+$ git clone --recursive https://github.com/davidhalter/jedi-vim
 $ git clone https://github.com/valloric/vim-indent-guides
 $ git clone https://github.com/asheq/close-buffers.vim
 ```
