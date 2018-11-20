@@ -1,12 +1,5 @@
 # Vim - Awesome shorcut keys
 
-- https://stackoverflow.com/a/26710166/3744499
-- https://www.openfoundry.org/tw/tech-column/2383-vim--buffers-and-windows
-- https://github.com/shawncplus/vim-classes/blob/master/expert-1.md
-- https://github.com/amix/vimrc
-- https://stackoverflow.com/a/5400978
-- https://stackoverflow.com/a/9927057/3744499
-
 ### Update vimrc
 
 ```
@@ -18,9 +11,55 @@ git pull --rebase
 
 - `<leader>` = `,`
 
-### switch modes
+### Switch modes
 
 - `<esc>` or `<C-[>` to normal mode
+
+### Verbs in Vim
+
+- `d` Delete
+- `c` Change
+- `>` Indent
+- `v` Visually select
+- `y` Yank
+
+### Nouns in Vim - Motions
+
+Motions: `wWbBeEfFtT`
+
+- `w` Forward to the beginning of next word
+- `W` Forward to the beginning of the next WORD
+- `b` Backward to the next beginning of a word
+- `B` Backward to the next beginning of a WORD
+- `e` Forward to the next end of word
+- `E` Forward to the next end of WORD
+- `[n]f<o>` Forward until (nth) (o)  (Inclusive)
+- `[n]F<o>` Backward until (nth) (o) (Inclusive)
+- `[n]t<o>` Forward until (nth) (o)  (Exclusive)
+- `[n]T<o>` Backward until (nth) (o) (Exclusive)
+
+### Nouns in Vim - Text Objects
+
+- Text Objects: `{}[]()w<>t'"`
+
+- `iw` inner word
+- `it` inner tag
+- `i"` inner quotes
+- `ip` inner paragraph
+- `i(` inner parentheses
+- `as` around sentence
+- select to next char "w" `vfw`, select 'til next char "w" `vtw`
+
+### Advanced motions
+
+- `()` Next sentences  ("." delimited words)
+- `{}` Next paragraphs (Next empty line)
+- `[n]G` Go to line [n]
+- `gg` Go to the top of the file
+- `0` Front of line
+- `^` Front of line (first non-blank)
+- `%` Matching brace/bracket/paren/tag (with matchtag plugin)
+- `$` End of line
 
 ### Pen to the page
 
@@ -34,52 +73,6 @@ git pull --rebase
 - `O` enter insert mode on the above line
 - `C` Delete from cursor to end of line and begin insert
 
-### Motions
-
-Basics: `wWbBeE`
-
-- `w` Forward to the beginning of next word
-- `W` Forward to the beginning of the next WORD
-- `b` Backward to the next beginning of a word
-- `B` Backward to the next beginning of a WORD
-- `e` Forward to the next end of word
-- `E` Forward to the next end of WORD
-- `[n]f<o>` Forward until (nth) (o)  (Inclusive)
-- `[n]F<o>` Backward until (nth) (o) (Inclusive)
-- `[n]t<o>` Forward until (nth) (o)  (Exclusive)
-- `[n]T<o>` Backward until (nth) (o) (Exclusive)
-
-### Advanced motions
-
-```
-() - Sentences  (". " delimited words)
-{} - Paragraphs (Next empty line)
-
-    Example:
-        d} - Delete until next paragraph (useful for deleting unnecessary conditional blocks)
-
-        if (something)
-        {
-            test
-        }
-
-; - Repeat last motion forward
-, - Repeat last motion backward
-g<hjkl> - Go down a _visual_ line
-    This is some text that's going to wrap so I have to fill in a lot of words. I can never think of things to type here because I'm not a creative person but this will demonstrate visual versus hardbroken lines.
-    This is a second line
-
-<#>G - Go to Line #
-gg   - Go to the top of the file
-
-]] - Next section (Depending on your current filetype this may move between functions)
-[[ - Previous section (see above note)
-0 - Front of line
-^ - Front of line (first non-blank)
-% - Matching brace/bracket/paren/tag(with matchtag plugin, see session 3)
-$ - End of line
-```
-
 ### Searching
 
 - `/`  Forward
@@ -90,25 +83,27 @@ $ - End of line
 - `g#` Word under cursor - backward (unbounded)
 - `n`  Next result, forward
 - `N`  Next result, backward
+- no highlight on search result `:noh` or `<leader><CR>`
+
+### Find and Replace
+
+- `:%s/foo/bar/g` replace 'foo' (in all lines) it with 'bar'.
+- `:s/foo/bar/gi` replace 'foo' (in the current line only) it with 'bar'. (case insensitive)
 
 ### Changing
 
 - `c` Change (Same as d but put me in insert mode)
-    - `cw` - change word
-    - `c<motion>`
-    - `cc` = `S` - Delete current line and enter insert mode
-    - `C` change to end of line
-    - `2cw` - Delete 2 words and enter insert mode
+- `cc` = `S` Delete current line and enter insert mode
+- `C` change to end of line
 - `r` replace single character; `R` replace multiple characters
 - `s` change single character, does the same thing as `x` then `i`
 
 ### Deleting
 
-- `d` - Delete: `[range]d<motion>`
-    - `dd`  - delete current line
-    - `dj`  - delete current and next line (j = down)
-    - `2dj` - delete current and 2 lines downward
-    - `D` delete to end of line;
+- `d` delete motion `[range]d<motion>`
+- `dd` delete current line
+- `d0` delete to the beginning of line
+- `D` or `d$` delete to end of line
 - `x` delete in selection
 
 ### Cut and paste
@@ -118,25 +113,34 @@ $ - End of line
 - `yy` copy line into paste buffer; `dd` cut line into paste buffer
 - `p` paste buffer below cursor line; `P` paste buffer above cursor line
 - `xp` swap two characters (x to delete one character, then p to put it back after the cursor position)
+- `"0p` paste from last yanked text
+- `"+y<CR>` copy to the system clipboard
+- `"+p` paste from the system clipboard
 
-```
-~  - Toggle the case of character under cursor
-g~ - Toggle case of [motion]
-    g~w - Toggle case of cursor -> end of word
-        tr|ue -> g~w -> trUE
-    g~iw - Toggle case of entire word under cursor
-        tr|ue -> g~iw -> TRUE
-```
+### Files
+
+- `:e path/to/file` edit new file (buffer)
+- `:e!` revert to last save
+- `:w !sudo tee %` force write with sudo trick. `%` (special variables) "the current file"
+- `:w!` force write
+- `:w new.txt` save (save content to `new.txt` while keeping `original.txt` as the opened buffe)
+- `:wall` save all (save all changed buffers)
+- `:sav new.txt` save as (first write content to the file `new.txt`, then hide buffer `original.txt`, finally open `new.txt` as the current buffer)
+- `:sav new_name` + `:!rm <C-r>#` (expand to an alternate-file) rename files
+- (mru) `<leader>f`open recently opened files
+- (NERDTree) `<leader>nn` toggle nerdtree
+- (NERDTree) `o` open/close folder
+
+> Note that filename with "space" must be escaped with backslash `\`.
 
 ### Buffers
 
-- edit new file (buffer) `:e path/to/file`
-- list buffers `:ls`
-- switch between alternative buffer `<C-^>` or `:b#`
-- switch to buffer number `N`: `N<C-^>` or `:bN`
-- close (dismiss) current buffer `<leader>bd` or `:Bclose`
-- close all buffers `<leader>ba`
-- open/toggle (bufexplorer) `<leader>o`
+- `<C-^>` or `:b#` switch between alternative files (buffer)
+- `:ls` list buffers
+- `:bN` switch to buffer number
+- `<leader>bd` or `:Bclose` close (dismiss) current buffer
+- `<leader>ba` close all buffers
+- `<leader>o` open/toggle (bufexplorer)
 
 ### Windows
 
@@ -157,61 +161,43 @@ g~ - Toggle case of [motion]
 
 ### CWD (current working directory)
 
-- show CWD `:pwd`
-- switch CWD to the directory of the open buffer `<leader>cd`
-- show current file path `:echo @%`
+- `:pwd` show CWD
+- `<leader>cd` Switch CWD to the directory of the open buffer
+- `:echo @%` show current file path
 
 ### Code editing
 
-- toggle paste mode on and off `<leader>pp`
-- change syntax highlighting `:set syntax=php`
-- (vim-commentary) comment out a line (takes a count) `gcc`
-- (vim-commentary) comment out the selection `gc` 
-- (surround.vim) add quotes in word `ysiw"`
-- (surround.vim) remove the delimiters entirely `ds"`
-- (surround.vim) change surrounding `cs"'`
-- join [count]/selected lines `J`
-- disable line number: `:set nonumber`
+- `<leader>pp` toggle paste mode
+- `:set syntax=python` change syntax highlighting
+- (vim-commentary) `:echo @%` comment out a line (takes a count)
+- (vim-commentary) `gc` comment out the selection
+- (surround.vim) `ysiw"` add quotes in word
+- (surround.vim) `ds"` remove the delimiters entirely
+- (surround.vim) `cs"'` change surrounding
+- `J` join [count]/selected lines
+- `~` Toggle the case of character under cursor. (Visual mode) `U` for uppercase, `u` for lowercase
+- `gUiw` Change current word to uppercase
+- `:set nonumber`disable line number
 
 ### Advanced Editing: jump-select-copy-paste
 
 http://vim.wikia.com/wiki/Moving_around
 
-- cuts to the end of the line `d$` 
-- cuts to the beginning `d0`
 - cuts to first non-whitespace character `df `
-- copy to the system clipboard `"+y<CR>`
-- paste from last yanked text `"0p`
-- paste from the system clipboard `"+p`
 - replace a word with yanked text: `yiw` in "first" then `viwp` on "second"
-- select to next char "w" `vfw`, select 'til next char "w" `vtw`
-- select in word `viw`
-- select in paragraph `vip`
-- select in quotes `vi"`
-- select (all-include) in quotes `va"`
-- jump N lines up/down `N[jk]`
-- jump to previous cursor position \`\` (two back tick)
-- jump to previous line `''`  (two single quotes)
-- jump cursor N times back to unmatched parentheses `[(`, forward `])`
-- jump cursor N times back to unmatched braces `[{`, forward `]}`
-- find next char "w" `fw`, 'til next char "w" `tw`
-- find backward char "w" `Fw`, `Tw` (F or T in opposite direction")
+- `N[jk]` jump N lines up/down
+- \`\` (two back tick) jump to previous cursor position
+- `''` jump to previous line
+- `[(` jump cursor N times back to unmatched parentheses, forward `])`
+- `[{` jump cursor N times back to unmatched braces, forward `]}`
+- `]]` jump to next section (Depending on your current filetype this may move between functions)
+- `[[` jump to previous section
+
+### Folding
+
 - fold selected lines `zf` (manual mode)
 - open/close fold in file `zr`/`zm`. `zR`/`zM` for all levels
 - toggle/open/close single fold `za`/`zo`/`zc`. `zA`/`zO`/`zC` for all levels
-
-```
-# Text objects: {}[]()w<>t'"`
-
-i vs a:
-    i = Inside
-        Example:
-            self.test[obj|ect] -> ci[ -> self.test[|]
-
-    a = Around
-        Example:
-            self.test[obj|ect] -> ca[ -> self.test|
-```
 
 ### Sublime flavor select (vim-multiple-cursors)
 
@@ -221,31 +207,6 @@ i vs a:
 - prev: `<C-p>` remove current virtual cursor + selection and go back on previous match
 - select all: `<A-n>` start muticursor and directly select all matches
 
-### find and replace
-
-- search forward `/`, search backward `?`
-- next result `n`, previous result `N`
-- search forward under the cursor `*`
-- search backward under the cursor `#`
-- no highlight on search result `:noh` or `<leader><CR>`
-
-### Files
-
-- `:w !sudo tee %` force write with sudo trick. `%` (special variables) "the current file"
-- `:w!` force write
-- `:e!` revert to last save
-- `:w new.txt` save (save content to `new.txt` while keeping `original.txt` as the opened buffe)
-- `:wall` save all (save all changed buffers)
-- `:sav new.txt` save as (first write content to the file `new.txt`, then hide buffer `original.txt`, finally open `new.txt` as the current buffer)
-- `:sav new_name` + `:!rm <C-r>#` rename files
-- `<C-r>#`     will instantly expand to an alternate-file 
-- `<leader>f`  open recently opened files (mru)
-- `<leader>nn` (NERDTree) toggle nerdtree
-- `o`          (NERDTree) open/close folder
-- `<leader>cd` Switch CWD to the directory of the open buffer
-
-> Note that filename with "space" must be escaped with backslash `\`.
-
 ### Commands
 
 - `!` will turn a command into a toggle command `:set cursorline <-> :set nocursorline` == `:set cursorline!`
@@ -254,16 +215,28 @@ i vs a:
 
 Special registers:
 
-- `"` Noname buffer - Last `dcsxy`
-- `_` Blackhole buffer
-- `%` Filename
-- `/` Last search
-- `:` Last command
-- `.` Last edit
-- paste from last yanked text `"0p`
+- `""` Noname register - Last `dcsxy`
+- `"0` last yanked text
+- `"0` to `"9` yanked register
+- `"_` Blackhole register
+- `"/` Last search pattern
+- `".` Last inserted text (read only)
+- `"%` Current filename (read only)
+- `"#` Alternate file name (last edited file) (read only)
+- `":` Last command (read only)
 
 ### Misc
 
 - `u` - Undo (See :help undo, it's complicated)
 - `<C-r>` - Redo
 - `.` - Redo last change
+
+## References
+
+- [buffers vs tabs?](https://stackoverflow.com/a/26710166/3744499)
+- [vim--buffers-and-windows](https://www.openfoundry.org/tw/tech-column/2383-vim--buffers-and-windows)
+- [Huckleberry Vim](https://github.com/shawncplus/vim-classes/blob/master/expert-1.md)
+- [vimrc](https://github.com/amix/vimrc)
+- [most-used vim commands/keypresses](https://stackoverflow.com/a/5400978)
+- https://stackoverflow.com/a/9927057/3744499
+- [Vim registers: The basics and beyond](https://www.brianstorti.com/vim-registers/)
