@@ -46,9 +46,11 @@ $ git clone https://github.com/tweekmonster/braceless.vim
 $ git clone --recursive https://github.com/davidhalter/jedi-vim
 $ git clone https://github.com/valloric/vim-indent-guides
 $ git clone https://github.com/asheq/close-buffers.vim
+$ git clone https://github.com/jalvesaq/Nvim-R.git
 ```
 
 - [braceless.vim](https://github.com/tweekmonster/braceless.vim)
 - [jedi-vim](https://github.com/davidhalter/jedi-vim)
 - [vim-indent-guides](https://github.com/valloric/vim-indent-guides)
 - [close-buffers](https://github.com/asheq/close-buffers.vim)
+- [Nvim-R](https://github.com/jalvesaq/Nvim-R)
