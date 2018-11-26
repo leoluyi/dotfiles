@@ -121,6 +121,7 @@ java \
 jupyter-notebook-viewer \
 keycastr \
 sourcetree \
+spectacle \
 transmission \
 xquartz \
 qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
