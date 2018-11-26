@@ -280,7 +280,7 @@
 	<key>shouldShowStatusIcon</key>
 	<true/>
 	<key>shouldStartAtLogin</key>
-	<true/>
+	<false/>
 	<key>shouldSyncDocsets</key>
 	<true/>
 	<key>shouldSyncGeneral</key>
