@@ -178,7 +178,8 @@ Text Objects: `{}[]()w<>t'"`
 - `J` join [count]/selected lines
 - `~` Toggle the case of character under cursor. (Visual mode) `U` for uppercase, `u` for lowercase
 - `gUiw` Change current word to uppercase
-- `:set nonumber`disable line number
+- `:set nonumber` disable line number
+- `:set norelativenumber` disable relative line number
 
 ### Advanced Editing: jump-select-copy-paste
 
