@@ -44,12 +44,13 @@ alias pipenv-subl='pipenv run subl'
 
 # custom functions
 function mkcd {
-  if [ ! -n "$1" ]; then
+  last=$(eval "echo \$$#")
+  if [ ! -n "$last" ]; then
     echo "Enter a directory name"
-  elif [ -d $1 ]; then
-    echo "\`$1' already exists"
+  elif [ -d "$last" ]; then
+    echo "\"$last\" already exists"
   else
-    mkdir $1 && cd $1
+    mkdir "$@" && cd "$last" || exit
   fi
 }
 
@@ -73,7 +74,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 # The fuck
-eval $(thefuck --alias)
+eval "$(thefuck --alias)"
 
 # pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -81,9 +82,13 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # pyenv-virtualenv
-if which pyenv-virtualenv-init > /dev/null; then
+if command -v which pyenv-virtualenv-init > /dev/null; then
   eval "$(pyenv virtualenv-init -)"
 fi
+
+# Fix pyenv bug for git
+# https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
+export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
 
 # env for pipenv
 export PIPENV_IGNORE_VIRTUALENVS=1
@@ -93,3 +98,4 @@ export PIPENV_IGNORE_VIRTUALENVS=1
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
+
