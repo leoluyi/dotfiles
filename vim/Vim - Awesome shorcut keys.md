@@ -121,7 +121,7 @@ Text Objects: `{}[]()w<>t'"`
 ### Files
 
 - `:e path/to/file` edit new file (buffer)
-- `:e!` revert to last save
+- `:e!` revert to last save (or use `:earlier 1f`)
 - `:w !sudo tee %` force write with sudo trick. `%` (special variables) "the current file"
 - `:w!` force write
 - `:w new.txt` save (save content to `new.txt` while keeping `original.txt` as the opened buffe)
@@ -211,7 +211,7 @@ http://vim.wikia.com/wiki/Moving_around
 
 ### Commands
 
-- `!` will turn a command into a toggle command `:set cursorline <-> :set nocursorline` == `:set cursorline!`
+- `!` will turn a command into a toggle command, e.g., `:set cursorline <-> :set nocursorline` == `:set cursorline!`
 
 ### Registers
 
