@@ -123,6 +123,7 @@ keycastr \
 sourcetree \
 spectacle \
 transmission \
+tabula \
 xquartz \
 qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
 ```
