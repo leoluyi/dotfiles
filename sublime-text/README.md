@@ -71,7 +71,7 @@ to a different shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>:
 ```
 Block selection
 
-⌥+click  Block selection using the mouse (Windows: Right Mouse Button + Shift)
+⌥+click  Block selection using the mouse (Windows: Shift + Right Click)
 
 Jumping
 
@@ -79,8 +79,7 @@ Jumping
 
 Adding a Line
 
-⌃+⇧+⬆   Extra cursor on the line above (Windows/Linux: Ctrl+Alt+⬆ and Ctrl+Alt+⬇)
-⌃+⇧+⬇   Extra cursor on the line below
+⌃+⇧+⬆ and ⌃+⇧+⬇    Extra cursor on the line above/below (Windows/Linux: Ctrl+Alt+⬆ and Ctrl+Alt+⬇)
 
 Splitting the Selection into Lines
 
@@ -88,22 +87,22 @@ Splitting the Selection into Lines
 
 Quick Add Next
 
-⌘+L       Select line - Repeat to select next lines
-⌘+D       Select word - Repeat to select next occurrence
+⌘+L        Select line - Repeat to select next lines
+⌘+D        Select word - Repeat to select next occurrence
 ⌘+K, ⌘+D  Individual occurrences can be skipped via Quick Skip Next (Windows: Ctrl+K, Ctrl+D)
-⌘+U       If you go too far, use Undo Selection to step backwards (Windows: Ctrl+U)
+⌘+U        If you go too far, use Undo Selection to step backwards (Windows: Ctrl+U)
 
 Find All
 
-⌃+⌘+G   Select all occurrences of current selection (Windows/Linux: Alt+F3)
+⌃+⌘+G      Select all occurrences of current selection (Windows/Linux: Alt+F3)
 ```
 
 **Navigation/Goto Anywhere**
 
 ```
-⌘+P or ⌘+T  Quick-open files by name
+⌘+P or ⌘+T   Quick-open files by name
 ⌘+R           Goto symbol / Goto word in current file
-⌃+G           Goto line in current file
+⌃+G            Goto line in current file
 ```
 
 ---
