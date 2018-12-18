@@ -4,13 +4,13 @@
 
 Put all files from `sublime-settings` into `~/Library/Application Support/Sublime Text 3/Packages/User/`
 
-### OS X Command Line
+#### OS X Command Line
 
 ```
 $ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin
 ```
 
-### Canceling build
+#### Canceling build
 
 https://stackoverflow.com/a/28397562/3744499
 
@@ -22,10 +22,25 @@ For Windows users, there is no <kbd>Break</kbd> key, so go into Preferences>Key 
 { "keys": ["ctrl+break"], "command": "cancel_build" }
 ```
 
-to a different shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>:
+to a different shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>:
 
 ```
-{ "keys": ["ctrl+alt+b"], "command": "cancel_build" }
+{ "keys": ["ctrl+alt+c"], "command": "cancel_build" }
+```
+
+**Method 2: Use [Chain of Command](https://packagecontrol.io/packages/Chain%20of%20Command)**
+
+```
+    { "keys": ["escape"], "command": "chain", 
+        "args": {"commands": [
+            ["cancel_build"],
+            ["hide_panel", {"cancel": true}]
+        ]},
+        "context":
+        [
+            { "key": "panel_visible", "operator": "equal", "operand": true }
+        ]
+    }
 ```
 
 ---
