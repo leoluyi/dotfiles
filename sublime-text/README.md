@@ -4,11 +4,31 @@
 
 Put all files from `sublime-settings` into `~/Library/Application Support/Sublime Text 3/Packages/User/`
 
-## OS X Command Line
+### OS X Command Line
 
 ```
 $ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin
 ```
+
+### Canceling build
+
+https://stackoverflow.com/a/28397562/3744499
+
+You want to use <kbd>Ctrl</kbd>+<kbd>Break</kbd>. For your own information, just go check under **Tools** in Sublime Text and you'll see **Cancel Build** and the above hotkey. It'll work just fine for infinite loops. Suffice to say, I've had the same happen!
+
+For Windows users, there is no <kbd>Break</kbd> key, so go into Preferences>Key Bindings and change the line:
+
+```
+{ "keys": ["ctrl+break"], "command": "cancel_build" }
+```
+
+to a different shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>:
+
+```
+{ "keys": ["ctrl+alt+b"], "command": "cancel_build" }
+```
+
+---
 
 ## Shorcut keys
 
@@ -17,40 +37,58 @@ $ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/lo
 
 **General**
 
-⌘ + ⇧ + P   Command Palette
-⌃ + `   Python Console
-⌘ + K, ⌘ + B    Toggle side bar
+- Command Palette: <kbd>⌘</kbd>+<kbd>⇧</kbd>+<kbd>P</kbd>
+- Python Console: <kbd>⌃</kbd>+<kbd>`</kbd>
+- Toggle side bar: <kbd>⌘</kbd>+<kbd>K</kbd>, <kbd>⌘</kbd>+<kbd>B</kbd>
 
 **Editing**
 
 ```
-⌘ + ↩       Insert line after
-⌘ + ⇧ + ↩   Insert line before
-⌘ + ⇧ + D   Duplicate line(s)
-⌘ + J       Join line below to the end of the current line
-⌃ + ⇧ + K   Delete current line of cursor
+⌘+↩       Insert line after
+⌘+⇧+↩   Insert line before
+⌘+⇧+D   Duplicate line(s)
+⌘+J       Join line below to the end of the current line
+⌃+⇧+K   Delete current line of cursor
 ```
 
 **Selection and Jump**
 
 ```
-⌥ + click  Block selection using the mouse (Windows: Right Mouse Button + Shift)
-⌃ + M       Jump to closing parentheses Repeat to jump to opening parentheses
-⌃ + ⇧ + ⬆   Extra cursor on the line above (Windows/Linux: Ctrl+Alt+⬆ and Ctrl+Alt+⬇)
-⌃ + ⇧ + ⬇   Extra cursor on the line below
-⌘ + L       Select line - Repeat to select next lines
-⌘ + D       Select word - Repeat to select next occurrence
-⌘ + K, ⌘ + D  Individual occurrences can be skipped via Quick Skip Next
-⌘ + U       If you go too far, use Undo Selection to step backwards
-⌃ + ⌘ + G   Select all occurrences of current selection (Windows/Linux: Alt+F3)
+Block selection
+
+⌥+click  Block selection using the mouse (Windows: Right Mouse Button + Shift)
+
+Jumping
+
+⌃+M       Jump to closing parentheses. Repeat to jump to opening parentheses
+
+Adding a Line
+
+⌃+⇧+⬆   Extra cursor on the line above (Windows/Linux: Ctrl+Alt+⬆ and Ctrl+Alt+⬇)
+⌃+⇧+⬇   Extra cursor on the line below
+
+Splitting the Selection into Lines
+
+⇧+⌘+L  (Windows/Linux: Ctrl+Shift+L)
+
+Quick Add Next
+
+⌘+L       Select line - Repeat to select next lines
+⌘+D       Select word - Repeat to select next occurrence
+⌘+K, ⌘+D  Individual occurrences can be skipped via Quick Skip Next (Windows: Ctrl+K, Ctrl+D)
+⌘+U       If you go too far, use Undo Selection to step backwards (Windows: Ctrl+U)
+
+Find All
+
+⌃+⌘+G   Select all occurrences of current selection (Windows/Linux: Alt+F3)
 ```
 
 **Navigation/Goto Anywhere**
 
 ```
-⌘ + P or ⌘ + T  Quick-open files by name
-⌘ + R           Goto symbol / Goto word in current file
-⌃ + G           Goto line in current file
+⌘+P or ⌘+T  Quick-open files by name
+⌘+R           Goto symbol / Goto word in current file
+⌃+G           Goto line in current file
 ```
 
 ---
