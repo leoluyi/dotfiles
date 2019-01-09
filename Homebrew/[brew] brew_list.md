@@ -10,8 +10,8 @@ $ brew list
 
 ```
 $ brew install \
-asciinema \ # record terminal sessions
-atomicparsley \ # setting metadata into MPEG-4
+asciinema     `# record terminal sessions` \
+atomicparsley `# setting metadata into MPEG-4` \
 bash \
 bash-completion \
 bash-git-prompt \
@@ -28,17 +28,17 @@ grep \
 grip \
 highlight \
 htop-osx \
-john-jumbo \ # password crack
+john-jumbo `# password crack` \
 libpng \
 libsvg \
 libxml2 \
 libzip \
 npm \
 openssl \
-pdfcrack \  # pdf password crack
+pdfcrack   `# pdf password crack` \
 pip-completion \
 pipenv \
-plowshare \ # 免空神器
+plowshare  `# 免空神器` \
 proj \
 pyenv \
 pyenv-virtualenv \
@@ -120,10 +120,12 @@ iterm2 \
 java \
 jupyter-notebook-viewer \
 keycastr \
+r-app \
+rstudio \
 sourcetree \
 spectacle \
-transmission \
 tabula \
+transmission \
 xquartz \
 qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
 ```
