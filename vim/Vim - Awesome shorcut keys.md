@@ -170,16 +170,19 @@ Text Objects: `{}[]()w<>t'"`
 
 - `<leader>pp` toggle paste mode
 - `:set syntax=python` change syntax highlighting
-- (vim-commentary) `:echo @%` comment out a line (takes a count)
-- (vim-commentary) `gc` comment out the selection
-- (surround.vim) `ysiw"` add quotes in word
-- (surround.vim) `ds"` remove the delimiters entirely
-- (surround.vim) `cs"'` change surrounding
-- `J` join [count]/selected lines
+- `J` join selected lines `[n]J`
 - `~` Toggle the case of character under cursor. (Visual mode) `U` for uppercase, `u` for lowercase
 - `gUiw` Change current word to uppercase
 - `:set nonumber` disable line number
 - `:set norelativenumber` disable relative line number
+- [(vim-commentary)](https://github.com/tpope/vim-commentary)
+    - `gcc` comment out a line (takes a count)
+    - `gc` comment out the selection
+    - `gcap` comment out a paragraph
+- (surround.vim)
+    - `ysiw"` add quotes in word
+    - `ds"` remove the delimiters entirely
+    - `cs"'` change surrounding
 
 ### Advanced Editing: jump-select-copy-paste
 
