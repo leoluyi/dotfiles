@@ -89,23 +89,21 @@ Add a vim-plug section to your ~/.vimrc (or ~/.config/nvim/init.vim for Neovim):
 - Run `:CtrlPBuffer` or `:CtrlPMRU` in find buffer or find MRU file mode.
 - Run `:CtrlPMixed` to search in Files, Buffers and MRU files at the same time.
 
-[**jedi-vim**](https://github.com/davidhalter/jedi-vim)
-
-...
-
 [**Nvim-R**](https://github.com/jalvesaq/Nvim-R)
 
 - https://medium.freecodecamp.org/turning-vim-into-an-r-ide-cd9602e8c217
 - https://gist.github.com/leoluyi/2aeb4795c99de487b568178a31f7b635
 
+Commands
+
 - `devtools::install_github("jalvesaq/colorout")`
-- `\rf`: opens vim-connected R session
-- `<Space>`: sends code from vim to R; here remapped in `init.vim` from default `\l`
+- `\rf` opens vim-connected R session
+- `<Space>` sends code from vim to R; here remapped in `init.vim` from default `\l`
 - `:split` or `:vsplit`: splits viewport (similar to pane split in tmux)
-- `<C-x><C-o>`: omni completion for R objects/functions.
-- `<C-w> H` or `<C-w> K`: toggles between horizontal/vertical splits
-- `<C-w> w`: jumps cursor to R viewport and back
-- `<C-w> r`: swaps viewports
+- `<C-x><C-o>` omni completion for R objects/functions.
+- `<C-w>H` or `<C-w>K`: toggles between horizontal/vertical splits
+- `<C-w>w` jumps cursor to R viewport and back
+- `<C-w>r` swaps viewports
 
 [**ncim-R**](https://github.com/gaalcaras/ncm-R)
 
@@ -138,13 +136,15 @@ Plug 'ncm2/ncm2-ultisnips'
 Plug 'lervag/vimtex'
 ```
 
+[**Nerdtree**](https://github.com/scrooloose/nerdtree)
+
+- `<leader>nn` toggle nerdtree
+- `o` open/close folder
+
 [**vim-indent-guides**](https://github.com/valloric/vim-indent-guides)
 
-...
+[**jedi-vim**](https://github.com/davidhalter/jedi-vim)
 
-[**Nerdtree**]()
-
-...
 
 ## Misc
 
