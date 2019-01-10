@@ -1,4 +1,5 @@
 set number relativenumber
+set encoding=utf-8
 
 " Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
@@ -29,4 +30,27 @@ let g:indent_guides_guide_size = 1
 
 " braceless.vim
 autocmd FileType python BracelessEnable +indent
+
+" vim-plug
+call plug#begin()
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'jalvesaq/Nvim-R'
+Plug 'gaalcaras/ncm-R'
+
+" Vim 8 only
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+" Optional: for snippet support
+" Further configuration might be required, read below
+Plug 'sirver/UltiSnips'
+Plug 'ncm2/ncm2-ultisnips'
+
+" Optional: better Rnoweb support (LaTeX completion)
+Plug 'lervag/vimtex'
+call plug#end()
+
 
