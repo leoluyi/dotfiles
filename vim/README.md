@@ -22,9 +22,16 @@ $ sh ~/.vim_runtime/install_awesome_parameterized.sh /opt/vim_runtime user0 user
 $ sh ~/.vim_runtime/install_awesome_parameterized.sh /opt/vim_runtime --all
 ```
 
-How to uninstall
+**How to update to latest version**
 
-- Remove `~/.vim_runtime`
+```
+cd ~/.vim_runtime
+git pull --rebase
+```
+
+**How to uninstall**
+
+- Remove `rm -rf ~/.vim_runtime`
 - Remove any lines that reference `.vim_runtime` in your `~/.vimrc`
 
 ## Install Packages
@@ -38,16 +45,33 @@ $ cd ~/.vim_runtime/my_plugins
 $ git clone <package_repo>
 ```
 
-Install packages
+**Install packages**
 
 ```sh
-$ cd ~/.vim_runtime/my_plugins
-$ git clone https://github.com/tweekmonster/braceless.vim
-$ git clone --recursive https://github.com/davidhalter/jedi-vim
-$ git clone https://github.com/valloric/vim-indent-guides
-$ git clone https://github.com/asheq/close-buffers.vim
-$ git clone https://github.com/ctrlpvim/ctrlp.vim
+cd ~/.vim_runtime/my_plugins \
+  && git clone https://github.com/tweekmonster/braceless.vim \
+  && git clone --recursive https://github.com/davidhalter/jedi-vim \
+  && git clone https://github.com/valloric/vim-indent-guides \
+  && git clone https://github.com/asheq/close-buffers.vim \
+  && git clone https://github.com/ctrlpvim/ctrlp.vim
 ```
+
+**Update plugins**
+
+```
+cd ~/.vim_runtime/my_plugins
+
+for i in `ls`; do
+  cd "$i"
+  git pull
+  cd ..
+done
+```
+
+
+**Remove a plugin**
+
+Simply remove its directory from `~/.vim_runtime/my_plugins`.
 
 ### Install package with vim-plug
 
@@ -60,7 +84,7 @@ curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-Usage
+**Usage**
 
 Add a vim-plug section to your `~/.vimrc` (or `~/.config/nvim/init.vim` for Neovim). Edit `~/.vim_runtime/my_configs.vim` for **Ultimate vimrc** settings:
 
@@ -68,7 +92,12 @@ Add a vim-plug section to your `~/.vimrc` (or `~/.config/nvim/init.vim` for Neov
 2. List the plugins with `Plug` commands.
 3. `call plug#end()` to update `&runtimepath` and initialize plugin system.
 4. Reload `.vimrc` with `:so %` and `:PlugInstall` to install plugins.
-5. `PlugClean[!]` Remove unused directories.
+
+**Commands**
+
+1. `PlugInstall`: Install plugins
+2. `PlugUpdate`: Install or update plugins.
+3. `PlugClean[!]`: Remove unused directories (bang version will clean without prompt).
 
 ### Packages List
 

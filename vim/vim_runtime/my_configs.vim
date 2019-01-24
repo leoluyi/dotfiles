@@ -29,7 +29,9 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 
 " braceless.vim
-autocmd FileType python BracelessEnable +indent
+if exists('BracelessEnable')
+    autocmd FileType python BracelessEnable +indent
+endif
 
 " vim-plug
 call plug#begin()
