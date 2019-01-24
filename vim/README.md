@@ -62,7 +62,7 @@ curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
 
 Usage
 
-Add a vim-plug section to your `~/.vimrc` (or `~/.config/nvim/init.vim` for Neovim):
+Add a vim-plug section to your `~/.vimrc` (or `~/.config/nvim/init.vim` for Neovim). Edit `~/.vim_runtime/my_configs.vim` for **Ultimate vimrc** settings:
 
 1. Begin the section with `call plug#begin()`.
 2. List the plugins with `Plug` commands.
