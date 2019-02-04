@@ -120,6 +120,7 @@ iterm2 \
 java \
 jupyter-notebook-viewer \
 keycastr \
+obs \
 r-app \
 rstudio \
 sourcetree \
@@ -129,6 +130,13 @@ transmission \
 xquartz \
 qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
 ```
+
+[qlImageSize](https://github.com/L1cardo/qlImageSize) manually install
+
+1. Download the file from [here](https://github.com/L1cardo/qlImageSize/releases)
+2. Unzip the file you have just downloaded and you will get a file named `qlImageSize.qlgenerator`
+3. Copy the `qlImageSize.qlgenerator` to the `/Users/⁨<your-user-name>⁨/Library/QuickLook⁩/` (You may need a password permission)
+4. Launch `Terminal.app` and run `qlmanage -r`
 
 ### References
 
