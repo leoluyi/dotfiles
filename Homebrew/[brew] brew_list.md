@@ -72,6 +72,7 @@ Install homebrew-cask
 
 ```
 $ brew tap caskroom/cask
+$ brew tap homebrew/cask-fonts
 ```
 
 ### Cask list
@@ -80,6 +81,7 @@ $ brew tap caskroom/cask
 $ brew cask install \
 dash \
 deckset \
+font-meslo-for-powerline \
 iina \
 iterm2 \
 java \
@@ -136,6 +138,5 @@ $ brew cask uninstall <PGMNAME>
 - http://caskroom.io/
 - [Yenlung - [Keynote] 程式碼高亮化](http://yenlung-blog.logdown.com/posts/773053-keynote-code-highlighting)
 - [Mac - quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins)
-- https://github.com/Marginal/QLVideo
+- [QuickLook Video](https://github.com/Marginal/QLVideo)
 - [Grip -- GitHub Readme Instant Preview](https://github.com/joeyespo/grip)
-
