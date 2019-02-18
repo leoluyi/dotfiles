@@ -1,12 +1,6 @@
 # Homebrew Package List
 
-### List Installed Packages
-
-```
-$ brew list
-```
-
-### Install
+### Install packages
 
 ```
 $ brew install \
@@ -56,39 +50,66 @@ youtube-dl \
 $ brew tap eddieantonio/eddieantonio && brew install imgcat
 ```
 
-### Update
+### Using homebrew
+
+Update
 
 ```
 $ brew update && brew upgrade
 ```
 
-### Refernces
+List Installed Packages
 
-- https://github.com/joeyespo/grip
-- http://yenlung-blog.logdown.com/posts/773053-keynote-code-highlighting
+```
+$ brew list
+```
 
 ---------------------------------------------
 
-# brew cask
+## brew cask
 
-### Install homebrew-cask
-
-http://blog.visioncan.com/2014/introducing-cask/
+Install homebrew-cask
 
 ```
 $ brew tap caskroom/cask
 ```
 
-or
+### Cask list
 
 ```
-$ brew install caskroom/cask/brew-cask
+$ brew cask install \
+dash \
+deckset \
+iina \
+iterm2 \
+java \
+jupyter-notebook-viewer \
+keycastr \
+macdown \
+obs \
+r-app \
+rstudio \
+sourcetree \
+spectacle \
+tabula \
+transmission \
+xquartz \
+qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo
 ```
 
-Search
+[qlImageSize](https://github.com/L1cardo/qlImageSize) manually install
+
+1. Download the file from [here](https://github.com/L1cardo/qlImageSize/releases)
+2. Unzip the file you have just downloaded and you will get a file named `qlImageSize.qlgenerator`
+3. Copy the `qlImageSize.qlgenerator` to the `/Users/⁨<your-user-name>⁨/Library/QuickLook⁩/` (You may need a password permission)
+4. Launch `Terminal.app` and run `qlmanage -r`
+
+### Using casks
+
+Searching for Casks
 
 ```
-$ brew cask search <PGMNAME>
+$ brew search <PGMNAME>
 ```
 
 List installed cask
@@ -109,37 +130,12 @@ Uninstall
 $ brew cask uninstall <PGMNAME>
 ```
 
-### Cask list
-
-```
-$ brew cask install \
-dash \
-deckset \
-iina \
-iterm2 \
-java \
-jupyter-notebook-viewer \
-keycastr \
-obs \
-r-app \
-rstudio \
-sourcetree \
-spectacle \
-tabula \
-transmission \
-xquartz \
-qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
-```
-
-[qlImageSize](https://github.com/L1cardo/qlImageSize) manually install
-
-1. Download the file from [here](https://github.com/L1cardo/qlImageSize/releases)
-2. Unzip the file you have just downloaded and you will get a file named `qlImageSize.qlgenerator`
-3. Copy the `qlImageSize.qlgenerator` to the `/Users/⁨<your-user-name>⁨/Library/QuickLook⁩/` (You may need a password permission)
-4. Launch `Terminal.app` and run `qlmanage -r`
-
 ### References
 
-- https://github.com/sindresorhus/quick-look-plugins
+- https://brew.sh/
+- http://caskroom.io/
+- [Yenlung - [Keynote] 程式碼高亮化](http://yenlung-blog.logdown.com/posts/773053-keynote-code-highlighting)
+- [Mac - quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins)
 - https://github.com/Marginal/QLVideo
-- http://bionicprofessor.com/2016/05/15/installing-r-in-os-x-with-homebrew-and-cask/
+- [Grip -- GitHub Readme Instant Preview](https://github.com/joeyespo/grip)
+
