@@ -49,10 +49,11 @@ P             lets you choose the paste-buffer to paste from
 ```
 <C-c>  Create new session (or :new<CR>)
 
-<C-f>  switch to another session by name
+
 s      list sessions and choose
-$      Rename the current session 
 L      'Last' (previously used) session
+<C-f>  switch to another session by name
+$      Rename the current session 
 
 d      Detach the current client.
 D      Choose a client to detach.
@@ -69,12 +70,11 @@ c       Create a new window
 C-h, C-l  navigate windows (default n and p are unbound)
 <Tab>     brings you to the last active window
 
-,       Rename the current window
 w       list windows and choose
+,       Rename the current window
+
 &       kill window
 
-n, p    Change to the next/previous window.
-l       Last selected window
 '       Prompt for a window index to select
 0       to 9 Select windows 0 to 9
 f       find window
