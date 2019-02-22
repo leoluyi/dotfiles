@@ -23,35 +23,17 @@
 
 ## Oh My Tmux Features
 
-- `C-a` acts as secondary prefix, while keeping default `C-b` prefix
-- `<prefix> Enter` enters copy-mode; `<esc>` exits copy-mode
+- `<C-a>` acts as secondary prefix, while keeping default `<C-b>` prefix
+- `<prefix> <enter>` enters copy-mode; `<esc>` exits copy-mode
 
 **With prefix: `C-a`**
 
 ```
-+         maximize any pane to a new window
 m         toggle mouse mode
 e         opens ~/.tmux.conf.local with the editor
 r         reloads the configuration
+
 C-l       clears both the screen and the tmux history
-
-C-c       creates a new session
-C-f       lets you switch to another session by name
-
-C-h, C-l  navigate windows (default n and p are unbound)
-<Tab>     brings you to the last active window
-
--             splits the current pane vertically
-_             splits the current pane horizontally
-h, j, k, l    navigate panes ala Vim
-H, J, K, L    resize panes
-< , >         swap panes
-+             maximizes the current pane to a new window
-
-m             toggles mouse mode on or off
-
-U             launches Urlview (if available)
-F             launches Facebook PathPicker (if available)
 
 b             lists the paste-buffers
 p             pastes from the top paste-buffer
@@ -66,6 +48,8 @@ P             lets you choose the paste-buffer to paste from
 
 ```
 <C-c>  Create new session (or :new<CR>)
+
+<C-f>  switch to another session by name
 s      list sessions and choose
 $      Rename the current session 
 L      'Last' (previously used) session
@@ -81,6 +65,10 @@ D      Choose a client to detach.
 
 ```
 c       Create a new window
+
+C-h, C-l  navigate windows (default n and p are unbound)
+<Tab>     brings you to the last active window
+
 ,       Rename the current window
 w       list windows and choose
 &       kill window
@@ -102,22 +90,28 @@ i       Display some information about the current window.
 ### Panes
 
 ```
-%          horizontal split pane (left and right)
-"          vertical split pane (top and bottom)
+% or -     vertically split pane (left and right)
+" or _     horizontally split pane (top and bottom)
 x          kill pane (or just type `exit` or ctrl+d)
 
-← → ↑ ↓    go to the next pane on the left, right, ...
+← → ↑ ↓    navigate the next pane on the left, right, ...
+h, j, k, l navigate panes ala Vim
 o          swap panes
 ;          go to the 'last' (previously active) pane
 q          show pane indexes
-⍽          space - toggle between layouts
 
+⍽         toggle between layouts
+< , >      Swap panes
 C-o        Rotate the panes in the current window forwards
 {          Swap the current pane with the previous pane.
 }          Swap the current pane with the next pane.
 
 z          Toggle zoom state of the current pane.
++          maximize any pane to a new window
 !          Break the current pane out of the window
+
+H, J, K, L    resize panes
++             maximizes the current pane to a new window
 ```
 
 
@@ -137,4 +131,7 @@ z          Toggle zoom state of the current pane.
 t  big clock
 ?  list shortcuts
 :  prompt
+
+U             launches Urlview (if available)
+F             launches Facebook PathPicker (if available)
 ```
