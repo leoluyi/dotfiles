@@ -45,6 +45,7 @@ tmux \
 tree \
 vim \
 wget \
+ydiff \
 youtube-dl \
 
 $ brew tap eddieantonio/eddieantonio && brew install imgcat
