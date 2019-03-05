@@ -134,16 +134,24 @@ Text Objects: `{}[]()w<>t'"`
 
 > Note that filename with "space" must be escaped with backslash `\`.
 
-### Buffers
+### Navigation
+
+- `Ctrl-o` - old cursor position - this is a standard mapping but very useful, so included here
+- `Ctrl-i` - opposite of Ctrl-O (again, this is standard)
+- \`\` (two back tick) jump between previous cursor position
+
+**Buffers**
 
 - `<C-^>` or `:b#` switch between alternative files (buffer)
 - `:ls` list buffers
 - `:bN` switch to buffer number
+- `:bp` - go to previous buffer
+- `:bn` - go to next buffer
 - `<leader>bd` or `:Bclose` close (dismiss) current buffer
 - `<leader>ba` close all buffers
 - `<leader>o` open/toggle (bufexplorer)
 
-### Windows
+**Windows**
 
 - window split `:new` `:vnew` `:split [path/to/file]` `:vsplit [path/to/file]` `<C-w>s` `<C-w>v`
 - move between windows `<C-w> [hjkl]` or `<C-hjkl>`
@@ -151,7 +159,7 @@ Text Objects: `{}[]()w<>t'"`
 - window resize `<C-w>+` `<C-w>-` `<C-w>>` `<C-w><` (prefix number to adjust size)
 - close window `<C-w>c`
 
-### Tabs
+**Tabs**
 
 - tab new `<leader>tn`
 - switch between tabs: goto next tab `gt`, goto prev. tab `gT`
@@ -191,7 +199,6 @@ http://vim.wikia.com/wiki/Moving_around
 - cuts to first non-whitespace character `df `
 - replace a word with yanked text: `yiw` in "first" then `viwp` on "second"
 - `N[jk]` jump N lines up/down
-- \`\` (two back tick) jump to previous cursor position
 - `''` jump to previous line
 - `[(` jump cursor N times back to unmatched parentheses, forward `])`
 - `[{` jump cursor N times back to unmatched braces, forward `]}`
@@ -245,3 +252,4 @@ Special registers:
 - [most-used vim commands/keypresses](https://stackoverflow.com/a/5400978)
 - https://stackoverflow.com/a/9927057/3744499
 - [Vim registers: The basics and beyond](https://www.brianstorti.com/vim-registers/)
+- [skwp/dotfiles#vim](https://github.com/skwp/dotfiles#vim---whats-included)
