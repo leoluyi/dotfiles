@@ -96,24 +96,20 @@ x          kill pane (or just type `exit` or ctrl+d)
 
 ← → ↑ ↓    navigate the next pane on the left, right, ...
 h, j, k, l navigate panes ala Vim
-o          swap panes
+o          switch between panes
 ;          go to the 'last' (previously active) pane
 q          show pane indexes
 
 ⍽         toggle between layouts
-< , >      Swap panes
+< , > or { , }  Swap current pane with the previous/next pane. 
 C-o        Rotate the panes in the current window forwards
-{          Swap the current pane with the previous pane.
-}          Swap the current pane with the next pane.
 
 z          Toggle zoom state of the current pane.
-+          maximize any pane to a new window
++          maximize the current pane to a new window
 !          Break the current pane out of the window
 
 H, J, K, L    resize panes
-+             maximizes the current pane to a new window
 ```
-
 
 ### Window/pane surgery
 
