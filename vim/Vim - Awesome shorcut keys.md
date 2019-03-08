@@ -159,8 +159,8 @@ More cool searching tricks:
 - `<C-^>` or `:b#`          - switch between alternative files (buffer)
 - `:ls`                     - list buffers
 - `:b 2`                    - open buffer #2 in this window
-- `:bp` - go to previous buffer
-- `:bn` - go to next buffer
+- `:bp`                     - go to previous buffer
+- `:bn`                     - go to next buffer
 - `<leader>bd` or `:Bclose` - close (dismiss) current buffer
 - `<leader>ba`              - close all buffers
 - `<leader>o`               - open/toggle (bufexplorer)
