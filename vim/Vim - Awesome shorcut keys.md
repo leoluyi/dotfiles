@@ -76,20 +76,34 @@ Text Objects: `{}[]()w<>t'"`
 
 ### Searching
 
-- `/`  Forward
-- `?`  Backward
-- `*`  Word under cursor - forward  (bounded)
-- `g*` Word under cursor - forward  (unbounded)
-- `#`  Word under cursor - backward (bounded)
-- `g#` Word under cursor - backward (unbounded)
-- `n`  Next result, forward
-- `N`  Next result, backward
-- no highlight on search result `:noh` or `<leader><CR>`
+- `/pattern` - search forward for pattern
+- `?pattern` - search backward
+- `n`        - repeat forward search
+- `N`        - repeat backward
+- `*`        - Word under cursor - forward  (bounded)
+- `g*`       - Word under cursor - forward  (unbounded)
+- `#`        - Word under cursor - backward (bounded)
+- `g#`       - Word under cursor - backward (unbounded)
+- `n`        - Next result, forward
+- `N`        - Next result, backward
+- `:nohl` or `<leader><CR>` - no highlight on search result
+- `:set ignorecase` - case insensitive
+- `:set smartcase`  - use case if any caps used 
+- `:set incsearch`  - show match as search proceeds
+- `:set hlsearch`   - search highlighting
 
-### Find and Replace
+More cool searching tricks:
 
-- `:%s/foo/bar/g` replace 'foo' (in all lines) it with 'bar'.
-- `:s/foo/bar/gi` replace 'foo' (in the current line only) it with 'bar'. (case insensitive)
+- `*`                 - search for word currently under cursor
+- `g*`                - search for partial word under cursor 
+                        (repeat with n)
+- `ctrl-o`, `ctrl-i`  - go through jump locations
+- `[I`                - show lines with matching word under cursor
+
+### Search and Replace
+
+- `:%s/search_for_this/replace_with_this/gc` - search whole file and replace, confirm each replace
+- `:s/search_for_this/replace_with_this/gi` - replace in the current line only, with case insensitive
 
 ### Changing
 
@@ -142,31 +156,40 @@ Text Objects: `{}[]()w<>t'"`
 
 **Buffers**
 
-- `<C-^>` or `:b#` switch between alternative files (buffer)
-- `:ls` list buffers
-- `:bN` switch to buffer number
+- `<C-^>` or `:b#`          - switch between alternative files (buffer)
+- `:ls`                     - list buffers
+- `:b 2`                    - open buffer #2 in this window
 - `:bp` - go to previous buffer
 - `:bn` - go to next buffer
-- `<leader>bd` or `:Bclose` close (dismiss) current buffer
-- `<leader>ba` close all buffers
-- `<leader>o` open/toggle (bufexplorer)
+- `<leader>bd` or `:Bclose` - close (dismiss) current buffer
+- `<leader>ba`              - close all buffers
+- `<leader>o`               - open/toggle (bufexplorer)
 
 **Windows**
 
-- window split `:new` `:vnew` `:split [path/to/file]` `:vsplit [path/to/file]` `<C-w>s` `<C-w>v`
-- move between windows `<C-w> [hjkl]` or `<C-hjkl>`
-- switch windows back and forth `<C-w>w`
-- window resize `<C-w>+` `<C-w>-` `<C-w>>` `<C-w><` (prefix number to adjust size)
-- close window `<C-w>c`
+- `:split filename` / `:vsplit filename` - split / vertical split window and load another file
+    - `:new` / `:vnew`
+    - `<C-w>s` / `<C-w>v`
+- `ctrl-w up arrow` or `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up a window
+- `<C-w>w`            - move cursor to another window (cycle)
+- `<C-w>+` `<C-w>-` `<C-w>>` `<C-w><` - window resize (can do with number prefix)
+- `<C-w>c` or `:hide` - close current window
+- `ctrl-w_`           - maximize current window
+- `ctrl-w=`           - make all equal size
+- `10 ctrl-w+`        - increase window size by 10 lines
+- `:sview file`       - same as split, but readonly
+- `:only`             - keep only this window open
 
 **Tabs**
 
-- tab new `<leader>tn`
-- switch between tabs: goto next tab `gt`, goto prev. tab `gT`
-- tab close `<leader>tc`
-- tab only `<leader>to`
-- tab move `<leader>tm`
-- Opens a new tab with the current buffer's path `<leader>te`
+- `<leader>tn` tab new
+- switch between tabs:
+    - goto next tab `gt`
+    - goto prev. tab `gT`
+- `<leader>tc` tab close
+- `<leader>to` tab only
+- `<leader>tm` tab move
+- `<leader>te` open a new tab with the current buffer's path
 
 ### CWD (current working directory)
 
@@ -253,3 +276,4 @@ Special registers:
 - https://stackoverflow.com/a/9927057/3744499
 - [Vim registers: The basics and beyond](https://www.brianstorti.com/vim-registers/)
 - [skwp/dotfiles#vim](https://github.com/skwp/dotfiles#vim---whats-included)
+- [vim help](https://www.cs.swarthmore.edu/oldhelp/vim/)
