@@ -33,21 +33,21 @@ Motions: `wWbBeEfFtT`
 - `B` Backward to the next beginning of a WORD
 - `e` Forward to the next end of word
 - `E` Forward to the next end of WORD
-- `[n]f<o>` Forward until (nth) (o)  (Inclusive)
-- `[n]F<o>` Backward until (nth) (o) (Inclusive)
-- `[n]t<o>` Forward until (nth) (o)  (Exclusive)
-- `[n]T<o>` Backward until (nth) (o) (Exclusive)
+- `<num>f<char>` Forward until (nth) `<char>`  (Inclusive)
+- `<num>F<char>` backward until (nth) `<char>` (Inclusive)
+- `<num>t<char>` forward unTil (nth) `<char>`  (Exclusive)
+- `<num>T<char>` backward unTil (nth) `<char>` (Exclusive)
 
 Advanced motions
 
-- `()` Next sentences  ("." delimited words)
-- `{}` Next paragraphs (Next empty line)
-- `[n]G` Go to line [n]
-- `gg` Go to the top of the file
-- `0` Front of line
-- `^` Front of line (first non-blank)
-- `%` Matching brace/bracket/paren/tag (with matchtag plugin)
-- `$` End of line
+- `(`, `)`    - Prev / Next sentences ("." delimited words)
+- `{`, `}`    - Prev / Next paragraphs (next empty line)
+- `26 G`      - Go to line `26`
+- `gg`        - Go to the top of the file
+- `0`         - Front of line
+- `^`         - Front of line (first non-blank)
+- `%`         - Matching brace/bracket/paren/tag (with matchtag plugin)
+- `$`         - End of line
 
 ### Nouns in Vim - Text Objects
 
@@ -80,23 +80,19 @@ Text Objects: `{}[]()w<>t'"`
 - `?pattern` - search backward
 - `n`        - repeat forward search
 - `N`        - repeat backward
-- `*`        - Word under cursor - forward  (bounded)
-- `g*`       - Word under cursor - forward  (unbounded)
-- `#`        - Word under cursor - backward (bounded)
-- `g#`       - Word under cursor - backward (unbounded)
-- `n`        - Next result, forward
-- `N`        - Next result, backward
 - `:nohl` or `<leader><CR>` - no highlight on search result
 - `:set ignorecase` - case insensitive
-- `:set smartcase`  - use case if any caps used 
+- `:set smartcase`  - use case if any caps used
 - `:set incsearch`  - show match as search proceeds
 - `:set hlsearch`   - search highlighting
 
 More cool searching tricks:
 
-- `*`                 - search for word currently under cursor
-- `g*`                - search for partial word under cursor 
+- `*`                 - search for word currently under cursor  (bounded)
+- `g*`                - search for partial word under cursor    (unbounded)
                         (repeat with n)
+- `#`                 - search for word under cursor - backward (bounded)
+- `g#`                - search for word under cursor - backward (unbounded)
 - `ctrl-o`, `ctrl-i`  - go through jump locations
 - `[I`                - show lines with matching word under cursor
 
@@ -107,44 +103,49 @@ More cool searching tricks:
 
 ### Changing
 
-- `c` Change (Same as d but put me in insert mode)
-- `cc` = `S` Delete current line and enter insert mode
-- `C` change to end of line
-- `r` replace single character; `R` replace multiple characters
-- `s` change single character, does the same thing as `x` then `i`
+- `c`          - change (Same as `d` but put me in insert mode)
+- `cc` = `S`   - delete current line and enter insert mode
+- `c0`         - change to begining of line
+- `C`          - change to end of line
+- `r`          - replace under cursor; `R` replace multiple characters
+- `s`          - change under cursor, does the same thing as `x` then `i`
 
 ### Deleting
 
-- `d` delete motion `[range]d<motion>`
-- `dd` delete current line
-- `d0` delete to the beginning of line
-- `D` or `d$` delete to end of line
-- `x` delete in selection
+- `d`          - delete motion; `d3e` to delete 3 words
+- `dd`         - delete current line; `3dd` to delete 3 lines
+- `d0`         - delete to the beginning of line
+- `D` or `d$`  - delete to end of line
+- `x`          - delete in selection
 
 ### Cut and paste
 
-- `I` insert before block (`<esc>` to finish insert)
-- `A` append after block (`<esc>` to finish insert)
-- `yy` copy line into paste buffer; `dd` cut line into paste buffer
-- `p` paste buffer below cursor line; `P` paste buffer above cursor line
-- `xp` swap two characters (x to delete one character, then p to put it back after the cursor position)
-- `"0p` paste from last yanked text
-- `"+y<CR>` copy to the system clipboard
-- `"+p` paste from the system clipboard
+- `I`          - insert before block (`<esc>` to finish insert)
+- `A`          - append after block (`<esc>` to finish insert)
+- `yy`         - copy line into paste buffer; `dd` cut line into paste buffer
+- `p`          - paste buffer below cursor line; `P` paste buffer above cursor line
+
+More cool tricks:
+
+- `"0 p`       - paste from last yanked text
+- `"+ y<CR>`   - copy to the system clipboard
+- `"+ p`       - paste from the system clipboard
+- `x  p`       - swap two characters (`x` to delete one character, then `p` to put it back after the cursor position)
 
 ### Files
 
-- `:e path/to/file` edit new file (buffer)
-- `:e!` revert to last save (or use `:earlier 1f`)
-- `:w !sudo tee %` force write with sudo trick. `%` (special variables) "the current file"
-- `:w!` force write
-- `:w new.txt` save (save content to `new.txt` while keeping `original.txt` as the opened buffe)
-- `:wall` save all (save all changed buffers)
-- `:sav new.txt` save as (first write content to the file `new.txt`, then hide buffer `original.txt`, finally open `new.txt` as the current buffer)
+- `ZZ`
+- `:e path/to/file` - edit new file (buffer)
+- `:e!`             - revert to last save (or use `:earlier 1f`)
+- `:w !sudo tee %`  - force write with sudo trick. `%` (special variables) "the current file"
+- `:w!`             - force write
+- `:w new.txt`      - save (save content to `new.txt` while keeping `original.txt` as the opened buffe)
+- `:wall`           - save all (save all changed buffers)
+- `:sav new.txt`    - save as (first write content to the file `new.txt`, then hide buffer `original.txt`, finally open `new.txt` as the current buffer)
 - `:sav new_name` + `:!rm <C-r>#` (expand to an alternate-file) rename files
-- (mru) `<leader>f`open recently opened files
-- (NERDTree) `<leader>nn` toggle nerdtree
-- (NERDTree) `o` open/close folder
+- (mru) `<leader>f` - open recently opened files
+- (NERDTree) `<leader>nn` - toggle nerdtree
+- (NERDTree) `o`          - open/close folder
 
 > Note that filename with "space" must be escaped with backslash `\`.
 
@@ -165,20 +166,21 @@ More cool searching tricks:
 - `<leader>ba`              - close all buffers
 - `<leader>o`               - open/toggle (bufexplorer)
 
-**Windows**
+**Windows (Panes)**
 
 - `:split filename` / `:vsplit filename` - split / vertical split window and load another file
     - `:new` / `:vnew`
-    - `<C-w>s` / `<C-w>v`
-- `ctrl-w up arrow` or `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up a window
-- `<C-w>w`            - move cursor to another window (cycle)
-- `<C-w>+` `<C-w>-` `<C-w>>` `<C-w><` - window resize (can do with number prefix)
-- `<C-w>c` or `:hide` - close current window
-- `ctrl-w_`           - maximize current window
-- `ctrl-w=`           - make all equal size
-- `10 ctrl-w+`        - increase window size by 10 lines
-- `:sview file`       - same as split, but readonly
-- `:only`             - keep only this window open
+    - `<C-w> s` / `<C-w> v`
+- `<C-w> up arrow` or `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up a window
+- `<C-w> w`            - move cursor to another window (cycle)
+- `<C-w> +`, `<C-w> -` - window resize up / down (can do with number prefix)
+- `<C-w> >`, `<C-w> <` - window resize left / right (can do with number prefix)
+- `10 <C-w> +`         - increase window size by 10 lines
+- `<C-w> c` or `:hide` - close current window
+- `<C-w> _`            - maximize current window
+- `<C-w> =`            - make all equal size
+- `:sview file`        - same as split, but readonly
+- `:only`              - keep only this window open
 
 **Tabs**
 
@@ -199,13 +201,12 @@ More cool searching tricks:
 
 ### Code editing
 
-- `<leader>pp` toggle paste mode
-- `:set syntax=python` change syntax highlighting
-- `J` join selected lines `[n]J`
-- `~` Toggle the case of character under cursor. (Visual mode) `U` for uppercase, `u` for lowercase
+- `<leader>pp`         - toggle paste mode
+- `:set syntax=python` - change syntax highlighting
+- `J`                  - join selected lines `<num>J`
+- `~`                  - Toggle the case of character under cursor.
+                       (Visual mode) `U` for uppercase, `u` for lowercase
 - `gUiw` Change current word to uppercase
-- `:set nonumber` disable line number
-- `:set norelativenumber` disable relative line number
 - [(vim-commentary)](https://github.com/tpope/vim-commentary)
     - `gcc` comment out a line (takes a count)
     - `gc` comment out the selection
@@ -214,6 +215,11 @@ More cool searching tricks:
     - `ysiw"` add quotes in word
     - `ds"` remove the delimiters entirely
     - `cs"'` change surrounding
+
+Other settings
+
+- `:set nonumber` disable line number
+- `:set norelativenumber` disable relative line number
 
 ### Advanced Editing: jump-select-copy-paste
 
@@ -244,21 +250,43 @@ http://vim.wikia.com/wiki/Moving_around
 
 ### Commands
 
-- `!` will turn a command into a toggle command, e.g., `:set cursorline <-> :set nocursorline` == `:set cursorline!`
+- `!`    - turn a command into a toggle command, e.g., `:set cursorline <-> :set nocursorline` == `:set cursorline!`
+- `q:`   - show command-line history window
+- `q/`   - show searches history
+- Type `:` or `/` to start entering a command or search, then press the 'cedit' key (default is `Ctrl-f`)
+- Press `Enter` to execute the current line (and close the command-line window); or Press `Ctrl-c twice` to close the command-line window (cancel).
 
 ### Registers
 
-Special registers:
+When you copy and cut stuff, it gets saved to registers. You can pull stuff from those registers at a later time.
 
-- `""` Noname register - Last `dcsxy`
-- `"0` last yanked text
-- `"0` to `"9` yanked register
-- `"_` Blackhole register
-- `"/` Last search pattern
-- `".` Last inserted text (read only)
-- `"%` Current filename (read only)
-- `"#` Alternate file name (last edited file) (read only)
-- `":` Last command (read only)
+- `:reg`     - show named registers and what's in them
+- `"5p`      - paste what's in register `"5`
+
+**Special registers**
+
+- `""` no-name register (quotation register) - last cut / delete by `dcsxy`
+- `"0` last yanked register
+- `"0` to `"9` Nth-yanked register
+- `"_` blackhole register --> `"_ d` delete and throw to blackhole
+- `"/` last search pattern
+- `".` last inserted text (read only)
+- `"%` current filename (read only)
+- `"#` alternate file name (last edited file) (read only)
+- `":` last command (read only)
+
+**Recording**
+
+You can also record a whole series of edits to a register, and then apply them over and over.
+
+- `qk`       - records edits into register k 
+               (q again to stop recording)
+- `@k`       - execute recorded edits (macro)
+- `@@`       - repeat last one
+- `5@@`      - repeat 5 times
+- `"kp`      - print macro k 
+               (e.g., to edit or add to .vimrc)
+- `"kd`      - replace register k with what cursor is on
 
 ### Misc
 
@@ -277,3 +305,8 @@ Special registers:
 - [Vim registers: The basics and beyond](https://www.brianstorti.com/vim-registers/)
 - [skwp/dotfiles#vim](https://github.com/skwp/dotfiles#vim---whats-included)
 - [vim help](https://www.cs.swarthmore.edu/oldhelp/vim/)
+
+**Videos**
+
+- [Vim Basics in 8 Minutes](https://www.youtube.com/watch?v=ggSyF1SVFr4)
+- [A Vid in which Vim Saves Me Hours & Hundreds of Clicks](https://www.youtube.com/watch?v=hraHAZ1-RaM)
