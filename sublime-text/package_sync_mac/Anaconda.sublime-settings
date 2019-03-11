@@ -1,0 +1,53 @@
+{
+    "python_interpreter": "/Users/leoluyi/.pyenv/shims/python",
+    "anaconda_linting": false,
+    "swallow_startup_errors": true,
+
+    /*
+        Do not fix the errors listed here:
+        Note: By default we ignore E309 as this is not pep8 but it does
+        conflict with pep257 D211.
+    */
+    "autoformat_ignore":
+    [
+        "E309", "E501"
+    ],
+
+    /*
+        If anaconda_gutter_marks is true, this determines what theme is used.
+        Theme 'basic' only adds dots and circles to gutter.
+
+        Other available themes are 'alpha', 'bright', 'dark', 'hard', "retina"
+        (for retina displays) and 'simple'. To see icons that will be used for
+        each theme check gutter_icon_themes folder in Anaconda package.
+    */
+    "anaconda_gutter_theme": "bright",
+
+    /*
+        If 'outline' (default), anaconda will outline error lines.
+        If 'fill', anaconda will fill the lines.
+        If 'solid_underline', anaconda will draw a solid underline below regions.
+        If 'stippled_underline', anaconda will draw a stippled underline below regions.
+        If 'squiggly_underline', anaconda will draw a squiggly underline below regions.
+        If 'none', anaconda will not draw anything on error lines.
+    */
+    "anaconda_linter_mark_style": "stippled_underline",
+
+    /*
+        A list of pep8 error numbers to ignore.
+        The list of error codes is in this file:
+            https://github.com/jcrocholl/pep8/blob/master/pep8.py.
+        Search for "Ennn:", where nnn is a 3-digit number.
+        E309 is ignored by default as it conflicts with pep257 E211
+    */
+    "pep8_ignore":
+    [
+        "E309",
+        "E501",
+        "W291",
+        "W293",
+        "W391"
+    ],
+
+    "anaconda_linter_phantoms": false
+}

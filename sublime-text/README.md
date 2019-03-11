@@ -2,15 +2,26 @@
 
 ## Settings
 
+#### Sync settings
+
+1. Install **Package Control**
+2. [Install **Package Syncing**](https://packagecontrol.io/packages/Package%20Syncing)
+3. Restore settings
+    - On new machine, you have to download your backup settings to a sync folder.
+    - Set the sync folder in command palette `Package Syncing: Define Sync Folder` as `/Users/leoluyi/Dropbox/leo_works/dotfiles/sublime-text/package_sync_mac`, then
+    - **Package Syncing** will automatically pull all available files from that folder.
+
+**Manually restore settings**
+
 Put all files from `sublime-settings` into `~/Library/Application Support/Sublime Text 3/Packages/User/`
 
-#### OS X Command Line
+#### OS X Command Line Tool
 
 ```
 $ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin
 ```
 
-#### Canceling build
+#### Canceling build shorcut keys
 
 https://stackoverflow.com/a/28397562/3744499
 
