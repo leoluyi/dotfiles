@@ -5,7 +5,7 @@
 #### Sync settings
 
 1. Install **Package Control**
-2. [Install **Package Syncing**](https://packagecontrol.io/packages/Package%20Syncing)
+2. Install [**Package Syncing**](https://packagecontrol.io/packages/Package%20Syncing)
 3. Restore settings
     - On new machine, you have to download your backup settings to a sync folder.
     - Set the sync folder in command palette `Package Syncing: Define Sync Folder` as `/Users/leoluyi/Dropbox/leo_works/dotfiles/sublime-text/package_sync_mac`, then
