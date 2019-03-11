@@ -9,7 +9,7 @@
 3. Restore settings
     - On new machine, you have to download your backup settings to a sync folder.
     - Set the sync folder in command palette `Package Syncing: Define Sync Folder` as `/Users/leoluyi/Dropbox/leo_works/dotfiles/sublime-text/package_sync_mac`, then
-    - **Package Syncing** will automatically pull all available files from that folder. **Restart** Sublime Text & Package Control will check for missing packages and install them automatically
+    - **Package Syncing** will automatically pull all available files from that folder. **Restart** Sublime Text & Package Control will check for missing packages and install them automatically.
 
 **Manually restore settings**
 
@@ -70,50 +70,50 @@ to a different shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>:
 **Editing**
 
 ```
-⌘+↩       Insert line after
-⌘+⇧+↩   Insert line before
-⌘+⇧+D   Duplicate line(s)
-⌘+J       Join line below to the end of the current line
-⌃+⇧+K   Delete current line of cursor
+⌘ + ↩       Insert line after
+⌘ + ⇧ + ↩   Insert line before
+⌘ + ⇧ + D   Duplicate line(s)
+⌘ + J       Join line below to the end of the current line
+⌃ + ⇧ + K   Delete current line of cursor
 ```
 
 **Selection and Jump**
 
 ```
-Block selection
+### Block selection
 
 ⌥+click  Block selection using the mouse (Windows: Shift + Right Click)
 
-Jumping
+### Jumping
 
-⌃+M       Jump to closing parentheses. Repeat to jump to opening parentheses
+⌃+M      Jump to closing parentheses. Repeat to jump to opening parentheses
 
-Adding a Line
+### Adding a Line
 
 ⌃+⇧+⬆ and ⌃+⇧+⬇    Extra cursor on the line above/below (Windows/Linux: Ctrl+Alt+⬆ and Ctrl+Alt+⬇)
 
-Splitting the Selection into Lines
+### Splitting the Selection into Lines
 
 ⇧+⌘+L  (Windows/Linux: Ctrl+Shift+L)
 
-Quick Add Next
+### Quick Add Next
 
 ⌘+L        Select line - Repeat to select next lines
 ⌘+D        Select word - Repeat to select next occurrence
-⌘+K, ⌘+D  Individual occurrences can be skipped via Quick Skip Next (Windows: Ctrl+K, Ctrl+D)
+⌘+K, ⌘+D   Individual occurrences can be skipped via Quick Skip Next (Windows: Ctrl+K, Ctrl+D)
 ⌘+U        If you go too far, use Undo Selection to step backwards (Windows: Ctrl+U)
 
-Find All
+### Find All
 
 ⌃+⌘+G      Select all occurrences of current selection (Windows/Linux: Alt+F3)
 ```
 
-**Navigation/Goto Anywhere**
+**Navigation / Goto Anywhere**
 
 ```
 ⌘+P or ⌘+T   Quick-open files by name
-⌘+R           Goto symbol / Goto word in current file
-⌃+G            Goto line in current file
+⌘+R          Goto symbol / Goto word in current file
+⌃+G          Goto line in current file
 ```
 
 ---
