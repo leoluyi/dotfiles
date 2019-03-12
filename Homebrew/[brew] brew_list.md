@@ -30,6 +30,7 @@ libzip \
 npm \
 openssl \
 pdfcrack   `# pdf password crack` \
+peco \     `# Simplistic interactive filtering tool` \
 pip-completion \
 pipenv \
 plowshare  `# 免空神器` \
