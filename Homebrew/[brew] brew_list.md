@@ -30,7 +30,7 @@ libzip \
 npm \
 openssl \
 pdfcrack   `# pdf password crack` \
-peco \     `# Simplistic interactive filtering tool` \
+peco       `# Simplistic interactive filtering tool` \
 pip-completion \
 pipenv \
 plowshare  `# 免空神器` \
@@ -81,9 +81,11 @@ $ brew tap homebrew/cask-fonts
 
 ```
 $ brew cask install \
-dash \
+`# dash` \
 deckset \
+firefox \
 font-meslo-for-powerline \
+google-chrome \
 iina \
 iterm2 \
 java \
@@ -91,22 +93,27 @@ jupyter-notebook-viewer \
 keycastr \
 macdown \
 obs \
-r-app \
+r \
 rstudio \
 sourcetree \
 spectacle \
 tabula \
 transmission \
 xquartz \
-qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo
+qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo
 ```
 
 [qlImageSize](https://github.com/L1cardo/qlImageSize) manually install
 
-1. Download the file from [here](https://github.com/L1cardo/qlImageSize/releases)
+1. Download the file from [here](https://github.com/Nyx0uf/qlImageSize/releases/tag/2.6.1)
 2. Unzip the file you have just downloaded and you will get a file named `qlImageSize.qlgenerator`
 3. Copy the `qlImageSize.qlgenerator` to the `/Users/⁨<your-user-name>⁨/Library/QuickLook⁩/` (You may need a password permission)
 4. Launch `Terminal.app` and run `qlmanage -r`
+
+```bash
+wget -q - https://github.com/Nyx0uf/qlImageSize/releases/download/2.6.1/qlImageSize.qlgenerator.zip \
+&& unzip -c qlImageSize.qlgenerator.zip > ${HOME}/Library/QuickLook⁩/qlImageSize.qlgenerator
+```
 
 ### Using casks
 

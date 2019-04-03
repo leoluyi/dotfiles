@@ -7,10 +7,9 @@ https://github.com/gpakosz/.tmux
 Installation
 
 ```sh
-$ cd
-$ git clone https://github.com/gpakosz/.tmux.git
+$ git clone https://github.com/gpakosz/.tmux.git ~/.tmux
 $ ln -s -f .tmux/.tmux.conf
-$ cp .tmux/.tmux.conf.local .
+$ cp tmux/.tmux.conf.local .
 ```
 
 ## tmux-completion
