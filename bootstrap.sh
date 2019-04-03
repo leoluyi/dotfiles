@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 cd "$(dirname "${BASH_SOURCE}")";
-echo "cd to $(dirname "${BASH_SOURCE}")";
 
 function sync_dotfile() {
   # rsync --exclude ".git/" \
@@ -137,6 +136,8 @@ bash ~/.vim_runtime/install_awesome_vimrc.sh
 echo "###### Install Vim Packages ######"
 
 old_dir=$(pwd)
+echo "${old_dir}"
+
 cd ~/.vim_runtime/my_plugins \
   && git clone https://github.com/tweekmonster/braceless.vim \
   && git clone --recursive https://github.com/davidhalter/jedi-vim \

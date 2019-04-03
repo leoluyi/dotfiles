@@ -6,7 +6,7 @@
     "ensure_newline_at_eof_on_save": true,
     "find_selected_text": false,
     "font_face": "Meslo LG M DZ Regular for Powerline",
-    "font_size": 14,
+    "font_size": 15,
     "highlight_line": true,
     "highlight_modified_tabs": true,
     "ignored_packages":
