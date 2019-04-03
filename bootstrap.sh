@@ -46,23 +46,12 @@ echo "###### Install Apps with Homebrew ######"
 brew tap caskroom/cask && \
 brew tap homebrew/cask-fonts && \
 brew cask install \
-deckset \
 firefox \
 font-meslo-for-powerline \
 google-chrome \
 iina \
 iterm2 \
-java \
 jupyter-notebook-viewer \
-keycastr \
-macdown \
-obs \
-r \
-rstudio \
-sourcetree \
-spectacle \
-tabula \
-transmission \
 xquartz \
 qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo;
 
@@ -89,6 +78,19 @@ tmux \
 tree \
 vim \
 wget;
+
+echo "###### Fix Bash Completion ######"
+# https://dwatow.github.io/2018/09-21-git-cmd-auto-complete/
+# 用 brew 安裝 git，
+# 安裝完 bash 會自動指向 brew 安裝的路徑，
+# 確定版本之後，要去 github 找 git-completion.bash，並且，找到與你的 git 匹配的 版本。
+
+old_dir=$(pwd)
+cd $(brew --prefix)/opt/bash-completion/etc/bash_completion.d
+curl -L -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+brew unlink bash-completion
+brew link bash-completion
+cd "${old_dir}"
 
 echo "###### Virtualenv Settings ######"
 
@@ -117,15 +119,13 @@ if [ -z "$(ls -A ${HOME}/.vim_runtime)" ]; then
   echo "Installing Vim Packages ..."
 
   old_dir=$(pwd)
-  echo "${old_dir}"
-
-  cd ~/.vim_runtime/my_plugins \
-    && git clone https://github.com/tweekmonster/braceless.vim \
-    && git clone --recursive https://github.com/davidhalter/jedi-vim \
-    && git clone https://github.com/valloric/vim-indent-guides \
-    && git clone https://github.com/asheq/close-buffers.vim \
-    && git clone https://github.com/ctrlpvim/ctrlp.vim
-  cd "${old_dir}";
+  cd ~/.vim_runtime/my_plugins
+  git clone https://github.com/tweekmonster/braceless.vim
+  git clone --recursive https://github.com/davidhalter/jedi-vim
+  git clone https://github.com/valloric/vim-indent-guides
+  git clone https://github.com/asheq/close-buffers.vim
+  git clone https://github.com/ctrlpvim/ctrlp.vim
+  cd "${old_dir}"
 else
   echo "Awesome Vim is already installed."
 fi
