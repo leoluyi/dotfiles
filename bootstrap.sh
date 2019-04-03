@@ -13,9 +13,8 @@ function sync_dotfile() {
   cp git/macOS.gitignore ${HOME}/.gitignore_global
   cp macOS/bash_profile ${HOME}/.bash_profile
   cp macOS/bashrc ${HOME}/.bashrc
-  cp tmux/tmux.conf.local .tmux.conf.local
+  cp tmux/tmux.conf.local ${HOME}/.tmux.conf.local
   cp git/gitconfig ${HOME}/.gitconfig
-  cp vim/vimrc ${HOME}/.vimrc
   cp vim/vim_runtime/my_configs.vim ${HOME}/.vim_runtime/my_configs.vim
   cp bash-git-prompt/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
 }
@@ -103,8 +102,9 @@ ln -s -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/l
 
 echo "###### Tmux Settings ######"
 
-if [ -z "$(ls -A ${HOME}/.tmux)" ]; then
+if [ ! -d "${HOME}/.tmux" ]; then
   git clone https://github.com/gpakosz/.tmux.git "${HOME}/.tmux"
+  cp tmux/tmux.conf "${HOME}/.tmux/.tmux.conf"
   ln -s -f "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
 else
   echo ".tmux is already installed."
@@ -112,7 +112,7 @@ fi
 
 echo "###### Install Awesome Vim ######"
 
-if [ -z "$(ls -A ${HOME}/.vim_runtime)" ]; then
+if [ ! -d "${HOME}/.vim_runtime" ]; then
   git clone --depth=1 https://github.com/amix/vimrc.git ${HOME}/.vim_runtime
   bash ~/.vim_runtime/install_awesome_vimrc.sh
 
