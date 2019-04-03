@@ -77,7 +77,6 @@ gnupg \
 grep \
 htop-osx \
 openssl \
-pdfcrack   `# pdf password crack` \
 peco       `# Simplistic interactive filtering tool` \
 pip-completion \
 pipenv \
@@ -102,26 +101,34 @@ ln -s -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/l
 
 echo "###### Tmux Settings ######"
 
-git clone https://github.com/gpakosz/.tmux.git "${HOME}/.tmux"
-ln -s -f "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
+if [ -z "$(ls -A ${HOME}/.tmux)" ]; then
+  git clone https://github.com/gpakosz/.tmux.git "${HOME}/.tmux"
+  ln -s -f "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
+else
+  echo ".tmux is already installed."
+fi
 
 echo "###### Install Awesome Vim ######"
 
-git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-bash ~/.vim_runtime/install_awesome_vimrc.sh
+if [ -z "$(ls -A ${HOME}/.vim_runtime)" ]; then
+  git clone --depth=1 https://github.com/amix/vimrc.git ${HOME}/.vim_runtime
+  bash ~/.vim_runtime/install_awesome_vimrc.sh
 
-echo "###### Install Vim Packages ######"
+  echo "Installing Vim Packages ..."
 
-old_dir=$(pwd)
-echo "${old_dir}"
+  old_dir=$(pwd)
+  echo "${old_dir}"
 
-cd ~/.vim_runtime/my_plugins \
-  && git clone https://github.com/tweekmonster/braceless.vim \
-  && git clone --recursive https://github.com/davidhalter/jedi-vim \
-  && git clone https://github.com/valloric/vim-indent-guides \
-  && git clone https://github.com/asheq/close-buffers.vim \
-  && git clone https://github.com/ctrlpvim/ctrlp.vim
-cd "${old_dir}";
+  cd ~/.vim_runtime/my_plugins \
+    && git clone https://github.com/tweekmonster/braceless.vim \
+    && git clone --recursive https://github.com/davidhalter/jedi-vim \
+    && git clone https://github.com/valloric/vim-indent-guides \
+    && git clone https://github.com/asheq/close-buffers.vim \
+    && git clone https://github.com/ctrlpvim/ctrlp.vim
+  cd "${old_dir}";
+else
+  echo "Awesome Vim is already installed."
+fi
 
 echo "###### Source Bash Settings ######"
 
