@@ -43,76 +43,53 @@ fi
 
 echo "###### Install Apps with Homebrew ######"
 
-# brew tap caskroom/cask && \
-# brew tap homebrew/cask-fonts && \
-# brew cask install \
-# deckset \
-# firefox \
-# font-meslo-for-powerline \
-# google-chrome \
-# iina \
-# iterm2 \
-# java \
-# jupyter-notebook-viewer \
-# keycastr \
-# macdown \
-# obs \
-# r \
-# rstudio \
-# sourcetree \
-# spectacle \
-# tabula \
-# transmission \
-# xquartz \
-# qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo;
+brew tap caskroom/cask && \
+brew tap homebrew/cask-fonts && \
+brew cask install \
+deckset \
+firefox \
+font-meslo-for-powerline \
+google-chrome \
+iina \
+iterm2 \
+java \
+jupyter-notebook-viewer \
+keycastr \
+macdown \
+obs \
+r \
+rstudio \
+sourcetree \
+spectacle \
+tabula \
+transmission \
+xquartz \
+qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo;
 
 echo "###### Install CLI with Homebrew ######"
 
 brew install \
-asciinema     `# record terminal sessions` \
-atomicparsley `# setting metadata into MPEG-4` \
 bash \
 bash-completion \
 bash-git-prompt \
-bfg \
-cmatrix \
-coreutils \
-czmq \
-ffmpeg \
-gcc \
-gdal \
 git \
 gnupg \
 grep \
-grip \
-highlight \
 htop-osx \
-john-jumbo `# password crack` \
-libpng \
-libsvg \
-libxml2 \
-libzip \
-npm \
 openssl \
 pdfcrack   `# pdf password crack` \
 peco       `# Simplistic interactive filtering tool` \
 pip-completion \
 pipenv \
-plowshare  `# 免空神器` \
-proj \
 pyenv \
 pyenv-virtualenv \
 rename \
-shellcheck \
-terminal-notifier \
 thefuck \
 tldr \
 tmux \
 tree \
 vim \
-wget \
-ydiff \
-youtube-dl;
+wget;
 
 echo "###### Virtualenv Settings ######"
 
