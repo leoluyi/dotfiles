@@ -88,6 +88,7 @@ docker \
 firefox \
 font-meslo-for-powerline \
 google-chrome \
+google-drive-file-stream \
 iina \
 iterm2 \
 java \
