@@ -75,6 +75,7 @@ Install homebrew-cask
 ```
 $ brew tap caskroom/cask
 $ brew tap homebrew/cask-fonts
+$ brew tap homebrew/completions
 ```
 
 ### Cask list
@@ -83,6 +84,7 @@ $ brew tap homebrew/cask-fonts
 $ brew cask install \
 `# dash` \
 deckset \
+docker \
 firefox \
 font-meslo-for-powerline \
 google-chrome \

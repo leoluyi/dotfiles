@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")";
+cd "$(dirname "${BASH_SOURCE}")" || return;
 
 function sync_dotfile() {
   # rsync --exclude ".git/" \
@@ -19,10 +19,10 @@ function sync_dotfile() {
   cp bash-git-prompt/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
 }
 
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
+if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   sync_dotfile;
 else
-  read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+  read -rp "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
   echo "";
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     sync_dotfile;
@@ -32,12 +32,12 @@ unset sync_dotfile;
 
 echo "###### Install Homebrew ######"
 
-if [[ $(command -v brew) == "" ]]; then
+if [ -x "$(command -v brew)" ]; then
+  echo "Updating Homebrew ..."
+  brew update
+else
   echo "Installing Hombrew ..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-else
-    echo "Updating Homebrew ..."
-    brew update
 fi
 
 echo "###### Install Apps with Homebrew ######"
@@ -52,7 +52,8 @@ iina \
 iterm2 \
 jupyter-notebook-viewer \
 xquartz \
-qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo;
+qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
+2>/dev/null;
 
 echo "###### Install CLI with Homebrew ######"
 
@@ -76,7 +77,8 @@ tldr \
 tmux \
 tree \
 vim \
-wget;
+wget \
+2>/dev/null
 
 echo "###### Fix Bash Completion ######"
 # https://dwatow.github.io/2018/09-21-git-cmd-auto-complete/
@@ -85,16 +87,29 @@ echo "###### Fix Bash Completion ######"
 # 確定版本之後，要去 github 找 git-completion.bash，並且，找到與你的 git 匹配的 版本。
 
 old_dir=$(pwd)
-cd $(brew --prefix)/opt/bash-completion/etc/bash_completion.d
-curl -L -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+cd $(brew --prefix)/opt/bash-completion/etc/bash_completion.d || return
+
+# Git completion
+curl -s -L -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
 brew unlink bash-completion
 brew link bash-completion
-cd "${old_dir}"
+
+# Docker
+if [ -x "$(command -v docker)" ]; then
+  etc=/Applications/Docker.app/Contents/Resources/etc
+  ln -s -f $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
+  ln -s -f $etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
+  ln -s -f $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
+else
+  echo "Docker is not installed."
+fi
+
+cd "${old_dir}" || return
 
 echo "###### Virtualenv Settings ######"
 
-mkdir -p ${HOME}/.local/share/virtualenvs/
-ln -s -f ${HOME}/.local/share/virtualenvs/ ${HOME}/.virtualenvs
+mkdir -p "${HOME}/.local/share/virtualenvs/"
+ln -s -f "${HOME}/.local/share/virtualenvs/" "${HOME}/.virtualenvs"
 
 echo "###### Sublime Text Settings ######"
 
@@ -113,23 +128,23 @@ fi
 echo "###### Install Awesome Vim ######"
 
 if [ ! -d "${HOME}/.vim_runtime" ]; then
-  git clone --depth=1 https://github.com/amix/vimrc.git ${HOME}/.vim_runtime
+  git clone --depth=1 https://github.com/amix/vimrc.git "${HOME}/.vim_runtime"
   bash ~/.vim_runtime/install_awesome_vimrc.sh
 
   echo "Installing Vim Packages ..."
 
   old_dir=$(pwd)
-  cd ~/.vim_runtime/my_plugins
+  cd ~/.vim_runtime/my_plugins || return
   git clone https://github.com/tweekmonster/braceless.vim
   git clone --recursive https://github.com/davidhalter/jedi-vim
   git clone https://github.com/valloric/vim-indent-guides
   git clone https://github.com/asheq/close-buffers.vim
   git clone https://github.com/ctrlpvim/ctrlp.vim
-  cd "${old_dir}"
+  cd "${old_dir}" || return
 else
   echo "Awesome Vim is already installed."
 fi
 
 echo "###### Source Bash Settings ######"
 
-source ${HOME}/.bash_profile;
+source "${HOME}/.bash_profile";
