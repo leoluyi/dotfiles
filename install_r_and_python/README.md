@@ -63,5 +63,5 @@ Done.
 Install `rJava` in R:
 
 ```r
-> install.packages("rJava", repos="https://cloud.r-project.org/")
+> install.packages("rJava", repos="https://cloud.r-project.org")
 ```
