@@ -25,6 +25,33 @@
 		<string></string>
 		<key>CPU_MenubarCombineCores</key>
 		<integer>1</integer>
+		<key>CPU_MenubarMode</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>100</string>
+				<key>uuid</key>
+				<string>8160A432-7201-4B9A-A801-FEE40D3DD5F3</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>6</string>
+				<key>uuid</key>
+				<string>2BE668B3-571D-4055-8473-90A92EB1F39A</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>8</string>
+				<key>uuid</key>
+				<string>8ED22FF4-D759-43BB-8EE2-85D5AC21472E</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>9</string>
+				<key>uuid</key>
+				<string>A56D8C90-F963-4A94-8638-A5A583810505</string>
+			</dict>
+		</array>
 		<key>CPU_MenubarSingleHistoryGraph</key>
 		<integer>1</integer>
 		<key>CombinedMenubarDisplayMode</key>
@@ -79,7 +106,7 @@
 		<key>MenubarGraphOpacity-Dark</key>
 		<real>0.5254218578338623</real>
 		<key>MenubarSkinColor-Dark</key>
-		<integer>0</integer>
+		<integer>2</integer>
 		<key>Migrated_6.0</key>
 		<true/>
 		<key>Migrated_6.22</key>
