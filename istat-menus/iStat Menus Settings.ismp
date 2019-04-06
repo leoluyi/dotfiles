@@ -31,25 +31,13 @@
 				<key>key</key>
 				<string>100</string>
 				<key>uuid</key>
-				<string>8160A432-7201-4B9A-A801-FEE40D3DD5F3</string>
+				<string>BA428532-F7E4-4D3F-9123-6B4CC9F6907A</string>
 			</dict>
 			<dict>
 				<key>key</key>
 				<string>6</string>
 				<key>uuid</key>
-				<string>2BE668B3-571D-4055-8473-90A92EB1F39A</string>
-			</dict>
-			<dict>
-				<key>key</key>
-				<string>8</string>
-				<key>uuid</key>
-				<string>8ED22FF4-D759-43BB-8EE2-85D5AC21472E</string>
-			</dict>
-			<dict>
-				<key>key</key>
-				<string>9</string>
-				<key>uuid</key>
-				<string>A56D8C90-F963-4A94-8638-A5A583810505</string>
+				<string>3C4515D7-B15C-419D-AE54-727AC943973F</string>
 			</dict>
 		</array>
 		<key>CPU_MenubarSingleHistoryGraph</key>
