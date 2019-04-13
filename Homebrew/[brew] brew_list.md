@@ -95,6 +95,7 @@ java \
 jupyter-notebook-viewer \
 keycastr \
 macdown \
+mounty \
 obs \
 r \
 rstudio \
@@ -106,7 +107,7 @@ xquartz \
 qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo
 ```
 
-[qlImageSize](https://github.com/L1cardo/qlImageSize) manually install
+**Install [qlImageSize](https://github.com/L1cardo/qlImageSize) manually**
 
 1. Download the file from [here](https://github.com/Nyx0uf/qlImageSize/releases/tag/2.6.1)
 2. Unzip the file you have just downloaded and you will get a file named `qlImageSize.qlgenerator`

@@ -26,7 +26,6 @@ Git,
 GitGutter,
 Google Search,
 Google Spell Check,
-Gutter Color,
 Hermes,
 HexViewer,
 Highlight Dodgy Chars,
@@ -69,6 +68,11 @@ WordCount,
 Zen Tabs,
 ```
 
+**Requirements:**
+
+- ImageMagick `brew install imagemagick --with-xz --with-font-config --with-little-cms --with-little-cms2 \`
+- flake8 `pip intall flake8`
+
 __Windows__
 
 ```
@@ -90,7 +94,6 @@ Flask Hello,
 Git,
 GitGutter,
 Google Search,
-Gutter Color,
 HexViewer,
 Icon Fonts,
 Jinja2,

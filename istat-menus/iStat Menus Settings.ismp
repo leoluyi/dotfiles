@@ -6,19 +6,53 @@
 	<string>1090</string>
 	<key>preferences</key>
 	<dict>
+		<key>Battery_DisableBluetooth</key>
+		<integer>0</integer>
+		<key>Battery_MenubarCustomizeStates</key>
+		<integer>0</integer>
+		<key>Battery_MenubarItems</key>
+		<array>
+			<dict>
+				<key>internal</key>
+				<true/>
+				<key>key</key>
+				<string>D86847500Q9J83K5P</string>
+				<key>name</key>
+				<string>Internal Battery</string>
+				<key>subtype</key>
+				<integer>-1</integer>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+		</array>
 		<key>Battery_MenubarMode</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>5</string>
+				<key>uuid</key>
+				<string>B9663A76-6A80-4E8C-8777-EF4C58463CF9</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>7</string>
+				<key>uuid</key>
+				<string>D990CB86-08EE-4668-BE14-050C18EED871</string>
+			</dict>
+		</array>
+		<key>Battery_MenubarModeCharged</key>
 		<array>
 			<dict>
 				<key>key</key>
 				<string>2</string>
 				<key>uuid</key>
-				<string>7823CED7-3F4B-4A91-A310-1C7EF3A57955</string>
+				<string>F9BCD3DD-3A39-4336-9606-37C62C49BB0F</string>
 			</dict>
 			<dict>
 				<key>key</key>
 				<string>1</string>
 				<key>uuid</key>
-				<string>20C922EC-3666-4F01-BD45-92906FD7E530</string>
+				<string>93D43D25-833D-4D6B-831D-652E86D21F7E</string>
 			</dict>
 		</array>
 		<key>CPU_DropdownOrderDisabled</key>
@@ -42,13 +76,52 @@
 		</array>
 		<key>CPU_MenubarSingleHistoryGraph</key>
 		<integer>1</integer>
+		<key>CombinedDropdownDisplayMode</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>6</string>
+				<key>uuid</key>
+				<string>803C122F-D49E-4953-8367-E9C2E734B4FC</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>1</string>
+				<key>uuid</key>
+				<string>53D5CBC2-48B6-4BA6-BFA8-7B95018DB9C1</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>2</string>
+				<key>uuid</key>
+				<string>584F6566-F731-4E1A-9238-65B77E28A298</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>4</string>
+				<key>uuid</key>
+				<string>F1CBC223-90EE-465D-BFF5-3E5ABE713766</string>
+			</dict>
+		</array>
 		<key>CombinedMenubarDisplayMode</key>
 		<array>
 			<dict>
 				<key>key</key>
 				<string>1</string>
 				<key>uuid</key>
-				<string>563A5D0D-1FC3-4896-AD75-F92A11FAED50</string>
+				<string>C4288227-C90F-4D8B-9BFD-6F71FE0D6239</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>2</string>
+				<key>uuid</key>
+				<string>B552D382-15F8-47CF-BDBD-997715631BD9</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>6</string>
+				<key>uuid</key>
+				<string>054E161A-FF53-4E2F-BA3F-6A03B8CF14B8</string>
 			</dict>
 		</array>
 		<key>Disks_MenubarItems</key>
@@ -92,7 +165,7 @@
 		<key>InstalledHelpers-mas</key>
 		<true/>
 		<key>MenubarGraphOpacity-Dark</key>
-		<real>0.5254218578338623</real>
+		<real>0.35949999094009399</real>
 		<key>MenubarSkinColor-Dark</key>
 		<integer>2</integer>
 		<key>Migrated_6.0</key>
@@ -128,10 +201,11 @@
 				<string>10.00</string>
 			</dict>
 		</array>
+		<key>ProcessesCombine</key>
+		<true/>
 		<key>StatusItems-Order</key>
 		<array>
-			<integer>2</integer>
-			<integer>1</integer>
+			<integer>8</integer>
 		</array>
 		<key>Theme-SeperateStyles</key>
 		<false/>

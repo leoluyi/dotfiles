@@ -17,6 +17,10 @@
 		"Markdown",
 		"Vintage"
 	],
+	"mdpopups.sublime_user_lang_map":
+	{
+	},
+	"mdpopups.use_sublime_highlighter": true,
 	"open_files_in_new_window": true,
 	"preview_on_click": true,
 	"rulers":

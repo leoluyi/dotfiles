@@ -27,10 +27,11 @@ git pull --rebase
 
 Motions: `wWbBeEfFtT`
 
+- `b` Backward to the beginning of current or previous word
+- `B` Backward to the beginning of current or previous WORD
+- `ge` go to the end of the previous word
 - `w` Forward to the beginning of next word
-- `W` Forward to the beginning of the next WORD
-- `b` Backward to the next beginning of a word
-- `B` Backward to the next beginning of a WORD
+- `W` Forward to the beginning of next WORD
 - `e` Forward to the next end of word
 - `E` Forward to the next end of WORD
 - `<num>f<char>` Forward until (nth) `<char>`  (Inclusive)
