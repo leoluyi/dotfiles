@@ -23,7 +23,13 @@ git pull --rebase
 - `v` Visually select
 - `y` Yank
 
-### Nouns in Vim - Motions
+### Structure of an Editing Command
+
+```
+editing commands = <number><command><text object or motion>
+```
+
+### Motions
 
 Motions: `wWbBeEfFtT`
 
@@ -41,27 +47,54 @@ Motions: `wWbBeEfFtT`
 
 Advanced motions
 
-- `(`, `)`    - Prev / Next sentences ("." delimited words)
-- `{`, `}`    - Prev / Next paragraphs (next empty line)
-- `26 G`      - Go to line `26`
+- `#G`        - Go to line `#`
 - `gg`        - Go to the top of the file
 - `0`         - Front of line
 - `^`         - Front of line (first non-blank)
-- `%`         - Matching brace/bracket/paren/tag (with matchtag plugin)
 - `$`         - End of line
+- `%`         - Matching brace/bracket/paren/tag (with matchtag plugin)
+- `(`, `)`    - Prev / Next sentences ("." delimited words)
+- `{`, `}`    - Prev / Next paragraphs (next empty line)
 
-### Nouns in Vim - Text Objects
+### Text Objects
 
-Text Objects: `{}[]()w<>t'"`
+https://blog.carbonfive.com/2011/10/17/vim-text-objects-the-definitive-guide/
+
+Plaintext Text - Words
 
 - `iw` inner word
-- `it` inner tag
-- `i"` inner quotes
-- `ip` inner paragraph
-- `i(` inner parentheses
-- `i[` inner bracket
 - `as` around sentence
-- select to next char "w" `vfw`, select 'til next char "w" `vtw`
+
+Plaintext Text - Paragraphs
+
+- `ip` inner paragraph
+
+Quoted Strings
+
+- `a"` -- a double quoted string
+- `i"` -- inner double quoted string
+- `a'` -- a single quoted string
+- `i'` -- inner single quoted string
+- `at` -- a html tag
+- `it` -- inner html tag
+- `a>` -- a single tag
+- `i>` -- inner single tag
+
+Parentheses Text Objects
+
+- `i)` -- inner parenthesized block
+- `i)` -- inner parenthesized block
+- `i]` -- inner bracket
+- `i}` -- inner brace block
+- a\` -- a back quoted string
+- i\` -- inner back quoted string
+
+> [CamelCaseMotion](https://github.com/bkad/CamelCaseMotion) provides a text object to move by words within a camel or snake-cased word.
+
+Examples:
+
+- select to next char "w" `vfw`
+- select 'til next char "w" `vtw`
 
 ### Pen to the page
 
@@ -153,7 +186,7 @@ More cool tricks:
 ### Navigation
 
 - `Ctrl-o` - old cursor position - this is a standard mapping but very useful, so included here
-- `Ctrl-i` - opposite of Ctrl-O (again, this is standard)
+- `Ctrl-i` - opposite of `Ctrl-o`
 - \`\` (two back tick) jump between previous cursor position
 
 **Buffers**
@@ -198,7 +231,6 @@ More cool tricks:
 
 - `:pwd` show CWD
 - `<leader>cd` Switch CWD to the directory of the open buffer
-- `:echo @%` show current file path
 
 ### Code editing
 
@@ -208,14 +240,15 @@ More cool tricks:
 - `~`                  - Toggle the case of character under cursor.
                        (Visual mode) `U` for uppercase, `u` for lowercase
 - `gUiw` Change current word to uppercase
-- [(vim-commentary)](https://github.com/tpope/vim-commentary)
+- ([vim-commentary](https://github.com/tpope/vim-commentary))
     - `gcc` comment out a line (takes a count)
     - `gc` comment out the selection
     - `gcap` comment out a paragraph
-- (surround.vim)
-    - `ysiw"` add quotes in word
-    - `ds"` remove the delimiters entirely
-    - `cs"'` change surrounding
+- ([surround.vim](https://github.com/tpope/vim-surround))
+    - `ys iw "` add quotes in word
+    - `ds "` remove the delimiters entirely
+    - `cs "'` change surrounding
+    - `yss )` wrap the entire line in parentheses
 
 Other settings
 
@@ -262,6 +295,7 @@ http://vim.wikia.com/wiki/Moving_around
 When you copy and cut stuff, it gets saved to registers. You can pull stuff from those registers at a later time.
 
 - `:reg`     - show named registers and what's in them
+- `"5y`      - yank to register `"5`
 - `"5p`      - paste what's in register `"5`
 
 **Special registers**
@@ -281,13 +315,37 @@ When you copy and cut stuff, it gets saved to registers. You can pull stuff from
 You can also record a whole series of edits to a register, and then apply them over and over.
 
 - `qk`       - records edits into register k 
-               (q again to stop recording)
+               (`q` again to stop recording)
 - `@k`       - execute recorded edits (macro)
 - `@@`       - repeat last one
 - `5@@`      - repeat 5 times
 - `"kp`      - print macro k 
                (e.g., to edit or add to .vimrc)
 - `"kd`      - replace register k with what cursor is on
+
+### Special Variables
+
+https://vim.fandom.com/wiki/Get_the_name_of_the_current_file
+
+- `:echo @%` directory/name of file (relative to the current working directory)
+- `:echo expand('%:t')` name of file
+- `:echo expand('%:p')` full path
+- `:echo expand('%:p:h')` directory containing file ('head')
+- `:echo expand('%:r')` name of file less one extension ('root')
+- `:echo expand('%:e')` name of file's extension ('extension')
+- `:cd %:p:h` change the working directory to the file being edited. (`:p` Make file name a full path. `:h` Head of the file name)
+- In insert mode, type `Ctrl-r` then `%` to insert the name of the current file.
+
+### Vim paste in command mode - the power of `Ctrl-r`
+
+http://vimdoc.sourceforge.net/htmldoc/insert.html#i_CTRL-R
+
+Use `Ctrl-r "` when entering a command in command mode to paste the current paste buffer contents.
+
+- Substitute `"` for a buffer name (say, `0` for yanked buffer),
+- `%` for current filename,
+- `/` for last search term,
+- `+` for the `X clipboard` or a host of other substitutions.
 
 ### Misc
 

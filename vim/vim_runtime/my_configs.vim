@@ -9,6 +9,9 @@ set encoding=utf-8
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
 
+" Allow saving of files as sudo when I forgot to start vim using sudo
+cmap w!! w !sudo tee > /dev/null %
+
 " multi_cursor - default mapping
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
@@ -21,8 +24,8 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" Allow saving of files as sudo when I forgot to start vim using sudo
-cmap w!! w !sudo tee > /dev/null %
+" NERDTree Settings
+let g:NERDTreeWinPos = "left"
 
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
@@ -54,5 +57,4 @@ Plug 'ncm2/ncm2-ultisnips'
 " Optional: better Rnoweb support (LaTeX completion)
 Plug 'lervag/vimtex'
 call plug#end()
-
 
