@@ -83,6 +83,7 @@ $ brew tap homebrew/completions
 ```
 $ brew cask install \
 `# dash` \
+betterzip \
 deckset \
 docker \
 firefox \
@@ -103,6 +104,7 @@ sourcetree \
 spectacle \
 tabula \
 transmission \
+welly \
 xquartz \
 qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo
 ```

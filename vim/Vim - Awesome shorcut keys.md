@@ -106,10 +106,10 @@ More cool searching tricks:
 
 - `c`          - change (Same as `d` but put me in insert mode)
 - `cc` = `S`   - delete current line and enter insert mode
-- `c0`         - change to begining of line
-- `C`          - change to end of line
+- `c0`         - change to begining of line and enter insert mode
+- `C` = `c$`   - change to end of line and enter insert mode
+- `s`          - change under cursor and enter insert mode, does the same thing as `x` then `i`
 - `r`          - replace under cursor; `R` replace multiple characters
-- `s`          - change under cursor, does the same thing as `x` then `i`
 
 ### Deleting
 
