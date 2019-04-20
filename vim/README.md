@@ -174,6 +174,7 @@ Plug 'lervag/vimtex'
 
 [**jedi-vim**](https://github.com/davidhalter/jedi-vim)
 
+[**Command-T**](https://github.com/wincent/Command-T)
 
 ## Misc
 
