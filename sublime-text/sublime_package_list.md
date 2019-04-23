@@ -122,6 +122,7 @@ Terminal,
 Text Pastry,
 Theme - Flatland,
 Virtualenv,
+Whitespace,
 WordCount,
 Zen Tabs,
 ```
