@@ -205,7 +205,9 @@
 		<true/>
 		<key>StatusItems-Order</key>
 		<array>
-			<integer>8</integer>
+			<integer>2</integer>
+			<integer>6</integer>
+			<integer>1</integer>
 		</array>
 		<key>Theme-SeperateStyles</key>
 		<false/>
