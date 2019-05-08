@@ -18,6 +18,11 @@
 		"Markdown",
 		"Vintage"
 	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
 	"mdpopups.sublime_user_lang_map":
 	{
 	},
