@@ -192,29 +192,58 @@ More cool tricks:
 **Buffers**
 
 - `<C-^>` or `:b#`          - switch between alternative files (buffer)
-- `:ls`                     - list buffers
-- `:b 2`                    - open buffer #2 in this window
-- `:bp`                     - go to previous buffer
-- `:bn`                     - go to next buffer
-- `<leader>bd` or `:Bclose` - close (dismiss) current buffer
+- `:ls`, `:buffers`         - list buffers
+- `:b 2`                    - swith to buffer #2 in this window
+- `:b filename`             - swith to buffer **fuzzy matching** `:b exa` will jump to say `example.html`
+- `:bp[revious]`            - go to previous buffer
+- `:bn[ext]`                - go to next buffer
+- `:bd[elete]`              - delete a buffer
+- `<leader>bd` or `:Bclose` - (Bclose.vim) close (dismiss) current buffer without closing the window
 - `<leader>ba`              - close all buffers
 - `<leader>o`               - open/toggle (bufexplorer)
 
+```
+:sb 3                 - 分屏並打開編號為 3 的 Buffer
+:vertical sb 3        - 同上，垂直分屏
+:vertical rightbelow sfind file.txt   - sfind可以打開在 Vim PATH 中的任何文件
+```
+
+![tabs-windows-buffers](https://harttle.land/assets/img/blog/tabs-windows-buffers.png)
+
 **Windows (Panes)**
 
-- `:split filename` / `:vsplit filename` - split / vertical split window and load another file
-    - `:new` / `:vnew`
-    - `<C-w> s` / `<C-w> v`
-- `<C-w> up arrow` or `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up a window
-- `<C-w> w`            - move cursor to another window (cycle)
-- `<C-w> +`, `<C-w> -` - window resize up / down (can do with number prefix)
-- `<C-w> >`, `<C-w> <` - window resize left / right (can do with number prefix)
-- `10 <C-w> +`         - increase window size by 10 lines
-- `<C-w> c` or `:hide` - close current window
-- `<C-w> _`            - maximize current window
-- `<C-w> =`            - make all equal size
-- `:sview file`        - same as split, but readonly
-- `:only`              - keep only this window open
+- `:sp[lit] filename`   - horizontal split window and load another file (`:new`)
+- `:vs[plit] filename`  - vertical split window and load another file (`:vnew`)
+- `:clo[se]`            - close current window
+- `:hide`    - hide current window
+- `:only`               - keep only this window open
+- `:sview file`         - same as split, but readonly
+
+Shorcuts
+
+- `<C-w> arrow` or `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up/down/left/right a window
+- `<C-w> w`             - move cursor to another window (cycle)
+- `<C-w> s`             - 水平分割當前窗口
+- `<C-w> v`             - 垂直分割當前窗口
+- `<C-w> q`             - 關閉當前窗口
+- `<C-w> c`             - hide current window
+- `<C-w> n`             - 打開一個新窗口（空文件）
+- `<C-w> o`             - 關閉出當前窗口之外的所有窗口
+- `<C-w> T`             - 當前窗口移動到新標籤頁
+
+Resizing
+
+- `<C-w> _`             - maximize current window
+- `<C-w> =`             - make all equal size
+- `<C-w> +`, `<C-w> -`  - window resize up / down (can do with number prefix)
+- `<C-w> >`, `<C-w> <`  - window resize left / right (can do with number prefix)
+- `10 <C-w> +`          - increase window size by 10 lines
+
+使用 `-O` 參數可以讓 Vim 以分屏的方式打開多個文件：
+
+```bash
+vim -O main.cpp my-oj-toolkit.h
+```
 
 **Tabs**
 
@@ -238,7 +267,7 @@ More cool tricks:
 - `:set syntax=python` - change syntax highlighting
 - `J`                  - join selected lines `<num>J`
 - `~`                  - Toggle the case of character under cursor.
-                       (Visual mode) `U` for uppercase, `u` for lowercase
+- (Visual mode) `U` for uppercase, `u` for lowercase
 - `gUiw` Change current word to uppercase
 - ([vim-commentary](https://github.com/tpope/vim-commentary))
     - `gcc` comment out a line (takes a count)
