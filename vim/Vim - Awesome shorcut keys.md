@@ -208,6 +208,15 @@ More cool tricks:
 :vertical rightbelow sfind file.txt   - sfind可以打開在 Vim PATH 中的任何文件
 ```
 
+利用通配符進行緩衝區跳轉
+
+set the config:
+
+```
+set wildmenu wildmode=full 
+set wildchar=<Tab> wildcharm=<C-Z>
+```
+
 ![tabs-windows-buffers](https://harttle.land/assets/img/blog/tabs-windows-buffers.png)
 
 **Windows (Panes)**
@@ -219,10 +228,14 @@ More cool tricks:
 - `:only`               - keep only this window open
 - `:sview file`         - same as split, but readonly
 
-Shorcuts
 
-- `<C-w> arrow` or `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up/down/left/right a window
-- `<C-w> w`             - move cursor to another window (cycle)
+Switch between panes
+
+- `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up/down/left/right a window (`<C-w> arrow`)
+- `<C-w> w`                    - move cursor to another window (cycle)
+
+Shortcuts
+
 - `<C-w> s`             - 水平分割當前窗口
 - `<C-w> v`             - 垂直分割當前窗口
 - `<C-w> q`             - 關閉當前窗口
@@ -247,10 +260,33 @@ vim -O main.cpp my-oj-toolkit.h
 
 **Tabs**
 
+- `:tabe[dit] {file}`  - edit specified file in a new tab
+- `:tabf[ind] {file}`  - open a new tab with filename given, searching the 'path' to find it
+- `:tabc[lose]`        - close current tab
+- `:tabc[lose] {i}`    - close i-th tab
+- `:tabo[nly]`         - close all other tabs (show only the current tab)
+
+Moving tabs
+
+- `:tabs`        - list all tabs including their displayed window
+- `:tabm 0`      - move current tab to first
+- `:tabm`        - move current tab to last
+- `:tabm {i}`    - move current tab to position i+1
+
+Switch between tabs
+
+- `gt`           - goto next tab
+- `gT`           - goto prev. tab
+- `{i}gt`        - go to tab in position i 
+
+```
+noremap <C-L> <Esc>:tabnext<CR>
+noremap <C-H> <Esc>:tabprevious<CR>
+```
+
+Shortcuts
+
 - `<leader>tn` tab new
-- switch between tabs:
-    - goto next tab `gt`
-    - goto prev. tab `gT`
 - `<leader>tc` tab close
 - `<leader>to` tab only
 - `<leader>tm` tab move
@@ -393,6 +429,8 @@ Use `Ctrl-r "` when entering a command in command mode to paste the current past
 - [Vim registers: The basics and beyond](https://www.brianstorti.com/vim-registers/)
 - [skwp/dotfiles#vim](https://github.com/skwp/dotfiles#vim---whats-included)
 - [vim help](https://www.cs.swarthmore.edu/oldhelp/vim/)
+- https://harttle.land/2015/11/17/vim-buffer.html
+- https://harttle.land/2015/11/14/vim-window.html
 
 **Videos**
 
