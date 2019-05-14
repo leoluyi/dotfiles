@@ -248,8 +248,8 @@ Resizing
 
 - `<C-w> _`             - maximize current window
 - `<C-w> =`             - make all equal size
-- `<C-w> +`, `<C-w> -`  - window resize up / down (can do with number prefix)
-- `<C-w> >`, `<C-w> <`  - window resize left / right (can do with number prefix)
+- `<C-w> +`, `<C-w> -`  - window resize up / down
+- `<C-w> >`, `<C-w> <`  - window resize left / right
 - `10 <C-w> +`          - increase window size by 10 lines
 
 使用 `-O` 參數可以讓 Vim 以分屏的方式打開多個文件：
