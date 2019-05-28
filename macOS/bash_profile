@@ -10,7 +10,7 @@ export TERM=xterm-256color
 # The various escape codes that we can use to color our prompt.
 #   Based on work by woods
 #
-#   https://gist.github.com/31967
+#   https://gist.github.com/woods/31967
 
         RED="\[\033[0;31m\]"
      YELLOW="\[\033[0;33m\]"
@@ -46,7 +46,7 @@ alias pdocker="docker ps | peco | awk '{print \$1;}' | tr '\n' ' ' | xargs docke
 # custom functions
 function mkcd {
   last=$(eval "echo \$$#")
-  if [ ! -n "$last" ]; then
+  if [ -z "$last" ]; then
     echo "Enter a directory name"
   elif [ -d "$last" ]; then
     echo "\"$last\" already exists"
