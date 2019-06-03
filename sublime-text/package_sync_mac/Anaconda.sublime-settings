@@ -1,5 +1,5 @@
 {
-    "python_interpreter": "/Users/leoluyi/.pyenv/shims/python",
+    "python_interpreter": "python",
     "anaconda_linting": false,
     "swallow_startup_errors": true,
 
