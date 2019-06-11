@@ -135,6 +135,21 @@
 				<string>Macintosh HD</string>
 			</dict>
 		</array>
+		<key>Disks_MenubarMode</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>6</string>
+				<key>uuid</key>
+				<string>AC1E015E-CC48-44EE-8CB6-A7EAF52E63D9</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>9</string>
+				<key>uuid</key>
+				<string>1E1FBD49-F2BC-478E-B520-DD4C821E3BCD</string>
+			</dict>
+		</array>
 		<key>DropdownGraphBackground</key>
 		<integer>1</integer>
 		<key>DropdownTheme-Dark</key>
@@ -205,6 +220,7 @@
 		<true/>
 		<key>StatusItems-Order</key>
 		<array>
+			<integer>4</integer>
 			<integer>2</integer>
 			<integer>6</integer>
 			<integer>1</integer>
