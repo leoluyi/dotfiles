@@ -135,10 +135,10 @@ List installed cask
 $ brew cask list
 ```
 
-Update
+Upgrade apps
 
 ```
-$ brew cask update
+$ brew cask upgrade
 ```
 
 Uninstall
