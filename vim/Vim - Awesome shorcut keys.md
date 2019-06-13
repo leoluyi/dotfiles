@@ -127,8 +127,9 @@ More cool searching tricks:
                         (repeat with n)
 - `#`                 - search for word under cursor - backward (bounded)
 - `g#`                - search for word under cursor - backward (unbounded)
-- `ctrl-o`, `ctrl-i`  - go through jump locations
-- `[I`                - show lines with matching word under cursor
+- `[I`                - show lines with matching word under cursor. Type `:<linenum><CR>` to jump to the line.
+
+[Go to lines matched by `[I`](https://superuser.com/q/692548)
 
 ### Search and Replace
 
@@ -185,9 +186,12 @@ More cool tricks:
 
 ### Navigation
 
+**Go through jump locations**
+
+- `:<linenum>` - go to <linenum>
 - `Ctrl-o` - old cursor position - this is a standard mapping but very useful, so included here
 - `Ctrl-i` - opposite of `Ctrl-o`
-- \`\` (two back tick) jump between previous cursor position
+- \`\` (two back tick) - jump between previous cursor position
 
 **Buffers**
 
