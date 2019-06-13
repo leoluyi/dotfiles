@@ -131,6 +131,13 @@ More cool searching tricks:
 
 [Go to lines matched by `[I`](https://superuser.com/q/692548)
 
+**Go through jump list** ("jump list", a list of places where your cursor has been to)
+
+- `:<linenum>` - go to `<linenum>`
+- `Ctrl-o` - old cursor position - this is a standard mapping but very useful, so included here
+- `Ctrl-i` - opposite of `Ctrl-o`
+- \`\` (two back tick) - jump between previous cursor position
+
 ### Search and Replace
 
 - `:%s/search_for_this/replace_with_this/gc` - search whole file and replace, confirm each replace
@@ -185,13 +192,6 @@ More cool tricks:
 > Note that filename with "space" must be escaped with backslash `\`.
 
 ### Navigation
-
-**Go through jump list** ("jump list", a list of places where your cursor has been to)
-
-- `:<linenum>` - go to <linenum>
-- `Ctrl-o` - old cursor position - this is a standard mapping but very useful, so included here
-- `Ctrl-i` - opposite of `Ctrl-o`
-- \`\` (two back tick) - jump between previous cursor position
 
 **Buffers**
 
