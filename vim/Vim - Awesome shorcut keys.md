@@ -186,7 +186,7 @@ More cool tricks:
 
 ### Navigation
 
-**Go through jump locations**
+**Go through jump list** ("jump list", a list of places where your cursor has been to)
 
 - `:<linenum>` - go to <linenum>
 - `Ctrl-o` - old cursor position - this is a standard mapping but very useful, so included here
