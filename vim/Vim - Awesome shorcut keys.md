@@ -140,8 +140,8 @@ More cool searching tricks:
 
 ### Search and Replace
 
-- `:%s/search_for_this/replace_with_this/gc` - search whole file and replace, confirm each replace
-- `:s/search_for_this/replace_with_this/gi` - replace in the current line only, with case insensitive
+- `:%s/search_for_this/replace_with_this/gc` - replace in the whole file (%s), [c]onfirm each replace
+- `:s/search_for_this/replace_with_this/gi` -  replace in the current line only, with case [i]nsensitive
 
 ### Changing
 
