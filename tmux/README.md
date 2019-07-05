@@ -39,7 +39,7 @@ set -g status-keys vi
 set -g mode-keys vi
 ```
 
-## 
+## tmux plugins manager
 
 Clone TPM:
 
