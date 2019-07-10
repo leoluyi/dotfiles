@@ -50,5 +50,13 @@
         "W391"
     ],
 
+    /*
+        Use anaconda for code completion
+        Suppress sublime completions
+    */
+    "disable_anaconda_completion": false,
+    "suppress_word_completions": true,
+    "suppress_explicit_completions": true,
+
     "anaconda_linter_phantoms": false
 }
