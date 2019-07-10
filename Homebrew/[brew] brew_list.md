@@ -52,6 +52,14 @@ youtube-dl \
 $ brew tap eddieantonio/eddieantonio && brew install imgcat
 ```
 
+**Other packages**
+
+```bash
+# https://github.com/jesseduffield/lazydocker
+brew tap jesseduffield/lazydocker
+brew install lazydocker
+```
+
 ### Using homebrew
 
 Update
