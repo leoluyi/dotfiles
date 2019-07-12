@@ -38,11 +38,12 @@ endif
 
 " vim-plug
 call plug#begin()
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'jalvesaq/Nvim-R'
 Plug 'gaalcaras/ncm-R'
+Plug 'jalvesaq/Nvim-R'
+Plug 'ncm2/ncm2'
+" Plug 'ncm2/ncm2-jedi'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
 " Vim 8 only
 if !has('nvim')
