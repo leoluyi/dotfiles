@@ -86,7 +86,7 @@ curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
 
 **Install Packages**
 
-In vim command
+Install packages in in vim command:
 
 ```
 :PlugInstall
