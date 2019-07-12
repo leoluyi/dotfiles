@@ -418,9 +418,10 @@ Use `Ctrl-r "` when entering a command in command mode to paste the current past
 
 ### Misc
 
-- `u` - Undo (See :help undo, it's complicated)
-- `<C-r>` - Redo
-- `.` - Redo last change
+- `u`      - Undo (See :help undo, it's complicated)
+- `<C-r>`  - Redo
+- `.`      - Redo last change
+- `:%sort` - Sort in visual mode. Use `:%sort!` to sort in reverse order. `:%sort n` for numeric sort.
 
 ## References
 
