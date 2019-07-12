@@ -84,6 +84,14 @@ curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
+**Install Packages**
+
+In vim command
+
+```
+:PlugInstall
+```
+
 **Usage**
 
 Add a vim-plug section to your `~/.vimrc` (or `~/.config/nvim/init.vim` for Neovim). Edit `~/.vim_runtime/my_configs.vim` for **Ultimate vimrc** settings:
