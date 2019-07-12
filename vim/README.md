@@ -34,11 +34,11 @@ git pull --rebase
 - Remove `rm -rf ~/.vim_runtime`
 - Remove any lines that reference `.vim_runtime` in your `~/.vimrc`
 
-## Install Packages
+## Packages
 
 [Vim Awesome](https://vimawesome.com)
 
-### Install package with Pathogen
+### 1. Install package with Pathogen
 
 ```sh
 $ cd ~/.vim_runtime/my_plugins
@@ -73,7 +73,7 @@ done
 
 Simply remove its directory from `~/.vim_runtime/my_plugins`.
 
-### Install package with vim-plug
+### 2. Install package with vim-plug
 
 **Install [vim-plug](https://github.com/junegunn/vim-plug)**
 
@@ -107,7 +107,7 @@ Add a vim-plug section to your `~/.vimrc` (or `~/.config/nvim/init.vim` for Neov
 2. `PlugUpdate`: Install or update plugins.
 3. `PlugClean[!]`: Remove unused directories (bang version will clean without prompt).
 
-### Packages List
+### 3. Packages List
 
 [**braceless.vim**](https://github.com/tweekmonster/braceless.vim)
 
