@@ -106,10 +106,12 @@ fi
 
 cd "${old_dir}" || return
 
-echo "###### Virtualenv Settings ######"
+echo "###### Virtualenv Integration with Sublime Text ######"
 
-mkdir -p "${HOME}/.local/share/virtualenvs/"
-ln -s -f "${HOME}/.local/share/virtualenvs/" "${HOME}/.virtualenvs"
+mkdir -p "${HOME}/.local/share/virtualenvs"
+venv_folder="${HOME}/.virtualenvs"
+
+[[ -L "$venv_folder" && -d "$venv_folder" ]] || ln -sf "${HOME}/.local/share/virtualenvs" "${HOME}/.virtualenvs"
 
 echo "###### Sublime Text Settings ######"
 
@@ -147,4 +149,4 @@ fi
 
 echo "###### Source Bash Settings ######"
 
-source "${HOME}/.bash_profile";
+source "${HOME}"/.bash_profile;
