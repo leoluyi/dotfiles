@@ -206,11 +206,7 @@ let g:jedi#rename_command = "<leader>r"
 
 [**Command-T**](https://github.com/wincent/Command-T): Fast file navigation for VIM
 
-Bring up the Command-T file window by typing:
-
-```
-<Leader>t
-```
+Bring up the Command-T file window by typing: `<Leader>t`
 
 COMMANDS
 
