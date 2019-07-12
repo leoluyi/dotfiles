@@ -1,6 +1,8 @@
 # Vim settings
 
-## Install [The Ultimate vimrc](https://github.com/amix/vimrc)
+## Install the Ultimate Vimrc
+
+https://github.com/amix/vimrc)
 
 **Install for your own user only**
 
@@ -216,3 +218,7 @@ COMMANDS
 ## Misc
 
 - `:so %` to reload `.vimrc`
+
+## References
+
+- [Setting up VIM as an IDE for Python](https://medium.com/@hanspinckaers/setting-up-vim-as-an-ide-for-python-773722142d1d)
