@@ -4,17 +4,19 @@
 
 **Install for your own user only**
 
-```sh
-$ git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-$ sh ~/.vim_runtime/install_awesome_vimrc.sh
+```bash
+# Install Ultimate vimrc
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime \
+  && bash ~/.vim_runtime/install_awesome_vimrc.sh
 
 # copy settings
-$ wget -qO ~/.vim_runtime/my_configs.vim https://github.com/leoluyi/dotfiles/raw/master/vim/vim_runtime/my_configs.vim
+wget -qO ~/.vim_runtime/my_configs.vim https://github.com/leoluyi/dotfiles/raw/master/vim/vim_runtime/my_configs.vim
+wget -qO ~/.vim_runtime/vimrcs/my_configs.vim https://github.com/leoluyi/dotfiles/raw/master/vim/vim_runtime/vimrcs/filetypes.vim
 ```
 
 **Install for multiple users**
 
-```sh
+```bash
 $ git clone --depth=1 https://github.com/amix/vimrc.git /opt/vim_runtime
 $ sh ~/.vim_runtime/install_awesome_parameterized.sh /opt/vim_runtime user0 user1 user2
 
@@ -24,7 +26,7 @@ $ sh ~/.vim_runtime/install_awesome_parameterized.sh /opt/vim_runtime --all
 
 **How to update to latest version**
 
-```
+```bash
 cd ~/.vim_runtime
 git pull --rebase
 ```
@@ -40,14 +42,14 @@ git pull --rebase
 
 ### 1. Install package with Pathogen
 
-```sh
+```bash
 $ cd ~/.vim_runtime/my_plugins
 $ git clone <package_repo>
 ```
 
 **Install packages**
 
-```sh
+```bash
 cd ~/.vim_runtime/my_plugins \
   && git clone https://github.com/tweekmonster/braceless.vim \
   && git clone --recursive https://github.com/davidhalter/jedi-vim \
@@ -58,7 +60,7 @@ cd ~/.vim_runtime/my_plugins \
 
 **Update plugins**
 
-```
+```bash
 cd ~/.vim_runtime/my_plugins
 
 for i in `ls`; do
@@ -79,7 +81,7 @@ Simply remove its directory from `~/.vim_runtime/my_plugins`.
 
 Download plug.vim and put it in the "autoload" directory.
 
-```
+```bash
 curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
@@ -146,13 +148,13 @@ Commands
 
 https://github.com/gaalcaras/ncm-R/issues/2#issuecomment-353635826
 
-```
+```bash
 $ pip install neovim
 ```
 
 Use vim-plug to install:
 
-```
+```vim
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -190,8 +192,8 @@ Plug 'lervag/vimtex'
 - Usages `<leader>n` (shows all the usages of a name)
 - Open module, e.g. `:Pyimport os` (opens the `os` module)
 
-```
-NOTE: subject to change!
+```vim
+" NOTE: subject to change!
 
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"
