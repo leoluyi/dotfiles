@@ -96,6 +96,7 @@ deckset \
 docker \
 firefox \
 font-meslo-for-powerline \
+font-mononoki-nerd-font \
 google-chrome \
 google-drive-file-stream \
 iina \
@@ -103,7 +104,7 @@ iterm2 \
 java \
 jupyter-notebook-viewer \
 keycastr \
-macdown \
+`#macdown` \
 mounty \
 obs \
 r \
@@ -112,6 +113,7 @@ sourcetree \
 spectacle \
 tabula \
 transmission \
+typora \
 welly \
 xquartz \
 qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo
