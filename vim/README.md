@@ -2,7 +2,7 @@
 
 ## Install the Ultimate Vimrc
 
-https://github.com/amix/vimrc)
+https://github.com/amix/vimrc
 
 **Install for your own user only**
 
