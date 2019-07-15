@@ -83,7 +83,6 @@ Quoted Strings
 Parentheses Text Objects
 
 - `i)` -- inner parenthesized block
-- `i)` -- inner parenthesized block
 - `i]` -- inner bracket
 - `i}` -- inner brace block
 - a\` -- a back quoted string
