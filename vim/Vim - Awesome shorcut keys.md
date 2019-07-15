@@ -176,7 +176,7 @@ More cool tricks:
 
 ### Files
 
-- `ZZ`
+- `ZZ`              - Write current file, if modified, and quit
 - `:e path/to/file` - edit new file (buffer)
 - `:e!`             - revert to last save (or use `:earlier 1f`)
 - `:w !sudo tee %`  - force write with sudo trick. `%` (special variables) "the current file"
