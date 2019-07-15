@@ -2,34 +2,6 @@
 
 cd "$(dirname "${BASH_SOURCE}")" || return;
 
-function sync_dotfile() {
-  # rsync --exclude ".git/" \
-  #   --exclude ".DS_Store" \
-  #   --exclude ".osx" \
-  #   --exclude "bootstrap.sh" \
-  #   --exclude "README.md" \
-  #   --exclude "LICENSE-MIT.txt" \
-  #   -avh --no-perms macOS/bash_{profile,rc} ~;
-  cp git/macOS.gitignore ${HOME}/.gitignore_global
-  cp macOS/bash_profile ${HOME}/.bash_profile
-  cp macOS/bashrc ${HOME}/.bashrc
-  cp tmux/tmux.conf.local ${HOME}/.tmux.conf.local
-  cp git/gitconfig ${HOME}/.gitconfig
-  cp vim/vim_runtime/my_configs.vim ${HOME}/.vim_runtime/my_configs.vim
-  cp bash-git-prompt/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
-}
-
-if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
-  sync_dotfile;
-else
-  read -rp "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
-  echo "";
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    sync_dotfile;
-  fi;
-fi;
-unset sync_dotfile;
-
 echo "###### Install Homebrew ######"
 
 if [ -x "$(command -v brew)" ]; then
@@ -154,6 +126,36 @@ if [ ! -d "${HOME}/.vim_runtime" ]; then
 else
   echo "Awesome Vim is already installed."
 fi
+
+echo "###### sync_dotfile ######"
+
+function sync_dotfile() {
+  # rsync --exclude ".git/" \
+  #   --exclude ".DS_Store" \
+  #   --exclude ".osx" \
+  #   --exclude "bootstrap.sh" \
+  #   --exclude "README.md" \
+  #   --exclude "LICENSE-MIT.txt" \
+  #   -avh --no-perms macOS/bash_{profile,rc} ~;
+  cp git/macOS.gitignore ${HOME}/.gitignore_global
+  cp macOS/bash_profile ${HOME}/.bash_profile
+  cp macOS/bashrc ${HOME}/.bashrc
+  cp tmux/tmux.conf.local ${HOME}/.tmux.conf.local
+  cp git/gitconfig ${HOME}/.gitconfig
+  cp vim/vim_runtime/my_configs.vim ${HOME}/.vim_runtime/my_configs.vim
+  cp bash-git-prompt/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
+}
+
+if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
+  sync_dotfile;
+else
+  read -rp "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+  echo "";
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    sync_dotfile;
+  fi;
+fi;
+unset sync_dotfile;
 
 echo "###### Source Bash Settings ######"
 
