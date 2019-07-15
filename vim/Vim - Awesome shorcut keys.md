@@ -133,10 +133,10 @@ More cool searching tricks:
 
 **Go through jump list** ("jump list", a list of places where your cursor has been to)
 
-- `:<linenum>` - go to `<linenum>`
-- `Ctrl-o` - old cursor position - this is a standard mapping but very useful, so included here
-- `Ctrl-i` - opposite of `Ctrl-o`
-- \`\` (two back tick) - jump between previous cursor position
+- `:<linenum>`           - go to `<linenum>`
+- `Ctrl-o` and `Ctrl-i`  - jump old and new cursor position through the jump list history
+- \`\` (double backtick) - jump between previous cursor position. See [jump list]()
+- `g;` and `g,`          - jump through edit positions, which are also very frequently used
 
 ### Search and Replace
 
