@@ -340,7 +340,7 @@ http://vim.wikia.com/wiki/Moving_around
 ### Folding
 
 - fold selected lines `zf` (manual mode)
-- open/close fold in file `zr`/`zm`. `zR`/`zM` for all levels
+- open/close fold in file `zr`/`zm`. Use `zR`/`zM` to open/close for all levels
 - toggle/open/close single fold `za`/`zo`/`zc`. `zA`/`zO`/`zC` for all levels
 
 ### Sublime flavor select (vim-multiple-cursors)
