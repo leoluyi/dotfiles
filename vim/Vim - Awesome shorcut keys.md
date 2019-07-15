@@ -328,7 +328,7 @@ Other settings
 
 http://vim.wikia.com/wiki/Moving_around
 
-- cuts to first non-whitespace character `df `
+- cuts to first non-whitespace character `df␣`
 - replace a word with yanked text: `yiw` in "first" then `viwp` on "second"
 - `N[jk]` jump N lines up/down
 - `''` jump to previous line
