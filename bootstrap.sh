@@ -80,10 +80,10 @@ cd "${old_dir}" || return
 
 echo "###### Virtualenv Integration with Sublime Text ######"
 
-mkdir -p "${HOME}/.local/share/virtualenvs"
-venv_folder="${HOME}/.virtualenvs"
+mkdir -p ~/.local/share/virtualenvs
+venv_folder="${HOME}"/.virtualenvs
 
-[[ -L "$venv_folder" && -d "$venv_folder" ]] || ln -sf "${HOME}/.local/share/virtualenvs" "${HOME}/.virtualenvs"
+[[ -L "$venv_folder" && -d "$venv_folder" ]] || ln -sf ~/.local/share/virtualenvs "${venv_folder}"
 
 echo "###### Sublime Text Settings ######"
 
@@ -91,29 +91,29 @@ ln -s -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/l
 
 echo "###### Tmux Settings ######"
 
-if [ ! -d "${HOME}/.tmux" ]; then
-  git clone https://github.com/gpakosz/.tmux.git "${HOME}/.tmux"
-  ln -sf "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
+if [ ! -d ~/.tmux ]; then
+  git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+  ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf
 else
   echo ".tmux awesome is already installed."
 fi
 
-if [ ! -d "${HOME}"/.tmux/plugins/tpm ]; then
+if [ ! -d ~/.tmux/plugins/tpm ]; then
   echo "Installing tmux plugins manager ..."
-  git clone https://github.com/tmux-plugins/tpm "${HOME}"/.tmux/plugins/tpm \
-    && cp tmux/tmux.conf.local ${HOME}/.tmux.conf.local \
-    && "${HOME}"/.tmux/plugins/tpm/bin/install_plugins
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
+    && cp tmux/tmux.conf.local ~/.tmux.conf.local \
+    && ~/.tmux/plugins/tpm/bin/install_plugins
 else
-  "${HOME}"/.tmux/plugins/tpm/bin/install_plugins
+  ~/.tmux/plugins/tpm/bin/install_plugins
 fi
 
 echo "###### Install Awesome Vim ######"
 
-if [ ! -d "${HOME}/.vim_runtime" ]; then
-  git clone --depth=1 https://github.com/amix/vimrc.git "${HOME}/.vim_runtime"
+if [ ! -d ~/.vim_runtime ]; then
+  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
   bash ~/.vim_runtime/install_awesome_vimrc.sh
 
-  echo "Installing Vim Packages ..."
+  echo "Installing Vim Packages with Pathogen..."
 
   old_dir=$(pwd)
   cd ~/.vim_runtime/my_plugins || return
@@ -123,6 +123,10 @@ if [ ! -d "${HOME}/.vim_runtime" ]; then
   git clone https://github.com/asheq/close-buffers.vim
   git clone https://github.com/ctrlpvim/ctrlp.vim
   cd "${old_dir}" || return
+  
+  echo "Installing Vim Packages with vim-plug ..."
+  curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 else
   echo "Awesome Vim is already installed."
 fi
@@ -137,13 +141,13 @@ function sync_dotfile() {
   #   --exclude "README.md" \
   #   --exclude "LICENSE-MIT.txt" \
   #   -avh --no-perms macOS/bash_{profile,rc} ~;
-  cp git/macOS.gitignore ${HOME}/.gitignore_global
-  cp macOS/bash_profile ${HOME}/.bash_profile
-  cp macOS/bashrc ${HOME}/.bashrc
-  cp tmux/tmux.conf.local ${HOME}/.tmux.conf.local
-  cp git/gitconfig ${HOME}/.gitconfig
-  cp vim/vim_runtime/my_configs.vim ${HOME}/.vim_runtime/my_configs.vim
-  cp bash-git-prompt/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
+  cp git/macOS.gitignore ~/.gitignore_global
+  cp macOS/bash_profile ~/.bash_profile
+  cp macOS/bashrc ~/.bashrc
+  cp tmux/tmux.conf.local ~/.tmux.conf.local
+  cp git/gitconfig ~/.gitconfig
+  cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim
+  cp bash-git-prompt/git-prompt-colors.sh ~/.git-prompt-colors.sh
 }
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
@@ -159,4 +163,4 @@ unset sync_dotfile;
 
 echo "###### Source Bash Settings ######"
 
-source "${HOME}"/.bash_profile;
+source ~/.bash_profile;
