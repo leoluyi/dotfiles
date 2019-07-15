@@ -197,7 +197,7 @@ More cool tricks:
 
 - `<C-^>` or `:b#`          - switch between alternative files (buffer)
 - `:ls`, `:buffers`         - list buffers
-- `:b 2`                    - swith to buffer #2 in this window
+- `:b2`                     - swith to buffer #2 in this window
 - `:b filename`             - swith to buffer **fuzzy matching** `:b exa` will jump to say `example.html`
 - `:bp[revious]`            - go to previous buffer
 - `:bn[ext]`                - go to next buffer
