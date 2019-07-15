@@ -90,7 +90,7 @@ old_dir=$(pwd)
 cd $(brew --prefix)/opt/bash-completion/etc/bash_completion.d || return
 
 # Git completion
-curl -s -L -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+curl -fsSL -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
 brew unlink bash-completion
 brew link bash-completion
 
@@ -122,9 +122,19 @@ echo "###### Tmux Settings ######"
 if [ ! -d "${HOME}/.tmux" ]; then
   git clone https://github.com/gpakosz/.tmux.git "${HOME}/.tmux"
   cp tmux/tmux.conf "${HOME}/.tmux/.tmux.conf"
-  ln -s -f "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
+  ln -sf "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
 else
-  echo ".tmux is already installed."
+  echo ".tmux awesome is already installed."
+fi
+
+if [ ! -d "${HOME}"/.tmux/plugins/tpm ]; then
+  echo "Installing tmux plugins manager ..."
+  git clone https://github.com/tmux-plugins/tpm "${HOME}"/.tmux/plugins/tpm \
+    && cp tmux/tmux.conf ~/.tmux/.tmux.conf \
+    && "${HOME}"/.tmux/plugins/tpm/bin/install_plugins
+else
+  cp tmux/tmux.conf ~/.tmux/.tmux.conf \
+    && "${HOME}"/.tmux/plugins/tpm/bin/install_plugins
 fi
 
 echo "###### Install Awesome Vim ######"
