@@ -85,8 +85,8 @@ Parentheses Text Objects
 - `i)` -- inner parenthesized block
 - `i]` -- inner bracket
 - `i}` -- inner brace block
-- a\` -- a back quoted string
-- i\` -- inner back quoted string
+- <code>a\`</code> -- a back quoted string
+- <code>i\`</code> -- inner back quoted string
 
 > [CamelCaseMotion](https://github.com/bkad/CamelCaseMotion) provides a text object to move by words within a camel or snake-cased word.
 
