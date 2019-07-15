@@ -1,18 +1,19 @@
 set number relativenumber
 set encoding=utf-8
 
-" Automatic toggling between line number modes
+" Automatic toggling between line number modes  ------------------------
 " https://jeffkreeftmeijer.com/vim-number/
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
-" Allow saving of files as sudo when I forgot to start vim using sudo
+" Allow saving of files as sudo ----------------------------------------
+" when I forgot to start vim using sudo 
 cmap w!! w !sudo tee > /dev/null %
 
-" multi_cursor - default mapping
+" multi_cursor - default mapping ---------------------------------------
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
 let g:multi_cursor_select_all_word_key = '<Esc>n'
@@ -24,19 +25,26 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" NERDTree Settings
+" NERDTree Settings ----------------------------------------------------
 let g:NERDTreeWinPos = "left"
 
-" vim-indent-guides
+" vim-indent-guides ----------------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 
-" braceless.vim
+" braceless.vim  -------------------------------------------------------
 if exists('BracelessEnable')
     autocmd FileType python BracelessEnable +indent
 endif
 
-" vim-plug
+" vim-plug -------------------------------------------------------------
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
 Plug 'gaalcaras/ncm-R'
 Plug 'jalvesaq/Nvim-R'
@@ -58,4 +66,3 @@ Plug 'ncm2/ncm2-ultisnips'
 " Optional: better Rnoweb support (LaTeX completion)
 Plug 'lervag/vimtex'
 call plug#end()
-
