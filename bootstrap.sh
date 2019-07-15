@@ -130,11 +130,9 @@ fi
 if [ ! -d "${HOME}"/.tmux/plugins/tpm ]; then
   echo "Installing tmux plugins manager ..."
   git clone https://github.com/tmux-plugins/tpm "${HOME}"/.tmux/plugins/tpm \
-    && cp tmux/tmux.conf ~/.tmux/.tmux.conf \
     && "${HOME}"/.tmux/plugins/tpm/bin/install_plugins
 else
-  cp tmux/tmux.conf ~/.tmux/.tmux.conf \
-    && "${HOME}"/.tmux/plugins/tpm/bin/install_plugins
+  "${HOME}"/.tmux/plugins/tpm/bin/install_plugins
 fi
 
 echo "###### Install Awesome Vim ######"
