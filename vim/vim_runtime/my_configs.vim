@@ -37,6 +37,13 @@ if exists('BracelessEnable')
     autocmd FileType python BracelessEnable +indent
 endif
 
+" vim-easy-align  ------------------------------------------------------
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -52,6 +59,7 @@ Plug 'ncm2/ncm2'
 " Plug 'ncm2/ncm2-jedi'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'junegunn/vim-easy-align'
 
 " Vim 8 only
 if !has('nvim')
