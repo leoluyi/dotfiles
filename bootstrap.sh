@@ -93,7 +93,6 @@ echo "###### Tmux Settings ######"
 
 if [ ! -d "${HOME}/.tmux" ]; then
   git clone https://github.com/gpakosz/.tmux.git "${HOME}/.tmux"
-  cp tmux/tmux.conf "${HOME}/.tmux/.tmux.conf"
   ln -sf "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
 else
   echo ".tmux awesome is already installed."
@@ -102,6 +101,7 @@ fi
 if [ ! -d "${HOME}"/.tmux/plugins/tpm ]; then
   echo "Installing tmux plugins manager ..."
   git clone https://github.com/tmux-plugins/tpm "${HOME}"/.tmux/plugins/tpm \
+    && cp tmux/tmux.conf.local ${HOME}/.tmux.conf.local \
     && "${HOME}"/.tmux/plugins/tpm/bin/install_plugins
 else
   "${HOME}"/.tmux/plugins/tpm/bin/install_plugins
