@@ -87,6 +87,7 @@ if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
   chsh -s "${BREW_PREFIX}/bin/bash";
 fi;
 
+brew cleanup
 
 echo "###### Fix Bash Completion ######"
 # https://dwatow.github.io/2018/09-21-git-cmd-auto-complete/
