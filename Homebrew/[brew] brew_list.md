@@ -57,14 +57,7 @@ youtube-dl \
 
 # Install other useful binaries.
 brew tap eddieantonio/eddieantonio && brew install imgcat
-```
-
-**Other packages**
-
-```bash
-# https://github.com/jesseduffield/lazydocker
-brew tap jesseduffield/lazydocker
-brew install lazydocker
+brew tap jesseduffield/lazydocker && brew install lazydocker
 ```
 
 ### Using homebrew
@@ -85,18 +78,15 @@ $ brew list
 
 ## brew cask
 
-Install homebrew-cask
-
-```
-$ brew tap caskroom/cask
-$ brew tap homebrew/cask-fonts
-$ brew tap homebrew/completions
-```
-
 ### Cask list
 
 ```
-$ brew cask install \
+# Tap cask GitHub repositories
+brew tap caskroom/cask
+brew tap homebrew/cask-fonts
+
+# Install apps
+brew cask install \
 `# dash` \
 betterzip \
 deckset \
