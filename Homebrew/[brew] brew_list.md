@@ -3,21 +3,23 @@
 ### Install packages
 
 ```
-$ brew install \
+brew install \
 asciinema     `# record terminal sessions` \
 atomicparsley `# setting metadata into MPEG-4` \
 bash \
-bash-completion \
+bash-completion@2 \
 bash-git-prompt \
 bfg \
 cmatrix \
-coreutils \
+coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
 czmq \
 ffmpeg \
+findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
 gcc \
 gdal \
 git \
 gnupg \
+gnu-sed --with-default-names \
 grep \
 grip \
 highlight \
@@ -27,8 +29,10 @@ libpng \
 libsvg \
 libxml2 \
 libzip \
+moreutils  `# Some other useful utilities like sponge` \
 npm \
 openssl \
+p7zip \
 pdfcrack   `# pdf password crack` \
 peco       `# Simplistic interactive filtering tool` \
 pip-completion \
@@ -39,17 +43,20 @@ pyenv \
 pyenv-virtualenv \
 rename \
 shellcheck \
+ssh-copy-id \
 terminal-notifier \
 thefuck \
 tldr \
 tmux \
 tree \
-vim \
+vim --with-override-system-vi \
 wget \
 ydiff \
 youtube-dl \
+2>/dev/null
 
-$ brew tap eddieantonio/eddieantonio && brew install imgcat
+# Install other useful binaries.
+brew tap eddieantonio/eddieantonio && brew install imgcat
 ```
 
 **Other packages**
