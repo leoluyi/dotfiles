@@ -9,7 +9,7 @@ if [ -x "$(command -v brew)" ]; then
   echo "Updating Homebrew ..."
   brew update
 
-  # Save Homebrew’s installed location.
+  # Save Homebrew's installed location.
   BREW_PREFIX=$(brew --prefix)
 else
   echo "Installing Hombrew ..."
@@ -85,7 +85,7 @@ ydiff \
 youtube-dl \
 2>/dev/null
 
-ln -s "${BREW_PREFIX}/bin/gsha256sum" "${BREW_PREFIX}/bin/sha256sum"
+# ln -sf "${BREW_PREFIX}/bin/gsha256sum" "${BREW_PREFIX}/bin/sha256sum"
 
 # Switch to using brew-installed bash as default shell
 if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
@@ -104,25 +104,20 @@ echo "###### Fix Bash Completion ######"
 # 安裝完 bash 會自動指向 brew 安裝的路徑，
 # 確定版本之後，要去 github 找 git-completion.bash，並且，找到與你的 git 匹配的 版本。
 
-old_dir=$(pwd)
-cd $(brew --prefix)/opt/bash-completion/etc/bash_completion.d || return
+BASH_COMPLETION_COMPAT_DIR=$(brew --prefix)/etc/bash_completion.d
 
 # Git completion
-curl -fsSL -O https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
-brew unlink bash-completion
-brew link bash-completion
+curl -fsSLo ${BASH_COMPLETION_COMPAT_DIR}/git-completion.bash https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
 
-# Docker
+# Docker completion
 if [ -x "$(command -v docker)" ]; then
-  etc=/Applications/Docker.app/Contents/Resources/etc
-  ln -s -f $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
-  ln -s -f $etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
-  ln -s -f $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
+  docker_etc=/Applications/Docker.app/Contents/Resources/etc
+  ln -sf "${docker_etc}/docker.bash-completion" $(brew --prefix)/etc/bash_completion.d/docker
+  ln -sf "${docker_etc}/docker-machine.bash-completion" $(brew --prefix)/etc/bash_completion.d/docker-machine
+  ln -sf "${docker_etc}/docker-compose.bash-completion" $(brew --prefix)/etc/bash_completion.d/docker-compose
 else
   echo "Docker is not installed."
 fi
-
-cd "${old_dir}" || return
 
 echo "###### Virtualenv Integration with Sublime Text ######"
 
@@ -133,7 +128,7 @@ venv_folder="${HOME}"/.virtualenvs
 
 echo "###### Sublime Text Settings ######"
 
-ln -s -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin
+ln -sf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin
 
 echo "###### Tmux Settings ######"
 
@@ -169,7 +164,7 @@ if [ ! -d ~/.vim_runtime ]; then
   git clone https://github.com/asheq/close-buffers.vim
   git clone https://github.com/ctrlpvim/ctrlp.vim
   cd "${old_dir}" || return
-  
+
   echo "Installing Vim Packages with vim-plug ..."
   curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
