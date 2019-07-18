@@ -127,11 +127,18 @@ if command -v brew >/dev/null 2>&1 && [ -f "$(brew --prefix)/opt/bash-git-prompt
   #GIT_PROMPT_START='\[\e]0;\u@\h:\w\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[0m\]'
 fi
 
-# Bash Completion
 # https://github.com/scop/bash-completion
-if command -v brew >/dev/null 2>&1 && [ -f $(brew --prefix)/etc/bash_completion ]; then
-  source $(brew --prefix)/etc/bash_completion
-fi
+if command -v brew >/dev/null 2>&1 && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
+	# bash-completion@2
+	# Ensure existing Homebrew v1 completions continue to work
+	export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d";
+	source "$(brew --prefix)/etc/profile.d/bash_completion.sh";
+elif [ -f $(brew --prefix)/etc/bash_completion ]; then
+	# Bash Completion v1 (Deprecated)
+	source $(brew --prefix)/etc/bash_completion;
+elif [ -f /etc/bash_completion ]; then
+	source /etc/bash_completion
+fi;
 
 # The fuck
 command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
