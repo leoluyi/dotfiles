@@ -58,6 +58,7 @@ libzip \
 moreutils  `# Some other useful utilities like sponge` \
 npm \
 openssl \
+p7zip \
 pdfcrack   `# pdf password crack` \
 peco       `# Simplistic interactive filtering tool` \
 pip-completion \
@@ -68,6 +69,7 @@ pyenv \
 pyenv-virtualenv \
 rename \
 shellcheck \
+ssh-copy-id \
 terminal-notifier \
 thefuck \
 tldr \
