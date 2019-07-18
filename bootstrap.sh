@@ -30,27 +30,63 @@ qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspic
 echo "###### Install CLI with Homebrew ######"
 
 brew install \
+asciinema     `# record terminal sessions` \
+atomicparsley `# setting metadata into MPEG-4` \
 bash \
-bash-completion \
+bash-completion@2 \
 bash-git-prompt \
+bfg \
+cmatrix \
+coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
+czmq \
+ffmpeg \
+findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
+gcc \
+gdal \
 git \
 gnupg \
+gnu-sed --with-default-names \
 grep \
+grip \
+highlight \
 htop-osx \
+john-jumbo `# password crack` \
+libpng \
+libsvg \
+libxml2 \
+libzip \
+moreutils  `# Some other useful utilities like sponge` \
+npm \
 openssl \
+pdfcrack   `# pdf password crack` \
 peco       `# Simplistic interactive filtering tool` \
 pip-completion \
 pipenv \
+plowshare  `# 免空神器` \
+proj \
 pyenv \
 pyenv-virtualenv \
 rename \
+shellcheck \
+terminal-notifier \
 thefuck \
 tldr \
 tmux \
 tree \
-vim \
+vim --with-override-system-vi \
 wget \
+ydiff \
+youtube-dl \
 2>/dev/null
+
+ln -s "${BREW_PREFIX}/bin/gsha256sum" "${BREW_PREFIX}/bin/sha256sum"
+
+# Switch to using brew-installed bash as default shell
+if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
+  echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells;
+  chsh -s "${BREW_PREFIX}/bin/bash";
+fi;
+
 
 echo "###### Fix Bash Completion ######"
 # https://dwatow.github.io/2018/09-21-git-cmd-auto-complete/
