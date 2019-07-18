@@ -5,8 +5,12 @@ cd "$(dirname "${BASH_SOURCE}")" || return;
 echo "###### Install Homebrew ######"
 
 if [ -x "$(command -v brew)" ]; then
+  # Make sure we're using the latest Homebrew.
   echo "Updating Homebrew ..."
   brew update
+
+  # Save Homebrew’s installed location.
+  BREW_PREFIX=$(brew --prefix)
 else
   echo "Installing Hombrew ..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -89,7 +93,10 @@ if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
   chsh -s "${BREW_PREFIX}/bin/bash";
 fi;
 
+
+# Remove outdated versions from the cellar.
 brew cleanup
+
 
 echo "###### Fix Bash Completion ######"
 # https://dwatow.github.io/2018/09-21-git-cmd-auto-complete/
