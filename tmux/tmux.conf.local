@@ -4,7 +4,7 @@
 #         Copyright 2012--- Gregory Pakosz (@gpakosz).
 
 # -- List of plugins -----------------------------------------------------------
-https://github.com/gpakosz/.tmux/issues/228#issuecomment-472205869
+# https://github.com/gpakosz/.tmux/issues/228#issuecomment-472205869
 
 set -g @tpm_plugins ' \
   tmux-plugins/tpm \
@@ -16,7 +16,7 @@ set -g @tpm_plugins ' \
 '
 
 # -- Automatic Tmux start ------------------------------------------------------
-https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
+# https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
 
 set -g @continuum-boot 'on'
 set -g @continuum-restore 'on'
