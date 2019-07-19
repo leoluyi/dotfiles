@@ -39,6 +39,16 @@ set -g status-keys vi
 set -g mode-keys vi
 ```
 
+## Automatic Tmux start
+
+https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
+
+```
+# ~/.tmux.conf.local
+set -g @continuum-boot 'on'
+set -g @continuum-restore 'on'
+```
+
 ## tmux plugins manager
 
 Clone TPM:
