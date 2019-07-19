@@ -2,6 +2,8 @@
 
 cd "$(dirname "${BASH_SOURCE}")" || return;
 
+CURRENT_DIR=$(pwd)
+
 echo "###### Install Homebrew ######"
 
 if [ -x "$(command -v brew)" ]; then
@@ -153,14 +155,13 @@ if [ ! -d ~/.vim_runtime ]; then
 
   echo "Installing Vim Packages with Pathogen..."
 
-  old_dir=$(pwd)
   cd ~/.vim_runtime/my_plugins || return
   git clone https://github.com/tweekmonster/braceless.vim
   git clone --recursive https://github.com/davidhalter/jedi-vim
   git clone https://github.com/valloric/vim-indent-guides
   git clone https://github.com/asheq/close-buffers.vim
   git clone https://github.com/ctrlpvim/ctrlp.vim
-  cd "${old_dir}" || return
+  cd "${CURRENT_DIR}" || return
 
   echo "Installing Vim Packages with vim-plug ..."
   curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
