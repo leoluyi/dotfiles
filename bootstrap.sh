@@ -6,7 +6,7 @@ CURRENT_DIR=$(pwd)
 
 echo "###### Install Homebrew ######"
 
-if [ -x "$(command -v brew)" ]; then
+if command -v brew >/dev/null; then
   # Make sure we're using the latest Homebrew.
   echo "Updating Homebrew ..."
   brew update
@@ -103,27 +103,29 @@ echo "###### Fix Bash Completion ######"
 # 安裝完 bash 會自動指向 brew 安裝的路徑，
 # 確定版本之後，要去 github 找 git-completion.bash，並且，找到與你的 git 匹配的 版本。
 
-BASH_COMPLETION_COMPAT_DIR=$(brew --prefix)/etc/bash_completion.d
-
 # Git completion
-curl -fsSLo ${BASH_COMPLETION_COMPAT_DIR}/git-completion.bash https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+
+if command -v brew >/dev/null; then
+    BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
+    curl -fsSLo "${BASH_COMPLETION_COMPAT_DIR}"/git-completion.bash https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+fi
 
 # Docker completion
-if [ -x "$(command -v docker)" ]; then
-  docker_etc=/Applications/Docker.app/Contents/Resources/etc
-  ln -sf "${docker_etc}/docker.bash-completion" $(brew --prefix)/etc/bash_completion.d/docker
-  ln -sf "${docker_etc}/docker-machine.bash-completion" $(brew --prefix)/etc/bash_completion.d/docker-machine
-  ln -sf "${docker_etc}/docker-compose.bash-completion" $(brew --prefix)/etc/bash_completion.d/docker-compose
+if [ -w "${BASH_COMPLETION_COMPAT_DIR}" ]; then
+  DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
+  ln -sf "${DOCKER_ETC}/docker.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker
+  ln -sf "${DOCKER_ETC}/docker-machine.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker-machine
+  ln -sf "${DOCKER_ETC}/docker-compose.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker-compose
 else
-  echo "Docker is not installed."
+  echo "Docker was not installed."
 fi
 
 echo "###### Virtualenv Integration with Sublime Text ######"
 
 mkdir -p ~/.local/share/virtualenvs
-venv_folder="${HOME}"/.virtualenvs
+VENV_FOLDER="${HOME}/.virtualenvs"
 
-[[ -L "$venv_folder" && -d "$venv_folder" ]] || ln -sf ~/.local/share/virtualenvs "${venv_folder}"
+[[ -L "$VENV_FOLDER" && -d "$VENV_FOLDER" ]] || ln -sf ~/.local/share/virtualenvs "$VENV_FOLDER"
 
 echo "###### Sublime Text Settings ######"
 
