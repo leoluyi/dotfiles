@@ -14,6 +14,7 @@ $ ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
 Restore settings
 
 ```bash
+# In folder `dotfiles/tmux/`
 $ cp tmux.conf.local ~/.tmux.conf.local
 ```
 
