@@ -15,6 +15,12 @@ set -g @tpm_plugins ' \
   samoshkin/tmux-plugin-sysstat \
 '
 
+# -- Automatic Tmux start ------------------------------------------------------
+https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
+
+set -g @continuum-boot 'on'
+set -g @continuum-restore 'on'
+
 # -- navigation ----------------------------------------------------------------
 
 # if you're running tmux within iTerm2
