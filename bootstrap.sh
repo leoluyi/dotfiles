@@ -4,11 +4,11 @@ cd "$(dirname "${BASH_SOURCE}")" || return;
 
 CURRENT_DIR=$(pwd)
 
-echo "###### Install Homebrew ######"
+echo "$(tput setaf 2)###### Install Homebrew ######$(tput sgr 0)"
 
 if command -v brew >/dev/null; then
   # Make sure we're using the latest Homebrew.
-  echo "Updating Homebrew ..."
+  echo "Homebrew is installed. Updating Homebrew ..."
   brew update
 
   # Save Homebrew's installed location.
@@ -18,7 +18,7 @@ else
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-echo "###### Install Apps with Homebrew ######"
+echo "$(tput setaf 2)###### Install Apps with Homebrew ######$(tput sgr 0)"
 
 brew tap caskroom/cask && \
 brew tap homebrew/cask-fonts && \
@@ -33,7 +33,7 @@ xquartz \
 qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
 2>/dev/null;
 
-echo "###### Install CLI with Homebrew ######"
+echo "$(tput setaf 2)###### Install CLI with Homebrew ######$(tput sgr 0)"
 
 brew install \
 asciinema     `# record terminal sessions` \
@@ -98,7 +98,7 @@ fi;
 brew cleanup
 
 
-echo "###### Fix Bash Completion ######"
+echo "$(tput setaf 2)###### Fix Bash Completion ######$(tput sgr 0)"
 # https://dwatow.github.io/2018/09-21-git-cmd-auto-complete/
 # 用 brew 安裝 git，
 # 安裝完 bash 會自動指向 brew 安裝的路徑，
@@ -121,18 +121,18 @@ else
   echo "Docker is not installed."
 fi
 
-echo "###### Virtualenv Integration with Sublime Text ######"
+echo "$(tput setaf 2)###### Virtualenv Integration with Sublime Text ######$(tput sgr 0)"
 
 mkdir -p ~/.local/share/virtualenvs
 VENV_FOLDER="${HOME}/.virtualenvs"
 
 [[ -L "$VENV_FOLDER" && -d "$VENV_FOLDER" ]] || ln -sf ~/.local/share/virtualenvs "$VENV_FOLDER"
 
-echo "###### Sublime Text Settings ######"
+echo "$(tput setaf 2)###### Sublime Text Settings ######$(tput sgr 0)"
 
 ln -sf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin
 
-echo "###### Tmux Settings ######"
+echo "$(tput setaf 2)###### Tmux Settings ######$(tput sgr 0)"
 
 if [ ! -d ~/.tmux ]; then
   git clone https://github.com/gpakosz/.tmux.git ~/.tmux
@@ -150,7 +150,7 @@ else
   ~/.tmux/plugins/tpm/bin/install_plugins
 fi
 
-echo "###### Install Awesome Vim ######"
+echo "$(tput setaf 2)###### Install Awesome Vim ######$(tput sgr 0)"
 
 if [ ! -d ~/.vim_runtime ]; then
   git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
@@ -173,7 +173,7 @@ else
   echo "Awesome Vim is already installed."
 fi
 
-echo "###### sync_dotfile ######"
+echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
 
 function sync_dotfile() {
   # rsync --exclude ".git/" \
@@ -195,7 +195,7 @@ function sync_dotfile() {
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   sync_dotfile;
 else
-  read -rp "This may overwrite existing files in your home directory. Are you sure? (y/N) " -n 1;
+  read -rp "$(tput setaf 3)This may overwrite existing files in your home directory. Are you sure? (y/N) $(tput sgr 0)" -n 1;
   echo "";
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     sync_dotfile;
@@ -203,6 +203,6 @@ else
 fi;
 unset sync_dotfile;
 
-echo "###### Source Bash Settings ######"
+echo "$(tput setaf 2)###### Source Bash Settings ######$(tput sgr 0)"
 
 source ~/.bash_profile;
