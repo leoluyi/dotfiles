@@ -45,6 +45,7 @@ bfg \
 cmatrix \
 coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
 czmq \
+diff-so-fancy \
 ffmpeg \
 findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
 gcc \
@@ -117,7 +118,7 @@ if [ -w "${BASH_COMPLETION_COMPAT_DIR}" ]; then
   ln -sf "${DOCKER_ETC}/docker-machine.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker-machine
   ln -sf "${DOCKER_ETC}/docker-compose.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker-compose
 else
-  echo "Docker was not installed."
+  echo "Docker is not installed."
 fi
 
 echo "###### Virtualenv Integration with Sublime Text ######"
@@ -182,7 +183,7 @@ function sync_dotfile() {
   #   --exclude "README.md" \
   #   --exclude "LICENSE-MIT.txt" \
   #   -avh --no-perms macOS/bash_{profile,rc} ~;
-  cp git/macOS.gitignore ~/.gitignore_global
+  cp git/gitignore_global ~/.gitignore_global
   cp macOS/bash_profile ~/.bash_profile
   cp macOS/bashrc ~/.bashrc
   cp tmux/tmux.conf.local ~/.tmux.conf.local
@@ -194,7 +195,7 @@ function sync_dotfile() {
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   sync_dotfile;
 else
-  read -rp "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+  read -rp "This may overwrite existing files in your home directory. Are you sure? (y/N) " -n 1;
   echo "";
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     sync_dotfile;

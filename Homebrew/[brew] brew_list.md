@@ -13,6 +13,7 @@ bfg \
 cmatrix \
 coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
 czmq \
+diff-so-fancy \
 ffmpeg \
 findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
 gcc \

@@ -1,6 +1,12 @@
-# .bash_profile
+# ~/.bash_profile
 
-# [How to check if a program exists from a Bash script?](https://stackoverflow.com/a/677212/3744499)
+# How to check if a program exists from a Bash script?
+# https://stackoverflow.com/a/677212/3744499)
+
+# Homebrew prefix
+command -v brew >/dev/null 2>&1 && BREW_PREFIX=$(brew --prefix)
+
+# ============ Command prompt =============
 
 # enables color in the terminal bash shell
 export CLICOLOR=1
@@ -8,9 +14,6 @@ export CLICOLOR=1
 export LSCOLORS=Exgxcxdxbxegedabagacad
 # enables color for iTerm
 export TERM=xterm-256color
-
-# Homebrew prefix
-command -v brew >/dev/null 2>&1 && BREW_PREFIX=$(brew --prefix)
 
 # The various escape codes that we can use to color our prompt.
 #   Based on work by woods
@@ -52,6 +55,8 @@ if ls --color > /dev/null 2>&1; then # GNU `ls`
 else # macOS `ls`
     colorflag="-G"
 fi
+
+# ============ Aliases =============
 
 # Always use color output for `ls`
 if command -v gls >/dev/null 2>&1; then
@@ -104,7 +109,16 @@ alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 #alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-# custom functions
+# Git diff-so-fancy
+# https://github.com/so-fancy/diff-so-fancy
+if command -v diff-so-fancy >/dev/null 2>&1; then
+  function gd() {
+    git diff --color "$@" | diff-so-fancy | less --tabs=4 -RFX
+  }
+fi
+
+# ============ Custom functions ============
+
 function mkcd {
   last=$(eval "echo \$$#")
   if [ -z "$last" ]; then
@@ -117,7 +131,9 @@ function mkcd {
 }
 
 # gitignore api
-function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+function gi() { curl -L -s https://www.gitignore.io/api/"$1" ;}
+
+# ============ CLI tools ============
 
 # bash-git-prompt
 # https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
@@ -161,6 +177,8 @@ command -v pyenv 1>/dev/null 2>&1 && eval "$(pyenv init -)"
 
 # pyenv-virtualenv
 command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init -)"
+
+# ============ Others ============
 
 # Fix pyenv bug for git
 # https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
