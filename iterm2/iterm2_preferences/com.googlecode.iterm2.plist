@@ -876,12 +876,14 @@
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>773 110 601 269 0 0 1440 877 </string>
+	<key>NSWindow Frame SessionsPreferences</key>
+	<string>317 257 697 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>385 370 770 429 0 0 1440 900 </string>
+	<string>516 405 770 429 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>300 222 865 552 0 0 1440 877 </string>
+	<string>302 270 865 552 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>236 111 865 552 0 0 1440 900 </string>
+	<string>286 147 865 552 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>197 325 820 552 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1815,9 +1817,11 @@
 	<real>0.39098557692307701</real>
 	<key>StretchTabsToFillBar</key>
 	<false/>
+	<key>TabStyleWithAutomaticOption</key>
+	<integer>1</integer>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.2.8</string>
+	<string>3.2.9</string>
 </dict>
 </plist>

@@ -51,8 +51,8 @@ findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
 gcc \
 gdal \
 git \
+gnu-sed --with-default-names \
 gnupg \
-gnu-sed \
 grep \
 grip \
 highlight \
@@ -63,6 +63,7 @@ libsvg \
 libxml2 \
 libzip \
 moreutils  `# Some other useful utilities like sponge` \
+neofetch \
 npm \
 openssl \
 p7zip \
