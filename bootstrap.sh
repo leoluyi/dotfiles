@@ -76,6 +76,7 @@ plowshare  `# 免空神器` \
 proj \
 pyenv \
 pyenv-virtualenv \
+ranger     `# a terminal browser for Vim` \
 rename \
 shellcheck \
 ssh-copy-id \
