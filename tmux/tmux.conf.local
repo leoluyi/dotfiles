@@ -282,3 +282,6 @@ set -g mode-keys vi
 
 # move status line to top
 #set -g status-position top
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm'
