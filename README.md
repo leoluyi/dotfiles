@@ -27,5 +27,7 @@ When setting up a new Mac, you may want to set some sensible macOS defaults:
 ## Reference
 
 - https://github.com/mathiasbynens/dotfiles
+- https://github.com/alrra/dotfiles
+- https://github.com/holman/dotfiles
 - https://github.com/skwp/dotfiles
 - https://github.com/ccwang002/dotfiles
