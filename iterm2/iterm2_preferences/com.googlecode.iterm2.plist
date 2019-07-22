@@ -875,13 +875,13 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>773 110 601 269 0 0 1440 877 </string>
+	<string>757 191 601 94 0 0 1440 877 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>317 257 697 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>516 405 770 429 0 0 1440 877 </string>
+	<string>452 400 918 423 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>302 270 865 552 0 0 1440 877 </string>
+	<string>305 247 865 525 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>286 147 865 552 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1675,7 +1675,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>MesloLGMDZ-RegularForPowerline 15</string>
+			<string>HackNerdFontComplete-Regular 15</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1741,7 +1741,7 @@
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1</real>
+			<real>1.1</real>
 			<key>Visual Bell</key>
 			<false/>
 			<key>Window Type</key>

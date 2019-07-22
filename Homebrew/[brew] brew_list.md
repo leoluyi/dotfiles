@@ -95,7 +95,7 @@ deckset \
 docker \
 firefox \
 font-meslo-for-powerline \
-font-mononoki-nerd-font \
+font-hack-nerd-font \
 google-chrome \
 google-drive-file-stream \
 iina \

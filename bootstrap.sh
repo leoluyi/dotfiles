@@ -25,6 +25,7 @@ brew tap homebrew/cask-fonts && \
 brew cask install \
 firefox \
 font-meslo-for-powerline \
+font-hack-nerd-font \
 google-chrome \
 iina \
 iterm2 \
