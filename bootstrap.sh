@@ -139,9 +139,12 @@ echo "$(tput setaf 2)###### Tmux Settings ######$(tput sgr 0)"
 
 if [ ! -d ~/.tmux ]; then
   git clone https://github.com/gpakosz/.tmux.git ~/.tmux
-  ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf
 else
   echo ".tmux awesome is already installed."
+fi
+
+if [ -f ~/.tmux/.tmux.conf ]; then
+  ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf
 fi
 
 if [ ! -d ~/.tmux/plugins/tpm ]; then
