@@ -4,7 +4,7 @@
 #         Copyright 2012--- Gregory Pakosz (@gpakosz).
 
 # -- List of plugins -----------------------------------------------------------
-# https://github.com/gpakosz/.tmux/issues/228#issuecomment-472205869
+# https://github.com/gpakosz/.tmux/issues/61#issuecomment-439617033
 
 set -g @tpm_plugins ' \
   tmux-plugins/tpm \
