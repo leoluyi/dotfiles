@@ -137,20 +137,22 @@ ln -sf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/loc
 
 echo "$(tput setaf 2)###### Tmux Settings ######$(tput sgr 0)"
 
+# Install .tmux awesome
 if [ ! -d ~/.tmux ]; then
   git clone https://github.com/gpakosz/.tmux.git ~/.tmux
 else
   echo ".tmux awesome is already installed."
 fi
 
-if [ -f ~/.tmux/.tmux.conf ]; then
-  ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf
+if [ -f ~/.tmux/.tmux.conf ] && [ -f ./tmux/tmux.conf.local ]; then
+  ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf \
+    && cp ./tmux/tmux.conf.local ~/.tmux.conf.local
 fi
 
+# Install Tmux Plugin Manager
 if [ ! -d ~/.tmux/plugins/tpm ]; then
   echo "Installing tmux plugins manager ..."
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
-    && cp tmux/tmux.conf.local ~/.tmux.conf.local \
     && ~/.tmux/plugins/tpm/bin/install_plugins
 else
   ~/.tmux/plugins/tpm/bin/install_plugins
