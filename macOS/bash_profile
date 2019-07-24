@@ -75,7 +75,7 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 # Use pipenv for subl
-(command -v pipenv >/dev/null) && (command -v subl >/dev/null) && alias subl="env VIRTUAL_ENV=$(pipenv --venv) subl"
+(command -v pipenv >/dev/null) && (command -v subl >/dev/null) && alias subl='env VIRTUAL_ENV=$(pipenv --venv) subl'
 
 alias sourcetree='open -a SourceTree'
 # alias pdocker="docker ps | peco | awk '{print \$1;}' | tr '\n' ' ' | xargs docker"
