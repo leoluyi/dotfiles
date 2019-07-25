@@ -149,11 +149,22 @@ link_virtualenv
 
 echo "$(tput setaf 2)###### Sublime Text Settings ######$(tput sgr 0)"
 
-SUBL_PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
+# Link subl binary
+SUBL_BINARY="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
 
-if [ -x "${SUBL_PATH}" ]; then
-  ln -sf "${SUBL_PATH}" /usr/local/bin
+if [ -x "${SUBL_BINARY}" ]; then
+  ln -sf "${SUBL_BINARY}" /usr/local/bin
 fi
+
+# Fix bad Anaconda completion
+# https://github.com/DamnWidget/anaconda#auto-complete-for-import-behaves-badly
+
+SUBL_CONFIG_PATH="~/Library/Application Support/Sublime Text 3"
+
+mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" && \
+  curl -fsSL -o "${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences" https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences
+
+rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
 
 echo "$(tput setaf 2)###### Tmux Settings ######$(tput sgr 0)"
 
