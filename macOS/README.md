@@ -3,7 +3,7 @@
 Download bash_profile:
 
 ```
-$ curl -fSsLo ~/.bash_profile https://github.com/leoluyi/dotfiles/raw/master/macOS/bash_profile
+$ curl -fsSL -o ~/.bash_profile https://github.com/leoluyi/dotfiles/raw/master/macOS/bash_profile
 ```
 
 ## Upgrade to bash 4 in Mac OS X
