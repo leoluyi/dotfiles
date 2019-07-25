@@ -74,8 +74,20 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-# Use pipenv for subl
-(command -v pipenv >/dev/null) && (command -v subl >/dev/null) && alias subl='env VIRTUAL_ENV=$(pipenv --venv) subl'
+# subl + pipenv virtualenv
+if command -v pipenv >/dev/null && command -v subl >/dev/null; then
+  function subl-venv() {
+    if [ -n "$VIRTUAL_ENV" ]; then
+      PY_BINARY="${VIRTUAL_ENV}/bin/python" command subl "$@"
+    elif pipenv --venv >/dev/null 2>&1; then
+      PY_BINARY="$(pipenv --venv 2>/dev/null)/bin/python" command subl "$@"
+    else
+      PY_BINARY="$(which python 2>/dev/null)" command subl "$@"
+    fi
+  }
+
+  alias subl-pipenv='pipenv --venv && pipenv run subl'
+fi
 
 alias sourcetree='open -a SourceTree'
 # alias pdocker="docker ps | peco | awk '{print \$1;}' | tr '\n' ' ' | xargs docker"
