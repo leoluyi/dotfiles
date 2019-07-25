@@ -61,6 +61,10 @@ youtube-dl \
 # Install other useful binaries.
 brew tap eddieantonio/eddieantonio && brew install imgcat
 brew tap jesseduffield/lazydocker && brew install lazydocker
+
+# Spreadsheet Calculator Improvised
+brew tap nickolasburr/pfa
+brew install sc-im
 ```
 
 ### Using homebrew

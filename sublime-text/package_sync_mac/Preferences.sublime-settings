@@ -1,45 +1,45 @@
 {
-	"bold_folder_labels": true,
-	"close_windows_when_empty": true,
-	"color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
-	"detect_indentation": false,
-	"ensure_newline_at_eof_on_save": true,
-	"find_selected_text": false,
-	"font_face": "Meslo LG M DZ Regular for Powerline",
-	"font_size": 17,
-	"highlight_line": true,
-	"highlight_modified_tabs": true,
-	"ignored_packages":
-	[
-		"DashDoc",
-		"Flask Completions",
-		"Highlight Dodgy Chars",
-		"Highlight Trailing Whitespace",
-		"Icon Fonts",
-		"Markdown",
-		"Vintage"
-	],
-	"indent_guide_options":
-	[
-		"draw_normal",
-		"draw_active"
-	],
-	"mdpopups.sublime_user_lang_map":
-	{
-	},
-	"mdpopups.use_sublime_highlighter": true,
-	"open_files_in_new_window": true,
-	"preview_on_click": true,
-	"rulers":
-	[
-		80
-	],
-	"scroll_past_end": true,
-	"show_definitions": true,
-	"show_encoding": true,
-	"show_line_endings": true,
-	"theme": "Default.sublime-theme",
-	"translate_tabs_to_spaces": true,
-	"update_check": false,
-	"word_wrap": false
+    "bold_folder_labels": true,
+    "close_windows_when_empty": true,
+    "color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
+    "detect_indentation": false,
+    "ensure_newline_at_eof_on_save": true,
+    "find_selected_text": false,
+    "font_face": "Meslo LG M DZ Regular for Powerline",
+    "font_size": 17,
+    "highlight_line": true,
+    "highlight_modified_tabs": true,
+    "ignored_packages":
+    [
+        "DashDoc",
+        "Flask Completions",
+        "Highlight Dodgy Chars",
+        "Highlight Trailing Whitespace",
+        "Icon Fonts",
+        "Markdown",
+        "Vintage"
+    ],
+    "indent_guide_options":
+    [
+        "draw_normal",
+        "draw_active"
+    ],
+    "mdpopups.sublime_user_lang_map":
+    {
+    },
+    "mdpopups.use_sublime_highlighter": true,
+    "open_files_in_new_window": false,
+    "preview_on_click": true,
+    "rulers":
+    [
+        80
+    ],
+    "scroll_past_end": true,
+    "show_definitions": true,
+    "show_encoding": true,
+    "show_line_endings": true,
+    "theme": "Default.sublime-theme",
+    "translate_tabs_to_spaces": true,
+    "update_check": false,
+    "word_wrap": false
 }
