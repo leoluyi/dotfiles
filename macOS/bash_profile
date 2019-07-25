@@ -74,24 +74,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-# subl + pipenv virtualenv
-if command -v pipenv >/dev/null && command -v subl >/dev/null; then
-  function subl-venv() {
-    if [ -n "$VIRTUAL_ENV" ]; then
-      PY_BINARY="${VIRTUAL_ENV}/bin/python" command subl "$@"
-    elif pipenv --venv >/dev/null 2>&1; then
-      PY_BINARY="$(pipenv --venv 2>/dev/null)/bin/python" command subl "$@"
-    else
-      PY_BINARY="$(which python 2>/dev/null)" command subl "$@"
-    fi
-  }
-
-  alias subl-pipenv='pipenv --venv && pipenv run subl'
-fi
-
-alias sourcetree='open -a SourceTree'
-# alias pdocker="docker ps | peco | awk '{print \$1;}' | tr '\n' ' ' | xargs docker"
-
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto'
@@ -112,6 +94,26 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 #alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+alias sourcetree='open -a SourceTree'
+# alias pdocker="docker ps | peco | awk '{print \$1;}' | tr '\n' ' ' | xargs docker"
+
+# subl + pipenv virtualenv
+(command -v pipenv >/dev/null) && (command -v subl >/dev/null) && alias subl-pipenv='pipenv --venv && pipenv run subl'
+# if command -v pipenv >/dev/null && command -v subl >/dev/null; then
+#   function subl-venv() {
+#     if [ -n "$VIRTUAL_ENV" ]; then
+#       echo -e "Use VIRTUAL_ENV='${VIRTUAL_ENV}'"
+#       PY_BINARY="${VIRTUAL_ENV}/bin/python" command subl "$@"
+#     elif pipenv --venv >/dev/null 2>&1; then
+#       VIRTUAL_ENV=$(pipenv --venv 2>/dev/null)
+#       echo -e "Use VIRTUAL_ENV='${VIRTUAL_ENV}'"
+#       PY_BINARY="${VIRTUAL_ENV}/bin/python" command subl "$@"
+#     else
+#       PY_BINARY="$(which python 2>/dev/null)" command subl "$@"
+#     fi
+#   }
+# fi
 
 # Git diff-so-fancy
 # https://github.com/so-fancy/diff-so-fancy
