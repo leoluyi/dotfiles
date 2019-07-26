@@ -252,7 +252,7 @@ function sync_dotfile {
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim
 }
 
-if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
+if [ "$FORCE" == true ]; then
   sync_dotfile;
 else
   read -rp "$(tput setaf 3)This may overwrite existing files in your home directory. Are you sure? (y/N) $(tput sgr 0)";
