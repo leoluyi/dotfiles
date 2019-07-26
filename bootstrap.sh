@@ -231,13 +231,13 @@ function sync_dotfile {
   #   --exclude "README.md" \
   #   --exclude "LICENSE-MIT.txt" \
   #   -avh --no-perms macOS/bash_{profile,rc} ~;
+  cp bash-git-prompt/git-prompt-colors.sh ~/.git-prompt-colors.sh
+  cp git/gitconfig ~/.gitconfig
   cp git/gitignore_global ~/.gitignore_global
   cp macOS/bash_profile ~/.bash_profile
   cp macOS/bashrc ~/.bashrc
   cp tmux/tmux.conf.local ~/.tmux.conf.local
-  cp git/gitconfig ~/.gitconfig
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim
-  cp bash-git-prompt/git-prompt-colors.sh ~/.git-prompt-colors.sh
 }
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
