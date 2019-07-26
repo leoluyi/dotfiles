@@ -159,7 +159,7 @@ fi
 # Fix bad Anaconda completion
 # https://github.com/DamnWidget/anaconda#auto-complete-for-import-behaves-badly
 
-SUBL_CONFIG_PATH="~/Library/Application Support/Sublime Text 3"
+SUBL_CONFIG_PATH=~/"Library/Application Support/Sublime Text 3"
 
 mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" && \
   curl -fsSL -o "${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences" https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences
