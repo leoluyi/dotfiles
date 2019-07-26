@@ -2,6 +2,10 @@
 
 cd "$(dirname "${BASH_SOURCE}")" || exit 1;
 
+if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
+  FORCE=true
+fi
+
 CURRENT_DIR=$(pwd)
 
 echo "$(tput setaf 2)###### Install Homebrew ######$(tput sgr 0)"
@@ -170,6 +174,10 @@ echo "$(tput setaf 2)###### Tmux Settings ######$(tput sgr 0)"
 
 # Install .tmux awesome
 function install_tmux_awesome {
+  if [ "$1" == true ]; then
+    rm -rf ~/.tmux
+  fi
+
   if [ ! -d ~/.tmux ]; then
     git clone https://github.com/gpakosz/.tmux.git ~/.tmux
   else
@@ -190,12 +198,16 @@ function install_tmux_awesome {
     ~/.tmux/plugins/tpm/bin/install_plugins
   fi
 }
-install_tmux_awesome
+install_tmux_awesome $FORCE
 
 echo "$(tput setaf 2)###### Install Vim Awesome ######$(tput sgr 0)"
 
 function install_vim_awesome {
   CURRENT_DIR=$(pwd)
+
+  if [ "$1" == true ]; then
+    rm -rf ~/.vim_runtime
+  fi
 
   if [ ! -d ~/.vim_runtime ]; then
     git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
@@ -218,7 +230,7 @@ function install_vim_awesome {
     echo "Awesome Vim is already installed."
   fi
 }
-install_vim_awesome
+install_vim_awesome $FORCE
 
 echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
 
