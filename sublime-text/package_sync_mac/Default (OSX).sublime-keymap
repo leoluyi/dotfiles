@@ -1,3 +1,9 @@
 [
+    // reopen_last_file
+    { "keys": ["super+shift+t"], "command": "reopen_last_file" },
+
     { "keys": ["super+ctrl+shift+space"], "command": "expand_selection", "args": {"to": "scope"} },
+
+    // Terminal
+    { "keys": ["super+shift+alt+t"], "command": "open_terminal_project_folder" }
 ]
