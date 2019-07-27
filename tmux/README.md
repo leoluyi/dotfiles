@@ -90,4 +90,3 @@ run -b '~/.tmux/plugins/tpm/tpm'
 `prefix` + <kbd>alt</kbd> + <kbd>u</kbd>
 
 - remove/uninstall plugins not on the plugin list
-
