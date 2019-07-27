@@ -50,9 +50,9 @@ set -g @continuum-boot 'on'
 set -g @continuum-restore 'on'
 ```
 
-## tmux plugins manager
+## [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
 
-Clone TPM:
+Clone TPM to install:
 
 ```bash
 $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -71,6 +71,9 @@ set -g @tpm_plugins ' \
   nhdaly/tmux-scroll-copy-mode \
   samoshkin/tmux-plugin-sysstat \
 '
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm'
 ```
 
 **Key bindings**
