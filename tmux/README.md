@@ -72,7 +72,7 @@ set -g @tpm_plugins ' \
   samoshkin/tmux-plugin-sysstat \
 '
 
-# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf.local)
 run -b '~/.tmux/plugins/tpm/tpm'
 ```
 
