@@ -126,15 +126,14 @@ More cool searching tricks:
                         (repeat with n)
 - `#`                 - search for word under cursor - backward (bounded)
 - `g#`                - search for word under cursor - backward (unbounded)
-- `[I`                - show lines with matching word under cursor. Type `:<linenum><CR>` to jump to the line.
+- `[I`                - show lines with matching word under cursor. Type `:<linenum><CR>` to [jump to the line](https://superuser.com/q/692548)
 
-[Go to lines matched by `[I`](https://superuser.com/q/692548)
-
-**Go through jump list** ("jump list", a list of places where your cursor has been to)
+**Go through jump list** ([jump list](#), a list of places where your cursor has been to)
 
 - `:<linenum>`           - go to `<linenum>`
 - <code>\`\`</code> (double backtick) - jump between previous position and the current position cursor position in jump list
-- <code>\`.</code>                    - bring you to your **last change** (The \` goes to a mark, and `.` is a "special" mark which is automatically set to the position where the last change was mad)
+- <code>\`.</code>                    - bring you to your **last change**
+    - (The \` goes to a mark, and `.` is a "special" mark which is automatically set to the position where the last change was mad)
 - `Ctrl-o` and `Ctrl-i`  - work through the jump list history
 - `g;` and `g,`          - jump through [edit positions](), which are also very frequently used
 
@@ -296,10 +295,10 @@ Shortcuts
 - `<leader>tm` tab move
 - `<leader>te` open a new tab with the current buffer's path
 
-### CWD (current working directory)
+### Working directory
 
-- `:pwd` show CWD
-- `<leader>cd` Switch CWD to the directory of the open buffer
+- `:pwd` print working directory
+- `<leader>cd` set working directory to the directory of the open buffer (or use `:cd %:p:h` [more...](https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file)) 
 
 ### Code editing
 
@@ -369,17 +368,30 @@ When you copy and cut stuff, it gets saved to registers. You can pull stuff from
 
 **Special registers**
 
-- `""` no-name register (quotation register) - last cut / delete by `dcsxy`
-- `"0` last yanked register
-- `"0` to `"9` Nth-yanked register
-- `"_` blackhole register --> `"_ d` delete and throw to blackhole
-- `"/` last search pattern
-- `".` last inserted text (read only)
-- `"%` current filename (read only)
-- `"#` alternate file name (last edited file) (read only)
-- `":` last command (read only)
+- `""`        - no-name register (quotation register) - last cut/del/yank by `dcsxy`
+- `"0`        - last-yanked register
+- `"0` ~ `"9` - Nth-yanked register
+- `"_`        - blackhole register --> `"_ d` delete and throw to blackhole
+- `"/`        - last search pattern
+- `".`        - last inserted text (*read only*)
+- `"%`        - current filename (*read only*)
+- `"#`        - alternate file name (last edited file) (*read only*)
+- `":`        - last command (*read only*)
 
-**Recording**
+**Tricks in command mode for registers**
+
+Either in search mode `/` or in last line command mode `:`,
+with `<C-r> <register>` to insert text, e.g.,
+
+- `:<C-r>0` paste last yanked text
+- `:<C-r>%` paste current filename
+
+Also use `@ <register>` for variable:
+
+- `:echo @0` paste last yanked text
+- `:echo @%` print current filename
+
+### Recording macros
 
 You can also record a whole series of edits to a register, and then apply them over and over.
 
