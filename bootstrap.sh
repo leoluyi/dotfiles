@@ -6,8 +6,6 @@ if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   FORCE=true
 fi
 
-CURRENT_DIR=$(pwd)
-
 echo "$(tput setaf 2)###### Install Homebrew ######$(tput sgr 0)"
 
 if command -v brew >/dev/null; then
@@ -175,6 +173,7 @@ echo "$(tput setaf 2)###### Tmux Settings ######$(tput sgr 0)"
 # Install .tmux awesome
 function install_tmux_awesome {
   if [ "$1" == true ]; then
+    echo 'Removing ~/.tmux'
     rm -rf ~/.tmux
   fi
 
@@ -206,6 +205,7 @@ function install_vim_awesome {
   CURRENT_DIR=$(pwd)
 
   if [ "$1" == true ]; then
+    echo 'Removing ~/.vim_runtime'
     rm -rf ~/.vim_runtime
   fi
 
