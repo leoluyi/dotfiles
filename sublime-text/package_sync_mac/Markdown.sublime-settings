@@ -1,9 +1,10 @@
 {
-	"color_scheme": "Packages/MarkdownEditing/MarkdownEditor.tmTheme",
-	"draw_centered": false,
-	"line_numbers": true,
-	"rulers":
-	[
-		80
-	]
+    "color_scheme": "Packages/MarkdownEditing/MarkdownEditor.tmTheme",
+    "draw_centered": false,
+    "line_numbers": true,
+    "word_wrap": true,
+    "rulers":
+    [
+        80
+    ]
 }
