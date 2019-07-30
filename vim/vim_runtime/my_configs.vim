@@ -1,5 +1,15 @@
+" Some basics
 set number relativenumber
 set encoding=utf-8
+syntax on
+set nocompatible
+filetype plugin on
+
+" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
+set splitbelow splitright
+
+" Disables automatic commenting on newline:
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Automatic toggling between line number modes  ------------------------
 " https://jeffkreeftmeijer.com/vim-number/
