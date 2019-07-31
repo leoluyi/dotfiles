@@ -13,7 +13,7 @@ git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime \
 
 # copy settings
 wget -qO ~/.vim_runtime/my_configs.vim https://github.com/leoluyi/dotfiles/raw/master/vim/vim_runtime/my_configs.vim
-wget -qO ~/.vim_runtime/vimrcs/my_configs.vim https://github.com/leoluyi/dotfiles/raw/master/vim/vim_runtime/vimrcs/filetypes.vim
+wget -qO ~/.vim_runtime/vimrcs/filetypes.vim https://github.com/leoluyi/dotfiles/raw/master/vim/vim_runtime/vimrcs/filetypes.vim
 ```
 
 **Install for multiple users**
