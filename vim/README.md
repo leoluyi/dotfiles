@@ -42,40 +42,7 @@ git pull --rebase
 
 [Vim Awesome](https://vimawesome.com)
 
-### 1. Install package with Pathogen
-
-```bash
-$ cd ~/.vim_runtime/my_plugins
-$ git clone <package_repo>
-```
-
-**Install packages**
-
-```bash
-cd ~/.vim_runtime/my_plugins \
-  && git clone https://github.com/tweekmonster/braceless.vim \
-  && git clone --recursive https://github.com/davidhalter/jedi-vim \
-  && git clone https://github.com/valloric/vim-indent-guides \
-  && git clone https://github.com/asheq/close-buffers.vim \
-  && git clone https://github.com/ctrlpvim/ctrlp.vim
-```
-
-**Update plugins**
-
-```bash
-cd ~/.vim_runtime/my_plugins
-
-for i in `ls`; do
-  cd "$i"
-  git pull
-  cd ..
-done
-```
-
-
-**Remove a plugin**
-
-Simply remove its directory from `~/.vim_runtime/my_plugins`.
+### 1. Install package with [Pathogen](https://github.com/tpope/vim-pathogen) (Deprecated)
 
 ### 2. Install package with vim-plug
 
@@ -88,17 +55,10 @@ curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-**Install Packages**
-
-Install packages in in vim command:
-
-```
-:PlugInstall
-```
-
 **Usage**
 
-Add a vim-plug section to your `~/.vimrc` (or `~/.config/nvim/init.vim` for Neovim). Edit `~/.vim_runtime/my_configs.vim` for **Ultimate vimrc** settings:
+Add a vim-plug section to your `~/.vimrc` (or `~/.config/nvim/init.vim` for Neovim).
+Edit `~/.vim_runtime/my_configs.vim` insetead for **Ultimate vimrc** settings:
 
 1. Begin the section with `call plug#begin()`.
 2. List the plugins with `Plug` commands.
@@ -111,7 +71,7 @@ Add a vim-plug section to your `~/.vimrc` (or `~/.config/nvim/init.vim` for Neov
 2. `PlugUpdate`: Install or update plugins.
 3. `PlugClean[!]`: Remove unused directories (bang version will clean without prompt).
 
-### 3. Packages List
+### 3. Package list, commands and shortcut keys
 
 [**braceless.vim**](https://github.com/tweekmonster/braceless.vim)
 
@@ -146,7 +106,36 @@ Commands
 - `<C-w>w` jumps cursor to R viewport and back
 - `<C-w>r` swaps viewports
 
-[**ncim-R**](https://github.com/gaalcaras/ncm-R)
+[**Nerdtree**](https://github.com/scrooloose/nerdtree)
+
+- `<leader>nn` toggle nerdtree
+- `o` open/close folder
+
+[**vim-indent-guides**](https://github.com/valloric/vim-indent-guides)
+
+[**jedi-vim**](https://github.com/davidhalter/jedi-vim)
+
+- Completion `<C-Space>`
+- Goto assignments `<leader>g` (typical goto function)
+- Goto definitions `<leader>d` (follow identifier as far as possible, includes imports and statements)
+- Show Documentation/Pydoc `K` (shows a popup with assignments)
+- Renaming `<leader>r`
+- Usages `<leader>n` (shows all the usages of a name)
+- Open module, e.g. `:Pyimport os` (opens the `os` module)
+
+```vim
+" NOTE: subject to change!
+
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+```
+
+[**ncim-R**](https://github.com/gaalcaras/ncm-R) (neovim)
 
 https://github.com/gaalcaras/ncm-R/issues/2#issuecomment-353635826
 
@@ -177,36 +166,7 @@ Plug 'ncm2/ncm2-ultisnips'
 Plug 'lervag/vimtex'
 ```
 
-[**Nerdtree**](https://github.com/scrooloose/nerdtree)
-
-- `<leader>nn` toggle nerdtree
-- `o` open/close folder
-
-[**vim-indent-guides**](https://github.com/valloric/vim-indent-guides)
-
-[**jedi-vim**](https://github.com/davidhalter/jedi-vim)
-
-- Completion `<C-Space>`
-- Goto assignments `<leader>g` (typical goto function)
-- Goto definitions `<leader>d` (follow identifier as far as possible, includes imports and statements)
-- Show Documentation/Pydoc `K` (shows a popup with assignments)
-- Renaming `<leader>r`
-- Usages `<leader>n` (shows all the usages of a name)
-- Open module, e.g. `:Pyimport os` (opens the `os` module)
-
-```vim
-" NOTE: subject to change!
-
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-```
-
-[**Command-T**](https://github.com/wincent/Command-T): Fast file navigation for VIM
+[**Command-T**](https://github.com/wincent/Command-T) (neovim): Fast file navigation for VIM
 
 
 COMMANDS
