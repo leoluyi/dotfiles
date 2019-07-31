@@ -250,6 +250,7 @@ function sync_dotfile {
   cp macOS/bashrc ~/.bashrc
   cp tmux/tmux.conf.local ~/.tmux.conf.local
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim
+  cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/
 }
 
 if [ "$FORCE" == true ]; then
