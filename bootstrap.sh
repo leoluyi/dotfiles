@@ -202,7 +202,7 @@ install_tmux_awesome $FORCE
 echo "$(tput setaf 2)###### Install Vim Awesome ######$(tput sgr 0)"
 
 function install_vim_awesome {
-  CURRENT_DIR=$(pwd)
+  # CURRENT_DIR=$(pwd)
 
   if [ "$1" == true ]; then
     echo 'Removing: ~/.vim_runtime'
@@ -213,18 +213,18 @@ function install_vim_awesome {
     git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
     bash ~/.vim_runtime/install_awesome_vimrc.sh
 
-    echo "Installing Vim Packages with Pathogen..."
+    # echo "Installing Vim Packages with Pathogen..."
 
-    cd ~/.vim_runtime/my_plugins || return
-    git clone https://github.com/tweekmonster/braceless.vim
-    git clone --recursive https://github.com/davidhalter/jedi-vim
-    git clone https://github.com/valloric/vim-indent-guides
-    git clone https://github.com/asheq/close-buffers.vim
-    git clone https://github.com/ctrlpvim/ctrlp.vim
-    cd "${CURRENT_DIR}" || return
+    # cd ~/.vim_runtime/my_plugins || return
+    # git clone https://github.com/tweekmonster/braceless.vim
+    # git clone --recursive https://github.com/davidhalter/jedi-vim
+    # git clone https://github.com/valloric/vim-indent-guides
+    # git clone https://github.com/asheq/close-buffers.vim
+    # git clone https://github.com/ctrlpvim/ctrlp.vim
+    # cd "${CURRENT_DIR}" || return
 
     echo "Installing Vim Packages with vim-plug ..."
-    curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs \
+    curl -fsSLo ~/.vim_runtime/autoload/plug.vim --create-dirs --insecure \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   else
     echo "Awesome Vim is already installed."
