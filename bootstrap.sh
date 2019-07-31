@@ -205,8 +205,8 @@ function install_vim_awesome {
   # CURRENT_DIR=$(pwd)
 
   if [ "$1" == true ]; then
-    echo 'Removing: ~/.vim_runtime'
-    rm -rf ~/.vim_runtime
+    echo 'Removing: ~/.vim*'
+    rm -rf ~/.vim*
   fi
 
   if [ ! -d ~/.vim_runtime ]; then
