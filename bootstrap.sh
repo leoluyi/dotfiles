@@ -214,7 +214,6 @@ function install_vim_awesome {
     bash ~/.vim_runtime/install_awesome_vimrc.sh
 
     # echo "Installing Vim Packages with Pathogen..."
-
     # cd ~/.vim_runtime/my_plugins || return
     # git clone https://github.com/tweekmonster/braceless.vim
     # git clone --recursive https://github.com/davidhalter/jedi-vim
@@ -223,9 +222,6 @@ function install_vim_awesome {
     # git clone https://github.com/ctrlpvim/ctrlp.vim
     # cd "${CURRENT_DIR}" || return
 
-    echo "Installing Vim Packages with vim-plug ..."
-    curl -fsSLo ~/.vim_runtime/autoload/plug.vim --create-dirs --insecure \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   else
     echo "Awesome Vim is already installed."
   fi
