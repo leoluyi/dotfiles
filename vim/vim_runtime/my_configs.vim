@@ -57,34 +57,36 @@ nmap ga <Plug>(EasyAlign)
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-    echo "Downloading junegunn/vim-plug to manage plugins..."
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs --insecure
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if empty(glob('~/.vim_runtime/autoload/plug.vim'))
+  echo "Downloading junegunn/vim-plug to manage plugins..."
+  silent !curl -fsSLo ~/.vim_runtime/autoload/plug.vim --create-dirs --insecure
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin()
 " Plug 'ncm2/ncm2-jedi'
-" Plug 'roxma/nvim-yarp'
-" Plug 'roxma/vim-hug-neovim-rpc'
+
+" https://github.com/gaalcaras/ncm-R
+Plug 'gaalcaras/ncm-R'
+Plug 'jalvesaq/Nvim-R'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+" Vim 8 only
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 Plug 'asheq/close-buffers.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
-Plug 'gaalcaras/ncm-R'
-Plug 'jalvesaq/Nvim-R'
 Plug 'junegunn/vim-easy-align'
-Plug 'ncm2/ncm2'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
 Plug 'valloric/vim-indent-guides'
 Plug 'vifm/vifm.vim'
-
-" Vim 8 only
-if !has('nvim')
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
 
 " Optional: for snippet support
 " Further configuration might be required, read below
