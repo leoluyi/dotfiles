@@ -3,7 +3,7 @@
 cd "$(dirname "${BASH_SOURCE}")" || exit 1;
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
-  FORCE=true
+  FORCE="-f"
 fi
 
 echo "$(tput setaf 2)###### Install Homebrew ######$(tput sgr 0)"
@@ -172,7 +172,7 @@ echo "$(tput setaf 2)###### Tmux Settings ######$(tput sgr 0)"
 
 # Install .tmux awesome
 function install_tmux_awesome {
-  if [ "$1" == true ]; then
+  if [ "$1" == "-f" ]; then
     echo 'Removing: ~/.tmux'
     rm -rf ~/.tmux
   fi
@@ -204,7 +204,7 @@ echo "$(tput setaf 2)###### Install Vim Awesome ######$(tput sgr 0)"
 function install_vim_awesome {
   # CURRENT_DIR=$(pwd)
 
-  if [ "$1" == true ]; then
+  if [ "$1" == "-f" ]; then
     echo 'Removing: ~/.vim*'
     rm -rf ~/.vim*
   fi
