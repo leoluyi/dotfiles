@@ -15,6 +15,7 @@ coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PA
 czmq \
 diff-so-fancy \
 ffmpeg \
+figlet    `# Banner-like program prints strings as ASCII art` \
 findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
 gcc \
 gdal \
