@@ -49,12 +49,15 @@ function brew_install_cli {
   bash \
   bash-completion@2 \
   bash-git-prompt \
+  bat \
   bfg \
   cmatrix \
   coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
   czmq \
   diff-so-fancy \
+  fd \
   ffmpeg \
+  figlet    `# Banner-like program prints strings as ASCII art` \
   findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
   gcc \
   gdal \

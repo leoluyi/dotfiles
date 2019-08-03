@@ -192,8 +192,9 @@ command -v pyenv 1>/dev/null 2>&1 && eval "$(pyenv init -)"
 # pyenv-virtualenv
 command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init -)"
 
-# fzf completions
+# fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
 
 # ============ Others ============
 
