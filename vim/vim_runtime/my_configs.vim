@@ -9,6 +9,9 @@ set foldlevel=999
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
 
+" Shortcutting for yank and paste
+map <leader>P :0P
+
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 

@@ -175,7 +175,8 @@ More cool tricks:
 
 ### Files
 
-- `ZZ`              - Write current file, if modified, and quit
+- Shift `ZZ`        - Write current file, if modified, and quit
+- Shift `ZQ`        - Force exit without saving
 - `:e path/to/file` - edit new file (buffer)
 - `:e!`             - revert to last save (or use `:earlier 1f`)
 - `:w !sudo tee %`  - force write with sudo trick. `%` (special variables) "the current file"
@@ -205,14 +206,6 @@ More cool tricks:
 - `<leader>ba`              - close all buffers
 - `<leader>o`               - open/toggle (bufexplorer)
 
-```
-:sb 3                 - 分屏並打開編號為 3 的 Buffer
-:vertical sb 3        - 同上，垂直分屏
-:vertical rightbelow sfind file.txt   - sfind可以打開在 Vim PATH 中的任何文件
-```
-
-利用通配符進行緩衝區跳轉
-
 set the config:
 
 ```
@@ -220,7 +213,7 @@ set wildmenu wildmode=full
 set wildchar=<Tab> wildcharm=<C-Z>
 ```
 
-![tabs-windows-buffers](https://harttle.land/assets/img/blog/tabs-windows-buffers.png)
+![tabs-windows-buffers](./img/tabs-windows-buffers.png)
 
 **Windows (Panes)**
 
@@ -231,7 +224,6 @@ set wildchar=<Tab> wildcharm=<C-Z>
 - `:only`               - keep only this window open
 - `:sview file`         - same as split, but readonly
 
-
 Switch between panes
 
 - `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up/down/left/right a window (`<C-w> arrow`)
@@ -239,21 +231,33 @@ Switch between panes
 
 Shortcuts
 
-- `<C-w> s`             - 水平分割當前窗口
-- `<C-w> v`             - 垂直分割當前窗口
-- `<C-w> q`             - 關閉當前窗口
-- `<C-w> c`             - hide current window
-- `<C-w> n`             - 打開一個新窗口（空文件）
-- `<C-w> o`             - 關閉出當前窗口之外的所有窗口
+- `<C-w> s`             - split current window horizontally
+- `<C-w> v`             - split current window [v]ertically
+- `<C-w> c`             - close current window
+- `<C-w> m`             - move to window according to motion m
+- `<C-w> n` (`:new`)    - open new window (horizontally)
+- `<C-w> o`             - Close every window in the current tabview but the current one
 - `<C-w> T`             - 當前窗口移動到新標籤頁
 
 Resizing
 
-- `<C-w> _`             - maximize current window
-- `<C-w> =`             - make all equal size
-- `<C-w> +`, `<C-w> -`  - window resize up / down
-- `<C-w> >`, `<C-w> <`  - window resize left / right
-- `10 <C-w> +`          - increase window size by 10 lines
+- `<C-w> _`    - maximize height
+- `<C-w> |`    - maximize width
+- `<C-w> =`    - make all equal size
+- `<C-w> >`    - Incrementally increase the window to the right. Takes a parameter, e.g. CTRL-w 20 >
+- `<C-w> <`    - Incrementally increase the window to the left. Takes a parameter, e.g. CTRL-w 20 <
+- `<C-w> -`    - Incrementally decrease the window's height. Takes a parameter, e.g. CTRL-w 10 -
+- `<C-w> +`    - Incrementally increase the window's height. Takes a parameter, e.g. CTRL-w 10 +
+
+More split manipulation
+
+```
+"Swap top/bottom or left/right split
+<C-w> R
+
+"Break out current window into a new tabview
+<C-w> T
+```
 
 使用 `-O` 參數可以讓 Vim 以分屏的方式打開多個文件：
 
@@ -437,6 +441,7 @@ Use `Ctrl-r "` when entering a command in command mode to paste the current past
 
 ## References
 
+- [VIM KEYBOARD SHORTCUTS](https://gist.github.com/leoluyi/2770d1d8596bb9cf594432dfa56ef825)
 - [buffers vs tabs?](https://stackoverflow.com/a/26710166/3744499)
 - [vim--buffers-and-windows](https://www.openfoundry.org/tw/tech-column/2383-vim--buffers-and-windows)
 - [Huckleberry Vim](https://github.com/shawncplus/vim-classes/blob/master/expert-1.md)
