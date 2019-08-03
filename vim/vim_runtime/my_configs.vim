@@ -1,8 +1,10 @@
 " Some basics
+let mapleader = ","
 set number relativenumber
 set encoding=utf-8
 syntax on
 filetype plugin on
+set foldlevel=999
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
@@ -42,9 +44,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 
 " braceless.vim  -------------------------------------------------------
-if exists('BracelessEnable')
-    autocmd FileType python BracelessEnable +indent
-endif
+autocmd FileType python if exists(':BracelessEnable') | exe "BracelessEnable +indent" | endif 
 
 " vim-easy-align  ------------------------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -52,6 +52,9 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" fzf.vim --------------------------------------------------------------
+autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | endif
 
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -80,6 +83,8 @@ endif
 Plug 'asheq/close-buffers.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'

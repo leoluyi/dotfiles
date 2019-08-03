@@ -48,6 +48,7 @@ pyenv \
 pyenv-virtualenv \
 ranger     `# a terminal browser for Vim` \
 rename \
+ripgrep \
 shellcheck \
 ssh-copy-id \
 terminal-notifier \
