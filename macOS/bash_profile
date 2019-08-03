@@ -192,6 +192,9 @@ command -v pyenv 1>/dev/null 2>&1 && eval "$(pyenv init -)"
 # pyenv-virtualenv
 command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init -)"
 
+# fzf completions
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # ============ Others ============
 
 # Fix pyenv bug for git
