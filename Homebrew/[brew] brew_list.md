@@ -2,7 +2,7 @@
 
 ### Install packages
 
-```
+```bash
 brew install \
 asciinema     `# record terminal sessions` \
 atomicparsley `# setting metadata into MPEG-4` \
@@ -11,6 +11,7 @@ bash-completion@2 \
 bash-git-prompt \
 bat \
 bfg \
+brew install \
 cmatrix \
 coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
 czmq \
@@ -18,11 +19,13 @@ diff-so-fancy \
 fd \
 ffmpeg \
 figlet    `# Banner-like program prints strings as ASCII art` \
+findutils \
 findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
 gcc \
 gdal \
 git \
 gnu-sed --with-default-names \
+gnu-tar \
 gnupg \
 grep \
 grip \
@@ -75,13 +78,13 @@ brew install sc-im
 
 Update
 
-```
+```bash
 $ brew update && brew upgrade
 ```
 
 List Installed Packages
 
-```
+```bash
 $ brew list
 ```
 
@@ -91,7 +94,7 @@ $ brew list
 
 ### Cask list
 
-```
+```bash
 # Tap cask GitHub repositories
 brew tap caskroom/cask
 brew tap homebrew/cask-fonts
@@ -143,25 +146,25 @@ wget -q - https://github.com/Nyx0uf/qlImageSize/releases/download/2.6.1/qlImageS
 
 Searching for Casks
 
-```
+```bash
 $ brew search <PGMNAME>
 ```
 
 List installed cask
 
-```
+```bash
 $ brew cask list
 ```
 
 Upgrade apps
 
-```
+```bash
 $ brew cask upgrade
 ```
 
 Uninstall
 
-```
+```bash
 $ brew cask uninstall <PGMNAME>
 ```
 

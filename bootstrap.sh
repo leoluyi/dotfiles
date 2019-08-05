@@ -42,7 +42,6 @@ brew_install_app
 echo "$(tput setaf 2)###### Install CLI with Homebrew ######$(tput sgr 0)"
 
 function brew_install_cli {
-
   brew install \
   asciinema     `# record terminal sessions` \
   atomicparsley `# setting metadata into MPEG-4` \
@@ -51,6 +50,7 @@ function brew_install_cli {
   bash-git-prompt \
   bat \
   bfg \
+  brew install \
   cmatrix \
   coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
   czmq \
@@ -58,11 +58,13 @@ function brew_install_cli {
   fd \
   ffmpeg \
   figlet    `# Banner-like program prints strings as ASCII art` \
+  findutils \
   findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
   gcc \
   gdal \
   git \
   gnu-sed --with-default-names \
+  gnu-tar \
   gnupg \
   grep \
   grip \
@@ -88,6 +90,7 @@ function brew_install_cli {
   pyenv-virtualenv \
   ranger     `# a terminal browser for Vim` \
   rename \
+  ripgrep \
   shellcheck \
   ssh-copy-id \
   terminal-notifier \

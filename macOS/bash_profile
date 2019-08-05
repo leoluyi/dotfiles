@@ -100,20 +100,6 @@ alias sourcetree='open -a SourceTree'
 
 # subl + pipenv virtualenv
 (command -v pipenv >/dev/null) && (command -v subl >/dev/null) && alias subl-pipenv='pipenv --venv && pipenv run subl'
-# if command -v pipenv >/dev/null && command -v subl >/dev/null; then
-#   function subl-venv() {
-#     if [ -n "$VIRTUAL_ENV" ]; then
-#       echo -e "Use VIRTUAL_ENV='${VIRTUAL_ENV}'"
-#       PY_BINARY="${VIRTUAL_ENV}/bin/python" command subl "$@"
-#     elif pipenv --venv >/dev/null 2>&1; then
-#       VIRTUAL_ENV=$(pipenv --venv 2>/dev/null)
-#       echo -e "Use VIRTUAL_ENV='${VIRTUAL_ENV}'"
-#       PY_BINARY="${VIRTUAL_ENV}/bin/python" command subl "$@"
-#     else
-#       PY_BINARY="$(which python 2>/dev/null)" command subl "$@"
-#     fi
-#   }
-# fi
 
 # Git diff-so-fancy
 # https://github.com/so-fancy/diff-so-fancy
@@ -175,12 +161,17 @@ fi;
 # GNU
 # Use these commands with their normal names, you
 # can add a "gnubin" directory to your PATH from your bashrc like:
-
 if [ -d "${BREW_PREFIX}/opt" ]; then
     export PATH="${BREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
     export MANPATH="${BREW_PREFIX}/opt/coreutils/libexec/gnuman:$MANPATH"
     export PATH="${BREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
     export MANPATH="${BREW_PREFIX}/opt/gnu-sed/libexec/gnuman:$MANPATH"
+    export PATH="${BREW_PREFIX}/opt/findutils/libexec/gnubin:$PATH"
+    export MANPATH="${BREW_PREFIX}/opt/findutils/libexec/gnuman:$MANPATH"
+    export PATH="${BREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
+    export MANPATH="${BREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$MANPATH"
+    export PATH="${BREW_PREFIX}/opt/grep/libexec/gnubin:$PATH"
+    export MANPATH="${BREW_PREFIX}/opt/grep/libexec/gnuman:$MANPATH"
 fi
 
 # The fuck
