@@ -1,10 +1,18 @@
 " Some basics
 let mapleader = ","
+
 set number relativenumber
 set encoding=utf-8
-syntax on
-filetype plugin on
 set foldlevel=999
+syntax on
+filetype plugin indent on
+
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
