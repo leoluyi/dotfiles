@@ -7,12 +7,6 @@ set foldlevel=999
 syntax on
 filetype plugin indent on
 
-" move one line down and up.
-nmap <A-j> :.m.+1<CR>
-nmap <A-k> :.m.-2<CR>
-nmap <A-down> :.m.+1<CR>
-nmap <A-up> :.m.-2<CR>
-
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width
@@ -103,6 +97,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'matze/vim-move'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
