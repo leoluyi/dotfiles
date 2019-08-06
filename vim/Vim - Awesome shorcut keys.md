@@ -163,8 +163,8 @@ More cool searching tricks:
 
 - `I`          - insert before block (`<esc>` to finish insert)
 - `A`          - append after block (`<esc>` to finish insert)
-- `yy`         - copy line into paste buffer; `dd` cut line into paste buffer
-- `p`          - paste buffer below cursor line; `P` paste buffer above cursor line
+- `yy`         - copy line into paste register; `dd` cut line into paste register
+- `p`          - paste register below cursor line; `P` paste register above cursor line
 
 More cool tricks:
 
@@ -360,7 +360,7 @@ http://vim.wikia.com/wiki/Moving_around
 - `q:`   - show command-line history window
 - `q/`   - show searches history
 - Type `:` or `/` to start entering a command or search, then press the 'cedit' key (default is `Ctrl-f`)
-- Press `Enter` to execute the current line (and close the command-line window); or Press `Ctrl-c twice` to close the command-line window (cancel).
+- Then press `Enter` to execute the current line (and close the command-line window); or Press `Ctrl-c twice` to close the command-line window (cancel).
 
 ### Registers
 
@@ -419,18 +419,19 @@ https://vim.fandom.com/wiki/Get_the_name_of_the_current_file
 - `:echo expand('%:r')` name of file less one extension ('root')
 - `:echo expand('%:e')` name of file's extension ('extension')
 - `:cd %:p:h` change the working directory to the file being edited. (`:p` Make file name a full path. `:h` Head of the file name)
-- In insert mode, type `Ctrl-r` then `%` to insert the name of the current file.
 
 ### Vim paste in command mode - the power of `Ctrl-r`
 
 http://vimdoc.sourceforge.net/htmldoc/insert.html#i_CTRL-R
 
-Use `Ctrl-r "` when entering a command in command mode to paste the current paste buffer contents.
+Use `<C-r> register` when entering a command in _command mode_ or _insert mode_ to paste the register contents. Substitute for a register name:
 
-- Substitute `"` for a buffer name (say, `0` for yanked buffer),
-- `%` for current filename,
-- `/` for last search term,
-- `+` for the `X clipboard` or a host of other substitutions.
+- `<C-r> "` for last delete or yank
+- `<C-r> 0` for yanked register
+- `<C-r> .` for last inserted text
+- `<C-r> %` for current filename
+- `<C-r> /` for last search term
+- `<C-r> +` for the `X clipboard` or a host of other substitutions
 
 ### Misc
 
