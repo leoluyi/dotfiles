@@ -23,6 +23,16 @@ map <leader>P :0P
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" Fix Alt key mappings
+" https://stackoverflow.com/a/10216459
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+set timeout ttimeoutlen=50
+
 " Automatic toggling between line number modes  ------------------------
 " https://jeffkreeftmeijer.com/vim-number/
 augroup numbertoggle
