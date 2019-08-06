@@ -18,20 +18,26 @@ set expandtab
 set splitbelow splitright
 
 " Shortcutting for yank and paste
-map <leader>P :0P
+nmap <leader>P "0P
+nmap <leader>p "0p
+vmap <leader>P "0P
+vmap <leader>p "0p
 
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Fix Alt key mappings
-" https://stackoverflow.com/a/10216459
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-set timeout ttimeoutlen=50
+" vim-move config - Fix Alt key mappings
+" https://github.com/matze/vim-move/issues/15#issuecomment-168177827
+" for terms that send Alt as Escape sequence
+" see http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+" for why the <F20> hack. Keeps Esc from waiting for other keys to exit visual
+set <F20>=j
+set <F21>=k
+vmap <F20> <Plug>MoveBlockDown
+vmap <F21> <Plug>MoveBlockUp
+nmap <F20> <Plug>MoveLineDown
+nmap <F21> <Plug>MoveLineUp
+set ttimeoutlen=0
 
 " Automatic toggling between line number modes  ------------------------
 " https://jeffkreeftmeijer.com/vim-number/
@@ -58,7 +64,7 @@ let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 " NERDTree Settings ----------------------------------------------------
-let g:NERDTreeWinPos = "left"
+let g:NERDTreeWinPos = "right"
 
 " vim-indent-guides ----------------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
