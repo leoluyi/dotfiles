@@ -7,6 +7,12 @@ set foldlevel=999
 syntax on
 filetype plugin indent on
 
+" move one line down and up.
+nmap <A-j> :.m.+1<CR>
+nmap <A-k> :.m.-2<CR>
+nmap <A-down> :.m.+1<CR>
+nmap <A-up> :.m.-2<CR>
+
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width
