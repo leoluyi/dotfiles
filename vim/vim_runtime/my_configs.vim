@@ -18,10 +18,10 @@ set expandtab
 set splitbelow splitright
 
 " Shortcutting for yank and paste
-nmap <leader>P "0P
-nmap <leader>p "0p
-vmap <leader>P "0P
-vmap <leader>p "0p
+nnoremap <leader>P "0P
+nnoremap <leader>p "0p
+vnoremap <leader>P "0P
+vnoremap <leader>p "0p
 
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -76,6 +76,9 @@ nmap ga <Plug>(EasyAlign)
 " fzf.vim --------------------------------------------------------------
 autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | endif
 
+" ctrlp.vim ------------------------------------------------------------
+let g:ctrlp_map = '<c-f>'
+
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -101,7 +104,7 @@ if !has('nvim')
 endif
 
 Plug 'asheq/close-buffers.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
