@@ -1,11 +1,4 @@
-# Vim - Awesome shorcut keys
-
-### Update vimrc
-
-```
-cd ~/.vim_runtime
-git pull --rebase
-```
+# Vim - Awesome Keyboard Shorcuts
 
 ### key mappings
 
@@ -29,32 +22,514 @@ git pull --rebase
 editing commands = <number><command><text object or motion>
 ```
 
-### Motions
+### MOVEMENTS
 
-Motions: `wWbBeEfFtT`
+Motions: `wW bB eE fF tT`
 
-- `b` Backward to the beginning of current or previous word
-- `B` Backward to the beginning of current or previous WORD
-- `ge` go to the end of the previous word
-- `w` Forward to the beginning of next word
-- `W` Forward to the beginning of next WORD
-- `e` Forward to the next end of word
-- `E` Forward to the next end of WORD
-- `<num>f<char>` Forward until (nth) `<char>`  (Inclusive)
-- `<num>F<char>` backward until (nth) `<char>` (Inclusive)
-- `<num>t<char>` forward unTil (nth) `<char>`  (Exclusive)
-- `<num>T<char>` backward unTil (nth) `<char>` (Exclusive)
+```
+h        -   Move left
+j        -   Move down
+k        -   Move up
+l        -   Move right
+3j       -   Move 3 lines down
+$        -   Move to end of line
+0        -   Move to beginning of line (including whitespace)
+^        -   Move to first character on line
+gg       -   Move to first line of file
+G        -   Move to last line of file
+3G       -   Go to line 3
+:3<CR>   -   Go to line 3
 
-Advanced motions
+w        -   Move forward to next word, with cursor on first character (use W to jump by whitespace only)
+b        -   Move backward to next word, with cursor on first character (use B to jump by whitespace only)
+e        -   Move forward to next word, with cursor on last character (use E to jump by whitespace only)
+ge       -   Move backwards to next word, with cursor on last character (use gE to jump by whitespace only)
+(        -   Move to beginning of previous sentence. Use ) to go to next sentence
+{        -   Move to beginning of previous paragraph. Use } to go to next paragraph
++        -   Move forward to the first character on the next line
+-        -   Move backwards to the first character on the previous line
 
-- `#G`        - Go to line `#`
-- `gg`        - Go to the top of the file
-- `0`         - Front of line
-- `^`         - Front of line (first non-blank)
-- `$`         - End of line
-- `%`         - Matching brace/bracket/paren/tag (with matchtag plugin)
-- `(`, `)`    - Prev / Next sentences ("." delimited words)
-- `{`, `}`    - Prev / Next paragraphs (next empty line)
+CTRL+u   -   Move up by half a page
+CTRL+d   -   Move down by half a page
+CTRL+b   -   Move up by a page
+CTRL+f   -   Move down by a page
+
+H        -   Move cursor to header (top) line of current visible window
+M        -   Move cursor to middle line of current visible window
+L        -   Move cursor to last line of current visible window
+
+fc       -   Move cursor to next occurrence of character c on the current line (inclusive). Use Fc to move backwards
+tc       -   Move cursor till next character c on the current line (exclusive). Use Tc to move backwards
+%        -   Move cursor to next brace, bracket or comment paired to the current cursor location
+
+*        -   Search forward for word under cursor
+#        -   Search backwards for word under cursor
+/word    -   Search forward for word. Accepts regular expressions to search
+?word    -   Search backwards for word. Accepts regular expressions to search
+n        -   Repeat the last / or ? command
+N        -   Repeat the last / or ? command in the opposite direction
+
+# Advanced motions
+
+()       -   Move to prev / next sentences ("." delimited words)
+{}       -   Move to prev / next paragraphs (next empty line)
+[(       -   Move cursor N times back to unmatched parentheses, forward `])`
+[{       -   Move cursor N times back to unmatched braces, forward `]}`
+]]       -   Move to next section (Depending on your current filetype this may move between functions)
+[[       -   Move to previous section
+''       -   Move to previous line position
+```
+
+
+### NORMAL MODE -> INSERT MODE
+
+```
+i        -   Enter insert mode to the left of the cursor
+a        -   Enter insert mode to the right of the cursor
+I        -   Enter insert mode at first character of current line
+A        -   Enter insert mode at last character of current line
+
+o        -   Insert line below current line and enter insert mode
+O        -   Insert line above current line and enter insert mode
+```
+
+### DELETION & CHANGING
+
+```
+x        -   Delete character forward (under cursor). use x do delete backwards (before cursor)
+r        -   Replace single character under cursor, and remain in normal mode. Use `R` replace multiple characters
+s        -   Delete character under cursor, then switch to insert mode. Does the same thing as `x` then `i`
+
+dm       -   Delete in direction of movement m. For m, you can also use w, b, or any other variation.
+            `d3e` - delete 3 words.
+            `bdw` - back delete word.
+dd       -   Delete entire current line. `3dd` to delete 3 lines
+D / d$   -   Delete until end of line
+
+c        -   Change (Same as `d` but put me in insert mode)
+cm       -   Change the character or word (w) in motion m, then enter insert mode
+cc / S   -   Change current line and enter insert mode (unlike dd which leaves you in normal mode)
+C / c$   -   Change from cursor to end of line, and enter insert mode
+c0       - Change to begining of line and enter insert mode
+```
+
+### YANK & PUT
+
+```
+y        -   Yank (copy) highlighted text
+yy       -   Yank current linepPut (paste) yanked text below current line
+yw       -   Yank a word from the cursor
+ynw      -   Yank n words from the cursor
+y$       -   Yank till the end of the line
+p        -   Yank register below cursor line
+P        -   Put yanked text above current line
+J        -   Join current line with the next line. Use gJ to exclude join-position space
+xp       -   Transpose two letters (delete and paste, technically)
+
+# More cool tricks:
+
+"0 p       - paste from last yanked text
+"+ y<CR>   - copy to the system clipboard
+"+ p       - paste from the system clipboard
+x  p       - swap two characters (`x` to delete one character, then `p` to put it back after the cursor position)
+```
+
+
+### REGISTERS
+
+When you copy and cut stuff, it gets saved to registers. You can pull stuff from those registers at a later time.
+
+```
+:reg          -   show named registers and what's in them
+"5y           -   yank to register "5
+"5p           -   paste what's in register "5
+
+# Special registers
+
+""            -   no-name register (quotation register) - last cut/del/yank
+"0            -   last-yanked register
+"0 ~ "9       -   Nth-yanked register
+"_            -   blackhole register --> `"_d` delete and throw to blackhole
+"/            -   last search pattern
+".            -   last inserted text (*read only*)
+"%            -   current filename (*read only*)
+"#            -   alternate file name (last edited file) (*read only*)
+":            -   last command (*read only*)
+
+# Tricks in command mode for registers
+# Either in search mode `/` or in last line command mode `:`
+
+:<C-r>0       -   paste last yanked text
+:<C-r>%       -   paste current filename
+
+# Also use `@ <register>` for variable:
+
+:echo @0      -   paste last yanked text
+:echo @%      -   print current filename
+```
+
+### VISUAL MODE
+
+```
+v        -   Enter visual mode and highlight characters
+V        -   Enter visual mode and highlight lines
+CTRL+v   -   Enter visual block mode and highlight exactly where the cursor moves
+o        -   Switch cursor from first & last character of highlighted block while in visual mode
+~        -   Swap case under selection
+U        -   Uppercase
+u        -   Lowercase
+gUiw     -   (normal mode) Change current word to uppercase
+<<       -   Shift lines to left
+>>       -   Shift lines to right
+
+vat      -   Highlight all text up to and including the parent element
+vit      -   Highlight all text up to the parent element, excluding the element
+vac      -   Highlight all text including the pair marked with c (like va<, va' or va")
+vic      -   Highlight all text inside the pair marked with c
+vfw      -   Highlight to next char "w"
+vtw      -   Highlight 'til next char "w"
+```
+
+
+### FILES
+
+```
+:pwd              -   print working directory
+<leader>cd        -   set working directory to the directory of the open buffer
+:cd %:p:h         -   set working directory to the directory of the open buffer
+
+# See [more...](https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file)
+
+<Shift> ZZ        -   Write current file, if modified, and quit
+<Shift> ZQ        -   Force exit without saving
+:e path/to/file   -   edit new file (buffer)
+:e!               -   revert to last save (or use :earlier 1f)
+:w !sudo tee %    -   force write with sudo trick. % (special variables) "the current file"
+:w!               -   force write
+:w new.txt        -   save (save content to new.txt while keeping original.txt as the opened buffe)
+:wall             -   save all (save all changed buffers)
+:sav new.txt      -   save as (first write content to the file new.txt, then hide buffer original.txt, finally open new.txt as the current buffer)
+:sav new_name + :!rm <C-r>#    - Rename files (<C-r>#  expands to an alternate-file)
+```
+
+> Note that filename with "space" must be escaped with backslash `\`.
+
+### BUFFERS
+
+```
+<leader>o           -   [Bclose.vim] open/toggle bufexplorer
+:ls (or :buffers)   -   list / show available buffers
+:e filename         -   Edit a file in a new buffer
+
+<C-^> or :b#        -   Switch between the "alternative buffers"
+:bnext (or :bn)     -   go to next buffer
+:bprev (of :bp)     -   go to previous buffer
+
+:bdelete (or :bd)   -   unload a buffer (close a file). [Bclose.vim] `<leader>bd` close current; `<leader>ba` close all
+:bwipeout (or :bw)  -   unload a buffer and deletes it
+:b [N]              -   The number of the buffer you are interested to open
+:b [filename]       -   Swith to buffer (fuzzy matching)
+:ball               -   opens up all available buffers in horizontal split window
+:vertical ball      -   opens up all available buffero in vertical split window
+:q                  -   close the buffer window
+:help buffers       -   help for buffers
+:r <file_path>      -   reads a file from the path to the buffer
+:r !<command>       -   reads the output of the command into buffer
+:.! cat <file_path> -   reads the output of the command (eg: cat) into buffer or !! in ex-mode
+```
+
+set the config:
+
+```
+set wildmenu wildmode=full 
+set wildchar=<Tab> wildcharm=<C-Z>
+```
+
+![tabs-windows-buffers](./img/tabs-windows-buffers.png)
+
+### WINDOWS (PANES) MANAGEMENT
+
+```
+# Split screen
+
+:sp[lit] filename   - horizontal split window and load another file. CLI `vim -o file1 file2`
+:vs[plit] filename  - vertical split window and load another file. CLI `vim -O file1 file2`
+:new                - horizontal split with new file
+:vnew               - vertical split with new file
+:clo[se]            - close current window
+:hide               - hide current window
+:only               - keep only this window open
+:sview file         - same as split, but readonly
+
+# Switch between panes
+
+- `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up/down/left/right a window (`<C-w> arrow`)
+- `<C-w> w`                    - move cursor to another window (cycle)
+
+# Shortcuts
+
+<C-w> s             - split current window horizontally
+<C-w> v             - split current window [v]ertically
+<C-w> c             - close current window
+<C-w> m             - move to window according to motion m
+<C-w> n (or :new)   - open new window (horizontally)
+<C-w> o             - Close every window in the current tabview but the current one
+<C-w> T             - 當前窗口移動到新標籤頁
+
+# Resizing
+
+:resize 20          - Horizontal resize in active window
+:vertical resize 20 - Virtical resize in active window
+<C-w> _             - maximize height
+<C-w> |             - maximize width
+<C-w> =             - make all equal size
+<C-w> >             - Incrementally increase the window to the right. Takes a parameter, e.g. CTRL-w 20 >
+<C-w> <             - Incrementally increase the window to the left. Takes a parameter, e.g. CTRL-w 20 <
+<C-w> -             - Incrementally decrease the window's height. Takes a parameter, e.g. CTRL-w 10 -
+<C-w> +             - Incrementally increase the window's height. Takes a parameter, e.g. CTRL-w 10 +
+
+# More split manipulation
+
+" Rotate (swap) top/bottom or left/right split
+<C-w> R
+
+" Break out current window into a new tabview
+<C-w> T
+
+# Diff
+
+:windo diffthis              -  diff between 2 vsplit windows
+:diffs, diffsplit {filename} -  diffs the current window with the file given
+:diffoff                     -  turns off diff selection
+```
+
+### TAB VIEWS
+
+```
+:tabe filename      -   opens the file in newtab
+:tabf[ind] {file}   -   open a new tab with filename given, searching the 'path' to find it
+:tabe new           -   open an empty tab
+:tabs               -   list opened tabs
+:tabc [I]           -   close the active (i-th) tab
+:tabo[nly]          -   close all other tabs (show only the current tab)
+:tabn and tabp      -   Go to next tab or previous tab
+:tabfirst           -   Go to the first available tab
+:tablast            -   Go to the last available tab
+:help tabpage       -   help for tabs
+
+vim -p *.txt        -   open all txt files in tabs
+
+# Moving tabs
+
+:tabm 0             - move current tab to first
+:tabm               - move current tab to last
+:tabm {i}           - move current tab to position i+1
+
+# TAB NAVIGATION
+
+gt                  - goto next tab
+gT                  - goto prev. tab
+{i}gt               - go to tab in position i
+
+# Shortcuts
+
+<leader>tn          - tab new
+<leader>tc          - tab close
+<leader>to          - tab only
+<leader>tm          - tab move
+<leader>te          - open a new tab with the current buffer's path
+
+noremap tl <Esc>:tabnext<CR>
+noremap th <Esc>:tabprevious<CR>
+```
+
+### MACROS
+
+You can also record a whole series of edits to a register, and then apply them over and over.
+
+```
+qk       -  records edits into register k (`q` again to stop recording)
+@k       -  execute recorded macro
+@@       -  repeat last one
+5@@      -  repeat 5 times
+
+"kp      -  print macro k (e.g., to edit or add to .vimrc)
+"kd      -  replace register k with what cursor is on
+```
+
+
+### VIM FOLDING
+
+```
+zf#j      -   creates a fold from the cursor down # lines.
+zf/string -   creates a fold from the cursor to string .
+v{move}zf -   creates a visual select fold
+zf'a      -   creates a fold from cursor to mark a
+
+zo        -   opens a fold at the cursor.
+zO        -   opens all folds at the cursor.
+za        -   Toggles a fold at the cursor.
+zc        -   closes a fold at the cursor.
+zM        -   closes all open folds.
+zd        -   deletes the fold at the cursor.
+zE        -   deletes all folds.
+
+zj        -   moves the cursor to the next fold.
+zk        -   moves the cursor to the previous fold.
+zm        -   increases the foldlevel by one.
+zr        -   decreases the foldlevel by one.
+zR        -   decreases the foldlevel to zero -- all folds will be open.
+[z        -   move to start of open fold.
+]z        -   move to end of open fold.
+
+:set foldmethod=manual         -  default method v{select block}zf to fold
+:set foldmethod=marker         -  use marker fold method {{{
+:set foldemethod=marker/*,*/   -  user custom marker fold method
+:set foldmethod=indent         -  automatically fold programms per its indentation
+```
+
+
+### HISTORY/COMMAND BUFFER
+
+```
+q:              -   list history in command buffer
+q/              -   search history in command buffer
+# Another way: press the 'cedit' key (default is `Ctrl-f`) in command mode `:` or search mode `/`
+# Then press `Enter` to execute the current line
+CTRL+c CTRL+c   -   close the command buffer
+
+:set list       -   show hidden characters
+
+gg=G            -   Format HTML. Make sure FileType is set to html with :setf html
+CTRL+n          -   Press after typing part of a word. It scrolls down the list of all previously used words
+CTRL+p          -   Press after typing part of a word. It scrolls up the list of all previously used words
+
+!               -   Turn a command into a toggle command, e.g., `:set cursorline <-> :set nocursorline` == `:set cursorline!`
+```
+
+
+### SEARCH & REPLACE
+
+```
+/pattern                -   search forward for pattern
+?pattern                -   search backward
+n                       -   repeat forward search
+N                       -   repeat backward
+:nohl or <leader><CR>   -   no highlight on search result
+:set ignorecase         -   case insensitive
+:set smartcase          -   use case if any caps used
+:set incsearch          -   show match as search proceeds
+:set hlsearch           -   search highlighting
+
+More cool searching tricks:
+
+*                 - search for word currently under cursor  (bounded)
+g*                - search for partial word under cursor    (unbounded)
+                    (repeat with n)
+#                 - search for word under cursor - backward (bounded)
+g#                - search for word under cursor - backward (unbounded)
+[I                - show lines with matching word under cursor.
+```
+
+**Go through jump list (a list of places where your cursor has been to)
+
+```
+:<linenum>            - go to <linenum>
+`` (double backtick)  - jump between previous position and the current position cursor position in jump list
+`.                    - bring you to your **last change**
+                        (The ` goes to a mark, and "." is a "special" mark which is automatically set to the position where the last change was made)
+
+<C-o> and <C-i>       - work through the jump list history
+g; and g,             - jump through [edit positions](), which are also very frequently used
+```
+
+
+- `:%s/search_for_this/replace_with_this/gc` - replace in the whole file (%s), [c]onfirm each replace
+- `:s/search_for_this/replace_with_this/gi` -  replace in the current line only, with case [i]nsensitive
+
+
+### Plugins
+
+[vim-commentary](https://github.com/tpope/vim-commentary)
+
+```
+gcc        -   comment out a line (takes a count)
+gc         -   comment out the selection
+gcap       -   comment out a paragraph
+```
+
+[surround.vim](https://github.com/tpope/vim-surround)
+
+```
+ys iw "    -   add quotes in word
+ds "       -   remove the delimiters entirely
+cs "'      -   change surrounding from " to '
+yss )      -   wrap the entire line in parentheses
+```
+
+[NERDTree](#)
+
+```
+<leader>nn          -   toggle nerdtree
+o                   -   open/close folder
+
+m                   -   opens the  menu
+?                   -   help
+i                   -   horizontal split
+s                   -   vertical split
+CTRL-w + <-|->      -   (left or right) to navigate
+```
+
+[vim-multiple-cursors (Sublime-text-flavor select)](#)
+
+```
+<C-n>      -   (start) start multicursor and add a "virtual cursor + selection" on the match
+<C-n>      -   (next) add a new virtual cursor + selection on the next match
+<C-x>      -   (skip) skip the next match
+<C-p>      -   (prev) remove current virtual cursor + selection and go back on previous match
+<A-n>      -   (select all) start muticursor and directly select all matches
+```
+
+[mru](#)
+
+```
+<leader>f      - open recently opened files
+```
+
+
+### MISCELLANEOUS
+
+```
+u        -   Undo
+U        -   Undo all changes on current line
+CTRL+R   -   Redo
+.        -   Redo last change
+
+g~       -   switch case under cursor
+g~$      -   Toggle case of all characters to end of line.
+g~~      -   Toggle case of the current line (same as V~).
+gUU      -   switch the current line to upper case
+guu      -   switch the current line to lower case
+
+CTRL+A   -   Increment the number at cursor
+CTRL+X   -   Decrement the number at cursor
+
+.        -   Repeat last change or delete
+;        -   Repeat last f, t, F, or T command
+,        -   Repeat last f, t, F, or T command in opposite direction
+
+:%sort   -   Sort in visual mode. Use `:%sort!` to sort in reverse order; `:%sort n` for numeric sort.
+
+vim +10 <file_name>            - opens the file at line 10
+vim +/bash cronjob-lab.yml     - opens the file cronjob-lab.yml on the first occurence of bash
+
+vim scp://balasundaramm@mgmt-bst:22/~/automation/test-file.txt - Edit a remote file via scp
+
+:set nonumber            -  disable line number
+:set norelativenumber    -  disable relative line number
+```
+
+---
 
 ### Text Objects
 
@@ -90,323 +565,17 @@ Parentheses Text Objects
 
 > [CamelCaseMotion](https://github.com/bkad/CamelCaseMotion) provides a text object to move by words within a camel or snake-cased word.
 
-Examples:
-
-- select to next char "w" `vfw`
-- select 'til next char "w" `vtw`
-
-### Pen to the page
-
-- `i` Enter insert mode at cursor
-- `I` Enter insert mode at first non-blank character
-- `s` Delete character under cursor and enter insert mode
-- `S` Delete line and begin insert at beginning of same line
-- `a` Enter insert mode _after_ cursor
-- `A` Enter insert mode at the end of the line
-- `o` Enter insert mode on the next line
-- `O` enter insert mode on the above line
-- `C` Delete from cursor to end of line and begin insert
-
-### Searching
-
-- `/pattern` - search forward for pattern
-- `?pattern` - search backward
-- `n`        - repeat forward search
-- `N`        - repeat backward
-- `:nohl` or `<leader><CR>` - no highlight on search result
-- `:set ignorecase` - case insensitive
-- `:set smartcase`  - use case if any caps used
-- `:set incsearch`  - show match as search proceeds
-- `:set hlsearch`   - search highlighting
-
-More cool searching tricks:
-
-- `*`                 - search for word currently under cursor  (bounded)
-- `g*`                - search for partial word under cursor    (unbounded)
-                        (repeat with n)
-- `#`                 - search for word under cursor - backward (bounded)
-- `g#`                - search for word under cursor - backward (unbounded)
-- `[I`                - show lines with matching word under cursor. Type `:<linenum><CR>` to [jump to the line](https://superuser.com/q/692548)
-
-**Go through jump list** ([jump list](#), a list of places where your cursor has been to)
-
-- `:<linenum>`           - go to `<linenum>`
-- <code>\`\`</code> (double backtick) - jump between previous position and the current position cursor position in jump list
-- <code>\`.</code>                    - bring you to your **last change**
-    - (The \` goes to a mark, and `.` is a "special" mark which is automatically set to the position where the last change was mad)
-- `Ctrl-o` and `Ctrl-i`  - work through the jump list history
-- `g;` and `g,`          - jump through [edit positions](), which are also very frequently used
-
-### Search and Replace
-
-- `:%s/search_for_this/replace_with_this/gc` - replace in the whole file (%s), [c]onfirm each replace
-- `:s/search_for_this/replace_with_this/gi` -  replace in the current line only, with case [i]nsensitive
-
-### Changing
-
-- `c`          - change (Same as `d` but put me in insert mode)
-- `cc` = `S`   - delete current line and enter insert mode
-- `c0`         - change to begining of line and enter insert mode
-- `C` = `c$`   - change to end of line and enter insert mode
-- `s`          - change under cursor and enter insert mode, does the same thing as `x` then `i`
-- `r`          - replace under cursor; `R` replace multiple characters
-
-### Deleting
-
-- `d`          - delete motion; `d3e` to delete 3 words
-- `dd`         - delete current line; `3dd` to delete 3 lines
-- `d0`         - delete to the beginning of line
-- `D` or `d$`  - delete to end of line
-- `x`          - delete in selection
-
-### Cut and paste
-
-- `I`          - insert before block (`<esc>` to finish insert)
-- `A`          - append after block (`<esc>` to finish insert)
-- `yy`         - copy line into paste register; `dd` cut line into paste register
-- `p`          - paste register below cursor line; `P` paste register above cursor line
-
-More cool tricks:
-
-- `"0 p`       - paste from last yanked text
-- `"+ y<CR>`   - copy to the system clipboard
-- `"+ p`       - paste from the system clipboard
-- `x  p`       - swap two characters (`x` to delete one character, then `p` to put it back after the cursor position)
-
-### Files
-
-- Shift `ZZ`        - Write current file, if modified, and quit
-- Shift `ZQ`        - Force exit without saving
-- `:e path/to/file` - edit new file (buffer)
-- `:e!`             - revert to last save (or use `:earlier 1f`)
-- `:w !sudo tee %`  - force write with sudo trick. `%` (special variables) "the current file"
-- `:w!`             - force write
-- `:w new.txt`      - save (save content to `new.txt` while keeping `original.txt` as the opened buffe)
-- `:wall`           - save all (save all changed buffers)
-- `:sav new.txt`    - save as (first write content to the file `new.txt`, then hide buffer `original.txt`, finally open `new.txt` as the current buffer)
-- `:sav new_name` + `:!rm <C-r>#` (expand to an alternate-file) rename files
-- (mru) `<leader>f` - open recently opened files
-- (NERDTree) `<leader>nn` - toggle nerdtree
-- (NERDTree) `o`          - open/close folder
-
-> Note that filename with "space" must be escaped with backslash `\`.
-
-### Navigation
-
-**Buffers**
-
-- `<C-^>` or `:b#`          - switch between alternative files (buffer)
-- `:ls`, `:buffers`         - list buffers
-- `:b2`                     - swith to buffer #2 in this window
-- `:b filename`             - swith to buffer **fuzzy matching** `:b exa` will jump to say `example.html`
-- `:bp[revious]`            - go to previous buffer
-- `:bn[ext]`                - go to next buffer
-- `:bd[elete]`              - delete a buffer
-- `<leader>bd` or `:Bclose` - (Bclose.vim) close (dismiss) current buffer without closing the window
-- `<leader>ba`              - close all buffers
-- `<leader>o`               - open/toggle (bufexplorer)
-
-set the config:
-
-```
-set wildmenu wildmode=full 
-set wildchar=<Tab> wildcharm=<C-Z>
-```
-
-![tabs-windows-buffers](./img/tabs-windows-buffers.png)
-
-**Windows (Panes)**
-
-- `:sp[lit] filename`   - horizontal split window and load another file (`:new`)
-- `:vs[plit] filename`  - vertical split window and load another file (`:vnew`)
-- `:clo[se]`            - close current window
-- `:hide`    - hide current window
-- `:only`               - keep only this window open
-- `:sview file`         - same as split, but readonly
-
-Switch between panes
-
-- `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up/down/left/right a window (`<C-w> arrow`)
-- `<C-w> w`                    - move cursor to another window (cycle)
-
-Shortcuts
-
-- `<C-w> s`             - split current window horizontally
-- `<C-w> v`             - split current window [v]ertically
-- `<C-w> c`             - close current window
-- `<C-w> m`             - move to window according to motion m
-- `<C-w> n` (`:new`)    - open new window (horizontally)
-- `<C-w> o`             - Close every window in the current tabview but the current one
-- `<C-w> T`             - 當前窗口移動到新標籤頁
-
-Resizing
-
-- `<C-w> _`    - maximize height
-- `<C-w> |`    - maximize width
-- `<C-w> =`    - make all equal size
-- `<C-w> >`    - Incrementally increase the window to the right. Takes a parameter, e.g. CTRL-w 20 >
-- `<C-w> <`    - Incrementally increase the window to the left. Takes a parameter, e.g. CTRL-w 20 <
-- `<C-w> -`    - Incrementally decrease the window's height. Takes a parameter, e.g. CTRL-w 10 -
-- `<C-w> +`    - Incrementally increase the window's height. Takes a parameter, e.g. CTRL-w 10 +
-
-More split manipulation
-
-```
-"Swap top/bottom or left/right split
-<C-w> R
-
-"Break out current window into a new tabview
-<C-w> T
-```
-
-使用 `-O` 參數可以讓 Vim 以分屏的方式打開多個文件：
-
-```bash
-vim -O main.cpp my-oj-toolkit.h
-```
-
-**Tabs**
-
-- `:tabe[dit] {file}`  - edit specified file in a new tab
-- `:tabf[ind] {file}`  - open a new tab with filename given, searching the 'path' to find it
-- `:tabc[lose]`        - close current tab
-- `:tabc[lose] {i}`    - close i-th tab
-- `:tabo[nly]`         - close all other tabs (show only the current tab)
-
-Moving tabs
-
-- `:tabs`        - list all tabs including their displayed window
-- `:tabm 0`      - move current tab to first
-- `:tabm`        - move current tab to last
-- `:tabm {i}`    - move current tab to position i+1
-
-Switch between tabs
-
-- `gt`           - goto next tab
-- `gT`           - goto prev. tab
-- `{i}gt`        - go to tab in position i 
-
-```
-noremap <C-L> <Esc>:tabnext<CR>
-noremap <C-H> <Esc>:tabprevious<CR>
-```
-
-Shortcuts
-
-- `<leader>tn` tab new
-- `<leader>tc` tab close
-- `<leader>to` tab only
-- `<leader>tm` tab move
-- `<leader>te` open a new tab with the current buffer's path
-
-### Working directory
-
-- `:pwd` print working directory
-- `<leader>cd` set working directory to the directory of the open buffer (or use `:cd %:p:h` [more...](https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file)) 
-
 ### Code editing
 
 - `<leader>pp`         - toggle paste mode
 - `:set syntax=python` - change syntax highlighting
-- `J`                  - join selected lines `<num>J`
-- `~`                  - Toggle the case of character under cursor.
-- (Visual mode) `U` for uppercase, `u` for lowercase
-- `gUiw` Change current word to uppercase
-- ([vim-commentary](https://github.com/tpope/vim-commentary))
-    - `gcc` comment out a line (takes a count)
-    - `gc` comment out the selection
-    - `gcap` comment out a paragraph
-- ([surround.vim](https://github.com/tpope/vim-surround))
-    - `ys iw "` add quotes in word
-    - `ds "` remove the delimiters entirely
-    - `cs "'` change surrounding
-    - `yss )` wrap the entire line in parentheses
 
-Other settings
-
-- `:set nonumber` disable line number
-- `:set norelativenumber` disable relative line number
-
-### Advanced Editing: jump-select-copy-paste
+### Advanced Editing
 
 http://vim.wikia.com/wiki/Moving_around
 
-- cuts to first non-whitespace character `df␣`
+- `df␣` cuts to first non-whitespace character
 - replace a word with yanked text: `yiw` in "first" then `viwp` on "second"
-- `N[jk]` jump N lines up/down
-- `''` jump to previous line
-- `[(` jump cursor N times back to unmatched parentheses, forward `])`
-- `[{` jump cursor N times back to unmatched braces, forward `]}`
-- `]]` jump to next section (Depending on your current filetype this may move between functions)
-- `[[` jump to previous section
-
-### Folding
-
-- fold selected lines `zf` (manual mode)
-- open/close fold in file `zr`/`zm`. Use `zR`/`zM` to open/close for all levels
-- toggle/open/close single fold `za`/`zo`/`zc`. `zA`/`zO`/`zC` for all levels
-
-### Sublime flavor select (vim-multiple-cursors)
-
-- start: `<C-n>` start multicursor and add a _virtual cursor + selection_ on the match
-- next: `<C-n>` add a new virtual cursor + selection on the next match
-- skip: `<C-x>` skip the next match
-- prev: `<C-p>` remove current virtual cursor + selection and go back on previous match
-- select all: `<A-n>` start muticursor and directly select all matches
-
-### Commands
-
-- `!`    - turn a command into a toggle command, e.g., `:set cursorline <-> :set nocursorline` == `:set cursorline!`
-- `q:`   - show command-line history window
-- `q/`   - show searches history
-- Type `:` or `/` to start entering a command or search, then press the 'cedit' key (default is `Ctrl-f`)
-- Then press `Enter` to execute the current line (and close the command-line window); or Press `Ctrl-c twice` to close the command-line window (cancel).
-
-### Registers
-
-When you copy and cut stuff, it gets saved to registers. You can pull stuff from those registers at a later time.
-
-- `:reg`     - show named registers and what's in them
-- `"5y`      - yank to register `"5`
-- `"5p`      - paste what's in register `"5`
-
-**Special registers**
-
-- `""`        - no-name register (quotation register) - last cut/del/yank by `dcsxy`
-- `"0`        - last-yanked register
-- `"0` ~ `"9` - Nth-yanked register
-- `"_`        - blackhole register --> `"_ d` delete and throw to blackhole
-- `"/`        - last search pattern
-- `".`        - last inserted text (*read only*)
-- `"%`        - current filename (*read only*)
-- `"#`        - alternate file name (last edited file) (*read only*)
-- `":`        - last command (*read only*)
-
-**Tricks in command mode for registers**
-
-Either in search mode `/` or in last line command mode `:`,
-with `<C-r> <register>` to insert text, e.g.,
-
-- `:<C-r>0` paste last yanked text
-- `:<C-r>%` paste current filename
-
-Also use `@ <register>` for variable:
-
-- `:echo @0` paste last yanked text
-- `:echo @%` print current filename
-
-### Recording macros
-
-You can also record a whole series of edits to a register, and then apply them over and over.
-
-- `qk`       - records edits into register k 
-               (`q` again to stop recording)
-- `@k`       - execute recorded edits (macro)
-- `@@`       - repeat last one
-- `5@@`      - repeat 5 times
-- `"kp`      - print macro k 
-               (e.g., to edit or add to .vimrc)
-- `"kd`      - replace register k with what cursor is on
 
 ### Special Variables
 
@@ -420,7 +589,7 @@ https://vim.fandom.com/wiki/Get_the_name_of_the_current_file
 - `:echo expand('%:e')` name of file's extension ('extension')
 - `:cd %:p:h` change the working directory to the file being edited. (`:p` Make file name a full path. `:h` Head of the file name)
 
-### Vim paste in command mode - the power of `Ctrl-r`
+### Vim paste in command mode - `Ctrl-r`
 
 http://vimdoc.sourceforge.net/htmldoc/insert.html#i_CTRL-R
 
@@ -433,12 +602,6 @@ Use `<C-r> register` when entering a command in _command mode_ or _insert mode_ 
 - `<C-r> /` for last search term
 - `<C-r> +` for the `X clipboard` or a host of other substitutions
 
-### Misc
-
-- `u`      - Undo (See :help undo, it's complicated)
-- `<C-r>`  - Redo
-- `.`      - Redo last change
-- `:%sort` - Sort in visual mode. Use `:%sort!` to sort in reverse order. `:%sort n` for numeric sort.
 
 ## References
 
@@ -448,12 +611,12 @@ Use `<C-r> register` when entering a command in _command mode_ or _insert mode_ 
 - [Huckleberry Vim](https://github.com/shawncplus/vim-classes/blob/master/expert-1.md)
 - [vimrc](https://github.com/amix/vimrc)
 - [most-used vim commands/keypresses](https://stackoverflow.com/a/5400978)
-- https://stackoverflow.com/a/9927057/3744499
+- [How to save as a new file and keep working on the original one in Vim?](https://stackoverflow.com/a/9927057/3744499)
 - [Vim registers: The basics and beyond](https://www.brianstorti.com/vim-registers/)
 - [skwp/dotfiles#vim](https://github.com/skwp/dotfiles#vim---whats-included)
 - [vim help](https://www.cs.swarthmore.edu/oldhelp/vim/)
-- https://harttle.land/2015/11/17/vim-buffer.html
-- https://harttle.land/2015/11/14/vim-window.html
+- [vim-buffer](https://harttle.land/2015/11/17/vim-buffer.html)
+- [vim-window](https://harttle.land/2015/11/14/vim-window.html)
 
 **Videos**
 
