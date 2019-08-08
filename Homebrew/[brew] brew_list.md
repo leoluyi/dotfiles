@@ -4,6 +4,7 @@
 
 ```bash
 brew install \
+ag \
 asciinema     `# record terminal sessions` \
 atomicparsley `# setting metadata into MPEG-4` \
 bash \

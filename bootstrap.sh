@@ -43,6 +43,7 @@ echo "$(tput setaf 2)###### Install CLI with Homebrew ######$(tput sgr 0)"
 
 function brew_install_cli {
   brew install \
+  ag \
   asciinema     `# record terminal sessions` \
   atomicparsley `# setting metadata into MPEG-4` \
   bash \
@@ -58,7 +59,6 @@ function brew_install_cli {
   fd \
   ffmpeg \
   figlet    `# Banner-like program prints strings as ASCII art` \
-  findutils \
   findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
   gcc \
   gdal \
