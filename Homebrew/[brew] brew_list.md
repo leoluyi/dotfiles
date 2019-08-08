@@ -19,7 +19,6 @@ diff-so-fancy \
 fd \
 ffmpeg \
 figlet    `# Banner-like program prints strings as ASCII art` \
-findutils \
 findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
 gcc \
 gdal \
