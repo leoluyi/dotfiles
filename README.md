@@ -24,6 +24,11 @@ When setting up a new Mac, you may want to set some sensible macOS defaults:
 ./.macos
 ```
 
+## Cheatsheets & Shorcut keys
+
+- [Vim](./vim/vim_shorcut_keys.md)
+- [Tmux](./tmux/tmux_cheatsheet.md)
+
 ## Reference
 
 - https://github.com/mathiasbynens/dotfiles
