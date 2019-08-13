@@ -9,13 +9,13 @@
 ## Editing
 
 ```
-<Cmd-CR>         -  Insert line after<cmd>
-<Cmd-Shift-CR>   -  Insert line before
+<Cmd-CR>           -  Insert line after<cmd>
+<Cmd-Shift-CR>     -  Insert line before
 
-<Cmd-Shift-D>    -  Duplicate line(s)
-<Cmd-J>          -  Join line below to the end of the current line
+<Cmd-Shift-D>      -  Duplicate line(s)
+<Cmd-J>            -  Join line below to the end of the current line
 
-<Ctrl-Shift-K>   -  Delete current line of cursor
+<Ctrl-Shift-K>     -  Delete current line of cursor
 ```
 
 ## Selection and Jump
@@ -23,7 +23,9 @@
 Block selection
 
 ```
-<Alt+click>        -  Block selection using the mouse (Windows: Shift + Right Click)
+<Alt+click>        -  Block selection using the mouse
+                      (Windows: Shift + Right Click)
+<Ctrl-Shift-M>     -  Select all contents of the current parentheses `ci(`
 ```
 
 Jumping
@@ -48,7 +50,8 @@ Adding a Line
 Splitting
 
 ```
-<Cmd-Shift-L>      -  Splitting the Selection into Lines (Windows/Linux: Ctrl+Shift+L)
+<Cmd-Shift-L>      -  Splitting the Selection into Lines
+                      (Windows/Linux: Ctrl+Shift+L)
 ```
 
 Quick Add Next
@@ -56,14 +59,19 @@ Quick Add Next
 ```
 <Cmd-L>            -  Select line - Repeat to select next lines
 <Cmd-D>            -  Select word - Repeat to select next occurrence
-<Cmd-K>, <Cmd-D>   -  Individual occurrences can be skipped via Quick Skip Next (Windows: Ctrl+K, Ctrl+D)
-<Cmd-U>            -  Undo Selection to step backwards (Windows: Ctrl+U)
+<Cmd-K>, <Cmd-D>   -  Individual occurrences can be skipped via Quick Skip Next
+                      (Windows: Ctrl+K, Ctrl+D)
+<Cmd-U>            -  Undo Selection to step backwards
+                      (Windows: Ctrl+U)
 ```
 
-Find All
+Find
 
 ```
-<Ctrl-Cmd-G>       -  Select all occurrences of current selection (Windows/Linux: Alt+F3)
+<Ctrl-Cmd-G>       -  Select all occurrences under cursor
+                      (Windows/Linux: Alt+F3)
+<Ctrl-Alt-G>       -  Select next occurrences under cursor
+                      (Windows: Ctrl+F3)
 ```
 
 ## Navigation / Goto Anywhere
