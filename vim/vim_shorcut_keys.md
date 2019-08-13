@@ -396,17 +396,26 @@ q:              -   list history in command buffer
 q/              -   search history in command buffer
 # Another way: press the 'cedit' key (default is `Ctrl-f`) in command mode `:` or search mode `/`
 # Then press `Enter` to execute the current line
-CTRL+c CTRL+c   -   close the command buffer
+<C-c> <C-c>     -   close the command buffer
 
 :set list       -   show hidden characters
 
-gg=G            -   Format HTML. Make sure FileType is set to html with :setf html
-CTRL+n          -   Press after typing part of a word. It scrolls down the list of all previously used words
-CTRL+p          -   Press after typing part of a word. It scrolls up the list of all previously used words
+<C-n>           -   Press after typing part of a word. It scrolls down the list of all previously used words
+<C-p>           -   Press after typing part of a word. It scrolls up the list of all previously used words
 
 !               -   Turn a command into a toggle command, e.g., `:set cursorline <-> :set nocursorline` == `:set cursorline!`
+
+<C-g> or `:f`   -   Show file name
+1<C-g>          -   Show full file path
 ```
 
+### FILETYPE
+
+```
+:setf html      -   Set FileType to html
+:set ft?        -   Show current FileType
+gg=G            -   Fix indentation for current FileType
+```
 
 ### SEARCH & REPLACE
 
@@ -472,8 +481,13 @@ yss )      -   wrap the entire line in parentheses
 ```
 <leader>nn          -   toggle nerdtree
 o                   -   open/close folder
+p                   -   parent folder
+P                   -   root folder
+c                   -   set as root folder
+u                   -   set root folder to upper layer
 
-m                   -   opens the  menu
+I                   -   show hidden folder
+m                   -   opens the menu
 ?                   -   help
 i                   -   horizontal split
 s                   -   vertical split
@@ -511,8 +525,8 @@ g~~      -   Toggle case of the current line (same as V~).
 gUU      -   switch the current line to upper case
 guu      -   switch the current line to lower case
 
-CTRL+A   -   Increment the number at cursor
-CTRL+X   -   Decrement the number at cursor
+<C-a>    -   Increment the number at cursor
+<C+x>    -   Decrement the number at cursor
 
 .        -   Repeat last change or delete
 ;        -   Repeat last f, t, F, or T command
