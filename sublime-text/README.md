@@ -73,52 +73,6 @@ to a different shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>:
 ⌘ ↩     -- Insert line after
 ⌘ ⇧ ↩   -- Insert line before
 ⌘ ⇧ D   -- Duplicate line(s)
-⌘ J     -- Join line below to the end of the current line
-⌃ ⇧ K   -- Delete current line of cursor
-```
-
-**Selection and Jump**
-
-```
-### Block selection
-
-⌥+click  Block selection using the mouse (Windows: Shift + Right Click)
-
-### Jumping
-^ ,         -- previous modification
-^ .         -- next modification
-⌃ -         -- jump back
-⌃ Shift -   -- jump forward
-⌃ M         -- jump to closing parentheses. Repeat to jump to opening parentheses
-
-### Adding a Line
-
-⌃ ⇧ ⬆ and ⌃ ⇧ ⬇    -- Extra cursor on the line above/below
-(Windows/Linux: Ctrl+Alt+⬆ and Ctrl+Alt+⬇)
-
-### Splitting
-
-⇧ ⌘ L      -- Splitting the Selection into Lines (Windows/Linux: Ctrl+Shift+L)
-
-### Quick Add Next
-
-⌘ L        -- Select line - Repeat to select next lines
-⌘ D        -- Select word - Repeat to select next occurrence
-⌘ K, ⌘ D   -- Individual occurrences can be skipped via Quick Skip Next (Windows: Ctrl+K, Ctrl+D)
-⌘U         -- Undo Selection to step backwards (Windows: Ctrl+U)
-
-### Find All
-
-⌃ ⌘ G      -- Select all occurrences of current selection (Windows/Linux: Alt+F3)
-```
-
-**Navigation / Goto Anywhere**
-
-```
-⌘ P or ⌘ T  --  Quick-open files by name
-⌘ R         --  Goto symbol / Goto word in current file
-⌃ G         --  Goto line in current file
-```
 
 ---
 
