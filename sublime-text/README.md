@@ -2,7 +2,7 @@
 
 ## Settings
 
-#### Sync settings
+### Sync settings
 
 1. Install **Package Control**
 2. Install [**Package Syncing**](https://packagecontrol.io/packages/Package%20Syncing)
@@ -15,13 +15,13 @@
 
 Put all files from `sublime-settings` into `~/Library/Application Support/Sublime Text 3/Packages/User/`
 
-#### OS X Command Line Tool
+### OS X Command Line Tool
 
 ```
 $ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin
 ```
 
-#### Canceling build shorcut keys
+### Canceling build shorcut keys
 
 https://stackoverflow.com/a/28397562/3744499
 
