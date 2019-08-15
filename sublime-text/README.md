@@ -54,28 +54,6 @@ to a different shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>:
     }
 ```
 
----
-
-## Shorcut keys
-
-- http://docs.sublimetext.info/en/latest/reference/keyboard_shortcuts_osx.html
-- https://www.sublimetext.com/docs/3/multiple_selection_with_the_keyboard.html
-
-**General**
-
-- Command Palette: <kbd>⌘</kbd>+<kbd>⇧</kbd>+<kbd>P</kbd>
-- Python Console: <kbd>⌃</kbd>+<kbd>`</kbd>
-- Toggle side bar: <kbd>⌘</kbd>+<kbd>K</kbd>, <kbd>⌘</kbd>+<kbd>B</kbd>
-
-**Editing**
-
-```
-⌘ ↩     -- Insert line after
-⌘ ⇧ ↩   -- Insert line before
-⌘ ⇧ D   -- Duplicate line(s)
-
----
-
 ```
 -- BEGIN LICENSE --
 ZYNGA INC.
