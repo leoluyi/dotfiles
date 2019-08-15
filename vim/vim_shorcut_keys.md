@@ -482,16 +482,18 @@ yss )      -   wrap the entire line in parentheses
 <leader>nn          -   toggle nerdtree
 o                   -   open/close folder
 p                   -   parent folder
-P                   -   root folder
-c                   -   set as root folder
+
+P                   -   go to root folder
+C                   -   set cursor as root folder
 u                   -   set root folder to upper layer
 
 I                   -   show hidden folder
 m                   -   opens the menu
 ?                   -   help
+
 i                   -   horizontal split
 s                   -   vertical split
-CTRL-w + <-|->      -   (left or right) to navigate
+<C-w> ← | →         -   (left or right) to navigate
 ```
 
 [vim-multiple-cursors (Sublime-text-flavor select)](#)
