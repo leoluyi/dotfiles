@@ -54,6 +54,8 @@ to a different shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>:
     }
 ```
 
+## LICENSE
+
 ```
 -- BEGIN LICENSE --
 ZYNGA INC.
