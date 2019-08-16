@@ -116,8 +116,6 @@ function install_vim_awesome {
 
 
 function _sync_dotfile {
-  echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
-  echo "Syncing dotfiles ..."
   # rsync --exclude ".git/" \
   #   --exclude ".DS_Store" \
   #   --exclude ".osx" \
@@ -133,7 +131,10 @@ function _sync_dotfile {
   cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/
 }
 
-function sync_dotfile {  
+function sync_dotfile {
+  echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
+  echo "Syncing dotfiles ..."
+
   if [ "$1" == "-f" ]; then
     _sync_dotfile;
   else

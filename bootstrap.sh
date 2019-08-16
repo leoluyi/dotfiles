@@ -126,7 +126,7 @@ function use_gnu_bash {
   if ! grep -Fq "${BREW_PREFIX}/bin/bash" /etc/shells; then
     echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells;
     chsh -s "${BREW_PREFIX}/bin/bash";
-  fi;  
+  fi;
 }
 
 
@@ -235,8 +235,6 @@ function install_vim_awesome {
 
 
 function _sync_dotfile {
-  echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
-  echo "Syncing dotfiles ..."
   # rsync --exclude ".git/" \
   #   --exclude ".DS_Store" \
   #   --exclude ".osx" \
@@ -253,7 +251,10 @@ function _sync_dotfile {
 }
 
 
-function sync_dotfile {  
+function sync_dotfile {
+  echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
+  echo "Syncing dotfiles ..."
+
   if [ "$1" == "-f" ]; then
     _sync_dotfile;
   else

@@ -5,7 +5,15 @@
 ### Using Git and the bootstrap script
 
 ```bash
-git clone https://github.com/leoluyi/dotfiles.git && cd dotfiles && source bootstrap.sh
+git clone https://github.com/leoluyi/dotfiles.git && \
+  cd dotfiles && \
+  source /bootstrap.sh
+```
+
+Alternatively, to update while avoiding the confirmation prompt:
+
+```bash
+set -- -f; source bootstrap.sh
 ```
 
 ### Install Homebrew formulae
