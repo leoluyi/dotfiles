@@ -135,8 +135,12 @@ function gi() { curl -L -s https://www.gitignore.io/api/"$1" ;}
 # ============ CLI tools ============
 
 # bash-git-prompt
-GIT_PROMPT_THEME=Custom
-source ~/.bash-git-prompt/gitprompt.sh
+# https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
+if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
+  source ~/.bash-git-prompt/gitprompt.sh
+  GIT_PROMPT_ONLY_IN_REPO=0
+  GIT_PROMPT_THEME=Custom
+fi
 
 # pyenv
 command -v pyenv >/dev/null 2>&1 && \
@@ -152,12 +156,13 @@ command -v pipenv >/dev/null 2>&1 && eval "$(pipenv --completion)"
   alias subl-pipenv='pipenv --venv && pipenv run subl'
 
 # fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
+[ -f ~/.fzf.bash ] && \
+  source ~/.fzf.bash && \
+  export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
 
 # tmux completion
 if [ -f /usr/share/bash-completion/tmux_completion ]; then
-  . /usr/share/bash-completion/tmux_completion
+  source /usr/share/bash-completion/tmux_completion
 fi
 
 # Git diff-so-fancy

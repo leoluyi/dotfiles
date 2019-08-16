@@ -42,11 +42,6 @@ done;
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-# if [ -f ~/.bash_aliases ]; then
-#  . ~/.bash_aliases
-# fi
 
 # ============ Aliases =============
 
@@ -103,6 +98,31 @@ alias sourcetree='open -a SourceTree'
   (command -v subl >/dev/null) && \
   alias subl-pipenv='pipenv --venv && pipenv run subl'
 
+# ============ GNU bins ============
+# Use these commands with their normal names, you
+# can add a "gnubin" directory to your PATH from your bashrc like:
+if [ -d "${BREW_PREFIX}/opt" ]; then
+    export PATH="${BREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
+    export MANPATH="${BREW_PREFIX}/opt/coreutils/libexec/gnuman:$MANPATH"
+    export PATH="${BREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
+    export MANPATH="${BREW_PREFIX}/opt/gnu-sed/libexec/gnuman:$MANPATH"
+    export PATH="${BREW_PREFIX}/opt/findutils/libexec/gnubin:$PATH"
+    export MANPATH="${BREW_PREFIX}/opt/findutils/libexec/gnuman:$MANPATH"
+    export PATH="${BREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
+    export MANPATH="${BREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$MANPATH"
+    export PATH="${BREW_PREFIX}/opt/grep/libexec/gnubin:$PATH"
+    export MANPATH="${BREW_PREFIX}/opt/grep/libexec/gnuman:$MANPATH"
+fi
+
+# Enable color support of ls.
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+  colorflag="--color"
+  # export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+else # macOS `ls`
+  colorflag="-G"
+fi
+
 # ============ Custom functions ============
 
 function mkcd {
@@ -119,25 +139,7 @@ function mkcd {
 # gitignore api
 function gi() { curl -L -s https://www.gitignore.io/api/"$1" ;}
 
-# ============ CLI tools ============
-
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-  colorflag="--color"
-  # export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
-else # macOS `ls`
-  colorflag="-G"
-fi
-
-# bash-git-prompt
-# https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
-if command -v brew >/dev/null 2>&1 && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR=${BREW_PREFIX}/opt/bash-git-prompt/share
-  source "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh"
-  GIT_PROMPT_ONLY_IN_REPO=0
-  GIT_PROMPT_THEME=Custom
-  #GIT_PROMPT_START='\[\e]0;\u@\h:\w\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[0m\]'
-fi
+# ============ Completions ============
 
 # https://github.com/scop/bash-completion
 if command -v brew >/dev/null 2>&1 && [ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
@@ -152,35 +154,32 @@ elif [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
 fi;
 
-# GNU
-# Use these commands with their normal names, you
-# can add a "gnubin" directory to your PATH from your bashrc like:
-if [ -d "${BREW_PREFIX}/opt" ]; then
-    export PATH="${BREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/coreutils/libexec/gnuman:$MANPATH"
-    export PATH="${BREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/gnu-sed/libexec/gnuman:$MANPATH"
-    export PATH="${BREW_PREFIX}/opt/findutils/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/findutils/libexec/gnuman:$MANPATH"
-    export PATH="${BREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$MANPATH"
-    export PATH="${BREW_PREFIX}/opt/grep/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/grep/libexec/gnuman:$MANPATH"
+# ============ CLI tools ============
+
+# bash-git-prompt.
+# https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
+if command -v brew >/dev/null 2>&1 && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR=${BREW_PREFIX}/opt/bash-git-prompt/share
+  source "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh"
+  GIT_PROMPT_ONLY_IN_REPO=0
+  GIT_PROMPT_THEME=Custom
+  #GIT_PROMPT_START='\[\e]0;\u@\h:\w\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[0m\]'
 fi
 
-# The fuck
+# The fuck.
 command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
 
-# pyenv
+# pyenv.
 command -v pyenv >/dev/null 2>&1 && \
   eval "$(pyenv init -)" && \
   eval "$(pyenv virtualenv-init -)"
 
-# fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
+# fzf.
+[ -f ~/.fzf.bash ] && \
+  source ~/.fzf.bash && \
+  export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
 
-# Git diff-so-fancy
+# Git diff-so-fancy.
 # https://github.com/so-fancy/diff-so-fancy
 if command -v diff-so-fancy >/dev/null 2>&1; then
   function gd() {
@@ -190,14 +189,14 @@ fi
 
 # ============ Others ============
 
-# Fix pyenv bug for git
+# Fix pyenv bug for git.
 # https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
 export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
 
-# env for pipenv
+# env for pipenv.
 export PIPENV_IGNORE_VIRTUALENVS=1
 
-# Set locale to fix ssh forwarding problem
+# Set locale to fix ssh forwarding problem.
 # https://askubuntu.com/a/144448
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
