@@ -25,7 +25,7 @@ $ cp tmux.conf.local ~/.tmux.conf.local
 $ brew install tmux
 
 # Ubuntu
-$ sudo wget -O /usr/share/bash-completion/tmux_completion https://github.com/imomaliev/tmux-bash-completion/raw/master/completions/tmux
+$ sudo curl -fsSL -o /etc/bash_completion.d/tmux_completion https://github.com/imomaliev/tmux-bash-completion/raw/master/completions/tmux
 ```
 
 ## Set copy-mode-vi
