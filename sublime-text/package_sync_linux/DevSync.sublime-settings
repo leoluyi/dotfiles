@@ -1,0 +1,34 @@
+{
+    "pathMapping": [
+        {
+            "type": "remote",  // local or remote
+            "destOS": "linux", //OS variant of the destination; windows, linux, or osx
+            "serverAddress": "ubuntu16.taishinbank.net", // required for remote server
+            "username": "1050391", // required for remote server
+            "source": "/Users/leoluyi/Downloads/my_project", // Must be an absolute path
+            // "cygwinSourcePath": "/cygdrive/c/Users/me/workspace/project", // support for cygwin ssh executable.
+            "destination": "~/my_project",
+            // This script will be called at the end of the "full sync" command
+            // in case your environment has any special configuration (symlinks etc..) 
+            "bashScript": "null"
+        }
+    ],
+
+    // required binaries. you only need to change these if you do not have these commands in your
+    // path environment variable. If you do need to change them, enter the full path 
+    // (with extension if applicable) to the binary
+    "scpBinary": "scp", // needed to push saved files across
+    "sshBinary": "ssh", // needed to recursivly create missing directories
+    "rsyncBinary": "rsync", // needed to perform a full project sync
+    "bashBinary": "sh", // include any required arguments.
+    "rsyncExcludes": "${HOME}/.rsync/exclude",
+
+    // Example config for windows \w cygwin
+    // "scpBinary": "C:\\cygwin\\bin\\scp.exe",
+    // "sshBinary": "C:\\cygwin\\bin\\ssh.exe",
+    // "rsyncBinary": "C:\\cygwin\\bin\\rsync.exe",
+    // "bashBinary": "C:\\cygwin\\bin\\bash.exe --login -i -c",
+
+    "debugMode": false // if true, extra output will be printed to the console. (ctrl+`  to display the console)
+
+}

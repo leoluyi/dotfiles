@@ -1,0 +1,14 @@
+{
+    "enable_for_all_syntaxes": false,
+    "enable_for_syntaxes_list":
+    [
+        "Packages/C++/C.sublime-syntax",
+        "Packages/C++/C++.sublime-syntax",
+        "Packages/Java/Java.sublime-syntax",
+        "Packages/JavaScript/JSON.sublime-syntax",
+        "Packages/Python/Python.sublime-syntax",
+        "Packages/Python Improved/PythonImproved.tmLanguage",
+        "Packages/Rails/",
+        "Packages/XML/XML.sublime-syntax"
+    ]
+}
