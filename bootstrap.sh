@@ -140,12 +140,13 @@ function fix_bash_completion {
   # Git completion
   if command -v brew >/dev/null; then
       BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-      curl -fsSLo "${BASH_COMPLETION_COMPAT_DIR}"/git-completion.bash https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+      curl -fsSLo "${BASH_COMPLETION_COMPAT_DIR}"/git-completion.bash \
+        https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
   fi
 
   # Docker completion
-  if [ -w "${BASH_COMPLETION_COMPAT_DIR}" ]; then
-    DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
+  DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
+  if [ -w "${BASH_COMPLETION_COMPAT_DIR}" ] && [ -d "${DOCKER_ETC}" ]; then
     ln -sf "${DOCKER_ETC}/docker.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker
     ln -sf "${DOCKER_ETC}/docker-machine.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker-machine
     ln -sf "${DOCKER_ETC}/docker-compose.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker-compose
@@ -165,27 +166,6 @@ function link_virtualenv {
 }
 
 
-function subl_settings {
-  echo "$(tput setaf 2)###### Sublime Text Settings ######$(tput sgr 0)"
-
-  # Link subl binary
-  SUBL_BINARY="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
-
-  if [ -x "${SUBL_BINARY}" ]; then
-    ln -sf "${SUBL_BINARY}" /usr/local/bin
-  fi
-
-  # Fix bad Anaconda completion
-  # https://github.com/DamnWidget/anaconda#auto-complete-for-import-behaves-badly
-  SUBL_CONFIG_PATH=~/"Library/Application Support/Sublime Text 3"
-
-  mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" && \
-    curl -fsSL -o "${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences" https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences
-
-  rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
-}
-
-
 function install_tmux_awesome {
   echo "$(tput setaf 2)###### Install Tmux Awesome ######$(tput sgr 0)"
 
@@ -201,18 +181,15 @@ function install_tmux_awesome {
     echo ".tmux awesome is already installed."
   fi
 
-  if [ -f ~/.tmux/.tmux.conf ] && [ -f ./tmux/tmux.conf.local ]; then
-    ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf \
-      && cp ./tmux/tmux.conf.local ~/.tmux.conf.local
+  if [ -f ~/.tmux/.tmux.conf ] && [ -f ~/.tmux/tmux.conf.local ]; then
+    ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf && \
+      cp ~/.tmux/.tmux.conf.local ~/.tmux.conf.local
   fi
 
   # Install Tmux Plugin Manager
   if [ ! -d ~/.tmux/plugins/tpm ]; then
     echo "Installing tmux plugins manager ..."
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
-      && ~/.tmux/plugins/tpm/bin/install_plugins
-  else
-    ~/.tmux/plugins/tpm/bin/install_plugins
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
 }
 
@@ -234,6 +211,28 @@ function install_vim_awesome {
 }
 
 
+function subl_settings {
+  echo "$(tput setaf 2)###### Sublime Text Settings ######$(tput sgr 0)"
+
+  # Link subl binary
+  SUBL_BINARY="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
+
+  if [ -x "${SUBL_BINARY}" ]; then
+    ln -sf "${SUBL_BINARY}" /usr/local/bin
+  fi
+
+  # Fix bad Anaconda completion
+  # https://github.com/DamnWidget/anaconda#auto-complete-for-import-behaves-badly
+  SUBL_CONFIG_PATH=~/"Library/Application Support/Sublime Text 3"
+
+  mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" && \
+    curl -fsSL -o "${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences" \
+      https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences
+
+  rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
+}
+
+
 function _sync_dotfile {
   # rsync --exclude ".git/" \
   #   --exclude ".DS_Store" \
@@ -248,6 +247,11 @@ function _sync_dotfile {
   cp tmux/.[!.]* ~;
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
   cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/;
+
+  # Install tmux plugins
+  if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ]; then
+    ~/.tmux/plugins/tpm/bin/install_plugins
+  fi
 }
 
 
@@ -267,8 +271,8 @@ function sync_dotfile {
 }
 
 
-brew_install_app
 install_homebrew
+brew_install_app
 brew_install_cli
 use_gnu_bash
 fix_bash_completion

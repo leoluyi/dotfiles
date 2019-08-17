@@ -7,39 +7,9 @@ if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
 fi
 
 
-function apt_install_app {
-  echo "$(tput setaf 2)###### Install Apps with Apt ######$(tput sgr 0)"
-
-  sudo apt update && sudo apt install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    silversearcher-ag \
-    software-properties-common \
-    2>dev/null
-}
-
-
-# Git
-function install_git {
-  echo "$(tput setaf 2)###### Install Git ######$(tput sgr 0)"
-  sudo add-apt-repository -y ppa:git-core/ppa
-  sudo apt update && sudo apt install -y git
-}
-
-
-function install_docker {
-
-  # Docker completion
-  if [ -w "${BASH_COMPLETION_COMPAT_DIR}" ]; then
-    DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
-    ln -sf "${DOCKER_ETC}/docker.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker
-    ln -sf "${DOCKER_ETC}/docker-machine.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker-machine
-    ln -sf "${DOCKER_ETC}/docker-compose.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker-compose
-  else
-    echo "Docker is not installed."
-  fi
+function install_pyenv {
+  echo "$(tput setaf 2)###### Install Pyenv ######$(tput sgr 0)"
+  curl https://pyenv.run | bash
 }
 
 
@@ -67,37 +37,6 @@ function subl_settings {
 }
 
 
-# Install .tmux awesome
-function install_tmux_awesome {
-  echo "$(tput setaf 2)###### Tmux Settings ######$(tput sgr 0)"
-
-  if [ "$1" == "-f" ]; then
-    echo 'Removing: ~/.tmux'
-    rm -rf ~/.tmux
-  fi
-
-  if [ ! -d ~/.tmux ]; then
-    git clone https://github.com/gpakosz/.tmux.git ~/.tmux
-  else
-    echo ".tmux awesome is already installed."
-  fi
-
-  if [ -f ~/.tmux/.tmux.conf ] && [ -f ./tmux/tmux.conf.local ]; then
-    ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf \
-      && cp ./tmux/tmux.conf.local ~/.tmux.conf.local
-  fi
-
-  # Install Tmux Plugin Manager
-  if [ ! -d ~/.tmux/plugins/tpm ]; then
-    echo "Installing tmux plugins manager ..."
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
-      && ~/.tmux/plugins/tpm/bin/install_plugins
-  else
-    ~/.tmux/plugins/tpm/bin/install_plugins
-  fi
-}
-
-
 function install_vim_awesome {
   echo "$(tput setaf 2)###### Install Vim Awesome ######$(tput sgr 0)"
 
@@ -115,6 +54,37 @@ function install_vim_awesome {
 }
 
 
+function install_tmux_awesome {
+  echo "$(tput setaf 2)###### Tmux Settings ######$(tput sgr 0)"
+
+  # Install .tmux awesome
+  if [ "$1" == "-f" ]; then
+    echo 'Removing: ~/.tmux'
+    rm -rf ~/.tmux
+  fi
+
+  if [ ! -d ~/.tmux ]; then
+    git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+  else
+    echo ".tmux awesome is already installed."
+  fi
+
+  if [ -f ~/.tmux/.tmux.conf ] && [ -f ~/.tmux/tmux.conf.local ]; then
+    ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf && \
+      cp ~/.tmux/.tmux.conf.local ~/.tmux.conf.local
+  fi
+
+  # Install Tmux Plugin Manager
+  if [ ! -d ~/.tmux/plugins/tpm ]; then
+    echo "Installing tmux plugins manager ..."
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && \
+      ~/.tmux/plugins/tpm/bin/install_plugins
+  else
+    ~/.tmux/plugins/tpm/bin/install_plugins
+  fi
+}
+
+
 function _sync_dotfile {
   # rsync --exclude ".git/" \
   #   --exclude ".DS_Store" \
@@ -123,13 +93,14 @@ function _sync_dotfile {
   #   --exclude "README.md" \
   #   --exclude "LICENSE-MIT.txt" \
   #   -avh --no-perms macOS/bash_{profile,rc} ~;
-  cp bash-git-prompt/git-prompt-colors.sh ~/.git-prompt-colors.sh
-  cp ubuntu/* ~/
-  cp git/gitignore_global ~/.gitignore_global
-  cp tmux/tmux.conf.local ~/.tmux.conf.local
+  cp bash-git-prompt/.[!.]* ~;
+  cp git/.[!.]* ~;
+  cp tmux/.[!.]* ~;
+  cp ubuntu/* ~;
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim
   cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/
 }
+
 
 function sync_dotfile {
   echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
@@ -146,15 +117,21 @@ function sync_dotfile {
   fi;
 }
 
-apt_install_app
-link_virtualenv
+
 subl_settings
-install_docker
+link_virtualenv
+install_pyenv
 install_vim_awesome $FORCE
 install_tmux_awesome $FORCE
 sync_dotfile $FORCE
 
-unset sync_dotfile
+unset \
+  subl_settings \
+  link_virtualenv \
+  install_pyenv \
+  install_vim_awesome \
+  install_tmux_awesome \
+  sync_dotfile
 
 
 echo "$(tput setaf 2)###### Source Bash Settings ######$(tput sgr 0)"
