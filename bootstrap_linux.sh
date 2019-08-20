@@ -93,10 +93,10 @@ function _sync_dotfile {
   #   --exclude "README.md" \
   #   --exclude "LICENSE-MIT.txt" \
   #   -avh --no-perms macOS/bash_{profile,rc} ~;
-  cp bash-git-prompt/.[!.]* ~;
-  cp git/.[!.]* ~;
-  cp tmux/.[!.]* ~;
-  cp ubuntu/.[!.]* ~;
+  ls bash-git-prompt/.[!.]* | tee >(xargs -I_ cp _ ~) | xargs -I_ basename _ | xargs printf "~/%s\n";
+  ls git/.[!.]* | tee >(xargs -I_ cp _ ~) | xargs -I_ basename _ | xargs printf "~/%s\n";
+  ls tmux/.[!.]* | tee >(xargs -I_ cp _ ~) | xargs -I_ basename _ | xargs printf "~/%s\n";
+  ls ubuntu/.[!.]* | tee >(xargs -I_ cp _ ~) | xargs -I_ basename _ | xargs printf "~/%s\n";
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim
   cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/
 }
