@@ -86,6 +86,7 @@ function install_tmux_awesome {
 
 
 function _sync_dotfile {
+  echo "Syncing dotfiles ..."
   # rsync --exclude ".git/" \
   #   --exclude ".DS_Store" \
   #   --exclude ".osx" \
@@ -104,7 +105,6 @@ function _sync_dotfile {
 
 function sync_dotfile {
   echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
-  echo "Syncing dotfiles ..."
 
   if [ "$1" == "-f" ]; then
     _sync_dotfile;
