@@ -136,4 +136,4 @@ unset \
 
 echo "$(tput setaf 2)###### Source Bash Settings ######$(tput sgr 0)"
 
-source ~/.bash_profile;
+source ~/.bashrc;
