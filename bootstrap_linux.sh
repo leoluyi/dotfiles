@@ -9,7 +9,7 @@ fi
 
 function install_pyenv {
   echo "$(tput setaf 2)###### Install Pyenv ######$(tput sgr 0)"
-  curl https://pyenv.run | bash
+  curl -fsSL https://pyenv.run | bash
 }
 
 
@@ -96,7 +96,7 @@ function _sync_dotfile {
   cp bash-git-prompt/.[!.]* ~;
   cp git/.[!.]* ~;
   cp tmux/.[!.]* ~;
-  cp ubuntu/* ~;
+  cp ubuntu/.[!.]* ~;
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim
   cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/
 }
