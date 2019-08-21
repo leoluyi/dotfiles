@@ -143,6 +143,7 @@ if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
 fi
 
 # pyenv
+export PATH=~/".pyenv/bin:$PATH"
 command -v pyenv >/dev/null 2>&1 && \
   eval "$(pyenv init -)" && \
   eval "$(pyenv virtualenv-init -)"
