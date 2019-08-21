@@ -6,7 +6,7 @@
     editor = vim
 [user]
     name = Lu Yi
-    email = leo0650@gmail.com
+    email = tsb1050391@gmail.com
 [filter "lfs"]
     clean = git-lfs clean %f
     smudge = git-lfs smudge %f
