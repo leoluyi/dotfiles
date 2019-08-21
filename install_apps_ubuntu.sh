@@ -12,6 +12,8 @@ function install_apt_apps {
     build-essential \
     ca-certificates \
     curl \
+    default-jdk \
+    gdebi-core \
     gnupg-agent \
     libbz2-dev \
     libffi-dev \
@@ -24,10 +26,14 @@ function install_apt_apps {
     libxmlsec1-dev \
     llvm \
     make \
+    more \
+    ncdu    `# Interactive and very fast du` \
     neofetch \
+    nmon    `# Performance monitor` \
     silversearcher-ag \
     software-properties-common \
     tk-dev \
+    tree \
     wget \
     xz-utils \
     zlib1g-dev \
