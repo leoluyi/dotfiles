@@ -1,10 +1,10 @@
 # ~/.bash_profile
 
 # How to check if a program exists from a Bash script?
-# https://stackoverflow.com/a/677212/3744499)
+# https://stackoverflow.com/a/677212/3744499
 
 # Homebrew prefix
-command -v brew >/dev/null 2>&1 && BREW_PREFIX=$(brew --prefix)
+command -v brew &>/dev/null && BREW_PREFIX=$(brew --prefix)
 
 # ============ Command prompt =============
 
@@ -46,7 +46,7 @@ done;
 # ============ Aliases =============
 
 # Always use color output for `ls`
-if command -v gls >/dev/null 2>&1; then
+if command -v gls &>/dev/null; then
   alias ls='/usr/local/bin/gls ${colorflag} --group-directories-first'
 else
   alias ls='command ls ${colorflag}'
@@ -142,7 +142,7 @@ function gi() { curl -L -s https://www.gitignore.io/api/"$1" ;}
 # ============ Completions ============
 
 # https://github.com/scop/bash-completion
-if command -v brew >/dev/null 2>&1 && [ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
+if command -v brew &>/dev/null && [ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
     # bash-completion@2
     # Ensure existing Homebrew v1 completions continue to work
     export BASH_COMPLETION_COMPAT_DIR="${BREW_PREFIX}/etc/bash_completion.d";
@@ -158,7 +158,7 @@ fi;
 
 # bash-git-prompt.
 # https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
-if command -v brew >/dev/null 2>&1 && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+if command -v brew &>/dev/null && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   __GIT_PROMPT_DIR=${BREW_PREFIX}/opt/bash-git-prompt/share
   source "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh"
   GIT_PROMPT_ONLY_IN_REPO=0
@@ -167,10 +167,10 @@ if command -v brew >/dev/null 2>&1 && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/s
 fi
 
 # The fuck.
-command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
+command -v thefuck &>/dev/null && eval "$(thefuck --alias)"
 
 # pyenv.
-command -v pyenv >/dev/null 2>&1 && \
+command -v pyenv &>/dev/null && \
   eval "$(pyenv init -)" && \
   eval "$(pyenv virtualenv-init -)"
 
@@ -181,13 +181,16 @@ command -v pyenv >/dev/null 2>&1 && \
 
 # Git diff-so-fancy.
 # https://github.com/so-fancy/diff-so-fancy
-if command -v diff-so-fancy >/dev/null 2>&1; then
+if command -v diff-so-fancy &>/dev/null; then
   function gd() {
     git diff --color "$@" | diff-so-fancy | less --tabs=4 -RFX
   }
 fi
 
 # ============ Others ============
+
+# Use "most" as pager
+command -v most &>/dev/null && export PAGER=most
 
 # Fix pyenv bug for git.
 # https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422

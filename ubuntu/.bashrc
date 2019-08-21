@@ -176,6 +176,9 @@ fi
 
 # ============ Misc ============
 
+# Use "most" as pager
+command -v most &>/dev/null && export PAGER=most
+
 # Fix pyenv bug for git
 # https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
 export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
