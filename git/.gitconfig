@@ -5,7 +5,7 @@
     eol = lf
     editor = vim
 [user]
-    name = leoluyi
+    name = Lu Yi
     email = leo0650@gmail.com
 [filter "lfs"]
     clean = git-lfs clean %f
