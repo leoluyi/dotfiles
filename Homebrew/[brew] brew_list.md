@@ -36,6 +36,7 @@ libpng \
 libsvg \
 libxml2 \
 libzip \
+more \
 moreutils  `# Some other useful utilities like sponge` \
 neofetch \
 npm \

@@ -79,6 +79,7 @@ function brew_install_cli {
   libsvg \
   libxml2 \
   libzip \
+  more \
   moreutils  `# Some other useful utilities like sponge` \
   neofetch \
   npm \
