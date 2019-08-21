@@ -75,6 +75,7 @@ function brew_install_cli {
   highlight \
   htop-osx \
   john-jumbo `# password crack` \
+  jq \
   libpng \
   libsvg \
   libxml2 \
@@ -103,6 +104,7 @@ function brew_install_cli {
   tldr \
   tmux \
   tree \
+  unrar \
   vim --with-override-system-vi \
   wget \
   ydiff \

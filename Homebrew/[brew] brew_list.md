@@ -32,6 +32,7 @@ grip \
 highlight \
 htop-osx \
 john-jumbo `# password crack` \
+jq \
 libpng \
 libsvg \
 libxml2 \
@@ -60,6 +61,7 @@ thefuck \
 tldr \
 tmux \
 tree \
+unrar \
 vim --with-override-system-vi \
 wget \
 ydiff \
