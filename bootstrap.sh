@@ -241,10 +241,11 @@ function _sync_dotfile {
   #   --exclude "README.md" \
   #   --exclude "LICENSE-MIT.txt" \
   #   -avh --no-perms macOS/bash_{profile,rc} ~;
-  cp bash-git-prompt/.[!.]* ~;
-  cp git/.[!.]* ~;
-  cp macOS/.[!.]* ~;
-  cp tmux/.[!.]* ~;
+  src_folders=("bash-git-prompt" "git" "tmux" "macOS")
+  for folder in "${src_folders[@]}"; do
+    find "$folder" -type f -name '.[!.]*' | tee >(xargs -I_ cp _ ~) >(xargs -I_ basename _ | xargs printf "Updated ~/%s\n") >/dev/null;
+  done
+
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
   cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/;
 
