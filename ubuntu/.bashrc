@@ -132,9 +132,19 @@ function mkcd {
 # gitignore api
 function gi() { curl -L -s https://www.gitignore.io/api/"$1" ;}
 
+# ============ Completions ============
+
+# pipenv completion
+command -v pipenv >/dev/null 2>&1 && eval "$(pipenv --completion)"
+
+# tmux completion
+if [ -f /usr/share/bash-completion/tmux_completion ]; then
+  source /usr/share/bash-completion/tmux_completion
+fi
+
 # ============ CLI tools ============
 
-# bash-git-prompt
+# bash-git-prompt.
 # https://github.com/magicmonty/bash-git-prompt#via-git-clone
 if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
   source ~/.bash-git-prompt/gitprompt.sh
@@ -145,31 +155,23 @@ if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
   fi
 fi
 
-# pyenv
+# pyenv.
 export PATH=~/".pyenv/bin:$PATH"
 command -v pyenv >/dev/null 2>&1 && \
   eval "$(pyenv init -)" && \
   eval "$(pyenv virtualenv-init -)"
 
-# pipenv completion
-command -v pipenv >/dev/null 2>&1 && eval "$(pipenv --completion)"
-
-# subl + pipenv virtualenv
+# subl + pipenv virtualenv.
 (command -v pipenv >/dev/null) && \
   (command -v subl >/dev/null) && \
   alias subl-pipenv='pipenv --venv && pipenv run subl'
 
-# fzf
+# fzf.
 [ -f ~/.fzf.bash ] && \
   source ~/.fzf.bash && \
   export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
 
-# tmux completion
-if [ -f /usr/share/bash-completion/tmux_completion ]; then
-  source /usr/share/bash-completion/tmux_completion
-fi
-
-# Git diff-so-fancy
+# Git diff-so-fancy.
 # https://github.com/so-fancy/diff-so-fancy
 if command -v diff-so-fancy >/dev/null 2>&1; then
   function gd() {
@@ -179,7 +181,7 @@ fi
 
 # ============ Misc ============
 
-# Use "most" as pager
+# Set "most" as pager
 command -v most &>/dev/null && export PAGER=most
 
 # Fix pyenv bug for git

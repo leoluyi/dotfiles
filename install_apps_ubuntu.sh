@@ -13,6 +13,7 @@ function install_apt_apps {
     ca-certificates \
     curl \
     default-jdk \
+    fzf \
     gdebi-core \
     gnupg-agent \
     libbz2-dev \
