@@ -151,3 +151,5 @@ unset \
 echo "$(tput setaf 2)###### Source Bash Settings ######$(tput sgr 0)"
 
 source ~/.bashrc;
+
+echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"
