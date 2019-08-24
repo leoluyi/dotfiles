@@ -135,11 +135,14 @@ function gi() { curl -L -s https://www.gitignore.io/api/"$1" ;}
 # ============ CLI tools ============
 
 # bash-git-prompt
-# https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
+# https://github.com/magicmonty/bash-git-prompt#via-git-clone
 if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
   source ~/.bash-git-prompt/gitprompt.sh
   GIT_PROMPT_ONLY_IN_REPO=0
-  GIT_PROMPT_THEME=Custom
+
+  if grep -q 'GIT_PROMPT_THEME_NAME="Custom"' ~/.git-prompt-colors.sh 2>/dev/null ; then
+    GIT_PROMPT_THEME=Custom
+  fi
 fi
 
 # pyenv

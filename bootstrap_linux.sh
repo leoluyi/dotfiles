@@ -36,6 +36,18 @@ function subl_settings {
   rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
 }
 
+function install_bash_git_prompt {
+  echo "$(tput setaf 2)###### Install bash-git-prompt ######$(tput sgr 0)"
+
+  if [ "$1" == "-f" ]; then
+    echo 'Removing: ~/.bash-git-prompt/'
+    rm -rf ~/.bash-git-prompt
+  fi
+
+  if [ ! -d ~/.bash-git-prompt ]; then
+    git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+  fi
+}
 
 function install_vim_awesome {
   echo "$(tput setaf 2)###### Install Vim Awesome ######$(tput sgr 0)"
@@ -122,6 +134,7 @@ function sync_dotfile {
 subl_settings
 link_virtualenv
 install_pyenv
+install_bash_git_prompt $FORCE
 install_vim_awesome $FORCE
 install_tmux_awesome $FORCE
 sync_dotfile $FORCE

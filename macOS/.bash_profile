@@ -160,10 +160,13 @@ fi;
 # https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
 if command -v brew &>/dev/null && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   __GIT_PROMPT_DIR=${BREW_PREFIX}/opt/bash-git-prompt/share
-  source "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh"
   GIT_PROMPT_ONLY_IN_REPO=0
-  GIT_PROMPT_THEME=Custom
+  source "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh"
   #GIT_PROMPT_START='\[\e]0;\u@\h:\w\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[0m\]'
+
+  if grep -q 'GIT_PROMPT_THEME_NAME="Custom"' ~/.git-prompt-colors.sh 2>/dev/null ; then
+    GIT_PROMPT_THEME=Custom
+  fi
 fi
 
 # The fuck.
