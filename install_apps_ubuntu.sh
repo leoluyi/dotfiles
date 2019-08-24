@@ -31,11 +31,14 @@ function install_apt_apps {
     ncdu    `# Interactive and very fast du` \
     neofetch \
     nmon    `# Performance monitor` \
+    p7zip-full \
     silversearcher-ag \
     software-properties-common \
     tk-dev \
     tree \
+    unzip \
     wget \
+    xclip \
     xz-utils \
     zlib1g-dev \
     2>dev/null

@@ -4,6 +4,7 @@
     quotepath = false
     eol = lf
     editor = vim
+    pager = less
 [user]
     name = Lu Yi
     email = tsb1050391@gmail.com
