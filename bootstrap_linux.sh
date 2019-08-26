@@ -24,17 +24,21 @@ function link_virtualenv {
 
 function subl_settings {
   echo "$(tput setaf 2)###### Sublime Text Settings ######$(tput sgr 0)"
+  SUBL_CONFIG_PATH=~/.config/sublime-text-3
+  SUBL_SETTINGS="${SUBL_CONFIG_PATH}/Packages/User"
+
+  ## Sync settings
+  mkdir -p $SUBL_SETTINGS
+  cp ./sublime-text/package_sync_linux/* $SUBL_SETTINGS
+
   # Fix bad Anaconda completion
   # https://github.com/DamnWidget/anaconda#auto-complete-for-import-behaves-badly
-
-  SUBL_CONFIG_PATH=~/.config/sublime-text-3
-
   mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" && \
     curl -fsSL -o "${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences" \
-      https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences
-
-  rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
+      https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences && \
+    rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
 }
+
 
 function install_bash_git_prompt {
   echo "$(tput setaf 2)###### Install bash-git-prompt ######$(tput sgr 0)"
