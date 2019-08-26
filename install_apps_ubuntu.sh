@@ -155,6 +155,24 @@ function install_rstudio {
 }
 
 
+function install_pyenv {
+  echo "$(tput setaf 2)###### Install Pyenv ######$(tput sgr 0)"
+  curl -fsSL https://pyenv.run | bash
+}
+
+
+function install_diff_so_fancy {
+  echo "$(tput setaf 2)###### Install diff-so-fancy ######$(tput sgr 0)"
+
+  diff_so_fancy=/usr/local/bin/diff-so-fancy
+  if [ ! -x "${diff_so_fancy}" ]
+    sudo curl -fsSL https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy \
+      -o $diff_so_fancy &&
+    sudo chmod +x $diff_so_fancy
+  fi
+}
+
+
 install_apt_apps
 install_chrome
 install_docker
@@ -162,6 +180,8 @@ install_dropbox
 install_git
 install_r $FORCE
 install_rstudio
+install_pyenv
+install_diff_so_fancy
 
 unset \
   install_apt_apps \
@@ -170,4 +190,9 @@ unset \
   install_dropbox \
   install_git \
   install_r \
-  install_rstudio
+  install_rstudio \
+  install_pyenv \
+  install_diff_so_fancy \
+  2>/dev/null
+
+echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"

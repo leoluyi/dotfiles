@@ -7,12 +7,6 @@ if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
 fi
 
 
-function install_pyenv {
-  echo "$(tput setaf 2)###### Install Pyenv ######$(tput sgr 0)"
-  curl -fsSL https://pyenv.run | bash
-}
-
-
 function link_virtualenv {
   echo "$(tput setaf 2)###### Link Virtualenv Path ######$(tput sgr 0)"
   mkdir -p ~/.local/share/virtualenvs
@@ -33,10 +27,13 @@ function subl_settings {
 
   # Fix bad Anaconda completion
   # https://github.com/DamnWidget/anaconda#auto-complete-for-import-behaves-badly
-  mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" && \
-    curl -fsSL -o "${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences" \
-      https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences && \
-    rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
+  py_completion="${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences"
+  if [ ! -f "$py_completion" ]; then
+    mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" && \
+      curl -fsSL -o $py_completion \
+        https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences && \
+      rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
+  fi
 }
 
 
