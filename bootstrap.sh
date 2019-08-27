@@ -124,7 +124,8 @@ function subl_settings {
       curl -fsSL -o $py_completion \
         https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences && \
     rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
-} fi
+  fi
+}
 
 
 function _sync_dotfile {
