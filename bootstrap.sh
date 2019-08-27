@@ -158,9 +158,9 @@ function sync_dotfile {
   if [ "$1" == "-f" ]; then
     _sync_dotfile;
   else
-    read -rp "$(tput setaf 3)This may overwrite existing files in your home directory. Are you sure? (y/N) $(tput sgr 0)";
+    read -rp "$(tput setaf 3)This may overwrite existing files in your home directory. Are you sure? (Y/n) $(tput sgr 0)";
     echo "";
-    if [[ $REPLY =~ ^[Yy](es)?$ ]]; then
+    if [[ $REPLY =~ ^[Yy](es)?$ ]] || [ -z "$REPLY" ]; then
       _sync_dotfile;
     fi;
   fi;
