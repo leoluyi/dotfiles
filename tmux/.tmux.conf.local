@@ -18,7 +18,7 @@ set -g @tpm_plugins ' \
 # -- Automatic Tmux start ------------------------------------------------------
 # https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
 
-set -g @continuum-boot 'on'
+#set -g @continuum-boot 'on'
 set -g @continuum-restore 'on'
 
 # -- navigation ----------------------------------------------------------------
