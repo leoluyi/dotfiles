@@ -41,7 +41,7 @@
     current = yellow reverse
     local = yellow
 [color "status"]
-    added = green bold
+    added = yellow bold
     changed = red
     untracked = cyan
 [status]
