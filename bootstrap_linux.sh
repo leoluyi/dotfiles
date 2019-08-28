@@ -2,6 +2,17 @@
 
 cd "$(dirname "${BASH_SOURCE}")" || exit 1;
 
+os_name="$(uname -s)"
+case "${os}" in
+    Linux*)     machine=linux;;
+    Darwin*)    machine=macos;;
+    CYGWIN*)    machine=windows;;
+    MINGW*)     machine=windows;;
+    *)          machine="UNKNOWN:${os}"
+esac
+
+[ "$machine" = "linux" ] || exit 1;
+
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   FORCE="-f"
 fi
