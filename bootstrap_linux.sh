@@ -2,20 +2,35 @@
 
 cd "$(dirname "${BASH_SOURCE}")" || exit 1;
 
-os_name="$(uname -s)"
-case "${os}" in
-    Linux*)     machine=linux;;
-    Darwin*)    machine=macos;;
-    CYGWIN*)    machine=windows;;
-    MINGW*)     machine=windows;;
-    *)          machine="UNKNOWN:${os}"
-esac
-
-[ "$machine" = "linux" ] || exit 1;
-
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   FORCE="-f"
 fi
+
+
+get_os() {
+  local os=""
+  local kernel_name=""
+  kernel_name="$(uname -s)"
+
+  if [ "$kernel_name" = "Darwin" ]; then
+	os="macos"
+  elif [ "$kernel_name" = "Linux" ] && [ -e "/etc/os-release" ]; then
+	os="$(. /etc/os-release; printf "%s\n" "$ID")"
+  else
+	os="$kernel_name"
+  fi
+  printf "%s" "$os"
+}
+
+
+validate_os() {
+  local os=$(get_os)
+
+  if [ "$os" != "ubuntu" ]; then
+    printf "Sorry, this script is intended only for Ubuntu. (Your os is %s)\n" "$os"
+    exit 1
+  fi
+}
 
 
 function link_virtualenv {
@@ -143,9 +158,9 @@ function sync_dotfile {
 }
 
 
+validate_os
 subl_settings
 link_virtualenv
-install_pyenv
 install_bash_git_prompt $FORCE
 install_vim_awesome $FORCE
 install_tmux_awesome $FORCE
@@ -154,7 +169,6 @@ sync_dotfile $FORCE
 unset \
   subl_settings \
   link_virtualenv \
-  install_pyenv \
   install_vim_awesome \
   install_tmux_awesome \
   sync_dotfile
