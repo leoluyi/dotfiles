@@ -8,6 +8,33 @@ if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
 fi
 
 
+get_os() {
+  local os=""
+  local kernel_name=""
+  kernel_name="$(uname -s)"
+
+  if [ "$kernel_name" = "Darwin" ]; then
+    os="macos"
+  elif [ "$kernel_name" = "Linux" ] && [ -e "/etc/os-release" ]; then
+    os="$(. /etc/os-release; printf "%s\n" "$ID")"
+  else
+    os="$kernel_name"
+  fi
+  printf "%s" "$os"
+}
+
+
+validate_os() {
+  local os=$(get_os)
+  local want_os="$1"
+
+  if [ "$os" != "$want_os" ]; then
+    printf "Sorry, this script is intended only for %s. (Your os is %s)\n" "$want_os" "$os"
+    exit 1
+  fi
+}
+
+
 function install_apt_apps {
   echo "$(tput setaf 2)###### Install Apps with Apt ######$(tput sgr 0)"
 
@@ -165,7 +192,7 @@ function install_diff_so_fancy {
   echo "$(tput setaf 2)###### Install diff-so-fancy ######$(tput sgr 0)"
 
   diff_so_fancy=/usr/local/bin/diff-so-fancy
-  if [ ! -x "${diff_so_fancy}" ]
+  if [ ! -x "${diff_so_fancy}" ]; then
     sudo curl -fsSL https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy \
       -o $diff_so_fancy &&
     sudo chmod +x $diff_so_fancy
@@ -173,6 +200,7 @@ function install_diff_so_fancy {
 }
 
 
+validate_os macos
 install_apt_apps
 install_chrome
 install_docker

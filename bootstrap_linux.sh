@@ -13,11 +13,11 @@ get_os() {
   kernel_name="$(uname -s)"
 
   if [ "$kernel_name" = "Darwin" ]; then
-	os="macos"
+    os="macos"
   elif [ "$kernel_name" = "Linux" ] && [ -e "/etc/os-release" ]; then
-	os="$(. /etc/os-release; printf "%s\n" "$ID")"
+    os="$(. /etc/os-release; printf "%s\n" "$ID")"
   else
-	os="$kernel_name"
+    os="$kernel_name"
   fi
   printf "%s" "$os"
 }
@@ -25,9 +25,10 @@ get_os() {
 
 validate_os() {
   local os=$(get_os)
+  local want_os="$1"
 
-  if [ "$os" != "ubuntu" ]; then
-    printf "Sorry, this script is intended only for Ubuntu. (Your os is %s)\n" "$os"
+  if [ "$os" != "$want_os" ]; then
+    printf "Sorry, this script is intended only for %s. (Your os is %s)\n" "$want_os" "$os"
     exit 1
   fi
 }
@@ -158,7 +159,7 @@ function sync_dotfile {
 }
 
 
-validate_os
+validate_os ubuntu
 subl_settings
 link_virtualenv
 install_bash_git_prompt $FORCE

@@ -7,6 +7,33 @@ if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
 fi
 
 
+get_os() {
+  local os=""
+  local kernel_name=""
+  kernel_name="$(uname -s)"
+
+  if [ "$kernel_name" = "Darwin" ]; then
+    os="macos"
+  elif [ "$kernel_name" = "Linux" ] && [ -e "/etc/os-release" ]; then
+    os="$(. /etc/os-release; printf "%s\n" "$ID")"
+  else
+    os="$kernel_name"
+  fi
+  printf "%s" "$os"
+}
+
+
+validate_os() {
+  local os=$(get_os)
+  local want_os="$1"
+
+  if [ "$os" != "$want_os" ]; then
+    printf "Sorry, this script is intended only for %s. (Your os is %s)\n" "$want_os" "$os"
+    exit 1
+  fi
+}
+
+
 function install_homebrew {
   echo "$(tput setaf 2)###### Install Homebrew ######$(tput sgr 0)"
 
@@ -15,8 +42,6 @@ function install_homebrew {
     echo "Homebrew is installed. Updating Homebrew ..."
     brew update
 
-    # Save Homebrew's installed location.
-    BREW_PREFIX=$(brew --prefix)
   else
     echo "Installing Hombrew ..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -124,6 +149,7 @@ function brew_install_cli {
 }
 
 
+validate_os macos
 install_homebrew
 brew_install_app
 brew_install_cli

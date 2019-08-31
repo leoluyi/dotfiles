@@ -6,6 +6,32 @@ if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   FORCE="-f"
 fi
 
+get_os() {
+  local os=""
+  local kernel_name=""
+  kernel_name="$(uname -s)"
+
+  if [ "$kernel_name" = "Darwin" ]; then
+    os="macos"
+  elif [ "$kernel_name" = "Linux" ] && [ -e "/etc/os-release" ]; then
+    os="$(. /etc/os-release; printf "%s\n" "$ID")"
+  else
+    os="$kernel_name"
+  fi
+  printf "%s" "$os"
+}
+
+
+validate_os() {
+  local os=$(get_os)
+  local want_os="$1"
+
+  if [ "$os" != "$want_os" ]; then
+    printf "Sorry, this script is intended only for %s. (Your os is %s)\n" "$want_os" "$os"
+    exit 1
+  fi
+}
+
 
 function use_gnu_bash {
   echo "$(tput setaf 2)###### Use GNU Bash as default shell from homebrew ######$(tput sgr 0)"
@@ -166,7 +192,7 @@ function sync_dotfile {
   fi;
 }
 
-
+validate_os macos
 use_gnu_bash
 fix_bash_completion
 link_virtualenv
