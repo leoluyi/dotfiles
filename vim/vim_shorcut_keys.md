@@ -457,7 +457,7 @@ g; and g,             - jump through [edit positions](), which are also very fre
 - `:s/search_for_this/replace_with_this/gi` -  replace in the current line only, with case [i]nsensitive
 
 
-### Plugins
+### PLUGINS
 
 [vim-commentary](https://github.com/tpope/vim-commentary)
 
@@ -512,6 +512,22 @@ s                   -   vertical split
 <leader>f      - open recently opened files
 ```
 
+[fzf-vim](https://github.com/junegunn/fzf/blob/master/README-VIM.md)
+
+```
+:Files    -   search for files in your directory
+:Buffers  -   search for opened buffers
+
+" Look for files under current directory
+:FZF
+
+" Look for files under your home directory
+:FZF ~
+
+<C-t>     -   open in a new tab
+<C-x>     -   open in a new split
+<C-v>     -   open in a new vertical split
+```
 
 ### MISCELLANEOUS
 
@@ -621,6 +637,7 @@ Use `<C-r> register` when entering a command in _command mode_ or _insert mode_ 
 
 ## References
 
+- [Today I learned: Vim](http://tilvim.com/)
 - [VIM KEYBOARD SHORTCUTS](https://gist.github.com/leoluyi/2770d1d8596bb9cf594432dfa56ef825)
 - [buffers vs tabs?](https://stackoverflow.com/a/26710166/3744499)
 - [vim--buffers-and-windows](https://www.openfoundry.org/tw/tech-column/2383-vim--buffers-and-windows)
