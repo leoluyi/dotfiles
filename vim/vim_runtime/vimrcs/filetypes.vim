@@ -34,6 +34,11 @@ au FileType python set indentkeys-=0#
 au FileType python setlocal shiftwidth=4
 
 """"""""""""""""""""""""""""""
+" => shiftwidth section
+"""""""""""""""""""""""""""""""
+au FileType sql setlocal shiftwidth=2
+
+""""""""""""""""""""""""""""""
 " => JavaScript section
 """""""""""""""""""""""""""""""
 au FileType javascript call JavaScriptFold()
