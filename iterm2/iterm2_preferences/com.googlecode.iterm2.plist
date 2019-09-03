@@ -1131,17 +1131,27 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>731 144 601 184 0 0 1440 877 </string>
+	<string>725 101 695 223 0 0 1440 877 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>317 257 697 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>323 391 796 486 0 0 1440 900 </string>
+	<string>0 391 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>286 201 865 527 0 0 1440 877 </string>
+	<string>20 71 694 787 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>286 147 865 552 0 0 1440 877 </string>
+	<string>725 471 694 387 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>197 325 820 552 0 0 1440 877 </string>
+	<string>725 71 694 387 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>1077 471 334 187 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 4</key>
+	<string>1253 471 163 187 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 5</key>
+	<string>1253 471 163 87 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 6</key>
+	<string>1341 471 73 87 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 7</key>
+	<string>1341 441 73 67 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1976,6 +1986,10 @@
 	<real>575987161.27959704</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
+	<key>OpenArrangementAtStartup</key>
+	<false/>
+	<key>OpenNoWindowsAtStartup</key>
+	<true/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>

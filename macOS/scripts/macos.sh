@@ -114,6 +114,6 @@ defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 1
 # Set a shorter Delay until key repeat
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain InitialKeyRepeat -int 18
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
