@@ -167,6 +167,10 @@ function _sync_dotfile {
     find "$folder" -type f -name '.[!.]*' | tee >(xargs -I_ cp _ ~) >(xargs -I_ basename _ | xargs printf "Updated ~/%s\n") >/dev/null;
   done
 
+  # .config
+  rsync -rltq ./config/ ~/.config
+
+  # Vimrc
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
   cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/;
 
