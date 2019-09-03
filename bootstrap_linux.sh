@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")" || exit 1;
+cd "$(dirname "$BASH_SOURCE")" || exit 1;
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   FORCE="-f"
@@ -24,7 +24,7 @@ get_os() {
 
 
 validate_os() {
-  local os=$(get_os)
+  local os="$(get_os)"
   local want_os="$1"
 
   if [ "$os" != "$want_os" ]; then
@@ -57,7 +57,7 @@ function subl_settings {
   py_completion="${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences"
   if [ ! -f "$py_completion" ]; then
     mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" && \
-      curl -fsSL -o $py_completion \
+      curl -fsSL -o "$py_completion" \
         https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences && \
       rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
   fi
@@ -136,11 +136,17 @@ function _sync_dotfile {
   #   -avh --no-perms macOS/bash_{profile,rc} ~;
   src_folders=("bash-git-prompt" "git" "tmux" "ubuntu")
   for folder in "${src_folders[@]}"; do
-    find "$folder" -type f -name '.[!.]*' | tee >(xargs -I_ cp _ ~) >(xargs -I_ basename _ | xargs printf "Updated ~/%s\n") >/dev/null;
+    find "$folder" -type f -name '.[!.]*' | \
+      tee >(xargs -I_ cp _ ~) >(xargs -I_ basename _ | \
+      xargs printf "Updated ~/%s\n") >/dev/null;
   done
 
-  cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim
-  cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/
+  # .config
+  rsync -rlptq ./config/ ~/.config
+
+  # Vimrc
+  cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
+  cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/;
 }
 
 
