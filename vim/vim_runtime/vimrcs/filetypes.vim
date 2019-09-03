@@ -1,14 +1,13 @@
 """"""""""""""""""""""""""""""
 " => sh section
 """"""""""""""""""""""""""""""
-
-au FileType sh setlocal sw=2
+au FileType sh setlocal shiftwidth=2
 
 """"""""""""""""""""""""""""""
 " => R section
 """"""""""""""""""""""""""""""
 let r_indent_align_args = 0
-au FileType r setlocal sw=2
+au FileType r setlocal shiftwidth=2
 
 """"""""""""""""""""""""""""""
 " => Python section
@@ -32,7 +31,7 @@ au FileType python map <buffer> <leader>D ?def
 au FileType python set cindent
 au FileType python set cinkeys-=0#
 au FileType python set indentkeys-=0#
-
+au FileType python setlocal shiftwidth=4
 
 """"""""""""""""""""""""""""""
 " => JavaScript section
