@@ -49,10 +49,10 @@ ge       -   Move backwards to next word, with cursor on last character (use gE 
 +        -   Move forward to the first character on the next line
 -        -   Move backwards to the first character on the previous line
 
-CTRL+u   -   Move up by half a page
-CTRL+d   -   Move down by half a page
-CTRL+b   -   Move up by a page
-CTRL+f   -   Move down by a page
+<C-u>    -   Move up by half a page
+<C-d>    -   Move down by half a page
+<C-b>    -   Move up by a page
+<C-f>    -   Move down by a page
 
 H        -   Move cursor to header (top) line of current visible window
 M        -   Move cursor to middle line of current visible window
@@ -73,10 +73,11 @@ N        -   Repeat the last / or ? command in the opposite direction
 
 ()       -   Move to prev / next sentences ("." delimited words)
 {}       -   Move to prev / next paragraphs (next empty line)
-[(       -   Move cursor N times back to unmatched parentheses, forward `])`
-[{       -   Move cursor N times back to unmatched braces, forward `]}`
-]]       -   Move to next section (Depending on your current filetype this may move between functions)
-[[       -   Move to previous section
+]]       -   Move N times to next section (Depending on your current filetype this may move between functions); `[[` to previous section
+
+])       -   Move N times forward to unmatched parentheses, backward `[(`
+]}       -   Move N times forward to unmatched braces, backward `[{`
+
 ''       -   Move to previous line position
 ```
 
@@ -444,11 +445,14 @@ g#                - search for word under cursor - backward (unbounded)
 
 ```
 :<linenum>            - go to <linenum>
+
 `` (double backtick)  - jump between previous position and the current position cursor position in jump list
 `.                    - bring you to your **last change**
-                        (The ` goes to a mark, and "." is a "special" mark which is automatically set to the position where the last change was made)
 
-<C-o> and <C-i>       - work through the jump list history
+                        (The ` goes to a mark, and "." is a "special" mark which is automatically
+                         set to the position where the last change was made)
+
+<C-o> and <C-i>       - up / down walk through the jump list history
 g; and g,             - jump through [edit positions](), which are also very frequently used
 ```
 
