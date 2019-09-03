@@ -478,6 +478,8 @@ ys iw "    -   add quotes in word
 ds "       -   remove the delimiters entirely
 cs "'      -   change surrounding from " to '
 yss )      -   wrap the entire line in parentheses
+
+S "        -   (Visual mode) add quotes in selection
 ```
 
 [NERDTree](#)
