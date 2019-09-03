@@ -503,6 +503,7 @@ s                   -   vertical split
 <C-n>      -   (next) add a new virtual cursor + selection on the next match
 <C-x>      -   (skip) skip the next match
 <C-p>      -   (prev) remove current virtual cursor + selection and go back on previous match
+
 <A-n>      -   (select all) start muticursor and directly select all matches
 ```
 
@@ -542,7 +543,7 @@ gUU      -   switch the current line to upper case
 guu      -   switch the current line to lower case
 
 <C-a>    -   Increment the number at cursor
-<C+x>    -   Decrement the number at cursor
+<C-x>    -   Decrement the number at cursor
 
 .        -   Repeat last change or delete
 ;        -   Repeat last f, t, F, or T command
