@@ -62,6 +62,9 @@ let g:NERDTreeWinPos = "right"
 " comfortable_motion ---------------------------------------------------
 " Disable comfortable_motion.
 let g:loaded_comfortable_motion = 0
+" let g:comfortable_motion_interval = 1000.0 / 60
+" let g:comfortable_motion_friction = 80.0
+" let g:comfortable_motion_air_drag = 2.0
 
 " vim-indent-guides ----------------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
