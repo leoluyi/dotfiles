@@ -512,18 +512,16 @@ s                   -   vertical split
 <leader>f      - open recently opened files
 ```
 
-[fzf-vim](https://github.com/junegunn/fzf/blob/master/README-VIM.md)
+[fzf-vim](https://github.com/junegunn/fzf.vim)
 
 ```
-:Files    -   search for files in your directory
-:Buffers  -   search for opened buffers
+:Files / :FZF    -   search for files in current directory
+:FZF ~           -   Look for files under your home directory
+:Buffers         -   search for opened buffers
+:Ag              -   Full-text search (ALT-A to select all, ALT-D to deselect all)
 
-" Look for files under current directory
-:FZF
-
-" Look for files under your home directory
-:FZF ~
-
+" Open files
+<Enter>   -   open in current window
 <C-t>     -   open in a new tab
 <C-x>     -   open in a new split
 <C-v>     -   open in a new vertical split
