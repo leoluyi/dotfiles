@@ -41,7 +41,7 @@ augroup numbertoggle
 augroup END
 
 " Allow saving of files as sudo ----------------------------------------
-" when I forgot to start vim using sudo 
+" When I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
 " multi_cursor - default mapping ---------------------------------------
@@ -56,8 +56,12 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" NERDTree Settings ----------------------------------------------------
+" NERDTree -------------------------------------------------------------
 let g:NERDTreeWinPos = "right"
+
+" comfortable_motion ---------------------------------------------------
+" Disable comfortable_motion.
+let g:loaded_comfortable_motion = 0
 
 " vim-indent-guides ----------------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
@@ -67,10 +71,10 @@ let g:indent_guides_guide_size = 1
 autocmd FileType python if exists(':BracelessEnable') | exe "BracelessEnable +indent" | endif 
 
 " vim-easy-align  ------------------------------------------------------
-" Start interactive EasyAlign in visual mode (e.g. vipga)
+" Start interactive EasyAlign in visual mode (e.g. vipga).
 xmap ga <Plug>(EasyAlign)
 
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip).
 nmap ga <Plug>(EasyAlign)
 
 " fzf.vim --------------------------------------------------------------
