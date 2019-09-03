@@ -45,3 +45,4 @@ When setting up a new Mac, you may want to set some sensible macOS defaults:
 - https://github.com/holman/dotfiles
 - https://github.com/skwp/dotfiles
 - https://github.com/ccwang002/dotfiles
+- https://github.com/danteissaias/dotfiles

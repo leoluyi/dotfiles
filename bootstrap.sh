@@ -168,7 +168,10 @@ function _sync_dotfile {
   done
 
   # .config
-  rsync -rltq ./config/ ~/.config
+  rsync -rlptq ./config/ ~/.config
+
+  # .scripts
+  rsync -rlptq ./macOS/scripts/ ~/.scripts
 
   # Vimrc
   cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
