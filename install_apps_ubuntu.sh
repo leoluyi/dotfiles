@@ -200,7 +200,7 @@ function install_diff_so_fancy {
 }
 
 
-validate_os macos
+validate_os ubuntu
 install_apt_apps
 install_chrome
 install_docker
