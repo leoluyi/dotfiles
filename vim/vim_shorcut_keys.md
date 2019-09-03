@@ -150,12 +150,17 @@ When you copy and cut stuff, it gets saved to registers. You can pull stuff from
 ""            -   no-name register (quotation register) - last cut/del/yank
 "0            -   last-yanked register
 "0 ~ "9       -   Nth-yanked register
+"-            -   small delete register (deletes which are less than a complete line)
+
 "_            -   blackhole register --> `"_d` delete and throw to blackhole
-"/            -   last search pattern
-".            -   last inserted text (*read only*)
-"%            -   current filename (*read only*)
-"#            -   alternate file name (last edited file) (*read only*)
-":            -   last command (*read only*)
+
+"/            -   last searched pattern
+
+# (Read-only registers)
+".            -   last inserted text
+"%            -   current filename
+"#            -   alternate file name (last edited file)
+":            -   last command
 
 # Tricks in command mode for registers
 # Either in search mode `/` or in last line command mode `:`
@@ -435,13 +440,13 @@ More cool searching tricks:
 
 *                 - search for word currently under cursor  (bounded)
 g*                - search for partial word under cursor    (unbounded)
-                    (repeat with n)
+                (repeat with n)
 #                 - search for word under cursor - backward (bounded)
 g#                - search for word under cursor - backward (unbounded)
 [I                - show lines with matching word under cursor.
 ```
 
-**Go through jump list (a list of places where your cursor has been to)
+**Go through jump list** (a list of places where your cursor has been to)
 
 ```
 :<linenum>            - go to <linenum>
@@ -449,8 +454,8 @@ g#                - search for word under cursor - backward (unbounded)
 `` (double backtick)  - jump between previous position and the current position cursor position in jump list
 `.                    - bring you to your **last change**
 
-                        (The ` goes to a mark, and "." is a "special" mark which is automatically
-                         set to the position where the last change was made)
+                    (The ` goes to a mark, and "." is a "special" mark which is automatically
+                     set to the position where the last change was made)
 
 <C-o> and <C-i>       - up / down walk through the jump list history
 g; and g,             - jump through [edit positions](), which are also very frequently used
@@ -482,7 +487,7 @@ yss )      -   wrap the entire line in parentheses
 S "        -   (Visual mode) add quotes in selection
 ```
 
-[NERDTree](#)
+[NERDTree](https://github.com/scrooloose/nerdtree)
 
 ```
 <leader>nn          -   toggle nerdtree
@@ -502,7 +507,7 @@ s                   -   vertical split
 <C-w> ← | →         -   (left or right) to navigate
 ```
 
-[vim-multiple-cursors (Sublime-text-flavor select)](#)
+[vim-multiple-cursors (Sublime-text-flavor select)](https://github.com/terryma/vim-multiple-cursors)
 
 ```
 <C-n>      -   (start) start multicursor and add a "virtual cursor + selection" on the match
@@ -513,7 +518,7 @@ s                   -   vertical split
 <A-n>      -   (select all) start muticursor and directly select all matches
 ```
 
-[mru](#)
+[mru](https://github.com/vim-scripts/mru.vim)
 
 ```
 <leader>f      - open recently opened files
@@ -527,7 +532,7 @@ s                   -   vertical split
 :Buffers         -   search for opened buffers
 :Ag              -   Full-text search (ALT-A to select all, ALT-D to deselect all)
 
-" Open files
+# Open files
 <Enter>   -   open in current window
 <C-t>     -   open in a new tab
 <C-x>     -   open in a new split
@@ -539,7 +544,7 @@ s                   -   vertical split
 ```
 u        -   Undo
 U        -   Undo all changes on current line
-CTRL+R   -   Redo
+<C-R>    -   Redo
 .        -   Redo last change
 
 g~       -   switch case under cursor
@@ -556,6 +561,9 @@ guu      -   switch the current line to lower case
 ,        -   Repeat last f, t, F, or T command in opposite direction
 
 :%sort   -   Sort in visual mode. Use `:%sort!` to sort in reverse order; `:%sort n` for numeric sort.
+
+g <C-g>  -   Show statistics (word count, ...)
+<C-g>    -   Show line info
 
 vim +10 <file_name>            - opens the file at line 10
 vim +/bash cronjob-lab.yml     - opens the file cronjob-lab.yml on the first occurence of bash
