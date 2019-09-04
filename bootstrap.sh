@@ -111,6 +111,11 @@ function install_tmux_awesome {
     echo "Installing tmux plugins manager ..."
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
+
+  # Install tmux plugins
+  if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ]; then
+    ~/.tmux/plugins/tpm/bin/install_plugins
+  fi
 }
 
 
@@ -170,19 +175,14 @@ function _sync_dotfile {
   done
 
   # .config
-  rsync -rlptq ./config/ ~/.config
+  rsync -rlptvh ./config/ ~/.config
 
   # .scripts
-  rsync -rlptq ./macOS/scripts/ ~/.scripts
+  rsync -rlptvh ./macOS/scripts/ ~/.scripts
 
   # Vimrc
-  cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
-  cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/;
-
-  # Install tmux plugins
-  if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ]; then
-    ~/.tmux/plugins/tpm/bin/install_plugins
-  fi
+  rsync -rlptvh vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
+  rsync -rlptvh vim/vim_runtime/vimrcs/ ~/.vim_runtime/vimrcs/;
 }
 
 
@@ -206,9 +206,9 @@ use_gnu_bash
 fix_bash_completion
 link_virtualenv
 subl_settings
-install_tmux_awesome $FORCE
 install_vim_awesome $FORCE
 sync_dotfile $FORCE
+install_tmux_awesome $FORCE
 
 unset \
   use_gnu_bash \

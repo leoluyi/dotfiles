@@ -117,9 +117,11 @@ function install_tmux_awesome {
   # Install Tmux Plugin Manager
   if [ ! -d ~/.tmux/plugins/tpm ]; then
     echo "Installing tmux plugins manager ..."
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && \
-      ~/.tmux/plugins/tpm/bin/install_plugins
-  else
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
+
+  # Install tmux plugins
+  if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ]; then
     ~/.tmux/plugins/tpm/bin/install_plugins
   fi
 }
@@ -145,8 +147,8 @@ function _sync_dotfile {
   rsync -rlptq ./config/ ~/.config
 
   # Vimrc
-  cp vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
-  cp vim/vim_runtime/vimrcs/* ~/.vim_runtime/vimrcs/;
+  rsync -rlptvh vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
+  rsync -rlptvh vim/vim_runtime/vimrcs/ ~/.vim_runtime/vimrcs/;
 }
 
 
@@ -170,8 +172,8 @@ subl_settings
 link_virtualenv
 install_bash_git_prompt $FORCE
 install_vim_awesome $FORCE
-install_tmux_awesome $FORCE
 sync_dotfile $FORCE
+install_tmux_awesome $FORCE
 
 unset \
   subl_settings \
