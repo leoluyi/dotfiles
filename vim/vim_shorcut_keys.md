@@ -73,7 +73,9 @@ N        -   Repeat the last / or ? command in the opposite direction
 
 ()       -   Move to prev / next sentences ("." delimited words)
 {}       -   Move to prev / next paragraphs (next empty line)
-]]       -   Move N times to next section (Depending on your current filetype this may move between functions); `[[` to previous section
+
+]]       -   Move N times to next section or `{` (Depending on your current filetype this may move between functions); `[[` to previous section
+][       -   Move N times to next section or `}`
 
 ])       -   Move N times forward to unmatched parentheses, backward `[(`
 ]}       -   Move N times forward to unmatched braces, backward `[{`
