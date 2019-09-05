@@ -138,17 +138,13 @@ function _sync_dotfile {
   #   -avh --no-perms macOS/bash_{profile,rc} ~;
   src_folders=("bash-git-prompt" "git" "tmux" "vim" "ubuntu")
   for folder in "${src_folders[@]}"; do
-    find "$folder" -type f -name '.[!.]*' | \
-      tee >(xargs -I_ cp _ ~) >(xargs -I_ basename _ | \
+    find "$folder" -maxdepth 1 -name '.[!.]*' | \
+      tee >(xargs -I_ rsync -ar --no-perms _ ~) >(xargs -I_ basename _ | \
       xargs printf "Updated ~/%s\n") >/dev/null;
   done
 
   # .config
-  rsync -rlptq ./config/ ~/.config
-
-  # Vimrc
-  rsync -rlptvh vim/.vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
-  rsync -rlptvh vim/.vim_runtime/vimrcs/ ~/.vim_runtime/vimrcs/;
+  rsync -arvh --no-perms ./config/ ~/.config
 }
 
 
