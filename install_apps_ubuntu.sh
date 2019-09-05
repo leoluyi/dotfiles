@@ -25,7 +25,7 @@ get_os() {
 
 
 validate_os() {
-  local os=$(get_os)
+  local os="$(get_os)"
   local want_os="$1"
 
   if [ "$os" != "$want_os" ]; then

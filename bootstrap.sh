@@ -6,6 +6,7 @@ if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   FORCE="-f"
 fi
 
+
 get_os() {
   local os=""
   local kernel_name=""

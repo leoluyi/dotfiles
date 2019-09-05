@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")" || exit 1;
+cd "$(dirname "$BASH_SOURCE")" || exit 1;
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   FORCE="-f"
@@ -24,7 +24,7 @@ get_os() {
 
 
 validate_os() {
-  local os=$(get_os)
+  local os="$(get_os)"
   local want_os="$1"
 
   if [ "$os" != "$want_os" ]; then
