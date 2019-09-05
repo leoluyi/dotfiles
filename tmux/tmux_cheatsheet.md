@@ -131,3 +131,9 @@ t  big clock
 U             launches Urlview (if available)
 F             launches Facebook PathPicker (if available)
 ```
+
+Kill other sessions
+
+```bash
+tmux list-sessions | grep -v -E '\(attached\)$' | awk -F: '{print (}' | tr '\n' '\2' | xargs -0 -I_ tmux kill-session -t _;
+```
