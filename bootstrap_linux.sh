@@ -136,7 +136,7 @@ function _sync_dotfile {
   #   --exclude "README.md" \
   #   --exclude "LICENSE-MIT.txt" \
   #   -avh --no-perms macOS/bash_{profile,rc} ~;
-  src_folders=("bash-git-prompt" "git" "tmux" "ubuntu")
+  src_folders=("bash-git-prompt" "git" "tmux" "vim" "ubuntu")
   for folder in "${src_folders[@]}"; do
     find "$folder" -type f -name '.[!.]*' | \
       tee >(xargs -I_ cp _ ~) >(xargs -I_ basename _ | \
@@ -147,8 +147,8 @@ function _sync_dotfile {
   rsync -rlptq ./config/ ~/.config
 
   # Vimrc
-  rsync -rlptvh vim/vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
-  rsync -rlptvh vim/vim_runtime/vimrcs/ ~/.vim_runtime/vimrcs/;
+  rsync -rlptvh vim/.vim_runtime/my_configs.vim ~/.vim_runtime/my_configs.vim;
+  rsync -rlptvh vim/.vim_runtime/vimrcs/ ~/.vim_runtime/vimrcs/;
 }
 
 
