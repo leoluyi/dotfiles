@@ -52,12 +52,9 @@ function use_gnu_bash {
 
 function fix_bash_completion {
   echo "$(tput setaf 2)###### Fix Bash Completion ######$(tput sgr 0)"
-  # https://dwatow.github.io/2018/09-21-git-cmd-auto-complete/
-  # 用 brew 安裝 git，
-  # 安裝完 bash 會自動指向 brew 安裝的路徑，
-  # 確定版本之後，要去 github 找 git-completion.bash，並且，找到與你的 git 匹配的 版本。
 
   # Git completion
+  # https://dwatow.github.io/2018/09-21-git-cmd-auto-complete/
   if command -v brew >/dev/null; then
       BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
       curl -fsSLo "${BASH_COMPLETION_COMPAT_DIR}"/git-completion.bash \
