@@ -24,6 +24,8 @@ vnoremap <leader>P "0P
 vnoremap <leader>p "0p
 
 " yank to clipboard
+" https://stackoverflow.com/a/3961954
+" https://www.markcampbell.me/2016/04/12/setting-up-yank-to-clipboard-on-a-mac-with-vim.html
 if has("clipboard")
   set clipboard=unnamed " copy to the system clipboard
 
