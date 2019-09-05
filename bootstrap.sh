@@ -159,17 +159,13 @@ function subl_settings {
 
 function _sync_dotfile {
   echo "Syncing dotfiles ..."
-  # rsync --exclude ".git/" \
-  #   --exclude ".DS_Store" \
-  #   --exclude ".osx" \
-  #   --exclude "bootstrap.sh" \
-  #   --exclude "README.md" \
-  #   --exclude "LICENSE-MIT.txt" \
-  #   -avh --no-perms macOS/bash_{profile,rc} ~;
 
   src_folders=("bash-git-prompt" "git" "tmux" "vim" "macOS")
   for folder in "${src_folders[@]}"; do
-    find "$folder" -maxdepth 1 -name '.[!.]*' | \
+    find "$folder" -maxdepth 1 -name '.[!.]*' \
+      ! -name .git \
+      ! -name .DS_Store \
+      ! -name .osx | \
       tee >(xargs -I_ rsync -ar --no-perms _ ~) >(xargs -I_ basename _ | \
       xargs printf "Updated ~/%s\n") >/dev/null;
   done
