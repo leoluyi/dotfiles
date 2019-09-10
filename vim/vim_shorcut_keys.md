@@ -422,7 +422,7 @@ q/              -   search history in command buffer
 ```
 :setf html      -   Set FileType to html
 :set ft?        -   Show current FileType
-gg=G            -   Fix indentation for current FileType
+gg=G            -   Re-indent for current FileType
 ```
 
 ### SEARCH & REPLACE
