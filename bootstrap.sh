@@ -56,11 +56,11 @@ function fix_bash_completion {
 
   # Git completion
   # https://dwatow.github.io/2018/09-21-git-cmd-auto-complete/
-  if command -v brew >/dev/null; then
-      BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-      curl -fsSLo "${BASH_COMPLETION_COMPAT_DIR}"/git-completion.bash \
-        https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
-  fi
+  # if command -v brew >/dev/null; then
+  #     BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
+  #     curl -fsSLo "${BASH_COMPLETION_COMPAT_DIR}"/git-completion.bash \
+  #       https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+  # fi
 
   # Docker completion
   DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
