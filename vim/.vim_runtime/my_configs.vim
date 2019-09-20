@@ -34,6 +34,10 @@ if has("clipboard")
   endif
 endif
 
+" Remove all trailing whitespace by pressing F5
+" https://vim.fandom.com/wiki/Remove_unwanted_spaces
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
