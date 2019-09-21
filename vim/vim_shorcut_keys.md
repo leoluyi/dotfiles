@@ -574,6 +574,8 @@ vim scp://balasundaramm@mgmt-bst:22/~/automation/test-file.txt - Edit a remote f
 
 :set nonumber            -  disable line number
 :set norelativenumber    -  disable relative line number
+
+1 <C-g>  -   View the full path of the file
 ```
 
 ---
