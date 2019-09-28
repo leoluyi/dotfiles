@@ -173,3 +173,5 @@ export PIPENV_IGNORE_VIRTUALENVS=1
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
+
+command -v pyenv &>/dev/null && neofetch --size 30% --iterm2
