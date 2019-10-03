@@ -88,9 +88,9 @@ function install_chrome {
   echo "$(tput setaf 2)###### Install Chrome ######$(tput sgr 0)"
 
   if [ ! "$(dpkg -l | awk '{print $2}' | grep google-chrome-stable)" ]; then
-    curl -fsSL -o ~/Downloads/google-chrome-stable_current_amd64.deb \
+    curl -fsSL -o /tmp/google-chrome-stable_current_amd64.deb \
       https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo dpkg -i ~/Downloads/google-chrome-stable_current_amd64.deb
+    sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
   fi
 }
 
@@ -120,9 +120,10 @@ function install_docker {
   fi
 
   # ====== Completion ======
-  if [ ! -f /etc/bash_completion.d/docker-compose ]; then
+  docker_compose_completion=/etc/bash_completion.d/docker-compose
+  if [ ! -f "${docker_compose_completion}" ]; then
     sudo curl -fsSL https://raw.githubusercontent.com/docker/compose/1.24.1/contrib/completion/bash/docker-compose \
-      -o /etc/bash_completion.d/docker-compose
+      -o ${docker_compose_completion}
   fi
 }
 
@@ -133,8 +134,8 @@ function install_dropbox {
   if [ ! $(command -v dropbox 2>/dev/null) ]; then
     sudo apt install -y gdebi python-gpg
     # sudo apt install python-gpgme   # for Ubuntu16
-    wget -qO ~/Downloads/dropbox_2019.02.14_amd64.deb https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
-    sudo gdebi -n ~/Downloads/dropbox_2019.02.14_amd64.deb
+    wget -qO /tmp/dropbox_2019.02.14_amd64.deb https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
+    sudo gdebi -n /tmp/dropbox_2019.02.14_amd64.deb
     # https://askubuntu.com/a/148177/594426
     # sudo echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
   fi
@@ -175,9 +176,9 @@ function install_rstudio {
   echo "$(tput setaf 2)###### Install RStudio ######$(tput sgr 0)"
 
   if [ ! $(command -v rstudio 2>/dev/null) ]; then
-    curl -fsSL -o ~/Downloads/rstudio-1.2.1335-amd64.deb \
+    curl -fsSL -o /tmp/rstudio-1.2.1335-amd64.deb \
       https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.2.1335-amd64.deb
-    sudo apt install gdebi-core &&  sudo gdebi -n ~/Downloads/rstudio-1.2.1335-amd64.deb
+    sudo apt install gdebi-core &&  sudo gdebi -n /tmp/rstudio-1.2.1335-amd64.deb
   fi
 }
 
