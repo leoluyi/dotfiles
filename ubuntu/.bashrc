@@ -181,6 +181,9 @@ fi
 
 # ============ Misc ============
 
+# Text editor
+export EDITOR=vim
+
 # Set "most" as pager
 command -v most &>/dev/null && export PAGER=most
 
