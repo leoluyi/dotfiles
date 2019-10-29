@@ -117,6 +117,7 @@ function brew_install_cli {
   pipenv \
   plowshare  `# 免空神器` \
   proj \
+  qpdf \
   pyenv \
   pyenv-virtualenv \
   ranger     `# a terminal browser for Vim` \

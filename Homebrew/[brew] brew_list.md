@@ -51,6 +51,7 @@ plowshare  `# 免空神器` \
 proj \
 pyenv \
 pyenv-virtualenv \
+qpdf \
 ranger     `# a terminal browser for Vim` \
 rename \
 ripgrep \
