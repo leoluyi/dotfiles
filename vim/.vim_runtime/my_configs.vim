@@ -4,6 +4,7 @@ let mapleader = ","
 set number relativenumber
 set encoding=utf-8
 set foldlevel=999
+set background=dark
 syntax on
 filetype plugin indent on
 
