@@ -99,7 +99,7 @@ function install_tmux_awesome {
     echo ".tmux awesome is already installed."
   fi
 
-  if [ -f ~/.tmux/.tmux.conf ] && [ -f ~/.tmux/tmux.conf.local ]; then
+  if [ -f ~/.tmux/.tmux.conf ] && [ -f ~/.tmux/.tmux.conf.local ]; then
     ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf && \
       cp ~/.tmux/.tmux.conf.local ~/.tmux.conf.local
   fi
