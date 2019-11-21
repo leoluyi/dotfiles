@@ -18,6 +18,10 @@ set expandtab
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
 
+" Toggle number and relativenumber for copy-paste 
+nnoremap <leader>n :set number! relativenumber!<CR>
+vnoremap <leader>n :set number! relativenumber!<CR>
+
 " Shortcutting for yank and paste
 nnoremap <leader>P "0P
 nnoremap <leader>p "0p
