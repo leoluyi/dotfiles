@@ -112,6 +112,10 @@ function install_tmux_awesome {
   if [ -f ~/.tmux/.tmux.conf ] && [ -f ~/.tmux/.tmux.conf.local ]; then
     ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf && \
       cp ~/.tmux/.tmux.conf.local ~/.tmux.conf.local
+
+    if [ -f ./tmux/.tmux.conf.local ]; then
+      cp ./tmux/.tmux.conf.local ~/.tmux.conf.local
+    fi
   fi
 
   # Install Tmux Plugin Manager
@@ -165,8 +169,8 @@ subl_settings
 link_virtualenv
 install_bash_git_prompt $FORCE
 install_vim_awesome $FORCE
-sync_dotfile $FORCE
 install_tmux_awesome $FORCE
+sync_dotfile $FORCE
 
 unset \
   subl_settings \
