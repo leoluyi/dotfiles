@@ -75,7 +75,6 @@
 		"SideBarEnhancements",
 		"SingleTrailingNewLine",
 		"SublimeLinter",
-		"SublimeLinter-contrib-dockerfilelint",
 		"SublimeLinter-flake8",
 		"SublimeLinter-shellcheck",
 		"Super Calculator",
