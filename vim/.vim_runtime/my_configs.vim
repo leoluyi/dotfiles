@@ -77,7 +77,7 @@ let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 " NERDTree -------------------------------------------------------------
-let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinPos = "left"
 
 " comfortable_motion ---------------------------------------------------
 " Disable comfortable_motion.
@@ -106,6 +106,10 @@ autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | en
 " ctrlp.vim ------------------------------------------------------------
 let g:ctrlp_map = '<c-f>'
 
+" close-buffers.vim ----------------------------------------------------
+autocmd VimEnter * if exists(':Bdelete') | exe "nnoremap <silent> Q     :Bdelete menu<CR>" | endif
+autocmd VimEnter * if exists(':Bdelete') | exe "nnoremap <silent> <C-q> :Bdelete menu<CR>" | endif
+
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -130,18 +134,22 @@ if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'asheq/close-buffers.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'asheq/close-buffers.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'matze/vim-move'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
 Plug 'valloric/vim-indent-guides'
 Plug 'vifm/vifm.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Optional: for snippet support
 " Further configuration might be required, read below
