@@ -136,7 +136,7 @@ endif
 
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'asheq/close-buffers.vim'
+Plug 'Asheq/close-buffers.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
