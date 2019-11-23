@@ -1,4 +1,4 @@
-" Some basics
+" Some basics ---------------------------------------------------------
 let mapleader = ","
 
 set number relativenumber
@@ -14,45 +14,18 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
+" Ruler
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
 
-" Toggle number and relativenumber for copy-paste 
+" Toggle number and relativenumber for copy-paste
 nnoremap <leader>n :set number! relativenumber!<CR>
 vnoremap <leader>n :set number! relativenumber!<CR>
 
-" Shortcutting for yank and paste
-nnoremap <leader>P "0P
-nnoremap <leader>p "0p
-vnoremap <leader>P "0P
-vnoremap <leader>p "0p
-
-" yank to clipboard
-" https://stackoverflow.com/a/3961954
-" https://www.markcampbell.me/2016/04/12/setting-up-yank-to-clipboard-on-a-mac-with-vim.html
-if has("clipboard")
-  set clipboard=unnamed " copy to the system clipboard
-
-  if has("unnamedplus") " X11 support
-    set clipboard+=unnamedplus
-  endif
-endif
-
-" Remove all trailing whitespace by pressing F5
-" https://vim.fandom.com/wiki/Remove_unwanted_spaces
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-" Disables automatic commenting on newline:
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" vim-move config - workaround alt key mappings
-nmap zj <Plug>MoveLineDown
-vmap zj <Plug>MoveBlockDown
-nmap zk <Plug>MoveLineUp
-vmap zk <Plug>MoveBlockUp
-
-" Automatic toggling between line number modes  ------------------------
+" Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
 augroup numbertoggle
   autocmd!
@@ -60,11 +33,43 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-" Allow saving of files as sudo ----------------------------------------
-" When I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+" Disables automatic commenting on newline
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" multi_cursor - default mapping ---------------------------------------
+" My Shortcut Keys -----------------------------------------------------
+
+" Shortcutting for yank and paste
+nnoremap <leader>P "0P
+nnoremap <leader>p "0p
+vnoremap <leader>P "0P
+vnoremap <leader>p "0p
+
+" Remove all trailing whitespace by pressing F5
+" https://vim.fandom.com/wiki/Remove_unwanted_spaces
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" vim-move config - workaround alt key mappings
+nmap zj <Plug>MoveLineDown
+vmap zj <Plug>MoveBlockDown
+nmap zk <Plug>MoveLineUp
+vmap zk <Plug>MoveBlockUp
+
+" Force write: Allow saving of files as sudo
+" When I forgot to start vim using sudo.
+command W w !sudo tee "%" > /dev/null
+
+" " yank to clipboard
+" " https://stackoverflow.com/a/3961954
+" " https://www.markcampbell.me/2016/04/12/setting-up-yank-to-clipboard-on-a-mac-with-vim.html
+" if has("clipboard")
+"   set clipboard=unnamed " copy to the system clipboard
+
+"   if has("unnamedplus") " X11 support
+"     set clipboard+=unnamedplus
+"   endif
+" endif
+
+" vim-multiple-cursors - default mapping -------------------------------
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
 let g:multi_cursor_select_all_word_key = '<Esc>n'
@@ -79,7 +84,7 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " NERDTree -------------------------------------------------------------
 let g:NERDTreeWinPos = "left"
 
-" comfortable_motion ---------------------------------------------------
+" comfortable-motion.vim -----------------------------------------------
 " Disable comfortable_motion.
 let g:loaded_comfortable_motion = 0
 " let g:comfortable_motion_interval = 1000.0 / 60
@@ -91,7 +96,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 
 " braceless.vim  -------------------------------------------------------
-autocmd FileType python if exists(':BracelessEnable') | exe "BracelessEnable +indent" | endif 
+autocmd FileType python if exists(':BracelessEnable') | exe "BracelessEnable +indent" | endif
 
 " vim-easy-align  ------------------------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga).

@@ -208,8 +208,8 @@ vtw      -   Highlight 'til next char "w"
 
 # See [more...](https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file)
 
-<Shift> ZZ        -   Write current file, if modified, and quit
-<Shift> ZQ        -   Force exit without saving
+<Shift> ZZ        -   write current file, if modified, and quit
+<Shift> ZQ        -   force exit without saving
 :e path/to/file   -   edit new file (buffer)
 :e!               -   revert to last save (or use :earlier 1f)
 :w !sudo tee %    -   force write with sudo trick. % (special variables) "the current file"
@@ -580,7 +580,7 @@ vim scp://balasundaramm@mgmt-bst:22/~/automation/test-file.txt - Edit a remote f
 
 ---
 
-### Text Objects
+### TEXT OBJECTS
 
 https://blog.carbonfive.com/2011/10/17/vim-text-objects-the-definitive-guide/
 
@@ -651,6 +651,17 @@ Use `<C-r> register` when entering a command in _command mode_ or _insert mode_ 
 - `<C-r> /` for last search term
 - `<C-r> +` for the `X clipboard` or a host of other substitutions
 
+---
+
+## My Custom Shorcut Keys
+
+```
+- :W    -- Force write with sudo
+- <F5>  -- Remove trailing white space
+- <leader>p -- Paste yanked register
+```
+
+---
 
 ## References
 
