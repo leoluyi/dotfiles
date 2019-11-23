@@ -2,18 +2,18 @@
 let mapleader = ","
 
 " Color scheme
-set background=dark
 try
   colorscheme desert
   colorscheme peaksea
   colorscheme gruvbox
-  colorscheme nord
 catch
 endtry
 
-set number relativenumber
+set background=dark
 set encoding=utf-8
 set foldlevel=999
+set number relativenumber
+
 syntax on
 filetype plugin indent on
 
@@ -189,7 +189,6 @@ Plug 'vifm/vifm.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Theme
-Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
