@@ -81,7 +81,7 @@ vnoremap <leader>nn :set number! relativenumber!<CR> :IndentLinesToggle<CR>
 
 " Cut and paste
 nnoremap <leader>x "0x
-    vnoremap <leader>x "0x
+vnoremap <leader>x "0x
 
 " " yank to clipboard
 " " https://stackoverflow.com/a/3961954
@@ -210,6 +210,10 @@ let g:ale_linters = {
   \ }
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 
+" vim-highlightedyank --------------------------------------------------
+let g:highlightedyank_highlight_duration = 400
+highlight HighlightedyankRegion cterm=reverse gui=reverse
+
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -222,20 +226,21 @@ endif
 
 call plug#begin()
 
+"Plug 'valloric/vim-indent-guides'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'Asheq/close-buffers.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'machakann/vim-highlightedyank'
 Plug 'matze/vim-move'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
-" Plug 'valloric/vim-indent-guides'
-Plug 'Yggdroot/indentLine'
 Plug 'vifm/vifm.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Yggdroot/indentLine'
 
 " python
 "" Python Bundle
@@ -288,6 +293,14 @@ Plug 'lervag/vimtex'
 if !has('nvim') && v:version >= 800
   " https://github.com/roxma/vim-hug-neovim-rpc
   Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+" Older Vim
+if !has('nvim') && v:version < 800
+  " highlightedyank
+  if !exists('##TextYankPost')
+    map y <Plug>(highlightedyank)
+  endif
 endif
 
 call plug#end()
