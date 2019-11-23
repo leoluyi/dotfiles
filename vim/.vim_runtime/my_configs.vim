@@ -266,18 +266,19 @@ if has('nvim')
   Plug 'ncm2/ncm2-bufword'
   Plug 'ncm2/ncm2-jedi'
   Plug 'ncm2/ncm2-path'
-  Plug 'ncm2/ncm2-ultisnips'
 
   " Formater
   Plug 'Chiel92/vim-autoformat'
 
   " R support
   " https://github.com/gaalcaras/ncm-R
-  " Plug 'gaalcaras/ncm-R'
-  " Plug 'jalvesaq/Nvim-R'
-  " Plug 'roxma/nvim-yarp'
+  Plug 'gaalcaras/ncm-R'
+  Plug 'jalvesaq/Nvim-R'
+
   " Optional: for snippet support
-  " Plug 'sirver/UltiSnips'
+  " based on ultisnips
+  Plug 'ncm2/ncm2-ultisnips'
+  Plug 'SirVer/ultisnips'
 endif
 
 " Optional: better Rnoweb support (LaTeX completion)
