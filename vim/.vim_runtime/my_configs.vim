@@ -76,8 +76,8 @@ vmap zk <Plug>MoveBlockUp
 command! W w !sudo tee % > /dev/null
 
 " Toggle number and relativenumber for copy-paste
-nnoremap <leader>n :set number! relativenumber!<CR> :IndentLinesToggle<CR>
-vnoremap <leader>n :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+nnoremap <leader>nn :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+vnoremap <leader>nn :set number! relativenumber!<CR> :IndentLinesToggle<CR>
 
 " Cut and paste
 nnoremap <leader>x "0x
