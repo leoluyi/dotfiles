@@ -156,6 +156,9 @@ Plug 'valloric/vim-indent-guides'
 Plug 'vifm/vifm.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" Theme
+Plug 'arcticicestudio/nord-vim'
+
 " Optional: for snippet support
 " Further configuration might be required, read below
 Plug 'sirver/UltiSnips'
