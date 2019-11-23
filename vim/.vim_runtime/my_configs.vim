@@ -54,9 +54,9 @@ vmap zj <Plug>MoveBlockDown
 nmap zk <Plug>MoveLineUp
 vmap zk <Plug>MoveBlockUp
 
-" Force write: Allow saving of files as sudo
-" When I forgot to start vim using sudo.
-command W w !sudo tee "%" > /dev/null
+" :W Force write: Allow saving of files as sudo
+" (useful for handling the permission-denied error)
+command! W w !sudo tee % > /dev/null
 
 " " yank to clipboard
 " " https://stackoverflow.com/a/3961954
