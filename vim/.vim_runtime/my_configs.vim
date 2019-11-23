@@ -1,10 +1,19 @@
 " Some basics ---------------------------------------------------------
 let mapleader = ","
 
+" Color scheme
+set background=dark
+try
+  colorscheme desert
+  colorscheme peaksea
+  colorscheme gruvbox
+  colorscheme nord
+catch
+endtry
+
 set number relativenumber
 set encoding=utf-8
 set foldlevel=999
-set background=dark
 syntax on
 filetype plugin indent on
 
@@ -14,7 +23,7 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
-" Ruler
+" Color column
 set colorcolumn=80
 highlight ColorColumn ctermbg=Black guibg=lightgrey
 
@@ -115,6 +124,29 @@ let g:ctrlp_map = '<c-f>'
 autocmd VimEnter * if exists(':Bdelete') | exe "nnoremap <silent> Q     :Bdelete menu<CR>" | endif
 autocmd VimEnter * if exists(':Bdelete') | exe "nnoremap <silent> <C-q> :Bdelete menu<CR>" | endif
 
+" lightline.vim --------------------------------------------------------
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ 'active': {
+      \   'left': [ ['mode', 'paste'],
+      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+      \   'right': [ [ 'lineinfo' ], ['percent'] ,
+      \            [ 'fileformat', 'fileencoding', 'filetype'] ],
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': ' ', 'right': ' ' },
+      \ 'subseparator': { 'left': ' ', 'right': '|' }
+      \ }
+
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -158,6 +190,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Theme
 Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Optional: for snippet support
 " Further configuration might be required, read below
