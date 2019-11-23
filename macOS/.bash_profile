@@ -148,6 +148,21 @@ command -v pyenv &>/dev/null && \
   source ~/.fzf.bash && \
   export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
 
+if [ -f ~/.fzf.bash ] && command -v fd &>/dev/null; then
+  # Use fd (https://github.com/sharkdp/fd) instead of the default find
+  # command for listing path candidates.
+  # - The first argument to the function ($1) is the base path to start traversal
+  # - See the source code (completion.{bash,zsh}) for the details.
+  _fzf_compgen_path() {
+	fd --hidden --follow --exclude ".git" . "$1"
+  }
+
+  # Use fd to generate the list for directory completion
+  _fzf_compgen_dir() {
+	fd --type d --hidden --follow --exclude ".git" . "$1"
+  }
+fi
+
 # Git diff-so-fancy.
 # https://github.com/so-fancy/diff-so-fancy
 if command -v diff-so-fancy &>/dev/null; then
