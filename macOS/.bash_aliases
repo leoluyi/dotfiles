@@ -1,6 +1,10 @@
 # Enable aliases to be sudo'ed
 alias sudo='sudo '
 
+# Neovim
+(command -v nvim &>/dev/null) && \
+  alias vim='nvim'
+
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
@@ -30,7 +34,7 @@ alias df='df -kTh'
 alias free='free -h'
 alias less='less -r'
 
-# subl + pipenv virtualenv
+# subl + pipenv virtualenv.
 (command -v pipenv &>/dev/null) && \
   (command -v subl &>/dev/null) && \
   alias subl-pipenv='pipenv --venv && pipenv run subl'

@@ -1,6 +1,10 @@
 # Enable aliases to be sudo'ed
 alias sudo='sudo '
 
+# Neovim
+(command -v nvim &>/dev/null) && \
+  alias vim='nvim'
+
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
@@ -31,6 +35,15 @@ alias free='free -h'
 alias less='less -r'
 
 # subl + pipenv virtualenv.
-(command -v pipenv >/dev/null) && \
-  (command -v subl >/dev/null) && \
+(command -v pipenv &>/dev/null) && \
+  (command -v subl &>/dev/null) && \
   alias subl-pipenv='pipenv --venv && pipenv run subl'
+
+# youtube-dl
+(command -v youtube-dl &>/dev/null) \
+  && alias youtube-dl-list='youtube-dl -ci -f mp4 -o "%(playlist_index)s-%(title)s.%(ext)s" --yes-playlist' \
+  && alias youtube-dl-mp4='youtube-dl -f mp4' \
+  && alias youtube-dl-m4a='youtube-dl -f bestaudio[ext=m4a] --embed-thumbnail --add-metadata'
+
+# Other Apps
+alias sourcetree='open -a SourceTree'
