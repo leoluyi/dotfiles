@@ -3,7 +3,9 @@ alias sudo='sudo '
 
 # Neovim
 (command -v nvim &>/dev/null) && \
-  alias vim='nvim'
+  alias oldvim="command vim"
+  alias vim="nvim"
+  alias vi="nvim"
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
