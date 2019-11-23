@@ -8,11 +8,17 @@ try
   colorscheme gruvbox
 catch
 endtry
-
 set background=dark
+
+" Encoding
 set encoding=utf-8
-set foldlevel=999
-set number relativenumber
+set fileencoding=utf-8
+set fileencodings=utf-8
+set ttyfast
+set fileformats=unix,dos,mac
+
+"" Fix backspace indent
+set backspace=indent,eol,start
 
 syntax on
 filetype plugin indent on
@@ -23,16 +29,17 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
+set softtabstop=0
+
+set foldlevel=999
+set number relativenumber
+
 " Color column
 set colorcolumn=80
 highlight ColorColumn ctermbg=Black guibg=lightgrey
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
-
-" Toggle number and relativenumber for copy-paste
-nnoremap <leader>n :set number! relativenumber!<CR>
-vnoremap <leader>n :set number! relativenumber!<CR>
 
 " Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
@@ -66,6 +73,14 @@ vmap zk <Plug>MoveBlockUp
 " :W Force write: Allow saving of files as sudo
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
+
+" Toggle number and relativenumber for copy-paste
+nnoremap <leader>n :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+vnoremap <leader>n :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+
+" Cut and paste
+nnoremap <leader>x "0x
+    vnoremap <leader>x "0x
 
 " " yank to clipboard
 " " https://stackoverflow.com/a/3961954
@@ -103,6 +118,9 @@ let g:loaded_comfortable_motion = 0
 " vim-indent-guides ----------------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
+
+" indentLine ----------------------------------------------------
+
 
 " braceless.vim  -------------------------------------------------------
 autocmd FileType python if exists(':BracelessEnable') | exe "BracelessEnable +indent" | endif
@@ -158,25 +176,10 @@ if empty(glob('~/.vim_runtime/autoload/plug.vim'))
 endif
 
 call plug#begin()
-" Plug 'ncm2/ncm2-jedi'
-
-" https://github.com/gaalcaras/ncm-R
-Plug 'gaalcaras/ncm-R'
-Plug 'jalvesaq/Nvim-R'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-" Vim 8 only
-if !has('nvim')
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
 
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'Asheq/close-buffers.vim'
-Plug 'davidhalter/jedi-vim'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'matze/vim-move'
 Plug 'ryanoasis/vim-devicons'
@@ -184,19 +187,58 @@ Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
-Plug 'valloric/vim-indent-guides'
+" Plug 'valloric/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 Plug 'vifm/vifm.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" python
+"" Python Bundle
+if !has('nvim')
+  Plug 'davidhalter/jedi-vim'
+endif
+Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+
+" fzf
+if isdirectory('/usr/local/opt/fzf')
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+else
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf.vim'
+endif
 
 " Theme
 Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
-" Optional: for snippet support
-" Further configuration might be required, read below
-Plug 'sirver/UltiSnips'
-Plug 'ncm2/ncm2-ultisnips'
+" Neovim only
+if has('nvim')
+  Plug 'roxma/vim-hug-neovim-rpc'
+
+  " Autocomplete
+  Plug 'ncm2/ncm2-bufword'
+  Plug 'ncm2/ncm2-jedi'
+  Plug 'ncm2/ncm2-path'
+  Plug 'ncm2/ncm2-ultisnips'
+
+  " R support
+  " https://github.com/gaalcaras/ncm-R
+  Plug 'ncm2/ncm2'
+  Plug 'roxma/nvim-yarp'
+  Plug 'jalvesaq/Nvim-R'
+  Plug 'gaalcaras/ncm-R'
+  " Optional: for snippet support
+  " Further configuration might be required, read below
+  Plug 'sirver/UltiSnips'
+endif
 
 " Optional: better Rnoweb support (LaTeX completion)
 Plug 'lervag/vimtex'
+
+" Vim8 only
+if !has('nvim') && v:version >= 800
+  " https://github.com/roxma/vim-hug-neovim-rpc
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 call plug#end()
