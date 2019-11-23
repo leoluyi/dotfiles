@@ -36,6 +36,7 @@ set number relativenumber
 
 " Color column
 set colorcolumn=80
+set cc=+1  " highlight column after 'textwidth'
 highlight ColorColumn ctermbg=Black guibg=lightgrey
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
@@ -124,16 +125,21 @@ let g:indent_guides_guide_size = 1
 
 " NCM2 -----------------------------------------------------------------
 " https://yufanlu.net/2018/09/03/neovim-python/
-let g:python3_host_prog = "/Users/leoluyi/.pyenv/shims/python3"
 augroup NCM2
   autocmd!
   " enable ncm2 for all buffers
   autocmd BufEnter * call ncm2#enable_for_buffer()
-  " :help Ncm2PopupOpen for more information
+  " IMPORTANT: :help Ncm2PopupOpen for more information
   set completeopt=noinsert,menuone,noselect
+
   " When the <Enter> key is pressed while the popup menu is visible, it only
-  " hides the menu. Use this mapping to close the menu and also start a new line.
+  " hides the menu. Use this mapping to close the menu and also start a new line:
   inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+  " Use <TAB> to select the popup menu:
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <C-Space> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   " uncomment this block if you use vimtex for LaTex
   " autocmd Filetype tex call ncm2#register_source({
   "           \ 'name': 'vimtex',
@@ -145,6 +151,9 @@ augroup NCM2
   "           \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
   "           \ })
 augroup END
+
+" vim-autoformat -------------------------------------------
+noremap <F3> :Autoformat<CR>
 
 " braceless.vim  -------------------------------------------------------
 autocmd FileType python if exists(':BracelessEnable') | exe "BracelessEnable +indent" | endif
@@ -188,6 +197,18 @@ let g:lightline = {
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': '|' }
       \ }
+
+" Ale ------------------------------------------------------------------
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %code - %%s [%severity%]'
+let g:ale_linters = {
+  \   'python': ['flake8']
+  \ }
+let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -237,7 +258,9 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Neovim only
 if has('nvim')
-  Plug 'roxma/vim-hug-neovim-rpc'
+  " NCM base
+  Plug 'ncm2/ncm2'
+  Plug 'roxma/nvim-yarp'
 
   " Autocomplete
   Plug 'ncm2/ncm2-bufword'
@@ -245,15 +268,16 @@ if has('nvim')
   Plug 'ncm2/ncm2-path'
   Plug 'ncm2/ncm2-ultisnips'
 
+  " Formater
+  Plug 'Chiel92/vim-autoformat'
+
   " R support
   " https://github.com/gaalcaras/ncm-R
-  Plug 'ncm2/ncm2'
-  Plug 'roxma/nvim-yarp'
-  Plug 'jalvesaq/Nvim-R'
-  Plug 'gaalcaras/ncm-R'
+  " Plug 'gaalcaras/ncm-R'
+  " Plug 'jalvesaq/Nvim-R'
+  " Plug 'roxma/nvim-yarp'
   " Optional: for snippet support
-  " Further configuration might be required, read below
-  Plug 'sirver/UltiSnips'
+  " Plug 'sirver/UltiSnips'
 endif
 
 " Optional: better Rnoweb support (LaTeX completion)
