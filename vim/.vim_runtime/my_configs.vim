@@ -16,7 +16,7 @@ set shiftwidth=4
 set expandtab
 " Ruler
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=Black guibg=lightgrey
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
