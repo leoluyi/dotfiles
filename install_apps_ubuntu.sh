@@ -185,6 +185,26 @@ function install_rstudio {
 
 function install_pyenv {
   echo "$(tput setaf 2)###### Install Pyenv ######$(tput sgr 0)"
+
+  if [ -z "$PYENV_ROOT" ]; then
+    PYENV_ROOT="${HOME}/.pyenv"
+  fi
+
+  colorize() {
+    if [ -t 1 ]; then printf "\e[%sm%s\e[m" "$1" "$2"
+    else echo -n "$2"
+    fi
+  }
+
+  # Checks for `.pyenv` file, and suggests to remove it for installing
+  if [ -d "${PYENV_ROOT}" ]; then
+    { echo
+      colorize 1 "INFO"
+      echo ": Pyenv is already installed. Can not proceed with installation. Kindly remove the '${PYENV_ROOT}' directory first."
+      echo
+    } >&2
+    return
+  fi
   curl -fsSL https://pyenv.run | bash
 }
 
