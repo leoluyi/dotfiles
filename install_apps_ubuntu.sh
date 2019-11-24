@@ -7,6 +7,7 @@ if [ "$1" = "--force" ] || [ "$1" = "-f" ]; then
   FORCE="-f"
 fi
 
+version=$(lsb_release -sd)
 
 get_os() {
   local os=""
@@ -61,6 +62,9 @@ function install_apt_apps {
     more \
     ncdu    `# Interactive and very fast du` \
     neofetch \
+    neovim \
+    `# python-neovim` \
+    `# python3-neovim` \
     nmon    `# Performance monitor` \
     p7zip-full \
     silversearcher-ag \
@@ -74,6 +78,30 @@ function install_apt_apps {
     xz-utils \
     zlib1g-dev \
     2>dev/null
+}
+
+
+function install_neovim {
+  local old_ubuntu="$(echo "$(lsb_release -rs) 18.04" | awk '{print ($1 < $2)}')"
+
+  if [ "${old_ubuntu}" = 1 ];then
+    # Nvim repository
+    sudo apt install -y software-properties-common
+    sudo add-apt-repository -y ppa:neovim-ppa/stable
+
+    sudo apt update && sudo apt install -y neovim
+
+    sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+    sudo update-alternatives --config vi
+    sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+    sudo update-alternatives --config vim
+    sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+    sudo update-alternatives --config editor
+  else
+    sudo apt update && sudo apt install -y neovim python-neovim python3-neovim
+  fi
+
+  sudo python3 -m pip install pynvim
 }
 
 
@@ -225,9 +253,9 @@ function upgrade_tmux {
   echo "$(tput setaf 2)###### Upgrade tmux ######$(tput sgr 0)"
 
   # https://bogdanvlviv.com/posts/tmux/how-to-install-the-latest-tmux-on-ubuntu-16_04.html
-  MIN_TMUX_VERSION_REQUIRED="2.9"
-  current_tmux_version="$(tmux -V | cut -d' ' -f2-)"
-  need_upgrade="$(echo "${current_tmux_version} ${MIN_TMUX_VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"  # SC2072
+  local MIN_TMUX_VERSION_REQUIRED="2.9"
+  local current_tmux_version="$(tmux -V | cut -d' ' -f2-)"
+  local need_upgrade="$(echo "${current_tmux_version} ${MIN_TMUX_VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"  # SC2072
 
   if [ "${need_upgrade}" = 1 ]; then
     sudo apt install -y \
