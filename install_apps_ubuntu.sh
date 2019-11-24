@@ -245,6 +245,7 @@ install_r $FORCE
 install_rstudio
 install_pyenv
 install_diff_so_fancy
+upgrade_tmux
 
 unset \
   install_apt_apps \
@@ -256,6 +257,7 @@ unset \
   install_rstudio \
   install_pyenv \
   install_diff_so_fancy \
+  upgrade_tmux \
   &>/dev/null
 
 echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"
