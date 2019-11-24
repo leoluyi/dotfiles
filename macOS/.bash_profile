@@ -56,7 +56,6 @@ fi
 alias ll='ls -lhaFH'
 alias la='ls -A'
 alias l='ls -CF'
-alias vi='vim'
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
