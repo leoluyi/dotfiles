@@ -3,7 +3,7 @@
 # Check if has sudo privilege
 sudo -v || exit;
 
-if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
+if [ "$1" = "--force" ] || [ "$1" = "-f" ]; then
   FORCE="-f"
 fi
 
@@ -87,7 +87,7 @@ function install_git {
 function install_chrome {
   echo "$(tput setaf 2)###### Install Chrome ######$(tput sgr 0)"
 
-  if [ ! "$(dpkg -l | awk '{print $2}' | grep google-chrome-stable)" ]; then
+  if ! dpkg -l | awk '{print $2}' | grep -q google-chrome-stable; then
     curl -fsSL -o /tmp/google-chrome-stable_current_amd64.deb \
       https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
@@ -113,7 +113,7 @@ function install_docker {
   sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io
 
   # ====== Docker-compose ======
-  if [ ! $(command -v docker-compose 2>/dev/null) ]; then
+  if ! command -v docker-compose &>/dev/null ; then
     sudo curl -fsSL "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" \
       -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
@@ -131,7 +131,7 @@ function install_docker {
 function install_dropbox {
   echo "$(tput setaf 2)###### Install Dropbox ######$(tput sgr 0)"
 
-  if [ ! $(command -v dropbox 2>/dev/null) ]; then
+  if ! command -v dropbox &>/dev/null; then
     sudo apt install -y gdebi python-gpg
     # sudo apt install python-gpgme   # for Ubuntu16
     wget -qO /tmp/dropbox_2019.02.14_amd64.deb https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
@@ -145,7 +145,7 @@ function install_dropbox {
 function install_r {
   echo "$(tput setaf 2)###### Install R ######$(tput sgr 0)"
 
-  if [ "$1" == "-f" ]; then
+  if [ "$1" = "-f" ]; then
     # Remove Ubuntu packages for R.
     sudo apt purge -y r-base* r-recommended r-cran-*
     sudo apt autoremove -y
@@ -154,7 +154,7 @@ function install_r {
     sudo rm -rf /usr/local/lib/R/site-library/*
   fi
 
-  if [ ! "$(dpkg -l | awk '{print $2}' | grep r-base)" ]; then
+  if ! dpkg -l | awk '{print $2}' | grep -q r-base ; then
     # Install new version of R (3.6) for Ubuntu 18.04.
     sudo add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -sc)-cran35/"
     sudo add-apt-repository -y ppa:marutter/c2d4u3.5
@@ -175,7 +175,7 @@ function install_r {
 function install_rstudio {
   echo "$(tput setaf 2)###### Install RStudio ######$(tput sgr 0)"
 
-  if [ ! $(command -v rstudio 2>/dev/null) ]; then
+  if ! command -v rstudio &>/dev/null; then
     curl -fsSL -o /tmp/rstudio-1.2.1335-amd64.deb \
       https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.2.1335-amd64.deb
     sudo apt install gdebi-core &&  sudo gdebi -n /tmp/rstudio-1.2.1335-amd64.deb
@@ -201,6 +201,40 @@ function install_diff_so_fancy {
 }
 
 
+function upgrade_tmux {
+  echo "$(tput setaf 2)###### Upgrade tmux ######$(tput sgr 0)"
+
+  # https://bogdanvlviv.com/posts/tmux/how-to-install-the-latest-tmux-on-ubuntu-16_04.html
+  MIN_TMUX_VERSION_REQUIRED="2.9"
+  current_tmux_version="$(tmux -V | cut -d' ' -f2-)"
+  need_upgrade="$(echo "${current_tmux_version} ${MIN_TMUX_VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"  # SC2072
+
+  if [ "${need_upgrade}" = 1 ]; then
+    sudo apt install -y \
+      curl \
+      automake \
+      build-essential \
+      pkg-config \
+      libevent-dev \
+      libncurses5-dev
+
+    # Download, compile and install tmux
+    rm -rf /tmp/tmux
+    mkdir -p /tmp/tmux
+    curl -fsSLo "/tmp/tmux-${MIN_TMUX_VERSION_REQUIRED}.tar.gz" \
+      "https://github.com/tmux/tmux/releases/download/${MIN_TMUX_VERSION_REQUIRED}/tmux-${MIN_TMUX_VERSION_REQUIRED}.tar.gz"
+    tar -xf "/tmp/tmux-${MIN_TMUX_VERSION_REQUIRED}.tar.gz" -C /tmp
+    cd "/tmp/tmux-${MIN_TMUX_VERSION_REQUIRED}" || return
+    ./configure && make
+    sudo make install
+    cd - || return
+    rm -rf /tmp/tmux  # Cleanup
+  else
+    echo "No need to upgrade (current tmux version: ${current_tmux_version})"
+  fi
+}
+
+
 validate_os ubuntu
 install_apt_apps
 install_chrome
@@ -222,6 +256,6 @@ unset \
   install_rstudio \
   install_pyenv \
   install_diff_so_fancy \
-  2>/dev/null
+  &>/dev/null
 
 echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"

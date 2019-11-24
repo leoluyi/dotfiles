@@ -159,6 +159,6 @@ unset \
   brew_install_app \
   install_homebrew \
   brew_install_cli \
-  >/dev/null
+  &>/dev/null
 
 echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"

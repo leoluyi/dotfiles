@@ -212,7 +212,7 @@ unset \
   install_vim_awesome \
   _sync_dotfile \
   sync_dotfile \
-  >/dev/null
+  &>/dev/null
 
 echo "$(tput setaf 2)###### Source Bash Settings ######$(tput sgr 0)"
 
