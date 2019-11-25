@@ -255,6 +255,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'machakann/vim-highlightedyank'
 Plug 'matze/vim-move'
 Plug 'maximbaz/lightline-ale'
+Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -263,15 +264,7 @@ Plug 'tweekmonster/braceless.vim'
 Plug 'vifm/vifm.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
-
-" python
-"" Python Bundle
-if !has('nvim')
-  Plug 'davidhalter/jedi-vim'
-else
-  Plug 'davidhalter/jedi-vim', { 'on': [] }
-endif
-Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+Plug 'Chiel92/vim-autoformat'  " Formater
 
 " fzf
 if isdirectory('/usr/local/opt/fzf')
@@ -287,6 +280,9 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Neovim only
 if has('nvim')
+  Plug 'davidhalter/jedi-vim', { 'on': [] }
+  Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
+
   " NCM base
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
@@ -297,9 +293,6 @@ if has('nvim')
   Plug 'ncm2/ncm2-path'
   Plug 'ncm2/ncm2-tmux'
 
-  " Formater
-  Plug 'Chiel92/vim-autoformat'
-
   " R support
   " https://github.com/gaalcaras/ncm-R
   Plug 'gaalcaras/ncm-R'
@@ -309,21 +302,16 @@ if has('nvim')
   " based on ultisnips
   Plug 'ncm2/ncm2-ultisnips'
   Plug 'SirVer/ultisnips'
-endif
 
-" Optional: better Rnoweb support (LaTeX completion)
-Plug 'lervag/vimtex'
-
-" Vim8 only
-if !has('nvim') && v:version >= 800
+  " Optional: better Rnoweb support (LaTeX completion)
+  Plug 'lervag/vimtex'
+elseif v:version >= 800
+  " Vim8 only
   " https://github.com/roxma/vim-hug-neovim-rpc
   Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'davidhalter/jedi-vim'
 else
-  Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
-endif
-
-" Older Vim
-if !has('nvim') && v:version < 800
+  " Older Vim
   " highlightedyank
   if !exists('##TextYankPost')
     map y <Plug>(highlightedyank)
