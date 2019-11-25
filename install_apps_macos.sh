@@ -75,6 +75,7 @@ function brew_install_cli {
   ag \
   asciinema     `# record terminal sessions` \
   atomicparsley `# setting metadata into MPEG-4` \
+  autopep8 \
   bash \
   bash-completion@2 \
   bash-git-prompt \
@@ -89,6 +90,7 @@ function brew_install_cli {
   ffmpeg \
   figlet    `# Banner-like program prints strings as ASCII art` \
   findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
+  flake8 \
   gcc \
   gdal \
   git \
@@ -117,9 +119,9 @@ function brew_install_cli {
   pipenv \
   plowshare  `# 免空神器` \
   proj \
-  qpdf \
   pyenv \
   pyenv-virtualenv \
+  qpdf \
   ranger     `# a terminal browser for Vim` \
   rename \
   ripgrep \
