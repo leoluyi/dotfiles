@@ -2,10 +2,11 @@
 alias sudo='sudo '
 
 # Neovim
-(command -v nvim &>/dev/null) && \
-  alias oldvim="command vim"
+if command -v nvim &>/dev/null; then
+  alias ovim="command vim"
   alias vim="nvim"
   alias vi="nvim"
+fi
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'

@@ -246,6 +246,8 @@ Plug 'Yggdroot/indentLine'
 "" Python Bundle
 if !has('nvim')
   Plug 'davidhalter/jedi-vim'
+else
+  Plug 'davidhalter/jedi-vim', { 'on': [] }
 endif
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
@@ -271,6 +273,7 @@ if has('nvim')
   Plug 'ncm2/ncm2-bufword'
   Plug 'ncm2/ncm2-jedi'
   Plug 'ncm2/ncm2-path'
+  Plug 'ncm2/ncm2-tmux'
 
   " Formater
   Plug 'Chiel92/vim-autoformat'
@@ -293,6 +296,8 @@ Plug 'lervag/vimtex'
 if !has('nvim') && v:version >= 800
   " https://github.com/roxma/vim-hug-neovim-rpc
   Plug 'roxma/vim-hug-neovim-rpc'
+else
+  Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
 endif
 
 " Older Vim

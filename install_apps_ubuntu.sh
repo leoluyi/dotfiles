@@ -82,23 +82,22 @@ function install_apt_apps {
 
 
 function install_neovim {
-  local old_ubuntu="$(echo "$(lsb_release -rs) 18.04" | awk '{print ($1 < $2)}')"
+  local new_ubuntu="$(echo "$(lsb_release -rs) 18.04" | awk '{print ($1 < $2)}')"
 
-  if [ "${old_ubuntu}" = 1 ];then
-    # Nvim repository
-    sudo apt install -y software-properties-common
-    sudo add-apt-repository -y ppa:neovim-ppa/stable
+  # Nvim repository
+  sudo apt install -y software-properties-common
+  sudo add-apt-repository -y ppa:neovim-ppa/stable
 
+  if [ "${new_ubuntu}" = 1 ];then
+    sudo apt update && sudo apt install -y neovim python-neovim python3-neovim
+  else
     sudo apt update && sudo apt install -y neovim
-
     sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
     sudo update-alternatives --config vi
     sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
     sudo update-alternatives --config vim
     sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
     sudo update-alternatives --config editor
-  else
-    sudo apt update && sudo apt install -y neovim python-neovim python3-neovim
   fi
 
   sudo python3 -m pip install pynvim
@@ -286,25 +285,27 @@ function upgrade_tmux {
 validate_os ubuntu
 install_apt_apps
 install_chrome
+install_diff_so_fancy
 install_docker
 install_dropbox
 install_git
+install_neovim
+install_pyenv
 install_r $FORCE
 install_rstudio
-install_pyenv
-install_diff_so_fancy
 upgrade_tmux
 
 unset \
   install_apt_apps \
   install_chrome \
+  install_diff_so_fancy \
   install_docker \
   install_dropbox \
   install_git \
+  install_neovim \
+  install_pyenv \
   install_r \
   install_rstudio \
-  install_pyenv \
-  install_diff_so_fancy \
   upgrade_tmux \
   &>/dev/null
 
