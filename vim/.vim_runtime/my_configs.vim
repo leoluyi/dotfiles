@@ -161,7 +161,6 @@ autocmd FileType python if exists(':BracelessEnable') | exe "BracelessEnable +in
 " vim-easy-align  ------------------------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga).
 xmap ga <Plug>(EasyAlign)
-
 " Start interactive EasyAlign for a motion/text object (e.g. gaip).
 nmap ga <Plug>(EasyAlign)
 
@@ -177,7 +176,7 @@ autocmd VimEnter * if exists(':Bdelete') | exe "nnoremap <silent> <C-q> :Bdelete
 
 " lightline.vim --------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'gr',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
