@@ -46,8 +46,8 @@ set splitbelow splitright
 " https://jeffkreeftmeijer.com/vim-number/
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber number
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber nonumber
 augroup END
 
 " Disables automatic commenting on newline
@@ -76,8 +76,8 @@ vmap zk <Plug>MoveBlockUp
 command! W w !sudo tee % > /dev/null
 
 " Toggle number and relativenumber for copy-paste
-nnoremap <leader>nn :set number! relativenumber!<CR> :IndentLinesToggle<CR>
-vnoremap <leader>nn :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+nnoremap <leader>nn :set nonumber norelativenumber<CR> :IndentLinesToggle<CR>
+vnoremap <leader>nn :set number relativenumber<CR> :IndentLinesToggle<CR>
 
 " Cut and paste
 nnoremap <leader>x "0x

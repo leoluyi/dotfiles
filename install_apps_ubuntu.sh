@@ -293,10 +293,10 @@ validate_os ubuntu
 install_apt_apps
 install_chrome
 install_diff_so_fancy
-install_docker
+install_docker $FORCE
 install_dropbox
 install_git
-install_neovim
+install_neovim $FORCE
 install_pyenv
 install_r $FORCE
 install_rstudio

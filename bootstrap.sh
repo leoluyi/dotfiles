@@ -164,18 +164,24 @@ function subl_settings {
 function _sync_dotfile {
   echo "Syncing dotfiles ..."
 
-  src_folders=("bash-git-prompt" "git" "tmux" "vim" "macOS")
+  local src_folders=("bash-git-prompt" "git" "tmux" "vim" "macOS")
   for folder in "${src_folders[@]}"; do
-    find "$folder" -maxdepth 1 -name '.[!.]*' \
+    find "$folder" -maxdepth 1 -mindepth 1 -name '.[!.]*' -print0 \
       ! -name .git \
       ! -name .DS_Store \
       ! -name .osx | \
-      tee >(xargs -I_ rsync -ar --no-perms _ ~) >(xargs -I_ basename _ | \
-      xargs printf "Updated ~/%s\n") >/dev/null;
+      tee >(xargs -0 -I_ rsync -ar --no-perms _ ~) \
+          >(xargs -0 -I_ basename _ | tr '\n' '\0' | xargs -0 -n1 printf "Updated %s\n") \
+          >/dev/null;
   done
 
   # .config
-  rsync -rlptvh ./config/ ~/.config
+  find ./config/ -maxdepth 1 -mindepth 1 -type d -print0 | \
+    xargs -0 -I_ basename _ | \
+    tr '\n' '\0' | \
+    tee >(xargs -0 -I_ rsync -rlpth ./config/_ ~/.config/_) \
+        >(xargs -0 -n1 printf "Updated ~/.config/%s\n") \
+        >/dev/null;
 }
 
 
