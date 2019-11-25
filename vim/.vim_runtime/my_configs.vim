@@ -176,7 +176,7 @@ autocmd VimEnter * if exists(':Bdelete') | exe "nnoremap <silent> <C-q> :Bdelete
 
 " lightline.vim --------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'gr',
+      \ 'colorscheme': 'default',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
