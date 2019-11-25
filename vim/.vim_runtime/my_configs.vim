@@ -140,7 +140,7 @@ augroup NCM2
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <C-Space> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  " uncomment this block if you use vimtex for LaTex
+  " uncomment this block if you use vimtex for LaTex:
   " autocmd Filetype tex call ncm2#register_source({
   "           \ 'name': 'vimtex',
   "           \ 'priority': 8,
@@ -180,8 +180,9 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-      \   'right': [ [ 'lineinfo' ], ['percent'] ,
-      \            [ 'fileformat', 'fileencoding', 'filetype'] ],
+      \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+      \              [ 'lineinfo' ], ['percent'],
+      \              [ 'fileformat', 'fileencoding', 'filetype'] ],
       \ },
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
@@ -209,6 +210,27 @@ let g:ale_linters = {
   \ }
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 
+" lightline-ale ---------------------------------------------------------
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+
+" let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_checking = "◌"
+let g:lightline#ale#indicator_warnings = "⚠️"
+let g:lightline#ale#indicator_errors = "✖"
+let g:lightline#ale#indicator_ok = "✔"
+
 " vim-highlightedyank --------------------------------------------------
 let g:highlightedyank_highlight_duration = 400
 highlight HighlightedyankRegion cterm=reverse gui=reverse
@@ -230,7 +252,7 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'Asheq/close-buffers.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'machakann/vim-highlightedyank'
+Plug 'maximbaz/lightline-ale'
 Plug 'matze/vim-move'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
