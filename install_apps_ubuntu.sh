@@ -102,7 +102,7 @@ function install_neovim {
     fi
   fi
 
-  sudo pip3 install -U neovim pynvim
+  sudo pip3 install -U neovim pynvim jedi flake8 autopep8
 }
 
 
