@@ -46,8 +46,8 @@ set splitbelow splitright
 " https://jeffkreeftmeijer.com/vim-number/
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber number
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber nonumber
+  autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber 
+  autocmd BufLeave,FocusLost,InsertEnter   * set nonumber norelativenumber
 augroup END
 
 " Disables automatic commenting on newline
@@ -76,8 +76,8 @@ vmap zk <Plug>MoveBlockUp
 command! W w !sudo tee % > /dev/null
 
 " Toggle number and relativenumber for copy-paste
-nnoremap <leader>nn :set nonumber norelativenumber<CR> :IndentLinesToggle<CR>
-vnoremap <leader>nn :set number relativenumber<CR> :IndentLinesToggle<CR>
+nnoremap <leader>nn :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+vnoremap <leader>nn :set number! relativenumber!<CR> :IndentLinesToggle<CR>
 
 " Cut and paste
 nnoremap <leader>x "0x
@@ -181,7 +181,7 @@ let g:lightline = {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
-      \              [ 'lineinfo' ], ['percent'],
+      \              [ 'percent', 'lineinfo' ],
       \              [ 'fileformat', 'fileencoding', 'filetype'] ],
       \ },
       \ 'component': {
@@ -198,6 +198,27 @@ let g:lightline = {
       \ 'subseparator': { 'left': ' ', 'right': '|' }
       \ }
 
+" lightline-ale ---------------------------------------------------------
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+
+" let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_checking = "◌"
+" let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "✖"
+let g:lightline#ale#indicator_ok = "✔"
+
 " Ale ------------------------------------------------------------------
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 'never'
@@ -209,27 +230,6 @@ let g:ale_linters = {
   \   'python': ['flake8']
   \ }
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
-
-" lightline-ale ---------------------------------------------------------
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
-
-let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-      \ }
-
-" let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_checking = "◌"
-let g:lightline#ale#indicator_warnings = "⚠️"
-let g:lightline#ale#indicator_errors = "✖"
-let g:lightline#ale#indicator_ok = "✔"
 
 " vim-highlightedyank --------------------------------------------------
 let g:highlightedyank_highlight_duration = 400
@@ -252,8 +252,9 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'Asheq/close-buffers.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'maximbaz/lightline-ale'
+Plug 'machakann/vim-highlightedyank'
 Plug 'matze/vim-move'
+Plug 'maximbaz/lightline-ale'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
