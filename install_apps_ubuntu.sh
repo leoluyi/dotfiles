@@ -82,25 +82,27 @@ function install_apt_apps {
 
 
 function install_neovim {
-  local new_ubuntu="$(echo "$(lsb_release -rs) 18.04" | awk '{print ($1 < $2)}')"
+  local new_ubuntu="$(echo "$(lsb_release -rs) 18.04" | awk '{print ($1 >= $2)}')"
 
-  # Nvim repository
-  sudo apt install -y software-properties-common
-  sudo add-apt-repository -y ppa:neovim-ppa/stable
+  if ! command -v nvim &>/dev/null || [ "$1" = "-f" ]; then
+    # Nvim repository
+    sudo apt install -y software-properties-common
+    sudo add-apt-repository -y ppa:neovim-ppa/stable
 
-  if [ "${new_ubuntu}" = 1 ];then
-    sudo apt update && sudo apt install -y neovim python-neovim python3-neovim
-  else
-    sudo apt update && sudo apt install -y neovim
-    sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
-    sudo update-alternatives --config vi
-    sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
-    sudo update-alternatives --config vim
-    sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-    sudo update-alternatives --config editor
+    if [ "${new_ubuntu}" = 1 ];then
+      sudo apt update && sudo apt install -y neovim python3-pip
+    else
+      sudo apt update && sudo apt install -y neovim python3-pip
+      sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+      sudo update-alternatives --config vi
+      sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+      sudo update-alternatives --config vim
+      sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+      sudo update-alternatives --config editor
+    fi
   fi
 
-  sudo python3 -m pip install pynvim
+  sudo pip3 install -U neovim pynvim
 }
 
 
@@ -124,26 +126,30 @@ function install_chrome {
 
 function install_docker {
 
-  # ====== Docker ======
-  # https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community
-  sudo apt install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  sudo add-apt-repository -y \
-     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-     $(lsb_release -cs) \
-     stable"
-  sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io
+  if ! command -v docker &>/dev/null || [ "$1" = "-f" ]; then
+    # ====== Docker ======
+    # https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community
+    sudo apt install -y \
+      apt-transport-https \
+      ca-certificates \
+      curl \
+      gnupg-agent \
+      software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository -y \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+    sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io
+  fi
 
-  # ====== Docker-compose ======
-  if ! command -v docker-compose &>/dev/null ; then
-    sudo curl -fsSL "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" \
-      -o /usr/local/bin/docker-compose
-    sudo chmod +x /usr/local/bin/docker-compose
+  if ! command -v docker-compose &>/dev/null || [ "$1" = "-f" ]; then
+    # ====== Docker-compose ======
+    if ! command -v docker-compose &>/dev/null; then
+      sudo curl -fsSL "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" \
+        -o /usr/local/bin/docker-compose
+      sudo chmod +x /usr/local/bin/docker-compose
+    fi
   fi
 
   # ====== Completion ======
@@ -202,10 +208,11 @@ function install_r {
 function install_rstudio {
   echo "$(tput setaf 2)###### Install RStudio ######$(tput sgr 0)"
 
+  local RSTUDIO_VERSION="1.2.1335"
   if ! command -v rstudio &>/dev/null; then
-    curl -fsSL -o /tmp/rstudio-1.2.1335-amd64.deb \
-      https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.2.1335-amd64.deb
-    sudo apt install gdebi-core &&  sudo gdebi -n /tmp/rstudio-1.2.1335-amd64.deb
+    curl -fsSL -o /tmp/rstudio-${RSTUDIO_VERSION}-amd64.deb \
+      https://download1.rstudio.org/desktop/bionic/amd64/rstudio-${RSTUDIO_VERSION}-amd64.deb
+    sudo apt install gdebi-core && sudo gdebi -n /tmp/rstudio-${RSTUDIO_VERSION}-amd64.deb
   fi
 }
 

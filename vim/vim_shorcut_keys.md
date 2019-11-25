@@ -481,12 +481,12 @@ gcap       -   comment out a paragraph
 [surround.vim](https://github.com/tpope/vim-surround)
 
 ```
+S "        -   (Visual mode) add quotes in selection
+
 ys iw "    -   add quotes in word
 ds "       -   remove the delimiters entirely
 cs "'      -   change surrounding from " to '
 yss )      -   wrap the entire line in parentheses
-
-S "        -   (Visual mode) add quotes in selection
 ```
 
 [NERDTree](https://github.com/scrooloose/nerdtree)
