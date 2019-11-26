@@ -109,6 +109,24 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " == Utilities for vimrc. == -------------------------------------------
 
 " https://gist.github.com/thinca/1518874
+
+" == Naming convention. ==
+" Command name
+"  - CamelCase
+" Global function name
+"  - CamelCase
+" Local function name
+"  - s:split_by_underbar
+" Group name for autocmd
+"  - split-by-dash
+"   In vimrc, start with "vimrc"
+"    - vimrc-{unique-name}
+"   In vim plugin, start with "plugin"
+"    - plugin-{plugin-name}
+"    - plugin-{plugin-name}-{unique-name}
+"   In other custom files, start with "custom"
+"    - custom-{unique-name}
+
 function! s:has_plugin(name)
   return globpath(&runtimepath, 'plugin/' . a:name . '.vim') !=# ''
   \   || globpath(&runtimepath, 'autoload/' . a:name . '.vim') !=# ''
@@ -181,16 +199,23 @@ if s:has_plugin('vim-easy-align')
 endif
 
 " fzf.vim --------------------------------------------------------------
+" https://stackoverflow.com/a/5010399/3744499
+" Plugins are only loaded after vim has finished processing your .vimrc.
+" Also, pathogen doesn't actually load your plugins, it merely adds their
+" containing folders to the runtimepath option so they will be loaded after your .vimrc
+
+" You could create a VimEnter autocmd to set up your mapping after vim has finished loading:
 autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | endif
 
 " ctrlp.vim ------------------------------------------------------------
 let g:ctrlp_map = '<c-f>'
 
 " close-buffers.vim ----------------------------------------------------
-if exists(':Bdelete')
-  autocmd VimEnter * nnoremap <silent> Q     :Bdelete menu<CR>
-  autocmd VimEnter * nnoremap <silent> <C-q> :Bdelete menu<CR>
-endif
+autocmd VimEnter * |
+  \ if exists(':Bdelete') |
+  \   nnoremap <silent> Q     :Bdelete menu<CR> |
+  \   nnoremap <silent> <C-q> :Bdelete menu<CR> |
+  \ endif
 
 " lightline.vim --------------------------------------------------------
 let g:lightline = {
@@ -283,6 +308,7 @@ Plug 'Asheq/close-buffers.vim'
 Plug 'Chiel92/vim-autoformat'  " formater
 Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
@@ -321,6 +347,9 @@ if has('nvim') || v:version >= 800
   Plug 'ncm2/ncm2-path'
   Plug 'ncm2/ncm2-tmux'
 
+  " Disable jedi-vim
+  Plug 'davidhalter/jedi-vim', { 'on': [] }
+
   " R support
   " https://github.com/gaalcaras/ncm-R
   Plug 'gaalcaras/ncm-R'
@@ -337,7 +366,6 @@ if has('nvim') || v:version >= 800
   " Others
   " https://github.com/roxma/vim-hug-neovim-rpc
   Plug 'roxma/vim-hug-neovim-rpc'
-  Plug 'machakann/vim-highlightedyank'
 
 " Neovim only
 if has('nvim')
