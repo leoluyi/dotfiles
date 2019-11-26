@@ -47,7 +47,7 @@ set splitbelow splitright
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber 
-  autocmd BufLeave,FocusLost,InsertEnter   * set nonumber norelativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 " Disables automatic commenting on newline
@@ -76,8 +76,8 @@ vmap zk <Plug>MoveBlockUp
 command! W w !sudo tee % > /dev/null
 
 " Toggle number and relativenumber for copy-paste
-nnoremap <leader>nn :set number! relativenumber!<CR> :IndentLinesToggle<CR>
-vnoremap <leader>nn :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+nnoremap <leader>n :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+vnoremap <leader>n :set number! relativenumber!<CR> :IndentLinesToggle<CR>
 
 " Cut and paste
 nnoremap <leader>x "0x
@@ -106,6 +106,14 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
+" == Utilities for vimrc. == -------------------------------------------
+
+" https://gist.github.com/thinca/1518874
+function! s:has_plugin(name)
+  return globpath(&runtimepath, 'plugin/' . a:name . '.vim') !=# ''
+  \   || globpath(&runtimepath, 'autoload/' . a:name . '.vim') !=# ''
+endfunction
+
 " NERDTree -------------------------------------------------------------
 let g:NERDTreeWinPos = "left"
 
@@ -127,36 +135,40 @@ let g:indent_guides_guide_size = 1
 " https://yufanlu.net/2018/09/03/neovim-python/
 augroup NCM2
   autocmd!
-  " enable ncm2 for all buffers
-  autocmd BufEnter * call ncm2#enable_for_buffer()
-  " IMPORTANT: :help Ncm2PopupOpen for more information
-  set completeopt=noinsert,menuone,noselect
+  if exists(':BracelessEnable')
+    " enable ncm2 for all buffers
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    " IMPORTANT: :help Ncm2PopupOpen for more information
+    set completeopt=noinsert,menuone,noselect
 
-  " When the <Enter> key is pressed while the popup menu is visible, it only
-  " hides the menu. Use this mapping to close the menu and also start a new line:
-  inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+    " When the <Enter> key is pressed while the popup menu is visible, it only
+    " hides the menu. Use this mapping to close the menu and also start a new line:
+    inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
-  " Use <TAB> to select the popup menu:
-  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <C-Space> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  " uncomment this block if you use vimtex for LaTex:
-  " autocmd Filetype tex call ncm2#register_source({
-  "           \ 'name': 'vimtex',
-  "           \ 'priority': 8,
-  "           \ 'scope': ['tex'],
-  "           \ 'mark': 'tex',
-  "           \ 'word_pattern': '\w+',
-  "           \ 'complete_pattern': g:vimtex#re#ncm2,
-  "           \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-  "           \ })
+    " Use <TAB> to select the popup menu:
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <C-Space> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    " uncomment this block if you use vimtex for LaTex:
+    " autocmd Filetype tex call ncm2#register_source({
+    "           \ 'name': 'vimtex',
+    "           \ 'priority': 8,
+    "           \ 'scope': ['tex'],
+    "           \ 'mark': 'tex',
+    "           \ 'word_pattern': '\w+',
+    "           \ 'complete_pattern': g:vimtex#re#ncm2,
+    "           \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+    "           \ })
+  endif
 augroup END
 
 " vim-autoformat -------------------------------------------
 noremap <F3> :Autoformat<CR>
 
 " braceless.vim  -------------------------------------------------------
-autocmd FileType python if exists(':BracelessEnable') | exe "BracelessEnable +indent" | endif
+if exists(':BracelessEnable')
+  autocmd FileType python BracelessEnable +indent
+endif
 
 " vim-easy-align  ------------------------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga).
@@ -219,7 +231,7 @@ let g:lightline#ale#indicator_checking = "◌"
 let g:lightline#ale#indicator_errors = "✖"
 let g:lightline#ale#indicator_ok = "✔"
 
-" Ale ------------------------------------------------------------------
+" dense-analysis/ale ---------------------------------------------------
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
@@ -235,6 +247,11 @@ let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 let g:highlightedyank_highlight_duration = 400
 highlight HighlightedyankRegion cterm=reverse gui=reverse
 
+" tagbar ---------------------------------------------------------------
+if s:has_plugin('tagbar')
+  nmap <F8> :TagbarToggle<CR>
+fi
+
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -247,24 +264,32 @@ endif
 
 call plug#begin()
 
-"Plug 'valloric/vim-indent-guides'
-"Plug 'ctrlpvim/ctrlp.vim'
-Plug 'airblade/vim-gitgutter'
+" Plugins that already in awesome vimrc:
+"Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
+"Plug 'dense-analysis/ale'  " asynchronous linters engine
+"Plug 'tpope/vim-commentary'  "comment-out by gc
+
+" My Plugins
+" Plug 'vifm/vifm.vim'
+" Plug 'valloric/vim-indent-guides'
+Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'Asheq/close-buffers.vim'
+Plug 'Chiel92/vim-autoformat'  " formater
 Plug 'junegunn/vim-easy-align'
 Plug 'machakann/vim-highlightedyank'
+Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'
-Plug 'maximbaz/lightline-ale'
+Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins 
+Plug 'scrooloose/nerdtree'  " file list
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
-Plug 'vifm/vifm.vim'
+Plug 'tweekmonster/impsort.vim'  " color and sort imports
+Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'Yggdroot/indentLine'
-Plug 'Chiel92/vim-autoformat'  " Formater
+Plug 'Yggdroot/indentLine'  " show indent guide
 
 " fzf
 if isdirectory('/usr/local/opt/fzf')
@@ -284,12 +309,12 @@ if has('nvim')
   Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
 
   " NCM base
-  Plug 'ncm2/ncm2'
-  Plug 'roxma/nvim-yarp'
+  Plug 'ncm2/ncm2'  " awesome autocomplete plugin
+  Plug 'roxma/nvim-yarp'  " dependency of ncm2
 
   " Autocomplete
   Plug 'ncm2/ncm2-bufword'
-  Plug 'ncm2/ncm2-jedi'
+  Plug 'ncm2/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
   Plug 'ncm2/ncm2-path'
   Plug 'ncm2/ncm2-tmux'
 
