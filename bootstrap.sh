@@ -4,6 +4,8 @@ cd "$(dirname "$BASH_SOURCE")" || exit 1;
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
   FORCE="-f"
+else
+  FORCE="--no-force"
 fi
 
 
@@ -164,7 +166,7 @@ function subl_settings {
 function _sync_dotfile {
   echo "Syncing dotfiles ..."
 
-  local src_folders=("bash-git-prompt" "git" "tmux" "vim" "macOS")
+  local src_folders=("bash-git-prompt" "git" "tmux" "vim" "$1")
   for folder in "${src_folders[@]}"; do
     find "$folder" -maxdepth 1 -mindepth 1 -name '.[!.]*' -print0 \
       ! -name .git \
@@ -187,27 +189,26 @@ function _sync_dotfile {
 
 function sync_dotfile {
   echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
-  echo "Syncing dotfiles ..."
 
   if [ "$1" == "-f" ]; then
-    _sync_dotfile;
+    _sync_dotfile "$2";
   else
     read -rp "$(tput setaf 3)This may overwrite existing files in your home directory. Are you sure? (Y/n) $(tput sgr 0)";
     echo "";
     if [[ $REPLY =~ ^[Yy](es)?$ ]] || [ -z "$REPLY" ]; then
-      _sync_dotfile;
+      _sync_dotfile "$2";
     fi;
   fi;
 }
 
-validate_os macos
+validate_os "$(get_os)"
 use_gnu_bash
 fix_bash_completion
 link_virtualenv
 subl_settings
 install_vim_awesome $FORCE
 install_tmux_awesome $FORCE
-sync_dotfile $FORCE
+sync_dotfile $FORCE "$(get_os)"
 
 unset \
   use_gnu_bash \
