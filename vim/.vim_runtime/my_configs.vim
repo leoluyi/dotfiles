@@ -99,6 +99,9 @@ vnoremap <leader>x "0x
 "   endif
 " endif
 
+" Fix unwanted key map
+:unmap <C-Space>
+
 " vim-multiple-cursors - default mapping -------------------------------
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
@@ -135,6 +138,18 @@ let g:multi_cursor_quit_key            = '<Esc>'
 function! s:has_plugin(name)
   return globpath(&runtimepath, 'plugin/' . a:name . '.vim') !=# ''
   \   || globpath(&runtimepath, 'autoload/' . a:name . '.vim') !=# ''
+  \   || globpath(&runtimepath, 'plugged/' . a:name) !=# ''
+  \   || globpath(&runtimepath, 'my_plugins/' . a:name) !=# ''
+  \   || globpath(&runtimepath, 'sources_forked/' . a:name) !=# ''
+  \   || globpath(&runtimepath, 'sources_non_forked/' . a:name) !=# ''
+endfunction
+
+function! s:plug_loaded(name)
+  " https://vi.stackexchange.com/a/14143
+  " for vim-plug
+  return has_key(g:plugs, a:name)
+  \   && isdirectory(g:plugs[a:name].dir)
+  \   && stridx(&rtp, g:plugs[a:name].dir) >= 0)
 endfunction
 
 " NERDTree -------------------------------------------------------------
@@ -156,9 +171,9 @@ let g:indent_guides_guide_size = 1
 
 " NCM2 -----------------------------------------------------------------
 " https://yufanlu.net/2018/09/03/neovim-python/
-augroup NCM2
-  autocmd!
-  if s:has_plugin('ncm2')
+if s:has_plugin('ncm2')
+  augroup NCM2
+    autocmd!
     " enable ncm2 for all buffers
     autocmd BufEnter * call ncm2#enable_for_buffer()
     " IMPORTANT: :help Ncm2PopupOpen for more information
@@ -182,8 +197,8 @@ augroup NCM2
     "           \ 'complete_pattern': g:vimtex#re#ncm2,
     "           \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
     "           \ })
-  endif
-augroup END
+  augroup END
+endif
 
 " vim-autoformat -------------------------------------------
 if s:has_plugin('vim-autoformat')
@@ -300,7 +315,10 @@ if empty(glob('~/.vim_runtime/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin()
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim_runtime/plugged')
 
 " Plugins that already in awesome vimrc:
 "Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
@@ -377,7 +395,6 @@ if has('nvim') || v:version >= 800
 
 " Neovim only
 if has('nvim')
-  Plug 'davidhalter/jedi-vim', { 'on': [] }
   Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
 endif
 
