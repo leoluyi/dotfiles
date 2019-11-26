@@ -165,7 +165,7 @@ augroup END
 " vim-autoformat -------------------------------------------
 if s:has_plugin('vim-autoformat')
   noremap <F3> :Autoformat<CR>
-fi
+endif
 
 " braceless.vim  -------------------------------------------------------
 if exists(':BracelessEnable')
@@ -188,7 +188,7 @@ let g:ctrlp_map = '<c-f>'
 if exists(':Bdelete')
   autocmd VimEnter * nnoremap <silent> Q     :Bdelete menu<CR>
   autocmd VimEnter * nnoremap <silent> <C-q> :Bdelete menu<CR>
-fi
+endif
 
 " lightline.vim --------------------------------------------------------
 let g:lightline = {
@@ -254,7 +254,7 @@ highlight HighlightedyankRegion cterm=reverse gui=reverse
 " tagbar ---------------------------------------------------------------
 if s:has_plugin('tagbar')
   nmap <F8> :TagbarToggle<CR>
-fi
+endif
 
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -334,17 +334,21 @@ if has('nvim')
 
   " Optional: better Rnoweb support (LaTeX completion)
   Plug 'lervag/vimtex'
+
+" Vim8 only
 elseif v:version >= 800
-  " Vim8 only
   " https://github.com/roxma/vim-hug-neovim-rpc
   Plug 'roxma/vim-hug-neovim-rpc'
   Plug 'davidhalter/jedi-vim'
+
+" Older Vim
 else
-  " Older Vim
   " highlightedyank
   if !exists('##TextYankPost')
     map y <Plug>(highlightedyank)
   endif
+
+  Plug 'davidhalter/jedi-vim'
 endif
 
 call plug#end()
