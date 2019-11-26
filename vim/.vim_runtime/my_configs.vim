@@ -100,7 +100,7 @@ vnoremap <leader>x "0x
 " endif
 
 " Fix unwanted key map
-:unmap <C-Space>
+" :unmap <C-Space>
 
 " vim-multiple-cursors - default mapping -------------------------------
 let g:multi_cursor_start_word_key      = '<C-n>'
@@ -285,6 +285,7 @@ let g:lightline#ale#indicator_errors = "✖"
 let g:lightline#ale#indicator_ok = "✔"
 
 " dense-analysis/ale ---------------------------------------------------
+let g:ale_completion_enabled = 0
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
