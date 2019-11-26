@@ -135,7 +135,7 @@ let g:indent_guides_guide_size = 1
 " https://yufanlu.net/2018/09/03/neovim-python/
 augroup NCM2
   autocmd!
-  if exists(':BracelessEnable')
+  if s:has_plugin('ncm2')
     " enable ncm2 for all buffers
     autocmd BufEnter * call ncm2#enable_for_buffer()
     " IMPORTANT: :help Ncm2PopupOpen for more information
@@ -168,15 +168,17 @@ if s:has_plugin('vim-autoformat')
 endif
 
 " braceless.vim  -------------------------------------------------------
-if exists(':BracelessEnable')
+if s:has_plugin('braceless.vim')
   autocmd FileType python BracelessEnable +indent
 endif
 
 " vim-easy-align  ------------------------------------------------------
-" Start interactive EasyAlign in visual mode (e.g. vipga).
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip).
-nmap ga <Plug>(EasyAlign)
+if s:has_plugin('vim-easy-align')
+  " Start interactive EasyAlign in visual mode (e.g. vipga).
+  xmap ga <Plug>(EasyAlign)
+  " Start interactive EasyAlign for a motion/text object (e.g. gaip).
+  nmap ga <Plug>(EasyAlign)
+endif
 
 " fzf.vim --------------------------------------------------------------
 autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | endif
@@ -273,14 +275,14 @@ call plug#begin()
 "Plug 'dense-analysis/ale'  " asynchronous linters engine
 "Plug 'tpope/vim-commentary'  "comment-out by gc
 
-" My Plugins
+" My Plugins - nvim/vim8/vim7 compatible:
 " Plug 'vifm/vifm.vim'
 " Plug 'valloric/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'Asheq/close-buffers.vim'
 Plug 'Chiel92/vim-autoformat'  " formater
+Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
@@ -307,11 +309,8 @@ endif
 Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
-" Neovim only
-if has('nvim')
-  Plug 'davidhalter/jedi-vim', { 'on': [] }
-  Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
-
+" Neovim/Vim8 compatible
+if has('nvim') || v:version >= 800
   " NCM base
   Plug 'ncm2/ncm2'  " awesome autocomplete plugin
   Plug 'roxma/nvim-yarp'  " dependency of ncm2
@@ -335,20 +334,23 @@ if has('nvim')
   " Optional: better Rnoweb support (LaTeX completion)
   Plug 'lervag/vimtex'
 
-" Vim8 only
-elseif v:version >= 800
+  " Others
   " https://github.com/roxma/vim-hug-neovim-rpc
   Plug 'roxma/vim-hug-neovim-rpc'
-  Plug 'davidhalter/jedi-vim'
+  Plug 'machakann/vim-highlightedyank'
 
-" Older Vim
-else
+" Neovim only
+if has('nvim')
+  Plug 'davidhalter/jedi-vim', { 'on': [] }
+  Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
+endif
+
+" Older Vim only
+if v:version >= 730 && v:version < 800
   " highlightedyank
   if !exists('##TextYankPost')
     map y <Plug>(highlightedyank)
   endif
-
-  Plug 'davidhalter/jedi-vim'
 endif
 
 call plug#end()
