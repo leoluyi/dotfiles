@@ -163,7 +163,9 @@ augroup NCM2
 augroup END
 
 " vim-autoformat -------------------------------------------
-noremap <F3> :Autoformat<CR>
+if s:has_plugin('vim-autoformat')
+  noremap <F3> :Autoformat<CR>
+fi
 
 " braceless.vim  -------------------------------------------------------
 if exists(':BracelessEnable')
@@ -183,8 +185,10 @@ autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | en
 let g:ctrlp_map = '<c-f>'
 
 " close-buffers.vim ----------------------------------------------------
-autocmd VimEnter * if exists(':Bdelete') | exe "nnoremap <silent> Q     :Bdelete menu<CR>" | endif
-autocmd VimEnter * if exists(':Bdelete') | exe "nnoremap <silent> <C-q> :Bdelete menu<CR>" | endif
+if exists(':Bdelete')
+  autocmd VimEnter * nnoremap <silent> Q     :Bdelete menu<CR>
+  autocmd VimEnter * nnoremap <silent> <C-q> :Bdelete menu<CR>
+fi
 
 " lightline.vim --------------------------------------------------------
 let g:lightline = {
