@@ -101,6 +101,7 @@ vnoremap <leader>x "0x
 
 " Fix unwanted key map
 " :unmap <C-Space>
+inoremap <C-@> <Esc>
 
 " vim-multiple-cursors - default mapping -------------------------------
 let g:multi_cursor_start_word_key      = '<C-n>'
@@ -298,8 +299,10 @@ let g:ale_linters = {
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 
 " vim-highlightedyank --------------------------------------------------
-let g:highlightedyank_highlight_duration = 400
-highlight HighlightedyankRegion cterm=reverse gui=reverse
+if s:has_plugin('vim-highlightedyank')
+  let g:highlightedyank_highlight_duration = 400
+  " highlight HighlightedyankRegion cterm=reverse gui=reverse
+endif
 
 " tagbar ---------------------------------------------------------------
 if s:has_plugin('tagbar')
