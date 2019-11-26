@@ -36,6 +36,7 @@ set number relativenumber
 
 " Color column
 set colorcolumn=80
+set textwidth=80
 set cc=+1  " highlight column after 'textwidth'
 highlight ColorColumn ctermbg=Black guibg=lightgrey
 
@@ -46,8 +47,8 @@ set splitbelow splitright
 " https://jeffkreeftmeijer.com/vim-number/
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber 
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber 
 augroup END
 
 " Disables automatic commenting on newline
@@ -73,7 +74,11 @@ vmap zk <Plug>MoveBlockUp
 
 " :W Force write: Allow saving of files as sudo
 " (useful for handling the permission-denied error)
-command! W w !sudo tee % > /dev/null
+if !has('nvim')
+  command! W w !sudo tee % > /dev/null
+else
+  command! W w suda://%  " lambdalisue/suda.vim
+endif
 
 " Toggle number and relativenumber for copy-paste
 nnoremap <leader>n :set number! relativenumber!<CR> :IndentLinesToggle<CR>
@@ -208,14 +213,16 @@ endif
 autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | endif
 
 " ctrlp.vim ------------------------------------------------------------
-let g:ctrlp_map = '<c-f>'
+if s:has_plugin('ctrlp_map')
+  let g:ctrlp_map = '<c-f>'
+endif
 
 " close-buffers.vim ----------------------------------------------------
-autocmd VimEnter * |
-  \ if exists(':Bdelete') |
-  \   nnoremap <silent> Q     :Bdelete menu<CR> |
-  \   nnoremap <silent> <C-q> :Bdelete menu<CR> |
-  \ endif
+autocmd VimEnter *
+      \ if exists(':Bdelete') |
+      \   nnoremap <silent> Q     :Bdelete menu<CR> |
+      \   nnoremap <silent> <C-q> :Bdelete menu<CR> |
+      \ endif
 
 " lightline.vim --------------------------------------------------------
 let g:lightline = {
@@ -263,7 +270,7 @@ let g:lightline#ale#indicator_errors = "✖"
 let g:lightline#ale#indicator_ok = "✔"
 
 " dense-analysis/ale ---------------------------------------------------
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_echo_msg_error_str = 'E'
@@ -308,6 +315,7 @@ Plug 'Asheq/close-buffers.vim'
 Plug 'Chiel92/vim-autoformat'  " formater
 Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'lambdalisue/suda.vim'  " to read or write files with sudo command
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'
