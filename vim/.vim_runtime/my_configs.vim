@@ -150,8 +150,16 @@ function! s:plug_loaded(name)
   " for vim-plug
   return has_key(g:plugs, a:name)
   \   && isdirectory(g:plugs[a:name].dir)
-  \   && stridx(&rtp, g:plugs[a:name].dir) >= 0)
+  " \   && stridx(&runtimepath, g:plugs[a:name].dir) >= 0
 endfunction
+
+" Check pynvim ---------------------------------------------------------
+
+if has("nvim") && !has("python3")
+  echo "[pip3] Installing pynvim ...\n"
+  !python3 -m pip --disable-pip-version-check -q install --no-cache-dir --user -U pynvim jedi
+  echo "Done."
+endif
 
 " NERDTree -------------------------------------------------------------
 let g:NERDTreeWinPos = "left"
@@ -172,7 +180,7 @@ let g:indent_guides_guide_size = 1
 
 " NCM2 -----------------------------------------------------------------
 " https://yufanlu.net/2018/09/03/neovim-python/
-if s:has_plugin('ncm2')
+if has('nvim') && s:has_plugin('ncm2')
   augroup NCM2
     autocmd!
     " enable ncm2 for all buffers
@@ -369,35 +377,45 @@ Plug 'NLKNguyen/papercolor-theme'
 
 " Neovim/Vim8 compatible
 if has('nvim') || v:version >= 800
-  " NCM base
-  Plug 'ncm2/ncm2'  " awesome autocomplete plugin
-  Plug 'roxma/nvim-yarp'  " dependency of ncm2
 
-  " Autocomplete
-  Plug 'ncm2/ncm2-bufword'
-  Plug 'ncm2/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
-  Plug 'ncm2/ncm2-path'
-  Plug 'ncm2/ncm2-tmux'
+  " NCM2 plugins
+  if has("python3")
+    " NCM base
+    Plug 'ncm2/ncm2'  " awesome autocomplete plugin
+    Plug 'roxma/nvim-yarp'  " dependency of ncm2
 
-  " Disable jedi-vim
-  Plug 'davidhalter/jedi-vim', { 'on': [] }
+    " Autocomplete
+    Plug 'ncm2/ncm2-bufword'
+    Plug 'ncm2/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
+    Plug 'ncm2/ncm2-path'
+    Plug 'ncm2/ncm2-tmux'
 
-  " R support
-  " https://github.com/gaalcaras/ncm-R
-  Plug 'gaalcaras/ncm-R'
-  Plug 'jalvesaq/Nvim-R'
+    " Disable jedi-vim
+    Plug 'davidhalter/jedi-vim', { 'on': [] }
 
-  " Optional: for snippet support
-  " based on ultisnips
-  Plug 'ncm2/ncm2-ultisnips'
-  Plug 'SirVer/ultisnips'
+    " R support
+    " https://github.com/gaalcaras/ncm-R
+    Plug 'gaalcaras/ncm-R'
+    Plug 'jalvesaq/Nvim-R'
+
+    " Optional: for snippet support
+    " based on ultisnips
+    Plug 'ncm2/ncm2-ultisnips'
+    Plug 'SirVer/ultisnips'
+  endif
 
   " Optional: better Rnoweb support (LaTeX completion)
   Plug 'lervag/vimtex'
 
   " Others
   " https://github.com/roxma/vim-hug-neovim-rpc
-  Plug 'roxma/vim-hug-neovim-rpc'
+  " Plug 'roxma/vim-hug-neovim-rpc'
+
+if !has('nvim')
+  let g:ncm2_enable = 0
+  Plug 'ncm2/ncm2', { 'on': [] }  " awesome autocomplete plugin
+  Plug 'roxma/nvim-yarp', { 'on': [] }  " dependency of ncm2
+endif
 
 " Neovim only
 if has('nvim')
