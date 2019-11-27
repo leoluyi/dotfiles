@@ -102,7 +102,7 @@ function install_neovim {
     fi
   fi
 
-  pip3 install --user -U neovim pynvim jedi flake8 autopep8
+  python3 -m pip install --no-cache-dir --user -U neovim pynvim jedi flake8 autopep8
 }
 
 
