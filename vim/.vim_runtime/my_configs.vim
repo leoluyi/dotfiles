@@ -364,6 +364,8 @@ endif
 " Theme
 Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'rakr/vim-one'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Neovim/Vim8 compatible
 if has('nvim') || v:version >= 800
