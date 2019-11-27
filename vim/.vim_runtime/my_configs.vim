@@ -180,7 +180,7 @@ let g:indent_guides_guide_size = 1
 
 " NCM2 -----------------------------------------------------------------
 " https://yufanlu.net/2018/09/03/neovim-python/
-if has('nvim') && s:has_plugin('ncm2')
+if has('nvim') && has('python3') && s:has_plugin('ncm2')
   augroup NCM2
     autocmd!
     " enable ncm2 for all buffers
@@ -390,9 +390,6 @@ if has('nvim') || v:version >= 800
     Plug 'ncm2/ncm2-path'
     Plug 'ncm2/ncm2-tmux'
 
-    " Disable jedi-vim
-    Plug 'davidhalter/jedi-vim', { 'on': [] }
-
     " R support
     " https://github.com/gaalcaras/ncm-R
     Plug 'gaalcaras/ncm-R'
@@ -419,7 +416,9 @@ endif
 
 " Neovim only
 if has('nvim')
-  Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
+  " Disable jedi-vim
+  Plug 'davidhalter/jedi-vim', { 'on': [] }
+  " Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
 endif
 
 " Older Vim only
