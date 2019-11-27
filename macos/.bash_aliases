@@ -32,8 +32,8 @@ alias myips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
 # Fancy commands output
-alias du='du -kh'
-alias df='df -kTh'
+alias du='du -k'
+alias df='df -kT'
 alias free='free -h'
 alias less='less -r'
 

@@ -1,6 +1,0 @@
-; vim: ft=gitconfig
-
-[user]
-    name = Lu Yi
-    email = tsb1050391@gmail.com
-    signingkey =
