@@ -156,9 +156,8 @@ endfunction
 " Check pynvim ---------------------------------------------------------
 
 if has("nvim") && !has("python3")
-  echo "[pip3] Installing pynvim ...\n"
-  !python3 -m pip --disable-pip-version-check -q install --no-cache-dir --user -U pynvim jedi
-  echo "Done."
+  echo "[python3] Installing pynvim (required for ncm2) ...\n"
+  silent !python3 -m pip --disable-pip-version-check -q install --no-cache-dir --user -U pynvim
 endif
 
 " NERDTree -------------------------------------------------------------
@@ -401,12 +400,10 @@ if has('nvim') || v:version >= 800
     Plug 'SirVer/ultisnips'
   endif
 
-  " Optional: better Rnoweb support (LaTeX completion)
-  Plug 'lervag/vimtex'
-
   " Others
   " https://github.com/roxma/vim-hug-neovim-rpc
   " Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 if !has('nvim')
   let g:ncm2_enable = 0
@@ -419,6 +416,12 @@ if has('nvim')
   " Disable jedi-vim
   Plug 'davidhalter/jedi-vim', { 'on': [] }
   " Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
+endif
+
+" Vim only
+if !has('nvim')
+  " Disable ncm2-jedi
+  Plug 'ncm2/ncm2-jedi', { 'on': [] }  " fast python completion (use ncm2 if you want type info or snippet support)
 endif
 
 " Older Vim only
