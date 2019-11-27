@@ -38,7 +38,7 @@ set number relativenumber
 set colorcolumn=80
 set textwidth=80
 set cc=+1  " highlight column after 'textwidth'
-highlight ColorColumn ctermbg=Black guibg=lightgrey
+highlight ColorColumn ctermbg=Black guibg=Black
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
@@ -324,10 +324,10 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim_runtime/plugged')
 
-" Plugins that already in awesome vimrc:
-"Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
-"Plug 'dense-analysis/ale'  " asynchronous linters engine
-"Plug 'tpope/vim-commentary'  "comment-out by gc
+" Plugins already in awesome vimrc:
+" Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
+" Plug 'dense-analysis/ale'  " asynchronous linters engine
+" Plug 'tpope/vim-commentary'  "comment-out by gc
 
 " My Plugins - nvim/vim8/vim7 compatible:
 " Plug 'vifm/vifm.vim'
