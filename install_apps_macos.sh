@@ -52,7 +52,7 @@ function install_homebrew {
 function brew_install_app {
   echo "$(tput setaf 2)###### Install Apps with Homebrew ######$(tput sgr 0)"
 
-  brew tap caskroom/cask && \
+  brew tap homebrew/cask-cask && \
   brew tap homebrew/cask-fonts && \
   brew cask install \
   firefox \
