@@ -44,9 +44,9 @@ alias less='less -r'
 
 # youtube-dl
 (command -v youtube-dl &>/dev/null) \
-  && alias youtube-dl-list='youtube-dl -ci -f mp4 -o "%(playlist_index)s-%(title)s.%(ext)s" --yes-playlist' \
-  && alias youtube-dl-mp4='youtube-dl -f mp4' \
-  && alias youtube-dl-m4a='youtube-dl -f bestaudio[ext=m4a] --embed-thumbnail --add-metadata'
+  && alias youtube-dl-mp4='youtube-dl -f mp4 -f "bestvideo[height<=720][ext=mp4]+bestaudio/best[height<=720][ext=mp4]"' \
+  && alias youtube-dl-m4a='youtube-dl -f bestaudio[ext=m4a] --embed-thumbnail --add-metadata' \
+  && alias youtube-dl-list='youtube-dl-mp4 -ci -f mp4 -o "%(playlist_index)s-%(title)s.%(ext)s" --yes-playlist'
 
 # Other Apps
 alias sourcetree='open -a SourceTree'
