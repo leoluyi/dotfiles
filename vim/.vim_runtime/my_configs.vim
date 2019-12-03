@@ -347,11 +347,14 @@ if s:has_plugin('tagbar')
   nmap <F8> :TagbarToggle<CR>
 endif
 
-" Nvim-R
+" Nvim-R ---------------------------------------------------------------
 " https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt
 " prefer the window is always split vertically
 let R_rconsole_width = 57
 let R_min_editor_width = 18
+
+" auto-pairs -----------------------------------------------------------
+let g:AutoPairsShortcutToggle = '<M-p>'
 
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -371,11 +374,11 @@ call plug#begin('~/.vim_runtime/plugged')
 " Plugins already in awesome vimrc:
 " Plug 'ctrlpvim/ctrlp.vim'         " fuzzy search files
 " Plug 'dense-analysis/ale'         " asynchronous linters engine
-" Plug 'tpope/vim-commentary'       " comment-out by gc
+" Plug 'jiangmiao/auto-pairs'       " insert or delete brackets, parens, quotes in pair
 " Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it.
+" Plug 'tpope/vim-commentary'       " comment-out by gc
 
 " My Plugins - nvim/vim8/vim7 compatible:
-" Plug 'vifm/vifm.vim'
 " Plug 'valloric/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'ap/vim-css-color'  " Preview colours in source code
