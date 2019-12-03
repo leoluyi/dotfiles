@@ -34,11 +34,17 @@ set softtabstop=0
 set foldlevel=999
 set number relativenumber
 
+" Keeps the visual textwidth but doesn't add new line in insert mode
+" https://stackoverflow.com/q/2280030/3744499
+set formatoptions-=t
+
 " Color column
 set colorcolumn=80
+" let &colorcolumn=join(range(81,999),",")
 set textwidth=80
 set cc=+1  " highlight column after 'textwidth'
 highlight ColorColumn ctermbg=Black guibg=Black
+" highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
