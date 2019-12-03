@@ -151,7 +151,7 @@ function _sync_dotfile {
   find ./config/ -maxdepth 1 -mindepth 1 -type d -print0 | \
     xargs -0 -I_ basename _ | \
     tr '\n' '\0' | \
-    tee >(xargs -0 -I_ rsync -rlpth ./config/_ ~/.config/_) \
+    tee >(xargs -0 -I_ rsync -rlpth ./config/_ ~/.config/) \
         >(xargs -0 -n1 printf "Updated ~/.config/%s\n") \
         >/dev/null;
 }
