@@ -1,7 +1,14 @@
 " Some basics ---------------------------------------------------------
 let mapleader = ","
 
-" Color scheme
+""" Backups
+set history=50                        " Keep 50 lines of command line history
+set nobackup                          " No *~ backup files
+set nowritebackup                     " Do not make a backup before overwriting a file
+set nowrapscan                        " Do not searche wrap around the end of the file
+set noswapfile                        " Do not use a swapfile for the buffer
+
+""" Colors
 try
   colorscheme desert
   colorscheme peaksea
@@ -10,7 +17,40 @@ catch
 endtry
 set background=dark
 
-" Encoding
+""" Editing
+" set clipboard=unnamedplus           " Yank to the system register (*) by default
+set tabstop=4                         " show existing tab with 4 spaces width
+set shiftwidth=4                      " when indenting with '>', use 2 spaces width 
+set expandtab                         " On pressing tab, insert 4 spaces
+set softtabstop=0
+" " yank to clipboard
+" " https://stackoverflow.com/a/3961954
+" " https://www.markcampbell.me/2016/04/12/setting-up-yank-to-clipboard-on-a-mac-with-vim.html
+" if has("clipboard")
+"   set clipboard=unnamed " copy to the system clipboard
+
+"   if has("unnamedplus") " X11 support
+"     set clipboard+=unnamedplus
+"   endif
+" endif
+
+""" Folding
+set foldlevel=999
+set foldnestmax=3                     " Sets the maximum nesting of folds
+set foldmethod=syntax                 " The kind of folding
+set foldenable                        " Code folding
+set foldcolumn=1                      " Add a bit extra margin to the left
+
+""" Display
+set number relativenumber
+set colorcolumn=80                    " Display a ruler at a specific line
+" highlight ColorColumn ctermbg=Black guibg=Black
+" highlight ColorColumn ctermbg=235 guibg=#2c2d27
+" let &colorcolumn=join(range(81,999),",")
+" set colorcolumn=+1  " highlight column after 'textwidth'
+" set textwidth=80
+
+""" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
@@ -20,34 +60,24 @@ set fileformats=unix,dos,mac
 "" Fix backspace indent
 set backspace=indent,eol,start
 
+""" Files
 syntax on
 filetype plugin indent on
 
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 2 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
-set softtabstop=0
-
-set foldlevel=999
-set number relativenumber
-
-" Keeps the visual textwidth but doesn't add new line in insert mode
+""" Word Wrap
+set linebreak                         " Make Vim break lines without breaking words
+set wrap                              " Line wrapping
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o  " Disables automatic commenting on newline
 " https://stackoverflow.com/q/2280030/3744499
-set formatoptions-=t
+" set formatoptions-=t    " Keeps the visual textwidth but doesn't add new line in insert mode
 
-" Color column
-set colorcolumn=80
-" let &colorcolumn=join(range(81,999),",")
-set textwidth=80
-set cc=+1  " highlight column after 'textwidth'
-highlight ColorColumn ctermbg=Black guibg=Black
-" highlight ColorColumn ctermbg=235 guibg=#2c2d27
+""" Window and Tabs
+set splitbelow splitright   " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 
-" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-set splitbelow splitright
+""" 1.15 Warnings
+set noerrorbells                      " No annoying sound on errors
+" set novisualbell                      " No visual bell
+" set t_vb=                             " No beep or flash
 
 " Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
@@ -56,9 +86,6 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
   autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber 
 augroup END
-
-" Disables automatic commenting on newline
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " My Shortcut Keys -----------------------------------------------------
 
@@ -87,23 +114,20 @@ else
 endif
 
 " Toggle number and relativenumber for copy-paste
-nnoremap <leader>n :set number! relativenumber!<CR> :IndentLinesToggle<CR>
-vnoremap <leader>n :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+nnoremap <leader>n :set foldcolumn=0<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+vnoremap <leader>n :set foldcolumn=0<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR>
 
 " Cut and paste
 nnoremap <leader>x "0x
 vnoremap <leader>x "0x
 
-" " yank to clipboard
-" " https://stackoverflow.com/a/3961954
-" " https://www.markcampbell.me/2016/04/12/setting-up-yank-to-clipboard-on-a-mac-with-vim.html
-" if has("clipboard")
-"   set clipboard=unnamed " copy to the system clipboard
-
-"   if has("unnamedplus") " X11 support
-"     set clipboard+=unnamedplus
-"   endif
-" endif
+" Yank to clipboard
+nnoremap  <leader>Y  "+y$
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy "+yy
+vnoremap  <leader>Y  "+y$
+vnoremap  <leader>y  "+y
+vnoremap  <leader>yy "+yy
 
 " Fix unwanted key map
 " :unmap <C-Space>
