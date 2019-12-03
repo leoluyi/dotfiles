@@ -187,7 +187,7 @@ function install_r {
     sudo rm -rf /usr/local/lib/R/site-library/*
   fi
 
-  if ! dpkg -l | awk '{print $2}' | grep -q r-base ; then
+  if ! dpkg -l | awk '{print $2}' | grep -q '^r-base' ; then
     # Install new version of R (3.6) for Ubuntu 18.04.
     sudo add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -sc)-cran35/"
     sudo add-apt-repository -y ppa:marutter/c2d4u3.5
