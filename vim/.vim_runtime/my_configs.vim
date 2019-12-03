@@ -1,5 +1,6 @@
 " Some basics ---------------------------------------------------------
 let mapleader = ","
+let maplocalleader = "\\"
 
 """ Backups
 set history=50                        " Keep 50 lines of command line history
@@ -20,7 +21,7 @@ set background=dark
 """ Editing
 " set clipboard=unnamedplus           " Yank to the system register (*) by default
 set tabstop=4                         " show existing tab with 4 spaces width
-set shiftwidth=4                      " when indenting with '>', use 2 spaces width 
+set shiftwidth=4                      " when indenting with '>', use 2 spaces width
 set expandtab                         " On pressing tab, insert 4 spaces
 set softtabstop=0
 " " yank to clipboard
@@ -84,7 +85,7 @@ set noerrorbells                      " No annoying sound on errors
 augroup numbertoggle
   autocmd!
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-  autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber 
+  autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber
 augroup END
 
 " My Shortcut Keys -----------------------------------------------------
@@ -346,6 +347,12 @@ if s:has_plugin('tagbar')
   nmap <F8> :TagbarToggle<CR>
 endif
 
+" Nvim-R
+" https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt
+" prefer the window is always split vertically
+let R_rconsole_width = 57
+let R_min_editor_width = 18
+
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -362,17 +369,20 @@ endif
 call plug#begin('~/.vim_runtime/plugged')
 
 " Plugins already in awesome vimrc:
-" Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
-" Plug 'dense-analysis/ale'  " asynchronous linters engine
-" Plug 'tpope/vim-commentary'  "comment-out by gc
+" Plug 'ctrlpvim/ctrlp.vim'         " fuzzy search files
+" Plug 'dense-analysis/ale'         " asynchronous linters engine
+" Plug 'tpope/vim-commentary'       " comment-out by gc
+" Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it.
 
 " My Plugins - nvim/vim8/vim7 compatible:
 " Plug 'vifm/vifm.vim'
 " Plug 'valloric/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
+Plug 'ap/vim-css-color'  " Preview colours in source code
 Plug 'Asheq/close-buffers.vim'
 Plug 'Chiel92/vim-autoformat'  " formater
 Plug 'davidhalter/jedi-vim'
+Plug 'haya14busa/incsearch.vim'  " Incrementally highlights ALL pattern matches
 Plug 'junegunn/vim-easy-align'
 Plug 'lambdalisue/suda.vim'  " to read or write files with sudo command
 Plug 'machakann/vim-highlightedyank'
@@ -380,7 +390,7 @@ Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins 
+Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
 Plug 'scrooloose/nerdtree'  " file list
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
@@ -463,3 +473,6 @@ if v:version >= 730 && v:version < 800
 endif
 
 call plug#end()
+
+""" References """
+" https://hackmd.io/@AlexSu/ryLuYmwYm?type=view
