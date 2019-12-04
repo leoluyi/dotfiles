@@ -448,12 +448,6 @@ if has('nvim') || v:version >= 800
   " Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-if !has('nvim')
-  let g:ncm2_enable = 0
-  Plug 'ncm2/ncm2', { 'on': [] }  " awesome autocomplete plugin
-  Plug 'roxma/nvim-yarp', { 'on': [] }  " dependency of ncm2
-endif
-
 " Neovim only
 if has('nvim')
   " Disable jedi-vim
@@ -463,6 +457,10 @@ endif
 
 " Vim only
 if !has('nvim')
+  let g:ncm2_enable = 0
+  Plug 'ncm2/ncm2', { 'on': [] }  " awesome autocomplete plugin
+  Plug 'roxma/nvim-yarp', { 'on': [] }  " dependency of ncm2
+
   " Disable ncm2-jedi
   Plug 'ncm2/ncm2-jedi', { 'on': [] }  " fast python completion (use ncm2 if you want type info or snippet support)
 endif
