@@ -8,6 +8,9 @@ if command -v nvim &>/dev/null; then
   alias vi="nvim"
 fi
 
+# R
+alias R='R --no-save --no-restore'
+
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
