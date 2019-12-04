@@ -248,6 +248,11 @@ if s:has_plugin('vim-autoformat')
   noremap <F3> :Autoformat<CR>
 endif
 
+let g:autoformat_verbosemode=1
+let g:formatter_yapf_style = 'pep8'
+let g:formatters_python = ['black', 'yapf']
+" https://medium.com/3yourmind/auto-formatters-for-python-8925065f9505
+
 " braceless.vim  -------------------------------------------------------
 if s:has_plugin('braceless.vim')
   autocmd FileType python BracelessEnable +indent
