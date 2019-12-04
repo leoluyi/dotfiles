@@ -423,6 +423,7 @@ q/              -   search history in command buffer
 :setf html      -   Set FileType to html
 :set ft?        -   Show current FileType
 gg=G            -   Re-indent for current FileType
+:retab
 ```
 
 ### SEARCH & REPLACE
@@ -442,10 +443,12 @@ More cool searching tricks:
 
 *                 - search for word currently under cursor  (bounded)
 g*                - search for partial word under cursor    (unbounded)
-                (repeat with n)
+                    (repeat with n)
 #                 - search for word under cursor - backward (bounded)
 g#                - search for word under cursor - backward (unbounded)
 [I                - show lines with matching word under cursor.
+
+gd                - go to definition
 ```
 
 **Go through jump list** (a list of places where your cursor has been to)
