@@ -335,6 +335,7 @@ let g:ale_linters = {
   \   'python': ['flake8']
   \ }
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
+let b:ale_fixers = {'python': ['black']
 
 " vim-highlightedyank --------------------------------------------------
 if s:has_plugin('vim-highlightedyank')
