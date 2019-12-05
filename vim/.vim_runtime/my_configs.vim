@@ -363,7 +363,7 @@ endif
 " Nvim-R ---------------------------------------------------------------
 " https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt
 " prefer the window is always split vertically
-let R_rconsole_width = 65
+let R_rconsole_width = 75
 let R_min_editor_width = 18
 
 " auto-pairs -----------------------------------------------------------
