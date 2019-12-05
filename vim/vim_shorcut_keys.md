@@ -58,12 +58,14 @@ H        -   Move cursor to header (top) line of current visible window
 M        -   Move cursor to middle line of current visible window
 L        -   Move cursor to last line of current visible window
 
-fc       -   Move cursor to next occurrence of character c on the current line (inclusive). Use Fc to move backwards
-tc       -   Move cursor till next character c on the current line (exclusive). Use Tc to move backwards
-%        -   Move cursor to next brace, bracket or comment paired to the current cursor location
+fc       -   Find and jump to next character c on the current line (inclusive). Use Fc to move backwards
+tc       -   Find and jump till next character c on the current line (exclusive). Use Tc to move backwards
+;        -   to repeat the operation
+,        -   to repeat it in opposite direction
 
 *        -   Search forward for word under cursor
 #        -   Search backwards for word under cursor
+
 /word    -   Search forward for word. Accepts regular expressions to search
 ?word    -   Search backwards for word. Accepts regular expressions to search
 n        -   Repeat the last / or ? command
@@ -74,6 +76,7 @@ N        -   Repeat the last / or ? command in the opposite direction
 ()       -   Move to prev / next sentences ("." delimited words)
 {}       -   Move to prev / next paragraphs (next empty line)
 
+%        -   Go to match of next parentheses, bracket brace
 ]]       -   Move N times to next section or `{` (Depending on your current filetype this may move between functions); `[[` to previous section
 ][       -   Move N times to next section or `}`
 
@@ -108,12 +111,13 @@ dm       -   Delete in direction of movement m. For m, you can also use w, b, or
             `bdw` - back delete word.
 dd       -   Delete entire current line. `3dd` to delete 3 lines
 D / d$   -   Delete until end of line
+d0       -   Delete to the begining of line
 
 c        -   Change (Same as `d` but put me in insert mode)
 cm       -   Change the character or word (w) in motion m, then enter insert mode
 cc / S   -   Change current line and enter insert mode (unlike dd which leaves you in normal mode)
 C / c$   -   Change from cursor to end of line, and enter insert mode
-c0       - Change to begining of line and enter insert mode
+c0       -   Change to begining of line and enter insert mode
 ```
 
 ### YANK & PUT
@@ -356,15 +360,18 @@ noremap th <Esc>:tabprevious<CR>
 You can also record a whole series of edits to a register, and then apply them over and over.
 
 ```
-qk       -  records edits into register k (`q` again to stop recording)
-@k       -  execute recorded macro
-@@       -  repeat last one
-5@@      -  repeat 5 times
+qk            -  records edits into register k (`q` again to stop recording)
+@k            -  execute recorded macro
+@@            -  repeat last one
+5@@           -  repeat 5 times
 
-"kp      -  print macro k (e.g., to edit or add to .vimrc)
-"kd      -  replace register k with what cursor is on
+"kp           -  print macro k (e.g., to edit or add to .vimrc)
+"kd           -  replace register k with what cursor is on
+
+Advanced usage:
+
+:norm @q      -  Use the normal mode command to apply the macro (in the selected area)
 ```
-
 
 ### VIM FOLDING
 
@@ -552,7 +559,6 @@ U        -   Undo all changes on current line
 <C-R>    -   Redo
 .        -   Redo last change
 
-g~       -   switch case under cursor
 g~$      -   Toggle case of all characters to end of line.
 g~~      -   Toggle case of the current line (same as V~).
 gUU      -   switch the current line to upper case
@@ -561,7 +567,7 @@ guu      -   switch the current line to lower case
 <C-a>    -   Increment the number at cursor
 <C-x>    -   Decrement the number at cursor
 
-.        -   Repeat last change or delete
+.        -   Repeat last change
 ;        -   Repeat last f, t, F, or T command
 ,        -   Repeat last f, t, F, or T command in opposite direction
 
