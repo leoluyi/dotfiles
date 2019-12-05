@@ -567,8 +567,9 @@ guu      -   switch the current line to lower case
 
 :%sort   -   Sort in visual mode. Use `:%sort!` to sort in reverse order; `:%sort n` for numeric sort.
 
-g <C-g>  -   Show statistics (word count, ...)
 <C-g>    -   Show line info
+g <C-g>  -   Show statistics (word count, ...)
+1 <C-g>  -   View the full path of the file
 
 vim +10 <file_name>            - opens the file at line 10
 vim +/bash cronjob-lab.yml     - opens the file cronjob-lab.yml on the first occurence of bash
@@ -578,7 +579,8 @@ vim scp://balasundaramm@mgmt-bst:22/~/automation/test-file.txt - Edit a remote f
 :set nonumber            -  disable line number
 :set norelativenumber    -  disable relative line number
 
-1 <C-g>  -   View the full path of the file
+:version                 -   Checkk vim version
+:echo v:version          -   Print version number in 3 digits
 ```
 
 ---
