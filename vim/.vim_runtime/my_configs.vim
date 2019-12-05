@@ -347,7 +347,7 @@ let g:ale_linters = {
   \   'python': ['flake8']
   \ }
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
-let b:ale_fixers = {'python': ['black']}
+let b:ale_fixers = {'python': ['black', 'isort']}
 
 nmap <silent> <C-p> <Plug>(ale_next_wrap)
 
@@ -376,6 +376,18 @@ let g:AutoPairsShortcutToggle = '<M-p>'
 
 " vim-move -------------------------------------------------------------
 let g:move_key_modifier = 'M'  " don't know somehow that <opt + cmd> works for macos
+
+" vim-jedi -------------------------------------------------------------
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>u"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+
+" vim-isort ------------------------------------------------------------
+let g:vim_isort_map = '<C-i>'
 
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -406,6 +418,7 @@ Plug 'ap/vim-css-color'  " Preview colours in source code
 Plug 'Asheq/close-buffers.vim'
 Plug 'Chiel92/vim-autoformat'  " formater
 Plug 'davidhalter/jedi-vim'
+Plug 'fisadev/vim-isort'  " sort python imports
 Plug 'haya14busa/incsearch.vim'  " incrementally highlights ALL pattern matches
 Plug 'jeetsukumaran/vim-pythonsense'  " provides text objects and motions for Python classes, methods, functions, and doc strings
 Plug 'junegunn/vim-easy-align'
