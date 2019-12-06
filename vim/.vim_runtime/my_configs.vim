@@ -346,8 +346,7 @@ let g:ale_linters = {
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 let b:ale_fixers = {'python': ['black']}
 
-nmap <silent> <C-S-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-S-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-p> <Plug>(ale_next_wrap)
 
 " vim-highlightedyank --------------------------------------------------
 if s:has_plugin('vim-highlightedyank')
@@ -371,6 +370,9 @@ let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 let g:AutoPairsShortcutFastWrap = '<M-e>'
 let g:AutoPairsShortcutToggle = '<M-p>'
+
+" vim-move -------------------------------------------------------------
+let g:move_key_modifier = 'M'  " don't know somehow that <opt + cmd> works for macos
 
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -406,9 +408,10 @@ Plug 'junegunn/vim-easy-align'
 Plug 'lambdalisue/suda.vim'  " to read or write files with sudo command
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
-Plug 'matze/vim-move'
+Plug 'matze/vim-move'   " move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
 Plug 'scrooloose/nerdtree'  " file list
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
