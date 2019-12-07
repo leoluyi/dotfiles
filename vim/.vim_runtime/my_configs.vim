@@ -211,6 +211,8 @@ let g:indent_guides_guide_size = 1
 " vim-markdown ---------------------------------------------------------
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_math = 1
 
 " NCM2 -----------------------------------------------------------------
 " https://yufanlu.net/2018/09/03/neovim-python/

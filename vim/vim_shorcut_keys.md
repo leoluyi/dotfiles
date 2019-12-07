@@ -58,34 +58,42 @@ H        -   Move cursor to header (top) line of current visible window
 M        -   Move cursor to middle line of current visible window
 L        -   Move cursor to last line of current visible window
 
-fc       -   Find and jump to next character c on the current line (inclusive). Use Fc to move backwards
-tc       -   Find and jump till next character c on the current line (exclusive). Use Tc to move backwards
-;        -   to repeat the operation
-,        -   to repeat it in opposite direction
-
-*        -   Search forward for word under cursor
-#        -   Search backwards for word under cursor
-
-/word    -   Search forward for word. Accepts regular expressions to search
-?word    -   Search backwards for word. Accepts regular expressions to search
-n        -   Repeat the last / or ? command
-N        -   Repeat the last / or ? command in the opposite direction
+f<character>  -   Find and jump to next 'character' on the current line (inclusive)
+F<character>  -   to find backwards
+t<character>  -   Find and jump till next 'character' on the current line (exclusive)
+T<character>  -   to find backwards
+;        -   Repeat last f, t, F, or T command
+,        -   Repeat last f, t, F, or T command in opposite direction
 
 # Advanced motions
 
-()       -   Move to prev / next sentences ("." delimited words)
-{}       -   Move to prev / next paragraphs (next empty line)
+()       -   Jump to prev / next sentences ("." delimited words)
+{}       -   Jump to prev / next paragraphs (next empty line)
 
 %        -   Go to match of next parentheses, bracket brace
-]]       -   Move N times to next section or `{` (Depending on your current filetype this may move between functions); `[[` to previous section
-][       -   Move N times to next section or `}`
+])       -   Jump N times forward to unmatched parentheses, backward `[(`
+]}       -   Jump N times forward to unmatched braces, backward `[{`
 
-])       -   Move N times forward to unmatched parentheses, backward `[(`
-]}       -   Move N times forward to unmatched braces, backward `[{`
+]]       -   Jump N times to next section or `{` (Depending on your current filetype this may move between functions); `[[` to previous section
+][       -   Jump N times to next section or `}`
 
-''       -   Move to previous line position
+''       -   Jump to previous line position
 ```
 
+**Go through jump list** (a list of places where your cursor has been to)
+
+```
+:<linenum>            - go to <linenum>
+
+`` (double backtick)  - jump between previous position and the current position cursor position in jump list
+`.                    - go back **last change**
+
+                    (The ` goes to a mark, and "." is a "special" mark which is automatically
+                     set to the position where the last change was made)
+
+<C-o> and <C-i>       - up / down walk through the jump list history
+g; and g,             - jump through [edit positions](), which are also very frequently used
+```
 
 ### NORMAL MODE -> INSERT MODE
 
@@ -202,7 +210,6 @@ vfw      -   Highlight to next char "w"
 vtw      -   Highlight 'til next char "w"
 ```
 
-
 ### FILES
 
 ```
@@ -230,21 +237,28 @@ vtw      -   Highlight 'til next char "w"
 
 ```
 <leader>o           -   [Bclose.vim] open/toggle bufexplorer
+
 :ls (or :buffers)   -   list / show available buffers
 :e filename         -   Edit a file in a new buffer
 
 <C-^> or :b#        -   Switch between the "alternative buffers"
-:bnext (or :bn)     -   go to next buffer
-:bprev (of :bp)     -   go to previous buffer
+:bn[ext]            -   go to next buffer
+:bp[rev]            -   go to previous buffer
 
-:bdelete (or :bd)   -   unload a buffer (close a file). [Bclose.vim] `<leader>bd` close current; `<leader>ba` close all
-:bwipeout (or :bw)  -   unload a buffer and deletes it
-:b [N]              -   The number of the buffer you are interested to open
-:b [filename]       -   Swith to buffer (fuzzy matching)
+:bd[elete]          -   close buffer
+<leader>bd          -   (Bclose.vim) close current buffer
+<leader>ba          -   (Bclose.vim) close all buffers
+:bufdo bd           -   close all other buffers
+:bw[ipeout]         -   close buffer and deletes it
+
+:b <N>              -   go to the number of the buffer you are interested to open
+:b <filename>       -   go to buffer (fuzzy matching)
 :ball               -   opens up all available buffers in horizontal split window
 :vertical ball      -   opens up all available buffero in vertical split window
 :q                  -   close the buffer window
+
 :help buffers       -   help for buffers
+
 :r <file_path>      -   reads a file from the path to the buffer
 :r !<command>       -   reads the output of the command into buffer
 :.! cat <file_path> -   reads the output of the command (eg: cat) into buffer or !! in ex-mode
@@ -283,7 +297,6 @@ set wildchar=<Tab> wildcharm=<C-Z>
 <C-w> s             - split current window horizontally
 <C-w> v             - split current window [v]ertically
 <C-w> c             - close current window
-<C-w> m             - move to window according to motion m
 <C-w> n (or :new)   - open new window (horizontally)
 <C-w> o             - Close every window in the current tabview but the current one
 <C-w> T             - 當前窗口移動到新標籤頁
@@ -370,7 +383,7 @@ qk            -  records edits into register k (`q` again to stop recording)
 
 Advanced usage:
 
-:norm @q      -  Use the normal mode command to apply the macro (in the selected area)
+:norm @q      -  Use the normal mode command to apply the macro
 ```
 
 ### VIM FOLDING
@@ -436,47 +449,33 @@ gg=G            -   Re-indent for current FileType
 ### SEARCH & REPLACE
 
 ```
-/pattern                -   search forward for pattern
-?pattern                -   search backward
-n                       -   repeat forward search
-N                       -   repeat backward
+/pattern        -   search forward for pattern
+?pattern        -   search backward
+n               -   Repeat the last / or ? command
+N               -   Repeat the last / or ? command in the opposite direction
+
+*               -   Search forward for word under cursor
+#               -   Search backwards for word under cursor
+
+g*              - search for partial word under cursor    (unbounded)
+g#              - search for word under cursor - backward (unbounded)
+
+More cool searching tricks:
+
+[I              - show lines with matching word under cursor.
+gd              - go to definition for symbol under cursor
+
+Replacement:
+
 :nohl or <leader><CR>   -   no highlight on search result
 :set ignorecase         -   case insensitive
 :set smartcase          -   use case if any caps used
 :set incsearch          -   show match as search proceeds
 :set hlsearch           -   search highlighting
 
-More cool searching tricks:
-
-*                 - search for word currently under cursor  (bounded)
-g*                - search for partial word under cursor    (unbounded)
-                    (repeat with n)
-#                 - search for word under cursor - backward (bounded)
-g#                - search for word under cursor - backward (unbounded)
-[I                - show lines with matching word under cursor.
-
-gd                - go to definition
+:%s/search_for_this/replace_with_this/gc -  replace in the whole file (%s), [c]onfirm each replace
+:s/search_for_this/replace_with_this/gi  -  replace in the current line only, with case [i]nsensitive
 ```
-
-**Go through jump list** (a list of places where your cursor has been to)
-
-```
-:<linenum>            - go to <linenum>
-
-`` (double backtick)  - jump between previous position and the current position cursor position in jump list
-`.                    - bring you to your **last change**
-
-                    (The ` goes to a mark, and "." is a "special" mark which is automatically
-                     set to the position where the last change was made)
-
-<C-o> and <C-i>       - up / down walk through the jump list history
-g; and g,             - jump through [edit positions](), which are also very frequently used
-```
-
-
-- `:%s/search_for_this/replace_with_this/gc` - replace in the whole file (%s), [c]onfirm each replace
-- `:s/search_for_this/replace_with_this/gi` -  replace in the current line only, with case [i]nsensitive
-
 
 ### PLUGINS
 
@@ -503,6 +502,9 @@ yss )      -   wrap the entire line in parentheses
 
 ```
 <leader>nn          -   toggle nerdtree
+
+go                  -   preview file
+
 o                   -   open/close folder
 p                   -   parent folder
 
@@ -551,6 +553,25 @@ s                   -   vertical split
 <C-v>     -   open in a new vertical split
 ```
 
+[vim-move](https://github.com/matze/vim-move)
+
+```
+zk        -   Move current line/selections up
+zj        -   Move current line/selections down
+```
+
+[vim-markdown](https://github.com/plasticboy/vim-markdown)
+
+```
+gx       -   open the link under the cursor
+```
+
+[ale](https://github.com/dense-analysis/ale)
+
+```
+<C-p>    -   navigate next errors
+```
+
 ### MISCELLANEOUS
 
 ```
@@ -568,8 +589,6 @@ guu      -   switch the current line to lower case
 <C-x>    -   Decrement the number at cursor
 
 .        -   Repeat last change
-;        -   Repeat last f, t, F, or T command
-,        -   Repeat last f, t, F, or T command in opposite direction
 
 :%sort   -   Sort in visual mode. Use `:%sort!` to sort in reverse order; `:%sort n` for numeric sort.
 
@@ -667,9 +686,9 @@ Use `<C-r> register` when entering a command in _command mode_ or _insert mode_ 
 ## My Custom Shorcut Keys
 
 ```
-- :W    -- Force write with sudo
-- <F5>  -- Remove trailing white space
-- <leader>p -- Paste yanked register
+:W          - Force write with sudo
+<F5>        - Remove trailing white space
+<leader>p   - Paste yanked register
 ```
 
 ---
