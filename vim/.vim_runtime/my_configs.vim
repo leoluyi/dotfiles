@@ -1,6 +1,7 @@
 " Some basics ---------------------------------------------------------
 let mapleader = ","
 let maplocalleader = "\\"
+nnoremap <leader>, ,
 
 """ Backups
 set history=50                        " Keep 50 lines of command line history
