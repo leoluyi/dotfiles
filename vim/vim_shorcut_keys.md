@@ -71,28 +71,31 @@ T<character>  -   to find backwards
 {}       -   Jump to prev / next paragraphs (next empty line)
 
 %        -   Go to match of next parentheses, bracket brace
-])       -   Jump N times forward to unmatched parentheses, backward `[(`
-]}       -   Jump N times forward to unmatched braces, backward `[{`
+])       -   Jump N times forward to unmatched parentheses, `[(` for backward
+]}       -   Jump N times forward to unmatched braces, `[{` for backward
 
-]]       -   Jump N times to next section or `{` (Depending on your current filetype this may move between functions); `[[` to previous section
-][       -   Jump N times to next section or `}`
+]]       -   Jump (forward) N times to the beginning of next section / function / class
+][       -   Jump (forward) N times to the end of next section / function / class
 
-''       -   Jump to previous line position
+]m       -   Move (forward) to the beginning of the next Python method or function.
+]M       -   Move (forward) to the end of the current Python method or function.
+
 ```
 
 **Go through jump list** (a list of places where your cursor has been to)
 
 ```
-:<linenum>            - go to <linenum>
+:<linenum>            -   go to <linenum>
+''                    -   jump to previous line position
 
-`` (double backtick)  - jump between previous position and the current position cursor position in jump list
-`.                    - go back **last change**
+`` (double backtick)  -   jump between previous position and the current position cursor position in jump list
+<C-o> and <C-i>       -   up / down walk through the jump list history
 
-                    (The ` goes to a mark, and "." is a "special" mark which is automatically
-                     set to the position where the last change was made)
+`.                    -   go back last edit position
+g; and g,             -   jump through edit positions
 
-<C-o> and <C-i>       - up / down walk through the jump list history
-g; and g,             - jump through [edit positions](), which are also very frequently used
+(The ` goes to a mark, and "." is a "special" mark which is automatically
+set to the position where the last change was made)
 ```
 
 ### NORMAL MODE -> INSERT MODE
@@ -148,7 +151,6 @@ xp       -   Transpose two letters (delete and paste, technically)
 "+ p       - paste from the system clipboard
 x  p       - swap two characters (`x` to delete one character, then `p` to put it back after the cursor position)
 ```
-
 
 ### REGISTERS
 
@@ -580,7 +582,7 @@ U        -   Undo all changes on current line
 <C-R>    -   Redo
 .        -   Redo last change
 
-g~$      -   Toggle case of all characters to end of line.
+g~$       -   Toggle case of all characters to end of line.
 g~~      -   Toggle case of the current line (same as V~).
 gUU      -   switch the current line to upper case
 guu      -   switch the current line to lower case
