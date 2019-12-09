@@ -389,6 +389,14 @@ let g:jedi#rename_command = "<leader>r"
 " vim-isort ------------------------------------------------------------
 let g:vim_isort_map = '<C-i>'
 
+" ctrlp-funky ----------------------------------------------------------
+let g:ctrlp_funky_matchtype = 'path'
+let g:ctrlp_funky_syntax_highlight = 1
+if s:has_plugin('ctrlp-funky')
+  nnoremap <Leader>fu :CtrlPFunky<Cr>
+  nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+fi
+
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -431,6 +439,7 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
 Plug 'scrooloose/nerdtree'  " file list
+Plug 'tacahiroy/ctrlp-funky'  " function navigator for ctrlp.vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
