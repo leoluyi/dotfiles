@@ -419,8 +419,8 @@ call plug#begin('~/.vim_runtime/plugged')
 " Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it.
 " Plug 'tpope/vim-commentary'       " comment-out by gc
 
-" My Plugins - nvim/vim8/vim7 compatible:
-" Plug 'valloric/vim-indent-guides'
+" nvim/vim8/vim7 compatible:
+
 Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'ap/vim-css-color'  " Preview colours in source code
 Plug 'Asheq/close-buffers.vim'
@@ -431,6 +431,7 @@ Plug 'haya14busa/incsearch.vim'  " incrementally highlights ALL pattern matches
 Plug 'jeetsukumaran/vim-pythonsense'  " provides text objects and motions for Python classes, methods, functions, and doc strings
 Plug 'junegunn/vim-easy-align'
 Plug 'lambdalisue/suda.vim'  " to read or write files with sudo command
+Plug 'liuchengxu/vim-clap'  " Modern generic interactive finder and dispatcher for Vim and NeoVim
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
