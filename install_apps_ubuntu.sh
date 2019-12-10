@@ -40,6 +40,8 @@ function install_apt_apps {
   echo "$(tput setaf 2)###### Install Apps with Apt ######$(tput sgr 0)"
 
   sudo apt update && sudo apt install -y --no-install-recommends \
+    `# python-neovim` \
+    `# python3-neovim` \
     apt-transport-https \
     build-essential \
     ca-certificates \
@@ -48,6 +50,7 @@ function install_apt_apps {
     fzf \
     gdebi-core \
     gnupg-agent \
+    highlight \
     libbz2-dev \
     libffi-dev \
     liblzma-dev \
@@ -63,8 +66,6 @@ function install_apt_apps {
     ncdu    `# Interactive and very fast du` \
     neofetch \
     neovim \
-    `# python-neovim` \
-    `# python3-neovim` \
     nmon    `# Performance monitor` \
     p7zip-full \
     silversearcher-ag \
