@@ -124,12 +124,12 @@ nnoremap <leader>x "0x
 vnoremap <leader>x "0x
 
 " Yank to clipboard
-nnoremap  <leader>Y  "+y$
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy "+yy
-vnoremap  <leader>Y  "+y$
-vnoremap  <leader>y  "+y
-vnoremap  <leader>yy "+yy
+nnoremap <leader>Y  "+y$
+nnoremap <leader>y  "+y
+nnoremap <leader>yy "+yy
+vnoremap <leader>Y  "+y$
+vnoremap <leader>y  "+y
+vnoremap <leader>yy "+yy
 
 " Fix unwanted key map
 " :unmap <C-Space>
@@ -395,7 +395,7 @@ let g:ctrlp_funky_syntax_highlight = 1
 if s:has_plugin('ctrlp-funky')
   nnoremap <Leader>fu :CtrlPFunky<Cr>
   nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-fi
+endif
 
 " vim-plug -------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
