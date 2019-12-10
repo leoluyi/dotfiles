@@ -88,22 +88,6 @@ else # macOS `ls`
   colorflag="-G"
 fi
 
-# ============ Custom functions ============
-
-function mkcd {
-  last=$(eval "echo \$$#")
-  if [ -z "$last" ]; then
-    echo "Enter a directory name"
-  elif [ -d "$last" ]; then
-    echo "\"$last\" already exists"
-  else
-    mkdir "$@" && cd "$last" || exit
-  fi
-}
-
-# gitignore api
-function gi() { curl -L -s https://www.gitignore.io/api/"$1" ;}
-
 # ============ Completions ============
 
 # https://github.com/scop/bash-completion
