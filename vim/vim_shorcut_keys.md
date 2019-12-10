@@ -218,6 +218,7 @@ vtw      -   Highlight 'til next char "w"
 :pwd              -   print working directory
 <leader>cd        -   set working directory to the directory of the open buffer
 :cd %:p:h         -   set working directory to the directory of the open buffer
+                      (`:p` Make file name a full path. `:h` Head of the file name)
 
 # See [more...](https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file)
 
@@ -247,19 +248,24 @@ vtw      -   Highlight 'til next char "w"
 :bn[ext]            -   go to next buffer
 :bp[rev]            -   go to previous buffer
 
-:bd[elete]          -   close buffer
 <leader>bd          -   (Bclose.vim) close current buffer
 <leader>ba          -   (Bclose.vim) close all buffers
-:bufdo bd           -   close all other buffers
+
+:bd[elete]          -   deletes the current buffer, error if there are unwritten changes
+:bd!                -   deletes the current buffer, no error if unwritten changes
+:bufdo bd           -   deletes all buffers, stops at first error (unwritten changes)
+:bufdo! bd          -   deletes all buffers except those with unwritten changes
+:bufdo! bd!         -   deletes all buffers, no error on any unwritten changes
 :bw[ipeout]         -   close buffer and deletes it
+
+:%bd|e#             -   close all buffers but current one
 
 :b <N>              -   go to the number of the buffer you are interested to open
 :b <filename>       -   go to buffer (fuzzy matching)
 :ball               -   opens up all available buffers in horizontal split window
 :vertical ball      -   opens up all available buffero in vertical split window
-:q                  -   close the buffer window
 
-:help buffers       -   help for buffers
+:bufdo {cmd}        -   execute {cmd} for all buffers
 
 :r <file_path>      -   reads a file from the path to the buffer
 :r !<command>       -   reads the output of the command into buffer
@@ -280,40 +286,50 @@ set wildchar=<Tab> wildcharm=<C-Z>
 ```
 # Split screen
 
-:sp[lit] filename   - horizontal split window and load another file. CLI `vim -o file1 file2`
-:vs[plit] filename  - vertical split window and load another file. CLI `vim -O file1 file2`
-:new                - horizontal split with new file
-:vnew               - vertical split with new file
-:clo[se]            - close current window
-:hide               - hide current window
-:only               - keep only this window open
-:sview file         - same as split, but readonly
+:sp[lit] filename   -   horizontal split window and load another file
+:vs[plit] filename  -   vertical split window and load another file
+:sf                 -   find the path and open in split window
+:vert sf            -   find the path and open in vertically split window
+
+:new                -   horizontal split with new file
+:vnew               -   vertical split with new file
+:clo[se]            -   close current window
+:hide               -   hide current window
+:only               -   keep only this window open
+:sview file         -   same as split, but readonly
+
+vim -o file1 file2  -   open files with horizontally split windows
+vim -O file1 file2  -   open files with vertically split windows
+
+args **/*.yaml      -   manually add all yaml files into arg list;
+:sall               -   then open them all in split windows;
+:vert sall          -   or in vertically split windows.
 
 # Switch between panes
 
-- `<C-w> [hjkl]` or `<C-hjkl>` - move cursor up/down/left/right a window (`<C-w> arrow`)
-- `<C-w> w`                    - move cursor to another window (cycle)
+<C-w> [hjkl] or <C-hjkl>  -   move cursor up/down/left/right a window (`<C-w> arrow`)
+<C-w> w`                  -   move cursor to another window (cycle)
 
 # Shortcuts
 
-<C-w> s             - split current window horizontally
-<C-w> v             - split current window [v]ertically
-<C-w> c             - close current window
-<C-w> n (or :new)   - open new window (horizontally)
-<C-w> o             - Close every window in the current tabview but the current one
-<C-w> T             - 當前窗口移動到新標籤頁
+<C-w> s             -   split current window horizontally
+<C-w> v             -   split current window [v]ertically
+<C-w> c             -   close current window
+<C-w> n (or :new)   -   open new window (horizontally)
+<C-w> o             -   close every window in the current tabview but the current one
+<C-w> T             -   move current window into new tab
 
 # Resizing
 
-:resize 20          - Horizontal resize in active window
-:vertical resize 20 - Virtical resize in active window
-<C-w> _             - maximize height
-<C-w> |             - maximize width
-<C-w> =             - make all equal size
-<C-w> >             - Incrementally increase the window to the right. Takes a parameter, e.g. CTRL-w 20 >
-<C-w> <             - Incrementally increase the window to the left. Takes a parameter, e.g. CTRL-w 20 <
-<C-w> -             - Incrementally decrease the window's height. Takes a parameter, e.g. CTRL-w 10 -
-<C-w> +             - Incrementally increase the window's height. Takes a parameter, e.g. CTRL-w 10 +
+:resize 20          -   Horizontal resize in active window
+:vertical resize 20 -   Virtical resize in active window
+<C-w> _             -   maximize height
+<C-w> |             -   maximize width
+<C-w> =             -   make all equal size
+<C-w> >             -   Incrementally increase the window to the right. Takes a parameter, e.g. CTRL-w 20 >
+<C-w> <             -   Incrementally increase the window to the left. Takes a parameter, e.g. CTRL-w 20 <
+<C-w> -             -   Incrementally decrease the window's height. Takes a parameter, e.g. CTRL-w 10 -
+<C-w> +             -   Incrementally increase the window's height. Takes a parameter, e.g. CTRL-w 10 +
 
 # More split manipulation
 
@@ -323,26 +339,26 @@ set wildchar=<Tab> wildcharm=<C-Z>
 " Break out current window into a new tabview
 <C-w> T
 
-# Diff
+# Diff window
 
-:windo diffthis              -  diff between 2 vsplit windows
-:diffs, diffsplit {filename} -  diffs the current window with the file given
-:diffoff                     -  turns off diff selection
+:windo {cmd}                 -   execute {cmd} for all windows
+:windo diffthis              -   diff on this file for every window
+:diffs, diffsplit {filename} -   diffs the current window with the file given
+:diffoff                     -   turns off diff selection
 ```
 
 ### TAB VIEWS
 
 ```
-:tabe filename      -   opens the file in newtab
-:tabf[ind] {file}   -   open a new tab with filename given, searching the 'path' to find it
-:tabe new           -   open an empty tab
 :tabs               -   list opened tabs
-:tabc [I]           -   close the active (i-th) tab
+
+# Open tabs
+
+:tabe new           -   open an empty tab
+:tabe {filename}    -   open file in newtab
+:tabf[ind] {file}   -   open a new tab with filename given, searching the 'path' to find it
+:tabc {#}           -   close the active (i-th) tab
 :tabo[nly]          -   close all other tabs (show only the current tab)
-:tabn and tabp      -   Go to next tab or previous tab
-:tabfirst           -   Go to the first available tab
-:tablast            -   Go to the last available tab
-:help tabpage       -   help for tabs
 
 vim -p *.txt        -   open all txt files in tabs
 
@@ -357,6 +373,9 @@ vim -p *.txt        -   open all txt files in tabs
 gt                  - goto next tab
 gT                  - goto prev. tab
 {i}gt               - go to tab in position i
+:tabn and tabp      -   Go to next tab or previous tab
+:tabfirst           -   Go to the first available tab
+:tablast            -   Go to the last available tab
 
 # Shortcuts
 
@@ -668,7 +687,6 @@ https://vim.fandom.com/wiki/Get_the_name_of_the_current_file
 - `:echo expand('%:p:h')` directory containing file ('head')
 - `:echo expand('%:r')` name of file less one extension ('root')
 - `:echo expand('%:e')` name of file's extension ('extension')
-- `:cd %:p:h` change the working directory to the file being edited. (`:p` Make file name a full path. `:h` Head of the file name)
 
 ### Vim paste in command mode - `Ctrl-r`
 
