@@ -367,6 +367,7 @@ endif
 " prefer the window is always split vertically
 let R_rconsole_width = 75
 let R_min_editor_width = 18
+let R_assign = 0
 
 " auto-pairs -----------------------------------------------------------
 let g:AutoPairsFlyMode = 0
