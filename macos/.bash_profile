@@ -32,7 +32,7 @@ LIGHT_GREEN="\[\033[1;32m\]"
 
 #PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
 
-# Load the shell dotfiles, and then some:
+# ============ Load the shell dotfiles ============
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
 for file in ~/.{bash_aliases,bash_env,path,bash_prompt,exports,aliases,functions,extra}; do
