@@ -46,6 +46,7 @@ set foldcolumn=1                      " Add a bit extra margin to the left
 """ Display
 set number relativenumber
 set colorcolumn=80                    " Display a ruler at a specific line
+set cursorline
 " highlight ColorColumn ctermbg=Black guibg=Black
 " highlight ColorColumn ctermbg=235 guibg=#2c2d27
 " let &colorcolumn=join(range(81,999),",")
@@ -56,8 +57,8 @@ set colorcolumn=80                    " Display a ruler at a specific line
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
-set ttyfast
 set fileformats=unix,dos,mac
+set ttyfast
 
 "" Fix backspace indent
 set backspace=indent,eol,start
@@ -116,8 +117,8 @@ else
 endif
 
 " Toggle number and relativenumber for copy-paste
-nnoremap <leader>n :set foldcolumn=0<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR>
-vnoremap <leader>n :set foldcolumn=0<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR>
+nnoremap <leader>n :FoldColumnToggle<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR>
+vnoremap <leader>n :FoldColumnToggle<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR>
 
 " Cut and paste
 nnoremap <leader>x "0x
@@ -147,7 +148,7 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" == Utilities for vimrc. == -------------------------------------------
+" == Utilities for vimrc == -------------------------------------------
 
 " https://gist.github.com/thinca/1518874
 
@@ -184,6 +185,24 @@ function! s:plug_loaded(name)
   \   && isdirectory(g:plugs[a:name].dir)
   " \   && stridx(&runtimepath, g:plugs[a:name].dir) >= 0
 endfunction
+
+" Global functions.
+function! FoldColumnToggle()
+  " https://www.kawabangga.com/posts/1990
+  if &foldcolumn
+    setlocal foldcolumn=0
+  else
+    setlocal foldcolumn=1
+  endif
+endfunction
+
+:command! -nargs=0 FoldColumnToggle :call FoldColumnToggle()
+
+function! Highlight(text)
+  :execute "match blue /" . a:text . "/"
+endfunction
+
+:command! -nargs=1 Highlight :call Highlight(<q-args>)
 
 " Check pynvim ---------------------------------------------------------
 
