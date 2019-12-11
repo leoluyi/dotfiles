@@ -325,7 +325,7 @@ let g:lightline = {
       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \              [ 'percent', 'lineinfo' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype'] ],
+      \              [ 'fileformat', 'fileencoding', 'noet', 'filetype'] ],
       \ },
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
@@ -341,23 +341,64 @@ let g:lightline = {
       \ 'subseparator': { 'left': ' ', 'right': '|' }
       \ }
 
-" https://github.com/itchyny/lightline.vim/issues/229
-
-" lightline-ale ---------------------------------------------------------
 let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
+      \   'linter_checking': 'lightline#ale#checking',
+      \   'linter_warnings': 'lightline#ale#warnings',
+      \   'linter_errors': 'lightline#ale#errors',
+      \   'linter_ok': 'lightline#ale#ok',
+      \   'noet': 'LightlineNoexpandtab',
       \ }
 
 let g:lightline.component_type = {
-      \     'linter_checking': 'right',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
+      \   'linter_checking': 'right',
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error',
+      \   'linter_ok': 'left',
+      \   'noet': 'warning',
       \ }
 
+let g:lightline.component_type = extend(g:lightline.component_type, {'sw': 'LightlineShiftwidth'})
+
+" https://github.com/itchyny/lightline.vim/issues/229#issuecomment-297691647
+function! LightlineNoexpandtab()
+    let fname = expand('%:t')
+    if winwidth(0) < 90
+            \ || &expandtab
+            \ || fname == 'ControlP'
+        return ''
+    endif
+    if &shiftwidth == &tabstop
+        return '↹ '.&tabstop.' e̶t̶'
+    elseif &shiftwidth == 0
+      return '↹ '.&tabstop.' e̶t̶'
+    else
+      return '⇆ '.&shiftwidth.' ↹ '.&tabstop.' e̶t̶'
+    endif
+endfunction
+
+function! LightlineShiftwidth()
+    let fname = expand('%:t')
+    if winwidth(0) < 90
+            \ || ! &expandtab
+            \ || fname == 'ControlP'
+        return ''
+    endif
+    if &shiftwidth == 0
+        return '⇆ '.&tabstop
+    else
+        return '⇆ '.&shiftwidth
+    endif
+endfunction
+
+augroup lightline_update
+  autocmd!
+  if has('patch-7.4.786') " 17 Jul 2015 with fixes in 7.4.888, 8.0.0736, 8.0.0974
+    autocmd OptionSet tabstop,shiftwidth,expandtab :call lightline#update()
+  endif
+  autocmd Filetype * :call lightline#update()
+augroup END
+
+" lightline-ale ---------------------------------------------------------
 " let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_checking = "◌"
 " let g:lightline#ale#indicator_warnings = "\uf071"
