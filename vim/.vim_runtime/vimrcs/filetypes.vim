@@ -39,7 +39,7 @@ au FileType python set indentkeys-=0#
 au FileType python setlocal shiftwidth=4
 
 """"""""""""""""""""""""""""""
-" => shiftwidth section
+" => sql section
 """""""""""""""""""""""""""""""
 au FileType sql setlocal shiftwidth=2
 
