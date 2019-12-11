@@ -299,9 +299,8 @@ endif
 autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | endif
 
 " ctrlp.vim ------------------------------------------------------------
-if s:has_plugin('ctrlp_map')
-  let g:ctrlp_map = '<c-f>'
-endif
+let g:ctrlp_map = '<c-f>'
+let g:ctrlp_working_path_mode = 'ra'
 
 " close-buffers.vim ----------------------------------------------------
 autocmd VimEnter *
