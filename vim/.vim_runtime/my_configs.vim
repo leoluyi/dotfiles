@@ -86,13 +86,6 @@ set noerrorbells                      " No annoying sound on errors
 " Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
 " https://github.com/jeffkreeftmeijer/vim-numbertoggle
-
-" augroup numbertoggle
-"   autocmd!
-"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-"   autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber
-" augroup END
-
 augroup numbertoggle
   autocmd!
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
