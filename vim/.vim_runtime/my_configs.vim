@@ -84,10 +84,18 @@ set noerrorbells                      " No annoying sound on errors
 
 " Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
+" https://github.com/jeffkreeftmeijer/vim-numbertoggle
+
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+"   autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber
+" augroup END
+
 augroup numbertoggle
   autocmd!
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-  autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
 augroup END
 
 " My Shortcut Keys -----------------------------------------------------
@@ -332,6 +340,8 @@ let g:lightline = {
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': '|' }
       \ }
+
+" https://github.com/itchyny/lightline.vim/issues/229
 
 " lightline-ale ---------------------------------------------------------
 let g:lightline.component_expand = {
