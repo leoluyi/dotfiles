@@ -21,10 +21,11 @@ set background=dark
 
 """ Editing
 " set clipboard=unnamedplus           " Yank to the system register (*) by default
-set tabstop=4                         " show existing tab with 4 spaces width
-set shiftwidth=4                      " when indenting with '>', use 2 spaces width
+set tabstop=4                         " Show existing tab with 4 spaces width
+set softtabstop=0                     " Disable mixed tabs and spaces
+set shiftwidth=2                      " When indenting with '>', use 2 spaces width
 set expandtab                         " On pressing tab, insert 4 spaces
-set softtabstop=0
+
 " " yank to clipboard
 " " https://stackoverflow.com/a/3961954
 " " https://www.markcampbell.me/2016/04/12/setting-up-yank-to-clipboard-on-a-mac-with-vim.html
@@ -37,7 +38,7 @@ set softtabstop=0
 " endif
 
 """ Folding
-set foldlevel=999
+set foldlevel=999                     " Expand all fold levels
 set foldnestmax=3                     " Sets the maximum nesting of folds
 set foldmethod=syntax                 " The kind of folding
 set foldenable                        " Code folding
@@ -77,7 +78,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o  
 """ Window and Tabs
 set splitbelow splitright   " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 
-""" 1.15 Warnings
+""" Warnings
 set noerrorbells                      " No annoying sound on errors
 " set novisualbell                      " No visual bell
 " set t_vb=                             " No beep or flash
@@ -281,7 +282,6 @@ endif
 let g:autoformat_verbosemode=1
 let g:formatter_yapf_style = 'pep8'
 let g:formatters_python = ['black', 'yapf']
-" https://medium.com/3yourmind/auto-formatters-for-python-8925065f9505
 
 " braceless.vim  -------------------------------------------------------
 if s:has_plugin('braceless.vim')
@@ -325,7 +325,7 @@ let g:lightline = {
       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \              [ 'percent', 'lineinfo' ],
-      \              [ 'fileformat', 'fileencoding', 'noet', 'filetype'] ],
+      \              [ 'fileformat', 'fileencoding', 'filetype'] ],
       \ },
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
@@ -346,7 +346,6 @@ let g:lightline.component_expand = {
       \   'linter_warnings': 'lightline#ale#warnings',
       \   'linter_errors': 'lightline#ale#errors',
       \   'linter_ok': 'lightline#ale#ok',
-      \   'noet': 'LightlineNoexpandtab',
       \ }
 
 let g:lightline.component_type = {
@@ -354,49 +353,7 @@ let g:lightline.component_type = {
       \   'linter_warnings': 'warning',
       \   'linter_errors': 'error',
       \   'linter_ok': 'left',
-      \   'noet': 'warning',
       \ }
-
-let g:lightline.component_type = extend(g:lightline.component_type, {'sw': 'LightlineShiftwidth'})
-
-" https://github.com/itchyny/lightline.vim/issues/229#issuecomment-297691647
-function! LightlineNoexpandtab()
-    let fname = expand('%:t')
-    if winwidth(0) < 90
-            \ || &expandtab
-            \ || fname == 'ControlP'
-        return ''
-    endif
-    if &shiftwidth == &tabstop
-        return '↹ '.&tabstop.' e̶t̶'
-    elseif &shiftwidth == 0
-      return '↹ '.&tabstop.' e̶t̶'
-    else
-      return '⇆ '.&shiftwidth.' ↹ '.&tabstop.' e̶t̶'
-    endif
-endfunction
-
-function! LightlineShiftwidth()
-    let fname = expand('%:t')
-    if winwidth(0) < 90
-            \ || ! &expandtab
-            \ || fname == 'ControlP'
-        return ''
-    endif
-    if &shiftwidth == 0
-        return '⇆ '.&tabstop
-    else
-        return '⇆ '.&shiftwidth
-    endif
-endfunction
-
-augroup lightline_update
-  autocmd!
-  if has('patch-7.4.786') " 17 Jul 2015 with fixes in 7.4.888, 8.0.0736, 8.0.0974
-    autocmd OptionSet tabstop,shiftwidth,expandtab :call lightline#update()
-  endif
-  autocmd Filetype * :call lightline#update()
-augroup END
 
 " lightline-ale ---------------------------------------------------------
 " let g:lightline#ale#indicator_checking = "\uf110"
@@ -434,9 +391,8 @@ endif
 
 " Nvim-R ---------------------------------------------------------------
 " https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt
-" prefer the window is always split vertically
-let R_rconsole_width = 75
-let R_min_editor_width = 18
+let R_rconsole_width = 75    " Let window always split vertically
+let R_min_editor_width = 18  " Disable underscore mapping
 let R_assign = 0
 
 " auto-pairs -----------------------------------------------------------
@@ -446,7 +402,7 @@ let g:AutoPairsShortcutFastWrap = '<M-e>'
 let g:AutoPairsShortcutToggle = '<M-p>'
 
 " vim-move -------------------------------------------------------------
-let g:move_key_modifier = 'M'  " don't know somehow that <opt + cmd> works for macos
+let g:move_key_modifier = 'M'  " don't know but somehow that <opt + cmd> works for macos
 
 " vim-jedi -------------------------------------------------------------
 let g:jedi#goto_command = "<leader>d"
