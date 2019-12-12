@@ -123,10 +123,14 @@ for file in ~/.{bash_aliases,bash_env,path,bash_prompt,exports,aliases,functions
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
+# ============ Terminal ============
+# Disable Ctrl-s Software Flow Control
+stty -ixon
+
 # ============ Completions ============
 
 # pipenv completion
-command -v pipenv >/dev/null 2>&1 && eval "$(pipenv --completion)"
+command -v pipenv &>/dev/null && eval "$(pipenv --completion)"
 
 # tmux completion
 if [ -f /usr/share/bash-completion/tmux_completion ]; then
@@ -148,7 +152,7 @@ fi
 
 # pyenv.
 export PATH=~/".pyenv/bin:$PATH"
-command -v pyenv >/dev/null 2>&1 && \
+command -v pyenv &>/dev/null && \
   eval "$(pyenv init -)" && \
   eval "$(pyenv virtualenv-init -)"
 
@@ -164,19 +168,37 @@ command -v pyenv >/dev/null 2>&1 && \
 
 # Git diff-so-fancy.
 # https://github.com/so-fancy/diff-so-fancy
-if command -v diff-so-fancy >/dev/null 2>&1; then
+if command -v diff-so-fancy &>/dev/null; then
   function gd() {
     git diff --color "$@" | diff-so-fancy | less --tabs=4 -RFX
   }
 fi
 
-# ============ Misc ============
+# ============ Other apps ============
+# Dropbox
+dropbox start &>/dev/null
+
+# ============ Env ============
 
 # Text editor
 export EDITOR=vim
 
 # Set "most" as pager
 command -v most &>/dev/null && export PAGER=most
+
+# Enable syntax-highlighting in less.
+# brew install source-highlight
+if command -v highlight &>/dev/null; then
+  # Pipe Highlight to less
+  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --base16=grayscale-dark"
+  export LESS=" -R "
+fi
+
+if command -v src-hilite-lesspipe.sh &>/dev/null; then
+  # Pipe Highlight to less
+  export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+  export LESS=" -R "
+fi
 
 # Fix pyenv bug for git
 # https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
@@ -190,12 +212,6 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 # MS-SQL
 export PATH="$PATH:/opt/mssql-tools/bin"
-
-# Dropbox
-dropbox start > /dev/null 2>&1
-
-# Disable Ctrl-s Software Flow Control
-stty -ixon
 
 # Proxy
 # export http_proxy="8.8.8.8"

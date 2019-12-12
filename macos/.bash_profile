@@ -30,7 +30,7 @@ LIGHT_GREEN="\[\033[1;32m\]"
  LIGHT_GRAY="\[\033[0;37m\]"
  COLOR_NONE="\[\e[0m\]"
 
-#PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
+#PS1='${YELLOW}\u${COLOR_NONE}@${GREEN}\h${COLOR_NONE}:${BLUE}\w${COLOR_NONE}\$ '
 
 # ============ Load the shell dotfiles ============
 # * ~/.path can be used to extend `$PATH`.
@@ -62,6 +62,9 @@ alias l='ls -CF'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
+# More information for pager
+alias less='less -M -i --underline-special'
 
 # ============ GNU bins ============
 # Use these commands with their normal names, you
@@ -154,10 +157,24 @@ if command -v diff-so-fancy &>/dev/null; then
   }
 fi
 
-# ============ Others ============
+# ============ Env ============
 
 # Set "most" as pager
 command -v most &>/dev/null && export PAGER=most
+
+# Enable syntax-highlighting in less.
+# brew install source-highlight
+if command -v highlight &>/dev/null; then
+  # Pipe Highlight to less
+  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --base16=grayscale-dark"
+  export LESS=" -R "
+fi
+
+if command -v src-hilite-lesspipe.sh &>/dev/null; then
+  # Pipe Highlight to less
+  export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+  export LESS=" -R "
+fi
 
 # Fix pyenv bug for git.
 # https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
@@ -172,4 +189,5 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
+# ============ Footer ============
 command -v neofetch &>/dev/null && neofetch --size 30% --iterm2

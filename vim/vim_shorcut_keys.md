@@ -288,14 +288,19 @@ set wildchar=<Tab> wildcharm=<C-Z>
 
 :sp[lit] filename   -   horizontal split window and load another file
 :vs[plit] filename  -   vertical split window and load another file
-:sf                 -   find the path and open in split window
-:vert sf            -   find the path and open in vertically split window
+:sf[ind]            -   find the path and open in split window
+:vert sf[ind]       -   find the path and open in vertically split window
+
+:sb[uffer]          -   horizontal split with buffer
+:vert sb[uffer]     -   horizontal split with buffer
 
 :new                -   horizontal split with new file
 :vnew               -   vertical split with new file
+
 :clo[se]            -   close current window
 :hide               -   hide current window
 :only               -   keep only this window open
+
 :sview file         -   same as split, but readonly
 
 vim -o file1 file2  -   open files with horizontally split windows
@@ -308,16 +313,23 @@ args **/*.yaml      -   manually add all yaml files into arg list;
 # Switch between panes
 
 <C-w> [hjkl] or <C-hjkl>  -   move cursor up/down/left/right a window (`<C-w> arrow`)
-<C-w> w`                  -   move cursor to another window (cycle)
+<C-w> w                   -   move cursor to another window (cycle)
 
 # Shortcuts
 
+<c-w> t <c-w> K     -   To change two vertically split windows to horizonally split
+<c-w> t <c-w> H     -   Horizontally to vertically
+
 <C-w> s             -   split current window horizontally
 <C-w> v             -   split current window [v]ertically
-<C-w> c             -   close current window
 <C-w> n (or :new)   -   open new window (horizontally)
+<C-w> c             -   close current window
 <C-w> o             -   close every window in the current tabview but the current one
+
+<c-w> t             -   makes the first (topleft) window current
 <C-w> T             -   move current window into new tab
+<c-w> K             -   moves the current window to full-width at the very top
+<c-w> H             -   moves the current window to full-height at far left
 
 # Resizing
 
@@ -681,11 +693,11 @@ http://vim.wikia.com/wiki/Moving_around
 
 https://vim.fandom.com/wiki/Get_the_name_of_the_current_file
 
-- `:echo @%` directory/name of file (relative to the current working directory)
-- `:echo expand('%:t')` name of file
-- `:echo expand('%:p')` full path
-- `:echo expand('%:p:h')` directory containing file ('head')
-- `:echo expand('%:r')` name of file less one extension ('root')
+- `:echo @%` relative path of current file (relative to the working directory)
+- `:echo expand('%:t')` name of current file
+- `:echo expand('%:p')` full path of current file ('p' for path)
+- `:echo expand('%:p:h')` directory containing current file ('h' for head)
+- `:echo expand('%:r')` name of file less one extension ('r' for root)
 - `:echo expand('%:e')` name of file's extension ('extension')
 
 ### Vim paste in command mode - `Ctrl-r`
