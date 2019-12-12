@@ -613,7 +613,9 @@ U        -   Undo all changes on current line
 <C-R>    -   Redo
 .        -   Redo last change
 
-g~$       -   Toggle case of all characters to end of line.
+:e!      -   Reload current file and discard all changes
+
+g~$      -   Toggle case of all characters to end of line.
 g~~      -   Toggle case of the current line (same as V~).
 gUU      -   switch the current line to upper case
 guu      -   switch the current line to lower case
@@ -629,16 +631,20 @@ guu      -   switch the current line to lower case
 g <C-g>  -   Show statistics (word count, ...)
 1 <C-g>  -   View the full path of the file
 
-vim +10 <file_name>            - opens the file at line 10
-vim +/bash cronjob-lab.yml     - opens the file cronjob-lab.yml on the first occurence of bash
+vim +10 {file}           -   Opens the file at line 10
+vim +/bash {file}        -   Opens the file cronjob-lab.yml on the first occurence of bash
 
-vim scp://balasundaramm@mgmt-bst:22/~/automation/test-file.txt - Edit a remote file via scp
+:set nonumber            -   Disable line number
+:set norelativenumber    -   Disable relative line number
 
-:set nonumber            -  disable line number
-:set norelativenumber    -  disable relative line number
+:version                 -   Check vim version
+:echo v:version          -   Print version in 3-digit number
 
-:version                 -   Checkk vim version
-:echo v:version          -   Print version number in 3 digits
+:so[ource] {file}        -   Read Ex commands from {file}. These are commands that
+                             start with a ":".
+:so $MYVIMRC             -   Reloaad ~/.vimrc without restarting vim
+
+vim scp://hostname:22/~/automation/test-file.txt - Edit a remote file via scp
 ```
 
 ---
