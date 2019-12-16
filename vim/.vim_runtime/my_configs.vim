@@ -103,6 +103,7 @@ vnoremap <leader>p "0p
 " Remove all trailing whitespace by pressing F5
 " https://vim.fandom.com/wiki/Remove_unwanted_spaces
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+command! WhitespateTrailingRemove :%s/\s\+$//e
 
 " vim-move config - workaround alt key mappings
 nmap zj <Plug>MoveLineDown
@@ -198,13 +199,13 @@ function! FoldColumnToggle()
   endif
 endfunction
 
-:command! -nargs=0 FoldColumnToggle :call FoldColumnToggle()
+command! -nargs=0 FoldColumnToggle :call FoldColumnToggle()
 
 function! Highlight(text)
   :execute "match blue /" . a:text . "/"
 endfunction
 
-:command! -nargs=1 Highlight :call Highlight(<q-args>)
+command! -nargs=1 Highlight :call Highlight(<q-args>)
 
 " Check pynvim ---------------------------------------------------------
 
@@ -311,7 +312,7 @@ autocmd VimEnter *
 
 " lightline.vim --------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'default',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
@@ -346,6 +347,41 @@ let g:lightline.component_type = {
       \   'linter_errors': 'error',
       \   'linter_ok': 'left',
       \ }
+
+" Changing colorscheme on the fly
+" https://github.com/itchyny/lightline.vim/issues/258
+function! s:setLightlineColorscheme(name)
+    let g:lightline.colorscheme = a:name
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+endfun
+
+function! s:lightlineColorschemes(...)
+    return join(map(
+                \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
+                \ "fnamemodify(v:val,':t:r')"),
+                \ "\n")
+endfun
+
+command! -nargs=1 -complete=custom,s:lightlineColorschemes LightlineColorscheme
+            \ call s:setLightlineColorscheme(<q-args>)
+
+function! ColorToggle()
+    if &background ==? 'dark'
+        set background=light
+        let l:scheme = 'PaperColor'
+        exe "silent! colorscheme " . l:scheme
+        exe "silent! LightlineColorscheme " . l:scheme
+    else
+        set background=dark
+        let l:scheme = 'gruvbox'
+        exe "silent! colorscheme " . l:scheme
+        exe "silent! LightlineColorscheme " . l:scheme
+    endif
+endfunction
+
+command! ColorToggle call ColorToggle()
 
 " lightline-ale ---------------------------------------------------------
 " let g:lightline#ale#indicator_checking = "\uf110"
