@@ -53,3 +53,6 @@ alias less='less -r'
 
 # Other Apps
 alias sourcetree='open -a SourceTree'
+
+# Linux only
+source .macos_aliases
