@@ -500,6 +500,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/impsort.vim'  " color and sort imports
+Plug 'vim-scripts/Rename'
 Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'  " show indent guide
