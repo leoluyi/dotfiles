@@ -159,6 +159,9 @@ fi
 
 # ============ Env ============
 
+# User specific environment and startup programs
+export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
+
 # Set "most" as pager
 command -v most &>/dev/null && export PAGER=most
 
