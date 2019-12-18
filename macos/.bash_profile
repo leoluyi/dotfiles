@@ -93,6 +93,7 @@ fi
 
 # ============ Completions ============
 
+# bash completion
 # https://github.com/scop/bash-completion
 if command -v brew &>/dev/null && [ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
     # bash-completion@2
@@ -105,6 +106,14 @@ elif [ -f ${BREW_PREFIX}/etc/bash_completion ]; then
 elif [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
 fi;
+
+# pipenv completion
+command -v pipenv &>/dev/null && eval "$(pipenv --completion)"
+
+# pipx completion
+if command -v register-python-argcomplete &>/dev/null; then
+  eval "$(register-python-argcomplete pipx)"
+fi
 
 # ============ CLI tools ============
 

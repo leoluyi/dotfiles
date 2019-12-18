@@ -132,6 +132,11 @@ stty -ixon
 # pipenv completion
 command -v pipenv &>/dev/null && eval "$(pipenv --completion)"
 
+# pipx completion
+if command -v register-python-argcomplete &>/dev/null; then
+  eval "$(register-python-argcomplete pipx)"
+fi
+
 # tmux completion
 if [ -f /usr/share/bash-completion/tmux_completion ]; then
   source /usr/share/bash-completion/tmux_completion
