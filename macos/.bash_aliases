@@ -55,4 +55,6 @@ alias less='less -r'
 alias sourcetree='open -a SourceTree'
 
 # MacOS only
-source .aliases_macos
+if [ -f ~/.aliases_macos ]; then
+  source ~/.aliases_macos
+fi

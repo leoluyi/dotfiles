@@ -53,7 +53,7 @@ plowshare  `# 免空神器` \
 proj \
 pyenv \
 pyenv-virtualenv \
-qpdf \
+qpdf       `# pdf-to-pdf tool (remove pdf password)` \
 ranger     `# a terminal browser for Vim` \
 rename \
 ripgrep \
