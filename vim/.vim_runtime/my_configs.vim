@@ -276,7 +276,7 @@ let g:vim_markdown_math = 1
 
 " NCM2 -----------------------------------------------------------------
 " https://yufanlu.net/2018/09/03/neovim-python/
-if has('nvim') && has('python3') && s:has_plugin('ncm2')
+if has('nvim') && has('python3') && s:has_plugin('ncm2') && s:has_plugin('ncm2-ultisnips')
   augroup NCM2
     autocmd!
     " enable ncm2 for all buffers
@@ -287,6 +287,10 @@ if has('nvim') && has('python3') && s:has_plugin('ncm2')
     " When the <Enter> key is pressed while the popup menu is visible, it only
     " hides the menu. Use this mapping to close the menu and also start a new line:
     inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+    " Press enter key to trigger snippet expansion
+    " The parameters are the same as `:help feedkeys()`
+    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
     " Use <TAB> to select the popup menu:
     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
