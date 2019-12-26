@@ -323,6 +323,7 @@ args **/*.yaml      -   manually add all yaml files into arg list;
 
 <c-w> t <c-w> K     -   switch two vertically split windows to horizonally split
 <c-w> t <c-w> H     -   horizontally --> vertically
+                        https://stackoverflow.com/a/1269631/3744499
 
 <C-w> s             -   split current window horizontally
 <C-w> v             -   split current window [v]ertically
