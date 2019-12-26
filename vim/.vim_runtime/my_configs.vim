@@ -548,6 +548,7 @@ Plug 'scrooloose/nerdtree'  " file list
 Plug 'tacahiroy/ctrlp-funky'  " function navigator for ctrlp.vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
+Plug 'eugen0329/vim-esearch'  " project-wide async search and replace, similar to SublimeText
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/impsort.vim'  " color and sort imports
 Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
