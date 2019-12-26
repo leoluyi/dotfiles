@@ -229,12 +229,18 @@ vtw      -   Highlight 'til next char "w"
 
 <Shift> ZZ        -   write current file, if modified, and quit
 <Shift> ZQ        -   force exit without saving
+
+:q[uit]           -   Quit the current window
+:qa               -   Quit all windows
+
 :e path/to/file   -   edit new file (buffer)
 :e!               -   revert to last save (or use :earlier 1f)
 :w !sudo tee %    -   force write with sudo trick. % (special variables) "the current file"
 :w!               -   force write
 :w new.txt        -   save (save content to new.txt while keeping original.txt as the opened buffe)
-:wall             -   save all (save all changed buffers)
+:wa[ll]           -   save all (save all changed buffers)
+:wqa[ll]          -   save all and quit
+
 :sav new.txt      -   save as (first write content to the file new.txt, then hide buffer original.txt, finally open new.txt as the current buffer)
 :sav new_name + :!rm <C-r>#    - Rename files (<C-r>#  expands to an alternate-file)
 ```
