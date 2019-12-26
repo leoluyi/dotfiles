@@ -275,7 +275,7 @@ vtw      -   Highlight 'til next char "w"
 set the config:
 
 ```
-set wildmenu wildmode=full 
+set wildmenu wildmode=full
 set wildchar=<Tab> wildcharm=<C-Z>
 ```
 
@@ -286,13 +286,15 @@ set wildchar=<Tab> wildcharm=<C-Z>
 ```
 # Split screen
 
-:sp[lit] filename   -   horizontal split window and load another file
-:vs[plit] filename  -   vertical split window and load another file
-:sf[ind]            -   find the path and open in split window
-:vert sf[ind]       -   find the path and open in vertically split window
+:sp[lit] {filename}        -   horizontal split window and load another file
+:vs[plit] {filename}       -   vertical split window and load another file
+:sf[ind]                   -   find the path and open in split window
+:vert sf[ind]              -   find the path and open in vertically split window
 
-:sb[uffer]          -   horizontal split with buffer
-:vert sb[uffer]     -   horizontal split with buffer
+:sb[uffer] {bufname}       -   horizontal split with {bufname} from the buffer
+:vert sb[uffer] {bufname}  -   vertical split with {bufname} from the buffer
+:vert sball                -   vertical split all buffers
+:vs | buffer {bufname}     -   (same as above)
 
 :new                -   horizontal split with new file
 :vnew               -   vertical split with new file
