@@ -141,7 +141,10 @@ ynw      -   Yank n words from the cursor
 y$       -   Yank till the end of the line
 p        -   Yank register below cursor line
 P        -   Put yanked text above current line
+
 J        -   Join current line with the next line. Use gJ to exclude join-position space
+gJ       -   Join lines without space
+
 xp       -   Transpose two letters (delete and paste, technically)
 
 # More cool tricks:

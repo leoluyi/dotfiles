@@ -48,6 +48,7 @@ set foldcolumn=1                      " Add a bit extra margin to the left
 set number relativenumber
 set colorcolumn=80                    " Display a ruler at a specific line
 set cursorline
+set fillchars+=vert:│                 " Split separator
 " highlight ColorColumn ctermbg=Black guibg=Black
 " highlight ColorColumn ctermbg=235 guibg=#2c2d27
 " let &colorcolumn=join(range(81,999),",")
@@ -520,6 +521,7 @@ call plug#begin('~/.vim_runtime/plugged')
 " Plug 'jiangmiao/auto-pairs'       " insert or delete brackets, parens, quotes in pair
 " Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it.
 " Plug 'tpope/vim-commentary'       " comment-out by gc
+" Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
 
 " nvim/vim8/vim7 compatible:
 
