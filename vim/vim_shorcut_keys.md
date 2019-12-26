@@ -375,27 +375,26 @@ args **/*.yaml      -   manually add all yaml files into arg list;
 # Open tabs
 
 :tabe[dit] {file}   -   open file in newtab
-:tabnew
-
+:tabnew             -   (identical to above)
+:tabnew %           -   open current file in newtab
 :tabf[ind] {file}   -   open a new tab with filename given, searching the 'path' to find it
+
+vim -p *.txt        -   open all txt files in tabs
 
 <C-w>T              -   "move" current window to a new tab
 :tab sp             -   "copy" current window to a new tab
                         (split the current window, but open the split in a new tab)
-:tabnew %           -   open current file in newtab
 
-:tabc {#}           -   close the active (i-th) tab
+:tabc[lose] {#}     -   close the active (i-th) tab
 :tabo[nly]          -   close all other tabs (show only the current tab)
-
-vim -p *.txt        -   open all txt files in tabs
 
 # Moving tabs
 
-:tabm 0             - move current tab to first
+:tabm[ove] 0        - move current tab to first
 :tabm               - move current tab to last
 :tabm {i}           - move current tab to position i+1
 
-# TAB NAVIGATION
+# Tab navigation
 
 gt                  - goto next tab
 gT                  - goto prev. tab
