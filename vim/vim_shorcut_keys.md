@@ -517,12 +517,62 @@ Replacement:
 
 ### PLUGINS
 
+[ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
+
+```
+<c-f> / <c-b>    -   invoke CtrlP and cycle between modes (mru, buffers, files)
+<c-d>            -   switch to filename only search instead of full path
+<c-r>            -   switch to regexp mode
+<c-z>            -   mark/unmark multiple files and <c-o> to open them
+```
+
+[ack.vim](https://github.com/mileszs/ack.vim)
+
+```
+:Ack {pattern} [{path}]
+
+The quickfix results window is augmented with these convenience mappings:
+
+?          -   a quick summary of these keys, repeat to close
+o          -   to open (same as Enter)
+O          -   to open and close the quickfix window
+go         -   to preview file, open but maintain focus on ack.vim results
+t          -   to open in new tab
+T          -   to open in new tab without moving to it
+h          -   to open in horizontal split
+H          -   to open in horizontal split, keeping focus on the results
+v          -   to open in vertical split
+gv         -   to open in vertical split, keeping focus on the results
+q          -   to close the quickfix window
+```
+
 [vim-commentary](https://github.com/tpope/vim-commentary)
 
 ```
 gcc        -   comment out a line (takes a count)
 gc         -   comment out the selection
 gcap       -   comment out a paragraph
+```
+
+[fzf-vim](https://github.com/junegunn/fzf.vim)
+
+```
+:Files / :FZF    -   search for files in current directory
+:FZF ~           -   Look for files under your home directory
+:Buffers         -   search for opened buffers
+:Ag              -   Full-text search (ALT-A to select all, ALT-D to deselect all)
+
+# Open files
+<Enter>   -   open in current window
+<C-t>     -   open in a new tab
+<C-x>     -   open in a new split
+<C-v>     -   open in a new vertical split
+```
+
+[mru](https://github.com/vim-scripts/mru.vim)
+
+```
+<leader>f      - open recently opened files
 ```
 
 [surround.vim](https://github.com/tpope/vim-surround)
@@ -568,27 +618,6 @@ s                   -   vertical split
 <C-p>      -   (prev) remove current virtual cursor + selection and go back on previous match
 
 <A-n>      -   (select all) start muticursor and directly select all matches
-```
-
-[mru](https://github.com/vim-scripts/mru.vim)
-
-```
-<leader>f      - open recently opened files
-```
-
-[fzf-vim](https://github.com/junegunn/fzf.vim)
-
-```
-:Files / :FZF    -   search for files in current directory
-:FZF ~           -   Look for files under your home directory
-:Buffers         -   search for opened buffers
-:Ag              -   Full-text search (ALT-A to select all, ALT-D to deselect all)
-
-# Open files
-<Enter>   -   open in current window
-<C-t>     -   open in a new tab
-<C-x>     -   open in a new split
-<C-v>     -   open in a new vertical split
 ```
 
 [vim-move](https://github.com/matze/vim-move)
