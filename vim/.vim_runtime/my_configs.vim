@@ -55,9 +55,9 @@ set cursorline
 " set textwidth=80
 
 """ Encoding
-set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8
+set encoding=utf-8                    " Used internally, always utf-8
+set fileencoding=utf-8                " File-content encoding for the current buffle
+set fileencodings=utf-8,cp950         " A list of character encodings considered when starting to edit an existing file
 set fileformats=unix,dos,mac
 set ttyfast
 
@@ -71,12 +71,12 @@ filetype plugin indent on
 """ Word Wrap
 set linebreak                         " Make Vim break lines without breaking words
 set wrap                              " Line wrapping
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o  " Disables automatic commenting on newline
+set formatoptions-=t                  " When textwidth is set, keeps the visual textwidth but doesn't add new line in insert mode
+" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o  " Disables automatic commenting on newline
 " https://stackoverflow.com/q/2280030/3744499
-" set formatoptions-=t    " Keeps the visual textwidth but doesn't add new line in insert mode
 
 """ Window and Tabs
-set splitbelow splitright   " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
+set splitbelow splitright             " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 
 """ Warnings
 set noerrorbells                      " No annoying sound on errors
