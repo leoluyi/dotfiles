@@ -374,9 +374,16 @@ args **/*.yaml      -   manually add all yaml files into arg list;
 
 # Open tabs
 
-:tabe new           -   open an empty tab
-:tabe {filename}    -   open file in newtab
+:tabe[dit] {file}   -   open file in newtab
+:tabnew
+
 :tabf[ind] {file}   -   open a new tab with filename given, searching the 'path' to find it
+
+<C-w>T              -   "move" current window to a new tab
+:tab sp             -   "copy" current window to a new tab
+                        (split the current window, but open the split in a new tab)
+:tabnew %           -   open current file in newtab
+
 :tabc {#}           -   close the active (i-th) tab
 :tabo[nly]          -   close all other tabs (show only the current tab)
 
