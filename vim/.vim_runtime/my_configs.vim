@@ -139,6 +139,10 @@ vnoremap <leader>yy "+yy
 " :unmap <C-Space>
 inoremap <C-@> <Esc>
 
+" Zooming vim window splits
+noremap Zz <c-w>_ \| <c-w>\|
+noremap Zo <c-w>=
+
 " vim-multiple-cursors - default mapping -------------------------------
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'

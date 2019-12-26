@@ -197,10 +197,12 @@ v        -   Enter visual mode and highlight characters
 V        -   Enter visual mode and highlight lines
 CTRL+v   -   Enter visual block mode and highlight exactly where the cursor moves
 o        -   Switch cursor from first & last character of highlighted block while in visual mode
+
 ~        -   Swap case under selection
 U        -   Uppercase
 u        -   Lowercase
 gUiw     -   (normal mode) Change current word to uppercase
+
 <<       -   Shift lines to left
 >>       -   Shift lines to right
 
@@ -319,8 +321,8 @@ args **/*.yaml      -   manually add all yaml files into arg list;
 
 # Shortcuts
 
-<c-w> t <c-w> K     -   To change two vertically split windows to horizonally split
-<c-w> t <c-w> H     -   Horizontally to vertically
+<c-w> t <c-w> K     -   switch two vertically split windows to horizonally split
+<c-w> t <c-w> H     -   horizontally --> vertically
 
 <C-w> s             -   split current window horizontally
 <C-w> v             -   split current window [v]ertically
