@@ -49,11 +49,10 @@ set number relativenumber
 set colorcolumn=80                    " Display a ruler at a specific line
 set cursorline
 set fillchars+=vert:│                 " Split separator
-" highlight ColorColumn ctermbg=Black guibg=Black
-" highlight ColorColumn ctermbg=235 guibg=#2c2d27
-" let &colorcolumn=join(range(81,999),",")
-" set colorcolumn=+1  " highlight column after 'textwidth'
 " set textwidth=80
+" set colorcolumn=+1  " highlight column after 'textwidth'
+" let &colorcolumn=join(range(81,999),",")  " set colorcolumn for the whole screen after 81
+" highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 """ Encoding
 set encoding=utf-8                    " Used internally, always utf-8
