@@ -500,7 +500,7 @@ if s:has_plugin('ctrlp-funky')
 endif
 
 " vim-esearch ----------------------------------------------------------
-highlight ESearchMatch ctermfg=black ctermbg=38 guifg=#000000 guibg=#5FB4B4
+highlight ESearchMatch ctermfg=white ctermbg=204 guifg=#ffffff guibg=#FF3E7B
 
 " vim-plug =============================================================
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
