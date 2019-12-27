@@ -545,7 +545,6 @@ Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-Plug 'rakr/vim-colors-rakr'  " color scheme
 Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
 Plug 'scrooloose/nerdtree'  " file list
@@ -553,7 +552,7 @@ Plug 'tacahiroy/ctrlp-funky'  " function navigator for ctrlp.vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
-Plug 'tweekmonster/impsort.vim'  " color and sort imports
+Plug 'tweekmonster/impsort.vim'  " color and sort python imports
 Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'  " show indent guide
@@ -568,9 +567,10 @@ endif
 
 " Theme
 Plug 'morhetz/gruvbox'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'rakr/vim-one'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'rakr/vim-colors-rakr'
+Plug 'rakr/vim-one'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Neovim/Vim8 compatible
 if has('nvim') || v:version >= 800
