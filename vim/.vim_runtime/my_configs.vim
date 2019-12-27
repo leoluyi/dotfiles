@@ -499,7 +499,10 @@ if s:has_plugin('ctrlp-funky')
   nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 endif
 
-" vim-plug -------------------------------------------------------------
+" vim-esearch ----------------------------------------------------------
+highlight ESearchMatch ctermfg=black ctermbg=38 guifg=#000000 guibg=#5FB4B4
+
+" vim-plug =============================================================
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
 if empty(glob('~/.vim_runtime/autoload/plug.vim'))

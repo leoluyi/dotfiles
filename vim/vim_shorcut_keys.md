@@ -572,56 +572,72 @@ gcap       -   comment out a paragraph
 [fzf-vim](https://github.com/junegunn/fzf.vim)
 
 ```
-:Files / :FZF    -   search for files in current directory
-:FZF ~           -   Look for files under your home directory
+:Files {path}    -   search for files in {current} directory
+:FZF             -   (same as above)
+
 :Buffers         -   search for opened buffers
+<leader>b        -   (same as above)
+
 :Ag              -   Full-text search (ALT-A to select all, ALT-D to deselect all)
 
 # Open files
-<Enter>   -   open in current window
-<C-t>     -   open in a new tab
-<C-x>     -   open in a new split
-<C-v>     -   open in a new vertical split
+<Enter>          -   open in current window
+<C-t>            -   open in a new tab
+<C-x>            -   open in a new split
+<C-v>            -   open in a new vertical split
 ```
 
 [mru](https://github.com/vim-scripts/mru.vim)
 
 ```
-<leader>f      - open recently opened files
+<leader>f   - open recently opened files
+```
+
+[vim-esearch](https://github.com/eugen0329/vim-esearch)
+
+```
+<leader>ff  -   invoke search and insert a search pattern
+
+# In quickfix window:
+s           -   open file in split
+v           -   open file in vertical split
+t           -   open file in tab
+<S-s,v,t>   -   open a file silently
+<S-r>       -   reload currrent results
 ```
 
 [surround.vim](https://github.com/tpope/vim-surround)
 
 ```
-S "        -   (Visual mode) add quotes in selection
+S "         -   (Visual mode) add quotes in selection
 
-ys iw "    -   add quotes in word
-ds "       -   remove the delimiters entirely
-cs "'      -   change surrounding from " to '
-yss )      -   wrap the entire line in parentheses
+ys iw "     -   add quotes in word
+ds "        -   remove the delimiters entirely
+cs "'       -   change surrounding from " to '
+yss )       -   wrap the entire line in parentheses
 ```
 
 [NERDTree](https://github.com/scrooloose/nerdtree)
 
 ```
-<leader>nn          -   toggle nerdtree
+<leader>nn      -   toggle nerdtree
 
-go                  -   preview file
+go              -   preview file
 
-o                   -   open/close folder
-p                   -   parent folder
+o               -   open/close folder
+p               -   parent folder
 
-P                   -   go to root folder
-C                   -   set cursor as root folder
-u                   -   set root folder to upper layer
+P               -   go to root folder
+C               -   set cursor as root folder
+u               -   set root folder to upper layer
 
-I                   -   show hidden folder
-m                   -   opens the menu
-?                   -   help
+I               -   show hidden folder
+m               -   opens the menu
+?               -   help
 
-i                   -   horizontal split
-s                   -   vertical split
-<C-w> ← | →         -   (left or right) to navigate
+i               -   horizontal split
+s               -   vertical split
+<C-w> ← | →     -   (left or right) to navigate
 ```
 
 [vim-multiple-cursors (Sublime-text-flavor select)](https://github.com/terryma/vim-multiple-cursors)
