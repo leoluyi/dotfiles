@@ -531,6 +531,7 @@ Plug 'Asheq/close-buffers.vim'
 Plug 'Chiel92/vim-autoformat'  " formater
 Plug 'davidhalter/jedi-vim'
 Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
+Plug 'eugen0329/vim-esearch'  " project-wide async search and replace, similar to SublimeText
 Plug 'fisadev/vim-isort'  " sort python imports
 Plug 'haya14busa/incsearch.vim'  " incrementally highlights ALL pattern matches
 Plug 'jeetsukumaran/vim-pythonsense'  " provides text objects and motions for Python classes, methods, functions, and doc strings
@@ -542,13 +543,13 @@ Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+Plug 'rakr/vim-colors-rakr'  " color scheme
 Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
 Plug 'scrooloose/nerdtree'  " file list
 Plug 'tacahiroy/ctrlp-funky'  " function navigator for ctrlp.vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
-Plug 'eugen0329/vim-esearch'  " project-wide async search and replace, similar to SublimeText
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/impsort.vim'  " color and sort imports
 Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
