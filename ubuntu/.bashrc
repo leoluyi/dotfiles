@@ -186,7 +186,11 @@ dropbox start &>/dev/null
 # ============ Env ============
 
 # Text editor
-export EDITOR=vim
+if command -v nvim; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
 
 # Set "most" as pager
 command -v most &>/dev/null && export PAGER=most
