@@ -186,7 +186,7 @@ dropbox start &>/dev/null
 # ============ Env ============
 
 # Text editor
-if command -v nvim; then
+if command -v nvim &>/dev/null; then
   export EDITOR=nvim
 else
   export EDITOR=vim
