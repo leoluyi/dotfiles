@@ -18,8 +18,8 @@ set -g @tpm_plugins ' \
 # -- Automatic Tmux start ------------------------------------------------------
 # https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
 
-#set -g @continuum-boot 'on'
-#set -g @continuum-restore 'on'
+# set -g @continuum-boot 'on'
+# set -g @continuum-restore 'on'
 
 # -- navigation ----------------------------------------------------------------
 
@@ -36,7 +36,7 @@ set -g @tpm_plugins ' \
 # new window retains current path, possible values are:
 #   - true
 #   - false (default)
-tmux_conf_new_window_retain_current_path=false
+tmux_conf_new_window_retain_current_path=true
 
 # new pane retains current path, possible values are:
 #   - true (default)
@@ -59,7 +59,7 @@ tmux_conf_new_session_prompt=false
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
 #  - false (default)
-tmux_conf_theme_24b_colour=false
+tmux_conf_theme_24b_colour=true
 
 # window style
 tmux_conf_theme_window_fg='default'
