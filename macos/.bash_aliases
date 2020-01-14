@@ -40,6 +40,9 @@ alias df='df -kT'
 alias free='free -h'
 alias less='less -r'
 
+# Find the largest top 10 files and directories
+alias ducks='du -cks -- * | sort -rn | head'
+
 # subl + pipenv virtualenv.
 (command -v pipenv &>/dev/null) && \
   (command -v subl &>/dev/null) && \
