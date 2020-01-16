@@ -61,7 +61,10 @@ set fileencodings=utf-8,cp950         " A list of character encodings considered
 set fileformats=unix,dos,mac
 set ttyfast
 
-"" Fix backspace indent
+""" Number formats
+set nrformats-=octal
+
+""" Fix backspace indent
 set backspace=indent,eol,start
 
 """ Files
@@ -501,6 +504,12 @@ endif
 
 " vim-esearch ----------------------------------------------------------
 highlight ESearchMatch ctermfg=white ctermbg=204 guifg=#ffffff guibg=#FF3E7B
+
+" incsearch.vim --------------------------------------------------------
+" https://github.com/haya14busa/incsearch.vim/issues/79
+if has('nvim')
+  set inccommand=nosplit
+endif
 
 " vim-plug =============================================================
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
