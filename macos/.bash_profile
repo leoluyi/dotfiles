@@ -168,6 +168,13 @@ fi
 
 # ============ Env ============
 
+# Use nvim as default editor
+if command -v nvim &>/dev/null; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
+
 # User specific environment and startup programs
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
 
