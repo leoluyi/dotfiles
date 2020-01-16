@@ -78,7 +78,7 @@ function install_apt_apps {
     xclip \
     xz-utils \
     zlib1g-dev \
-    2>dev/null
+    2>/dev/null
 }
 
 
@@ -256,6 +256,18 @@ function install_diff_so_fancy {
 }
 
 
+function install_dbeaver {
+  if [ ! "$(dpkg -l dbeaver-ce 2>/dev/null)" ]; then
+    wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
+    if [ ! -f /etc/apt/sources.list.d/dbeaver.list ]; then
+      echo "deb https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt/sources.list.d/dbeaver.list
+    fi
+
+    sudo apt update && sudo apt -y install dbeaver-ce
+  fi
+}
+
+
 function upgrade_tmux {
   echo "$(tput setaf 2)###### Upgrade tmux ######$(tput sgr 0)"
 
@@ -265,6 +277,7 @@ function upgrade_tmux {
   local need_upgrade="$(echo "${current_tmux_version} ${MIN_TMUX_VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"  # SC2072
 
   if [ "${need_upgrade}" = 1 ]; then
+    echo "tmux need to be upgraded to v2.9 (current tmux version: ${current_tmux_version})"
     sudo apt install -y \
       curl \
       automake \
