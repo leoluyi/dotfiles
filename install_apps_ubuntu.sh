@@ -314,9 +314,11 @@ install_neovim $FORCE
 install_pyenv
 install_r $FORCE
 install_rstudio
+install_dbeaver
 upgrade_tmux
 
 unset \
+  validate_os ubuntu \
   install_apt_apps \
   install_chrome \
   install_diff_so_fancy \
@@ -327,6 +329,7 @@ unset \
   install_pyenv \
   install_r \
   install_rstudio \
+  install_dbeaver \
   upgrade_tmux \
   &>/dev/null
 
