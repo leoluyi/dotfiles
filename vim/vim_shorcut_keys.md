@@ -122,6 +122,7 @@ dm       -   Delete in direction of movement m. For m, you can also use w, b, or
             `bdw` - back delete word.
 dd       -   Delete entire current line. `3dd` to delete 3 lines
 D / d$   -   Delete until end of line
+0D       -   Clear current line without removing the line
 d0       -   Delete to the begining of line
 
 c        -   Change (Same as `d` but put me in insert mode)
