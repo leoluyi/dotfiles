@@ -40,6 +40,7 @@ function install_apt_apps {
   echo "$(tput setaf 2)###### Install Apps with Apt ######$(tput sgr 0)"
 
   sudo apt update && sudo apt install -y --no-install-recommends \
+    `# fd-find` \
     `# python-neovim` \
     `# python3-neovim` \
     apt-transport-https \
@@ -302,35 +303,47 @@ function upgrade_tmux {
   fi
 }
 
+function install_fd {
+  local FD_VERSION_REQUIRED="7.4.0"
 
-validate_os ubuntu
+  if ! command -v fd &>/dev/null; then
+    curl -fsSLo "/tmp/fd_${FD_VERSION_REQUIRED}_amd64.deb" \
+      "https://github.com/sharkdp/fd/releases/download/v${FD_VERSION_REQUIRED}/fd_${FD_VERSION_REQUIRED}_amd64.deb"
+
+    sudo dpkg -i "/tmp/fd_${FD_VERSION_REQUIRED}_amd64.deb"
+  fi
+}
+
 install_apt_apps
 install_chrome
+install_dbeaver
 install_diff_so_fancy
 install_docker $FORCE
 install_dropbox
+install_fd
 install_git
 install_neovim $FORCE
 install_pyenv
 install_r $FORCE
 install_rstudio
-install_dbeaver
+validate_os ubuntu
 upgrade_tmux
 
 unset \
-  validate_os ubuntu \
   install_apt_apps \
   install_chrome \
+  install_dbeaver \
   install_diff_so_fancy \
   install_docker \
   install_dropbox \
+  install_fd \
   install_git \
   install_neovim \
   install_pyenv \
   install_r \
   install_rstudio \
-  install_dbeaver \
   upgrade_tmux \
+  validate_os ubuntu \
   &>/dev/null
 
 echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"
