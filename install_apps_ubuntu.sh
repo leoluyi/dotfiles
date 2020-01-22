@@ -83,6 +83,7 @@ function install_apt_apps {
 
 
 function install_neovim {
+  echo "$(tput setaf 2)###### Install Neovim ######$(tput sgr 0)"
   local new_ubuntu="$(echo "$(lsb_release -rs) 18.04" | awk '{print ($1 >= $2)}')"
 
   if ! command -v nvim &>/dev/null || [ "$1" = "-f" ]; then
@@ -103,7 +104,7 @@ function install_neovim {
     fi
   fi
 
-  python3 -m pip install --no-cache-dir --user -U neovim pynvim jedi flake8 autopep8
+  python3 -m pip install --quiet --no-cache-dir --user -U neovim pynvim jedi flake8 autopep8
 }
 
 
@@ -112,11 +113,14 @@ function install_git {
   local VERSION_REQUIRED='2.25.0'
 
   local current_version="$(git --version | cut -d' ' -f3-)"
-  local need_upgrade="$(echo "${current_version} ${VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"  # SC2072
+  local need_upgrade="$(echo "${current_version} ${VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"
+  # SC2072 - https://stackoverflow.com/a/46827362/3744499
 
   if [ "${need_upgrade}" = 1 ]; then
     sudo add-apt-repository -y ppa:git-core/ppa
     sudo apt update -qq && sudo apt install -qq -y git
+  else
+    echo "No need to upgrade git (current version: ${current_version})"
   fi
 }
 
@@ -133,21 +137,25 @@ function install_chrome {
 
 
 function install_docker {
+  echo "$(tput setaf 2)###### Install Docker ######$(tput sgr 0)"
 
   if ! command -v docker &>/dev/null || [ "$1" = "-f" ]; then
     # ====== Docker ======
     # https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community
-    sudo apt install -y \
+    sudo apt install -qq -y \
       apt-transport-https \
       ca-certificates \
       curl \
       gnupg-agent \
       software-properties-common
+
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
     sudo add-apt-repository -y \
        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
        $(lsb_release -cs) \
        stable"
+
     sudo apt update -qq && sudo apt install -qq -y docker-ce docker-ce-cli containerd.io
   fi
 
@@ -222,7 +230,7 @@ function install_rstudio {
   if ! command -v rstudio &>/dev/null; then
     curl -fsSL -o /tmp/rstudio-${VERSION_REQUIRED}-amd64.deb \
       https://download1.rstudio.org/desktop/bionic/amd64/rstudio-${VERSION_REQUIRED}-amd64.deb
-    sudo apt install gdebi-core && sudo gdebi -n /tmp/rstudio-${VERSION_REQUIRED}-amd64.deb
+    sudo apt install -qq -y gdebi-core && sudo gdebi -n /tmp/rstudio-${VERSION_REQUIRED}-amd64.deb
   fi
 }
 
@@ -266,6 +274,8 @@ function install_diff_so_fancy {
 
 
 function install_dbeaver {
+  echo "$(tput setaf 2)###### Install DBeaver ######$(tput sgr 0)"
+
   if [ ! "$(dpkg -l dbeaver-ce 2>/dev/null)" ]; then
     wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
     if [ ! -f /etc/apt/sources.list.d/dbeaver.list ]; then
@@ -308,11 +318,13 @@ function upgrade_tmux {
     cd - || return
     rm -rf /tmp/tmux  # Cleanup
   else
-    echo "No need to upgrade (current tmux version: ${current_tmux_version})"
+    echo "No need to upgrade tmux (current version: ${current_version})"
   fi
 }
 
 function install_fd {
+  echo "$(tput setaf 2)###### Install fd ######$(tput sgr 0)"
+
   local VERSION_REQUIRED="7.4.0"
   local os_version_id="$(. /etc/os-release; printf "%s\n" "$VERSION_ID")"
 
