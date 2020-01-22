@@ -61,6 +61,7 @@ function install_apt_apps {
     libssl-dev \
     libxml2-dev \
     libxmlsec1-dev \
+    linuxbrew-wrapper \
     llvm \
     make \
     more \
