@@ -7,8 +7,6 @@ if [ "$1" = "--force" ] || [ "$1" = "-f" ]; then
   FORCE="-f"
 fi
 
-version=$(lsb_release -sd)
-
 get_os() {
   local os=""
   local kernel_name=""
@@ -39,7 +37,7 @@ validate_os() {
 function install_apt_apps {
   echo "$(tput setaf 2)###### Install Apps with Apt ######$(tput sgr 0)"
 
-  sudo apt update && sudo apt install -y --no-install-recommends \
+  sudo apt update -qq && sudo apt install -qq -y --no-install-recommends \
     `# fd-find` \
     `# python-neovim` \
     `# python3-neovim` \
@@ -54,6 +52,7 @@ function install_apt_apps {
     highlight \
     libbz2-dev \
     libffi-dev \
+    linuxbrew-wrapper \
     liblzma-dev \
     libncurses5-dev \
     libreadline-dev \
@@ -61,7 +60,6 @@ function install_apt_apps {
     libssl-dev \
     libxml2-dev \
     libxmlsec1-dev \
-    linuxbrew-wrapper \
     llvm \
     make \
     more \
@@ -93,9 +91,9 @@ function install_neovim {
     sudo add-apt-repository -y ppa:neovim-ppa/stable
 
     if [ "${new_ubuntu}" = 1 ];then
-      sudo apt update && sudo apt install -y neovim python3-pip
+      sudo apt -qq update && sudo apt install -y neovim python3-pip
     else
-      sudo apt update && sudo apt install -y neovim python3-pip
+      sudo apt -qq update && sudo apt install -y neovim python3-pip
       # sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
       # sudo update-alternatives --config vi
       # sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
@@ -111,8 +109,15 @@ function install_neovim {
 
 function install_git {
   echo "$(tput setaf 2)###### Install Git ######$(tput sgr 0)"
-  sudo add-apt-repository -y ppa:git-core/ppa
-  sudo apt update && sudo apt install -y git
+  local VERSION_REQUIRED='2.25.0'
+
+  local current_version="$(git --version | cut -d' ' -f3-)"
+  local need_upgrade="$(echo "${current_version} ${VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"  # SC2072
+
+  if [ "${need_upgrade}" = 1 ]; then
+    sudo add-apt-repository -y ppa:git-core/ppa
+    sudo apt update -qq && sudo apt install -qq -y git
+  fi
 }
 
 
@@ -143,7 +148,7 @@ function install_docker {
        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
        $(lsb_release -cs) \
        stable"
-    sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io
+    sudo apt update -qq && sudo apt install -qq -y docker-ce docker-ce-cli containerd.io
   fi
 
   if ! command -v docker-compose &>/dev/null || [ "$1" = "-f" ]; then
@@ -168,10 +173,11 @@ function install_dropbox {
   echo "$(tput setaf 2)###### Install Dropbox ######$(tput sgr 0)"
 
   if ! command -v dropbox &>/dev/null; then
-    sudo apt install -y gdebi python-gpg
+    sudo apt install -qq -y gdebi python-gpg
     # sudo apt install python-gpgme   # for Ubuntu16
     wget -qO /tmp/dropbox_2019.02.14_amd64.deb https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
     sudo gdebi -n /tmp/dropbox_2019.02.14_amd64.deb
+
     # https://askubuntu.com/a/148177/594426
     # sudo echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
   fi
@@ -196,14 +202,15 @@ function install_r {
     sudo add-apt-repository -y ppa:marutter/c2d4u3.5
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9
-    sudo apt update
-    sudo apt -y install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev curl libssh2-1-dev libxml2-dev libxslt-dev
-    sudo apt -y install \
-    r-base \
-    r-base-core \
-    r-recommended \
-    r-cran-rjava \
-    r-cran-devtools
+    sudo apt update -qq
+    sudo apt install -qq -y \
+      build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev curl libssh2-1-dev libxml2-dev libxslt-dev
+    sudo apt install -qq -y \
+      r-base \
+      r-base-core \
+      r-recommended \
+      r-cran-rjava \
+      r-cran-devtools
   fi
 }
 
@@ -211,11 +218,11 @@ function install_r {
 function install_rstudio {
   echo "$(tput setaf 2)###### Install RStudio ######$(tput sgr 0)"
 
-  local RSTUDIO_VERSION="1.2.1335"
+  local VERSION_REQUIRED="1.2.1335"
   if ! command -v rstudio &>/dev/null; then
-    curl -fsSL -o /tmp/rstudio-${RSTUDIO_VERSION}-amd64.deb \
-      https://download1.rstudio.org/desktop/bionic/amd64/rstudio-${RSTUDIO_VERSION}-amd64.deb
-    sudo apt install gdebi-core && sudo gdebi -n /tmp/rstudio-${RSTUDIO_VERSION}-amd64.deb
+    curl -fsSL -o /tmp/rstudio-${VERSION_REQUIRED}-amd64.deb \
+      https://download1.rstudio.org/desktop/bionic/amd64/rstudio-${VERSION_REQUIRED}-amd64.deb
+    sudo apt install gdebi-core && sudo gdebi -n /tmp/rstudio-${VERSION_REQUIRED}-amd64.deb
   fi
 }
 
@@ -265,7 +272,7 @@ function install_dbeaver {
       echo "deb https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt/sources.list.d/dbeaver.list
     fi
 
-    sudo apt update && sudo apt -y install dbeaver-ce
+    sudo apt update -qq && sudo apt install -qq -y dbeaver-ce
   fi
 }
 
@@ -274,13 +281,14 @@ function upgrade_tmux {
   echo "$(tput setaf 2)###### Upgrade tmux ######$(tput sgr 0)"
 
   # https://bogdanvlviv.com/posts/tmux/how-to-install-the-latest-tmux-on-ubuntu-16_04.html
-  local MIN_TMUX_VERSION_REQUIRED="2.9"
-  local current_tmux_version="$(tmux -V | cut -d' ' -f2-)"
-  local need_upgrade="$(echo "${current_tmux_version} ${MIN_TMUX_VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"  # SC2072
+  local VERSION_REQUIRED="2.9"
+
+  local current_version="$(tmux -V | cut -d' ' -f2-)"
+  local need_upgrade="$(echo "${current_version} ${VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"  # SC2072
 
   if [ "${need_upgrade}" = 1 ]; then
-    echo "tmux need to be upgraded to v2.9 (current tmux version: ${current_tmux_version})"
-    sudo apt install -y \
+    echo "tmux need to be upgraded to v2.9 (current tmux version: ${current_version})"
+    sudo apt install -qq -y \
       curl \
       automake \
       build-essential \
@@ -291,10 +299,10 @@ function upgrade_tmux {
     # Download, compile and install tmux
     rm -rf /tmp/tmux
     mkdir -p /tmp/tmux
-    curl -fsSLo "/tmp/tmux-${MIN_TMUX_VERSION_REQUIRED}.tar.gz" \
-      "https://github.com/tmux/tmux/releases/download/${MIN_TMUX_VERSION_REQUIRED}/tmux-${MIN_TMUX_VERSION_REQUIRED}.tar.gz"
-    tar -xf "/tmp/tmux-${MIN_TMUX_VERSION_REQUIRED}.tar.gz" -C /tmp
-    cd "/tmp/tmux-${MIN_TMUX_VERSION_REQUIRED}" || return
+    curl -fsSLo "/tmp/tmux-${VERSION_REQUIRED}.tar.gz" \
+      "https://github.com/tmux/tmux/releases/download/${VERSION_REQUIRED}/tmux-${VERSION_REQUIRED}.tar.gz"
+    tar -xf "/tmp/tmux-${VERSION_REQUIRED}.tar.gz" -C /tmp
+    cd "/tmp/tmux-${VERSION_REQUIRED}" || return
     ./configure && make
     sudo make install
     cd - || return
@@ -305,16 +313,28 @@ function upgrade_tmux {
 }
 
 function install_fd {
-  local FD_VERSION_REQUIRED="7.4.0"
+  local VERSION_REQUIRED="7.4.0"
+  local os_version_id="$(. /etc/os-release; printf "%s\n" "$VERSION_ID")"
+
+  function version_gte {
+    [ "$1" = "$(echo -e "$1\n$2" | sort -Vr | head -n1)" ]
+  }
 
   if ! command -v fd &>/dev/null; then
-    curl -fsSLo "/tmp/fd_${FD_VERSION_REQUIRED}_amd64.deb" \
-      "https://github.com/sharkdp/fd/releases/download/v${FD_VERSION_REQUIRED}/fd_${FD_VERSION_REQUIRED}_amd64.deb"
-
-    sudo dpkg -i "/tmp/fd_${FD_VERSION_REQUIRED}_amd64.deb"
+    if version_gte $os_version_id "19.04"; then
+      sudo apt install fd-find
+    else
+      curl -fsSLo "/tmp/fd_${VERSION_REQUIRED}_amd64.deb" \
+        "https://github.com/sharkdp/fd/releases/download/v${VERSION_REQUIRED}/fd_${VERSION_REQUIRED}_amd64.deb" \
+        && sudo dpkg -i "/tmp/fd_${VERSION_REQUIRED}_amd64.deb"
+    fi
   fi
 }
 
+# Step 0 - Detect OS Version
+validate_os ubuntu
+
+# Step 1 - Execute the installation
 install_apt_apps
 install_chrome
 install_dbeaver
@@ -327,7 +347,6 @@ install_neovim $FORCE
 install_pyenv
 install_r $FORCE
 install_rstudio
-validate_os ubuntu
 upgrade_tmux
 
 unset \
