@@ -193,3 +193,4 @@ echo "$(tput setaf 2)###### Source Bash Settings ######$(tput sgr 0)"
 source ~/.bashrc;
 
 echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"
+echo -e "$(tput setaf 7)Use the following command to update your vim packages:\n    vim -c PlugUpdate -c qa!$(tput sgr 0)"

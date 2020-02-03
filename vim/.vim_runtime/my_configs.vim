@@ -480,6 +480,7 @@ let g:AutoPairsShortcutFastWrap = '<M-e>'
 let g:AutoPairsShortcutToggle = '<M-p>'
 
 " vim-move -------------------------------------------------------------
+" https://github.com/matze/vim-move
 let g:move_key_modifier = 'M'  " don't know but somehow that <opt + cmd> works for macos
 
 " vim-jedi -------------------------------------------------------------

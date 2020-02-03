@@ -536,7 +536,7 @@ Replacement:
 [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
 
 ```
-<c-f> / <c-b>    -   invoke CtrlP and cycle between modes (mru, buffers, files)
+<c-f> / <c-b>    -   invoke CtrlP and cycle between modes (files, buffers, mru)
 <c-d>            -   switch to filename only search instead of full path
 <c-r>            -   switch to regexp mode
 <c-z>            -   mark/unmark multiple files and <c-o> to open them
@@ -657,6 +657,12 @@ s               -   vertical split
 ```
 zk        -   Move current line/selections up
 zj        -   Move current line/selections down
+
+(For MacOS, the key modifier could be <Opt+Cmd>.)
+<A-k>  -   Move current line/selection up
+<A-j>  -   Move current line/selection down
+<A-h>  -   Move current character/selection left
+<A-l>  -   Move current character/selection right
 ```
 
 [vim-markdown](https://github.com/plasticboy/vim-markdown)
@@ -696,6 +702,8 @@ guu      -   switch the current line to lower case
 <C-g>    -   Show line info
 g <C-g>  -   Show statistics (word count, ...)
 1 <C-g>  -   View the full path of the file
+
+gx       -   Open URL under cursor with browser
 
 vim +10 {file}           -   Opens the file at line 10
 vim +/bash {file}        -   Opens the file cronjob-lab.yml on the first occurence of bash
