@@ -166,7 +166,7 @@ function subl_settings {
 function _sync_dotfile {
   echo "Syncing dotfiles ..."
 
-  local src_folders=("bash-git-prompt" "git" "tmux" "vim" "$1")
+  local src_folders=("bash-git-prompt" "git" "tmux" "vim" "common_dotfiles" "$1")
   for folder in "${src_folders[@]}"; do
     find "$folder" -maxdepth 1 -mindepth 1 -name '.[!.]*' -print0 \
       ! -name .git \

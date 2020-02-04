@@ -1391,7 +1391,7 @@
 	<key>Default Bookmark Guid</key>
 	<string>7D3705CA-F13E-4A05-A5BC-4E33590D3F1D</string>
 	<key>DimBackgroundWindows</key>
-	<false/>
+	<true/>
 	<key>DimOnlyText</key>
 	<false/>
 	<key>HideTab</key>
@@ -2265,7 +2265,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.26825824873096443</real>
+			<real>0.10477276332487309</real>
 			<key>Unicode Version</key>
 			<integer>9</integer>
 			<key>Unlimited Scrollback</key>
@@ -2340,7 +2340,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/leoluyi/Dropbox/leo_works/dotfiles/iterm2/iterm2_preferences</string>
+	<string>/Users/leoluyi/Dropbox/leo_workspace/dotfiles/iterm2/iterm2_preferences</string>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>SUEnableAutomaticChecks</key>
@@ -2356,7 +2356,7 @@
 	<key>ShowFullScreenTabBar</key>
 	<true/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.39098557692307701</real>
+	<real>0.10000000000000001</real>
 	<key>StretchTabsToFillBar</key>
 	<false/>
 	<key>TabStyleWithAutomaticOption</key>
