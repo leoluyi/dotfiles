@@ -136,7 +136,7 @@ function install_tmux_awesome {
 function _sync_dotfile {
   echo "Syncing dotfiles ..."
 
-  local src_folders=("bash-git-prompt" "git" "tmux" "vim" "$1")
+  local src_folders=("bash-git-prompt" "git" "tmux" "vim" "common_dotfiles" "$1")
   for folder in "${src_folders[@]}"; do
     find "$folder" -maxdepth 1 -mindepth 1 -name '.[!.]*' -print0 \
       ! -name .git \
@@ -193,4 +193,4 @@ echo "$(tput setaf 2)###### Source Bash Settings ######$(tput sgr 0)"
 source ~/.bashrc;
 
 echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"
-echo -e "$(tput setaf 7)Use the following command to update your vim packages:\n    vim -c PlugUpdate -c qa!$(tput sgr 0)"
+echo -e "$(tput setaf 4)Use the following command to update your vim packages:\n    vim -c PlugUpdate -c qa!$(tput sgr 0)"

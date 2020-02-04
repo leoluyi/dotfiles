@@ -540,8 +540,9 @@ call plug#begin('~/.vim_runtime/plugged')
 Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'ap/vim-css-color'  " Preview colours in source code
 Plug 'Asheq/close-buffers.vim'
+Plug 'cespare/vim-toml'  " Vim syntax for TOML
 Plug 'Chiel92/vim-autoformat'  " formater
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'  " Python IDE
 Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
 Plug 'eugen0329/vim-esearch'  " project-wide async search and replace, similar to SublimeText
 Plug 'fisadev/vim-isort'  " sort python imports
