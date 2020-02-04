@@ -37,6 +37,7 @@ $        -   Move to end of line
 ^        -   Move to first character on line
 gg       -   Move to first line of file
 G        -   Move to last line of file
+
 3G       -   Go to line 3
 :3<CR>   -   Go to line 3
 
@@ -717,7 +718,13 @@ vim +/bash {file}        -   Opens the file cronjob-lab.yml on the first occuren
 :so[ource] {file}        -   Read Ex commands from {file}. These are commands that
                              start with a ":".
 :so $MYVIMRC             -   Reloaad ~/.vimrc without restarting vim
+```
 
+Command line
+
+```
+vim +line_number {file}   -   Edit file and go to line number
+vim -c "command" -c q    -   Execute vim commands from shell
 vim scp://hostname:22/~/automation/test-file.txt - Edit a remote file via scp
 ```
 
