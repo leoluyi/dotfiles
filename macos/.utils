@@ -1,8 +1,8 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # ============ Custom functions ============
 
-function mkcd {
+function mkcd() {
   last=$(eval "echo \$$#")
   if [ -z "$last" ]; then
     echo "Enter a directory name"
