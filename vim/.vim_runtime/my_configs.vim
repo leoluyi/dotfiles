@@ -181,18 +181,18 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 function! s:has_plugin(name)
   return globpath(&runtimepath, 'plugin/' . a:name . '.vim') !=# ''
-  \   || globpath(&runtimepath, 'autoload/' . a:name . '.vim') !=# ''
-  \   || globpath(&runtimepath, 'plugged/' . a:name) !=# ''
-  \   || globpath(&runtimepath, 'my_plugins/' . a:name) !=# ''
-  \   || globpath(&runtimepath, 'sources_forked/' . a:name) !=# ''
-  \   || globpath(&runtimepath, 'sources_non_forked/' . a:name) !=# ''
+        \   || globpath(&runtimepath, 'autoload/' . a:name . '.vim') !=# ''
+        \   || globpath(&runtimepath, 'plugged/' . a:name) !=# ''
+        \   || globpath(&runtimepath, 'my_plugins/' . a:name) !=# ''
+        \   || globpath(&runtimepath, 'sources_forked/' . a:name) !=# ''
+        \   || globpath(&runtimepath, 'sources_non_forked/' . a:name) !=# ''
 endfunction
 
 function! s:plug_loaded(name)
   " https://vi.stackexchange.com/a/14143
   " for vim-plug
   return has_key(g:plugs, a:name)
-  \   && isdirectory(g:plugs[a:name].dir)
+        \   && isdirectory(g:plugs[a:name].dir)
   " \   && stridx(&runtimepath, g:plugs[a:name].dir) >= 0
 endfunction
 
@@ -215,9 +215,9 @@ endfunction
 command! -nargs=1 Highlight :call Highlight(<q-args>)
 
 " Rename3.vim  -  Rename a buffer within Vim and on disk.
-" 
+"
 " https://github.com/aehlke/vim-rename3/blob/master/rename3.vim
-" 
+"
 " Copyright July 2013 by Alex Ehlke <alex.ehlke at gmail.com>
 "
 " based on Rename2.vim (which couldn't handle spaces in paths)
@@ -235,22 +235,22 @@ command! -nargs=1 Highlight :call Highlight(<q-args>)
 command! -nargs=* -complete=file -bang Rename :call Rename("<args>", "<bang>")
 
 function! Rename(name, bang)
-    let l:curfile = expand("%:p")
-    let l:curfilepath = expand("%:p:h")
-    let l:newname = l:curfilepath . "/" . a:name
-    let v:errmsg = ""
-    silent! exec "saveas" . a:bang . " " . fnameescape(l:newname)
-    if v:errmsg =~# '^$\|^E329'
-        if expand("%:p") !=# l:curfile && filewritable(expand("%:p"))
-            silent exec "bwipe! " . fnameescape(l:curfile)
-            if delete(l:curfile)
-                echoerr "Could not delete " . l:curfile
-            endif
-        endif
-    else
-        echoerr v:errmsg
+  let l:curfile = expand("%:p")
+  let l:curfilepath = expand("%:p:h")
+  let l:newname = l:curfilepath . "/" . a:name
+  let v:errmsg = ""
+  silent! exec "saveas" . a:bang . " " . fnameescape(l:newname)
+  if v:errmsg =~# '^$\|^E329'
+    if expand("%:p") !=# l:curfile && filewritable(expand("%:p"))
+      silent exec "bwipe! " . fnameescape(l:curfile)
+      if delete(l:curfile)
+        echoerr "Could not delete " . l:curfile
+      endif
     endif
-  endfunction
+  else
+    echoerr v:errmsg
+  endif
+endfunction
 " Check pynvim ---------------------------------------------------------
 
 if has("nvim") && !has("python3")
@@ -323,6 +323,7 @@ endif
 
 let g:autoformat_verbosemode=1
 let g:formatter_yapf_style = 'pep8'
+let g:formatdef_black = '"black -qS - "'
 let g:formatters_python = ['black', 'yapf']
 
 " braceless.vim  -------------------------------------------------------
@@ -401,34 +402,34 @@ let g:lightline.component_type = {
 " Changing colorscheme on the fly
 " https://github.com/itchyny/lightline.vim/issues/258
 function! s:setLightlineColorscheme(name)
-    let g:lightline.colorscheme = a:name
-    call lightline#init()
-    call lightline#colorscheme()
-    call lightline#update()
+  let g:lightline.colorscheme = a:name
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
 endfun
 
 function! s:lightlineColorschemes(...)
-    return join(map(
-                \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
-                \ "fnamemodify(v:val,':t:r')"),
-                \ "\n")
+  return join(map(
+        \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
+        \ "fnamemodify(v:val,':t:r')"),
+        \ "\n")
 endfun
 
 command! -nargs=1 -complete=custom,s:lightlineColorschemes LightlineColorscheme
-            \ call s:setLightlineColorscheme(<q-args>)
+      \ call s:setLightlineColorscheme(<q-args>)
 
 function! ColorToggle()
-    if &background ==? 'dark'
-        set background=light
-        let l:scheme = 'PaperColor'
-        exe "silent! colorscheme " . l:scheme
-        exe "silent! LightlineColorscheme " . l:scheme
-    else
-        set background=dark
-        let l:scheme = 'gruvbox'
-        exe "silent! colorscheme " . l:scheme
-        exe "silent! LightlineColorscheme " . l:scheme
-    endif
+  if &background ==? 'dark'
+    set background=light
+    let l:scheme = 'PaperColor'
+    exe "silent! colorscheme " . l:scheme
+    exe "silent! LightlineColorscheme " . l:scheme
+  else
+    set background=dark
+    let l:scheme = 'gruvbox'
+    exe "silent! colorscheme " . l:scheme
+    exe "silent! LightlineColorscheme " . l:scheme
+  endif
 endfunction
 
 command! ColorToggle call ColorToggle()
@@ -449,8 +450,8 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %code - %%s [%severity%]'
 let g:ale_linters = {
-  \   'python': ['flake8']
-  \ }
+      \   'python': ['flake8']
+      \ }
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 let b:ale_fixers = {'python': ['black', 'isort']}
 
@@ -518,7 +519,7 @@ endif
 if empty(glob('~/.vim_runtime/autoload/plug.vim'))
   echo "Downloading junegunn/vim-plug to manage plugins..."
   silent !curl -fsSLo ~/.vim_runtime/autoload/plug.vim --create-dirs --insecure
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -541,7 +542,7 @@ Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'ap/vim-css-color'  " Preview colours in source code
 Plug 'Asheq/close-buffers.vim'
 Plug 'cespare/vim-toml'  " Vim syntax for TOML
-Plug 'Chiel92/vim-autoformat'  " formater
+Plug 'Chiel92/vim-autoformat'  " formatters
 Plug 'davidhalter/jedi-vim'  " Python IDE
 Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
 Plug 'eugen0329/vim-esearch'  " project-wide async search and replace, similar to SublimeText
@@ -555,6 +556,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
+Plug 'psf/black'  " python formatter
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
