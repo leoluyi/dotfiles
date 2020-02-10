@@ -718,6 +718,8 @@ vim +/bash {file}        -   Opens the file cronjob-lab.yml on the first occuren
 :so[ource] {file}        -   Read Ex commands from {file}. These are commands that
                              start with a ":".
 :so $MYVIMRC             -   Reloaad ~/.vimrc without restarting vim
+
+:verbose map <key>       -   Check key mappings
 ```
 
 Command line
