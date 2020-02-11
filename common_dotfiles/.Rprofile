@@ -1,3 +1,15 @@
+# https://csgillespie.github.io/efficientR/3-3-r-startup.html#rprofile)
+# On start-up R will look for the R-Profile in the following places:
+# 1. `R_HOME`: the directory in which R is installed. Find out where your R_HOME with the `R.home()` command.
+# 2. `HOME`, the user's home directory. Can ask R where this is with, `path.expand("~")`
+# 3. R's current working directory. This is reported by `getwd()`.
+
+# Site-wide .Rprofile:
+# ```
+# site_path = R.home(component = "home")
+# fname = file.path(site_path, "etc", "Rprofile.site")
+# ```
+
 local({
   repos <- c(CRAN = "https://cloud.r-project.org", download.file.method = 'libcurl')
   if (.Platform$OS.type == "windows") {
