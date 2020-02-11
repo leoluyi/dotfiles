@@ -11,6 +11,7 @@
 # ```
 
 local({
+  # Set CRAN repo
   repos <- c(CRAN = "https://cloud.r-project.org", download.file.method = 'libcurl')
   if (.Platform$OS.type == "windows") {
     repos["CRANextra"] <- "https://www.stats.ox.ac.uk/pub/RWin"
@@ -26,4 +27,10 @@ local({
 
   try(dir.create(path = Sys.getenv("R_LIBS_USER"), showWarnings = FALSE, recursive = TRUE))
   .libPaths(c(Sys.getenv("R_LIBS_USER"),.libPaths()))
+
+  # Disable stringsAsFactors
+  options(stringsAsFactors=FALSE)
+
+  # Prompt display
+  options(prompt="#> ")
 })

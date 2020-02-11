@@ -683,28 +683,28 @@ gx       -   open the link under the cursor
 ```
 Menu entry                                Default shortcut~
 Start/Close
-  . Start R (default)                                  \rf
+ -* Start R (default)                                  \rf
   . Start R (custom)                                   \rc
   --------------------------------------------------------
-  . Close R (no save)                                  \rq
+ -* Close R (no save)                                  \rq
   . Stop R                                          :RStop
 -----------------------------------------------------------
 Send
-  . File                                               \aa
+ -* File                                               \aa
   . File (echo)                                        \ae
   . File (open .Rout)                                  \ao
   --------------------------------------------------------
-  . Line                                                \l
-  . Line (and down)                                     \d
+ -* Line                                                \l
+ -* Line (and down)                                     \d
   . Line (and new one)                                  \q
   . Left part of line (cur)                       \r<Left>
   . Right part of line (cur)                     \r<Right>
   . Line (evaluate and insert the output as comment)    \o
   . All lines above the current one                    \su
   --------------------------------------------------------
-  . Paragraph                                          \pp
+ -* Paragraph                                          \pp
   . Paragraph (echo)                                   \pe
-  . Paragraph (and down)                               \pd
+ -* Paragraph (and down)                               \pd
   . Paragraph (echo and down)                          \pa
   --------------------------------------------------------
   . Block (cur)                                        \bb
@@ -723,8 +723,8 @@ Send
   . Function (cur and down)                            \fd
   . Function (cur, echo and down)                      \fa
   --------------------------------------------------------
-  . Selection                                          \ss
-  . Selection (echo)                                   \se
+ -* Selection                                          \ss
+ -* Selection (echo)                                   \se
   . Selection (and down)                               \sd
   . Selection (echo and down)                          \sa
   . Selection (evaluate and insert output in new tab)  \so
@@ -733,8 +733,18 @@ Send
 -----------------------------------------------------------
 Command
   . List space                                         \rl
-  . Clear console                                      \rr
-  . Remove objects and clear console                   \rm
+ -* Clear console                                      \rr
+ -* Remove objects and clear console                   \rm
+    --------------------------------------------------------
+ -* Print (cur)                                        \rp
+ -* Names (cur)                                        \rn
+  . Structure (cur)                                    \rt
+  . View data.frame (cur) in new tab                   \rv
+  . View data.frame (cur) in horizontal split          \vs
+  . View data.frame (cur) in vertical split            \vv
+  . View head(data.frame) (cur) in horizontal split    \vh
+  . Run dput(cur) and show output in new tab           \td
+  . Run print(cur) and show output in new tab          \tp
 ```
 
 ### MISCELLANEOUS
