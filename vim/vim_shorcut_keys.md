@@ -678,6 +678,65 @@ gx       -   open the link under the cursor
 <C-p>    -   navigate next errors
 ```
 
+[Nvim-R](https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt)
+
+```
+Menu entry                                Default shortcut~
+Start/Close
+  . Start R (default)                                  \rf
+  . Start R (custom)                                   \rc
+  --------------------------------------------------------
+  . Close R (no save)                                  \rq
+  . Stop R                                          :RStop
+-----------------------------------------------------------
+Send
+  . File                                               \aa
+  . File (echo)                                        \ae
+  . File (open .Rout)                                  \ao
+  --------------------------------------------------------
+  . Line                                                \l
+  . Line (and down)                                     \d
+  . Line (and new one)                                  \q
+  . Left part of line (cur)                       \r<Left>
+  . Right part of line (cur)                     \r<Right>
+  . Line (evaluate and insert the output as comment)    \o
+  . All lines above the current one                    \su
+  --------------------------------------------------------
+  . Paragraph                                          \pp
+  . Paragraph (echo)                                   \pe
+  . Paragraph (and down)                               \pd
+  . Paragraph (echo and down)                          \pa
+  --------------------------------------------------------
+  . Block (cur)                                        \bb
+  . Block (cur, echo)                                  \be
+  . Block (cur, down)                                  \bd
+  . Block (cur, echo and down)                         \ba
+  --------------------------------------------------------
+  . Chunk (cur)                                        \cc
+  . Chunk (cur, echo)                                  \ce
+  . Chunk (cur, down)                                  \cd
+  . Chunk (cur, echo and down)                         \ca
+  . Chunk (from first to here)                         \ch
+  --------------------------------------------------------
+  . Function (cur)                                     \ff
+  . Function (cur, echo)                               \fe
+  . Function (cur and down)                            \fd
+  . Function (cur, echo and down)                      \fa
+  --------------------------------------------------------
+  . Selection                                          \ss
+  . Selection (echo)                                   \se
+  . Selection (and down)                               \sd
+  . Selection (echo and down)                          \sa
+  . Selection (evaluate and insert output in new tab)  \so
+  --------------------------------------------------------
+  . Send motion region                                 \m{motion}
+-----------------------------------------------------------
+Command
+  . List space                                         \rl
+  . Clear console                                      \rr
+  . Remove objects and clear console                   \rm
+```
+
 ### MISCELLANEOUS
 
 ```
