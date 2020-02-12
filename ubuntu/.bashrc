@@ -196,10 +196,9 @@ fi
 command -v most &>/dev/null && export PAGER=most
 
 # Enable syntax-highlighting in less.
-# brew install source-highlight
 if command -v highlight &>/dev/null; then
   # Pipe Highlight to less
-  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --base16=grayscale-dark"
+  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style=whitengrey"
   export LESS=" -R "
 fi
 
