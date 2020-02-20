@@ -551,7 +551,7 @@ Plug 'haya14busa/incsearch.vim'  " incrementally highlights ALL pattern matches
 Plug 'jeetsukumaran/vim-pythonsense'  " provides text objects and motions for Python classes, methods, functions, and doc strings
 Plug 'junegunn/vim-easy-align'
 Plug 'lambdalisue/suda.vim'  " to read or write files with sudo command
-Plug 'liuchengxu/vim-clap'  " Modern generic interactive finder and dispatcher for Vim and NeoVim
+" Plug 'liuchengxu/vim-clap'  " Modern generic interactive finder and dispatcher for Vim and NeoVim
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
