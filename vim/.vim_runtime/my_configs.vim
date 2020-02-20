@@ -556,7 +556,6 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
-Plug 'psf/black'  " python formatter
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
