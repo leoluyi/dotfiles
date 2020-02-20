@@ -71,7 +71,7 @@ function install_apt_apps {
     silversearcher-ag \
     software-properties-common \
     tk-dev \
-    tldr \
+    # tldr \
     tree \
     unzip \
     wget \
@@ -81,6 +81,15 @@ function install_apt_apps {
     2>/dev/null
 }
 
+
+function install_tldr {
+  # https://gitlab.com/pepa65/tldr-bash-client
+  # https://github.com/raylee/tldr
+
+  local loc=/usr/local/bin/tldr  # elevated privileges needed for some locations
+  sudo wget -qO $loc https://4e4.win/tldr
+  sudo chmod +x $loc
+}
 
 function install_neovim {
   echo "$(tput setaf 2)###### Install Neovim ######$(tput sgr 0)"
@@ -359,6 +368,7 @@ install_neovim $FORCE
 install_pyenv
 install_r $FORCE
 install_rstudio
+install_tldr
 upgrade_tmux
 
 unset \
@@ -374,6 +384,7 @@ unset \
   install_pyenv \
   install_r \
   install_rstudio \
+  install_tldr \
   upgrade_tmux \
   validate_os ubuntu \
   &>/dev/null
