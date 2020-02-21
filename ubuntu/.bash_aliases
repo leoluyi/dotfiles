@@ -1,3 +1,6 @@
+# Don't show directories
+alias ls='ls --color=auto --hide=Dropbox'
+
 # Enable aliases to be sudo'ed
 alias sudo='sudo '
 
