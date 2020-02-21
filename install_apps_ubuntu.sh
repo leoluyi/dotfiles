@@ -197,6 +197,9 @@ function install_dropbox {
 
     # https://askubuntu.com/a/148177/594426
     # sudo echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
+
+    # Remove icon from Unity menu
+    sudo rm /usr/share/applications/dropbox.desktop &>/dev/null
   fi
 }
 
