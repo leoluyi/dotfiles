@@ -3,6 +3,9 @@
 #         without any warranty.
 #         Copyright 2012--- Gregory Pakosz (@gpakosz).
 
+# -- Unbind C-b prefix ---------------------------------------------------------
+unbind C-b
+
 # -- List of plugins -----------------------------------------------------------
 # https://github.com/gpakosz/.tmux/issues/61#issuecomment-439617033
 
