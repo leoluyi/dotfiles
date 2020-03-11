@@ -1,4 +1,7 @@
 # ====== Linux only ======
 
+# Don't show directories
+alias ls='ls --color=auto --hide=Dropbox'
+
 # https://github.com/Mayccoll/Gogh
 alias term-color='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
