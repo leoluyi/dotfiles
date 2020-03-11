@@ -542,11 +542,11 @@ Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'ap/vim-css-color'  " Preview colours in source code
 Plug 'Asheq/close-buffers.vim'
 Plug 'cespare/vim-toml'  " Vim syntax for TOML
-Plug 'Chiel92/vim-autoformat'  " formatters
-Plug 'davidhalter/jedi-vim'  " Python IDE
+Plug 'Chiel92/vim-autoformat'  " formatters (pip install --user black)
+Plug 'davidhalter/jedi-vim'  " Python IDE (pip install --user jedi)
 Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
 Plug 'eugen0329/vim-esearch'  " project-wide async search and replace, similar to SublimeText
-Plug 'fisadev/vim-isort'  " sort python imports
+Plug 'fisadev/vim-isort'  " sort python imports (pip install --user jedi)
 Plug 'haya14busa/incsearch.vim'  " incrementally highlights ALL pattern matches
 Plug 'jeetsukumaran/vim-pythonsense'  " provides text objects and motions for Python classes, methods, functions, and doc strings
 Plug 'junegunn/vim-easy-align'
@@ -555,7 +555,7 @@ Plug 'lambdalisue/suda.vim'  " to read or write files with sudo command
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
-Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome
+Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome (pip install --user flake8)
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
