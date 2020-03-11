@@ -81,12 +81,12 @@ function brew_install_cli {
   bash-git-prompt \
   bat \
   bfg \
-  brew install \
+  black \
   cmatrix \
   coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
   czmq \
   diff-so-fancy \
-  dive `# A tool for exploring each layer in a docker image` \
+  dive      `# A tool for exploring each layer in a docker image` \
   fd \
   ffmpeg \
   figlet    `# Banner-like program prints strings as ASCII art` \
