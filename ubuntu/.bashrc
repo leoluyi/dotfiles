@@ -221,6 +221,10 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 # MS-SQL
 export PATH="$PATH:/opt/mssql-tools/bin"
 
+# Poetry
+# https://python-poetry.org/docs/
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # Proxy
 # export http_proxy="8.8.8.8"
 # export https_proxy=$http_proxy
