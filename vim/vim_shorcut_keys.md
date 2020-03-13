@@ -753,7 +753,7 @@ Command
 u        -   Undo
 U        -   Undo all changes on current line
 <C-R>    -   Redo
-.        -   Redo last change
+.        -   Repeat last change
 
 :e!      -   Reload current file and discard all changes
 
@@ -762,18 +762,21 @@ g~~      -   Toggle case of the current line (same as V~).
 gUU      -   switch the current line to upper case
 guu      -   switch the current line to lower case
 
+gv       -   Re-select previous selected area
+gx       -   Open URL under cursor with browser
+
 <C-a>    -   Increment the number at cursor
-<C-x>    -   Decrement the number at cursor
 
-.        -   Repeat last change
+(Visual) g<C-a>  -   Add [count] to the number or alphabetic character in
+                     the highlighted text.
 
-:%sort   -   Sort in visual mode. Use `:%sort!` to sort in reverse order; `:%sort n` for numeric sort.
-
-<C-g>    -   Show line info
+  <C-g>  -   Show line info
 g <C-g>  -   Show statistics (word count, ...)
 1 <C-g>  -   View the full path of the file
 
-gx       -   Open URL under cursor with browser
+:%sort   -   Sort in visual mode.
+             :%sort!  to sort in reverse order;
+             :%sort n for numeric sort.
 
 vim +10 {file}           -   Opens the file at line 10
 vim +/bash {file}        -   Opens the file cronjob-lab.yml on the first occurence of bash
