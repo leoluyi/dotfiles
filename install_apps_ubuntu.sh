@@ -62,7 +62,7 @@ function install_apt_apps {
     libxmlsec1-dev \
     llvm \
     make \
-    more \
+    most \
     ncdu    `# Interactive and very fast du` \
     neofetch \
     neovim \
@@ -71,7 +71,7 @@ function install_apt_apps {
     silversearcher-ag \
     software-properties-common \
     tk-dev \
-    # tldr \
+    # tldr `# Ubuntu 18 later only` \
     tree \
     unzip \
     wget \
