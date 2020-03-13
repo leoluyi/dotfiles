@@ -195,16 +195,16 @@ fi
 command -v most &>/dev/null && export PAGER=most
 
 # Enable syntax-highlighting in less.
-if command -v highlight &>/dev/null; then
-  # Pipe Highlight to less
-  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style=whitengrey"
+if [[ -x /usr/share/source-highlight/src-hilite-lesspipe.sh ]]; then
+  # Pipe Highlight to less.
+  export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
   export LESS=" -R "
 fi
 
 # Enable syntax-highlighting in less.
-if [[ -x /usr/share/source-highlight/src-hilite-lesspipe.sh ]]; then
-  # Pipe Highlight to less.
-  export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+if command -v highlight &>/dev/null; then
+  # Pipe Highlight to less
+  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style=whitengrey"
   export LESS=" -R "
 fi
 

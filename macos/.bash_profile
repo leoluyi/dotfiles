@@ -178,17 +178,17 @@ fi
 command -v most &>/dev/null && export PAGER=most
 
 # Enable syntax-highlighting in less.
-if command -v highlight &>/dev/null; then
-  # Pipe Highlight to less
-  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --base16=grayscale-dark"
-  export LESS=" -R "
-fi
-
-# Enable syntax-highlighting in less.
 # brew install source-highlight
 if command -v src-hilite-lesspipe.sh &>/dev/null; then
   # Pipe Highlight to less.
   export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+  export LESS=" -R "
+fi
+
+# Enable syntax-highlighting in less.
+if command -v highlight &>/dev/null; then
+  # Pipe Highlight to less
+  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --base16=grayscale-dark"
   export LESS=" -R "
 fi
 
