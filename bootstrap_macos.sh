@@ -172,7 +172,7 @@ function _sync_dotfile {
       ! -name .git \
       ! -name .DS_Store \
       ! -name .osx | \
-      tee >(xargs -0 -I_ rsync -arL --no-perms _ ~) \
+      tee >(xargs -0 -I_ rsync -ar --no-perms _ ~) \
           >(xargs -0 -I_ basename _ | tr '\n' '\0' | xargs -0 -n1 printf "Updated %s\n") \
           >/dev/null;
   done
@@ -190,14 +190,15 @@ function _sync_dotfile {
 function sync_dotfile {
   echo "$(tput setaf 2)###### Update dotfiles ######$(tput sgr 0)"
 
-  if [ "$1" == "-f" ]; then
-    _sync_dotfile "$2";
-  else
-    read -rp "$(tput setaf 3)This may overwrite existing files in your home directory. Are you sure? (Y/n) $(tput sgr 0)";
+  if [ "$1" != "-f" ]; then
+    read -rp "$(tput setaf 3)This may overwrite existing files in your home directory. Are you sure? (Y/n) $(tput sgr 0)" is_overwrite;
     echo "";
-    if [[ $REPLY =~ ^[Yy](es)?$ ]] || [ -z "$REPLY" ]; then
+  else
+    is_overwrite=Y
+  fi;
+
+  if [[ -z "$is_overwrite" ]] || [[ $is_overwrite =~ ^[Yy](es)?$ ]]; then
       _sync_dotfile "$2";
-    fi;
   fi;
 }
 
