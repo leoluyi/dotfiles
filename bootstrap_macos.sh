@@ -172,7 +172,7 @@ function _sync_dotfile {
       ! -name .git \
       ! -name .DS_Store \
       ! -name .osx | \
-      tee >(xargs -0 -I_ rsync -ar --no-perms _ ~) \
+      tee >(xargs -0 -I_ rsync -arL --no-perms _ ~) \
           >(xargs -0 -I_ basename _ | tr '\n' '\0' | xargs -0 -n1 printf "Updated %s\n") \
           >/dev/null;
   done
