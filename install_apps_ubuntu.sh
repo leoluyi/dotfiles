@@ -41,6 +41,7 @@ function install_apt_apps {
     `# fd-find` \
     `# python-neovim` \
     `# python3-neovim` \
+    `# tldr # Ubuntu 18 later only` \
     apt-transport-https \
     build-essential \
     ca-certificates \
@@ -52,7 +53,6 @@ function install_apt_apps {
     highlight \
     libbz2-dev \
     libffi-dev \
-    linuxbrew-wrapper \
     liblzma-dev \
     libncurses5-dev \
     libreadline-dev \
@@ -60,6 +60,7 @@ function install_apt_apps {
     libssl-dev \
     libxml2-dev \
     libxmlsec1-dev \
+    linuxbrew-wrapper \
     llvm \
     make \
     most \
@@ -70,8 +71,8 @@ function install_apt_apps {
     p7zip-full \
     silversearcher-ag \
     software-properties-common \
+    source-highlight \
     tk-dev \
-    # tldr `# Ubuntu 18 later only` \
     tree \
     unzip \
     wget \

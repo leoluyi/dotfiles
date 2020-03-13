@@ -180,19 +180,18 @@ if command -v diff-so-fancy &>/dev/null; then
 fi
 
 # ============ Other apps ============
-# Dropbox
+# Dropbox.
 dropbox start &>/dev/null
 
 # ============ Env ============
-
-# Text editor
+# Use nvim as default editor.
 if command -v nvim &>/dev/null; then
   export EDITOR=nvim
 else
   export EDITOR=vim
 fi
 
-# Set "most" as pager
+# Set "most" as pager.
 command -v most &>/dev/null && export PAGER=most
 
 # Enable syntax-highlighting in less.
@@ -202,30 +201,32 @@ if command -v highlight &>/dev/null; then
   export LESS=" -R "
 fi
 
-if command -v src-hilite-lesspipe.sh &>/dev/null; then
-  # Pipe Highlight to less
-  export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+# Enable syntax-highlighting in less.
+if [[ -x /usr/share/source-highlight/src-hilite-lesspipe.sh ]]; then
+  # Pipe Highlight to less.
+  export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
   export LESS=" -R "
 fi
 
-# Fix pyenv bug for git
+# Fix pyenv bug from git-core. (shims do not work with gettext)
 # https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
 export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
 
-# env for pipenv
+# env for pipenv.
 export PIPENV_IGNORE_VIRTUALENVS=1
 
-# Homebrew
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-
-# MS-SQL
-export PATH="$PATH:/opt/mssql-tools/bin"
-
-# Poetry
+# ============ Path for binaries ============
+# Poetry.
 # https://python-poetry.org/docs/
 export PATH="$HOME/.poetry/bin:$PATH"
 
-# Proxy
+# Homebrew.
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+
+# MS-SQL.
+export PATH="$PATH:/opt/mssql-tools/bin"
+
+# ============ Proxy ============
 # export http_proxy="8.8.8.8"
 # export https_proxy=$http_proxy
 # export HTTP_PROXY=$http_proxy

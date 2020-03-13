@@ -167,46 +167,51 @@ if command -v diff-so-fancy &>/dev/null; then
 fi
 
 # ============ Env ============
-
-# Use nvim as default editor
+# Use nvim as default editor.
 if command -v nvim &>/dev/null; then
   export EDITOR=nvim
 else
   export EDITOR=vim
 fi
 
-# User specific environment and startup programs
-export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
-
-# Set "most" as pager
+# Set "most" as pager.
 command -v most &>/dev/null && export PAGER=most
 
 # Enable syntax-highlighting in less.
-# brew install source-highlight
 if command -v highlight &>/dev/null; then
   # Pipe Highlight to less
   export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --base16=grayscale-dark"
   export LESS=" -R "
 fi
 
+# Enable syntax-highlighting in less.
+# brew install source-highlight
 if command -v src-hilite-lesspipe.sh &>/dev/null; then
-  # Pipe Highlight to less
+  # Pipe Highlight to less.
   export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
   export LESS=" -R "
 fi
 
-# Fix pyenv bug for git.
+# Fix pyenv bug from git-core. (shims do not work with gettext)
 # https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
 export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
 
 # env for pipenv.
 export PIPENV_IGNORE_VIRTUALENVS=1
 
+# ============ Path for binaries ============
+# User specific environment and startup programs
+export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
+
+# Poetry.
+# https://python-poetry.org/docs/
+export PATH="$HOME/.poetry/bin:$PATH"
+
+# ============ Footer ============
 # Set locale to fix ssh forwarding problem.
 # https://askubuntu.com/a/144448
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-# ============ Footer ============
 command -v neofetch &>/dev/null && neofetch --size 30% --iterm2
