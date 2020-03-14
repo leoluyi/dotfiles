@@ -9,6 +9,11 @@ au FileType sh setlocal shiftwidth=2
 au FileType vim setlocal shiftwidth=2
 
 """"""""""""""""""""""""""""""
+" => markdown section
+""""""""""""""""""""""""""""""
+au FileType markdown setlocal shiftwidth=4
+
+""""""""""""""""""""""""""""""
 " => R section
 """"""""""""""""""""""""""""""
 let r_indent_align_args = 0
