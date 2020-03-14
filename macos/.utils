@@ -31,3 +31,14 @@ function gdrive-dl() {
     curl -L -b /tmp/cookies \
     "https://drive.google.com$download_link" > $file_name
 }
+
+function tree-gitignore {
+  # https://unix.stackexchange.com/a/291283/184321
+  git_ignore_files=("$(git config --get core.excludesfile)" .gitignore ~/.gitignore)
+  ignore_pattern="$(grep -hvE '^$|^#' "${git_ignore_files[@]}" 2>/dev/null|sed 's:/$::'|tr '\n' '\|')"
+  if git status &> /dev/null && [[ -n "${ignore_pattern}" ]]; then
+    tree -I "${ignore_pattern}" "${@}"
+  else 
+    tree "${@}"
+  fi
+}
