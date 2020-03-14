@@ -97,6 +97,9 @@ augroup END
 
 " My Shortcut Keys -----------------------------------------------------
 
+" No highlight search
+nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
+
 " Shortcutting for yank and paste
 nnoremap <leader>P "0P
 nnoremap <leader>p "0p
@@ -272,8 +275,17 @@ let g:loaded_comfortable_motion = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 
-" indentLine -----------------------------------------------------------
+" Yggdroot/indentLine -----------------------------------------------------------
 
+" haya14busa/incsearch.vim -----------------------------------------------------------
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
 
 " vim-markdown ---------------------------------------------------------
 let g:vim_markdown_folding_disabled = 1
