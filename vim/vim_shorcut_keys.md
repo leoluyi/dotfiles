@@ -428,17 +428,16 @@ noremap th <Esc>:tabprevious<CR>
 You can also record a whole series of edits to a register, and then apply them over and over.
 
 ```
-qk            -  records edits into register k (`q` again to stop recording)
-@k            -  execute recorded macro
-@@            -  repeat last one
-5@@           -  repeat 5 times
+q[k]            -  records edits into register [k] (`q` again to stop recording)
+@[k]            -  execute recorded macro
+@@              -  repeat last one
+5@@             -  repeat 5 times
 
-"kp           -  print macro k (e.g., to edit or add to .vimrc)
-"kd           -  replace register k with what cursor is on
+"[k]p           -  print macro [k] (e.g., to edit or add to .vimrc)
 
 Advanced usage:
 
-:norm @q      -  Use the normal mode command to apply the macro
+:norm @[q]      -  Use the normal mode command to apply the macro
 ```
 
 ### VIM FOLDING
@@ -753,7 +752,7 @@ Command
 u        -   Undo
 U        -   Undo all changes on current line
 <C-R>    -   Redo
-.        -   Repeat last change
+.        -   Redo last change
 
 :e!      -   Reload current file and discard all changes
 
