@@ -866,7 +866,7 @@ http://vimdoc.sourceforge.net/htmldoc/insert.html#i_CTRL-R
 
 Use `<C-r> register` when entering a command in _command mode_ or _insert mode_ to paste the register contents. Substitute for a register name:
 
-- `<C-r> "` for last delete or yank
+- `<C-r> "` for last yanked or deleted
 - `<C-r> 0` for yanked register
 - `<C-r> .` for last inserted text
 - `<C-r> %` for current filename
