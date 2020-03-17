@@ -98,8 +98,10 @@ function brew_install_cli {
   gnu-sed --with-default-names \
   gnu-tar \
   gnupg \
+  glances    `# cross-platform, text-based command-line tool for monitoring systems` \
   grep \
   grip \
+  httpie \
   highlight \
   htop-osx \
   john-jumbo `# password crack` \
@@ -111,7 +113,9 @@ function brew_install_cli {
   more \
   moreutils  `# Some other useful utilities like sponge` \
   neofetch \
+  ncdu       `# NCurses Disk Usage` \
   npm \
+  wrk        `# Modern HTTP benchmarking tool` \
   openssl \
   p7zip \
   pdfcrack   `# pdf password crack` \
@@ -130,6 +134,7 @@ function brew_install_cli {
   ssh-copy-id \
   terminal-notifier \
   thefuck \
+  tig        `# visual tool for Git` \
   tldr \
   tmux \
   tree \
