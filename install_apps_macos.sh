@@ -95,27 +95,27 @@ function brew_install_cli {
   gcc \
   gdal \
   git \
+  glances    `# cross-platform, text-based command-line tool for monitoring systems` \
   gnu-sed --with-default-names \
   gnu-tar \
   gnupg \
-  glances    `# cross-platform, text-based command-line tool for monitoring systems` \
   grep \
   grip \
-  httpie \
   highlight \
   htop-osx \
+  httpie \
   john-jumbo `# password crack` \
   jq \
   libpng \
   libsvg \
   libxml2 \
   libzip \
+  lolcat \
   more \
   moreutils  `# Some other useful utilities like sponge` \
-  neofetch \
   ncdu       `# NCurses Disk Usage` \
+  neofetch \
   npm \
-  wrk        `# Modern HTTP benchmarking tool` \
   openssl \
   p7zip \
   pdfcrack   `# pdf password crack` \
@@ -141,6 +141,7 @@ function brew_install_cli {
   unrar \
   vim --with-override-system-vi \
   wget \
+  wrk        `# Modern HTTP benchmarking tool` \
   ydiff \
   youtube-dl \
   2>/dev/null
