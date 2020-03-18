@@ -42,6 +42,7 @@ function install_apt_apps {
     `# python-neovim` \
     `# python3-neovim` \
     `# tldr # Ubuntu 18 later only` \
+    ag \
     apt-transport-https \
     build-essential \
     ca-certificates \
@@ -69,6 +70,7 @@ function install_apt_apps {
     neovim \
     nmon    `# Performance monitor` \
     p7zip-full \
+    ranger \
     silversearcher-ag \
     software-properties-common \
     source-highlight \
@@ -149,8 +151,8 @@ function install_chrome {
 function install_docker {
   echo "$(tput setaf 2)###### Install Docker ######$(tput sgr 0)"
 
+  # ====== Docker ======
   if ! command -v docker &>/dev/null || [ "$1" = "-f" ]; then
-    # ====== Docker ======
     # https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community
     sudo apt install -qq -y \
       apt-transport-https \
@@ -169,13 +171,11 @@ function install_docker {
     sudo apt update -qq && sudo apt install -qq -y docker-ce docker-ce-cli containerd.io
   fi
 
+  # ====== Docker-compose ======
   if ! command -v docker-compose &>/dev/null || [ "$1" = "-f" ]; then
-    # ====== Docker-compose ======
-    if ! command -v docker-compose &>/dev/null; then
-      sudo curl -fsSL "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" \
-        -o /usr/local/bin/docker-compose
-      sudo chmod +x /usr/local/bin/docker-compose
-    fi
+    sudo curl -fsSL "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" \
+      -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
   fi
 
   # ====== Completion ======
@@ -200,7 +200,7 @@ function install_dropbox {
     # sudo echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
 
     # Remove icon from Unity menu
-    sudo rm /usr/share/applications/dropbox.desktop &>/dev/null
+    sudo mv /usr/share/applications/dropbox.desktop /usr/share/applications/dropbox.desktop.bak &>/dev/null
   fi
 }
 
@@ -335,6 +335,7 @@ function upgrade_tmux {
   fi
 }
 
+
 function install_fd {
   echo "$(tput setaf 2)###### Install fd ######$(tput sgr 0)"
 
@@ -346,7 +347,7 @@ function install_fd {
   }
 
   if ! command -v fd &>/dev/null; then
-    if version_gte $os_version_id "19.04"; then
+    if version_gte "$os_version_id" "19.04"; then
       sudo apt install fd-find
     else
       curl -fsSLo "/tmp/fd_${VERSION_REQUIRED}_amd64.deb" \
@@ -355,6 +356,44 @@ function install_fd {
     fi
   fi
 }
+
+
+function install_vscode {
+  if ! [ -x /usr/bin/code ] && ! [ -x /usr/local/bin/code ]; then
+    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    sudo apt update && sudo apt -y install code
+  fi
+}
+
+
+function install_sublimetext {
+  if ! command -v subl &>/dev/null; then
+    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+    sudo apt update && sudo apt install -y sublime-text
+  fi
+}
+
+
+function install_fonts {
+  old_dir=$(pwd)
+
+  # Powerline.
+  font_dir=~/.local/share/fonts
+  mkdir -p "$font_dir"
+  curl -fsSL -o ~/.local/share/fonts/Meslo-LG-M-DZ-Regular-for-Powerline.ttf https://github.com/powerline/fonts/raw/master/Meslo%20Dotted/Meslo%20LG%20M%20DZ%20Regular%20for%20Powerline.ttf
+  fc-cache -f "$font_dir"
+
+  # nerd-font.
+  cd /tmp || return
+  git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git \
+    && cd nerd-fonts \
+    && ./install.sh SourceCodePro
+
+  cd "$old_dir"
+}
+
 
 # Step 0 - Detect OS Version
 validate_os ubuntu
@@ -372,7 +411,9 @@ install_neovim $FORCE
 install_pyenv
 install_r $FORCE
 install_rstudio
+install_sublimetext
 install_tldr
+install_vscode
 upgrade_tmux
 
 unset \
@@ -388,7 +429,9 @@ unset \
   install_pyenv \
   install_r \
   install_rstudio \
+  install_sublimetext \
   install_tldr \
+  install_vscode \
   upgrade_tmux \
   validate_os ubuntu \
   &>/dev/null

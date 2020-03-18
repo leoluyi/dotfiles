@@ -50,16 +50,16 @@ function subl_settings {
   SUBL_CONFIG_PATH=~/.config/sublime-text-3
   SUBL_SETTINGS="${SUBL_CONFIG_PATH}/Packages/User"
 
-  ## Sync settings
+  ## Sync settings.
   mkdir -p $SUBL_SETTINGS
   cp ./sublime-text/package_sync_linux/* $SUBL_SETTINGS
 
-  # Fix bad Anaconda completion
+  # Fix bad Anaconda completion.
   # https://github.com/DamnWidget/anaconda#auto-complete-for-import-behaves-badly
-  py_completion="${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences"
-  if [ ! -f "$py_completion" ]; then
+  PY_COMPLETION="${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences"
+  if [ ! -f "$PY_COMPLETION" ]; then
     mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" && \
-      curl -fsSL -o "$py_completion" \
+      curl -fsSL -o "$PY_COMPLETION" \
         https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences && \
       rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
   fi
