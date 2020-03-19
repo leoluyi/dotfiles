@@ -226,6 +226,10 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 # MS-SQL.
 export PATH="$PATH:/opt/mssql-tools/bin"
 
+# ============ LANG =============
+export LANG=en_US.UTF-8
+export LANGUAGE=en
+
 # ============ Proxy ============
 # export http_proxy="8.8.8.8"
 # export https_proxy=$http_proxy
