@@ -1,6 +1,6 @@
 {
     "sync": true,
-    "sync_folder": "/Users/leoluyi/Dropbox/leo_works/dotfiles/sublime-text/package_sync_mac",
+    "sync_folder": "/Users/leoluyi/Dropbox/leo_workspace/dotfiles/sublime-text/package_sync_mac",
     "files_to_include": [
         "*.sublime-build",
         "*.sublime-commands",
