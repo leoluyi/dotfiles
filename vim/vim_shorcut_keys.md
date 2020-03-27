@@ -900,6 +900,8 @@ Use `<C-r> register` when entering a command in _command mode_ or _insert mode_ 
 - [vim help](https://www.cs.swarthmore.edu/oldhelp/vim/)
 - [vim-buffer](https://harttle.land/2015/11/17/vim-buffer.html)
 - [vim-window](https://harttle.land/2015/11/14/vim-window.html)
+- [Vim Cheat Sheet](https://vim.rtorr.com/)
+- [awesome practice and study log](https://github.com/oldratlee/vim-practice)
 
 **Videos**
 
