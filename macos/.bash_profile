@@ -1,5 +1,5 @@
-# ~/.bash_profile
-
+# My bash config. Not much to see here
+# 
 # How to check if a program exists from a Bash script?
 # https://stackoverflow.com/a/677212/3744499
 
@@ -214,4 +214,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-command -v neofetch &>/dev/null && neofetch --size 30% --iterm2
+# command -v neofetch &>/dev/null && neofetch --size 30% --iterm2
+command -v neofetch &>/dev/null \
+  && [ -f "$HOME/.config/ascii/batman.ascii" ] \
+  && neofetch --source "$HOME/.config/ascii/batman.ascii"
