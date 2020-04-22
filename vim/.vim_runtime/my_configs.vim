@@ -1,4 +1,7 @@
-" Some basics ---------------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Some basics
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let mapleader = ","
 let maplocalleader = "\\"
 nnoremap <leader>, ,
@@ -95,18 +98,33 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
 augroup END
 
-" My Shortcut Keys -----------------------------------------------------
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => My Shortcut Keys
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " No highlight search
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 
-" Shortcutting for yank and paste
-nnoremap <leader>P "0P
-nnoremap <leader>p "0p
-vnoremap <leader>P "0P
-vnoremap <leader>p "0p
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Splits and tabbed files
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make adjusting split sizes a bit more friendly
+noremap <silent> <C-Left> :vert resize +3<CR>
+noremap <silent> <C-Right> :vert resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
 
-" Remove all trailing whitespace by pressing F5
+" Change 2 split windows from vert to horiz or horiz to vert
+map <leader>th <C-w>t<C-w>H
+map <leader>tk <C-w>t<C-w>K
+
+" Zoom a window in and out
+noremap Zz <c-w>_ \| <c-w>\|
+noremap Zo <c-w>=
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Code editing stuffs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove all trailing whitespace by pressing <F5>
 " https://vim.fandom.com/wiki/Remove_unwanted_spaces
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 command! WhitespateTrailingRemove :%s/\s\+$//e
@@ -129,9 +147,18 @@ endif
 nnoremap <leader>n :FoldColumnToggle<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR>
 vnoremap <leader>n :FoldColumnToggle<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR>
 
-" Cut and paste
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Copy and paste stuffs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Cut to yanked register
 nnoremap <leader>x "0x
 vnoremap <leader>x "0x
+
+" Paste from yanked register
+nnoremap <leader>P "0P
+nnoremap <leader>p "0p
+vnoremap <leader>P "0P
+vnoremap <leader>p "0p
 
 " Yank to clipboard
 nnoremap <leader>Y  "+y$
@@ -141,13 +168,11 @@ vnoremap <leader>Y  "+y$
 vnoremap <leader>y  "+y
 vnoremap <leader>yy "+yy
 
-" Fix unwanted key map
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Fix unwanted key map
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " :unmap <C-Space>
 inoremap <C-@> <Esc>
-
-" Zooming vim window splits
-noremap Zz <c-w>_ \| <c-w>\|
-noremap Zo <c-w>=
 
 " vim-multiple-cursors - default mapping -------------------------------
 let g:multi_cursor_start_word_key      = '<C-n>'
