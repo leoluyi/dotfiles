@@ -204,7 +204,7 @@ fi
 # Enable syntax-highlighting in less.
 if command -v highlight &>/dev/null; then
   # Pipe Highlight to less
-  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style=whitengrey"
+  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style=solarized-dark"
   export LESS=" -R "
 fi
 
