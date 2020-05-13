@@ -677,6 +677,20 @@ gx       -   open the link under the cursor
 <C-p>    -   navigate next errors
 ```
 
+[jedi-vim](https://github.com/davidhalter/jedi-vim)
+
+```
+<C-Space>    -   Completion
+K            -   Show Documentation/Pydoc (shows a popup with assignments)
+
+<leader>g    -   Goto assignment (typical goto function)
+<leader>d    -   Goto definition (follow identifier as far as possible, includes imports and statements)
+<leader>s    -   Goto (typing) stub
+
+<leader>r    -   Renaming
+<leader>n    -   Usages (shows all the usages of a name)
+```
+
 [Nvim-R](https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt)
 
 ```

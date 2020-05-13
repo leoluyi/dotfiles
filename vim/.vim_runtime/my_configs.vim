@@ -524,6 +524,7 @@ let g:move_key_modifier = 'M'  " don't know but somehow that <opt + cmd> works f
 " vim-jedi -------------------------------------------------------------
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_stubs_command = "<leader>s"
 let g:jedi#goto_definitions_command = ""
 let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>u"
@@ -550,6 +551,10 @@ if has('nvim')
   set inccommand=nosplit
 endif
 
+" poet-v ---------------------------------------------------------------
+let g:poetv_executables = ['poetry', 'pipenv']
+let g:poetv_auto_activate = 1
+
 " vim-plug =============================================================
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -566,15 +571,16 @@ endif
 call plug#begin('~/.vim_runtime/plugged')
 
 " Plugins already in awesome vimrc:
+" Plug 'itchyny/lightline.vim'      " A light and configurable statusline/tabline plugin
 " Plug 'ctrlpvim/ctrlp.vim'         " fuzzy search files
 " Plug 'dense-analysis/ale'         " asynchronous linters engine
 " Plug 'jiangmiao/auto-pairs'       " insert or delete brackets, parens, quotes in pair
-" Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it.
+" Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it
 " Plug 'tpope/vim-commentary'       " comment-out by gc
 " Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
 
 " nvim/vim8/vim7 compatible:
-
+" Plug 'liuchengxu/vim-clap'  " Modern generic interactive finder and dispatcher for Vim and NeoVim
 Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'ap/vim-css-color'  " Preview colours in source code
 Plug 'Asheq/close-buffers.vim'
@@ -588,12 +594,11 @@ Plug 'haya14busa/incsearch.vim'  " incrementally highlights ALL pattern matches
 Plug 'jeetsukumaran/vim-pythonsense'  " provides text objects and motions for Python classes, methods, functions, and doc strings
 Plug 'junegunn/vim-easy-align'
 Plug 'lambdalisue/suda.vim'  " to read or write files with sudo command
-Plug 'leoluyi/poet-v'  " Vim Meets Poetry and Pipenv Virtual Environments
-" Plug 'liuchengxu/vim-clap'  " Modern generic interactive finder and dispatcher for Vim and NeoVim
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome (pip install --user flake8)
+Plug 'mhinz/vim-startify'  " The fancy start screen for Vim
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
@@ -606,6 +611,7 @@ Plug 'tweekmonster/impsort.vim'  " color and sort python imports
 Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'  " show indent guide
+
 
 " fzf
 if isdirectory('/usr/local/opt/fzf')
