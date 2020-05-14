@@ -81,6 +81,7 @@ function install_apt_apps {
     xclip \
     xz-utils \
     zlib1g-dev \
+    zip \
     2>/dev/null
 }
 
