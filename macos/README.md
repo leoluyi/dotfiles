@@ -10,6 +10,27 @@ $ curl -fsSL -o ~/.bash_profile https://github.com/leoluyi/dotfiles/raw/master/m
 
 http://clubmate.fi/upgrade-to-bash-4-in-mac-os-x/
 
+Update homebrew packet database and install bash:
+
+```bash
+brew update && brew install bash
+```
+
+Configure terminal to use it:
+
+```bash
+# Add the new shell to the list of allowed shells
+sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+# Change to the new shell
+chsh -s /usr/local/bin/bash
+```
+
+Check bash version with:
+
+```bash
+bash --version
+```
+
 ## About bash_profile and bashrc on macOS
 
 https://scriptingosx.com/2017/04/about-bash_profile-and-bashrc-on-macos/
