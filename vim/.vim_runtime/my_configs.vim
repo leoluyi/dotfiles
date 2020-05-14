@@ -451,6 +451,7 @@ let g:lightline.component_expand = {
       \   'linter_warnings': 'lightline#ale#warnings',
       \   'linter_errors': 'lightline#ale#errors',
       \   'linter_ok': 'lightline#ale#ok',
+      \   'buffers': 'lightline#bufferline#buffers',
       \ }
 
 let g:lightline.component_type = {
@@ -458,9 +459,10 @@ let g:lightline.component_type = {
       \   'linter_warnings': 'warning',
       \   'linter_errors': 'error',
       \   'linter_ok': 'left',
+      \   'buffers': 'tabsel',
       \ }
 
-" Changing colorscheme on the fly
+" Changing lightline colorscheme on the fly
 " https://github.com/itchyny/lightline.vim/issues/258
 function! s:setLightlineColorscheme(name)
   let g:lightline.colorscheme = a:name
@@ -494,6 +496,33 @@ function! ColorToggle()
 endfunction
 
 command! ColorToggle call ColorToggle()
+
+" lightline-bufferline --------------------------------------------------
+if s:has_plugin('lightline-bufferline')
+  let g:lightline.tabline = {
+        \   'left': [ ['buffers'] ],
+        \   'right': [ ['close'] ]
+        \ }
+
+  let g:lightline#bufferline#show_number = 1
+  let g:lightline#bufferline#unnamed      = '[No Name]'
+  let g:lightline#bufferline#filename_modifier = ':t'  " Only show filename
+
+  nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+  nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+  nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+  nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+  nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+  nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+  nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+  nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+  nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+  nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+endif
+
+if has('gui_running')
+  set guioptions-=e
+endif
 
 " lightline-ale ---------------------------------------------------------
 " let g:lightline#ale#indicator_checking = "\uf110"
@@ -617,6 +646,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome (pip install --user flake8)
+Plug 'mengelbrecht/lightline-bufferline'  " display the list of buffers in the lightline vim plugin
 Plug 'mhinz/vim-startify'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
