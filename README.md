@@ -34,7 +34,7 @@ When setting up a new Mac, you may want to set some sensible macOS defaults:
 
 ## Cheatsheets & Shorcut keys
 
-- [Vim](./vim/vim_shorcut_keys.md)
+- [Vim](./vim/vim_shortcut_keys.md)
 - [Tmux](./tmux/tmux_cheatsheet.md)
 - [Sublime-Text](./sublime-text/sublime_shorcut_keys.md)
 
