@@ -385,6 +385,28 @@ endif
 " You could create a VimEnter autocmd to set up your mapping after vim has finished loading:
 autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | endif
 
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 " ctrlp.vim ------------------------------------------------------------
 let g:ctrlp_map = '<c-f>'
 let g:ctrlp_working_path_mode = 'ra'
@@ -524,7 +546,6 @@ let g:move_key_modifier = 'M'  " don't know but somehow that <opt + cmd> works f
 " vim-jedi -------------------------------------------------------------
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_stubs_command = "<leader>s"
 let g:jedi#goto_definitions_command = ""
 let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>u"
@@ -551,10 +572,6 @@ if has('nvim')
   set inccommand=nosplit
 endif
 
-" poet-v ---------------------------------------------------------------
-let g:poetv_executables = ['poetry', 'pipenv']
-let g:poetv_auto_activate = 1
-
 " vim-plug =============================================================
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -571,11 +588,10 @@ endif
 call plug#begin('~/.vim_runtime/plugged')
 
 " Plugins already in awesome vimrc:
-" Plug 'itchyny/lightline.vim'      " A light and configurable statusline/tabline plugin
 " Plug 'ctrlpvim/ctrlp.vim'         " fuzzy search files
 " Plug 'dense-analysis/ale'         " asynchronous linters engine
 " Plug 'jiangmiao/auto-pairs'       " insert or delete brackets, parens, quotes in pair
-" Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it
+" Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it.
 " Plug 'tpope/vim-commentary'       " comment-out by gc
 " Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
 
@@ -598,7 +614,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome (pip install --user flake8)
-Plug 'mhinz/vim-startify'  " The fancy start screen for Vim
+Plug 'mhinz/vim-startify'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
@@ -664,6 +680,9 @@ if has('nvim')
   " Disable jedi-vim
   Plug 'davidhalter/jedi-vim', { 'on': [] }
   " Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
+
+  " FZF - Popup window
+  let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 endif
 
 " Vim only
