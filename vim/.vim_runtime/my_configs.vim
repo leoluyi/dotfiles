@@ -391,6 +391,8 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -597,9 +599,10 @@ call plug#begin('~/.vim_runtime/plugged')
 
 " nvim/vim8/vim7 compatible:
 " Plug 'liuchengxu/vim-clap'  " Modern generic interactive finder and dispatcher for Vim and NeoVim
-Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
+Plug 'airblade/vim-gitgutter'  " Show git changes to files in gutter
+Plug 'airblade/vim-rooter'  " Changes Vim working directory to project root
 Plug 'ap/vim-css-color'  " Preview colours in source code
-Plug 'Asheq/close-buffers.vim'
+Plug 'Asheq/close-buffers.vim'  " Quickly close (bdelete) several buffers at once
 Plug 'cespare/vim-toml'  " Vim syntax for TOML
 Plug 'Chiel92/vim-autoformat'  " formatters (pip install --user black)
 Plug 'davidhalter/jedi-vim'  " Python IDE (pip install --user jedi)
