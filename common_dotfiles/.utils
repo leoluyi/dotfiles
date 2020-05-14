@@ -105,3 +105,92 @@ color () {
     echo -e "\e[0;30m█████\\e[0m\e[0;31m█████\\e[0m\e[0;32m█████\\e[0m\e[0;33m█████\\e[0m\e[0;34m█████\\e[0m\e[0;35m█████\\e[0m\e[0;36m█████\\e[0m\e[0;37m█████\\e[0m"
     echo -e "\e[0m\e[1;30m█████\\e[0m\e[1;31m█████\\e[0m\e[1;32m█████\\e[0m\e[1;33m█████\\e[0m\e[1;34m█████\\e[0m\e[1;35m█████\\e[0m\e[1;36m█████\\e[0m\e[1;37m█████\\e[0m"
 }
+
+# Count code lines in some directory.
+# https://github.com/paulmillr/dotfiles/blob/master/home/.zshrc.sh
+# $ loc py js css
+# # => Lines of code for .py: 3781
+# # => Lines of code for .js: 3354
+# # => Lines of code for .css: 2970
+# # => Total lines of code: 10105
+function loc() {
+  local total
+  local firstletter
+  local ext
+  local lines
+  total=0
+  for ext in $@; do
+    firstletter=$(echo $ext | cut -c1-1)
+    if [[ firstletter != "." ]]; then
+      ext=".$ext"
+    fi
+    lines=`find-exec "*$ext" cat | wc -l`
+    lines=${lines// /}
+    total=$(($total + $lines))
+    echo "Lines of code for ${fg[blue]}$ext${reset_color}: ${fg[green]}$lines${reset_color}"
+  done
+  echo "${fg[blue]}Total${reset_color} lines of code: ${fg[green]}$total${reset_color}"
+}
+
+function _calcram() {
+  local sum
+  sum=0
+  for i in `ps aux | grep -i "$1" | grep -v "grep" | awk '{print $6}'`; do
+    sum=$(($i + $sum))
+  done
+  sum=$(echo "scale=2; $sum / 1024.0" | bc)
+  echo $sum
+}
+
+# Show how much RAM application uses.
+# $ ram safari
+# # => safari uses 154.69 MBs of RAM
+function ram() {
+  local sum
+  local app="$1"
+  if [ -z "$app" ]; then
+    echo "First argument - pattern to grep from processes"
+    return 0
+  fi
+
+  sum=$(_calcram $app)
+  if [[ $sum != "0" ]]; then
+    echo "${fg[blue]}${app}${reset_color} uses ${fg[green]}${sum}${reset_color} MBs of RAM"
+  else
+    echo "No active processes matching pattern '${fg[blue]}${app}${reset_color}'"
+  fi
+}
+
+# Same, but tracks RAM usage in realtime. Will run until you stop it.
+# $ rams safari
+function rams() {
+  local sum
+  local app="$1"
+  if [ -z "$app" ]; then
+    echo "First argument - pattern to grep from processes"
+    return 0
+  fi
+
+  while true; do
+    sum=$(_calcram $app)
+    if [[ $sum != "0" ]]; then
+      echo -en "${fg[blue]}${app}${reset_color} uses ${fg[green]}${sum}${reset_color} MBs of RAM\r"
+    else
+      echo -en "No active processes matching pattern '${fg[blue]}${app}${reset_color}'\r"
+    fi
+    sleep 1
+  done
+}
+
+# $ size dir1 file2.js
+function size() {
+  # du -scBM | sort -n
+  du -shck "$@" | sort -rn | awk '
+      function human(x) {
+          s="kMGTEPYZ";
+          while (x>=1000 && length(s)>1)
+              {x/=1024; s=substr(s,2)}
+          return int(x+0.5) substr(s,1,1)
+      }
+      {gsub(/^[0-9]+/, human($1)); print}'
+}
