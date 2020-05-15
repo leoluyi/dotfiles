@@ -67,7 +67,7 @@ function install_apt_apps {
     most \
     ncdu    `# Interactive and very fast du` \
     neofetch \
-    neovim \
+    # neovim \
     nmon    `# Performance monitor` \
     p7zip-full \
     ranger \
@@ -102,7 +102,7 @@ function install_neovim {
   if ! command -v nvim &>/dev/null || [ "$1" = "-f" ]; then
     # Nvim repository
     sudo apt install -y software-properties-common
-    sudo add-apt-repository -y ppa:neovim-ppa/stable
+    sudo add-apt-repository -y ppa:neovim-ppa/unstable
 
     if [ "${new_ubuntu}" = 1 ];then
       sudo apt -qq update && sudo apt install -y neovim python3-pip

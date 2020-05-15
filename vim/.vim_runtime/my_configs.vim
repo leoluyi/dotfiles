@@ -713,9 +713,11 @@ if has('nvim')
   " Disable jedi-vim
   Plug 'davidhalter/jedi-vim', { 'on': [] }
   " Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
+endif
 
+if has('nvim-0.4.0')
   " FZF - Popup window
-  let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+  let g:fzf_layout = { 'down':'~30%', 'window': { 'width': 0.8, 'height': 0.8, 'yoffset':0.5, 'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 endif
 
 " Vim only
