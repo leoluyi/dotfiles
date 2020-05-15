@@ -405,7 +405,7 @@ install_chrome
 install_dbeaver
 install_diff_so_fancy
 install_docker $FORCE
-install_dropbox
+# install_dropbox
 install_fd
 install_git
 install_neovim $FORCE
@@ -423,7 +423,7 @@ unset \
   install_dbeaver \
   install_diff_so_fancy \
   install_docker \
-  install_dropbox \
+  # install_dropbox \
   install_fd \
   install_git \
   install_neovim \
