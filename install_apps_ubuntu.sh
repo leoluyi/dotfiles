@@ -117,6 +117,8 @@ function install_neovim {
     fi
   fi
 
+  # Install neovim python client for ncm2
+  # https://github.com/ncm2/ncm2
   python3 -m pip install --quiet --no-cache-dir --user -U neovim pynvim jedi flake8 autopep8
 }
 

@@ -129,10 +129,6 @@ function install_tmux_awesome {
   # Install tmux plugins
   if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ] && command -v tmux >/dev/null; then
     ~/.tmux/plugins/tpm/bin/install_plugins
-
-    # Install neovim python client for ncm2
-    # https://github.com/ncm2/ncm2
-    python3 -m pip --disable-pip-version-check -q install --no-cache-dir --user -U pynvim
   fi
 }
 
