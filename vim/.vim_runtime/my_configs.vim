@@ -143,9 +143,12 @@ else
   command! W w suda://%  " lambdalisue/suda.vim
 endif
 
-" Toggle number and relativenumber for copy-paste
-nnoremap <leader>n :FoldColumnToggle<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR>
-vnoremap <leader>n :FoldColumnToggle<CR> :set number! relativenumber!<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR>
+" Toggle number and relativenumber for cursor copy-paste
+"nnoremap <leader>n :set number! relativenumber!<CR> :FoldColumnToggle<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR> :GitGutterToggle<CR>
+nnoremap <leader>n :set nonumber norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
+vnoremap <leader>n :set nonumber norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
+nnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnsable<CR> :ALEEnsableBuffer<CR> :GitGutterEnsable<CR>
+vnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnsable<CR> :ALEEnsableBuffer<CR> :GitGutterEnsable<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Copy and paste stuffs
@@ -426,7 +429,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'filename', 'modified'],
-      \             ['zoomstatus'] ],
+      \             ['zoomstatus', 'githunks'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \              [ 'percent', 'lineinfo' ],
       \              [ 'fileformat', 'fileencoding', 'filetype'] ],
@@ -441,6 +444,9 @@ let g:lightline = {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'component_function': {
+      \    'githunks': 'LightlineGitGutter'
       \ },
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': '|' }
@@ -496,6 +502,14 @@ function! ColorToggle()
 endfunction
 
 command! ColorToggle call ColorToggle()
+
+function! LightlineGitGutter()
+  if !get(g:, 'gitgutter_enabled', 0) || empty(FugitiveHead())
+    return ''
+  endif
+  let [ l:added, l:modified, l:removed ] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', l:added, l:modified, l:removed)
+endfunction
 
 " lightline-bufferline --------------------------------------------------
 if s:has_plugin('lightline-bufferline')
@@ -603,6 +617,14 @@ if has('nvim')
   set inccommand=nosplit
 endif
 
+" vim-gitgutter --------------------------------------------------------
+" set the default value of updatetime to 100ms
+set updatetime=500
+let g:gitgutter_enabled=1
+
+" git-blame ------------------------------------------------------------
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
+
 " vim-plug =============================================================
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
@@ -660,6 +682,7 @@ Plug 'tweekmonster/impsort.vim'  " color and sort python imports
 Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'  " show indent guide
+Plug 'zivyangll/git-blame.vim'  " See Git Blame information in the status bar for the currently selected line
 
 
 " fzf
