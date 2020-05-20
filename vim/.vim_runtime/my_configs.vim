@@ -339,6 +339,20 @@ let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 
+" nerdtree-git-plugin --------------------------------------------------
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✚",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
 " comfortable-motion.vim -----------------------------------------------
 " Disable comfortable_motion.
 let g:loaded_comfortable_motion = 0
