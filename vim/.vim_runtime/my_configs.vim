@@ -717,31 +717,32 @@ Plug 'airblade/vim-rooter'  " Changes Vim working directory to project root
 Plug 'ap/vim-css-color'  " Preview colours in source code
 Plug 'Asheq/close-buffers.vim'  " Quickly close (bdelete) several buffers at once
 Plug 'cespare/vim-toml'  " Vim syntax for TOML
-Plug 'Chiel92/vim-autoformat'  " formatters (pip install --user black)
+Plug 'Chiel92/vim-autoformat'  " Formatters (pip install --user black)
+Plug 'christoomey/vim-tmux-navigator'  " Seamless navigation between tmux panes and vim splits
 Plug 'davidhalter/jedi-vim'  " Python IDE (pip install --user jedi)
 Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
-Plug 'eugen0329/vim-esearch'  " project-wide async search and replace, similar to SublimeText
-Plug 'fisadev/vim-isort'  " sort python imports (pip install --user jedi)
-Plug 'haya14busa/incsearch.vim'  " incrementally highlights ALL pattern matches
-Plug 'jeetsukumaran/vim-pythonsense'  " provides text objects and motions for Python classes, methods, functions, and doc strings
+Plug 'eugen0329/vim-esearch'  " Project-wide async search and replace, similar to SublimeText
+Plug 'fisadev/vim-isort'  " Sort python imports (pip install --user jedi)
+Plug 'haya14busa/incsearch.vim'  " Incrementally highlights ALL pattern matches
+Plug 'jeetsukumaran/vim-pythonsense'  " Provides text objects and motions for Python classes, methods, functions, and doc strings
 Plug 'junegunn/vim-easy-align'
-Plug 'lambdalisue/suda.vim'  " to read or write files with sudo command
+Plug 'lambdalisue/suda.vim'  " Read or write files with sudo command
 Plug 'machakann/vim-highlightedyank'
-Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
-Plug 'matze/vim-move'   " move lines and selections up and down
-Plug 'maximbaz/lightline-ale'  " make linter in statusline awesome (pip install --user flake8)
-Plug 'mengelbrecht/lightline-bufferline'  " display the list of buffers in the lightline vim plugin
+Plug 'majutsushi/tagbar'  " Show tags in a bar (functions etc) for easy browsing
+Plug 'matze/vim-move'   " Move lines and selections up and down
+Plug 'maximbaz/lightline-ale'  " Make linter in statusline awesome (pip install --user flake8)
+Plug 'mengelbrecht/lightline-bufferline'  " Display the list of buffers in the lightline vim plugin
 Plug 'mhinz/vim-startify'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-Plug 'rhysd/conflict-marker.vim'  " highlight, Jump and Resolve Conflict Markers Quickly in Vim
-Plug 'ryanoasis/vim-devicons'  " adds file type icons to Vim plugins
-Plug 'scrooloose/nerdtree'  " file list
-Plug 'tacahiroy/ctrlp-funky'  " function navigator for ctrlp.vim
+Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
+Plug 'ryanoasis/vim-devicons'  " Adds file type icons to Vim plugins
+Plug 'scrooloose/nerdtree'  " File list
+Plug 'tacahiroy/ctrlp-funky'  " Function navigator for ctrlp.vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
-Plug 'tweekmonster/impsort.vim'  " color and sort python imports
-Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
+Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
+Plug 'Vimjas/vim-python-pep8-indent'  " Better indenting for python
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'  " show indent guide
 Plug 'zivyangll/git-blame.vim'  " See Git Blame information in the status bar for the currently selected line
@@ -775,7 +776,12 @@ if has('nvim') || v:version >= 800
     Plug 'ncm2/ncm2-bufword'
     Plug 'ncm2/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
     Plug 'ncm2/ncm2-path'
-    Plug 'ncm2/ncm2-tmux'
+    " Plug 'ncm2/ncm2-tmux'
+
+    " Asyncomplete
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'wellle/tmux-complete.vim'
 
     " R support
     " https://github.com/gaalcaras/ncm-R
