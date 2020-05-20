@@ -6,6 +6,8 @@ let mapleader = ","
 let maplocalleader = "\\"
 nnoremap <leader>, ,
 
+set updatetime=500                    " Faster completion
+
 """ Backups
 set history=50                        " Keep 50 lines of command line history
 set nobackup                          " No *~ backup files
@@ -78,18 +80,17 @@ filetype plugin indent on
 set linebreak                         " Make Vim break lines without breaking words
 set wrap                              " Line wrapping
 set formatoptions-=t                  " When textwidth is set, keeps the visual textwidth but doesn't add new line in insert mode
-" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o  " Disables automatic commenting on newline
-" https://stackoverflow.com/q/2280030/3744499
+" autocmd FileType * setlocal formatoptions-=cro  " Disables automatic commenting on newline. https://stackoverflow.com/q/2280030/3744499
 
 """ Window and Tabs
 set splitbelow splitright             " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 
 """ Warnings
 set noerrorbells                      " No annoying sound on errors
-" set novisualbell                      " No visual bell
 " set t_vb=                             " No beep or flash
+" set novisualbell                      " No visual bell
 
-" Automatic toggling between line number modes
+""" Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
 " https://github.com/jeffkreeftmeijer/vim-numbertoggle
 augroup numbertoggle
@@ -98,72 +99,89 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
 augroup END
 
+""" auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+au! BufWritePost $MYVIMRC source %
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => My Shortcut Keys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" No highlight search
+
+""" No highlight search
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Splits and tabbed files
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Splits and tabbed files
 " Make adjusting split sizes a bit more friendly
 noremap <silent> <C-Left> :vert resize +3<CR>
 noremap <silent> <C-Right> :vert resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
 
-" Change 2 split windows from vert to horiz or horiz to vert
+""" Change 2 split windows from vert to horiz or horiz to vert
 map <leader>th <C-w>t<C-w>H
 map <leader>tk <C-w>t<C-w>K
 
-" Zoom a window in and out
+""" Zoom a window in and out
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Better tabbing
+vnoremap < <gv
+vnoremap > >gv
+
+""" Better window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+""" TAB in general mode will move to text buffer
+nnoremap <TAB> :bnext<CR>
+""" SHIFT-TAB will go back
+nnoremap <S-TAB> :bprevious<CR>
+
+""" Alternate way to save
+nnoremap <C-s> :w<CR>
+
+""" Insert new line without automatic commenting
+nnoremap <Leader>o o<Esc>^Da
+nnoremap <Leader>O O<Esc>^Da
+
+"------------------------
 " => Code editing stuffs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove all trailing whitespace by pressing <F5>
-" https://vim.fandom.com/wiki/Remove_unwanted_spaces
+"------------------------
+
+""" <F5> -  Remove all trailing whitespace. https://vim.fandom.com/wiki/Remove_unwanted_spaces
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 command! WhitespateTrailingRemove :%s/\s\+$//e
 
-" vim-move config - workaround alt key mappings
-nmap zj <Plug>MoveLineDown
-vmap zj <Plug>MoveBlockDown
-nmap zk <Plug>MoveLineUp
-vmap zk <Plug>MoveBlockUp
-
-" :W Force write: Allow saving of files as sudo
-" (useful for handling the permission-denied error)
+""" :W   -  Force write. Allow saving of files as sudo
 if !has('nvim')
   command! W w !sudo tee % > /dev/null
 else
   command! W w suda://%  " lambdalisue/suda.vim
 endif
 
-" Toggle number and relativenumber for cursor copy-paste
+""" Toggle number and relativenumber for cursor copy-paste
 "nnoremap <leader>n :set number! relativenumber!<CR> :FoldColumnToggle<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR> :GitGutterToggle<CR>
 nnoremap <leader>n :set nonumber norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
 vnoremap <leader>n :set nonumber norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
 nnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnsable<CR> :ALEEnsableBuffer<CR> :GitGutterEnsable<CR>
 vnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnsable<CR> :ALEEnsableBuffer<CR> :GitGutterEnsable<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"--------------------------
 " => Copy and paste stuffs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Cut to yanked register
+"--------------------------
+""" Cut to yanked register
 nnoremap <leader>x "0x
 vnoremap <leader>x "0x
 
-" Paste from yanked register
+""" Paste from yanked register
 nnoremap <leader>P "0P
 nnoremap <leader>p "0p
 vnoremap <leader>P "0P
 vnoremap <leader>p "0p
 
-" Yank to clipboard
+""" Yank to clipboard
 nnoremap <leader>Y  "+y$
 nnoremap <leader>y  "+y
 nnoremap <leader>yy "+yy
@@ -171,25 +189,15 @@ vnoremap <leader>Y  "+y$
 vnoremap <leader>y  "+y
 vnoremap <leader>yy "+yy
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"--------------------------
 " => Fix unwanted key map
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" :unmap <C-Space>
+"--------------------------
+":unmap <C-Space>
 inoremap <C-@> <Esc>
 
-" vim-multiple-cursors - default mapping -------------------------------
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_select_all_word_key = '<Esc>n'
-let g:multi_cursor_start_key           = 'g<C-n>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_select_all_key      = 'g<Esc>n'
-let g:multi_cursor_next_key            = '<C-n>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-
-" == Utilities for vimrc == -------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Utilities for vimrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " https://gist.github.com/thinca/1518874
 
@@ -289,6 +297,30 @@ if has("nvim") && !has("python3")
   silent !python3 -m pip --disable-pip-version-check -q install --no-cache-dir --user -U pynvim
 endif
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" vim-multiple-cursors ------------------------------------------------- 
+" default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_select_all_word_key = '<Esc>n'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_select_all_key      = 'g<Esc>n'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+" vim-move ------------------------------------------------------------- 
+" workaround alt key mappings
+nmap zj <Plug>MoveLineDown
+vmap zj <Plug>MoveBlockDown
+nmap zk <Plug>MoveLineUp
+vmap zk <Plug>MoveBlockUp
+
 " NERDTree -------------------------------------------------------------
 let g:NERDTreeWinPos = "left"
 
@@ -303,9 +335,9 @@ let g:loaded_comfortable_motion = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 
-" Yggdroot/indentLine -----------------------------------------------------------
+" Yggdroot/indentLine --------------------------------------------------
 
-" haya14busa/incsearch.vim -----------------------------------------------------------
+" haya14busa/incsearch.vim ---------------------------------------------
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
@@ -618,14 +650,15 @@ if has('nvim')
 endif
 
 " vim-gitgutter --------------------------------------------------------
-" set the default value of updatetime to 100ms
-set updatetime=500
 let g:gitgutter_enabled=1
 
 " git-blame ------------------------------------------------------------
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
-" vim-plug =============================================================
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-plug
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
 if empty(glob('~/.vim_runtime/autoload/plug.vim'))
@@ -763,5 +796,7 @@ endif
 
 call plug#end()
 
-"" References
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => References
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " https://hackmd.io/@AlexSu/ryLuYmwYm?type=view

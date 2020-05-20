@@ -89,14 +89,15 @@ T<character>  -   to find backwards
 :<linenum>            -   go to <linenum>
 ''                    -   jump to previous line position
 
-`` (double backtick)  -   jump between previous position and the current position cursor position in jump list
 <C-o> and <C-i>       -   up / down walk through the jump list history
 
-`.                    -   go back last edit position
-g; and g,             -   jump through edit positions
+`` (double backtick)  -   jump between previous position and the current position cursor position in jump list
+`.                    -   go back last change position
 
 (The ` goes to a mark, and "." is a "special" mark which is automatically
-set to the position where the last change was made)
+ set to the position where the last change was made)
+
+g; and g,             -   jump back and forth change list
 ```
 
 ### NORMAL MODE -> INSERT MODE
