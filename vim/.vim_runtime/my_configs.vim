@@ -82,7 +82,7 @@ set wrap                              " Line wrapping
 set formatoptions-=t                  " When textwidth is set, keeps the visual textwidth but doesn't add new line in insert mode
 " autocmd FileType * setlocal formatoptions-=cro  " Disables automatic commenting on newline. https://stackoverflow.com/q/2280030/3744499
 
-""" Window and Tabs
+""" Splits and Tabs
 set splitbelow splitright             " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 
 """ Warnings
@@ -128,12 +128,6 @@ noremap Zo <c-w>=
 vnoremap < <gv
 vnoremap > >gv
 
-""" Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
 """ TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
 """ SHIFT-TAB will go back
@@ -146,9 +140,28 @@ nnoremap <C-s> :w<CR>
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
 
-"------------------------
+"----------------------------
+" => Splits and Tabbed Files
+"----------------------------
+""" Better window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+""" Make adjusing split sizes a bit more friendly
+noremap <silent> <C-S-Left> :vertical resize +3<CR>
+noremap <silent> <C-S-Right> :vertical resize -3<CR>
+noremap <silent> <C-S-Up> :resize +3<CR>
+noremap <silent> <C-S-Down> :resize -3<CR>
+
+""" Change 2 split windows from vert to horiz or horiz to vert
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
+
+"----------------------------
 " => Code editing stuffs
-"------------------------
+"----------------------------
 
 """ <F5> -  Remove all trailing whitespace. https://vim.fandom.com/wiki/Remove_unwanted_spaces
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
@@ -168,9 +181,9 @@ vnoremap <leader>n :set nonumber norelativenumber<CR> :setlocal foldcolumn=0<CR>
 nnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnsable<CR> :ALEEnsableBuffer<CR> :GitGutterEnsable<CR>
 vnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnsable<CR> :ALEEnsableBuffer<CR> :GitGutterEnsable<CR>
 
-"--------------------------
+"----------------------------
 " => Copy and paste stuffs
-"--------------------------
+"----------------------------
 """ Cut to yanked register
 nnoremap <leader>x "0x
 vnoremap <leader>x "0x
@@ -323,6 +336,8 @@ vmap zk <Plug>MoveBlockUp
 
 " NERDTree -------------------------------------------------------------
 let g:NERDTreeWinPos = "left"
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
 
 " comfortable-motion.vim -----------------------------------------------
 " Disable comfortable_motion.
