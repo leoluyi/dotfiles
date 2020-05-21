@@ -336,8 +336,11 @@ vmap zk <Plug>MoveBlockUp
 
 " NERDTree -------------------------------------------------------------
 let g:NERDTreeWinPos = "left"
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
+
+"Close automatically when NERDTree is the only remaining window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " nerdtree-git-plugin --------------------------------------------------
 let g:NERDTreeIndicatorMapCustom = {
