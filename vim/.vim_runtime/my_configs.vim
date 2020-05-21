@@ -684,6 +684,15 @@ let g:gitgutter_enabled=1
 " git-blame ------------------------------------------------------------
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
+" quick-scope ----------------------------------------------------------
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#EF5F70' gui=underline ctermfg=81 cterm=underline
+
+let g:qs_max_chars=150
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -742,9 +751,10 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
+Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
 Plug 'Vimjas/vim-python-pep8-indent'  " Better indenting for python
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'Yggdroot/indentLine'  " show indent guide
+Plug 'Yggdroot/indentLine'  " Show indent guide
 Plug 'zivyangll/git-blame.vim'  " See Git Blame information in the status bar for the currently selected line
 
 
