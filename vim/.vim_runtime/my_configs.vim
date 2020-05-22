@@ -178,8 +178,8 @@ endif
 "nnoremap <leader>n :set number! relativenumber!<CR> :FoldColumnToggle<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR> :GitGutterToggle<CR>
 nnoremap <leader>n :set nonumber norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
 vnoremap <leader>n :set nonumber norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
-nnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnsable<CR> :ALEEnsableBuffer<CR> :GitGutterEnsable<CR>
-vnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnsable<CR> :ALEEnsableBuffer<CR> :GitGutterEnsable<CR>
+nnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnable<CR> :ALEEnableBuffer<CR> :GitGutterEnable<CR>
+vnoremap <leader>N :set number relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnable<CR> :ALEEnableBuffer<CR> :GitGutterEnable<CR>
 
 "----------------------------
 " => Copy and paste stuffs
@@ -341,6 +341,11 @@ let NERDTreeMinimalUI = 1
 
 "Close automatically when NERDTree is the only remaining window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
 
 " nerdtree-git-plugin --------------------------------------------------
 let g:NERDTreeIndicatorMapCustom = {
@@ -723,7 +728,6 @@ call plug#begin('~/.vim_runtime/plugged')
 " Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
 
 " nvim/vim8/vim7 compatible:
-" Plug 'liuchengxu/vim-clap'  " Modern generic interactive finder and dispatcher for Vim and NeoVim
 Plug 'airblade/vim-gitgutter'  " Show git changes to files in gutter
 Plug 'airblade/vim-rooter'  " Changes Vim working directory to project root
 Plug 'ap/vim-css-color'  " Preview colours in source code
@@ -745,6 +749,7 @@ Plug 'matze/vim-move'   " Move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " Make linter in statusline awesome (pip install --user flake8)
 Plug 'mengelbrecht/lightline-bufferline'  " Display the list of buffers in the lightline vim plugin
 Plug 'mhinz/vim-startify'
+Plug 'pangloss/vim-javascript'  " Vastly improved Javascript indentation and syntax support in Vim
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " Adds file type icons to Vim plugins
@@ -760,7 +765,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'  " Show indent guide
 Plug 'zivyangll/git-blame.vim'  " See Git Blame information in the status bar for the currently selected line
 
-
 " fzf
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -770,6 +774,7 @@ else
 endif
 
 " Theme
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'rakr/vim-colors-rakr'
@@ -777,7 +782,7 @@ Plug 'rakr/vim-one'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Neovim/Vim8 compatible
-if has('nvim') || v:version >= 800
+if has('nvim') || has('patch-8.0.0')
 
   " NCM2 plugins
   if has("python3")
@@ -808,8 +813,9 @@ if has('nvim') || v:version >= 800
   endif
 
   " Others
-  " https://github.com/roxma/vim-hug-neovim-rpc
+  " trying to build a compatibility layer for neovim rpc client working on vim8. https://github.com/roxma/vim-hug-neovim-rpc
   " Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'ThePrimeagen/vim-be-good'  " nvim plugin designed to make you better at Vim Movements
 endif
 
 " Neovim only
@@ -819,12 +825,14 @@ if has('nvim')
   " Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
 endif
 
-if has('nvim-0.4.0')
+if has('nvim-0.4.2') || has('patch-8.1.2114')
+  " Plug 'liuchengxu/vim-clap'  " Modern generic interactive finder and dispatcher for Vim and NeoVim
+
   " FZF - Popup window
   let g:fzf_layout = { 'down':'~30%', 'window': { 'width': 0.8, 'height': 0.8, 'yoffset':0.5, 'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 endif
 
-" Vim only
+" Vim7/8 only
 if !has('nvim')
   let g:ncm2_enable = 0
   Plug 'ncm2/ncm2', { 'on': [] }  " awesome autocomplete plugin
@@ -834,7 +842,7 @@ if !has('nvim')
   Plug 'ncm2/ncm2-jedi', { 'on': [] }  " fast python completion (use ncm2 if you want type info or snippet support)
 endif
 
-" Older Vim only
+" Vim7 only
 if v:version >= 730 && v:version < 800
   " highlightedyank
   if !exists('##TextYankPost')
