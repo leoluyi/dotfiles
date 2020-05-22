@@ -139,7 +139,6 @@ nnoremap <C-s> :w<CR>
 """ Insert new line without automatic commenting
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
-
 "----------------------------
 " => Splits and Tabbed Files
 "----------------------------
@@ -162,6 +161,9 @@ map <Leader>tk <C-w>t<C-w>K
 "----------------------------
 " => Code editing stuffs
 "----------------------------
+
+""" <F6> -  Absolute numbers
+map <F6> :set relativenumber!<CR>
 
 """ <F5> -  Remove all trailing whitespace. https://vim.fandom.com/wiki/Remove_unwanted_spaces
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
@@ -314,7 +316,7 @@ endif
 " => Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" vim-multiple-cursors ------------------------------------------------- 
+" vim-multiple-cursors -------------------------------------------------
 " default mapping
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
@@ -327,7 +329,7 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" vim-move ------------------------------------------------------------- 
+" vim-move -------------------------------------------------------------
 " workaround alt key mappings
 nmap zj <Plug>MoveLineDown
 vmap zj <Plug>MoveBlockDown
@@ -426,6 +428,7 @@ if has('nvim') && has('python3') && s:has_plugin('ncm2') && s:has_plugin('ncm2-u
 endif
 
 " vim-autoformat -------------------------------------------
+" <F3>
 if s:has_plugin('vim-autoformat')
   noremap <F3> :Autoformat<CR>
 endif
@@ -723,9 +726,10 @@ call plug#begin('~/.vim_runtime/plugged')
 " Plug 'ctrlpvim/ctrlp.vim'         " fuzzy search files
 " Plug 'dense-analysis/ale'         " asynchronous linters engine
 " Plug 'jiangmiao/auto-pairs'       " insert or delete brackets, parens, quotes in pair
+" Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
 " Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it.
 " Plug 'tpope/vim-commentary'       " comment-out by gc
-" Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
+" Plug 'tpope/vim-fugitive'         " A Git wrapper so awesome
 
 " nvim/vim8/vim7 compatible:
 Plug 'airblade/vim-gitgutter'  " Show git changes to files in gutter
