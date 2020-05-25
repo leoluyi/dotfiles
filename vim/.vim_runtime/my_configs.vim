@@ -17,9 +17,11 @@ set noswapfile                        " Do not use a swapfile for the buffer
 
 """ Terminal colors
 if has("termguicolors")
-  " fix bug for vim
-  set t_8f=[38;2;%lu;%lu;%lum
-  set t_8b=[48;2;%lu;%lu;%lum
+  if !has('nvim')
+    " fix bug for vim
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
+  fi
 
   " enable true color
   set termguicolors
@@ -99,6 +101,9 @@ set splitbelow splitright             " Splits open at the bottom and right, whi
 set noerrorbells                      " No annoying sound on errors
 " set t_vb=                             " No beep or flash
 " set novisualbell                      " No visual bell
+
+""" Fix mouse issue using Alacritty terminal
+set ttymouse=sgr
 
 """ Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
