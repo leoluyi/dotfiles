@@ -103,7 +103,7 @@ set noerrorbells                      " No annoying sound on errors
 " set novisualbell                      " No visual bell
 
 """ Fix mouse issue using Alacritty terminal
-set ttymouse=sgr
+" set ttymouse=sgr
 
 """ Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
