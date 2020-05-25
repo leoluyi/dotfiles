@@ -87,6 +87,7 @@ function brew_install_cli {
   czmq \
   diff-so-fancy \
   dive      `# A tool for exploring each layer in a docker image` \
+  dust      `# A more intuitive version of du in rust` \
   fd \
   ffmpeg \
   figlet    `# Banner-like program prints strings as ASCII art` \
@@ -99,6 +100,7 @@ function brew_install_cli {
   gnu-sed --with-default-names \
   gnu-tar \
   gnupg \
+  gotop      `# graphical activity monitor inspired by gtop and vtop` \
   grep \
   grip \
   highlight \
