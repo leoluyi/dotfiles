@@ -6,6 +6,10 @@
 # -- Unbind C-b prefix ---------------------------------------------------------
 set -g prefix C-a
 
+# -- Turn on true color --------------------------------------------------------
+set -g default-terminal screen-256color
+set-option -ga terminal-overrides ",*256col*:Tc"
+
 # -- List of plugins -----------------------------------------------------------
 # See: https://github.com/gpakosz/.tmux/issues/61#issuecomment-439617033
 
