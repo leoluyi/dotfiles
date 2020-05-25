@@ -7,13 +7,13 @@
 ```bash
 git clone https://github.com/leoluyi/dotfiles.git && \
   cd dotfiles && \
-  source /bootstrap.sh
+  source /bootstrap_macos.sh.sh
 ```
 
 Alternatively, to update while avoiding the confirmation prompt:
 
 ```bash
-set -- -f; source bootstrap.sh
+set -- -f; source bootstrap_macos.sh
 ```
 
 ### Install Homebrew formulae
@@ -21,7 +21,7 @@ set -- -f; source bootstrap.sh
 When setting up a new Mac, you may want to install some common Homebrew formulae (after installing Homebrew, of course):
 
 ```bash
-./brew.sh
+./install_apps_macos.sh
 ```
 
 ### Sensible macOS defaults
@@ -29,7 +29,15 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 When setting up a new Mac, you may want to set some sensible macOS defaults:
 
 ```bash
-./.macos
+. ./macos/.scripts/.macos
+```
+
+### Fonts
+
+That will give you the font to put in the config:
+
+```bash
+fc-list : family | rg -i powerline
 ```
 
 ## Cheatsheets & Shorcut keys
