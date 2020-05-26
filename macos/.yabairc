@@ -47,5 +47,6 @@ yabai -m config --space 2 layout bsp
 # yabai -m rule --add app="App Store" manage=off
 yabai -m rule --add app=".*" manage=off
 yabai -m rule --add app="iTerm" manage=on
+yabai -m rule --add app="Alacritty" manage=on
 
 echo "yabai configuration loaded.."
