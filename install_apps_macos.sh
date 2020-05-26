@@ -52,19 +52,20 @@ function install_homebrew {
 function brew_install_app {
   echo "$(tput setaf 2)###### Install Apps with Homebrew ######$(tput sgr 0)"
 
-  # You don't need to install cask anymore, you just need homebrew
+  # You don't need to install cask anymore, you just need homebrew.
   brew tap homebrew/cask-fonts && \
   brew cask install \
-  firefox \
-  font-meslo-for-powerline \
-  font-hack-nerd-font \
-  google-chrome \
-  iina \
-  iterm2 \
-  jupyter-notebook-viewer \
-  xquartz \
-  qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
-  2>/dev/null;
+    firefox \
+    font-hack-nerd-font \
+    font-meslo-for-powerline \
+    google-chrome \
+    iina \
+    iterm2 \
+    jupyter-notebook-viewer \
+    openinterminal `# Finder Toolbar to open the current directory in Terminal, iTerm, Hyper or Alacritty. https://github.com/Ji4n1ng/OpenInTerminal` \
+    xquartz \
+    qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
+    2>/dev/null;
 }
 
 
