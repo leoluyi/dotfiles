@@ -1,6 +1,7 @@
 # open terminal
 # cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
 alt - return : ~/.scripts/iterm.sh
+shift + alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
 ctrl + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 # focus window
@@ -142,7 +143,7 @@ shift + alt - f : yabai -m window --toggle native-fullscreen
 shift + alt - b : yabai -m window --toggle border
 
 # toggle window split type
-shift + s : yabai -m window --toggle split
+alt - s : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
 alt - t : yabai -m window --toggle float;\
