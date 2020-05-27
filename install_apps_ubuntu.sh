@@ -37,18 +37,14 @@ validate_os() {
 function install_apt_apps {
   echo "$(tput setaf 2)###### Install Apps with Apt ######$(tput sgr 0)"
 
-  sudo apt update -qq && sudo apt install -qq -y --no-install-recommends \
-    `# fd-find` \
+  apt update -qq && apt install -qq -y --no-install-recommends \
     `# python-neovim` \
     `# python3-neovim` \
-    `# tldr # Ubuntu 18 later only` \
-    ag \
     apt-transport-https \
     build-essential \
     ca-certificates \
     curl \
     default-jdk \
-    fzf \
     gdebi-core \
     gnupg-agent \
     highlight \
@@ -66,9 +62,8 @@ function install_apt_apps {
     make \
     most \
     ncdu    `# Interactive and very fast du` \
-    neofetch \
-    # neovim \
     nmon    `# Performance monitor` \
+    openssl \
     p7zip-full \
     ranger \
     silversearcher-ag \
@@ -80,40 +75,38 @@ function install_apt_apps {
     wget \
     xclip \
     xz-utils \
-    zlib1g-dev \
     zip \
+    zlib1g-dev \
     2>/dev/null
 }
-
 
 function install_tldr {
   # https://gitlab.com/pepa65/tldr-bash-client
   # https://github.com/raylee/tldr
 
   local loc=/usr/local/bin/tldr  # elevated privileges needed for some locations
-  sudo wget -qO $loc https://4e4.win/tldr
-  sudo chmod +x $loc
+  wget -qO $loc https://4e4.win/tldr
+  chmod +x $loc
 }
 
 function install_neovim {
-  echo "$(tput setaf 2)###### Install Neovim ######$(tput sgr 0)"
   local new_ubuntu="$(echo "$(lsb_release -rs) 18.04" | awk '{print ($1 >= $2)}')"
 
   if ! command -v nvim &>/dev/null || [ "$1" = "-f" ]; then
     # Nvim repository
-    sudo apt install -y software-properties-common
-    sudo add-apt-repository -y ppa:neovim-ppa/unstable
+    apt install -qq -y software-properties-common
+    add-apt-repository -y ppa:neovim-ppa/unstable
 
     if [ "${new_ubuntu}" = 1 ];then
-      sudo apt -qq update && sudo apt install -y neovim python3-pip
+      apt -qq update && apt install -qq -y neovim python3-pip
     else
-      sudo apt -qq update && sudo apt install -y neovim python3-pip
-      # sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
-      # sudo update-alternatives --config vi
-      # sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
-      # sudo update-alternatives --config vim
-      # sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-      # sudo update-alternatives --config editor
+      apt -qq update && apt install -qq -y neovim python3-pip
+      # update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+      # update-alternatives --config vi
+      # update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+      # update-alternatives --config vim
+      # update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+      # update-alternatives --config editor
     fi
   fi
 
@@ -124,7 +117,6 @@ function install_neovim {
 
 
 function install_git {
-  echo "$(tput setaf 2)###### Install Git ######$(tput sgr 0)"
   local VERSION_REQUIRED='2.25.0'
 
   local current_version="$(git --version | cut -d' ' -f3-)"
@@ -132,8 +124,8 @@ function install_git {
   # SC2072 - https://stackoverflow.com/a/46827362/3744499
 
   if [ "${need_upgrade}" = 1 ]; then
-    sudo add-apt-repository -y ppa:git-core/ppa
-    sudo apt update -qq && sudo apt install -qq -y git
+    add-apt-repository -y ppa:git-core/ppa
+    apt update -qq && apt install -qq -y git
   else
     echo "No need to upgrade git (current version: ${current_version})"
   fi
@@ -141,122 +133,123 @@ function install_git {
 
 
 function install_chrome {
-  echo "$(tput setaf 2)###### Install Chrome ######$(tput sgr 0)"
 
   if ! dpkg -l | awk '{print $2}' | grep -q google-chrome-stable; then
     curl -fsSL -o /tmp/google-chrome-stable_current_amd64.deb \
       https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+    apt install -qq -y gdebi-core && gdebi -n /tmp/google-chrome-stable_current_amd64.deb
   fi
 }
 
 
 function install_docker {
-  echo "$(tput setaf 2)###### Install Docker ######$(tput sgr 0)"
 
   # ====== Docker ======
   if ! command -v docker &>/dev/null || [ "$1" = "-f" ]; then
     # https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community
-    sudo apt install -qq -y \
+    apt install -qq -y \
       apt-transport-https \
       ca-certificates \
       curl \
       gnupg-agent \
       software-properties-common
 
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 
-    sudo add-apt-repository -y \
+    add-apt-repository -y \
        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
        $(lsb_release -cs) \
        stable"
 
-    sudo apt update -qq && sudo apt install -qq -y docker-ce docker-ce-cli containerd.io
+    apt update -qq && apt install -qq -y docker-ce docker-ce-cli containerd.io
   fi
 
   # ====== Docker-compose ======
   if ! command -v docker-compose &>/dev/null || [ "$1" = "-f" ]; then
-    sudo curl -fsSL "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" \
+    curl -fsSL "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" \
       -o /usr/local/bin/docker-compose
-    sudo chmod +x /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
   fi
 
   # ====== Completion ======
   docker_compose_completion=/etc/bash_completion.d/docker-compose
   if [ ! -f "${docker_compose_completion}" ]; then
-    sudo curl -fsSL https://raw.githubusercontent.com/docker/compose/1.24.1/contrib/completion/bash/docker-compose \
+    curl -fsSL https://raw.githubusercontent.com/docker/compose/1.24.1/contrib/completion/bash/docker-compose \
       -o ${docker_compose_completion}
   fi
 }
-
 
 function install_dropbox {
   echo "$(tput setaf 2)###### Install Dropbox ######$(tput sgr 0)"
 
   if ! command -v dropbox &>/dev/null; then
-    sudo apt install -qq -y gdebi python-gpg
-    # sudo apt install python-gpgme   # for Ubuntu16
+    apt install -qq -y gdebi python-gpg
+    # apt install python-gpgme   # for Ubuntu16
     wget -qO /tmp/dropbox_2019.02.14_amd64.deb https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
-    sudo gdebi -n /tmp/dropbox_2019.02.14_amd64.deb
+    gdebi -n /tmp/dropbox_2019.02.14_amd64.deb
 
     # https://askubuntu.com/a/148177/594426
-    # sudo echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
+    # echo fs.inotify.max_user_watches=100000 | tee -a /etc/sysctl.conf; sysctl -p
 
     # Remove icon from Unity menu
-    sudo mv /usr/share/applications/dropbox.desktop /usr/share/applications/dropbox.desktop.bak &>/dev/null
+    mv /usr/share/applications/dropbox.desktop /usr/share/applications/dropbox.desktop.bak &>/dev/null
   fi
 }
 
-
 function install_r {
-  echo "$(tput setaf 2)###### Install R ######$(tput sgr 0)"
 
   if [ "$1" = "-f" ]; then
     # Remove Ubuntu packages for R.
-    sudo apt purge -y r-base* r-recommended r-cran-*
-    sudo apt autoremove -y
+    apt purge -y r-base* r-recommended r-cran-*
+    apt autoremove -y
 
     # Remove old site packages.
-    sudo rm -rf /usr/local/lib/R/site-library/*
+    rm -rf /usr/local/lib/R/site-library/*
   fi
 
   if ! dpkg -l | awk '{print $2}' | grep -q '^r-base' ; then
     # Install new version of R (3.6) for Ubuntu 18.04.
-    sudo add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -sc)-cran35/"
-    sudo add-apt-repository -y ppa:marutter/c2d4u3.5
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9
-    sudo apt update -qq
-    sudo apt install -qq -y \
+    add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -sc)-cran35/"
+    add-apt-repository -y ppa:marutter/c2d4u3.5
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9
+    apt update -qq
+    apt install -qq -y \
       build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev curl libssh2-1-dev libxml2-dev libxslt-dev
-    sudo apt install -qq -y \
+    apt install -qq -y \
       r-base \
       r-base-core \
       r-recommended \
       r-cran-rjava \
       r-cran-devtools
+
+    su - -c "R -e \"install.packages('renv', repos = 'http://cran.rstudio.com/')\""
   fi
 }
 
 
 function install_rstudio {
-  echo "$(tput setaf 2)###### Install RStudio ######$(tput sgr 0)"
 
   local VERSION_REQUIRED="1.2.1335"
+  local UBUNTU_CODENAME
+
+  UBUNTU_CODENAME="$(grep -Po '(?<=CODENAME\=).+' </etc/lsb-release)"
   if ! command -v rstudio &>/dev/null; then
     curl -fsSL -o /tmp/rstudio-${VERSION_REQUIRED}-amd64.deb \
-      https://download1.rstudio.org/desktop/bionic/amd64/rstudio-${VERSION_REQUIRED}-amd64.deb
-    sudo apt install -qq -y gdebi-core && sudo gdebi -n /tmp/rstudio-${VERSION_REQUIRED}-amd64.deb
+      "https://download1.rstudio.org/desktop/${UBUNTU_CODENAME}/amd64/rstudio-${VERSION_REQUIRED}-amd64.deb"
+    apt install -qq -y gdebi-core && gdebi -n /tmp/rstudio-${VERSION_REQUIRED}-amd64.deb
   fi
 }
 
 
 function install_pyenv {
-  echo "$(tput setaf 2)###### Install Pyenv ######$(tput sgr 0)"
+  echo "$(tput setaf 2)###### Install Python ######$(tput sgr 0)"
 
-  if [ -z "$PYENV_ROOT" ]; then
-    PYENV_ROOT="${HOME}/.pyenv"
-  fi
+  apt install -qq -y --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+  rm -rf /pyenv
+  mkdir -p /pyenv
+  chmod 755 /pyenv >/dev/null 2>&1
 
   colorize() {
     if [ -t 1 ]; then printf "\e[%sm%s\e[m" "$1" "$2"
@@ -264,57 +257,45 @@ function install_pyenv {
     fi
   }
 
-  # Checks for `.pyenv` file, and suggests to remove it for installing
-  if [ -d "${PYENV_ROOT}" ]; then
-    { echo
-      colorize 1 "INFO"
-      echo ": Pyenv is already installed. Can not proceed with installation. Kindly remove the '${PYENV_ROOT}' directory first."
-      echo
-    } >&2
-    return
-  fi
-  curl -fsSL https://pyenv.run | bash
+  curl -fsSL https://pyenv.run | PYENV_ROOT="/pyenv/.pyenv" bash
 }
 
 
 function install_diff_so_fancy {
-  echo "$(tput setaf 2)###### Install diff-so-fancy ######$(tput sgr 0)"
 
   diff_so_fancy=/usr/local/bin/diff-so-fancy
   if [ ! -x "${diff_so_fancy}" ]; then
-    sudo curl -fsSL https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy \
+    curl -fsSL https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy \
       -o $diff_so_fancy &&
-    sudo chmod +x $diff_so_fancy
+    chmod +x $diff_so_fancy
   fi
 }
 
 
 function install_dbeaver {
-  echo "$(tput setaf 2)###### Install DBeaver ######$(tput sgr 0)"
 
   if [ ! "$(dpkg -l dbeaver-ce 2>/dev/null)" ]; then
-    wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
+    wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | apt-key add -
     if [ ! -f /etc/apt/sources.list.d/dbeaver.list ]; then
-      echo "deb https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt/sources.list.d/dbeaver.list
+      echo "deb https://dbeaver.io/debs/dbeaver-ce /" | tee /etc/apt/sources.list.d/dbeaver.list
     fi
 
-    sudo apt update -qq && sudo apt install -qq -y dbeaver-ce
+    apt update -qq && apt install -qq -y dbeaver-ce
   fi
 }
 
 
 function upgrade_tmux {
-  echo "$(tput setaf 2)###### Upgrade tmux ######$(tput sgr 0)"
 
   # https://bogdanvlviv.com/posts/tmux/how-to-install-the-latest-tmux-on-ubuntu-16_04.html
-  local VERSION_REQUIRED="2.9"
+  local VERSION_REQUIRED="3.1"
 
   local current_version="$(tmux -V | cut -d' ' -f2-)"
   local need_upgrade="$(echo "${current_version} ${VERSION_REQUIRED}" | awk '{print ($1 < $2)}')"  # SC2072
 
-  if [ "${need_upgrade}" = 1 ]; then
+  if ! command -v tmux &>/dev/null || [ "${need_upgrade}" = 1 ]; then
     echo "tmux need to be upgraded to v2.9 (current tmux version: ${current_version})"
-    sudo apt install -qq -y \
+    apt install -qq -y \
       curl \
       automake \
       build-essential \
@@ -330,7 +311,7 @@ function upgrade_tmux {
     tar -xf "/tmp/tmux-${VERSION_REQUIRED}.tar.gz" -C /tmp
     cd "/tmp/tmux-${VERSION_REQUIRED}" || return
     ./configure && make
-    sudo make install
+    make install
     cd - || return
     rm -rf /tmp/tmux  # Cleanup
   else
@@ -340,7 +321,6 @@ function upgrade_tmux {
 
 
 function install_fd {
-  echo "$(tput setaf 2)###### Install fd ######$(tput sgr 0)"
 
   local VERSION_REQUIRED="7.4.0"
   local os_version_id="$(. /etc/os-release; printf "%s\n" "$VERSION_ID")"
@@ -351,11 +331,11 @@ function install_fd {
 
   if ! command -v fd &>/dev/null; then
     if version_gte "$os_version_id" "19.04"; then
-      sudo apt install fd-find
+      apt install -qq -y fd-find
     else
       curl -fsSLo "/tmp/fd_${VERSION_REQUIRED}_amd64.deb" \
         "https://github.com/sharkdp/fd/releases/download/v${VERSION_REQUIRED}/fd_${VERSION_REQUIRED}_amd64.deb" \
-        && sudo dpkg -i "/tmp/fd_${VERSION_REQUIRED}_amd64.deb"
+        && dpkg -i "/tmp/fd_${VERSION_REQUIRED}_amd64.deb"
     fi
   fi
 }
@@ -363,18 +343,20 @@ function install_fd {
 
 function install_vscode {
   if ! [ -x /usr/bin/code ] && ! [ -x /usr/local/bin/code ]; then
-    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-    sudo apt update && sudo apt -y install code
+    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
+    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    apt update -qq && apt -y install code
+
+    sed -i '#https://packages.microsoft.com/repos/vscode#d' /etc/apt/sources.list 2>/dev/null
   fi
 }
 
 
 function install_sublimetext {
   if ! command -v subl &>/dev/null; then
-    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-    sudo apt update && sudo apt install -y sublime-text
+    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+    echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+    apt update -qq && apt install -qq -y sublime-text
   fi
 }
 
@@ -397,46 +379,74 @@ function install_fonts {
   cd "$old_dir"
 }
 
+function install_ripgrep {
+  # [[ $UID == 0 ]] || { echo "run as sudo to install"; exit 1; }
+  if ! command -v rg &>/dev/null; then
+    apt install -qq -y jq curl
+    REPO="https://github.com/BurntSushi/ripgrep/releases/download/"
+    RG_LATEST=$(curl -sSL "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | jq --raw-output .tag_name)
+    RELEASE="${RG_LATEST}/ripgrep-${RG_LATEST}-x86_64-unknown-linux-musl.tar.gz"
 
-# Step 0 - Detect OS Version
-validate_os ubuntu
+    TMPDIR=$(mktemp -d)
 
-# Step 1 - Execute the installation
-install_apt_apps
-install_chrome
-install_dbeaver
-install_diff_so_fancy
-install_docker $FORCE
-# install_dropbox
-install_fd
-install_git
-install_neovim $FORCE
-install_pyenv
-install_r $FORCE
-install_rstudio
-install_sublimetext
-install_tldr
-install_vscode
-upgrade_tmux
+    curl -fsSL ${REPO}${RELEASE} | tar zxf - --strip-component=1 -C $TMPDIR
+    mv ${TMPDIR}/rg /usr/local/bin/
+    mkdir -p /usr/local/share/man/man1/
+    mv ${TMPDIR}/doc/rg.1 /usr/local/share/man/man1/
+    mkdir -p /usr/share/bash-completion/completions/
+    mv ${TMPDIR}/complete/rg.bash /usr/share/bash-completion/completions/rg
+    mandb
 
-unset \
-  install_apt_apps \
-  install_chrome \
-  install_dbeaver \
-  install_diff_so_fancy \
-  install_docker \
-  # install_dropbox \
-  install_fd \
-  install_git \
-  install_neovim \
-  install_pyenv \
-  install_r \
-  install_rstudio \
-  install_sublimetext \
-  install_tldr \
-  install_vscode \
-  upgrade_tmux \
-  validate_os ubuntu \
-  &>/dev/null
+    # Cleanup
+    rm -rf ${TMPDIR}
+  fi
+}
 
+
+function main {
+  # Step 0 - Detect OS Version
+  validate_os ubuntu
+
+  # Step 1 - Execute the installation
+  install_apt_apps
+  install_chrome
+  install_dbeaver
+  install_diff_so_fancy
+  install_docker $FORCE
+  # install_dropbox
+  install_fd
+  install_git
+  install_neovim $FORCE
+  install_pyenv
+  install_r $FORCE
+  install_ripgrep
+  install_rstudio
+  install_sublimetext
+  install_tldr
+  install_vscode
+  upgrade_tmux
+
+  unset \
+    install_apt_apps \
+    install_chrome \
+    install_dbeaver \
+    install_diff_so_fancy \
+    install_docker \
+    `# install_dropbox` \
+    install_fd \
+    install_git \
+    install_neovim \
+    install_pyenv \
+    install_r \
+    install_ripgrep \
+    install_rstudio \
+    install_sublimetext \
+    install_tldr \
+    install_vscode \
+    upgrade_tmux \
+    validate_os ubuntu \
+    &>/dev/null
+}
+
+sudo bash main
 echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"
