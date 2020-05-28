@@ -622,8 +622,9 @@ if s:has_plugin('lightline-bufferline')
         \ }
 
   let g:lightline#bufferline#show_number = 1
-  let g:lightline#bufferline#unnamed      = '[No Name]'
+  let g:lightline#bufferline#unnamed     = '[No Name]'
   let g:lightline#bufferline#filename_modifier = ':t'  " Only show filename
+  let g:lightline#bufferline#enable_devicons = 1
 
   nmap <Leader>1 <Plug>lightline#bufferline#go(1)
   nmap <Leader>2 <Plug>lightline#bufferline#go(2)
