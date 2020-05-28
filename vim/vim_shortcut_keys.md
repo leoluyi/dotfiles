@@ -692,6 +692,13 @@ K            -   Show Documentation/Pydoc (shows a popup with assignments)
 <leader>n    -   Usages (shows all the usages of a name)
 ```
 
+[vim-move](https://github.com/matze/vim-move)
+
+```
+<z-j>   Move current line/selection down
+<z-k>   Move current line/selection up
+```
+
 [Nvim-R](https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt)
 
 ```
