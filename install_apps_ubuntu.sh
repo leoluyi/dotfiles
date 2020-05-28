@@ -448,5 +448,5 @@ function main {
     &>/dev/null
 }
 
-sudo bash main
+main
 echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"
