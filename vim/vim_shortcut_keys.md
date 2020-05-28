@@ -784,6 +784,16 @@ gx       -   Open URL under cursor with browser
 (Visual) g<C-a>  -   Add [count] to the number or alphabetic character in
                      the highlighted text.
 
+# how-to-generate-a-number-sequence
+# https://stackoverflow.com/a/48408001
+-> <C-v>     -  blockwise select the first character.
+-> (Use j to go down N lines)
+-> I         -  Insert 0. <Esc> to exit insert mode.
+-> gv        -  to re-select the previously selected area.
+-> g <C-a>  -  to create a sequence
+-> (Use 2g <C-a> to use a step count of 2.)
+
+
   <C-g>  -   Show line info
 g <C-g>  -   Show statistics (word count, ...)
 1 <C-g>  -   View the full path of the file
