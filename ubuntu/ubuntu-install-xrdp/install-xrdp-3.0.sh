@@ -319,6 +319,17 @@ echo
 
 }
 
+#---------------------------------------------------#
+# Function 11 - xrdp config ini
+#---------------------------------------------------#
+
+function xrdp_config() {
+  list="rdpdr drdynvc cliprdr rail tcutils"
+  for item in $list; do
+    sudo sed -i.bak "s/^${item}"'=.*/'"${item}=false/g" /etc/xrdp/xrdp.ini
+  done
+}
+
 #--------------------------------------------------------------------------#
 # -----------------------END Function Section             -----------------#
 #--------------------------------------------------------------------------#
@@ -391,11 +402,10 @@ install_tweak
 allow_console
 create_polkit
 fix_theme
+xrdp_config
 
-
-if [ "$fixSound" = "yes" ];
-then
-enable_sound
+if [ "$fixSound" = "yes" ]; then
+  enable_sound
 fi
 
 #---------------------------------------------------#
