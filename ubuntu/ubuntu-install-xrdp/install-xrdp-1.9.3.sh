@@ -64,7 +64,7 @@ fi
 echo
 /bin/echo -e "\e[1;33m  Installing Git....Proceeding  \e[0m"
 echo
-sudo apt-get -y install git
+sudo apt-get update -y && sudo apt-get -qq -y install git
 echo
 
 CWD=$(pwd)

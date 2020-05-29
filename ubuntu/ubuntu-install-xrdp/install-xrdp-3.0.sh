@@ -61,7 +61,7 @@ echo
 /bin/echo -e "\e[1;33m   !   Installing PreReqs packages..Proceeding.  ! \e[0m"
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 
-sudo apt-get -y install ubuntu-desktop
+sudo apt update -qq -y && sudo apt-get -y install ubuntu-desktop
 
 echo
 /bin/echo -e "\e[1;33m   |-| Detecting xserver-xorg-core package installed  \e[0m"
