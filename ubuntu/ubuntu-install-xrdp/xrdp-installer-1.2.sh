@@ -79,8 +79,10 @@ echo
 /bin/echo -e "\e[1;33m   !   Installing XRDP Packages...Proceeding...  !\e[0m"
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 echo
-if [[ $HWE = "yes" ]] && [[ "$version" = *"Ubuntu 18.04"* ]];
-then
+
+sudo apt update -qq -y && sudo apt install -y ubuntu-desktop
+
+if [[ $HWE = "yes" ]] && [[ "$version" = *"Ubuntu 18.04"* ]]; then
 	sudo apt-get install xrdp -y
 	sudo apt-get install xorgxrdp-hwe-18.04
 else
@@ -103,10 +105,13 @@ Release=$(lsb_release -sr)
 /bin/echo -e "\e[1;33m   !   Installing PreReqs packages..Proceeding.  ! \e[0m"
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 echo
+
+sudo apt update -qq -y
+
 sudo apt-get -y install libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm fuse pkg-config git intltool checkinstall
 echo
-if [ $HWE = "yes" ];
-then
+
+if [ $HWE = "yes" ]; then
 	# - xorg-hwe-* to be installed
 	/bin/echo -e "\e[1;32m       |-| xorg package version: xserver-xorg-core-hwe-$Release \e[0m"
 	sudo apt-get install -y xserver-xorg-dev-hwe-$Release xserver-xorg-core-hwe-$Release	
@@ -242,6 +247,8 @@ echo
 /bin/echo -e "\e[1;33m   !   Installing Gnome Tweak...Proceeding...    !\e[0m"
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 echo
+
+sudo apt update -qq -y
 sudo apt-get install gnome-tweak-tool -y
 }
 
