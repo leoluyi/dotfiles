@@ -396,7 +396,7 @@ echo
 echo $tmp_dir
 #cd ~/Downloads
 cd $tmp_dir
-wget http://www.c-nergy.be/downloads/griffon_logo_xrdp.bmp
+wget http://www.c-nergy.be/downloads/griffon_logo_xrdp.bmp >/dev/null 2>&1
 
 #Check if script has run once...
 if [ -f /etc/xrdp/xrdp.ini.griffon ]
@@ -412,12 +412,14 @@ sudo cp /etc/xrdp/xrdp.ini /etc/xrdp/xrdp.ini.griffon
 if [ -d "/usr/local/share/xrdp" ] 
 then
     echo "Directory /path/to/dir exists." 
-	sudo cp griffon_logo_xrdp.bmp /usr/local/share/xrdp
+    sudo cp -f griffon_logo_xrdp.bmp /usr/local/share/xrdp
     sudo sed -i 's/ls_logo_filename=/ls_logo_filename=\/usr\/local\/share\/xrdp\/griffon_logo_xrdp.bmp/g' /etc/xrdp/xrdp.ini
 else
-    sudo cp griffon_logo_xrdp.bmp /usr/share/xrdp
-	sudo sed -i 's/ls_logo_filename=/ls_logo_filename=\/usr\/share\/xrdp\/griffon_logo_xrdp.bmp/g' /etc/xrdp/xrdp.ini
+    sudo cp -f griffon_logo_xrdp.bmp /usr/share/xrdp
+    sudo sed -i 's/ls_logo_filename=/ls_logo_filename=\/usr\/share\/xrdp\/griffon_logo_xrdp.bmp/g' /etc/xrdp/xrdp.ini
 fi
+
+rm -f griffon_logo_xrdp.bmp
 
 #4F194C
 sudo sed -i 's/blue=009cb5/blue=dedede/' /etc/xrdp/xrdp.ini
