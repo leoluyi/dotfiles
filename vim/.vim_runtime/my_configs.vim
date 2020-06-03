@@ -642,7 +642,7 @@ if has('gui_running')
   set guioptions-=e
 endif
 
-" lightline-ale ---------------------------------------------------------
+" lightline-ale --------------------------------------------------------
 " let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_checking = "◌"
 " let g:lightline#ale#indicator_warnings = "\uf071"
@@ -736,10 +736,12 @@ highlight QuickScopeSecondary guifg='#EF5F70' gui=underline ctermfg=81 cterm=und
 
 let g:qs_max_chars=150
 
+" vim-yankstack --------------------------------------------------------
+let g:yankstack_map_keys = 0
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 
 if empty(glob('~/.vim_runtime/autoload/plug.vim'))
@@ -762,6 +764,7 @@ call plug#begin('~/.vim_runtime/plugged')
 " Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it.
 " Plug 'tpope/vim-commentary'       " comment-out by gc
 " Plug 'tpope/vim-fugitive'         " A Git wrapper so awesome
+" Plug 'maxbrunsfeld/vim-yankstack'  " A lightweight implementation of emacs's kill-ring
 
 " nvim/vim8/vim7 compatible:
 Plug 'airblade/vim-gitgutter'  " Show git changes to files in gutter
