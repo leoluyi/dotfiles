@@ -686,6 +686,7 @@ let R_min_editor_width = 18  " Disable underscore mapping
 let R_assign = 0
 
 " auto-pairs -----------------------------------------------------------
+let b:autopairs_enabled = 0  " Disable by default
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 let g:AutoPairsShortcutFastWrap = '<M-e>'
@@ -742,6 +743,12 @@ let g:qs_max_chars=150
 " vim-yankstack --------------------------------------------------------
 let g:yankstack_map_keys = 0
 
+" vim-textobj-quote ----------------------------------------------------
+" You can replace straight quotes in existing text with curly quotes, and visa versa
+unmap <leader>q
+map <silent> <leader>qc <Plug>ReplaceWithCurly
+map <silent> <leader>qs <Plug>ReplaceWithStraight
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -790,16 +797,17 @@ Plug 'majutsushi/tagbar'  " Show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " Move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " Make linter in statusline awesome (pip install --user flake8)
 Plug 'mengelbrecht/lightline-bufferline'  " Display the list of buffers in the lightline vim plugin
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'  " The fancy start screen for Vim
 Plug 'pangloss/vim-javascript'  " Vastly improved Javascript indentation and syntax support in Vim
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+Plug 'reedes/vim-textobj-quote'  " Use ‘curly’ quote characters in Vim
 Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
 Plug 'ryanoasis/vim-devicons'  " Adds file type icons to Vim plugins
 Plug 'scrooloose/nerdtree'  " File list
 Plug 'tacahiroy/ctrlp-funky'  " Function navigator for ctrlp.vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
-Plug 'tweekmonster/braceless.vim'
+Plug 'tweekmonster/braceless.vim'  " Text objects, folding, and more for Python and other indented languages
 Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
 Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
 Plug 'Vimjas/vim-python-pep8-indent'  " Better indenting for python

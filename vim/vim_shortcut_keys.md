@@ -541,6 +541,9 @@ Replacement:
 <c-d>            -   switch to filename only search instead of full path
 <c-r>            -   switch to regexp mode
 <c-z>            -   mark/unmark multiple files and <c-o> to open them
+
+<c-v>            -   Open the selected file in a 'vertical' split.
+<c-s>            -   Open the selected file in a 'horizontal' split.
 ```
 
 [ack.vim](https://github.com/mileszs/ack.vim)
@@ -571,7 +574,7 @@ gc         -   comment out the selection
 gcap       -   comment out a paragraph
 ```
 
-[fzf-vim](https://github.com/junegunn/fzf.vim)
+[fzf-vim](https://github.com/junegunn/fzf.vim) - Full-text search
 
 ```
 :Files {path}    -   search for files in {current} directory
