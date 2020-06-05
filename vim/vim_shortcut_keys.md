@@ -874,6 +874,14 @@ Parentheses Text Objects
 - `<leader>pp`         - toggle paste mode
 - `:set syntax=python` - change syntax highlighting
 
+You can manually autoindent, retab or remove trailing whitespace with the following respective commands.
+
+```
+gg=G
+:retab
+:RemoveTrailingSpaces
+```
+
 ### Advanced Editing
 
 http://vim.wikia.com/wiki/Moving_around

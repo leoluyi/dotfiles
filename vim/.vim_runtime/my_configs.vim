@@ -66,6 +66,7 @@ set number relativenumber
 set colorcolumn=80                    " Display a ruler at a specific line
 set cursorline
 set fillchars+=vert:│                 " Split separator
+set listchars=tab:→\ ,eol:↲,space:·,nbsp:␣,trail:•,precedes:«,extends:»
 " set textwidth=80
 " set colorcolumn=+1  " highlight column after 'textwidth'
 " let &colorcolumn=join(range(81,999),",")  " set colorcolumn for the whole screen after 81
@@ -110,8 +111,8 @@ set noerrorbells                      " No annoying sound on errors
 " https://github.com/jeffkreeftmeijer/vim-numbertoggle
 augroup numbertoggle
   autocmd!
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set norelativenumber | endif
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set relativenumber   | endif
 augroup END
 
 """ auto source when writing to init.vm alternatively you can run :source $MYVIMRC
@@ -464,6 +465,8 @@ if s:has_plugin('vim-autoformat')
   noremap <F3> :Autoformat<CR>
 endif
 
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 1
 let g:autoformat_verbosemode=1
 let g:formatter_yapf_style = 'pep8'
 let g:formatdef_black = '"black -qS - "'

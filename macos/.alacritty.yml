@@ -706,6 +706,7 @@ key_bindings:
   - { key: J,    mods: Alt|Command, chars: "\x1bj" }
   - { key: K,    mods: Alt|Command, chars: "\x1bk" }
   - { key: L,    mods: Alt|Command, chars: "\x1bl" }
+  - { key: Space, mods: Control, chars: "\x00" }
 
 #debug:
   # Display the time it takes to redraw each frame.
