@@ -42,6 +42,7 @@ set tabstop=4                         " Show existing tab with 4 spaces width
 set softtabstop=0                     " Disable mixed tabs and spaces
 set shiftwidth=2                      " When indenting with '>', use 2 spaces width
 set expandtab                         " On pressing tab, insert 4 spaces
+set nrformats+=alpha                  " Increasing or decreasing alphabets with Ctrl-A and Ctrl-X
 
 " " yank to clipboard
 " " https://stackoverflow.com/a/3961954
