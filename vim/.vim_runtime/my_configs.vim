@@ -812,6 +812,7 @@ Plug 'tweekmonster/braceless.vim'  " Text objects, folding, and more for Python 
 Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
 Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
 Plug 'Vimjas/vim-python-pep8-indent'  " Better indenting for python
+Plug 'wincent/ferret'  " Find and Replace in Multiple Files
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'  " Show indent guide
 Plug 'zivyangll/git-blame.vim'  " See Git Blame information in the status bar for the currently selected line
