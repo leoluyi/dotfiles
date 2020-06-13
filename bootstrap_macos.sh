@@ -137,6 +137,9 @@ function install_vim_awesome {
   else
     echo "Awesome Vim is already installed."
   fi
+
+  # remove unwanted plugins
+  rm -rf ~/.vim_runtime/sources_non_forked/ack.vim/ &>/dev/null
 }
 
 
