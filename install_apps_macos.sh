@@ -68,6 +68,9 @@ function brew_install_app {
     xquartz \
     qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
     2>/dev/null;
+
+  # Set openinterninal - https://github.com/Ji4n1ng/OpenInTerminal/blob/master/Resources/README-Lite.md
+  defaults write wang.jianing.app.OpenInTerminal-Lite OIT_TerminalBundleIdentifier Alacritty &>/dev/null
 }
 
 
