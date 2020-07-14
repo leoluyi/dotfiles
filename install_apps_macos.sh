@@ -63,6 +63,8 @@ function brew_install_app {
     iterm2 \
     jupyter-notebook-viewer \
     openinterminal `# Finder Toolbar to open the current directory in Terminal, iTerm, Hyper or Alacritty. https://github.com/Ji4n1ng/OpenInTerminal` \
+    openineditor-lite \
+    openinterminal-lite \
     xquartz \
     qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
     2>/dev/null;
