@@ -138,6 +138,11 @@ command -v pyenv &>/dev/null && \
   eval "$(pyenv init -)" && \
   eval "$(pyenv virtualenv-init -)"
 
+# jenv
+command -v jenv &>/dev/null && \
+  export PATH="$HOME/.jenv/bin:$PATH" && \
+  eval "$(jenv init -)"
+
 # fzf.
 [ -f ~/.fzf.bash ] && \
   source ~/.fzf.bash && \

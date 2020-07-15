@@ -112,6 +112,7 @@ function brew_install_cli {
   highlight \
   htop-osx \
   httpie \
+  jenv \
   john-jumbo `# password crack` \
   jq \
   libpng \
