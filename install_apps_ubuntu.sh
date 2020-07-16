@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 # Check if has sudo privilege
-sudo -v || exit;
+if ! sudo -v; then
+  echo Aborted! Must have sudo privilege.;
+  exit;
+fi
 
 if [ "$1" = "--force" ] || [ "$1" = "-f" ]; then
   FORCE="-f"
@@ -112,7 +115,9 @@ function install_neovim {
 
   # Install neovim python client for ncm2
   # https://github.com/ncm2/ncm2
-  python3 -m pip install --quiet --no-cache-dir --user -U neovim pynvim jedi flake8 autopep8
+  [ -x /usr/bin/python3 ] \
+    && /usr/bin/python3 -m pip install --quiet --no-cache-dir --system -U \
+    neovim pynvim jedi flake8 autopep8
 }
 
 
