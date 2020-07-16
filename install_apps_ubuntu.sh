@@ -407,20 +407,35 @@ function install_ripgrep {
   fi
 }
 
+function install_linuxbrew {
+  # https://brew.sh/
+  # https://docs.brew.sh/Homebrew-on-Linux
+  if ! command -v rg &>/dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+    test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+    test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  fi
+
+  command -v brew &>/dev/null && \
+    brew install \
+    fzf
+}
 
 function main {
   # Step 0 - Detect OS Version
   validate_os ubuntu
 
   # Step 1 - Execute the installation
+  # install_dropbox
   install_apt_apps
   install_chrome
   install_dbeaver
   install_diff_so_fancy
   install_docker $FORCE
-  # install_dropbox
   install_fd
   install_git
+  install_linuxbrew
   install_neovim $FORCE
   install_pyenv
   install_r $FORCE
@@ -440,6 +455,7 @@ function main {
     `# install_dropbox` \
     install_fd \
     install_git \
+    install_linuxbrew \
     install_neovim \
     install_pyenv \
     install_r \
