@@ -411,10 +411,11 @@ function install_linuxbrew {
   # https://brew.sh/
   # https://docs.brew.sh/Homebrew-on-Linux
   if ! command -v rg &>/dev/null; then
+    apt update -qq && apt install -qq -y build-essential curl file git
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-    test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-    test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+    test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   fi
 
   command -v brew &>/dev/null && \
