@@ -61,7 +61,7 @@ echo
 /bin/echo -e "\e[1;33m   !   Installing PreReqs packages..Proceeding.  ! \e[0m"
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 
-sudo apt update -qq -y && sudo apt-get -y install ubuntu-desktop
+sudo -E apt update -qq -y && sudo -E apt-get -y install ubuntu-desktop
 
 echo
 /bin/echo -e "\e[1;33m   |-| Detecting xserver-xorg-core package installed  \e[0m"
@@ -73,12 +73,12 @@ then
 # - hwe 18.04 is installed
 /bin/echo -e "\e[1;32m       |-| xorg package version: xserver-xorg-core-hwe-18.04 \e[0m"
 echo
-sudo apt-get -y install libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev-hwe-18.04 fuse pkg-config git intltool xserver-xorg-core-hwe-18.04
+sudo -E apt-get -y install libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev-hwe-18.04 fuse pkg-config git intltool xserver-xorg-core-hwe-18.04
 else
 # - hwe 18.04 not installed
 /bin/echo -e "\e[1;32m       |-| xorg package version: xserver-xorg-core \e[0m"
 echo
-sudo apt-get -y install libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev fuse pkg-config git intltool xserver-xorg-core
+sudo -E apt-get -y install libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev fuse pkg-config git intltool xserver-xorg-core
 fi
 
 }
@@ -129,9 +129,9 @@ echo
 echo
 
 cd ${tmp_dir}/xrdp
-sudo ./bootstrap
-sudo ./configure --enable-fuse --enable-jpeg --enable-rfxcodec
-sudo make
+sudo -E ./bootstrap
+sudo -E ./configure --enable-fuse --enable-jpeg --enable-rfxcodec
+sudo -E make
 
 #-- check if no error during compilation
 
@@ -148,7 +148,7 @@ echo
 /bin/echo -e "\e[1;31m   !---------------------------------------------!\e[0m"
 exit
 fi
-sudo make install
+sudo -E make install
 
 echo
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
@@ -157,9 +157,9 @@ echo
 echo
 
 cd ${tmp_dir}/xorgxrdp
-sudo ./bootstrap
-sudo ./configure
-sudo make
+sudo -E ./bootstrap
+sudo -E ./configure
+sudo -E make
 
 # check if no error during compilation
 if [ $? -eq 0 ]
@@ -175,7 +175,7 @@ echo
 /bin/echo -e "\e[1;31m   !---------------------------------------------!\e[0m"
 exit
 fi
-sudo make install
+sudo -E make install
 
 }
 
@@ -190,10 +190,10 @@ echo
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 echo
 
-sudo systemctl daemon-reload
-sudo systemctl enable xrdp.service
-sudo systemctl enable xrdp-sesman.service
-sudo systemctl start xrdp
+sudo -E systemctl daemon-reload
+sudo -E systemctl enable xrdp.service
+sudo -E systemctl enable xrdp-sesman.service
+sudo -E systemctl start xrdp
 
 }
 
@@ -208,7 +208,7 @@ echo
 /bin/echo -e "\e[1;33m   !   Installing Gnome Tweak...Proceeding...    ! \e[0m"
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 echo
-sudo apt-get install gnome-tweak-tool -y
+sudo -E apt-get install gnome-tweak-tool -y
 }
 
 #--------------------------------------------------------------------#
@@ -222,7 +222,7 @@ echo
 /bin/echo -e "\e[1;33m   !   Granting Console Access...Proceeding...   ! \e[0m"
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 echo
-sudo sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config
+sudo -E sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config
 }
 
 #---------------------------------------------------#
@@ -237,7 +237,7 @@ echo
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 echo
 
-sudo bash -c "cat >/etc/polkit-1/localauthority/50-local.d/45-allow.colord.pkla" <<EOF
+sudo -E bash -c "cat >/etc/polkit-1/localauthority/50-local.d/45-allow.colord.pkla" <<EOF
 [Allow Colord all Users]
 Identity=unix-user:*
 Action=org.freedesktop.color-manager.create-device;org.freedesktop.color-manager.create-profile;org.freedesktop.color-manager.delete-device;org.freedesktop.color-manager.delete-profile;org.freedesktop.color-manager.modify-device;org.freedesktop.color-manager.modify-profile
@@ -266,7 +266,7 @@ echo
 /bin/echo -e "\e[1;33m   !   Fix Theme and extensions...Proceeding...  !\e[0m"
 /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
 echo
-sudo sed -i.bak "4 a #Improved Look n Feel Method\ncat <<EOF > ~/.xsessionrc\nexport GNOME_SHELL_SESSION_MODE=ubuntu\nexport XDG_CURRENT_DESKTOP=ubuntu:GNOME\nexport XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg\nEOF\n" /etc/xrdp/startwm.sh
+sudo -E sed -i.bak "4 a #Improved Look n Feel Method\ncat <<EOF > ~/.xsessionrc\nexport GNOME_SHELL_SESSION_MODE=ubuntu\nexport XDG_CURRENT_DESKTOP=ubuntu:GNOME\nexport XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg\nEOF\n" /etc/xrdp/startwm.sh
 echo
 }
 
@@ -283,38 +283,38 @@ echo
 echo
 
 # Step 1 - Enable Source Code Repository
-sudo apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename' main restricted'
-sudo apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename' restricted universe main multiverse'
-sudo apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename'-updates restricted universe main multiverse'
-sudo apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename'-backports main restricted universe multiverse'
-sudo apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename'-security main restricted universe main multiverse'
-sudo apt-get update
+sudo -E apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename' main restricted'
+sudo -E apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename' restricted universe main multiverse'
+sudo -E apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename'-updates restricted universe main multiverse'
+sudo -E apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename'-backports main restricted universe multiverse'
+sudo -E apt-add-repository -s 'deb http://be.archive.ubuntu.com/ubuntu/ '$codename'-security main restricted universe main multiverse'
+sudo -E apt-get update
 
 # Step 2 - Install Some PreReqs
-sudo apt-get install git libpulse-dev autoconf m4 intltool build-essential dpkg-dev -y
-sudo apt build-dep pulseaudio -y
+sudo -E apt-get install git libpulse-dev autoconf m4 intltool build-essential dpkg-dev -y
+sudo -E apt build-dep pulseaudio -y
 
 # Step 3 -  Download pulseaudio source in tmp_dir directory - Do not forget to enable source repositories
 tmp_dir=$(mktemp -d)
 cd ${tmp_dir}
-sudo apt source pulseaudio
+sudo -E apt source pulseaudio
 
 # Step 4 - Compile
 pulsever=$(pulseaudio --version | awk '{print $2}')
 cd "${tmp_dir}/pulseaudio-${pulsever}"
-sudo ./configure
+sudo -E ./configure
 
 # step 5 - Create xrdp sound modules
-sudo git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git
+sudo -E git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git
 cd pulseaudio-module-xrdp
-sudo ./bootstrap
-sudo ./configure PULSE_DIR="${tmp_dir}/pulseaudio-${pulsever}"
-sudo make
+sudo -E ./bootstrap
+sudo -E ./configure PULSE_DIR="${tmp_dir}/pulseaudio-${pulsever}"
+sudo -E make
 
 #Step 6 copy files to correct location (as defined in /etc/xrdp/pulse/default.pa)
 cd "${tmp_dir}/pulseaudio-${pulsever}/pulseaudio-module-xrdp/src/.libs"
-sudo install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so
-sudo install -t "/usr/lib/pulse-${pulsever}/modules" -D -m 644 *.so
+sudo -E install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so
+sudo -E install -t "/usr/lib/pulse-${pulsever}/modules" -D -m 644 *.so
 echo
 
 }
@@ -326,7 +326,7 @@ echo
 function xrdp_config() {
   list="rdpdr drdynvc cliprdr rail tcutils"
   for item in $list; do
-    sudo sed -i.bak "s/^${item}"'=.*/'"${item}=false/g" /etc/xrdp/xrdp.ini
+    sudo -E sed -i.bak "s/^${item}"'=.*/'"${item}=false/g" /etc/xrdp/xrdp.ini
   done
 }
 
