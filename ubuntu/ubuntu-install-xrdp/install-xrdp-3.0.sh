@@ -330,6 +330,15 @@ function xrdp_config() {
   done
 }
 
+function install_input_methods() {
+  echo
+  /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
+  /bin/echo -e "\e[1;33m   !   Installing input methods (ibus-chewing)...             !\e[0m"
+  /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
+  echo
+  sudo -E apt install -y ibus ibus-gtk ibus-gtk3 ibus-qt4 ibus-chewing
+}
+
 #--------------------------------------------------------------------------#
 # -----------------------END Function Section             -----------------#
 #--------------------------------------------------------------------------#
@@ -403,6 +412,7 @@ allow_console
 create_polkit
 fix_theme
 xrdp_config
+install_input_methods
 
 if [ "$fixSound" = "yes" ]; then
   enable_sound
