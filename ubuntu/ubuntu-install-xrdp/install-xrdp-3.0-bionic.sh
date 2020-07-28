@@ -336,7 +336,12 @@ function install_input_methods() {
   /bin/echo -e "\e[1;33m   !   Installing input methods (ibus-chewing)...             !\e[0m"
   /bin/echo -e "\e[1;33m   !---------------------------------------------!\e[0m"
   echo
-  sudo -E apt install -y ibus ibus-gtk ibus-gtk3 ibus-qt4 ibus-chewing
+  sudo -E apt install -qq -y ibus ibus-gtk ibus-gtk3 ibus-qt4 ibus-chewing
+  sudo -E apt install -qq -y language-pack-zh-hant language-pack-gnome-zh-hant
+}
+
+function set_timezone() {
+  sudo timedatectl set-timezone Asia/Taipei
 }
 
 #--------------------------------------------------------------------------#
