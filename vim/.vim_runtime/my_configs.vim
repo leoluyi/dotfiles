@@ -830,6 +830,7 @@ endif
 
 " Theme
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'rakr/vim-colors-rakr'
