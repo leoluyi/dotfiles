@@ -167,12 +167,13 @@ function install_neovim {
 function install_tmux() {
   echo "$(tput setaf 2)###### Install tmux ######$(tput sgr 0)"
 
-  # DOWNLOAD SOURCES FOR LIBEVENT AND MAKE AND INSTALL
+  TMUX_VERSION=2.9
   LIBEVENT_VERSION=2.0.22
   old_dir="$(pwd)"
 
   yum install -y gcc kernel-devel make ncurses-devel
 
+  # DOWNLOAD SOURCES FOR LIBEVENT AND MAKE AND INSTALL
   curl -fsSLo "/tmp/libevent-${LIBEVENT_VERSION}-stable.tar.gz" "https://github.com/libevent/libevent/releases/download/release-${LIBEVENT_VERSION}-stable/libevent-${LIBEVENT_VERSION}-stable.tar.gz"
   tar -xf libevent-${LIBEVENT_VERSION}-stable.tar.gz -C /tmp
 
@@ -183,7 +184,6 @@ function install_tmux() {
   fi
 
   # DOWNLOAD SOURCES FOR TMUX AND MAKE AND INSTALL
-  TMUX_VERSION=2.9
   curl -fsSLo "/tmp/tmux-${TMUX_VERSION}.tar.gz" \
     "https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz"
   tar -xf "/tmp/tmux-${TMUX_VERSION}.tar.gz" -C /tmp
