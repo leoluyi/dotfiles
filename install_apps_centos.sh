@@ -93,20 +93,22 @@ function make_yum_repo {
 }
 
 
-function install_python37 {
+function install_python3 {
   echo "$(tput setaf 2)###### Install Python 3.7 ######$(tput sgr 0)"
 
   PYTHON_VERSION=3.7.8
   old_dir="$(pwd)"
 
   yum install -y make gcc gcc-c++ openssl-devel bzip2-devel zlib-devel
-  curl -fsSLo /tmp/Python-${PYTHON_VERSION}.tgz https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz
-  cd /tmp \
-    && tar xzf Python-${PYTHON_VERSION}.tgz \
+  curl -fsSLo /tmp/Python-${PYTHON_VERSION}.tgz https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
+    && tar xxzf Python-${PYTHON_VERSION}.tgz -C /tmp \
     && cd /tmp/Python-${PYTHON_VERSION} \
-    && ./configure ––enable–optimizations \
-    && make \
-    && make install
+    && ./configure --enable-optimizations \
+    && make clean && make && make install
+
+  [ -x /usr/local/bin/python3 ] \
+    && /usr/local/bin/python3 -m pip install --system --
+    neovim pynvim jedi flake8 autopep8
 
   cd "${old_dir}"
 }
@@ -124,13 +126,14 @@ function install_vim {
     luajit luajit-devel \
     ncurses-devel \
     perl perl-devel \
-    perl-ExtUtils-CBuilder
+    perl-ExtUtils-CBuilder \
     perl-ExtUtils-Embed \
     perl-ExtUtils-ParseXS \
     perl-ExtUtils-XSpp \
     python python-devel \
     ruby ruby-devel \
-    tcl-devel
+    tcl-devel \
+    2>/dev/null
 
   git clone https://github.com/vim/vim.git /tmp/vim \
     && cd /tmp/vim \
@@ -140,8 +143,7 @@ function install_vim {
       --enable-pythoninterp \
       --enable-perlinterp \
       --enable-luainterp \
-    && make \
-    && make install
+    && make clean && make && make install
 
   cd "${old_dir}"
 }
