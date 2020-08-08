@@ -56,4 +56,5 @@ alias ducks='du -cksh -- * | sort -rh | head'
 
 # Alacritty theme
 (command -v alacritty-colorscheme &>/dev/null) \
-  && alias alacritty-toggle='alacritty-colorscheme -c $HOME/.alacritty.yml -t PaperColor.yaml gruvbox.yaml'
+  && alias light='alacritty-colorscheme -c $HOME/.alacritty.yml -t PaperColor.yaml' \
+  && alias dark='alacritty-colorscheme -c $HOME/.alacritty.yml -t gruvbox.yaml'
