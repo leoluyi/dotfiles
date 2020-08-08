@@ -6,11 +6,6 @@ colors:
     background: '#1d2021'
     foreground: '#d8dee9'
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '#1b2b34'
-    cursor: '#ffffff'
-
   # Normal colors
   normal:
     black:   '#343d46'
