@@ -238,6 +238,30 @@ endfunction
 nnoremap <leader>t : call Toggle_transparent()<CR>
 
 "--------------------------
+" => Toggle colorscheme
+"--------------------------
+function! ColorToggle()
+  if &background ==? 'dark'
+    set background=light
+    let l:scheme = 'PaperColor'
+    exe "silent! colorscheme " . l:scheme
+    exe "silent! LightlineColorscheme " . l:scheme
+  else
+    set background=dark
+    let l:scheme = 'gruvbox'
+    exe "silent! colorscheme " . l:scheme
+    exe "silent! LightlineColorscheme " . l:scheme
+  endif
+endfunction
+
+command! ColorToggle call ColorToggle()
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256          " Remove this line if not necessary
+  source ~/.vimrc_background
+endif
+
+"--------------------------
 " => Fix unwanted key map
 "--------------------------
 ":unmap <C-Space>
@@ -593,22 +617,6 @@ endfun
 
 command! -nargs=1 -complete=custom,s:lightlineColorschemes LightlineColorscheme
       \ call s:setLightlineColorscheme(<q-args>)
-
-function! ColorToggle()
-  if &background ==? 'dark'
-    set background=light
-    let l:scheme = 'PaperColor'
-    exe "silent! colorscheme " . l:scheme
-    exe "silent! LightlineColorscheme " . l:scheme
-  else
-    set background=dark
-    let l:scheme = 'gruvbox'
-    exe "silent! colorscheme " . l:scheme
-    exe "silent! LightlineColorscheme " . l:scheme
-  endif
-endfunction
-
-command! ColorToggle call ColorToggle()
 
 function! LightlineGitGutter()
   if !get(g:, 'gitgutter_enabled', 0) || empty(FugitiveHead())
