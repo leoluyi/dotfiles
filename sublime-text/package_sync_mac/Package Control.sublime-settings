@@ -2,6 +2,7 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+		"Protobuf Syntax Hightlighting"
 	],
 	"installed_packages":
 	[
@@ -67,6 +68,7 @@
 		"Pretty JSON",
 		"Project Sync",
 		"ProjectManager",
+		"Protobuf Syntax Hightlighting",
 		"Python Breakpoints",
 		"PyYapf Python Formatter",
 		"R-Box",

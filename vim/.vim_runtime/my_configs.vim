@@ -813,6 +813,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/braceless.vim'  " Text objects, folding, and more for Python and other indented languages
 Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
+Plug 'uarun/vim-protobuf' " Syntax highlighting for Google's Protocol Buffers
 Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
 Plug 'Vimjas/vim-python-pep8-indent'  " Better indenting for python
 Plug 'wincent/ferret'  " Find and Replace in Multiple Files
