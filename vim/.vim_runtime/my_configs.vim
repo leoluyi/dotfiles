@@ -126,6 +126,13 @@ au! BufWritePost $MYVIMRC source %
 """ No highlight search
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 
+""" Close a buffer without closing the window?
+" https://stackoverflow.com/a/19619038/3744499
+nmap ,d :b#<bar>bd#<CR>
+
+""" Add new file in the directory of the open file
+nmap ,a :e %:h/
+
 """ Splits and tabbed files
 " Make adjusting split sizes a bit more friendly
 noremap <silent> <C-Left> :vert resize +3<CR>
@@ -393,6 +400,10 @@ let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 
+" Nerdtree config for wildignore
+set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*
+let NERDTreeRespectWildIgnore=1
+
 "Close automatically when NERDTree is the only remaining window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -402,7 +413,7 @@ if exists('g:loaded_webdevicons')
 endif
 
 " nerdtree-git-plugin --------------------------------------------------
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -747,6 +758,10 @@ let g:qs_max_chars=150
 " vim-yankstack --------------------------------------------------------
 let g:yankstack_map_keys = 0
 
+" ncm2-look.vim --------------------------------------------------------
+autocmd FileType markdown :let b:ncm2_look_enabled = 1
+let g:ncm2_look_mark = '📖'
+
 " vim-textobj-quote ----------------------------------------------------
 " You can replace straight quotes in existing text with curly quotes, and visa versa
 unmap <leader>q
@@ -845,13 +860,14 @@ if has('nvim') || has('patch-8.0.0')
   if has("python3")
     " NCM base
     Plug 'ncm2/ncm2'  " awesome autocomplete plugin
-    Plug 'roxma/nvim-yarp'  " dependency of ncm2
+    Plug 'roxma/nvim-yarp'  " required by ncm2
 
     " Autocomplete
+    " Plug 'ncm2/ncm2-tmux'
     Plug 'ncm2/ncm2-bufword'
     Plug 'ncm2/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
     Plug 'ncm2/ncm2-path'
-    " Plug 'ncm2/ncm2-tmux'
+    Plug 'filipekiss/ncm2-look.vim'  " Look.vim completion plugin
 
     " Asyncomplete
     Plug 'prabirshrestha/async.vim'
