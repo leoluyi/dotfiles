@@ -3,6 +3,8 @@
 ### key mappings
 
 - `<leader>` = `,`
+- `<C-Space>` or `<C-n>` to trigger auto completion
+- `<C-p>` to select previous auto completion
 
 ### Switch modes
 
@@ -119,9 +121,10 @@ x        -   Delete character forward (under cursor). use x do delete backwards 
 r        -   Replace single character under cursor, and remain in normal mode. Use `R` replace multiple characters
 s        -   Delete character under cursor, then switch to insert mode. Does the same thing as `x` then `i`
 
-dm       -   Delete in direction of movement m. For m, you can also use w, b, or any other variation.
-            `d3e` - delete 3 words.
-            `bdw` - back delete word.
+d<movement>  -   Delete in direction of movement.
+d3e      -   delete 3 words.
+bdw      -   delete a word backward.
+
 dd       -   Delete entire current line. `3dd` to delete 3 lines
 D / d$   -   Delete until end of line
 0D       -   Clear current line without removing the line
@@ -225,7 +228,7 @@ vtw      -   Highlight 'til next char "w"
 ```
 :pwd              -   print working directory
 <leader>cd        -   set working directory to the directory of the open buffer
-:cd %:p:h         -   set working directory to the directory of the open buffer
+                      `:cd %:p:h`
                       (`:p` Make file name a full path. `:h` Head of the file name)
 
 # See [more...](https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file)
@@ -253,8 +256,6 @@ vtw      -   Highlight 'til next char "w"
 ### BUFFERS
 
 ```
-<leader>o           -   [Bclose.vim] open/toggle bufexplorer
-
 :ls (or :buffers)   -   list / show available buffers
 :e filename         -   Edit a file in a new buffer
 
@@ -429,23 +430,24 @@ noremap th <Esc>:tabprevious<CR>
 You can also record a whole series of edits to a register, and then apply them over and over.
 
 ```
-q[k]            -  records edits into register [k] (`q` again to stop recording)
-@[k]            -  execute recorded macro
+qk              -  records edits into register "k" (`q` again to stop recording)
+@k              -  execute recorded macro
 @@              -  repeat last one
 5@@             -  repeat 5 times
 
-"[k]p           -  print macro [k] (e.g., to edit or add to .vimrc)
+"kp           -  print macro "k" (e.g., to edit or add to `.vimrc`)
 
 Advanced usage:
 
-:norm @[q]      -  Use the normal mode command to apply the macro
+:norm @k        -  Use the normal mode command to apply the macro "k"
+:%norm command  -  Apply the <command> to the whole file
 ```
 
 ### VIM FOLDING
 
 ```
 zf#j      -   creates a fold from the cursor down # lines.
-zf/string -   creates a fold from the cursor to string .
+zf/string -   creates a fold from the cursor to string.
 v{move}zf -   creates a visual select fold
 zf'a      -   creates a fold from cursor to mark a
 
@@ -530,14 +532,20 @@ Replacement:
 
 :%s/search_for_this/replace_with_this/gc -  replace in the whole file (%s), [c]onfirm each replace
 :s/search_for_this/replace_with_this/gi  -  replace in the current line only, with case [i]nsensitive
+
+:.,.+2s/                -  replace current line to the next 2 line.
+                           (you can type `2:` for quick input)
 ```
 
 ### PLUGINS
 
-[ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
+[ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim) - Full path fuzzy file, buffer, mru, tag, ... finder for Vim
 
 ```
-<c-f> / <c-b>    -   invoke CtrlP and cycle between modes (files, buffers, mru)
+<c-f> / <c-b>    -   invoke CtrlP and cycle between modes in the sequence of:
+                     files, buffers, MRU
+<leader>f        -  `:CtrlPMRU` invoke MRU
+
 <c-d>            -   switch to filename only search instead of full path
 <c-r>            -   switch to regexp mode
 <c-z>            -   mark/unmark multiple files and <c-o> to open them
@@ -546,24 +554,12 @@ Replacement:
 <c-s>            -   Open the selected file in a 'horizontal' split.
 ```
 
-[ack.vim](https://github.com/mileszs/ack.vim)
+[ferret](https://github.com/wincent/ferret) - Multi-file search and replace
 
 ```
-:Ack {pattern} [{path}]
+:Ack {pattern} {options}  -  Searches for {pattern} in all the files under the current directory
 
-The quickfix results window is augmented with these convenience mappings:
-
-?          -   a quick summary of these keys, repeat to close
-o          -   to open (same as Enter)
-O          -   to open and close the quickfix window
-go         -   to preview file, open but maintain focus on ack.vim results
-t          -   to open in new tab
-T          -   to open in new tab without moving to it
-h          -   to open in horizontal split
-H          -   to open in horizontal split, keeping focus on the results
-v          -   to open in vertical split
-gv         -   to open in vertical split, keeping focus on the results
-q          -   to close the quickfix window
+<leader>r                 -  Ack substitute (:Acks {pattern})
 ```
 
 [vim-commentary](https://github.com/tpope/vim-commentary)
@@ -592,16 +588,10 @@ gcap       -   comment out a paragraph
 <C-v>            -   open in a new vertical split
 ```
 
-[mru](https://github.com/vim-scripts/mru.vim)
+[vim-esearch](https://github.com/eugen0329/vim-esearch) - Performing project-wide async search and replace, similar to SublimeText
 
 ```
-<leader>f   - open recently opened files
-```
-
-[vim-esearch](https://github.com/eugen0329/vim-esearch)
-
-```
-<leader>ff  -   invoke search and insert a search pattern
+<leader>ff  -   invoke search and insert a search pattern (`:q` to quit)
 
 # In quickfix window:
 s           -   open file in split
