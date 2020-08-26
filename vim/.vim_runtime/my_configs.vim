@@ -450,10 +450,11 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 " vim-markdown ---------------------------------------------------------
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_math = 1
+let g:vim_markdown_new_list_item_indent = 0
 
 " NCM2 -----------------------------------------------------------------
 " https://yufanlu.net/2018/09/03/neovim-python/
@@ -807,9 +808,11 @@ Plug 'davidhalter/jedi-vim'  " Python IDE (pip install --user jedi)
 Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
 Plug 'eugen0329/vim-esearch'  " Project-wide async search and replace, similar to SublimeText
 Plug 'fisadev/vim-isort'  " Sort python imports (pip install --user jedi)
+Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'  " Syntax highlighting, matching rules and mappings for the original Markdown and extensions
 Plug 'haya14busa/incsearch.vim'  " Incrementally highlights ALL pattern matches
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jeetsukumaran/vim-pythonsense'  " Provides text objects and motions for Python classes, methods, functions, and doc strings
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'  " Preview markdown on your modern browser with synchronised scrolling and flexible configuration
 Plug 'lambdalisue/suda.vim'  " Read or write files with sudo command
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " Show tags in a bar (functions etc) for easy browsing
