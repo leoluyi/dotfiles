@@ -66,7 +66,7 @@ function brew_install_app {
     openineditor-lite \
     openinterminal-lite \
     xquartz \
-    qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
+    qlimagesize mdimagesizemdimporter qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
     2>/dev/null;
 
   # Set openinterninal - https://github.com/Ji4n1ng/OpenInTerminal/blob/master/Resources/README-Lite.md
