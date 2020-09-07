@@ -140,12 +140,12 @@ qlimagesize qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspic
 
 1. Download the file from [here](https://github.com/Nyx0uf/qlImageSize/releases/tag/2.6.1)
 2. Unzip the file you have just downloaded and you will get a file named `qlImageSize.qlgenerator`
-3. Copy the `qlImageSize.qlgenerator` to the `/Users/⁨<your-user-name>⁨/Library/QuickLook⁩/` (You may need a password permission)
+3. Copy the `qlImageSize.qlgenerator` to the `/Users/<your-user-name>/Library/QuickLook⁩/` (You may need a password permission)
 4. Launch `Terminal.app` and run `qlmanage -r`
 
 ```bash
 wget -q - https://github.com/Nyx0uf/qlImageSize/releases/download/2.6.1/qlImageSize.qlgenerator.zip \
-&& unzip -c qlImageSize.qlgenerator.zip > ${HOME}/Library/QuickLook⁩/qlImageSize.qlgenerator
+&& unzip -c qlImageSize.qlgenerator.zip > ${HOME}/Library/QuickLook/qlImageSize.qlgenerator
 ```
 
 ### Using casks
