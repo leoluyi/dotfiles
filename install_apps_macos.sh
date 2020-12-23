@@ -34,12 +34,23 @@ validate_os() {
 }
 
 
+function install_xcodecli {
+  echo "$(tput setaf 2)###### Install Xcode CLI ######$(tput sgr 0)"
+  if [ $(xcode-select -p) = "/Library/Developer/CommandLineTools" ]; then
+    echo "Xcode CommandLineTools is already installed."
+  else
+    echo "Installing Xcode CommandLineTools ..."
+    xcode-select --install
+  fi
+}
+
+
 function install_homebrew {
   echo "$(tput setaf 2)###### Install Homebrew ######$(tput sgr 0)"
 
   if command -v brew &>/dev/null; then
     # Make sure we're using the latest Homebrew.
-    echo "Homebrew is installed. Updating Homebrew ..."
+    echo "Homebrew is already installed. Updating Homebrew ..."
     brew update
 
   else
@@ -169,13 +180,15 @@ function brew_install_cli {
 
 
 validate_os macos
+install_xcodecli
 install_homebrew
 brew_install_app
 brew_install_cli
 
 unset \
-  brew_install_app \
+  install_xcodecli \
   install_homebrew \
+  brew_install_app \
   brew_install_cli \
   &>/dev/null
 
