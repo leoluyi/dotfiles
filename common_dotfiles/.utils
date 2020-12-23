@@ -194,3 +194,11 @@ function size() {
       }
       {gsub(/^[0-9]+/, human($1)); print}'
 }
+
+
+function hlsdl-mp4() {
+  # requirements: selsta/hlsdl, ffmpeg
+  local url="$1"
+  local file_name="$2"
+  hlsdl -v -o - "$url" | ffmpeg -f mp4 -i pipe: -c copy "$file_name"
+}
