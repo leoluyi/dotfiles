@@ -4,7 +4,8 @@
 # https://stackoverflow.com/a/677212/3744499
 
 # Homebrew prefix
-command -v brew &>/dev/null && BREW_PREFIX=$(brew --prefix)
+# command -v brew &>/dev/null && BREW_PREFIX=$(brew --prefix)
+command -v brew &>/dev/null && BREW_PREFIX=$(dirname $(dirname $(type -p brew)))
 
 # ============ Command prompt =============
 
