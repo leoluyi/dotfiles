@@ -219,9 +219,10 @@ function ffmpeg-fix-mp4() {
   done
   shift $((OPTIND-1))
 
-  local files="${@}"
+  local files=("$@")
+  echo $files
 
-  for fullfile in $files; do
+  for fullfile in "${files[@]}"; do
     local file_name=$(basename -- "$fullfile")
     local file_name="${file_name%.*}"
 
@@ -232,9 +233,15 @@ function ffmpeg-fix-mp4() {
 
     echo "Output directory: ${out_dir%/}/"
     echo ------------------------------------------------
-    echo "Input file: $fullfile"
 
-    if ffmpeg -f mp4 -i "$fullfile" -c copy "${out_dir%/}/${file_name}_fixed.mp4"; then
+    if [[ "$fullfile" = *_fixed.mp4 ]]; then
+      echo "Skip file: $fullfile" 1>&2
+      continue
+    fi
+    echo "Processing file: $fullfile ..."
+
+    if ffmpeg -i "$fullfile" -c copy "${out_dir%/}/${file_name}_fixed.mp4"; then
+      rm -f "$fullfile"
       echo "Finished: ${out_dir%/}/${file_name}_fixed.mp4"
     fi
     echo ------------------------------------------------
