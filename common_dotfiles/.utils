@@ -199,6 +199,45 @@ function size() {
 function hlsdl-mp4() {
   # requirements: selsta/hlsdl, ffmpeg
   local url="$1"
-  local file_name="$2"
-  hlsdl -v -o - "$url" | ffmpeg -f mp4 -i pipe: -c copy "$file_name"
+  local title="$2"
+  hlsdl -q -b -o "${title}.mp4" "$url"
+}
+
+
+function ffmpeg-fix-mp4() {
+  usage() { echo  "Usage: $0 [-o <OUTPUT_DIR>] <INPUT_FILE>" 1>&2; exit 1; }
+
+  while getopts ":o:" argv; do
+    case "${argv}" in
+      o )
+        local out_dir=${OPTARG}
+        ;;
+      * )
+        usage
+        ;;
+    esac
+  done
+  shift $((OPTIND-1))
+
+  local files="${@}"
+
+  for fullfile in $files; do
+    local file_name=$(basename -- "$fullfile")
+    local file_name="${file_name%.*}"
+
+    local current_dir="$(pwd)"
+
+    [ -z "${out_dir}" ] && out_dir="$current_dir"
+    [ -z "${out_dir}" ] && usage
+
+    echo "Output directory: ${out_dir%/}/"
+    echo ------------------------------------------------
+    echo "Input file: $fullfile"
+
+    if ffmpeg -f mp4 -i "$fullfile" -c copy "${out_dir%/}/${file_name}_fixed.mp4"; then
+      echo "Finished: ${out_dir%/}/${file_name}_fixed.mp4"
+    fi
+    echo ------------------------------------------------
+
+  done
 }
