@@ -8,7 +8,7 @@
 2. Install [**Package Syncing**](https://packagecontrol.io/packages/Package%20Syncing)
 3. Restore settings
     - On new machine, you have to download your backup settings to a sync folder.
-    - Set the sync folder in command palette `Package Syncing: Define Sync Folder` as `/Users/leoluyi/Dropbox/leo_works/dotfiles/sublime-text/package_sync_mac`, then
+    - Set the sync folder in command palette `Package Syncing: Define Sync Folder` as `/Users/leoluyi/Dropbox/leo_workspace/dotfiles/sublime-text/package_sync_mac`, then
     - **Package Syncing** will automatically pull all available files from that folder. **Restart** Sublime Text & Package Control will check for missing packages and install them automatically.
 
 **Manually restore settings**
