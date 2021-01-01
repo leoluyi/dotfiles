@@ -209,6 +209,7 @@ function ffmpeg-fix-mp4() {
 
   local out_dir
 
+  local OPTIND o argv # https://stackoverflow.com/a/16655341/3744499
   while getopts ":o:" argv; do
     case "${argv}" in
       o )
@@ -230,7 +231,7 @@ function ffmpeg-fix-mp4() {
 
     local current_dir="$(pwd)"
 
-    [ -z "${out_dir}" ] && out_dir="$current_dir" && echo "Output directory: ${out_dir%/}/"
+    [ -z "${out_dir}" ] && out_dir="$current_dir" && echo "Default output to current directory: ${out_dir%/}/"
     [ -z "${out_dir}" ] && usage
 
     echo ------------------------------------------------
