@@ -207,10 +207,13 @@ function hlsdl-mp4() {
 function ffmpeg-fix-mp4() {
   usage() { echo  "Usage: $0 [-o <OUTPUT_DIR>] <INPUT_FILE>" 1>&2; exit 1; }
 
+  local out_dir
+
   while getopts ":o:" argv; do
     case "${argv}" in
       o )
         local out_dir=${OPTARG}
+        echo "Set output directory: ${out_dir%/}/"
         ;;
       * )
         usage
@@ -220,7 +223,6 @@ function ffmpeg-fix-mp4() {
   shift $((OPTIND-1))
 
   local files=("$@")
-  echo $files
 
   for fullfile in "${files[@]}"; do
     local file_name=$(basename -- "$fullfile")
@@ -228,10 +230,9 @@ function ffmpeg-fix-mp4() {
 
     local current_dir="$(pwd)"
 
-    [ -z "${out_dir}" ] && out_dir="$current_dir"
+    [ -z "${out_dir}" ] && out_dir="$current_dir" && echo "Output directory: ${out_dir%/}/"
     [ -z "${out_dir}" ] && usage
 
-    echo "Output directory: ${out_dir%/}/"
     echo ------------------------------------------------
 
     if [[ "$fullfile" = *_fixed.mp4 ]]; then
