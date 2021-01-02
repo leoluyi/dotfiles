@@ -54,7 +54,7 @@ else
 fi
 
 # sets up proper alias commands when called
-alias ll='ls -lhaFH'
+alias ll='ls -lvhaF'
 alias la='ls -A'
 alias l='ls -CF'
 

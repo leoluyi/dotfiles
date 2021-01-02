@@ -158,7 +158,6 @@ function brew_install_cli {
   tldr \
   tmux \
   tree \
-  unrar \
   vim --with-override-system-vi \
   wget \
   wrk        `# Modern HTTP benchmarking tool` \
