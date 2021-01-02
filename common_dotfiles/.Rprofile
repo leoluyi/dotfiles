@@ -12,7 +12,7 @@
 
 local({
   # Set CRAN repo
-  repos <- c(CRAN = "https://cloud.r-project.org")
+  repos <- c(CRAN = "https://cran.rstudio.com")
   if (.Platform$OS.type == "windows") {
     repos["CRANextra"] <- "https://www.stats.ox.ac.uk/pub/RWin"
   }
