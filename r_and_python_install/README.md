@@ -1,17 +1,32 @@
-# R settings
+# R settings on MacOS
+
+## Install R
+
+```bash
+brew install --cask r
+```
 
 ## Locale
 
-R.app automatically detects user's settings in the International section of the
+**R.app** automatically detects user's settings in the International section of the
 System Preferences and uses that information to offer translated messages
 and GUI if available.
 
 ```bash
-$ defaults write org.R-project.R force.LANG en_US.UTF-8
+defaults write org.R-project.R force.LANG en_US.UTF-8
 ```
 
-Please note that you must always use `.UTF-8` version of the locale,
-otherwise `R.app` will not work properly.
+> Please note that you must always use `.UTF-8` version of the locale,
+> otherwise `R.app` will not work properly.
+
+## data.table with OpenMP enabled
+
+```bash
+brew update && brew install llvm libomp
+# Use "Makevars" file
+mv .R ~/
+Rscript -e 'install.packages("data.table", repos="https://cloud.r-project.org")';
+```
 
 ## rJava
 
@@ -19,14 +34,7 @@ otherwise `R.app` will not work properly.
 
 ```bash
 $ brew tap AdoptOpenJDK/openjdk
-$ brew cask install adoptopenjdk
-```
-
-Or Java
-
-```bash
-$ brew cask install java
-$ brew cask info java
+$ brew install --cask adoptopenjdk
 ```
 
 2. Install rJava from CRAN
