@@ -65,7 +65,7 @@ function brew_install_app {
 
   # You don't need to install cask anymore, you just need homebrew.
   brew tap homebrew/cask-fonts && \
-  brew cask install \
+  brew install --cask \
     firefox \
     font-hack-nerd-font \
     font-meslo-for-powerline \
