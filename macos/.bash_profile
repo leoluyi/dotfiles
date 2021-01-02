@@ -207,11 +207,14 @@ export PIPENV_IGNORE_VIRTUALENVS=1
 
 # ============ Path for binaries ============
 # User specific environment and startup programs
-export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 # Poetry.
 # https://python-poetry.org/docs/
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# R Framework
+[ -d "/Library/Frameworks/R.framework/Resources" ] && export PATH="/Library/Frameworks/R.framework/Resources:$PATH"
 
 # ============ Footer ============
 # Set locale to fix ssh forwarding problem.
