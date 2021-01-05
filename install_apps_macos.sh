@@ -78,7 +78,8 @@ function brew_install_app {
     openinterminal-lite \
     xquartz \
     qlimagesize mdimagesizemdimporter qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
-    2>/dev/null;
+    2>&1 \
+  | grep -Ev '(Warning)|(re[-]?install)'
 
   # Set openinterninal - https://github.com/Ji4n1ng/OpenInTerminal/blob/master/Resources/README-Lite.md
   defaults write wang.jianing.app.OpenInTerminal-Lite OIT_TerminalBundleIdentifier Alacritty &>/dev/null
@@ -114,7 +115,7 @@ function brew_install_cli {
   gdal \
   git \
   glances    `# cross-platform, text-based command-line tool for monitoring systems` \
-  gnu-sed --with-default-names \
+  gnu-sed \
   gnu-tar \
   gnupg \
   gotop      `# graphical activity monitor inspired by gtop and vtop` \
@@ -131,10 +132,11 @@ function brew_install_cli {
   libxml2 \
   libzip \
   lolcat \
-  more \
   moreutils  `# Some other useful utilities like sponge` \
+  most \
   ncdu       `# NCurses Disk Usage` \
   neofetch \
+  neovim \
   npm \
   openssl \
   p7zip \
@@ -150,6 +152,7 @@ function brew_install_cli {
   ranger     `# a terminal browser for Vim` \
   rename \
   ripgrep \
+  sc-im \
   shellcheck \
   ssh-copy-id \
   terminal-notifier \
@@ -158,20 +161,20 @@ function brew_install_cli {
   tldr \
   tmux \
   tree \
-  vim --with-override-system-vi \
+  vim \
   wget \
   wrk        `# Modern HTTP benchmarking tool` \
   ydiff \
   youtube-dl \
-  2>/dev/null
+  2>&1 \
+  | grep -Ev '(installed)|(re[-]?install)'
 
   # Install other useful binaries.
-  brew tap eddieantonio/eddieantonio && brew install imgcat 2>/dev/null
-  brew tap jesseduffield/lazydocker && brew install lazydocker 2>/dev/null
+  brew install eddieantonio/eddieantonio/imgcat 2>/dev/null
+  brew install jesseduffield/lazydocker/lazydocker 2>/dev/null
 
   # Spreadsheet Calculator Improvised
-  brew tap nickolasburr/pfa
-  brew install sc-im 2>/dev/null
+  # brew install nickolasburr/pfa/sc-im 2>/dev/null
 
   # Remove outdated versions from the cellar.
   brew cleanup

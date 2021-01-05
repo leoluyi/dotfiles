@@ -129,6 +129,8 @@ if command -v brew &>/dev/null && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/share
   if grep -q 'GIT_PROMPT_THEME_NAME="Custom"' ~/.git-prompt-colors.sh 2>/dev/null ; then
     GIT_PROMPT_THEME=Custom
   fi
+else
+  PS1='${YELLOW}\u${COLOR_NONE}@${GREEN}\h${COLOR_NONE}:${BLUE}\w${COLOR_NONE}\n\$ '
 fi
 
 # The fuck.
