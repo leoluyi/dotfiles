@@ -48,7 +48,7 @@ done;
 
 # Always use color output for `ls`
 if command -v gls &>/dev/null; then
-  alias ls='/usr/local/bin/gls ${colorflag} --group-directories-first'
+  alias ls='${BREW_PREFIX}/bin/gls ${colorflag} --group-directories-first'
 else
   alias ls='command ls ${colorflag}'
 fi
