@@ -20,30 +20,32 @@ export TERM=xterm-256color
 #   Based on work by woods
 #
 #   https://gist.github.com/woods/31967
+#   https://misc.flogisoft.com/bash/tip_colors_and_formatting
 
-#         RED="\[\e[0;31m\]"
-#      YELLOW="\[\e[0;33m\]"
-#       GREEN="\[\e[0;32m\]"
-#        BLUE="\[\e[0;34m\]"
-#   LIGHT_RED="\[\e[1;31m\]"
-# LIGHT_GREEN="\[\e[1;32m\]"
-#       WHITE="\[\e[1;37m\]"
-#  LIGHT_GRAY="\[\e[0;37m\]"
-#  COLOR_NONE="\[\e[0m\]"
+        RED='\[\e[1;31m\]'
+     YELLOW='\[\e[1;33m\]'
+      GREEN='\[\e[1;32m\]'
+       BLUE='\[\e[1;34m\]'
+  LIGHT_RED='\[\e[1;31m\]'
+LIGHT_GREEN='\[\e[1;32m\]'
+      WHITE='\[\e[1;37m\]'
+ LIGHT_GRAY='\[\e[1;37m\]'
+       BOLD='\[\e[1m\]'
+      RESET='\[\e[0m\]'
 
-        RED="$(tput setaf 1)"
-     YELLOW="$(tput setaf 3)"
-      GREEN="$(tput setaf 2)"
-       BLUE="$(tput setaf 4)"
-       GRAY="$(tput setaf 8)"
-  LIGHT_RED="$(tput setaf 9)"
-LIGHT_GREEN="$(tput setaf 10)"
-      WHITE="$(tput setaf 15)"
- LIGHT_GRAY="$(tput setaf 7)"
-      RESET="$(tput sgr 0)"
-       BOLD="$(tput bold)"
+#         RED="$(tput setaf 1)"
+#      YELLOW="$(tput setaf 3)"
+#       GREEN="$(tput setaf 2)"
+#        BLUE="$(tput setaf 4)"
+#        GRAY="$(tput setaf 8)"
+#   LIGHT_RED="$(tput setaf 9)"
+# LIGHT_GREEN="$(tput setaf 10)"
+#       WHITE="$(tput setaf 15)"
+#  LIGHT_GRAY="$(tput setaf 7)"
+#        BOLD="$(tput bold)"
+#       RESET="$(tput sgr 0)"
 
-PS1='${BOLD}${YELLOW}\u${RESET}${BOLD}@${GREEN}\h:${RESET} ${BOLD}${BLUE}\w${RESET}\n${GRAY}\A ${RESET}\$ '
+PS1="${BOLD}${YELLOW}\u${RESET}${BOLD}@${GREEN}\h:${RESET} ${BOLD}${BLUE}\w${RESET}\n${LIGHT_GRAY}\A ${RESET}\$ "
 
 # ============ Load the shell dotfiles ============
 # * ~/.path can be used to extend `$PATH`.
