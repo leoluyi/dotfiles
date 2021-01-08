@@ -1,5 +1,5 @@
 # My bash config. Not much to see here
-# 
+#
 # How to check if a program exists from a Bash script?
 # https://stackoverflow.com/a/677212/3744499
 
@@ -21,17 +21,26 @@ export TERM=xterm-256color
 #
 #   https://gist.github.com/woods/31967
 
-        RED="\[\033[0;31m\]"
-     YELLOW="\[\033[0;33m\]"
-      GREEN="\[\033[0;32m\]"
-       BLUE="\[\033[0;34m\]"
-  LIGHT_RED="\[\033[1;31m\]"
-LIGHT_GREEN="\[\033[1;32m\]"
-      WHITE="\[\033[1;37m\]"
- LIGHT_GRAY="\[\033[0;37m\]"
- COLOR_NONE="\[\e[0m\]"
+#         RED="\[\e[0;31m\]"
+#      YELLOW="\[\e[0;33m\]"
+#       GREEN="\[\e[0;32m\]"
+#        BLUE="\[\e[0;34m\]"
+#   LIGHT_RED="\[\e[1;31m\]"
+# LIGHT_GREEN="\[\e[1;32m\]"
+#       WHITE="\[\e[1;37m\]"
+#  LIGHT_GRAY="\[\e[0;37m\]"
+#  COLOR_NONE="\[\e[0m\]"
 
-#PS1='${YELLOW}\u${COLOR_NONE}@${GREEN}\h${COLOR_NONE}:${BLUE}\w${COLOR_NONE}\$ '
+        RED="$(tput setaf 1)"
+     YELLOW="$(tput setaf 3)"
+      GREEN="$(tput setaf 2)"
+       BLUE="$(tput setaf 4)"
+       GRAY="$(tput setaf 8)"
+  LIGHT_RED="$(tput setaf 9)"
+LIGHT_GREEN="$(tput setaf 10)"
+      WHITE="$(tput setaf 15)"
+ LIGHT_GRAY="$(tput setaf 7)"
+ COLOR_NONE="$(tput sgr 0)"
 
 # ============ Load the shell dotfiles ============
 # * ~/.path can be used to extend `$PATH`.
@@ -130,7 +139,7 @@ if command -v brew &>/dev/null && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/share
     GIT_PROMPT_THEME=Custom
   fi
 else
-  PS1='${YELLOW}\u${COLOR_NONE}@${GREEN}\h${COLOR_NONE}:${BLUE}\w${COLOR_NONE}\n\$ '
+  PS1='${YELLOW}\u${COLOR_NONE}@${GREEN}\h${COLOR_NONE}:${BLUE}\w{COLOR_NONE}\n${GRAY}\A ${COLOR_NONE}\$ '
 fi
 
 # The fuck.
@@ -157,12 +166,12 @@ if [ -f ~/.fzf.bash ] && command -v fd &>/dev/null; then
   # - The first argument to the function ($1) is the base path to start traversal
   # - See the source code (completion.{bash,zsh}) for the details.
   _fzf_compgen_path() {
-	fd --hidden --follow --exclude ".git" . "$1"
+    fd --hidden --follow --exclude ".git" . "$1"
   }
 
   # Use fd to generate the list for directory completion
   _fzf_compgen_dir() {
-	fd --type d --hidden --follow --exclude ".git" . "$1"
+    fd --type d --hidden --follow --exclude ".git" . "$1"
   }
 fi
 
