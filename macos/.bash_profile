@@ -40,7 +40,10 @@ export TERM=xterm-256color
 LIGHT_GREEN="$(tput setaf 10)"
       WHITE="$(tput setaf 15)"
  LIGHT_GRAY="$(tput setaf 7)"
- COLOR_NONE="$(tput sgr 0)"
+      RESET="$(tput sgr 0)"
+       BOLD="$(tput bold)"
+
+PS1='${BOLD}${YELLOW}\u${RESET}${BOLD}@${GREEN}\h:${RESET} ${BOLD}${BLUE}\w${RESET}\n${GRAY}\A ${RESET}\$ '
 
 # ============ Load the shell dotfiles ============
 # * ~/.path can be used to extend `$PATH`.
@@ -131,15 +134,13 @@ fi
 # https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
 if command -v brew &>/dev/null && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   __GIT_PROMPT_DIR=${BREW_PREFIX}/opt/bash-git-prompt/share
-  GIT_PROMPT_ONLY_IN_REPO=0
+  GIT_PROMPT_ONLY_IN_REPO=1
   source "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh"
   #GIT_PROMPT_START='\[\e]0;\u@\h:\w\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[0m\]'
 
   if grep -q 'GIT_PROMPT_THEME_NAME="Custom"' ~/.git-prompt-colors.sh 2>/dev/null ; then
     GIT_PROMPT_THEME=Custom
   fi
-else
-  PS1='${YELLOW}\u${COLOR_NONE}@${GREEN}\h${COLOR_NONE}:${BLUE}\w{COLOR_NONE}\n${GRAY}\A ${COLOR_NONE}\$ '
 fi
 
 # The fuck.
@@ -235,6 +236,6 @@ export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 # command -v neofetch &>/dev/null && neofetch --size 30% --iterm2
-command -v neofetch &>/dev/null \
-  && [ -f "$HOME/.config/ascii/batman.ascii" ] \
-  && neofetch --source "$HOME/.config/ascii/batman.ascii"
+# command -v neofetch &>/dev/null \
+#   && [ -f "$HOME/.config/ascii/batman.ascii" ] \
+#   && neofetch --source "$HOME/.config/ascii/batman.ascii"
