@@ -1548,6 +1548,8 @@
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>IRMemory</key>
+	<integer>4</integer>
 	<key>NeverWarnAboutShortLivedSessions_7D3705CA-F13E-4A05-A5BC-4E33590D3F1D</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_7D3705CA-F13E-4A05-A5BC-4E33590D3F1D_selection</key>
@@ -2418,7 +2420,7 @@
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.10000000000000001</real>
+	<real>0.26281993969066725</real>
 	<key>StretchTabsToFillBar</key>
 	<false/>
 	<key>TabStyleWithAutomaticOption</key>
