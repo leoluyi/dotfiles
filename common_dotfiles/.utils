@@ -236,7 +236,7 @@ function ffmpeg-fix-mp4() {
 
     echo ------------------------------------------------
 
-    if [[ "$fullfile" = *_fixed.mp4 ]]; then
+    if [[ "$fullfile" = *_fixed.mp4 ]] || [[ $(lsof "$fullfile") ]]; then
       echo "Skip file: $fullfile" 1>&2
       continue
     fi
