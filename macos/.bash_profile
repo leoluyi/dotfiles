@@ -126,7 +126,7 @@ fi;
 command -v pipenv &>/dev/null && eval "$(pipenv --completion)"
 
 # pipx completion
-if command -v register-python-argcomplete &>/dev/null; then
+if [ $(command -v register-python-argcomplete &>/dev/null) ] && [ $(command -v pipx &>/dev/null) ]; then
   eval "$(register-python-argcomplete pipx)"
 fi
 
@@ -208,7 +208,7 @@ fi
 # Enable syntax-highlighting in less.
 if command -v highlight &>/dev/null; then
   # Pipe Highlight to less
-  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --base16=grayscale-dark"
+  export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --base16=gruvbox-dark-pale"
   export LESS=" -R "
 fi
 
