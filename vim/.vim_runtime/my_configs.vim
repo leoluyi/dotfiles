@@ -567,7 +567,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'filename', 'modified'],
-      \             ['zoomstatus', 'githunks'] ],
+      \             ['zoomstatus', 'githunks', 'venv'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \              [ 'percent', 'lineinfo' ],
       \              [ 'fileformat', 'fileencoding', 'filetype'] ],
@@ -584,7 +584,8 @@ let g:lightline = {
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
       \ },
       \ 'component_function': {
-      \    'githunks': 'LightlineGitGutter'
+      \   'githunks': 'LightlineGitGutter',
+      \   'venv': 'virtualenv#statusline'
       \ },
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': '|' }
