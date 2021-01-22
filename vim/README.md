@@ -38,7 +38,13 @@ git pull --rebase
 - Remove `rm -rf ~/.vim_runtime`
 - Remove any lines that reference `.vim_runtime` in your `~/.vimrc`
 
-## Packages
+## Install Python Requirements
+
+```bash
+pip install neovim pynvim jedi flake8 autopep8
+```
+
+## Vim Plugins
 
 [Vim Awesome](https://vimawesome.com)
 
