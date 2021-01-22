@@ -82,7 +82,11 @@ function brew_install_app {
   | grep -Ev '(Warning)|(re[-]?install)'
 
   # Set openinterninal - https://github.com/Ji4n1ng/OpenInTerminal/blob/master/Resources/README-Lite.md
-  defaults write wang.jianing.app.OpenInTerminal-Lite OIT_TerminalBundleIdentifier Alacritty &>/dev/null
+  # defaults write wang.jianing.app.OpenInTerminal-Lite LiteDefaultTerminal Alacritty &>/dev/null
+
+  # Remove settings.
+  # defaults remove wang.jianing.app.OpenInTerminal-Lite LiteDefaultTerminal
+  # defaults remove wang.jianing.app.OpenInEditor-Lite LiteDefaultEditor
 }
 
 
