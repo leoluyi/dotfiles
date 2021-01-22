@@ -812,6 +812,7 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'  " Syntax highlighting
 Plug 'haya14busa/incsearch.vim'  " Incrementally highlights ALL pattern matches
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jeetsukumaran/vim-pythonsense'  " Provides text objects and motions for Python classes, methods, functions, and doc strings
+Plug 'jmcantrell/vim-virtualenv'  " Virtualenv support
 Plug 'junegunn/vim-easy-align'  " Preview markdown on your modern browser with synchronised scrolling and flexible configuration
 Plug 'lambdalisue/suda.vim'  " Read or write files with sudo command
 Plug 'machakann/vim-highlightedyank'
@@ -821,6 +822,7 @@ Plug 'maximbaz/lightline-ale'  " Make linter in statusline awesome (pip install 
 Plug 'mengelbrecht/lightline-bufferline'  " Display the list of buffers in the lightline vim plugin
 Plug 'mhinz/vim-startify'  " The fancy start screen for Vim
 Plug 'pangloss/vim-javascript'  " Vastly improved Javascript indentation and syntax support in Vim
+Plug 'PieterjanMontens/vim-pipenv'  " Pipenv support (depends on 'jmcantrell/vim-virtualenv')
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'reedes/vim-textobj-quote'  " Use ‘curly’ quote characters in Vim
 Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
