@@ -85,19 +85,28 @@ T<character>  -   to find backwards
 
 ```
 
-**Go through jump list** (a list of places where your cursor has been to)
+**Go through jumplist**
+
+(contains all the points in any buffer you recently jumped to. It can be accessed with `:jumps`)
 
 ```
-:<linenum>            -   go to <linenum>
-''                    -   jump to previous line position
-
 <C-o> and <C-i>       -   up / down walk through the jump list history
 
+''                    -   jump to previous line position
+
 `` (double backtick)  -   jump between previous position and the current position cursor position in jump list
-`.                    -   go back last change position
 
 (The ` goes to a mark, and "." is a "special" mark which is automatically
  set to the position where the last change was made)
+```
+
+**The changelist**
+
+(contains all the points in the current buffer where you have recently changed something. It can be accessed with the `:changes`)
+
+
+```
+`.                    -   go back last change position
 
 g; and g,             -   jump back and forth change list
 ```
@@ -534,7 +543,7 @@ Replacement:
 :s/search_for_this/replace_with_this/gi  -  replace in the current line only, with case [i]nsensitive
 
 :.,.+2s/                -  replace current line to the next 2 line.
-                           (you can type `2:` for quick input)
+                           (you can type `3:` for quick input)
 ```
 
 ### PLUGINS
