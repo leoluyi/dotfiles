@@ -163,6 +163,7 @@ nnoremap <C-s> :w<CR>
 """ Insert new line without automatic commenting
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
+
 "----------------------------
 " => Splits and Tabbed Files
 "----------------------------
@@ -262,6 +263,13 @@ function! ColorToggle()
 endfunction
 
 command! ColorToggle call ColorToggle()
+
+"--------------------------
+" => Misc
+"--------------------------
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <C-m> mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 "--------------------------
 " => Fix unwanted key map
@@ -551,8 +559,18 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " ctrlp.vim ------------------------------------------------------------
-let g:ctrlp_map = '<c-f>'
+" https://github.com/kien/ctrlp.vim
+
+" Quickly find and open a file in the current working directory
+let g:ctrlp_map = '<C-f>'
 let g:ctrlp_working_path_mode = 'ra'
+
+" Quickly find and open a recently opened file
+noremap <leader>m :CtrlPMRU<CR>
+unmap <leader>f
+
+let g:ctrlp_max_height = 20
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 " close-buffers.vim ----------------------------------------------------
 autocmd VimEnter *
@@ -683,7 +701,9 @@ let g:ale_linters = {
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 let b:ale_fixers = {'python': ['black', 'isort']}
 
-nmap <silent> <C-p> <Plug>(ale_next_wrap)
+" https://github.com/dense-analysis/ale#5xi-how-can-i-navigate-between-errors-quickly
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " vim-highlightedyank --------------------------------------------------
 if s:has_plugin('vim-highlightedyank')
@@ -770,6 +790,27 @@ unmap <leader>q
 map <silent> <leader>qc <Plug>ReplaceWithCurly
 map <silent> <leader>qs <Plug>ReplaceWithStraight
 
+" LeaderF --------------------------------------------------------------
+" don't show the help in normal mode
+let g:Lf_HideHelp = 1
+let g:Lf_UseCache = 0
+let g:Lf_UseVersionControlTool = 0
+let g:Lf_IgnoreCurrentBufferName = 1
+" popup mode
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+
+let g:Lf_ShortcutF = "<leader>ff"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+" noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+" noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -838,8 +879,10 @@ Plug 'uarun/vim-protobuf' " Syntax highlighting for Google's Protocol Buffers
 Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
 Plug 'Vimjas/vim-python-pep8-indent'  " Better indenting for python
 Plug 'wincent/ferret'  " Find and Replace in Multiple Files
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'  " An efficient fuzzy finder that helps to locate files, buffers, mrus, gtags, etc. on the fly.
+"
 Plug 'Yggdroot/indentLine'  " Show indent guide
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'zivyangll/git-blame.vim'  " See Git Blame information in the status bar for the currently selected line
 
 " fzf
