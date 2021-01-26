@@ -879,10 +879,9 @@ Plug 'uarun/vim-protobuf' " Syntax highlighting for Google's Protocol Buffers
 Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
 Plug 'Vimjas/vim-python-pep8-indent'  " Better indenting for python
 Plug 'wincent/ferret'  " Find and Replace in Multiple Files
-Plug 'Xuyuanp/nerdtree-git-plugin'  " An efficient fuzzy finder that helps to locate files, buffers, mrus, gtags, etc. on the fly.
-"
+Plug 'Xuyuanp/nerdtree-git-plugin'  " A plugin of NERDTree showing git status flags.
 Plug 'Yggdroot/indentLine'  " Show indent guide
-Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }  " An efficient fuzzy finder that helps to locate files, buffers, mrus, gtags, etc. on the fly.
 Plug 'zivyangll/git-blame.vim'  " See Git Blame information in the status bar for the currently selected line
 
 " fzf
@@ -928,6 +927,9 @@ if has('nvim') || has('patch-8.0.0')
     Plug 'gaalcaras/ncm-R'
     Plug 'jalvesaq/Nvim-R'
 
+    " Floaterm
+    Plug 'voldikss/vim-floaterm'  " Use (neo)vim terminal in the floating/popup window.
+
     " Optional: for snippet support
     " based on ultisnips
     Plug 'ncm2/ncm2-ultisnips'
@@ -935,9 +937,8 @@ if has('nvim') || has('patch-8.0.0')
   endif
 
   " Others
-  " trying to build a compatibility layer for neovim rpc client working on vim8. https://github.com/roxma/vim-hug-neovim-rpc
-  " Plug 'roxma/vim-hug-neovim-rpc'
   Plug 'ThePrimeagen/vim-be-good'  " nvim plugin designed to make you better at Vim Movements
+  " Plug 'roxma/vim-hug-neovim-rpc'  " trying to build a compatibility layer for neovim rpc client working on vim8. https://github.com/roxma/vim-hug-neovim-rpc
 endif
 
 " Neovim only
