@@ -276,6 +276,7 @@ noremap <leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 "--------------------------
 ":unmap <C-Space>
 inoremap <C-@> <Esc>
+unmap <leader>f
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Utilities for vimrc
@@ -567,7 +568,6 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " Quickly find and open a recently opened file
 noremap <leader>m :CtrlPMRU<CR>
-unmap <leader>f
 
 let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
@@ -802,7 +802,7 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
-let g:Lf_ShortcutF = "<leader>F"
+let g:Lf_ShortcutF = "<leader>FF"
 noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
