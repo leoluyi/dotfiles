@@ -176,6 +176,7 @@ function brew_install_cli {
   # Install other useful binaries.
   brew install eddieantonio/eddieantonio/imgcat 2>/dev/null
   brew install jesseduffield/lazydocker/lazydocker 2>/dev/null
+  brew install jesseduffield/lazygit/lazygit 2>/dev/null
 
   # Spreadsheet Calculator Improvised
   # brew install nickolasburr/pfa/sc-im 2>/dev/null
