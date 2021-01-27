@@ -142,6 +142,48 @@ if [ -f /usr/share/bash-completion/tmux_completion ]; then
   source /usr/share/bash-completion/tmux_completion
 fi
 
+# ============ Command prompt =============
+
+# enables color in the terminal bash shell.
+export CLICOLOR=1
+# enables color for iTerm.
+export TERM=xterm-256color
+# sets up the color scheme for list.
+# export LSCOLORS=Exgxcxdxbxegedabagacad
+
+# The various escape codes that we can use to color our prompt.
+#   Based on work by woods
+#
+#   https://gist.github.com/woods/31967
+#   https://misc.flogisoft.com/bash/tip_colors_and_formatting
+
+       GRAY='\[\e[0;37m\]'
+  DARK_GRAY='\[\e[1;30m\]'
+        RED='\[\e[1;31m\]'
+      GREEN='\[\e[1;32m\]'
+     YELLOW='\[\e[1;33m\]'
+       BLUE='\[\e[1;34m\]'
+  LIGHT_RED='\[\e[1;31m\]'
+LIGHT_GREEN='\[\e[1;32m\]'
+      WHITE='\[\e[1;37m\]'
+ LIGHT_GRAY='\[\e[1;37m\]'
+       BOLD='\[\e[1m\]'
+      RESET='\[\e[0m\]'
+
+#         RED="$(tput setaf 1)"
+#       GREEN="$(tput setaf 2)"
+#      YELLOW="$(tput setaf 3)"
+#        BLUE="$(tput setaf 4)"
+#        GRAY="$(tput setaf 8)"
+#   LIGHT_RED="$(tput setaf 9)"
+# LIGHT_GREEN="$(tput setaf 10)"
+#       WHITE="$(tput setaf 15)"
+#  LIGHT_GRAY="$(tput setaf 7)"
+#        BOLD="$(tput bold)"
+#       RESET="$(tput sgr 0)"
+
+PS1="${BOLD}${YELLOW}\u${RESET}${BOLD}@${GREEN}\h:${RESET} ${BOLD}${BLUE}\w${RESET}\n${GRAY}\A ${RESET}\$ "
+
 # ============ CLI tools ============
 
 # bash-git-prompt.
@@ -167,9 +209,24 @@ command -v pyenv &>/dev/null && \
   alias subl-pipenv='pipenv --venv && pipenv run subl'
 
 # fzf.
-[ -f ~/.fzf.bash ] && \
-  source ~/.fzf.bash && \
+[ -f "$HOME/.fzf.bash"  ] && \
+  source "$HOME/.fzf.bash"  && \
   export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
+
+if [ -f "$HOME/.fzf.bash"  ] && command -v fd &>/dev/null; then
+  # Use fd (https://github.com/sharkdp/fd) instead of the default find
+  # command for listing path candidates.
+  # - The first argument to the function ($1) is the base path to start traversal
+  # - See the source code (completion.{bash,zsh}) for the details.
+  _fzf_compgen_path() {
+    fd --hidden --follow --exclude ".git" . "$1"
+  }
+
+  # Use fd to generate the list for directory completion
+  _fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude ".git" . "$1"
+  }
+fi
 
 # Git diff-so-fancy.
 # https://github.com/so-fancy/diff-so-fancy

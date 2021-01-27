@@ -22,9 +22,11 @@ export TERM=xterm-256color
 #   https://gist.github.com/woods/31967
 #   https://misc.flogisoft.com/bash/tip_colors_and_formatting
 
+       GRAY='\[\e[0;37m\]'
+  DARK_GRAY='\[\e[1;30m\]'
         RED='\[\e[1;31m\]'
-     YELLOW='\[\e[1;33m\]'
       GREEN='\[\e[1;32m\]'
+     YELLOW='\[\e[1;33m\]'
        BLUE='\[\e[1;34m\]'
   LIGHT_RED='\[\e[1;31m\]'
 LIGHT_GREEN='\[\e[1;32m\]'
@@ -34,8 +36,8 @@ LIGHT_GREEN='\[\e[1;32m\]'
       RESET='\[\e[0m\]'
 
 #         RED="$(tput setaf 1)"
-#      YELLOW="$(tput setaf 3)"
 #       GREEN="$(tput setaf 2)"
+#      YELLOW="$(tput setaf 3)"
 #        BLUE="$(tput setaf 4)"
 #        GRAY="$(tput setaf 8)"
 #   LIGHT_RED="$(tput setaf 9)"
@@ -45,7 +47,7 @@ LIGHT_GREEN='\[\e[1;32m\]'
 #        BOLD="$(tput bold)"
 #       RESET="$(tput sgr 0)"
 
-PS1="${BOLD}${YELLOW}\u${RESET}${BOLD}@${GREEN}\h:${RESET} ${BOLD}${BLUE}\w${RESET}\n${LIGHT_GRAY}\A ${RESET}\$ "
+PS1="${BOLD}${YELLOW}\u${RESET}${BOLD}@${GREEN}\h:${RESET} ${BOLD}${BLUE}\w${RESET}\n${GRAY}\A ${RESET}\$ "
 
 # ============ Load the shell dotfiles ============
 # * ~/.path can be used to extend `$PATH`.
