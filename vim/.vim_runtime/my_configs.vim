@@ -894,6 +894,7 @@ endif
 
 " Theme
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'jonathanfilip/vim-lucius'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
