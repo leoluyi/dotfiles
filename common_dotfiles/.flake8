@@ -15,7 +15,11 @@ exclude =
     # This contains our built documentation
     build,
     # This contains builds of flake8 that we don't want to check
-    dist
+    dist,
+    # Testing
+    .tox,
+    # Python builds
+    .eggs, *.egg
 max-complexity = 18
 max-line-length = 88
 extend-ignore = E203
