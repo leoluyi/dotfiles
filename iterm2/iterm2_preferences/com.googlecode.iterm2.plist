@@ -820,26 +820,26 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.0</real>
+				<real>0.80392158031463623</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.76862746477127075</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.75294119119644165</real>
 			</dict>
 			<key>Selection Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>1</real>
+				<real>0.3960784375667572</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.86945539712905884</real>
+				<real>0.35294118523597717</real>
 				<key>Red Component</key>
-				<real>0.75742977857589722</real>
+				<real>0.30588236451148987</real>
 			</dict>
 		</dict>
 		<key>LuciusWhite</key>
@@ -2758,26 +2758,26 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.0</real>
+				<real>0.80392158031463623</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.76862746477127075</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.75294119119644165</real>
 			</dict>
 			<key>Selection Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>1</real>
+				<real>0.3960784375667572</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.86945539712905884</real>
+				<real>0.35294118523597717</real>
 				<key>Red Component</key>
-				<real>0.75742977857589722</real>
+				<real>0.30588236451148987</real>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -2877,8 +2877,10 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
+	<key>kCPKUseSystemColorPicker</key>
 	<false/>
 </dict>
 </plist>
