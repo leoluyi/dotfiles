@@ -68,6 +68,7 @@ function brew_install_app {
   brew install --cask \
     firefox \
     font-hack-nerd-font \
+    font-iosevka-nerd-font \
     font-meslo-for-powerline \
     google-chrome \
     iina \
