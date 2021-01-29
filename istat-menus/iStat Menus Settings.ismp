@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>build</key>
-	<string>1090</string>
+	<string>1157</string>
 	<key>preferences</key>
 	<dict>
 		<key>Battery_DisableBluetooth</key>
@@ -19,10 +19,6 @@
 				<string>D86847500Q9J83K5P</string>
 				<key>name</key>
 				<string>Internal Battery</string>
-				<key>subtype</key>
-				<integer>-1</integer>
-				<key>type</key>
-				<integer>0</integer>
 			</dict>
 		</array>
 		<key>Battery_MenubarMode</key>
@@ -31,13 +27,13 @@
 				<key>key</key>
 				<string>5</string>
 				<key>uuid</key>
-				<string>B9663A76-6A80-4E8C-8777-EF4C58463CF9</string>
+				<string>E4A54C12-AB17-4600-B670-2CF583B718F5</string>
 			</dict>
 			<dict>
 				<key>key</key>
 				<string>7</string>
 				<key>uuid</key>
-				<string>D990CB86-08EE-4668-BE14-050C18EED871</string>
+				<string>631A1B8B-18CA-457F-A01C-DCC307439648</string>
 			</dict>
 		</array>
 		<key>Battery_MenubarModeCharged</key>
@@ -46,13 +42,13 @@
 				<key>key</key>
 				<string>2</string>
 				<key>uuid</key>
-				<string>F9BCD3DD-3A39-4336-9606-37C62C49BB0F</string>
+				<string>ED85661B-3324-45D2-8013-E6B8290352E5</string>
 			</dict>
 			<dict>
 				<key>key</key>
 				<string>1</string>
 				<key>uuid</key>
-				<string>93D43D25-833D-4D6B-831D-652E86D21F7E</string>
+				<string>7205F738-B505-409A-A53B-AFDDD40BDC5C</string>
 			</dict>
 		</array>
 		<key>CPU_DropdownOrderDisabled</key>
@@ -132,7 +128,7 @@
 				<key>key</key>
 				<string>692539FE-94F5-4809-9226-7D76DBE4D73C</string>
 				<key>name</key>
-				<string>Macintosh HD</string>
+				<string>Macintosh HD - 資料</string>
 			</dict>
 		</array>
 		<key>Disks_MenubarMode</key>
@@ -179,6 +175,8 @@
 		</array>
 		<key>InstalledHelpers-mas</key>
 		<true/>
+		<key>Menubar-DetectedColor</key>
+		<string>1.00 1.00 1.00 0.90</string>
 		<key>MenubarGraphOpacity-Dark</key>
 		<real>0.35949999094009399</real>
 		<key>MenubarSkinColor-Dark</key>
@@ -187,6 +185,27 @@
 		<true/>
 		<key>Migrated_6.22</key>
 		<true/>
+		<key>Migrated_6.5</key>
+		<true/>
+		<key>Network_DataFormat</key>
+		<integer>3</integer>
+		<key>Network_MenubarMode</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>3</string>
+				<key>uuid</key>
+				<string>7C241E79-E9EC-401E-92B8-442A8CAB62B6</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>0</string>
+				<key>uuid</key>
+				<string>5A42907C-7387-4F2D-9AFA-76C2DF6FA5F8</string>
+			</dict>
+		</array>
+		<key>Network_StatusCheckFlatten</key>
+		<integer>0</integer>
 		<key>Notifications-Enabled</key>
 		<false/>
 		<key>Notifications-Items</key>
@@ -255,6 +274,6 @@
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>6.31</string>
+	<string>6.51</string>
 </dict>
 </plist>
