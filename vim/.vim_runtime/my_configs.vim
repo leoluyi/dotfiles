@@ -939,14 +939,15 @@ if has('nvim') || has('patch-8.0.0')
 
   " Others
   Plug 'ThePrimeagen/vim-be-good'  " nvim plugin designed to make you better at Vim Movements
-  " Plug 'roxma/vim-hug-neovim-rpc'  " trying to build a compatibility layer for neovim rpc client working on vim8. https://github.com/roxma/vim-hug-neovim-rpc
 endif
 
 " Neovim only
 if has('nvim')
   " Disable jedi-vim
   Plug 'davidhalter/jedi-vim', { 'on': [] }
-  " Plug 'roxma/vim-hug-neovim-rpc', { 'on': [] }
+
+  " File browser.
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }  " Requires pynvim
 endif
 
 if has('nvim-0.4.2') || has('patch-8.1.2114')
@@ -961,6 +962,7 @@ if !has('nvim')
   let g:ncm2_enable = 0
   Plug 'ncm2/ncm2', { 'on': [] }  " awesome autocomplete plugin
   Plug 'roxma/nvim-yarp', { 'on': [] }  " dependency of ncm2
+  " Plug 'roxma/vim-hug-neovim-rpc'  " trying to build a compatibility layer for neovim rpc client working on vim8. https://github.com/roxma/vim-hug-neovim-rpc
 
   " Disable ncm2-jedi
   Plug 'ncm2/ncm2-jedi', { 'on': [] }  " fast python completion (use ncm2 if you want type info or snippet support)
