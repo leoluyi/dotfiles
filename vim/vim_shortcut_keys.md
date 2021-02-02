@@ -625,12 +625,11 @@ yss )       -   wrap the entire line in parentheses
 
 ```
 <leader>nn      -   toggle nerdtree
+o               -   open/close folder
 
 go              -   preview file
 
-o               -   open/close folder
 p               -   parent folder
-
 P               -   go to root folder
 C               -   set cursor as root folder
 u               -   set root folder to upper layer
@@ -692,6 +691,8 @@ K            -   Show Documentation/Pydoc (shows a popup with assignments)
 
 <leader>r    -   Renaming
 <leader>n    -   Usages (shows all the usages of a name)
+
+Open module, e.g. `:Pyimport os` (opens the `os` module)
 ```
 
 [vim-move](https://github.com/matze/vim-move)
@@ -701,7 +702,38 @@ K            -   Show Documentation/Pydoc (shows a popup with assignments)
 <z-k>   Move current line/selection up
 ```
 
+[**close-buffers**](https://github.com/asheq/close-buffers.vim)
+
+- `:CloseOtherBuffers` 🔥: Close all buffers except buffer in current window.
+- `:CloseHiddenBuffers` 🔥: Close all buffers not visible in any window.
+- `:CloseBuffersMenu` 🔥: Lets you choose any other command.
+
+[**braceless.vim**](https://github.com/tweekmonster/braceless.vim)
+
+- Moving to recognized blocks is done with `[[` and `]]`
+- `vaP`, `ciP`, `>iP`
+
+[**ctrlp.vim**](https://github.com/ctrlpvim/ctrlp.vim)
+
+- Run `:CtrlP` or `:CtrlP` [starting-directory] in find file mode.
+- Run `:CtrlPBuffer` or `:CtrlPMRU` in find buffer or find MRU file mode.
+- Run `:CtrlPMixed` to search in Files, Buffers and MRU files at the same time.
+
 [Nvim-R](https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt)
+
+- https://medium.freecodecamp.org/turning-vim-into-an-r-ide-cd9602e8c217
+- https://gist.github.com/leoluyi/2aeb4795c99de487b568178a31f7b635
+
+Commands
+
+- `devtools::install_github("jalvesaq/colorout")`
+- `\rf` opens vim-connected R session
+- `<Space>` sends code from vim to R; here remapped in `init.vim` from default `\l`
+- `:split` or `:vsplit`: splits viewport (similar to pane split in tmux)
+- `<C-x><C-o>` omni completion for R objects/functions.
+- `<C-w>H` or `<C-w>K`: toggles between horizontal/vertical splits
+- `<C-w>w` jumps cursor to R viewport and back
+- `<C-w>r` swaps viewports
 
 ```
 Menu entry                                Default shortcut~

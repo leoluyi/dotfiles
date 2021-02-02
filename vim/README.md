@@ -2,13 +2,13 @@
 
 ## Install the Ultimate Vimrc
 
-https://github.com/amix/vimrc
+https://github.com/leoluyi/vimrc
 
 **Install for your own user only**
 
 ```bash
 # Install Ultimate vimrc
-git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime \
+git clone --depth=1 https://github.com/leoluyi/vimrc.git ~/.vim_runtime \
   && bash ~/.vim_runtime/install_awesome_vimrc.sh
 
 # copy settings
@@ -19,7 +19,7 @@ wget -qO ~/.vim_runtime/vimrcs/filetypes.vim https://github.com/leoluyi/dotfiles
 **Install for multiple users**
 
 ```bash
-$ git clone --depth=1 https://github.com/amix/vimrc.git /opt/vim_runtime
+$ git clone --depth=1 https://github.com/leoluyi/vimrc.git /opt/vim_runtime
 $ sh ~/.vim_runtime/install_awesome_parameterized.sh /opt/vim_runtime user0 user1 user2
 
 # to install for all users with home directories
@@ -77,110 +77,6 @@ Edit `~/.vim_runtime/my_configs.vim` insetead for **Ultimate vimrc** settings:
 2. `PlugUpdate`: Install or update plugins.
 3. `PlugClean[!]`: Remove unused directories (bang version will clean without prompt).
 
-### 3. Package list, commands and shortcut keys
-
-[**braceless.vim**](https://github.com/tweekmonster/braceless.vim)
-
-- Moving to recognized blocks is done with `[[` and `]]`
-- `vaP`, `ciP`, `>iP`
-
-[**close-buffers**](https://github.com/asheq/close-buffers.vim)
-
-- `:CloseOtherBuffers` 🔥: Close all buffers except buffer in current window.
-- `:CloseHiddenBuffers` 🔥: Close all buffers not visible in any window.
-- `:CloseBuffersMenu` 🔥: Lets you choose any other command.
-
-[**ctrlp.vim**](https://github.com/ctrlpvim/ctrlp.vim)
-
-- Run `:CtrlP` or `:CtrlP` [starting-directory] in find file mode.
-- Run `:CtrlPBuffer` or `:CtrlPMRU` in find buffer or find MRU file mode.
-- Run `:CtrlPMixed` to search in Files, Buffers and MRU files at the same time.
-
-[**Nvim-R**](https://github.com/jalvesaq/Nvim-R)
-
-- https://medium.freecodecamp.org/turning-vim-into-an-r-ide-cd9602e8c217
-- https://gist.github.com/leoluyi/2aeb4795c99de487b568178a31f7b635
-
-Commands
-
-- `devtools::install_github("jalvesaq/colorout")`
-- `\rf` opens vim-connected R session
-- `<Space>` sends code from vim to R; here remapped in `init.vim` from default `\l`
-- `:split` or `:vsplit`: splits viewport (similar to pane split in tmux)
-- `<C-x><C-o>` omni completion for R objects/functions.
-- `<C-w>H` or `<C-w>K`: toggles between horizontal/vertical splits
-- `<C-w>w` jumps cursor to R viewport and back
-- `<C-w>r` swaps viewports
-
-[**Nerdtree**](https://github.com/scrooloose/nerdtree)
-
-- `<leader>nn` toggle nerdtree
-- `o` open/close folder
-
-[**vim-indent-guides**](https://github.com/valloric/vim-indent-guides)
-
-[**jedi-vim**](https://github.com/davidhalter/jedi-vim)
-
-- Completion `<C-Space>`
-- Goto assignments `<leader>g` (typical goto function)
-- Goto definitions `<leader>d` (follow identifier as far as possible, includes imports and statements)
-- Show Documentation/Pydoc `K` (shows a popup with assignments)
-- Renaming `<leader>r`
-- Usages `<leader>n` (shows all the usages of a name)
-- Open module, e.g. `:Pyimport os` (opens the `os` module)
-
-```vim
-" NOTE: subject to change!
-
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-```
-
-[**ncim-R**](https://github.com/gaalcaras/ncm-R) (neovim)
-
-https://github.com/gaalcaras/ncm-R/issues/2#issuecomment-353635826
-
-```bash
-$ pip install neovim
-```
-
-Use vim-plug to install:
-
-```vim
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'jalvesaq/Nvim-R'
-Plug 'gaalcaras/ncm-R'
-
-" Vim 8 only
-if !has('nvim')
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
-
-" Optional: for snippet support
-" Further configuration might be required, read below
-Plug 'sirver/UltiSnips'
-Plug 'ncm2/ncm2-ultisnips'
-
-" Optional: better Rnoweb support (LaTeX completion)
-Plug 'lervag/vimtex'
-```
-
-[**Command-T**](https://github.com/wincent/Command-T) (neovim): Fast file navigation for VIM
-
-
-COMMANDS
-
-- `<Leader>b`   - Bring up the Command-T buffer window (`:CommandTBuffer`)
-- `<Leader>t`   - Bring up the Command-T file window (`:CommandT`)
-- `<C-c>`       - cancel
-
 ## Misc
 
 - `:so %` to reload `.vimrc`
@@ -188,3 +84,5 @@ COMMANDS
 ## References
 
 - [Setting up VIM as an IDE for Python](https://medium.com/@hanspinckaers/setting-up-vim-as-an-ide-for-python-773722142d1d)
+- [xu-cheng/dotfiles](https://github.com/xu-cheng/dotfiles/tree/master/home/.config/nvim)
+- [dezull/awesome-vimrc](https://github.com/dezull/awesome-vimrc) - amix's vimrc, modified to use vim plug
