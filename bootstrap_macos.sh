@@ -132,7 +132,7 @@ function install_vim_awesome {
   fi
 
   if [ ! -d ~/.vim_runtime ]; then
-    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+    git clone --depth=1 https://github.com/leoluyi/vimrc.git ~/.vim_runtime
     bash ~/.vim_runtime/install_awesome_vimrc.sh
   else
     echo "Awesome Vim is already installed."
