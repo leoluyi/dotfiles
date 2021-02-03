@@ -1,0 +1,1 @@
+.vim_runtime/vimrcs/pluginrc.d/plugins_config.vim
