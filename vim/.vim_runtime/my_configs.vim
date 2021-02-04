@@ -171,6 +171,9 @@ nnoremap <C-s> :w<CR>
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
 
+""" Spellcheck
+nnoremap <leader>sc setlocal spell!
+
 "----------------------------
 " => Splits and Tabbed Files
 "----------------------------
@@ -281,9 +284,13 @@ noremap <leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 "--------------------------
 " => Fix unwanted key map
 "--------------------------
-":unmap <C-Space>
-inoremap <C-@> <Esc>
-unmap <leader>f
+try
+  ":unmap <C-Space>
+  inoremap <C-@> <Esc>
+  unmap <leader>f
+  unmap <leader>q
+catch
+endtry
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Global functions.
