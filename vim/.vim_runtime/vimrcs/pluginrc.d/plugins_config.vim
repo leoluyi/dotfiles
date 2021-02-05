@@ -243,7 +243,7 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'githunks': 'LightlineGitGutter',
-      \   'venv': 'poetv#statusline',
+      \   'venv': 'virtualenv#statusline',
       \ },
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': '|' }
@@ -502,7 +502,7 @@ hi link DefxIconsOpenedTreeIcon Error
 let g:neoformat_enabled_python = ['black', 'yapf']
 
 " petobens/poet-v -------------------------------------------------------------
-let g:poetv_executables = ['poetry', 'pipenv']
-let g:poetv_auto_activate = 1
-let g:poetv_statusline_symbol = ''
-let g:poetv_set_environment = 1
+" let g:poetv_executables = ['poetry', 'pipenv']
+" let g:poetv_auto_activate = 1
+" let g:poetv_statusline_symbol = ''
+" let g:poetv_set_environment = 1

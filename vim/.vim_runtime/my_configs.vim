@@ -265,11 +265,17 @@ vnoremap <leader>y  "+y
 vnoremap <leader>yy "+yy
 
 "--------------------------
+" => Map normal mode commands to insert mode
+"--------------------------
+" Delete to the end of line
+imap <C-k> <C-o>D  
+
+"--------------------------
 " => Toggle transparent background
 "--------------------------
 " https://jnrowe.github.io/articles/tips/Toggling_settings_in_vim.html
 let t:is_transparent = 0
-function! Toggle_transparent()
+function! ToggleTransparent()
     if t:is_transparent == 0
         hi Normal guibg=NONE ctermbg=NONE
         let t:is_transparent = 1
@@ -278,7 +284,8 @@ function! Toggle_transparent()
         let t:is_tranparent = 0
     endif
 endfunction
-nnoremap <leader>t : call Toggle_transparent()<CR>
+command! ToggleTransparent call ToggleTransparent()
+nnoremap <leader>t : call ToggleTransparent()<CR>
 
 "--------------------------
 " => Toggle colorscheme
