@@ -7,6 +7,24 @@ if has("nvim") && !has("python3")
   silent !python3 -m pip --disable-pip-version-check -q install --no-cache-dir --user -U pynvim
 endif
 
+" See :help g:python3_host_prog
+" See https://github.com/deoplete-plugins/deoplete-jedi/wiki/Setting-up-Python-for-Neovim#using-virtual-environments
+" If you plan to use per-project virtualenvs often, you should assign one
+"  virtualenv for Neovim and hard-code the interpreter path via
+"  g:python3_host_prog (or g:python_host_prog) so that the "pynvim" package
+"  is not required for each virtualenv.
+" 
+"  Example using pyenv:
+"    ¦ pyenv install 3.4.4
+"    ¦ pyenv virtualenv 3.4.4 py3nvim
+"    ¦ pyenv activate py3nvim
+"    ¦ pip install pynvim
+"    ¦ pyenv which python  # Note the path
+"  The last command reports the interpreter path, add it to your init.vim:
+"    ¦ let g:python3_host_prog = '/path/to/py3nvim/bin/python'
+let s:user_home = expand('~/')
+let g:python3_host_prog = s:user_home . '.pyenv/versions/py3nvim/bin/python'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Some basics
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -135,7 +153,7 @@ nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 
 """ Close a buffer without closing the window?
 " https://stackoverflow.com/a/19619038/3744499
-nmap ,d :b#<bar>bd#<CR>
+nmap ,bd :b#<bar>bd#<CR>
 
 """ Add new file in the directory of the open file
 nmap ,a :e %:h/
@@ -221,6 +239,13 @@ vnoremap <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn
 "----------------------------
 " => Copy and paste stuffs
 "----------------------------
+
+" map paste, yank and delete to named register so the content
+" will not be overwritten (I know I should just remember...)
+nnoremap x "_x
+vnoremap x "_x
+nnoremap cc "_cc
+
 """ Cut to yanked register
 nnoremap <leader>x "0x
 vnoremap <leader>x "0x

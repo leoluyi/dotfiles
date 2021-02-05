@@ -1,17 +1,17 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load utils
 runtime vimrcs/utils.vim
 
-" Colorscheme ----------------------------------------------------------
+" Colorscheme -----------------------------------------------------------------
 try
   colorscheme gruvbox
 catch
 endtry
 
-" vim-multiple-cursors -------------------------------------------------
+" vim-multiple-cursors --------------------------------------------------------
 " default mapping
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
@@ -24,14 +24,14 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" vim-move -------------------------------------------------------------
+" vim-move --------------------------------------------------------------------
 " workaround alt key mappings
 nmap zj <Plug>MoveLineDown
 vmap zj <Plug>MoveBlockDown
 nmap zk <Plug>MoveLineUp
 vmap zk <Plug>MoveBlockUp
 
-" NERDTree -------------------------------------------------------------
+" NERDTree --------------------------------------------------------------------
 let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
@@ -48,7 +48,7 @@ if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
 
-" nerdtree-git-plugin --------------------------------------------------
+" nerdtree-git-plugin ---------------------------------------------------------
 let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -62,20 +62,20 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-" comfortable-motion.vim -----------------------------------------------
+" comfortable-motion.vim ------------------------------------------------------
 " Disable comfortable_motion.
 let g:loaded_comfortable_motion = 0
 " let g:comfortable_motion_interval = 1000.0 / 60
 " let g:comfortable_motion_friction = 80.0
 " let g:comfortable_motion_air_drag = 2.0
 
-" vim-indent-guides ----------------------------------------------------
+" vim-indent-guides -----------------------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 
-" Yggdroot/indentLine --------------------------------------------------
+" Yggdroot/indentLine ---------------------------------------------------------
 
-" haya14busa/incsearch.vim ---------------------------------------------
+" haya14busa/incsearch.vim ----------------------------------------------------
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
@@ -85,14 +85,14 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
-" vim-markdown ---------------------------------------------------------
+" vim-markdown ----------------------------------------------------------------
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_new_list_item_indent = 0
 
-" NCM2 -----------------------------------------------------------------
+" NCM2 ------------------------------------------------------------------------
 " https://yufanlu.net/2018/09/03/neovim-python/
 if has('nvim') && has('python3') && Has_plugin('ncm2') && Has_plugin('ncm2-ultisnips')
   augroup NCM2
@@ -127,7 +127,20 @@ if has('nvim') && has('python3') && Has_plugin('ncm2') && Has_plugin('ncm2-ultis
   augroup END
 endif
 
-" vim-autoformat -------------------------------------------
+" set completeopt=menuone,noselect,noinsert
+set shortmess+=c
+inoremap <C-c> <ESC>
+" make it fast
+let ncm2#popup_delay = 5
+let ncm2#complete_length = [[1, 1]]
+" Use new fuzzy based matches
+let g:ncm2#matcher = 'substrfuzzy'
+
+" ncm2-look.vim ---------------------------------------------------------------
+autocmd FileType markdown :let b:ncm2_look_enabled = 1
+let g:ncm2_look_mark = '📖'
+
+" vim-autoformat --------------------------------------------------------------
 " <F3>
 if Has_plugin('vim-autoformat')
   noremap <F3> :Autoformat<CR>
@@ -140,12 +153,12 @@ let g:formatter_yapf_style = 'pep8'
 let g:formatdef_black = '"black -qS - "'
 let g:formatters_python = ['black', 'yapf']
 
-" braceless.vim  -------------------------------------------------------
+" braceless.vim  --------------------------------------------------------------
 if Has_plugin('braceless.vim')
   autocmd FileType python BracelessEnable +indent
 endif
 
-" vim-easy-align  ------------------------------------------------------
+" vim-easy-align  -------------------------------------------------------------
 if Has_plugin('vim-easy-align')
   " Start interactive EasyAlign in visual mode (e.g. vipga).
   xmap ga <Plug>(EasyAlign)
@@ -153,7 +166,7 @@ if Has_plugin('vim-easy-align')
   nmap ga <Plug>(EasyAlign)
 endif
 
-" fzf.vim --------------------------------------------------------------
+" fzf.vim ---------------------------------------------------------------------
 " https://stackoverflow.com/a/5010399/3744499
 " Plugins are only loaded after vim has finished processing your .vimrc.
 " Also, pathogen doesn't actually load your plugins, it merely adds their
@@ -186,7 +199,7 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" ctrlp.vim ------------------------------------------------------------
+" ctrlp.vim -------------------------------------------------------------------
 " https://github.com/kien/ctrlp.vim
 
 " Quickly find and open a file in the current working directory
@@ -199,14 +212,14 @@ noremap <leader>m :CtrlPMRU<CR>
 let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
-" close-buffers.vim ----------------------------------------------------
+" close-buffers.vim -----------------------------------------------------------
 autocmd VimEnter *
       \ if exists(':Bdelete') |
       \   nnoremap <silent> Q     :Bdelete menu<CR> |
       \   nnoremap <silent> <C-q> :Bdelete menu<CR> |
       \ endif
 
-" lightline.vim --------------------------------------------------------
+" lightline.vim ---------------------------------------------------------------
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
@@ -230,7 +243,7 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'githunks': 'LightlineGitGutter',
-      \   'venv': 'virtualenv#statusline'
+      \   'venv': 'poetv#statusline',
       \ },
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': '|' }
@@ -279,7 +292,7 @@ function! LightlineGitGutter()
   return printf('+%d ~%d -%d', l:added, l:modified, l:removed)
 endfunction
 
-" lightline-bufferline --------------------------------------------------
+" lightline-bufferline --------------------------------------------------------
 if Has_plugin('lightline-bufferline')
   let g:lightline.tabline = {
         \   'left': [ ['buffers'] ],
@@ -307,14 +320,14 @@ if has('gui_running')
   set guioptions-=e
 endif
 
-" lightline-ale --------------------------------------------------------
+" lightline-ale ---------------------------------------------------------------
 " let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_checking = "◌"
 " let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "✖"
 let g:lightline#ale#indicator_ok = "✔"
 
-" dense-analysis/ale ---------------------------------------------------
+" dense-analysis/ale ----------------------------------------------------------
 let g:ale_completion_enabled = 0
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
@@ -332,47 +345,54 @@ let b:ale_fixers = {'python': ['black', 'isort']}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" vim-highlightedyank --------------------------------------------------
+" vim-highlightedyank ---------------------------------------------------------
 if Has_plugin('vim-highlightedyank')
   let g:highlightedyank_highlight_duration = 400
   " highlight HighlightedyankRegion cterm=reverse gui=reverse
 endif
 
-" tagbar ---------------------------------------------------------------
+" tagbar ----------------------------------------------------------------------
 if Has_plugin('tagbar')
   nmap <F8> :TagbarToggle<CR>
 endif
 
-" Nvim-R ---------------------------------------------------------------
+" Nvim-R ----------------------------------------------------------------------
 " https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt
 let R_rconsole_width = 75    " Let window always split vertically
 let R_min_editor_width = 18  " Disable underscore mapping
 let R_assign = 0
 
-" auto-pairs -----------------------------------------------------------
+" auto-pairs ------------------------------------------------------------------
 let b:autopairs_enabled = 0  " Disable by default
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 let g:AutoPairsShortcutFastWrap = '<M-e>'
 let g:AutoPairsShortcutToggle = '<M-p>'
 
-" vim-move -------------------------------------------------------------
+" vim-move --------------------------------------------------------------------
 " https://github.com/matze/vim-move
 let g:move_key_modifier = 'M'  " don't know but somehow that <opt + cmd> works for macos
 
-" vim-jedi -------------------------------------------------------------
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
+" jedi-vim --------------------------------------------------------------------
+" Disable Jedi-vim autocompletion and enable call-signatures options since we have NCM2 for autocompletion.
+let g:jedi#auto_initialization = 1
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = ""
+let g:jedi#show_call_signatures = "1"
+
+let g:jedi#goto_command = "<leader>gg"
+let g:jedi#goto_assignments_command = "<leader>ga"
+let g:jedi#goto_definitions_command = "<leader>gd"
 let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>u"
-let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 
-" vim-isort ------------------------------------------------------------
+" vim-isort -------------------------------------------------------------------
 let g:vim_isort_map = '<C-i>'
 
-" ctrlp-funky ----------------------------------------------------------
+" ctrlp-funky -----------------------------------------------------------------
 let g:ctrlp_funky_matchtype = 'path'
 let g:ctrlp_funky_syntax_highlight = 1
 if Has_plugin('ctrlp-funky')
@@ -380,22 +400,22 @@ if Has_plugin('ctrlp-funky')
   nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 endif
 
-" vim-esearch ----------------------------------------------------------
+" vim-esearch -----------------------------------------------------------------
 highlight ESearchMatch ctermfg=white ctermbg=204 guifg=#ffffff guibg=#FF3E7B
 
-" incsearch.vim --------------------------------------------------------
+" incsearch.vim ---------------------------------------------------------------
 " https://github.com/haya14busa/incsearch.vim/issues/79
 if has('nvim')
   set inccommand=nosplit
 endif
 
-" vim-gitgutter --------------------------------------------------------
+" vim-gitgutter ---------------------------------------------------------------
 let g:gitgutter_enabled=1
 
-" git-blame ------------------------------------------------------------
+" git-blame -------------------------------------------------------------------
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
-" quick-scope ----------------------------------------------------------
+" quick-scope -----------------------------------------------------------------
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
@@ -404,14 +424,10 @@ highlight QuickScopeSecondary guifg='#EF5F70' gui=underline ctermfg=81 cterm=und
 
 let g:qs_max_chars=150
 
-" vim-yankstack --------------------------------------------------------
+" vim-yankstack ---------------------------------------------------------------
 let g:yankstack_map_keys = 0
 
-" ncm2-look.vim --------------------------------------------------------
-autocmd FileType markdown :let b:ncm2_look_enabled = 1
-let g:ncm2_look_mark = '📖'
-
-" vim-textobj-quote ----------------------------------------------------
+" vim-textobj-quote -----------------------------------------------------------
 filetype plugin on       " may already be in your .vimrc
 
 if Has_plugin('vim-textobj-quote')
@@ -427,7 +443,7 @@ endif
 map <silent> <leader>qc <Plug>ReplaceWithCurly
 map <silent> <leader>qs <Plug>ReplaceWithStraight
 
-" LeaderF --------------------------------------------------------------
+" LeaderF ---------------------------------------------------------------------
 " don't show the help in normal mode
 let g:Lf_HideHelp = 1
 let g:Lf_UseCache = 0
@@ -448,7 +464,7 @@ noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 " noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
 " noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
-" Defx ----------------------------------------------------------------
+" Defx ------------------------------------------------------------------------
 nmap <silent> <Leader>nn :Defx -columns=icons:indent:filename:type <cr>
 
 call defx#custom#option('_', {
@@ -481,3 +497,12 @@ endif
 
 " defx-icons
 hi link DefxIconsOpenedTreeIcon Error
+
+" sbdchd/neoformat ------------------------------------------------------------
+let g:neoformat_enabled_python = ['black', 'yapf']
+
+" petobens/poet-v -------------------------------------------------------------
+let g:poetv_executables = ['poetry', 'pipenv']
+let g:poetv_auto_activate = 1
+let g:poetv_statusline_symbol = ''
+let g:poetv_set_environment = 1
