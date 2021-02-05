@@ -465,25 +465,105 @@ noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 " noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
 " Defx ------------------------------------------------------------------------
-nmap <silent> <Leader>nn :Defx -columns=icons:indent:filename:type <cr>
-
-call defx#custom#option('_', {
-      \ 'winwidth': 40,
-      \ 'split': 'vertical',
-      \ 'direction': 'topleft',
-      \ 'show_ignored_files': 0,
-      \ 'buffer_name': '',
-      \ 'toggle': 1,
-      \ 'resume': 1
-      \ })
 
 if Has_plugin('defx.nvim')
   autocmd FileType defx call s:defx_mappings()
 
+  nmap <silent> <Leader>nn :Defx -columns=mark:indent:git:icons:filename:type -floating-preview <cr>
+
+  call defx#custom#option('_', {
+        \ 'winwidth': 40,
+        \ 'split': 'vertical',
+        \ 'direction': 'topleft',
+        \ 'show_ignored_files': 0,
+        \ 'buffer_name': '',
+        \ 'toggle': 1,
+        \ 'resume': 1
+        \ })
+
+  " defx-git
+  call defx#custom#column('git', 'indicators', {
+	\ 'Modified'  : '✹',
+	\ 'Staged'    : '✚',
+	\ 'Untracked' : '✭',
+	\ 'Renamed'   : '➜',
+	\ 'Unmerged'  : '═',
+	\ 'Ignored'   : '☒',
+	\ 'Deleted'   : '✖',
+	\ 'Unknown'   : '?'
+	\ })
+
+  hi Defx_git_Untracked guifg=#FF0000
+
   function! s:defx_mappings() abort
-    nnoremap <silent><buffer><expr> o     <SID>defx_toggle_tree()                    " 開啟或者關閉資料夾，檔案
-    nnoremap <silent><buffer><expr> .     defx#do_action('toggle_ignored_files')     " 顯示隱藏檔案
-    nnoremap <silent><buffer><expr> <C-r>  defx#do_action('redraw')
+    " Define mappings
+    nnoremap <silent><buffer><expr> <CR>
+    \ defx#do_action('drop')
+	nnoremap <silent><buffer><expr> <2-LeftMouse>
+	\ defx#do_action('drop')
+    nnoremap <silent><buffer><expr> c
+    \ defx#do_action('copy')
+    nnoremap <silent><buffer><expr> m
+    \ defx#do_action('move')
+    nnoremap <silent><buffer><expr> p
+    \ defx#do_action('paste')
+    nnoremap <silent><buffer><expr> l
+    \ defx#do_action('open')
+    nnoremap <silent><buffer><expr> E
+    \ defx#do_action('open', 'vsplit')
+    nnoremap <silent><buffer><expr> P
+    \ defx#do_action('preview')
+    nnoremap <silent><buffer><expr> o
+    \ defx#do_action('open_tree', 'toggle')
+    nnoremap <silent><buffer><expr> K
+    \ defx#do_action('new_directory')
+    nnoremap <silent><buffer><expr> N
+    \ defx#do_action('new_file')
+    nnoremap <silent><buffer><expr> M
+    \ defx#do_action('new_multiple_files')
+    nnoremap <silent><buffer><expr> C
+    \ defx#do_action('toggle_columns',
+    \                'mark:indent:icon:filename:type:size:time')
+    nnoremap <silent><buffer><expr> S
+    \ defx#do_action('toggle_sort', 'time')
+    nnoremap <silent><buffer><expr> d
+    \ defx#do_action('remove')
+    nnoremap <silent><buffer><expr> r
+    \ defx#do_action('rename')
+    nnoremap <silent><buffer><expr> !
+    \ defx#do_action('execute_command')
+    nnoremap <silent><buffer><expr> x
+    \ defx#do_action('execute_system')
+    nnoremap <silent><buffer><expr> yy
+    \ defx#do_action('yank_path')
+    nnoremap <silent><buffer><expr> .
+    \ defx#do_action('toggle_ignored_files')
+    nnoremap <silent><buffer><expr> ;
+    \ defx#do_action('repeat')
+    nnoremap <silent><buffer><expr> h
+    \ defx#do_action('cd', ['..'])
+    nnoremap <silent><buffer><expr> ~
+    \ defx#do_action('cd')
+    nnoremap <silent><buffer><expr> q
+    \ defx#do_action('quit')
+    nnoremap <silent><buffer><expr> <Space>
+    \ defx#do_action('toggle_select') . 'j'
+    nnoremap <silent><buffer><expr> *
+    \ defx#do_action('toggle_select_all')
+    nnoremap <silent><buffer><expr> j
+    \ line('.') == line('$') ? 'gg' : 'j'
+    nnoremap <silent><buffer><expr> k
+    \ line('.') == 1 ? 'G' : 'k'
+    nnoremap <silent><buffer><expr> <C-r>
+    \ defx#do_action('redraw')
+    nnoremap <silent><buffer><expr> <C-g>
+    \ defx#do_action('print')
+    nnoremap <silent><buffer><expr> cd
+    \ defx#do_action('change_vim_cwd')
+    nnoremap <silent><buffer><expr> > defx#do_action('resize',
+	\ defx#get_context().winwidth + 10)
+	nnoremap <silent><buffer><expr> < defx#do_action('resize',
+	\ defx#get_context().winwidth - 10)
   endfunction
 
   function! s:defx_toggle_tree() abort
@@ -494,9 +574,6 @@ if Has_plugin('defx.nvim')
       return defx#do_action('multi', ['drop'])
   endfunction
 endif
-
-" defx-icons
-hi link DefxIconsOpenedTreeIcon Error
 
 " sbdchd/neoformat ------------------------------------------------------------
 let g:neoformat_enabled_python = ['black', 'yapf']

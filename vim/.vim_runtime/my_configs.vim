@@ -242,9 +242,9 @@ vnoremap <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn
 
 " map paste, yank and delete to named register so the content
 " will not be overwritten (I know I should just remember...)
-nnoremap x "_x
-vnoremap x "_x
-nnoremap cc "_cc
+nnoremap x "0x
+vnoremap x "0x
+nnoremap cc "0cc
 
 """ Cut to yanked register
 nnoremap <leader>x "0x
