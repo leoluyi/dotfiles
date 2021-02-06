@@ -366,7 +366,7 @@ let R_min_editor_width = 18  " Disable underscore mapping
 let R_assign = 0
 
 " auto-pairs ------------------------------------------------------------------
-let b:autopairs_enabled = 0  " Disable by default
+autocmd BufEnter * let b:autopairs_enabled = 0  " Disable by default
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 let g:AutoPairsShortcutFastWrap = '<M-e>'
