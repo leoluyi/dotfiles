@@ -141,12 +141,15 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set relativenumber   | endif
 augroup END
 
-""" auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-au! BufWritePost $MYVIMRC source %
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => My Shortcut Keys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" Edit and source vimrc
+map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
+nnoremap <leader>rc :source $MYVIMRC<CR>
+""" auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+au! BufWritePost $MYVIMRC source %
 
 """ No highlight search
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
@@ -274,15 +277,17 @@ imap <C-k> <C-o>D
 " => Toggle transparent background
 "--------------------------
 " https://jnrowe.github.io/articles/tips/Toggling_settings_in_vim.html
+" https://stackoverflow.com/a/37720708/3744499
 let t:is_transparent = 0
 function! ToggleTransparent()
-    if t:is_transparent == 0
-        hi Normal guibg=NONE ctermbg=NONE
-        let t:is_transparent = 1
-    else
-        set background=dark
-        let t:is_tranparent = 0
-    endif
+  if t:is_transparent == 0
+    hi Normal ctermbg=NONE guibg=NONE
+    let t:is_transparent = 1
+  else
+    hi Normal ctermbg=235 guibg=#282828
+    set background=dark
+    let t:is_transparent = 0
+  endif
 endfunction
 command! ToggleTransparent call ToggleTransparent()
 nnoremap <leader>t : call ToggleTransparent()<CR>

@@ -172,16 +172,19 @@ endif
 " Also, pathogen doesn't actually load your plugins, it merely adds their
 " containing folders to the runtimepath option so they will be loaded after your .vimrc
 
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+
 " You could create a VimEnter autocmd to set up your mapping after vim has finished loading:
-autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<cr>" | endif
+autocmd VimEnter * if exists(':Files') | exe "map <leader>f :Files<CR>" | endif
+autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<CR>" | endif
+autocmd VimEnter * if exists(':History') | exe "map <leader>m :History<CR>" | endif
 
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
-
-let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -199,18 +202,18 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" ctrlp.vim -------------------------------------------------------------------
-" https://github.com/kien/ctrlp.vim
-
-" Quickly find and open a file in the current working directory
-let g:ctrlp_map = '<C-f>'
-let g:ctrlp_working_path_mode = 'ra'
-
-" Quickly find and open a recently opened file
-noremap <leader>m :CtrlPMRU<CR>
-
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+" " ctrlp.vim -------------------------------------------------------------------
+" " https://github.com/kien/ctrlp.vim
+" 
+" " Quickly find and open a file in the current working directory
+" let g:ctrlp_map = '<C-f>'
+" let g:ctrlp_working_path_mode = 'ra'
+" 
+" " Quickly find and open a recently opened file
+" noremap <leader>m :CtrlPMRU<CR>
+" 
+" let g:ctrlp_max_height = 20
+" let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 " close-buffers.vim -----------------------------------------------------------
 autocmd VimEnter *
