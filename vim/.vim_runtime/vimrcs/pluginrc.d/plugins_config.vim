@@ -430,7 +430,7 @@ let g:qs_max_chars=150
 " vim-yankstack ---------------------------------------------------------------
 let g:yankstack_map_keys = 0
 
-" vim-textobj-quote -----------------------------------------------------------
+" reedes/vim-textobj-quote ----------------------------------------------------
 filetype plugin on       " may already be in your .vimrc
 
 if Has_plugin('vim-textobj-quote')

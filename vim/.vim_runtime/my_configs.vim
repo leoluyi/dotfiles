@@ -36,6 +36,7 @@ nnoremap <leader>, ,
 set updatetime=500                    " Faster completion
 
 """ Backups
+set hidden                            " Opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
 set history=50                        " Keep 50 lines of command line history
 set nobackup                          " No *~ backup files
 set nowritebackup                     " Do not make a backup before overwriting a file
