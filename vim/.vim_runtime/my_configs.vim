@@ -219,12 +219,15 @@ map <Leader>tk <C-w>t<C-w>K
 " => Code editing stuffs
 "----------------------------
 
-""" <F6> -  Absolute numbers
-map <F6> :set relativenumber!<CR>
-
 """ <F5> -  Remove all trailing whitespace. https://vim.fandom.com/wiki/Remove_unwanted_spaces
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 command! WhitespateTrailingRemove :%s/\s\+$//e
+
+""" <F6> -  Absolute numbers
+map <F6> :set relativenumber!<CR>
+
+""" Re-indent current buffer
+command! Reindent <F3> gg=G''
 
 """ :W   -  Force write. Allow saving of files as sudo
 if !has('nvim')
