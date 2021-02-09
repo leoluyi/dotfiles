@@ -168,10 +168,13 @@ nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 
 """ Close a buffer without closing the window?
 " https://stackoverflow.com/a/19619038/3744499
-nmap ,bd :b#<bar>bd#<CR>
+" (Close the current buffer and move to the alternative one)
+nmap <leader>bd :b#<bar>bd#<CR>
 
 """ Add new file in the directory of the open file
-nmap ,a :e %:h/
+nmap <leader>a :e %:h/
+""" Add new file in the working directory
+nmap <leader>A :e <C-r>=getcwd()<CR>/
 
 """ Splits and tabbed files
 " Make adjusting split sizes a bit more friendly
@@ -235,7 +238,7 @@ map <Leader>tk <C-w>t<C-w>K
 "----------------------------
 
 """ <F5> -  Remove all trailing whitespace. https://vim.fandom.com/wiki/Remove_unwanted_spaces
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:echo 'Remove trailing whitespace'<CR>
 
 """ <F6> -  Absolute numbers
 map <F6> :set relativenumber!<CR>

@@ -217,17 +217,18 @@ let g:fzf_colors =
 
 " close-buffers.vim -----------------------------------------------------------
 autocmd VimEnter *
-      \ if exists(':Bdelete') |
-      \   nnoremap <silent> Q     :Bdelete menu<CR> |
-      \   nnoremap <silent> <C-q> :Bdelete menu<CR> |
-      \ endif
+  \ if exists(':Bdelete') |
+  \   nnoremap <silent> Q     :Bdelete menu<CR> |
+  \   nnoremap <silent> <C-q> :Bdelete menu<CR> |
+  \   nnoremap <leader>bo :Bdelete hidden<CR> |
+  \ endif
 
 " lightline.vim ---------------------------------------------------------------
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
-      \             ['fugitive', 'readonly', 'filename', 'modified'],
+      \             ['readonly', 'filename', 'fugitive', 'modified'],
       \             ['zoomstatus', 'githunks', 'venv'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \              [ 'percent', 'lineinfo' ],
@@ -236,7 +237,7 @@ let g:lightline = {
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+      \   'fugitive': '%{exists("*fugitive#head")?" ".fugitive#head():""}',
       \   'zoomstatus': '%{exists("*zoom#statusline")?zoom#statusline():""}'
       \ },
       \ 'component_visible_condition': {
