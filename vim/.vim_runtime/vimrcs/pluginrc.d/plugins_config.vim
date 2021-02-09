@@ -225,11 +225,11 @@ autocmd VimEnter *
 
 " lightline.vim ---------------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'one dark',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
-      \             ['readonly', 'filename', 'fugitive', 'modified'],
-      \             ['zoomstatus', 'githunks', 'venv'] ],
+      \             ['readonly', 'filename', 'modified', 'fugitive'],
+      \             ['githunks', 'venv', 'zoomstatus'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \              [ 'percent', 'lineinfo' ],
       \              [ 'fileformat', 'fileencoding', 'filetype'] ],
@@ -251,7 +251,7 @@ let g:lightline = {
       \   'filename': 'LightlineFilename',
       \ },
       \ 'separator': { 'left': ' ', 'right': ' ' },
-      \ 'subseparator': { 'left': ' ', 'right': '|' }
+      \ 'subseparator': { 'left': '', 'right': '|' }
       \ }
 
 let g:lightline.component_expand = {
