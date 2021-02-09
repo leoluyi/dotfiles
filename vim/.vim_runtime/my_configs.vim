@@ -155,8 +155,13 @@ augroup END
 """ Edit and source vimrc
 map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
 nnoremap <leader>rc :source $MYVIMRC<CR>
+
 """ auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-au! BufWritePost $MYVIMRC source %
+autocmd! BufWritePost $MYVIMRC source %
+
+""" Mark current position to 's' before search, so that you can jump back by hitting <'s>
+nnoremap / ms/
+nnoremap ? ms?
 
 """ No highlight search
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
@@ -202,6 +207,9 @@ nnoremap <Leader>O O<Esc>^Da
 """ Spellcheck
 nnoremap <leader>sc setlocal spell!
 
+""" Show marks list and goto
+nnoremap <localleader>m :<C-u>marks<CR>:normal! `
+
 "----------------------------
 " => Splits and Tabbed Files
 "----------------------------
@@ -212,8 +220,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 """ Make adjusing split sizes a bit more friendly
-noremap <silent> <C-S-Left> :vertical resize +3<CR>
-noremap <silent> <C-S-Right> :vertical resize -3<CR>
+noremap <silent> <C-S-Left> :vertical resize -3<CR>
+noremap <silent> <C-S-Right> :vertical resize +3<CR>
 noremap <silent> <C-S-Up> :resize +3<CR>
 noremap <silent> <C-S-Down> :resize -3<CR>
 nnoremap <silent> <leader>rp :resize 100<CR>
