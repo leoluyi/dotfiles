@@ -306,6 +306,12 @@ function! LightlineFilename()
         \ expand('%:~:.') !=# '' ? expand('%:~:.') : '[No Name]'
 endfunction
 
+" display the plugin information
+" https://github.com/itchyny/lightline.vim#can-i-display-the-plugin-information-at-the-filename-component
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
+
 " lightline-bufferline --------------------------------------------------------
 if Has_plugin('lightline-bufferline')
   let g:lightline.tabline = {
