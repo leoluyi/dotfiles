@@ -25,6 +25,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+alias work='[ -d ~/_playground_side_projects ] && cd ~/_playground_side_projects'
+
 # IP addresses
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 #alias localip="ipconfig getifaddr en0"
