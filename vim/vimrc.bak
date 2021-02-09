@@ -39,7 +39,7 @@ set autoread
 " Statusline ------------------------------------------------------------------
 " https://shapeshed.com/vim-statuslines/
 function! GitBranch()
-  if has('git')
+  if executable('git')
     return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
   else
     return ''

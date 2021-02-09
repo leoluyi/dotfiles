@@ -216,7 +216,7 @@ let g:fzf_colors =
 " let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 " close-buffers.vim -----------------------------------------------------------
-autocmd VimEnter *
+autocmd BufEnter *
   \ if exists(':Bdelete') |
   \   nnoremap <silent> Q     :Bdelete menu<CR> |
   \   nnoremap <silent> <C-q> :Bdelete menu<CR> |
@@ -453,6 +453,7 @@ highlight QuickScopeSecondary guifg='#EF5F70' gui=underline ctermfg=81 cterm=und
 let g:qs_max_chars=150
 
 " vim-yankstack ---------------------------------------------------------------
+" load yankstack without the default key mappings
 let g:yankstack_map_keys = 0
 
 " reedes/vim-textobj-quote ----------------------------------------------------
@@ -622,12 +623,17 @@ endif
 " https://www.youtube.com/watch?v=PO6DxfGPQvw
 
 " git status
-nnoremap <leader>gs :G<CR>
-nnoremap <leader>gf :diffget //2
-nnoremap <leader>gj :diffget //3
+autocmd BufEnter * |
+  \ if exists(':G') |
+  \   nnoremap <leader>gs :G<CR> |
+  \   nnoremap <leader>gf :diffget //2 |
+  \   nnoremap <leader>gj :diffget //3 |
+  \ endif
 
 " tpope/vim-commentary --------------------------------------------------------
-if exists(':Commentary')
-  nmap <localleader>/ :Commentary<CR>
-  vmap <localleader>/ :Commentary<CR>
-endif
+autocmd BufEnter * |
+  \ if exists(':Commentary') |
+  \   echom 'hihi' |
+  \   nnoremap <localleader>/ :Commentary<CR> |
+  \   vnoremap <localleader>/ :Commentary<CR> |
+  \ endif
