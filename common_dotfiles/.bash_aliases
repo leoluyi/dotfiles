@@ -26,6 +26,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 alias work='[ -d ~/_playground_side_projects ] && cd ~/_playground_side_projects'
+alias Dropbox='[ -d ~/Dropbox ] && cd ~/Dropbox'
+alias temp='[ -d ~/Downloads/.temp ] && cd ~/Downloads/.temp'
 
 # IP addresses
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
