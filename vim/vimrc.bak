@@ -2,7 +2,7 @@
 syntax on
 filetype off
 
-colorscheme elflord
+colorscheme default
 
 " Backspace
 "http://stackoverflow.com/questions/11560201/backspace-key-not-working-in-vim-vi
@@ -14,9 +14,9 @@ set textwidth=80
 " Spaces are better than a tab character
 set expandtab
 set smarttab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 
 " line number, use "set nonumber" to take off
 set number
@@ -34,51 +34,69 @@ set fileencoding=utf-8
 " Finding files
 " Display all matchng files when using :find tab autocompletion
 set wildmenu
-
 set autoread
 
-" Vundle settings ------------------------------------
+" Statusline ------------------------------------------------------------------
+" https://shapeshed.com/vim-statuslines/
+function! GitBranch()
+  if has('git')
+    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+  else
+    return ''
+  endif
+endfunction
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?' '.l:branchname.'  ':''
+endfunction
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+function IsBinary()
+	if (&binary == 0)
+		return ""
+	else
+		return "[Binary]"
+	endif
+endfunction
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-scripts/Vim-R-plugin'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+function FileSize()
+  " https://magiclen.org/vimrc/
+	let bytes = getfsize(expand("%:p"))
+	if bytes <= 0
+		return "[Empty]"
+	endif
+	if bytes < 1024
+		return "[" . bytes . "B]"
+	elseif bytes < 1048576
+		return "[" . (bytes / 1024) . "KB]"
+	else
+		return "[" . (bytes / 1048576) . "MB]"
+	endif
+endfunction
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+function! Filename()
+  return expand('%:~:.') !=# '' ? expand('%:~:.') : '[No Name]'
+endfunction
 
-" ----------------------------------------------------
-
-vmap <Space> <Plug>RDSendSelection
-nmap <Space> <Plug>RDSendLine
-let vimrplugin_applescript=0
-let vimrplugin_vsplit=1
-let vimrplugin_assign = 0
-
-" ---------------------------------------------------
-
-let g:airline_theme="powerlineish" 
-
-" Fonts 
-let g:airline_powerline_fonts = 1   
-let g:airline#extensions#tabline#enabled = 1
+" Ensure that the status bar is enabled
 set laststatus=2
 
-
+set statusline=
+set statusline+=%#CursorColumn#
+set statusline+=[%{mode()}]
+set statusline+=%{&paste?'[PASTE]':''}
+set statusline+=%{StatuslineGit()}
+set statusline+=\ %#TabLineSel#
+set statusline+=\ %{Filename()}
+set statusline+=\ %m              " Modified
+set statusline+=\ %{FileSize()}%{IsBinary()}  " File size
+set statusline+=%=                " Split
+set statusline+=%#CursorColumn#
+set statusline+=\ %{&fileformat}  " File format
+set statusline+=\ \|\ %{&fileencoding?&fileencoding:&encoding}  " Encoding
+set statusline+=\ \|\ %{strlen(&filetype)?&filetype:'plain'}    " Filetype
+set statusline+=\ \ %#PmenuSel#
+set statusline+=\ \ %p%%          " Percentage through
+set statusline+=\ \|\ %l:%c       " Line number:Column number
+set statusline+=\ %#LineNr#
+set statusline+=\ ✔

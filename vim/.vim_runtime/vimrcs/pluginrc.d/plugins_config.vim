@@ -225,7 +225,7 @@ autocmd VimEnter *
 
 " lightline.vim ---------------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'one dark',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['readonly', 'filename', 'modified', 'fugitive'],
@@ -378,9 +378,17 @@ endif
 
 " Nvim-R ----------------------------------------------------------------------
 " https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt
-let R_rconsole_width = 75    " Let window always split vertically
-let R_min_editor_width = 18  " Disable underscore mapping
-let R_assign = 0
+if Has_plugin('Nvim-R')
+  vmap <localleader><CR> <Plug>RDSendSelection
+  nmap <localleader><CR> <Plug>RDSendLine
+
+  let R_rconsole_width = 75    " Let window always split vertically
+  let R_min_editor_width = 18
+  let R_assign = 0  " Disable underscore mapping to assign
+  let vimrplugin_applescript=0
+  let vimrplugin_vsplit=1
+  let vimrplugin_assign = 0
+endif
 
 " auto-pairs ------------------------------------------------------------------
 autocmd BufEnter * let b:autopairs_enabled = 0  " Disable by default

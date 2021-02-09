@@ -108,9 +108,15 @@ set listchars=tab:→\ ,eol:↲,space:·,nbsp:␣,trail:•,precedes:«,extends:
 """ Encoding
 set encoding=utf-8                    " Used internally, always utf-8
 set fileencoding=utf-8                " File-content encoding for the current buffle
-set fileencodings=utf-8,cp950         " A list of character encodings considered when starting to edit an existing file
 set fileformats=unix,dos,mac
 set ttyfast
+
+if has("multi_byte")
+  " A list of character encodings considered when starting to edit an existing file
+  set fileencodings=utf-8,utf-16,cp950,big5,gb2312,gbk,gb18030,euc-jp,euc-kr,latin1
+else
+  echoerr "If +multi_byte is not included, you should compile Vim with big features."
+endif
 
 """ Number formats
 set nrformats-=octal
