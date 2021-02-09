@@ -56,13 +56,17 @@ if has("termguicolors")
 endif
 
 """ Colors
-try
-  " Most terminals don't handle italics right so gruvbox disables italics for terminals by default
-  " https://github.com/gruvbox-community/gruvbox/wiki/Terminal-specific#1-italics-is-disabled
+" Most terminals don't handle italics right so gruvbox disables italics for terminals by default
+" https://github.com/gruvbox-community/gruvbox/wiki/Terminal-specific#1-italics-is-disabled
+if has('nvim')
   let g:gruvbox_italic=1
+endif
+
+try
   colorscheme gruvbox
 catch
 endtry
+
 set background=dark
 
 " Enable true color

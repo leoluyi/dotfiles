@@ -41,7 +41,7 @@ set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*
 let NERDTreeRespectWildIgnore=1
 
 "Close automatically when NERDTree is the only remaining window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " after a re-source, fix syntax matching issues (concealing brackets):
 if exists('g:loaded_webdevicons')
@@ -623,7 +623,7 @@ endif
 " https://www.youtube.com/watch?v=PO6DxfGPQvw
 
 " git status
-autocmd BufEnter * |
+autocmd BufEnter *
   \ if exists(':G') |
   \   nnoremap <leader>gs :G<CR> |
   \   nnoremap <leader>gf :diffget //2 |
@@ -631,9 +631,8 @@ autocmd BufEnter * |
   \ endif
 
 " tpope/vim-commentary --------------------------------------------------------
-autocmd BufEnter * |
+autocmd BufEnter *
   \ if exists(':Commentary') |
-  \   echom 'hihi' |
   \   nnoremap <localleader>/ :Commentary<CR> |
   \   vnoremap <localleader>/ :Commentary<CR> |
   \ endif
