@@ -248,6 +248,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'githunks': 'LightlineGitGutter',
       \   'venv': 'virtualenv#statusline',
+      \   'filename': 'LightlineFilename',
       \ },
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': '|' }
@@ -294,6 +295,15 @@ function! LightlineGitGutter()
   endif
   let [ l:added, l:modified, l:removed ] = GitGutterGetHunkSummary()
   return printf('+%d ~%d -%d', l:added, l:modified, l:removed)
+endfunction
+
+function! LightlineFilename()
+  " which expands the name of the current file, but prevents the expansion of
+  " the tilde (:~), and makes the path relative to the current working directory (:.).
+  return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
+        \ &filetype ==# 'unite' ? unite#get_status_string() :
+        \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
+        \ expand('%:~:.') !=# '' ? expand('%:~:.') : '[No Name]'
 endfunction
 
 " lightline-bufferline --------------------------------------------------------
