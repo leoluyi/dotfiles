@@ -140,7 +140,7 @@ let g:ncm2#matcher = 'substrfuzzy'
 autocmd FileType markdown :let b:ncm2_look_enabled = 1
 let g:ncm2_look_mark = '📖'
 
-" vim-autoformat --------------------------------------------------------------
+" wim-autoformat --------------------------------------------------------------
 " <F3>
 if Has_plugin('vim-autoformat')
   noremap <F3> :Autoformat<CR>
@@ -204,14 +204,14 @@ let g:fzf_colors =
 
 " " ctrlp.vim -------------------------------------------------------------------
 " " https://github.com/kien/ctrlp.vim
-" 
+"
 " " Quickly find and open a file in the current working directory
 " let g:ctrlp_map = '<C-f>'
 " let g:ctrlp_working_path_mode = 'ra'
-" 
+"
 " " Quickly find and open a recently opened file
 " noremap <leader>m :CtrlPMRU<CR>
-" 
+"
 " let g:ctrlp_max_height = 20
 " let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
@@ -586,3 +586,23 @@ let g:neoformat_enabled_python = ['black', 'yapf']
 " let g:poetv_auto_activate = 1
 " let g:poetv_statusline_symbol = ''
 " let g:poetv_set_environment = 1
+
+" jremmen/vim-rigpgrep --------------------------------------------------------
+if executable('rg')
+  let g:rg_derive_root='true'
+  let g:rg_root_types=['.git']
+endif
+
+" tpope/vim-fugitive ----------------------------------------------------------
+" https://www.youtube.com/watch?v=PO6DxfGPQvw
+
+" git status
+nnoremap <leader>gs :G<CR>
+nnoremap <leader>gf :diffget //2
+nnoremap <leader>gj :diffget //3
+
+" tpope/vim-commentary --------------------------------------------------------
+if exists(':Commentary')
+  nmap <localleader>/ :Commentary<CR>
+  vmap <localleader>/ :Commentary<CR>
+endif

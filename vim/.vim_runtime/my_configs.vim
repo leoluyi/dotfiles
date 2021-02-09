@@ -13,7 +13,7 @@ endif
 "  virtualenv for Neovim and hard-code the interpreter path via
 "  g:python3_host_prog (or g:python_host_prog) so that the "pynvim" package
 "  is not required for each virtualenv.
-" 
+"
 "  Example using pyenv:
 "    ¦ pyenv install 3.4.4
 "    ¦ pyenv virtualenv 3.4.4 py3nvim
@@ -30,7 +30,7 @@ let g:python3_host_prog = s:user_home . '.pyenv/versions/py3nvim/bin/python'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader = ","
-let maplocalleader = "\\"
+let maplocalleader = "\<space>"
 nnoremap <leader>, ,
 
 set updatetime=500                    " Faster completion
@@ -57,10 +57,16 @@ endif
 
 """ Colors
 try
+  " Most terminals don't handle italics right so gruvbox disables italics for terminals by default
+  " https://github.com/gruvbox-community/gruvbox/wiki/Terminal-specific#1-italics-is-disabled
+  let g:gruvbox_italic=1
   colorscheme gruvbox
 catch
 endtry
 set background=dark
+
+" Enable true color
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 """ Editing
 " set clipboard=unnamedplus           " Yank to the system register (*) by default
@@ -210,6 +216,7 @@ noremap <silent> <C-S-Left> :vertical resize +3<CR>
 noremap <silent> <C-S-Right> :vertical resize -3<CR>
 noremap <silent> <C-S-Up> :resize +3<CR>
 noremap <silent> <C-S-Down> :resize -3<CR>
+nnoremap <silent> <leader>rp :resize 100<CR>
 
 """ Change 2 split windows from vert to horiz or horiz to vert
 map <Leader>th <C-w>t<C-w>H
@@ -221,13 +228,12 @@ map <Leader>tk <C-w>t<C-w>K
 
 """ <F5> -  Remove all trailing whitespace. https://vim.fandom.com/wiki/Remove_unwanted_spaces
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-command! WhitespateTrailingRemove :%s/\s\+$//e
 
 """ <F6> -  Absolute numbers
 map <F6> :set relativenumber!<CR>
 
 """ Re-indent current buffer
-command! Reindent <F3> gg=G''
+command! ReindentAll <F3> gg=G''
 
 """ :W   -  Force write. Allow saving of files as sudo
 if !has('nvim')
@@ -249,13 +255,17 @@ vnoremap <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn
 
 " map paste, yank and delete to named register so the content
 " will not be overwritten (I know I should just remember...)
-nnoremap x "0x
-vnoremap x "0x
-nnoremap cc "0cc
+
+" `_` register, the black hole
+nnoremap x "_x
+vnoremap x "_x
 
 """ Cut to yanked register
 nnoremap <leader>x "0x
 vnoremap <leader>x "0x
+nnoremap <leader>S "0S
+nnoremap <leader>D "0D
+nnoremap cc "0cc
 
 """ Paste from yanked register
 nnoremap <leader>P "0P
@@ -275,7 +285,7 @@ vnoremap <leader>yy "+yy
 " => Map normal mode commands to insert mode
 "--------------------------
 " Delete to the end of line
-imap <C-k> <C-o>D  
+imap <C-k> <C-o>D
 
 "--------------------------
 " => Toggle transparent background
@@ -290,6 +300,9 @@ function! ToggleTransparent()
   else
     hi Normal ctermbg=235 guibg=#282828
     set background=dark
+    let l:scheme = 'gruvbox'
+    exe "silent! colorscheme " . l:scheme
+    exe "silent! LightlineColorscheme " . l:scheme
     let t:is_transparent = 0
   endif
 endfunction
@@ -337,6 +350,9 @@ endtry
 " => Global functions.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"--------------------------
+" FoldColumnToggle
+"--------------------------
 function! FoldColumnToggle()
   " https://www.kawabangga.com/posts/1990
   if &foldcolumn
@@ -354,6 +370,9 @@ endfunction
 
 command! -nargs=1 Highlight :call Highlight(<q-args>)
 
+"--------------------------
+" Rename3
+"--------------------------
 " Rename3.vim  -  Rename a buffer within Vim and on disk.
 "
 " https://github.com/aehlke/vim-rename3/blob/master/rename3.vim
@@ -391,6 +410,28 @@ function! Rename(name, bang)
     echoerr v:errmsg
   endif
 endfunction
+
+"--------------------------
+" => TrimWhitespace
+"--------------------------
+function! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+command! TrimWhitespace :call TrimWhitespace()
+command! WhitespaceTrailingRemove :%s/\s\+$//e
+
+"--------------------------
+" => EmptyRegisters
+"--------------------------
+function! EmptyRegisters()
+  let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
+  for r in regs
+    call setreg(r, [])
+  endfor
+endfun
+command! EmptyRegisters :call EmptyRegisters()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => References

@@ -91,13 +91,20 @@ T<character>  -   to find backwards
 
 ```
 <C-o> and <C-i>       -   up / down walk through the jump list history
+```
 
+Special marks `:marks`
+
+```
 ''                    -   jump to previous line position
+'0                    -   jump to last file edited when Vim was exited
+
 
 `` (double backtick)  -   jump between previous position and the current position cursor position in jump list
+`.                    -   go back last-change-position special mark
 
-(The ` goes to a mark, and "." is a "special" mark which is automatically
- set to the position where the last change was made)
+
+(The ` goes to a mark position, and the ' goes to a line position)
 ```
 
 **The changelist**
@@ -106,8 +113,6 @@ T<character>  -   to find backwards
 
 
 ```
-`.                    -   go back last change position
-
 g; and g,             -   jump back and forth change list
 ```
 
@@ -318,11 +323,12 @@ set wildchar=<Tab> wildcharm=<C-Z>
 :sb[uffer] {bufname}       -   horizontal split with {bufname} from the buffer
 :vert sb[uffer] {bufname}  -   vertical split with {bufname} from the buffer
 :vert sball                -   vertical split all buffers
-:vs | buffer {bufname}     -   (same as above)
+:vs | b[uffer] {bufname}   -   (same as above)
 
 :new                -   horizontal split with new file
 :vnew               -   vertical split with new file
 
+https://vi.stackexchange.com/a/9480
 :clo[se]            -   close current window
 :hide               -   hide current window
 :only               -   keep only this window open
@@ -336,7 +342,7 @@ args **/*.yaml      -   manually add all yaml files into arg list;
 :sall               -   then open them all in split windows;
 :vert sall          -   or in vertically split windows.
 
-# Switch between panes
+# Switch between windows
 
 <C-w> [hjkl] or <C-hjkl>  -   move cursor up/down/left/right a window (`<C-w> arrow`)
 <C-w> w                   -   move cursor to another window (cycle)
@@ -350,8 +356,9 @@ args **/*.yaml      -   manually add all yaml files into arg list;
 <C-w> s             -   split current window horizontally
 <C-w> v             -   split current window [v]ertically
 <C-w> n (or :new)   -   open new window (horizontally)
+
 <C-w> c             -   close current window
-<C-w> o             -   close every window in the current tabview but the current one
+<C-w>o / <C-w><C-o> -   (Only window) close all other windows
 
 <c-w> t             -   makes the first (topleft) window current
 <C-w> T             -   move current window into new tab
@@ -814,6 +821,7 @@ U        -   Undo all changes on current line
 
 g~$      -   Toggle case of all characters to end of line.
 g~~      -   Toggle case of the current line (same as V~).
+gUiw     -   Uppercase the word
 gUU      -   switch the current line to upper case
 guu      -   switch the current line to lower case
 
@@ -831,8 +839,8 @@ gx       -   Open URL under cursor with browser
 -> (Use j to go down N lines)
 -> I         -  Insert 0. <Esc> to exit insert mode.
 -> gv        -  to re-select the previously selected area.
--> g <C-a>  -  to create a sequence
--> (Use 2g <C-a> to use a step count of 2.)
+-> g<C-a>  -  to create a sequence
+-> (Use 2g<C-a> to use a step count of 2.)
 
 
   <C-g>  -   Show line info
@@ -844,13 +852,15 @@ g <C-g>  -   Show statistics (word count, ...)
              :%sort n for numeric sort.
 
 vim +10 {file}           -   Opens the file at line 10
-vim +/bash {file}        -   Opens the file cronjob-lab.yml on the first occurence of bash
+vim +/str {file}         -   Opens the {file} on the first occurence of "str"
 
 :set nonumber            -   Disable line number
 :set norelativenumber    -   Disable relative line number
 
 :version                 -   Check vim version
 :echo v:version          -   Print version in 3-digit number
+
+:cd %:p:h                -   Change directory to the currently open file.
 
 :so[ource] {file}        -   Read Ex commands from {file}. These are commands that
                              start with a ":".
