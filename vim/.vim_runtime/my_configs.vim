@@ -26,8 +26,11 @@ let s:user_home = expand('~/')
 let g:python3_host_prog = s:user_home . '.pyenv/versions/py3nvim/bin/python'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Some basics
+" => Some basics sets
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+autocmd! BufWritePost $MYVIMRC source %
 
 let mapleader = ","
 let maplocalleader = "\<space>"
@@ -162,12 +165,39 @@ augroup END
 " => My Shortcut Keys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"----------------------------
+" => General
+"----------------------------
+
+""" Better tabbing
+vnoremap < <gv
+vnoremap > >gv
+
+""" Alternate way to save
+nnoremap <C-s> :w<CR>
+
+""" Add new file in the directory of the open file
+nmap <leader>a :e %:h/
+""" Add new file in the working directory
+nmap <leader>A :e <C-r>=getcwd()<CR>/
+
+"----------------------------
+" => Editing mappings
+"----------------------------
+
+" Remap VIM 0 to first non-blank character
+map 0 ^
+noremap <leader>0 0
+
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
 """ Edit and source vimrc
 map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
 nnoremap <leader>rc :source $MYVIMRC<CR>
-
-""" auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-autocmd! BufWritePost $MYVIMRC source %
 
 """ Mark current position to 's' before search, so that you can jump back by hitting <'s>
 nnoremap / ms/
@@ -176,15 +206,18 @@ nnoremap ? ms?
 """ No highlight search
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 
+""" Insert new line without automatic commenting
+nnoremap <Leader>o o<Esc>^Da
+nnoremap <Leader>O O<Esc>^Da
+
+"----------------------------
+" => Moving around, tabs, windows and buffers
+"----------------------------
+
 """ Close a buffer without closing the window?
 " https://stackoverflow.com/a/19619038/3744499
 " (Close the current buffer and move to the alternative one)
 nmap <leader>bd :b#<bar>bd#<CR>
-
-""" Add new file in the directory of the open file
-nmap <leader>a :e %:h/
-""" Add new file in the working directory
-nmap <leader>A :e <C-r>=getcwd()<CR>/
 
 """ Splits and tabbed files
 " Make adjusting split sizes a bit more friendly
@@ -201,27 +234,13 @@ map <leader>tk <C-w>t<C-w>K
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
-""" Better tabbing
-vnoremap < <gv
-vnoremap > >gv
-
 """ TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
 """ SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
 
-""" Alternate way to save
-nnoremap <C-s> :w<CR>
-
-""" Insert new line without automatic commenting
-nnoremap <Leader>o o<Esc>^Da
-nnoremap <Leader>O O<Esc>^Da
-
-""" Spellcheck
-nnoremap <leader>sc setlocal spell!
-
-""" Show marks list and goto
-nnoremap <leader>gm :<C-u>marks<CR>:normal! `
+""" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 "----------------------------
 " => Splits and Tabbed Files
@@ -343,7 +362,7 @@ function! ToggleTransparent()
   endif
 endfunction
 command! ToggleTransparent call ToggleTransparent()
-nnoremap <leader>t : call ToggleTransparent()<CR>
+nnoremap <leader>tt : call ToggleTransparent()<CR>
 
 "--------------------------
 " => Toggle colorscheme
@@ -371,13 +390,19 @@ command! ColorToggle call ColorToggle()
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <leader>mm mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm
 
+""" Spellcheck
+nnoremap <leader>sc setlocal spell!
+
+""" Show marks list and goto
+nnoremap <leader>gm :<C-u>marks<CR>:normal! `
+
 "--------------------------
 " => Fix unwanted key map
 "--------------------------
 try
-  ":unmap <C-Space>
+  " unmap <C-Space>
+  " unmap <leader>f
   inoremap <C-@> <Esc>
-  unmap <leader>f
   unmap <leader>q
 catch
 endtry
@@ -459,7 +484,16 @@ function! TrimWhitespace()
     call winrestview(l:save)
 endfun
 command! TrimWhitespace :call TrimWhitespace()
-command! WhitespaceTrailingRemove :%s/\s\+$//e
+
+
+fun! WhitespaceTrailingRemove()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+command! WhitespaceTrailingRemove :call WhitespaceTrailingRemove()
 
 "--------------------------
 " => EmptyRegisters

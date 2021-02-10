@@ -1,6 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" https://stackoverflow.com/a/5010399/3744499
+" Plugins are only loaded after vim has finished processing your .vimrc.
+" Also, vim-plug doesn't actually load your plugins, it merely adds their
+" containing folders to the runtimepath option so they will be loaded after your .vimrc
 
 " Load utils
 runtime vimrcs/utils.vim
@@ -99,10 +103,12 @@ if has('nvim') && has('python3') && Has_plugin('ncm2') && Has_plugin('ncm2-ultis
     autocmd!
     " enable ncm2 for all buffers
     autocmd BufEnter * call ncm2#enable_for_buffer()
-    " IMPORTANT: :help Ncm2PopupOpen for more information
-    set completeopt=noinsert,menuone,noselect
+    " IMPORTANT: :help Ncm2PopupOpen / :help ncm2-autocmd for more information
+    " set completeopt=noinsert,menuone,noselect
+    au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+    au User Ncm2PopupClose set completeopt=menuone
 
-    " When the <Enter> key is pressed while the popup menu is visible, it only
+  " When the <Enter> key is pressed while the popup menu is visible, it only
     " hides the menu. Use this mapping to close the menu and also start a new line:
     inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
@@ -167,18 +173,14 @@ if Has_plugin('vim-easy-align')
 endif
 
 " fzf.vim ---------------------------------------------------------------------
-" https://stackoverflow.com/a/5010399/3744499
-" Plugins are only loaded after vim has finished processing your .vimrc.
-" Also, pathogen doesn't actually load your plugins, it merely adds their
-" containing folders to the runtimepath option so they will be loaded after your .vimrc
 
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 
-" You could create a VimEnter autocmd to set up your mapping after vim has finished loading:
-autocmd VimEnter * if exists(':Files') | exe "map <leader>f :Files<CR>" | endif
-autocmd VimEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<CR>" | endif
-autocmd VimEnter * if exists(':History') | exe "map <leader>m :History<CR>" | endif
+" You could create a VimEnter / BufEnter autocmd to set up your mapping after vim has finished loading:
+autocmd BufEnter * if exists(':Files') | exe "map <leader>f :Files<CR>" | endif
+autocmd BufEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<CR>" | endif
+autocmd BufEnter * if exists(':History') | exe "map <leader>m :History<CR>" | endif
 
 " This is the default extra key bindings
 let g:fzf_action = {
@@ -644,3 +646,6 @@ autocmd BufEnter *
   \ if exists(':UndotreeToggle') |
   \   nmap <silent> <leader>u :UndotreeToggle<CR> |
   \ endif
+
+" garbas/vim-snipmate ---------------------------------------------------------
+let g:snipMate = { 'snippet_version' : 1 }

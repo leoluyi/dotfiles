@@ -17,13 +17,16 @@ call plug#begin('~/.vim_runtime/plugged')
 
 " Plugins already in awesome vimrc:
 Plug 'dense-analysis/ale'         " asynchronous linters engine
+Plug 'garbas/vim-snipmate'        " Aims to be a concise vim script that implements some of TextMate's snippets features in Vim
+Plug 'honza/vim-snippets'         " vim-snipmate default snippets (Previously snipmate-snippets)
+Plug 'itchyny/lightline.vim'      " A light and configurable statusline/tabline plugin for Vim
 Plug 'jiangmiao/auto-pairs'       " insert or delete brackets, parens, quotes in pair
+Plug 'MarcWeber/vim-addon-mw-utils'  " Required by 'vim-snipmate'
+Plug 'maxbrunsfeld/vim-yankstack' " A lightweight implementation of emacs's kill-ring
 Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _ to shrink it.
+Plug 'tomtom/tlib_vim'          " Required by 'vim-snipmate'
 Plug 'tpope/vim-commentary'       " comment-out by gc
 Plug 'tpope/vim-fugitive'         " A Git wrapper so awesome
-Plug 'maxbrunsfeld/vim-yankstack' " A lightweight implementation of emacs's kill-ring
-Plug 'itchyny/lightline.vim'      " A light and configurable statusline/tabline plugin for Vim
-Plug 'honza/vim-snippets'         " vim-snipmate default snippets (Previously snipmate-snippets)
 
 
 " nvim/vim8/vim7 compatible:
@@ -68,9 +71,10 @@ Plug 'ryanoasis/vim-devicons'  " Adds file type icons to Vim plugins
 Plug 'sbdchd/neoformat'  " A (Neo)vim plugin for formatting code.
 Plug 'scrooloose/nerdtree'  " File list
 Plug 'stsewd/fzf-checkout.vim'  " Manage branches and tags with fzf
-Plug 'terryma/vim-multiple-cursors'  " True Sublime Text style multiple selections for Vim
+Plug 'terryma/vim-multiple-cursors'  " ctrl+n, ctrl+p, ctrl+x, Esc. True Sublime Text style multiple selections for Vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'tpope/vim-surround'  " Provides mappings to easily delete, change and add such surroundings in pairs.
+Plug 'tpope/vim-repeat'  " enable repeating supported plugin maps with '.'
+Plug 'tpope/vim-surround'  "cs.., ds., ys.. . Provides mappings to easily delete, change and add such surroundings in pairs.
 Plug 'tweekmonster/braceless.vim'  " Text objects, folding, and more for Python and other indented languages
 Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
 Plug 'uarun/vim-protobuf' " Syntax highlighting for Google's Protocol Buffers
