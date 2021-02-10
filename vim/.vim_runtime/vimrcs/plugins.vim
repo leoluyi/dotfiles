@@ -23,6 +23,7 @@ Plug 'tpope/vim-commentary'       " comment-out by gc
 Plug 'tpope/vim-fugitive'         " A Git wrapper so awesome
 Plug 'maxbrunsfeld/vim-yankstack' " A lightweight implementation of emacs's kill-ring
 Plug 'itchyny/lightline.vim'      " A light and configurable statusline/tabline plugin for Vim
+Plug 'honza/vim-snippets'         " vim-snipmate default snippets (Previously snipmate-snippets)
 
 
 " nvim/vim8/vim7 compatible:

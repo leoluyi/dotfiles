@@ -221,7 +221,7 @@ nnoremap <Leader>O O<Esc>^Da
 nnoremap <leader>sc setlocal spell!
 
 """ Show marks list and goto
-nnoremap <localleader>m :<C-u>marks<CR>:normal! `
+nnoremap <leader>gm :<C-u>marks<CR>:normal! `
 
 "----------------------------
 " => Splits and Tabbed Files
@@ -271,9 +271,21 @@ nnoremap <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn
 vnoremap <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnable<CR> :ALEEnableBuffer<CR> :GitGutterEnable<CR>
 
 "----------------------------
+" => Parenthesis/bracket
+"----------------------------
+inoremap $) ()<esc>i
+inoremap $] []<esc>i
+inoremap $} {}<esc>i
+inoremap $4 {<esc>o}<esc>O<space><space>
+inoremap $' ''<esc>i
+inoremap $" ""<esc>i
+nnoremap <localleader>' viw<esc>`>a'<esc>`<i'<esc>
+nnoremap <localleader>" viw<esc>`>a"<esc>`<i"<esc>
+
+"----------------------------
 " => Copy and paste stuffs
 "----------------------------
-
+" https://zean.be/articles/vim-registers/
 " map paste, yank and delete to named register so the content
 " will not be overwritten (I know I should just remember...)
 

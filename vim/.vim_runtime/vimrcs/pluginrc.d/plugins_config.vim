@@ -372,7 +372,7 @@ if Has_plugin('vim-highlightedyank')
 endif
 
 " tagbar ----------------------------------------------------------------------
-if Has_plugin('tagbar')
+if Has_plugin('tagbar') && executable('ctags')
   nmap <F8> :TagbarToggle<CR>
 endif
 

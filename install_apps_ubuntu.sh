@@ -117,7 +117,7 @@ function install_neovim {
   # https://github.com/ncm2/ncm2
   [ -x /usr/bin/python3 ] \
     && /usr/bin/python3 -m pip install --quiet --no-cache-dir --system -U \
-    neovim pynvim jedi flake8 autopep8
+    neovim pynvim jedi black flake8 autopep8
 }
 
 
