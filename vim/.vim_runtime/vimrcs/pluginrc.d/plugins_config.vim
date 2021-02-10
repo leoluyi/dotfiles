@@ -81,7 +81,10 @@ let g:indent_guides_guide_size = 1
 
 " haya14busa/incsearch.vim ----------------------------------------------------
 set hlsearch
-let g:incsearch#auto_nohlsearch = 1
+let g:incsearch#auto_nohlsearch = 1  " This feature turns 'hlsearch' off automatically after searching-related motions.
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
@@ -229,9 +232,9 @@ autocmd BufEnter *
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
-      \   'left': [ ['mode', 'paste'],
+      \   'left': [ ['mode', 'paste', 'zoomstatus'],
       \             ['readonly', 'filename', 'modified', 'fugitive'],
-      \             ['githunks', 'venv', 'zoomstatus'] ],
+      \             ['githunks', 'venv'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \              [ 'percent', 'lineinfo' ],
       \              [ 'fileformat', 'fileencoding', 'filetype'] ],
@@ -240,7 +243,7 @@ let g:lightline = {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
       \   'fugitive': '%{exists("*fugitive#head")?" ".fugitive#head():""}',
-      \   'zoomstatus': '%{exists("*zoom#statusline")?zoom#statusline():""}'
+      \   'zoomstatus': '%{exists("*zoom#statusline")&&(zoom#statusline()=="zoomed")?"ZOOMED":""}'
       \ },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
@@ -433,7 +436,53 @@ if Has_plugin('ctrlp-funky')
 endif
 
 " vim-esearch -----------------------------------------------------------------
-highlight ESearchMatch ctermfg=white ctermbg=204 guifg=#ffffff guibg=#FF3E7B
+
+let g:esearch = {}
+
+" Use regex matching with the smart case mode by default and avoid matching text-objects.
+let g:esearch.regex   = 0
+let g:esearch.textobj = 0
+let g:esearch.case    = 'smart'
+
+" Override the default files and directories to determine your project root. Set it
+" to blank to always use the current working directory.
+let g:esearch.root_markers = ['.git', 'Makefile', 'node_modules']
+
+" Set to 0 to prevent esearch from adding any default keymaps.
+let g:esearch.default_mappings = 1
+
+if Has_plugin('vim-esearch')
+  " Open the search window in a vertical split and reuse it for all further searches.
+  let g:esearch.name = '[esearch]'
+  let g:esearch.win_new = {esearch -> esearch#buf#goto_or_open(esearch.name, 'vnew')}
+
+  " " Use a popup-like floating window to render search results.
+  " " Try to jump into the opened floating window or open a new one.
+  " let g:esearch.win_new = {esearch ->
+  "   \ esearch#buf#goto_or_open(esearch.name, {name ->
+  "   \   nvim_open_win(bufadd(name), v:true, {
+  "   \     'relative': 'editor',
+  "   \     'row': &lines / 10,
+  "   \     'col': &columns / 10,
+  "   \     'width': &columns * 8 / 10,
+  "   \     'height': &lines * 8 / 10
+  "   \   })
+  "   \ })
+  "   \}
+  " " Close the floating window when opening an entry.
+  " autocmd User esearch_win_config autocmd BufLeave <buffer> quit
+
+  " " Automatically update the preview for the entry under the cursor.
+  " " NOTE It'll internally wrap CursorMoved autocommand to collect garbage on reloads, so no augroup around is required.
+  " autocmd User esearch_win_config
+  "   \  let b:autopreview = esearch#async#debounce(b:esearch.preview_open, 100)
+  "   \| autocmd CursorMoved <buffer> call b:autopreview.apply({'align': 'right'})
+endif
+
+" Redefine the default highlights (see :help highlight and :help esearch-appearance)
+" Implement autocmd to reload highlights on colorscheme change
+autocmd BufEnter *
+      \ highlight esearchMatch ctermfg=white ctermbg=204 guifg=#ffffff guibg=#FF3E7B
 
 " incsearch.vim ---------------------------------------------------------------
 " https://github.com/haya14busa/incsearch.vim/issues/79
@@ -445,7 +494,7 @@ endif
 let g:gitgutter_enabled=1
 
 " git-blame -------------------------------------------------------------------
-nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
+nnoremap <leader>gb :<C-u>call gitblame#echo()<CR>
 
 " quick-scope -----------------------------------------------------------------
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -516,15 +565,15 @@ if Has_plugin('defx.nvim')
 
   " defx-git
   call defx#custom#column('git', 'indicators', {
-	\ 'Modified'  : '✹',
-	\ 'Staged'    : '✚',
-	\ 'Untracked' : '✭',
-	\ 'Renamed'   : '➜',
-	\ 'Unmerged'  : '═',
-	\ 'Ignored'   : '☒',
-	\ 'Deleted'   : '✖',
-	\ 'Unknown'   : '?'
-	\ })
+    \ 'Modified'  : '✹',
+    \ 'Staged'    : '✚',
+    \ 'Untracked' : '✭',
+    \ 'Renamed'   : '➜',
+    \ 'Unmerged'  : '═',
+    \ 'Ignored'   : '☒',
+    \ 'Deleted'   : '✖',
+    \ 'Unknown'   : '?'
+    \ })
 
   hi Defx_git_Untracked guifg=#FF0000
 
@@ -532,8 +581,8 @@ if Has_plugin('defx.nvim')
     " Define mappings
     nnoremap <silent><buffer><expr> <CR>
     \ defx#do_action('drop')
-	nnoremap <silent><buffer><expr> <2-LeftMouse>
-	\ defx#do_action('drop')
+    nnoremap <silent><buffer><expr> <2-LeftMouse>
+    \ defx#do_action('drop')
     nnoremap <silent><buffer><expr> c
     \ defx#do_action('copy')
     nnoremap <silent><buffer><expr> m
@@ -594,9 +643,9 @@ if Has_plugin('defx.nvim')
     nnoremap <silent><buffer><expr> cd
     \ defx#do_action('change_vim_cwd')
     nnoremap <silent><buffer><expr> > defx#do_action('resize',
-	\ defx#get_context().winwidth + 10)
-	nnoremap <silent><buffer><expr> < defx#do_action('resize',
-	\ defx#get_context().winwidth - 10)
+    \ defx#get_context().winwidth + 10)
+    nnoremap <silent><buffer><expr> < defx#do_action('resize',
+    \ defx#get_context().winwidth - 10)
   endfunction
 
   function! s:defx_toggle_tree() abort
@@ -649,3 +698,12 @@ autocmd BufEnter *
 
 " garbas/vim-snipmate ---------------------------------------------------------
 let g:snipMate = { 'snippet_version' : 1 }
+
+" voldikss/vim-floaterm -------------------------------------------------------
+let g:floaterm_keymap_new    = '<F7>'
+let g:floaterm_keymap_prev   = '<F8>'
+let g:floaterm_keymap_next   = '<F9>'
+let g:floaterm_keymap_toggle = '<F12>'
+
+let g:floaterm_autoclose=2
+let g:floaterm_autohide=1

@@ -39,7 +39,7 @@ Plug 'Chiel92/vim-autoformat'  " Formatters (pip install --user black)
 Plug 'christoomey/vim-tmux-navigator'  " Seamless navigation between tmux panes and vim splits
 Plug 'davidhalter/jedi-vim'  " Python IDE (pip install --user jedi)
 Plug 'dbeniamine/cheat.sh-vim'  " A vim plugin to access cheat.sh sheets
-Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
+" Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
 Plug 'eugen0329/vim-esearch'  " Easy async search and replace across multiple files.
 Plug 'fisadev/vim-isort'  " Sort python imports (pip install --user isort)
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'  " Syntax highlighting, matching rules and mappings for the original Markdown and extensions
