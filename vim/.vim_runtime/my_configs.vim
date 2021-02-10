@@ -282,25 +282,28 @@ nnoremap x "_x
 vnoremap x "_x
 
 """ Cut to yanked register
-nnoremap <leader>x "0x
-vnoremap <leader>x "0x
-nnoremap <leader>S "0S
-nnoremap <leader>D "0D
+nnoremap <localleader>C "0C
+nnoremap <localleader>D "0D
+nnoremap <localleader>S "0S
+nnoremap <localleader>d "0d
+nnoremap <localleader>dd "0dd
+nnoremap <localleader>x "0x
+vnoremap <localleader>x "0x
 nnoremap cc "0cc
 
 """ Paste from yanked register
-nnoremap <leader>P "0P
-nnoremap <leader>p "0p
-vnoremap <leader>P "0P
-vnoremap <leader>p "0p
+nnoremap <localleader>P "0P
+nnoremap <localleader>p "0p
+vnoremap <localleader>P "0P
+vnoremap <localleader>p "0p
 
 """ Yank to clipboard
-nnoremap <leader>Y  "+y$
-nnoremap <leader>y  "+y
-nnoremap <leader>yy "+yy
-vnoremap <leader>Y  "+y$
-vnoremap <leader>y  "+y
-vnoremap <leader>yy "+yy
+nnoremap <localleader>Y  "+y$
+nnoremap <localleader>y  "+y
+nnoremap <localleader>yy "+yy
+vnoremap <localleader>Y  "+y$
+vnoremap <localleader>y  "+y
+vnoremap <localleader>yy "+yy
 
 "--------------------------
 " => Map normal mode commands to insert mode
@@ -354,7 +357,7 @@ command! ColorToggle call ColorToggle()
 "--------------------------
 
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <leader>mm mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm
 
 "--------------------------
 " => Fix unwanted key map
@@ -385,11 +388,14 @@ endfunction
 
 command! -nargs=0 FoldColumnToggle :call FoldColumnToggle()
 
+" https://stackoverflow.com/a/51146449
+" a highlight color must be set up for the function to work
 function! Highlight(text)
-  :execute "match blue /" . a:text . "/"
+  :execute "match IncSearch /" . a:text . "/"
 endfunction
 
 command! -nargs=1 Highlight :call Highlight(<q-args>)
+command! -nargs=0 HighlightClear :call Highlight('')
 
 "--------------------------
 " Rename3

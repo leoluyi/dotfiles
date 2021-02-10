@@ -362,8 +362,8 @@ let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 let b:ale_fixers = {'python': ['black', 'isort']}
 
 " https://github.com/dense-analysis/ale#5xi-how-can-i-navigate-between-errors-quickly
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <localleader>k <Plug>(ale_previous_wrap)
+nmap <silent> <localleader>j <Plug>(ale_next_wrap)
 
 " vim-highlightedyank ---------------------------------------------------------
 if Has_plugin('vim-highlightedyank')
@@ -403,17 +403,19 @@ let g:move_key_modifier = 'M'  " don't know but somehow that <opt + cmd> works f
 
 " jedi-vim --------------------------------------------------------------------
 " Disable Jedi-vim autocompletion and enable call-signatures options since we have NCM2 for autocompletion.
+let g:jedi#completions_command = ""
+
 let g:jedi#auto_initialization = 1
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = ""
 let g:jedi#show_call_signatures = "1"
 
 let g:jedi#goto_command = "<leader>gg"
 let g:jedi#goto_assignments_command = "<leader>ga"
 let g:jedi#goto_definitions_command = "<leader>gd"
+let g:jedi#usages_command = "<leader>gr"
 let g:jedi#documentation_command = "K"
 let g:jedi#rename_command = "<leader>r"
 
@@ -635,4 +637,10 @@ autocmd BufEnter *
   \ if exists(':Commentary') |
   \   nnoremap <localleader>/ :Commentary<CR> |
   \   vnoremap <localleader>/ :Commentary<CR> |
+  \ endif
+
+" mbbill/undotree -------------------------------------------------------------
+autocmd BufEnter *
+  \ if exists(':UndotreeToggle') |
+  \   nmap <silent> <leader>u :UndotreeToggle<CR> |
   \ endif

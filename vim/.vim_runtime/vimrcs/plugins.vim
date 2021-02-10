@@ -67,6 +67,7 @@ Plug 'ryanoasis/vim-devicons'  " Adds file type icons to Vim plugins
 Plug 'sbdchd/neoformat'  " A (Neo)vim plugin for formatting code.
 Plug 'scrooloose/nerdtree'  " File list
 Plug 'stsewd/fzf-checkout.vim'  " Manage branches and tags with fzf
+Plug 'terryma/vim-multiple-cursors'  " True Sublime Text style multiple selections for Vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'  " Provides mappings to easily delete, change and add such surroundings in pairs.
 Plug 'tweekmonster/braceless.vim'  " Text objects, folding, and more for Python and other indented languages
@@ -151,8 +152,11 @@ endif
 
 " Neovim only
 if has('nvim')
-  " Disable jedi-vim
+  " Disable plugins
   " Plug 'davidhalter/jedi-vim', { 'on': [] }
+  Plug 'scrooloose/nerdtree', { 'on': [] }  " File list
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': [] }
+  Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': [] }  " A plugin of NERDTree showing git status flags.
 
   " File browser.
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }  " Requires pynvim
