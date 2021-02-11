@@ -137,6 +137,7 @@ function brew_install_cli {
   libxml2 \
   libzip \
   lolcat \
+  mas        `# Mac App Store command line interface` \
   moreutils  `# Some other useful utilities like sponge` \
   most \
   ncdu       `# NCurses Disk Usage` \
