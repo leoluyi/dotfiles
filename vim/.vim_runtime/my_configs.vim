@@ -193,10 +193,11 @@ map 0 ^
 noremap <leader>0 0
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
+" https://youtu.be/QN4fuSsWTbA?t=664
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z=gv
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z=gv
 
 """ Edit and source vimrc
 map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
