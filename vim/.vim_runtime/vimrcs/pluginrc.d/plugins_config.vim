@@ -9,11 +9,13 @@
 " Load utils
 runtime vimrcs/utils.vim
 
-" Colorscheme -----------------------------------------------------------------
+" morhetz/gruvbox -------------------------------------------------------------
 try
   colorscheme gruvbox
 catch
 endtry
+
+let g:gruvbox_inverse=0
 
 " vim-multiple-cursors --------------------------------------------------------
 " default mapping
@@ -222,11 +224,11 @@ let g:fzf_colors =
 
 " close-buffers.vim -----------------------------------------------------------
 autocmd BufEnter *
-  \ if exists(':Bdelete') |
-  \   nnoremap <silent> Q     :Bdelete menu<CR> |
-  \   nnoremap <silent> <C-q> :Bdelete menu<CR> |
-  \   nnoremap <leader>bo :Bdelete hidden<CR> |
-  \ endif
+  \ if exists(':Bdelete')
+  \ | nnoremap <silent> Q     :Bdelete menu<CR>
+  \ | nnoremap <silent> <C-q> :Bdelete menu<CR>
+  \ | nnoremap <leader>bo :Bdelete hidden<CR>
+  \ | endif
 
 " lightline.vim ---------------------------------------------------------------
 let g:lightline = {
@@ -236,19 +238,27 @@ let g:lightline = {
       \             ['readonly', 'filename', 'modified', 'fugitive'],
       \             ['githunks', 'venv'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
-      \              [ 'percent', 'lineinfo' ],
+      \              [ 'indicator', 'percent', 'lineinfo' ],
       \              [ 'fileformat', 'fileencoding', 'filetype'] ],
+      \ },
+      \ 'inactive': {
+      \   'left': [ ['readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+      \              [ 'indicator', 'lineinfo' ] ],
       \ },
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
       \   'fugitive': '%{exists("*fugitive#head")?" ".fugitive#head():""}',
-      \   'zoomstatus': '%{exists("*zoom#statusline")&&(zoom#statusline()=="zoomed")?"ZOOMED":""}'
+      \   'zoomstatus': '%{exists("*zoom#statusline")&&(zoom#statusline()=="zoomed")?"ZOOMED":""}',
+      \   'indicator': '%{exists("*LineNoIndicator")?LineNoIndicator():""}',
       \ },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+      \   'zoomstatus': '(exists("*zoom#statusline") && (zoom#statusline()!="zoomed"))',
+      \   'indicator': '(exists("*LineNoIndicator"))',
       \ },
       \ 'component_function': {
       \   'githunks': 'LightlineGitGutter',
@@ -367,11 +377,11 @@ let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 let b:ale_fixers = {'python': ['black', 'isort']}
 
 " https://github.com/dense-analysis/ale#5xi-how-can-i-navigate-between-errors-quickly
-if Has_plugin('ale')
-  autocmd BufEnter *
-        \   nmap <silent> <localleader>k <Plug>(ale_previous_wrap)
-        \ | nmap <silent> <localleader>j <Plug>(ale_next_wrap)
-endif
+autocmd BufEnter *
+      \ if Has_plugin('ale')
+      \ | nmap <silent> <localleader>k <Plug>(ale_previous_wrap)
+      \ | nmap <silent> <localleader>j <Plug>(ale_next_wrap)
+      \ | endif
 
 " vim-highlightedyank ---------------------------------------------------------
 if Has_plugin('vim-highlightedyank')
@@ -680,24 +690,24 @@ endif
 
 " git status
 autocmd BufEnter *
-  \ if exists(':G') |
-  \   nnoremap <leader>gs :G<CR> |
-  \   nnoremap <leader>gf :diffget //2 |
-  \   nnoremap <leader>gj :diffget //3 |
-  \ endif
+  \ if exists(':G')
+  \ | nnoremap <leader>gs :G<CR>
+  \ | nnoremap <leader>gf :diffget //2
+  \ | nnoremap <leader>gj :diffget //3
+  \ | endif
 
 " tpope/vim-commentary --------------------------------------------------------
 autocmd BufEnter *
-  \ if exists(':Commentary') |
-  \   nnoremap <localleader>/ :Commentary<CR> |
-  \   vnoremap <localleader>/ :Commentary<CR> |
-  \ endif
+  \ if exists(':Commentary')
+  \ | nnoremap <localleader>/ :Commentary<CR>
+  \ | vnoremap <localleader>/ :Commentary<CR>
+  \ | endif
 
 " mbbill/undotree -------------------------------------------------------------
 autocmd BufEnter *
-  \ if exists(':UndotreeToggle') |
-  \   nmap <silent> <leader>u :UndotreeToggle<CR> |
-  \ endif
+  \ if exists(':UndotreeToggle')
+  \ | nmap <silent> <leader>u :UndotreeToggle<CR>
+  \ | endif
 
 " garbas/vim-snipmate ---------------------------------------------------------
 let g:snipMate = { 'snippet_version' : 1 }

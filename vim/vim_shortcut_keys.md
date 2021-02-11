@@ -915,8 +915,10 @@ Parentheses Text Objects
 
 ### Code editing
 
-- `<leader>pp`         - toggle paste mode
+- `<leader>pp`         - Toggle paste mode
 - `:set syntax=python` - change syntax highlighting
+- (visual the line) `gq` - Split long one-line comment into multiple lines
+- `8g_`                - Go to the end of the n-1 line
 
 You can manually autoindent, retab or remove trailing whitespace with the following respective commands.
 
