@@ -171,7 +171,7 @@ function _sync_dotfile {
 
   local src_folders=("bash-git-prompt" "git" "tmux" "vim" "common_dotfiles" "$1")
   for folder in "${src_folders[@]}"; do
-    find "$folder" -maxdepth 1 -mindepth 1 -name '.[!.]*' -print0 \
+    find "$folder" -maxdepth 1 -mindepth 1 \( -name '.[!.]*' -o -name '.local' -o -name '.config' \) -print0 \
       ! -name .git \
       ! -name .DS_Store \
       ! -name .osx | \
@@ -179,6 +179,12 @@ function _sync_dotfile {
           >(xargs -0 -I_ basename _ | tr '\n' '\0' | xargs -0 -n1 printf "Updated %s\n") \
           >/dev/null;
   done
+
+  # Link Brewfile for synchrizing settings.
+  if [ -f "$1"/.config/Brewfile ]; then
+    mkdir -p "$HOME/.config"
+    ln -f "$1"/.config/Brewfile "$HOME/.config/Brewfile"
+  fi
 
   # .config
   find ./config/ -maxdepth 1 -mindepth 1 -type d -print0 | \

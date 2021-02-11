@@ -8,8 +8,9 @@ function mkcd() {
     echo "Enter a directory name"
   elif [ -d "$last" ]; then
     echo "\"$last\" already exists"
+    cd "$last"
   else
-    mkdir "$@" && cd "$last" || exit
+    mkdir -p "$@" && cd "$last" || return 1
   fi
 }
 
@@ -18,7 +19,7 @@ function gi() { curl -L -s https://www.gitignore.io/api/"$1" ;}
 function gdrive-dl() {
   file_id=$1
   file_name=$2
-  
+
   # first stage to get the warning html
   curl -c /tmp/cookies \
     "https://drive.google.com/uc?export=download&id=$file_id" > \
@@ -38,7 +39,7 @@ function tree-gitignore() {
   ignore_pattern="$(grep -hvE '^$|^#' "${git_ignore_files[@]}" 2>/dev/null|sed 's:/$::'|tr '\n' '\|')"
   if git status &> /dev/null && [[ -n "${ignore_pattern}" ]]; then
     tree -I "${ignore_pattern}" "${@}"
-  else 
+  else
     tree "${@}"
   fi
 }
