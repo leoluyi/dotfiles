@@ -324,7 +324,7 @@ if Has_plugin('lightline-bufferline')
         \   'right': [ ['close'] ]
         \ }
 
-  let g:lightline#bufferline#show_number = 1
+  let g:lightline#bufferline#show_number = 2
   let g:lightline#bufferline#unnamed     = '[No Name]'
   let g:lightline#bufferline#filename_modifier = ':t'  " Only show filename
   let g:lightline#bufferline#enable_devicons = 1
@@ -367,8 +367,11 @@ let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 let b:ale_fixers = {'python': ['black', 'isort']}
 
 " https://github.com/dense-analysis/ale#5xi-how-can-i-navigate-between-errors-quickly
-nmap <silent> <localleader>k <Plug>(ale_previous_wrap)
-nmap <silent> <localleader>j <Plug>(ale_next_wrap)
+if Has_plugin('ale')
+  autocmd BufEnter *
+        \   nmap <silent> <localleader>k <Plug>(ale_previous_wrap)
+        \ | nmap <silent> <localleader>j <Plug>(ale_next_wrap)
+endif
 
 " vim-highlightedyank ---------------------------------------------------------
 if Has_plugin('vim-highlightedyank')
@@ -700,10 +703,10 @@ autocmd BufEnter *
 let g:snipMate = { 'snippet_version' : 1 }
 
 " voldikss/vim-floaterm -------------------------------------------------------
-let g:floaterm_keymap_new    = '<F7>'
-let g:floaterm_keymap_prev   = '<F8>'
-let g:floaterm_keymap_next   = '<F9>'
-let g:floaterm_keymap_toggle = '<F12>'
+let g:floaterm_keymap_new    = ''
+let g:floaterm_keymap_prev   = ''
+let g:floaterm_keymap_next   = ''
+let g:floaterm_keymap_toggle = '<leader>t'
 
 let g:floaterm_autoclose=2
 let g:floaterm_autohide=1

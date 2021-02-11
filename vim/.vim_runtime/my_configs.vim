@@ -181,6 +181,9 @@ nmap <leader>a :e %:h/
 """ Add new file in the working directory
 nmap <leader>A :e <C-r>=getcwd()<CR>/
 
+""" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
 "----------------------------
 " => Editing mappings
 "----------------------------
@@ -226,7 +229,7 @@ noremap <silent> <C-Right> :vert resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
 
-""" Change 2 split windows from vert to horiz or horiz to vert
+""" Rotate between vert and horiz windows
 map <leader>th <C-w>t<C-w>H
 map <leader>tk <C-w>t<C-w>K
 
@@ -238,9 +241,6 @@ noremap Zo <c-w>=
 nnoremap <TAB> :bnext<CR>
 """ SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
-
-""" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 "----------------------------
 " => Splits and Tabbed Files
@@ -267,13 +267,20 @@ map <Leader>tk <C-w>t<C-w>K
 "----------------------------
 
 """ <F5> -  Remove all trailing whitespace. https://vim.fandom.com/wiki/Remove_unwanted_spaces
-nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:echo 'Remove trailing whitespace'<CR>
+" nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:echo 'Remove trailing whitespace'<CR>
 
 """ <F6> -  Absolute numbers
 map <F6> :set relativenumber!<CR>
 
 """ Re-indent current buffer
-command! ReindentAll <F3> gg=G''
+function! ReindentAll()
+  let l:save = winsaveview()
+  execute 'normal gg=G'
+  call winrestview(l:save)
+endfunction
+
+command! ReindentAll :call ReindentAll()
+nmap <leader>R :ReindentAll<CR>
 
 """ :W   -  Force write. Allow saving of files as sudo
 if !has('nvim')
@@ -479,19 +486,19 @@ endfunction
 " => TrimWhitespace
 "--------------------------
 function! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
+  let l:save = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
 endfun
 command! TrimWhitespace :call TrimWhitespace()
 
 
 fun! WhitespaceTrailingRemove()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  silent! %s/\s\+$//e
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
 endfun
 command! WhitespaceTrailingRemove :call WhitespaceTrailingRemove()
 
