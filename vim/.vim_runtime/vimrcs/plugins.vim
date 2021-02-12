@@ -64,6 +64,7 @@ Plug 'mengelbrecht/lightline-bufferline'  " Display the list of buffers in the l
 Plug 'mhinz/vim-startify'  " The fancy start screen for Vim
 Plug 'ntpeters/vim-better-whitespace'  " Better whitespace highlighting for Vim
 Plug 'pangloss/vim-javascript'  " Vastly improved Javascript indentation and syntax support in Vim
+Plug 'petobens/poet-v'  " Detects and activates virtual environments in your python poetry or pipenv project
 Plug 'PieterjanMontens/vim-pipenv'  " Pipenv support (depends on 'jmcantrell/vim-virtualenv')
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'reedes/vim-textobj-quote'  " Extending Vim to better support typographic ('curly') quote characters
@@ -94,7 +95,6 @@ Plug 'nvim-telescope/telescope.nvim'
 " Deprecated plugins.
 " Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
 " Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
-" Plug 'petobens/poet-v'  " Detects and activates virtual environments in your python poetry or pipenv project
 " Plug 'tacahiroy/ctrlp-funky'  " Function navigator for ctrlp.vim
 " Plug 'wincent/ferret'  " Find and Replace in Multiple Files
 

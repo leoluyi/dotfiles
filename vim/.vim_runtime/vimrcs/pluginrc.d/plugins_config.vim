@@ -252,17 +252,17 @@ let g:lightline = {
       \   'fugitive': '%{exists("*fugitive#head")?" ".fugitive#head():""}',
       \   'zoomstatus': '%{exists("*zoom#statusline")&&(zoom#statusline()=="zoomed")?"ZOOMED":""}',
       \   'indicator': '%{exists("*LineNoIndicator")?LineNoIndicator():""}',
+      \   'venv': '%{exists("*virtualenv#statusline")&&(""!=virtualenv#statusline())?" ".virtualenv#statusline():""}',
       \ },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
       \   'zoomstatus': '(exists("*zoom#statusline") && (zoom#statusline()!="zoomed"))',
-      \   'indicator': '(exists("*LineNoIndicator"))',
+      \   'indicator': '(exists("*LineNoIndicator") && ""!=virtualenv#statusline())',
       \ },
       \ 'component_function': {
       \   'githunks': 'LightlineGitGutter',
-      \   'venv': 'virtualenv#statusline',
       \   'filename': 'LightlineFilename',
       \ },
       \ 'separator': { 'left': ' ', 'right': ' ' },
@@ -674,10 +674,10 @@ endif
 let g:neoformat_enabled_python = ['black', 'yapf']
 
 " petobens/poet-v -------------------------------------------------------------
-" let g:poetv_executables = ['poetry', 'pipenv']
-" let g:poetv_auto_activate = 1
-" let g:poetv_statusline_symbol = ''
-" let g:poetv_set_environment = 1
+let g:poetv_executables = ['poetry', 'pipenv']
+let g:poetv_auto_activate = 1
+let g:poetv_statusline_symbol = ''
+let g:poetv_set_environment = 1
 
 " jremmen/vim-rigpgrep --------------------------------------------------------
 if executable('rg')
