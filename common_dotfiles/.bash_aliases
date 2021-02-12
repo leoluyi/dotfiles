@@ -8,6 +8,9 @@ if command -v nvim &>/dev/null; then
   alias vi="nvim"
 fi
 
+# Just lazy
+alias f='fuck'
+
 # R
 alias R='R --no-save --no-restore'
 
