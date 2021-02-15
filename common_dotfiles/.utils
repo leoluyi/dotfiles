@@ -211,6 +211,8 @@ function hlsdl-mp4() {
   # requirements: selsta/hlsdl, ffmpeg
   local url="$1"
   local title="$2"
+
+  [ -z "$title" ] && title=$(date +'%Y%m%dT%H%M%S')
   hlsdl -q -b -o "${title}.mp4" "$url"
 }
 
