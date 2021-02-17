@@ -183,9 +183,9 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 
 " You could create a VimEnter / BufEnter autocmd to set up your mapping after vim has finished loading:
-autocmd BufEnter * if exists(':Files') | exe "map <leader>f :Files<CR>" | endif
-autocmd BufEnter * if exists(':Buffers') | exe "map <leader>b :Buffers<CR>" | endif
-autocmd BufEnter * if exists(':History') | exe "map <leader>m :History<CR>" | endif
+autocmd BufEnter * if exists(':Files') | execute "nnoremap <leader>f :Files<CR>" | endif
+autocmd BufEnter * if exists(':Buffers') | execute "nnoremap <leader>b :Buffers<CR>" | endif
+autocmd BufEnter * if exists(':History') | execute "nnoremap <leader>m :History<CR>" | endif
 
 " This is the default extra key bindings
 let g:fzf_action = {
@@ -225,9 +225,10 @@ let g:fzf_colors =
 " close-buffers.vim -----------------------------------------------------------
 autocmd BufEnter *
   \ if exists(':Bdelete')
-  \ | nnoremap <silent> Q     :Bdelete menu<CR>
-  \ | nnoremap <silent> <C-q> :Bdelete menu<CR>
-  \ | nnoremap <leader>bo :Bdelete hidden<CR>
+  \ | execute "nnoremap <silent> Q     :Bdelete menu<CR>"
+  \ | execute "nnoremap <silent> <C-q> :Bdelete menu<CR>"
+  \ | execute "nnoremap <leader>bo :Bdelete hidden<CR>"
+  \ | execute "nnoremap <leader>bd :Bdelete<CR>"
   \ | endif
 
 " lightline.vim ---------------------------------------------------------------
@@ -551,10 +552,14 @@ let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu S
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
 let g:Lf_ShortcutF = "<leader>FF"
-noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+autocmd BufEnter *
+  \ if exists(':Leaderf')
+  \ | noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+  \ | noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+  \ | noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+  \ | noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+  \ | endif
 
 " noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
 " noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
@@ -691,22 +696,22 @@ endif
 " git status
 autocmd BufEnter *
   \ if exists(':G')
-  \ | nnoremap <leader>gs :G<CR>
-  \ | nnoremap <leader>gf :diffget //2
-  \ | nnoremap <leader>gj :diffget //3
+  \ | execute "nnoremap <leader>gs :G<CR>"
+  \ | execute "nnoremap <leader>gf :diffget //2"
+  \ | execute "nnoremap <leader>gj :diffget //3"
   \ | endif
 
 " tpope/vim-commentary --------------------------------------------------------
 autocmd BufEnter *
   \ if exists(':Commentary')
-  \ | nnoremap <localleader>/ :Commentary<CR>
-  \ | vnoremap <localleader>/ :Commentary<CR>
+  \ | execute "nnoremap <localleader>/ :Commentary<CR>"
+  \ | execute "vnoremap <localleader>/ :Commentary<CR>"
   \ | endif
 
 " mbbill/undotree -------------------------------------------------------------
 autocmd BufEnter *
   \ if exists(':UndotreeToggle')
-  \ | nmap <silent> <leader>u :UndotreeToggle<CR>
+  \ | execute "nmap <silent> <leader>u :UndotreeToggle<CR>"
   \ | endif
 
 " garbas/vim-snipmate ---------------------------------------------------------
@@ -716,7 +721,7 @@ let g:snipMate = { 'snippet_version' : 1 }
 let g:floaterm_keymap_new    = ''
 let g:floaterm_keymap_prev   = ''
 let g:floaterm_keymap_next   = ''
-let g:floaterm_keymap_toggle = '<leader>t'
+let g:floaterm_keymap_toggle = '<leader>tt'
 
 let g:floaterm_autoclose=2
 let g:floaterm_autohide=1

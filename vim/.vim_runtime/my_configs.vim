@@ -221,7 +221,12 @@ nnoremap <Leader>O O<Esc>^Da
 """ Close a buffer without closing the window?
 " https://stackoverflow.com/a/19619038/3744499
 " (Close the current buffer and move to the alternative one)
-nmap <leader>bd :b#<bar>bd#<CR>
+autocmd VimEnter *
+  \ if exists(':Bclose')
+  \ | execute "nnoremap <leader>bd :Bclose<CR>"
+  \ | else
+  \ | execute "noremap <leader>bd :b#<bar>bd#<CR>"
+  \ | endif
 
 """ Splits and tabbed files
 " Make adjusting split sizes a bit more friendly
@@ -369,8 +374,8 @@ function! ToggleTransparent()
     let t:is_transparent = 0
   endif
 endfunction
-command! ToggleTransparent call ToggleTransparent()
-nnoremap <leader>tt : call ToggleTransparent()<CR>
+command! ToggleTransparentBackground call ToggleTransparent()
+nnoremap <leader>tb :ToggleTransparentBackground<CR>
 
 "--------------------------
 " => Toggle colorscheme
@@ -463,7 +468,7 @@ command! -nargs=0 HighlightClear :call Highlight('')
 "
 " :Rename[!] {newname}
 
-command! -nargs=* -complete=file -bang Rename :call Rename("<args>", "<bang>")
+command! -nargs=1 -complete=file -bang Rename :call Rename("<args>", "<bang>")
 
 function! Rename(name, bang)
   let l:curfile = expand("%:p")

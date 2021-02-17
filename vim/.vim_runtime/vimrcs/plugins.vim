@@ -55,6 +55,7 @@ Plug 'kana/vim-textobj-user'  " Depencency of reedes/vim-textobj-quote
 Plug 'kristijanhusak/defx-git'  " defx git plugin
 Plug 'kristijanhusak/defx-icons'  " Icons for defx
 Plug 'lambdalisue/suda.vim'  " Read or write files with sudo command
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }  " Shows keybindings in popup
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'  " Show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " Move lines and selections up and down
