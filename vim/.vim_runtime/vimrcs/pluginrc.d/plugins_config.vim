@@ -228,7 +228,7 @@ autocmd BufEnter *
   \ | execute "nnoremap <silent> Q     :Bdelete menu<CR>"
   \ | execute "nnoremap <silent> <C-q> :Bdelete menu<CR>"
   \ | execute "nnoremap <leader>bo :Bdelete hidden<CR>"
-  \ | execute "nnoremap <leader>bd :Bdelete<CR>"
+  \ | execute "nnoremap <leader>bd :Bclose<CR>"
   \ | endif
 
 " lightline.vim ---------------------------------------------------------------
@@ -380,8 +380,8 @@ let b:ale_fixers = {'python': ['black', 'isort']}
 " https://github.com/dense-analysis/ale#5xi-how-can-i-navigate-between-errors-quickly
 autocmd BufEnter *
       \ if Has_plugin('ale')
-      \ | nmap <silent> <localleader>k <Plug>(ale_previous_wrap)
-      \ | nmap <silent> <localleader>j <Plug>(ale_next_wrap)
+      \ | execute "nmap <silent> <localleader>k <Plug>(ale_previous_wrap)"
+      \ | execute "nmap <silent> <localleader>j <Plug>(ale_next_wrap)"
       \ | endif
 
 " vim-highlightedyank ---------------------------------------------------------
@@ -391,23 +391,24 @@ if Has_plugin('vim-highlightedyank')
 endif
 
 " tagbar ----------------------------------------------------------------------
-if Has_plugin('tagbar') && executable('ctags')
-  nmap <F8> :TagbarToggle<CR>
-endif
+autocmd BufEnter *
+      \ if exists(':TagbarToggle') && executable('ctags')
+      \ | execute "nmap <F8> :TagbarToggle<CR>"
+      \ | endif
 
 " Nvim-R ----------------------------------------------------------------------
 " https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt
-if Has_plugin('Nvim-R')
-  vmap <localleader><CR> <Plug>RDSendSelection
-  nmap <localleader><CR> <Plug>RDSendLine
-
-  let R_rconsole_width = 75    " Let window always split vertically
-  let R_min_editor_width = 18
-  let R_assign = 0  " Disable underscore mapping to assign
-  let vimrplugin_applescript=0
-  let vimrplugin_vsplit=1
-  let vimrplugin_assign = 0
-endif
+autocmd BufEnter *
+      \ if Has_plugin('Nvim-R')
+      \ |   execute "vmap <localleader><CR> <Plug>RDSendSelection"
+      \ |   execute "nmap <localleader><CR> <Plug>RDSendLine"
+      \ |   let R_rconsole_width = 75    " Let window always split vertically
+      \ |   let R_min_editor_width = 18
+      \ |   let R_assign = 0  " Disable underscore mapping to assign
+      \ |   let vimrplugin_applescript=0
+      \ |   let vimrplugin_vsplit=1
+      \ |   let vimrplugin_assign = 0
+      \ | endif
 
 " auto-pairs ------------------------------------------------------------------
 autocmd BufEnter * let b:autopairs_enabled = 0  " Disable by default
@@ -508,7 +509,10 @@ endif
 let g:gitgutter_enabled=1
 
 " git-blame -------------------------------------------------------------------
-nnoremap <leader>gb :<C-u>call gitblame#echo()<CR>
+autocmd BufEnter *
+  \ if exists('*gitblame#echo')
+  \ | execute "nnoremap <leader>gb :<C-u>call gitblame#echo()<CR>"
+  \ | endif
 
 " quick-scope -----------------------------------------------------------------
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -533,11 +537,11 @@ if Has_plugin('vim-textobj-quote')
     autocmd FileType textile call textobj#quote#init()
     autocmd FileType text call textobj#quote#init({'educate': 0})
   augroup END
-endif
 
-" You can replace straight quotes in existing text with curly quotes, and visa versa
-map <silent> <leader>qc <Plug>ReplaceWithCurly
-map <silent> <leader>qs <Plug>ReplaceWithStraight
+  " You can replace straight quotes in existing text with curly quotes, and visa versa
+  map <silent> <leader>qc <Plug>ReplaceWithCurly
+  map <silent> <leader>qs <Plug>ReplaceWithStraight
+endif
 
 " LeaderF ---------------------------------------------------------------------
 " don't show the help in normal mode
@@ -569,7 +573,10 @@ autocmd BufEnter *
 if Has_plugin('defx.nvim')
   autocmd FileType defx call s:defx_mappings()
 
-  nmap <silent> <Leader>nn :Defx -columns=mark:indent:git:icons:filename:type -floating-preview <cr>
+  autocmd BufEnter *
+        \ if exists(':Defx')
+        \ | execute "nmap <silent> <Leader>nn :Defx -columns=mark:indent:git:icons:filename:type -floating-preview <cr>"
+        \ | endif
 
   call defx#custom#option('_', {
         \ 'winwidth': 40,
@@ -679,10 +686,12 @@ endif
 let g:neoformat_enabled_python = ['black', 'yapf']
 
 " petobens/poet-v -------------------------------------------------------------
-let g:poetv_executables = ['poetry', 'pipenv']
-let g:poetv_auto_activate = 1
-let g:poetv_statusline_symbol = ''
-let g:poetv_set_environment = 1
+if executable('poetry') || executable('pipenv')
+  let g:poetv_executables = ['poetry', 'pipenv']
+  let g:poetv_auto_activate = 1
+  let g:poetv_statusline_symbol = ''
+  let g:poetv_set_environment = 1
+endif
 
 " jremmen/vim-rigpgrep --------------------------------------------------------
 if executable('rg')

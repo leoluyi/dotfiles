@@ -52,8 +52,6 @@ Plug 'jremmen/vim-ripgrep'  " Use RipGrep in Vim and display results in a quickf
 Plug 'junegunn/gv.vim'  " A git commit browser in Vim
 Plug 'junegunn/vim-easy-align'  " Preview markdown on your modern browser with synchronised scrolling and flexible configuration
 Plug 'kana/vim-textobj-user'  " Depencency of reedes/vim-textobj-quote
-Plug 'kristijanhusak/defx-git'  " defx git plugin
-Plug 'kristijanhusak/defx-icons'  " Icons for defx
 Plug 'lambdalisue/suda.vim'  " Read or write files with sudo command
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }  " Shows keybindings in popup
 Plug 'machakann/vim-highlightedyank'
@@ -65,7 +63,6 @@ Plug 'mengelbrecht/lightline-bufferline'  " Display the list of buffers in the l
 Plug 'mhinz/vim-startify'  " The fancy start screen for Vim
 Plug 'ntpeters/vim-better-whitespace'  " Better whitespace highlighting for Vim
 Plug 'pangloss/vim-javascript'  " Vastly improved Javascript indentation and syntax support in Vim
-Plug 'petobens/poet-v'  " Detects and activates virtual environments in your python poetry or pipenv project
 Plug 'PieterjanMontens/vim-pipenv'  " Pipenv support (depends on 'jmcantrell/vim-virtualenv')
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'reedes/vim-textobj-quote'  " Extending Vim to better support typographic ('curly') quote characters
@@ -88,10 +85,9 @@ Plug 'Yggdroot/indentLine'  " Show indent guide
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }  " An efficient fuzzy finder that helps to locate files, buffers, mrus, gtags, etc. on the fly.
 Plug 'zivyangll/git-blame.vim'  " See Git Blame information in the status bar for the currently selected line
 
-" telescope requirements...
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+if has('python3')
+  Plug 'petobens/poet-v'  " Detects and activates virtual environments in your python poetry or pipenv project
+endif
 
 " Deprecated plugins.
 " Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
@@ -119,7 +115,7 @@ Plug 'rakr/vim-one'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Neovim/Vim8 compatible
-if has('nvim') || has('patch-8.0.0')
+if has('nvim') || has('patch-8.2.0')
 
   " NCM2 plugins
   if has("python3")
@@ -146,6 +142,15 @@ if has('nvim') || has('patch-8.0.0')
 
     " Floaterm
     Plug 'voldikss/vim-floaterm'  " Use (neo)vim terminal in the floating/popup window.
+
+    " defx.nvim
+    Plug 'kristijanhusak/defx-git'  " defx git plugin
+    Plug 'kristijanhusak/defx-icons'  " Icons for defx
+
+    " telescope requirements...
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
 
     " Optional: for snippet support
     " based on ultisnips
@@ -180,7 +185,7 @@ endif
 if !has('nvim')
   let g:ncm2_enable = 0
   Plug 'ncm2/ncm2', { 'on': [] }  " awesome autocomplete plugin
-  Plug 'roxma/nvim-yarp', { 'on': [] }  " dependency of ncm2
+  Plug 'roxma/nvim-yarp', { 'on': [] }  " required by ncm2
   " Plug 'roxma/vim-hug-neovim-rpc'  " trying to build a compatibility layer for neovim rpc client working on vim8. https://github.com/roxma/vim-hug-neovim-rpc
 
   " Disable ncm2-jedi
