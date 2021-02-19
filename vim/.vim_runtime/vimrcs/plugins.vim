@@ -27,6 +27,7 @@ Plug 'terryma/vim-expand-region'  " Press + to expand the visual selection and _
 Plug 'tomtom/tlib_vim'          " Required by 'vim-snipmate'
 Plug 'tpope/vim-commentary'       " comment-out by gc
 Plug 'tpope/vim-fugitive'         " A Git wrapper so awesome
+Plug 'tpope/vim-sensible'         " Defaults everyone can agree on
 
 
 " nvim/vim8/vim7 compatible:
@@ -51,6 +52,7 @@ Plug 'jmcantrell/vim-virtualenv'  " Virtualenv support
 Plug 'jremmen/vim-ripgrep'  " Use RipGrep in Vim and display results in a quickfix list
 Plug 'junegunn/gv.vim'  " A git commit browser in Vim
 Plug 'junegunn/vim-easy-align'  " Preview markdown on your modern browser with synchronised scrolling and flexible configuration
+Plug 'kana/vim-textobj-line'  " Text objects for the current line
 Plug 'kana/vim-textobj-user'  " Depencency of reedes/vim-textobj-quote
 Plug 'lambdalisue/suda.vim'  " Read or write files with sudo command
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }  " Shows keybindings in popup
@@ -60,6 +62,7 @@ Plug 'matze/vim-move'   " Move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " Make linter in statusline awesome (pip install --user flake8)
 Plug 'mbbill/undotree'  " The undo history visualizer for VIM
 Plug 'mengelbrecht/lightline-bufferline'  " Display the list of buffers in the lightline vim plugin
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}  " Multiple cursors plugin for vim/neovim
 Plug 'mhinz/vim-startify'  " The fancy start screen for Vim
 Plug 'ntpeters/vim-better-whitespace'  " Better whitespace highlighting for Vim
 Plug 'pangloss/vim-javascript'  " Vastly improved Javascript indentation and syntax support in Vim
@@ -85,6 +88,7 @@ Plug 'Yggdroot/indentLine'  " Show indent guide
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }  " An efficient fuzzy finder that helps to locate files, buffers, mrus, gtags, etc. on the fly.
 Plug 'zivyangll/git-blame.vim'  " See Git Blame information in the status bar for the currently selected line
 
+" poet-v
 if has('python3')
   Plug 'petobens/poet-v'  " Detects and activates virtual environments in your python poetry or pipenv project
 endif
@@ -143,14 +147,15 @@ if has('nvim') || has('patch-8.2.0')
     " Floaterm
     Plug 'voldikss/vim-floaterm'  " Use (neo)vim terminal in the floating/popup window.
 
-    " defx.nvim
-    Plug 'kristijanhusak/defx-git'  " defx git plugin
-    Plug 'kristijanhusak/defx-icons'  " Icons for defx
-
     " telescope requirements...
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+
+    " File browser.
+    Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }  " Requires pynvim
+    Plug 'kristijanhusak/defx-git'  " defx git plugin
+    Plug 'kristijanhusak/defx-icons'  " Icons for defx
 
     " Optional: for snippet support
     " based on ultisnips
@@ -164,14 +169,11 @@ endif
 
 " Neovim only
 if has('nvim')
-  " Disable plugins
+  " Disable plugins.
   " Plug 'davidhalter/jedi-vim', { 'on': [] }
   Plug 'scrooloose/nerdtree', { 'on': [] }  " File list
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': [] }
   Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': [] }  " A plugin of NERDTree showing git status flags.
-
-  " File browser.
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }  " Requires pynvim
 endif
 
 if has('nvim-0.4.2') || has('patch-8.1.2114')
@@ -188,12 +190,12 @@ if !has('nvim')
   Plug 'roxma/nvim-yarp', { 'on': [] }  " required by ncm2
   " Plug 'roxma/vim-hug-neovim-rpc'  " trying to build a compatibility layer for neovim rpc client working on vim8. https://github.com/roxma/vim-hug-neovim-rpc
 
-  " Disable ncm2-jedi
+  " Disable ncm2-jedi.
   Plug 'ncm2/ncm2-jedi', { 'on': [] }  " fast python completion (use ncm2 if you want type info or snippet support)
 endif
 
 " Vim7 only
-if v:version >= 730 && v:version < 800
+if !has('nvim') && v:version >= 730 && v:version < 800
   " highlightedyank
   if !exists('##TextYankPost')
     map y <Plug>(highlightedyank)

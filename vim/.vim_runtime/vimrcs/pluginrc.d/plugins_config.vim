@@ -17,7 +17,7 @@ endtry
 
 let g:gruvbox_inverse=0
 
-" vim-multiple-cursors --------------------------------------------------------
+" terryma/vim-multiple-cursors ------------------------------------------------
 " default mapping
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
@@ -39,15 +39,24 @@ vmap zk <Plug>MoveBlockUp
 
 " NERDTree --------------------------------------------------------------------
 let g:NERDTreeWinPos = "left"
-let NERDTreeShowHidden = 1
+let g:NERDTreeWinSize=35
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
+
+autocmd VimEnter *
+      \ if exists(':NERDTreeToggle')
+      \ | execute "map <leader>nn :NERDTreeToggle<cr>"
+      \ | execute "map <leader>nb :NERDTreeFromBookmark<Space>"
+      \ | execute "map <leader>nf :NERDTreeFind<cr>"
+      \ | endif
 
 " Nerdtree config for wildignore
 set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*
 let NERDTreeRespectWildIgnore=1
 
 "Close automatically when NERDTree is the only remaining window
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd VimEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " after a re-source, fix syntax matching issues (concealing brackets):
 if exists('g:loaded_webdevicons')
@@ -183,9 +192,11 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 
 " You could create a VimEnter / BufEnter autocmd to set up your mapping after vim has finished loading:
-autocmd BufEnter * if exists(':Files') | execute "nnoremap <leader>f :Files<CR>" | endif
-autocmd BufEnter * if exists(':Buffers') | execute "nnoremap <leader>b :Buffers<CR>" | endif
-autocmd BufEnter * if exists(':History') | execute "nnoremap <leader>m :History<CR>" | endif
+autocmd VimEnter * if exists(':Files')   | execute "nnoremap <leader>f :Files<CR>" | endif
+autocmd VimEnter * if exists(':Buffers') | execute "nnoremap <leader>b :Buffers<CR>" | endif
+autocmd VimEnter * if exists(':History') | execute "nnoremap <leader>m :History<CR>" | endif
+" autocmd VimEnter * if exists(':BTags') | execute "noremap <Leader>t :BTags<CR>" | endif
+" autocmd VimEnter * if exists(':Tags') | execute "noremap <Leader>T :Tags<CR>" | endif
 
 " This is the default extra key bindings
 let g:fzf_action = {
@@ -223,7 +234,7 @@ let g:fzf_colors =
 " let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 " close-buffers.vim -----------------------------------------------------------
-autocmd BufEnter *
+autocmd VimEnter *
   \ if exists(':Bdelete')
   \ | execute "nnoremap <silent> Q     :Bdelete menu<CR>"
   \ | execute "nnoremap <silent> <C-q> :Bdelete menu<CR>"
@@ -339,6 +350,8 @@ if Has_plugin('lightline-bufferline')
   let g:lightline#bufferline#unnamed     = '[No Name]'
   let g:lightline#bufferline#filename_modifier = ':t'  " Only show filename
   let g:lightline#bufferline#enable_devicons = 1
+  let g:lightline#bufferline#modified = ' [+]'
+  let g:lightline#bufferline#read_only = ' [ro]'
 
   nmap <Leader>1 <Plug>lightline#bufferline#go(1)
   nmap <Leader>2 <Plug>lightline#bufferline#go(2)
@@ -365,20 +378,22 @@ let g:lightline#ale#indicator_ok = "✔"
 
 " dense-analysis/ale ----------------------------------------------------------
 let g:ale_completion_enabled = 0
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 1
 let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %code - %%s [%severity%]'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 'never'  " Only run linting when saving the file
 let g:ale_linters = {
       \   'python': ['flake8']
       \ }
 let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
+let g:ale_set_highlights = 0  " Disabling highlighting
 let b:ale_fixers = {'python': ['black', 'isort']}
 
+" Navigate between errors quickly with key bindings
 " https://github.com/dense-analysis/ale#5xi-how-can-i-navigate-between-errors-quickly
-autocmd BufEnter *
+autocmd VimEnter *
       \ if Has_plugin('ale')
       \ | execute "nmap <silent> <localleader>k <Plug>(ale_previous_wrap)"
       \ | execute "nmap <silent> <localleader>j <Plug>(ale_next_wrap)"
@@ -391,14 +406,14 @@ if Has_plugin('vim-highlightedyank')
 endif
 
 " tagbar ----------------------------------------------------------------------
-autocmd BufEnter *
+autocmd VimEnter *
       \ if exists(':TagbarToggle') && executable('ctags')
       \ | execute "nmap <F8> :TagbarToggle<CR>"
       \ | endif
 
 " Nvim-R ----------------------------------------------------------------------
 " https://raw.githubusercontent.com/jalvesaq/Nvim-R/master/doc/Nvim-R.txt
-autocmd BufEnter *
+autocmd VimEnter *
       \ if Has_plugin('Nvim-R')
       \ |   execute "vmap <localleader><CR> <Plug>RDSendSelection"
       \ |   execute "nmap <localleader><CR> <Plug>RDSendLine"
@@ -496,7 +511,7 @@ endif
 
 " Redefine the default highlights (see :help highlight and :help esearch-appearance)
 " Implement autocmd to reload highlights on colorscheme change
-autocmd BufEnter *
+autocmd VimEnter *
       \ highlight esearchMatch ctermfg=white ctermbg=204 guifg=#ffffff guibg=#FF3E7B
 
 " incsearch.vim ---------------------------------------------------------------
@@ -509,7 +524,7 @@ endif
 let g:gitgutter_enabled=1
 
 " git-blame -------------------------------------------------------------------
-autocmd BufEnter *
+autocmd VimEnter *
   \ if exists('*gitblame#echo')
   \ | execute "nnoremap <leader>gb :<C-u>call gitblame#echo()<CR>"
   \ | endif
@@ -557,12 +572,12 @@ let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
 let g:Lf_ShortcutF = "<leader>FF"
 
-autocmd BufEnter *
+autocmd VimEnter *
   \ if exists(':Leaderf')
-  \ | noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-  \ | noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-  \ | noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-  \ | noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+  \ | noremap <leader>FB :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+  \ | noremap <leader>FM :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+  \ | noremap <leader>FT :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+  \ | noremap <leader>FL :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
   \ | endif
 
 " noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
@@ -570,10 +585,10 @@ autocmd BufEnter *
 
 " Defx ------------------------------------------------------------------------
 
-if Has_plugin('defx.nvim')
+if Has_plugin('defx.nvim') && exists('*defx#custom#option')
   autocmd FileType defx call s:defx_mappings()
 
-  autocmd BufEnter *
+  autocmd VimEnter *
         \ if exists(':Defx')
         \ | execute "nmap <silent> <Leader>nn :Defx -columns=mark:indent:git:icons:filename:type -floating-preview <cr>"
         \ | endif
@@ -703,7 +718,7 @@ endif
 " https://www.youtube.com/watch?v=PO6DxfGPQvw
 
 " git status
-autocmd BufEnter *
+autocmd VimEnter *
   \ if exists(':G')
   \ | execute "nnoremap <leader>gs :G<CR>"
   \ | execute "nnoremap <leader>gf :diffget //2"
@@ -711,14 +726,14 @@ autocmd BufEnter *
   \ | endif
 
 " tpope/vim-commentary --------------------------------------------------------
-autocmd BufEnter *
+autocmd VimEnter *
   \ if exists(':Commentary')
   \ | execute "nnoremap <localleader>/ :Commentary<CR>"
   \ | execute "vnoremap <localleader>/ :Commentary<CR>"
   \ | endif
 
 " mbbill/undotree -------------------------------------------------------------
-autocmd BufEnter *
+autocmd VimEnter *
   \ if exists(':UndotreeToggle')
   \ | execute "nmap <silent> <leader>u :UndotreeToggle<CR>"
   \ | endif
@@ -734,3 +749,18 @@ let g:floaterm_keymap_toggle = '<leader>tt'
 
 let g:floaterm_autoclose=2
 let g:floaterm_autohide=1
+
+" airblade/vim-rooter ---------------------------------------------------------
+if !has('nvim')
+  let g:rooter_silent_chdir = 1
+endif
+
+" Vimroom ---------------------------------------------------------------------
+let g:goyo_width=100
+let g:goyo_margin_top = 2
+let g:goyo_margin_bottom = 2
+
+autocmd VimEnter *
+  \ if exists(':UndotreeToggle')
+  \ | execute "nnoremap <silent> <leader>z :Goyo<cr>"
+  \ | endif

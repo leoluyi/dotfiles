@@ -41,7 +41,7 @@ git pull --rebase
 ## Install Python Requirements
 
 ```bash
-pip install neovim pynvim jedi black flake8 autopep8
+pip install neovim pynvim jedi black flake8 autopep8 isort
 ```
 
 ## Vim Plugins

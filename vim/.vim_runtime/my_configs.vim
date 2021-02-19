@@ -32,6 +32,7 @@ let g:python3_host_prog = s:user_home . '.pyenv/versions/py3nvim/bin/python'
 """ auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 autocmd! BufWritePost $MYVIMRC source %
 
+""" Leader key
 let mapleader = ","
 let maplocalleader = "\<space>"
 nnoremap <leader>, ,
@@ -169,6 +170,9 @@ augroup END
 " => General
 "----------------------------
 
+""" Escape
+inoremap <C-c> <Esc>
+
 """ Better tabbing
 vnoremap < <gv
 vnoremap > >gv
@@ -192,12 +196,22 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 map 0 ^
 noremap <leader>0 0
 
+"----------------------------
+" => Editing mappings
+"----------------------------
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 " https://youtu.be/QN4fuSsWTbA?t=664
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z=gv
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z=gv
+nnoremap <M-j> mz:m+<cr>`z
+nnoremap <M-k> mz:m-2<cr>`z
+vnoremap <M-j> :m'>+<cr>`<my`>mzgv`yo`z=gv
+vnoremap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z=gv
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
 
 """ Edit and source vimrc
 map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
@@ -211,22 +225,23 @@ nnoremap ? ms?
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 
 """ Insert new line without automatic commenting
-nnoremap <Leader>o o<Esc>^Da
-nnoremap <Leader>O O<Esc>^Da
+nnoremap <localleader>o o<Esc>^Da
+nnoremap <localleader>O O<Esc>^Da
+
+""" Re-select pasted text
+" https://vim.fandom.com/wiki/Selecting_your_pasted_text
+nmap gp `[v`]
+
+""" Quickfix
+nnoremap <leader>cc :botright cope<cr> " open quickfix window
+nnoremap <leader>cw :cw 10<cr>         " open quickfix window if exists
+nnoremap <leader>cn :cnext<cr>         " next error
+nnoremap <leader>cp :cprevious<cr>     " previous error
+nnoremap <leader>cl :cl<cr>            " list all errors
 
 "----------------------------
 " => Moving around, tabs, windows and buffers
 "----------------------------
-
-""" Close a buffer without closing the window?
-" https://stackoverflow.com/a/19619038/3744499
-" (Close the current buffer and move to the alternative one)
-autocmd VimEnter *
-  \ if exists(':Bclose')
-  \ | execute "nnoremap <leader>bd :Bclose<CR>"
-  \ | else
-  \ | execute "noremap <leader>bd :b#<bar>bd#<CR>"
-  \ | endif
 
 """ Splits and tabbed files
 " Make adjusting split sizes a bit more friendly
@@ -245,17 +260,56 @@ noremap Zo <c-w>=
 
 """ TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
+vnoremap <TAB> :<C-u>bnext<CR>
 """ SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
+vnoremap <S-TAB> :<C-u>bprevious<CR>
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
+
+""" Close a buffer without closing the window?
+" https://stackoverflow.com/a/19619038/3744499
+" (Close the current buffer and move to the alternative one)
+autocmd VimEnter *
+  \ if exists(':Bclose')
+  \ | execute "nnoremap <leader>bd :Bclose<CR>"
+  \ | else
+  \ | execute "nnoremap <leader>bd :b#<bar>bd#<CR>"
+  \ | endif
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+    let l:currentBufNum = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
+
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
+
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
+
+    if buflisted(l:currentBufNum)
+        execute("bdelete! ".l:currentBufNum)
+    endif
+endfunction
 
 "----------------------------
 " => Splits and Tabbed Files
 "----------------------------
 """ Better window navigation
-nnoremap <C-h> :wincmd h<CR>
-nnoremap <C-j> :wincmd j<CR>
-nnoremap <C-k> :wincmd k<CR>
-nnoremap <C-l> :wincmd l<CR>
+nnoremap <silent> <C-h> :wincmd h<CR>
+nnoremap <silent> <C-j> :wincmd j<CR>
+nnoremap <silent> <C-k> :wincmd k<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
 
 """ Make adjusing split sizes a bit more friendly
 noremap <silent> <C-S-Left> :vertical resize -3<CR>
@@ -267,6 +321,14 @@ nnoremap <silent> <leader>rp :resize 100<CR>
 """ Change 2 split windows from vert to horiz or horiz to vert
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
+
+"----------------------------
+" => Visual mode related
+"----------------------------
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "----------------------------
 " => Code editing stuffs
@@ -286,7 +348,7 @@ function! ReindentAll()
 endfunction
 
 command! ReindentAll :call ReindentAll()
-nmap <leader>R :ReindentAll<CR>
+nmap <leader>R :<C-u>ReindentAll<CR>
 
 """ :W   -  Force write. Allow saving of files as sudo
 if !has('nvim')
