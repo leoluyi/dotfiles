@@ -108,15 +108,19 @@ let g:indent_guides_guide_size = 1
 " haya14busa/incsearch.vim ----------------------------------------------------
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1  " This feature turns 'hlsearch' off automatically after searching-related motions.
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+
+autocmd VimEnter *
+  \ if exists(':IncSearchMap')
+  \ | execute "map /  <Plug>(incsearch-forward)"
+  \ | execute "map ?  <Plug>(incsearch-backward)"
+  \ | execute "map g/ <Plug>(incsearch-stay)"
+  \ | execute "map n  <Plug>(incsearch-nohl-n)"
+  \ | execute "map N  <Plug>(incsearch-nohl-N)"
+  \ | execute "map *  <Plug>(incsearch-nohl-*)"
+  \ | execute "map #  <Plug>(incsearch-nohl-#)"
+  \ | execute "map g* <Plug>(incsearch-nohl-g*)"
+  \ | execute "map g# <Plug>(incsearch-nohl-g#)"
+  \ | endif
 
 " vim-markdown ----------------------------------------------------------------
 let g:vim_markdown_conceal = 0
@@ -137,9 +141,13 @@ if has('nvim') && has('python3') && Has_plugin('ncm2') && Has_plugin('ncm2-ultis
     au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
     au User Ncm2PopupClose set completeopt=menuone
 
-  " When the <Enter> key is pressed while the popup menu is visible, it only
+    " When the <Enter> key is pressed while the popup menu is visible, it only
     " hides the menu. Use this mapping to close the menu and also start a new line:
-    inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+    autocmd VimEnter *
+          \ if exists('*pumvisible')
+          \ | execute 'inoremap <expr> <CR> (pumvisible() ? "\<C-y>\<CR>" : "\<CR>")'
+          \ | execute 'inoremap <expr> <C-Space> pumvisible() ? "\<C-n>" : "\<Tab>"'
+          \ | endif
 
     " Press enter key to trigger snippet expansion
     " The parameters are the same as `:help feedkeys()`
@@ -147,8 +155,8 @@ if has('nvim') && has('python3') && Has_plugin('ncm2') && Has_plugin('ncm2-ultis
 
     " Use <TAB> to select the popup menu:
     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <C-Space> pumvisible() ? "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
     " uncomment this block if you use vimtex for LaTex:
     " autocmd Filetype tex call ncm2#register_source({
     "           \ 'name': 'vimtex',
@@ -170,6 +178,9 @@ let ncm2#popup_delay = 5
 let ncm2#complete_length = [[1, 1]]
 " Use new fuzzy based matches
 let g:ncm2#matcher = 'substrfuzzy'
+
+" ncm2-ultisnips --------------------------------------------------------------
+let g:UltiSnipsUsePythonVersion=3
 
 " ncm2-look.vim ---------------------------------------------------------------
 autocmd FileType markdown :let b:ncm2_look_enabled = 1
@@ -452,19 +463,25 @@ let g:AutoPairsShortcutToggle = '<M-p>'
 let g:move_key_modifier = 'M'  " don't know but somehow that <opt + cmd> works for macos
 
 " jedi-vim --------------------------------------------------------------------
-" Disable Jedi-vim autocompletion and enable call-signatures options since we have NCM2 for autocompletion.
-let g:jedi#completions_command = ""
 
+if has('nvim')
+  " Disable Jedi-vim autocompletion and enable call-signatures options since we have NCM2 for autocompletion.
+  let g:jedi#completions_command = ""
+  let g:jedi#completions_enabled = 0
+else
+  let g:jedi#completions_command = "<C-Space>"
+  let g:jedi#completions_enabled = 1
+endif
+
+let g:jedi#popup_on_dot = 1
 let g:jedi#auto_initialization = 1
-let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#smart_auto_mappings = 0
-let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = "1"
 
-let g:jedi#goto_command = "<leader>gg"
+let g:jedi#goto_command = "<leader>gd"
 let g:jedi#goto_assignments_command = "<leader>ga"
-let g:jedi#goto_definitions_command = "<leader>gd"
+" let g:jedi#goto_definitions_command = "<leader>gd"
 let g:jedi#usages_command = "<leader>gr"
 let g:jedi#documentation_command = "K"
 let g:jedi#rename_command = "<leader>r"
@@ -554,10 +571,14 @@ autocmd VimEnter *
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='#EF5F70' gui=underline ctermfg=81 cterm=underline
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg=#00C7DF gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg=#EF5F70 gui=underline ctermfg=81 cterm=underline
+augroup END
 
 let g:qs_max_chars=150
+let g:qs_buftype_blacklist = ['terminal', 'nofile']
 
 " vim-yankstack ---------------------------------------------------------------
 " load yankstack without the default key mappings

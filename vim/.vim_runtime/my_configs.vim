@@ -69,6 +69,7 @@ endif
 try
   colorscheme gruvbox
 catch
+  colorscheme default
 endtry
 
 set background=dark
