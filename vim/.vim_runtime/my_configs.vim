@@ -389,13 +389,16 @@ vnoremap x "_x
 
 """ Cut to yanked register
 nnoremap <localleader>C "0C
+vnoremap <localleader>C "0C
 nnoremap <localleader>D "0D
 nnoremap <localleader>S "0S
 nnoremap <localleader>d "0d
+vnoremap <localleader>d "0d
 nnoremap <localleader>dd "0dd
 nnoremap <localleader>x "0x
 vnoremap <localleader>x "0x
 nnoremap cc "0cc
+vnoremap cc "0cc
 
 """ Paste from yanked register
 nnoremap <localleader>P "0P

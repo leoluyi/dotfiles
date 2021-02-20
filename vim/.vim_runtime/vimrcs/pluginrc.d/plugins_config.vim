@@ -30,6 +30,21 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
+" mg979/vim-visual-multi ------------------------------------------------------
+" https://github.com/mg979/vim-visual-multi/wiki/Mappings
+let g:VM_default_mappings = 1
+let g:VM_maps = {}
+
+let g:VM_maps["Add Cursor Down"]             = '<M-C-Down>'
+let g:VM_maps["Add Cursor Up"]               = '<M-C-Up>'
+
+let g:VM_maps["Select Cursor Down"] = '<M-C-Down>'      " start selecting down
+let g:VM_maps["Select Cursor Up"]   = '<M-C-Up>'        " start selecting up
+
+" Enable undo/redo changes made in VM
+let g:VM_maps["Undo"] = 'u'
+let g:VM_maps["Redo"] = '<C-r>'
+
 " vim-move --------------------------------------------------------------------
 " workaround alt key mappings
 nmap zj <Plug>MoveLineDown
@@ -192,11 +207,11 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 
 " You could create a VimEnter / BufEnter autocmd to set up your mapping after vim has finished loading:
-autocmd VimEnter * if exists(':Files')   | execute "nnoremap <leader>f :Files<CR>" | endif
+autocmd VimEnter * if exists(':Files')   | execute "nnoremap <leader>f :Files<CR>"   | endif
 autocmd VimEnter * if exists(':Buffers') | execute "nnoremap <leader>b :Buffers<CR>" | endif
 autocmd VimEnter * if exists(':History') | execute "nnoremap <leader>m :History<CR>" | endif
-" autocmd VimEnter * if exists(':BTags') | execute "noremap <Leader>t :BTags<CR>" | endif
-" autocmd VimEnter * if exists(':Tags') | execute "noremap <Leader>T :Tags<CR>" | endif
+" autocmd VimEnter * if exists(':BTags')   | execute "noremap <Leader>t :BTags<CR>"    | endif
+" autocmd VimEnter * if exists(':Tags')    | execute "noremap <Leader>T :Tags<CR>"     | endif
 
 " This is the default extra key bindings
 let g:fzf_action = {
@@ -247,8 +262,8 @@ let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ ['mode', 'paste', 'zoomstatus'],
-      \             ['readonly', 'filename', 'modified', 'fugitive'],
-      \             ['githunks', 'venv'] ],
+      \             ['readonly', 'filename', 'modified', 'fugitive', 'githunks'],
+      \             ['venv'] ],
       \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \              [ 'indicator', 'percent', 'lineinfo' ],
       \              [ 'fileformat', 'fileencoding', 'filetype'] ],
@@ -520,8 +535,14 @@ if has('nvim')
   set inccommand=nosplit
 endif
 
-" vim-gitgutter ---------------------------------------------------------------
+" airblade/vim-gitgutter ------------------------------------------------------
 let g:gitgutter_enabled=1
+autocmd VimEnter *
+  \ if exists(':GitGutterToggle')
+  \ | execute "nnoremap <silent> <leader>tg :GitGutterToggle<cr>"
+  \ | execute "nmap ]h <Plug>(GitGutterNextHunk)"
+  \ | execute "nmap [h <Plug>(GitGutterPrevHunk)"
+  \ | endif
 
 " git-blame -------------------------------------------------------------------
 autocmd VimEnter *
@@ -751,9 +772,7 @@ let g:floaterm_autoclose=2
 let g:floaterm_autohide=1
 
 " airblade/vim-rooter ---------------------------------------------------------
-if !has('nvim')
-  let g:rooter_silent_chdir = 1
-endif
+let g:rooter_silent_chdir = 0
 
 " Vimroom ---------------------------------------------------------------------
 let g:goyo_width=100
@@ -764,3 +783,7 @@ autocmd VimEnter *
   \ if exists(':UndotreeToggle')
   \ | execute "nnoremap <silent> <leader>z :Goyo<cr>"
   \ | endif
+
+" garbas/vim-snipmate ---------------------------------------------------------
+" inoremap <C-j> <C-r>=snipMate#TriggerSnippet()<cr>
+" snoremap <C-j> <esc>i<right><C-r>=snipMate#TriggerSnippet()<cr>
