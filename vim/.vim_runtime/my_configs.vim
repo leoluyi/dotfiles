@@ -151,9 +151,26 @@ set noerrorbells                      " No annoying sound on errors
 " set t_vb=                             " No beep or flash
 " set novisualbell                      " No visual bell
 
+""" Turn persistent undo on.
+"   means that you can undo even when you close a buffer/VIM.
+try
+    set undodir=~/.vim_runtime/temp_dirs/undodir
+    set undofile
+catch
+endtry
+
+""" Disable scrollbars (real hackers don't use scrollbars for navigation!)
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
+
 """ Fix mouse issue using Alacritty terminal
 " set ttymouse=sgr
 
+"----------------------------
+" => Misc
+"----------------------------
 """ Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
 " https://github.com/jeffkreeftmeijer/vim-numbertoggle
@@ -162,6 +179,9 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set norelativenumber | endif
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set relativenumber   | endif
 augroup END
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => My Shortcut Keys
@@ -182,7 +202,7 @@ vnoremap > >gv
 nnoremap <C-s> :w<CR>
 
 """ Add new file in the directory of the open file
-nmap <leader>a :e %:h/
+nmap <leader>a :e <C-r>=expand("%:p:h")<CR>/
 """ Add new file in the working directory
 nmap <leader>A :e <C-r>=getcwd()<CR>/
 
@@ -214,7 +234,7 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-""" Edit and source vimrc
+""" Fast editing and reloading of vimrc configs.
 map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
 nnoremap <leader>rc :source $MYVIMRC<CR>
 
@@ -341,6 +361,10 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 """ <F6> -  Absolute numbers
 map <F6> :set relativenumber!<CR>
 
+""" Search and replace selected text.
+" https://stackoverflow.com/a/676619
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 """ Re-indent current buffer
 function! ReindentAll()
   let l:save = winsaveview()
@@ -360,10 +384,10 @@ endif
 
 """ Toggle number and relativenumber for cursor copy-paste
 "nnoremap <leader>n :set number! relativenumber!<CR> :FoldColumnToggle<CR> :IndentLinesToggle<CR> :ALEToggleBuffer<CR> :GitGutterToggle<CR>
-nnoremap <leader>n :set nonumber nolinebreak norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
-vnoremap <leader>n :set nonumber nolinebreak norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
-nnoremap <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnable<CR> :ALEEnableBuffer<CR> :GitGutterEnable<CR>
-vnoremap <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnable<CR> :ALEEnableBuffer<CR> :GitGutterEnable<CR>
+nnoremap <silent> <leader>n :set nonumber nolinebreak norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
+vnoremap <silent> <leader>n :set nonumber nolinebreak norelativenumber<CR> :setlocal foldcolumn=0<CR> :IndentLinesDisable<CR> :ALEDisableBuffer<CR> :GitGutterDisable<CR>
+nnoremap <silent> <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnable<CR> :ALEEnableBuffer<CR> :GitGutterEnable<CR>
+vnoremap <silent> <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnable<CR> :ALEEnableBuffer<CR> :GitGutterEnable<CR>
 
 "----------------------------
 " => Parenthesis/bracket
@@ -422,7 +446,108 @@ vnoremap <localleader>yy "+yy
 imap <C-k> <C-o>D
 
 "--------------------------
-" => Toggle transparent background
+" => Command mode related
+"--------------------------
+
+" Smart mappings on the command line
+cno $h e ~/
+cno $d e ~/Desktop/
+cno $j e ./
+cno $c e <C-\>eCurrentFileDir("e")<cr>
+
+" $q is super useful when browsing on the command line
+" it deletes everything until the last slash
+cno $q <C-\>eDeleteTillSlash()<cr>
+
+" Bash like keys for the command line
+cnoremap <C-A>		<Home>
+cnoremap <C-E>		<End>
+cnoremap <C-K>		<C-U>
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+" Map ½ to something useful
+map ½ $
+cmap ½ $
+imap ½ $
+
+"--------------------------
+" => Misc
+"--------------------------
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <leader>mm mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm
+
+""" Spellcheck
+nnoremap <leader>sc setlocal spell!
+
+""" Show marks list and goto
+nnoremap <leader>gm :<C-u>marks<CR>:normal! `
+
+""" Copy the entire content to new buffer.
+map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+
+" Quickly open a buffer for scribble
+map <leader>ob :e /tmp/buffer<cr>
+
+" Quickly open a markdown buffer for scribble
+map <leader>om :e /tmp/buffer.md<cr>
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+"--------------------------
+" => Fix unwanted key map
+"--------------------------
+
+" Make sure that enter is never overriden in the quickfix window
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+
+try
+  " unmap <C-Space>
+  " unmap <leader>f
+  inoremap <C-@> <Esc>
+  unmap <leader>q
+catch
+endtry
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General abbreviations
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+iabbrev xdate <C-r>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Omni complete functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Custom commands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+command! -nargs=0 FoldColumnToggle :call FoldColumnToggle()
+command! -nargs=1 -complete=file -bang Rename :call Rename("<args>", "<bang>")
+command! -nargs=1 Highlight :call Highlight(<q-args>)
+command! -nargs=0 HighlightClear :call Highlight('')
+command! WhitespaceTrailingRemove :call WhitespaceTrailingRemove()
+command! TrimWhitespace :call TrimWhitespace()
+command! EmptyRegisters :call EmptyRegisters()
+command! ColorToggle call ColorToggle()
+command! ToggleTransparentBackground call ToggleTransparent()
+nnoremap <leader>tb :ToggleTransparentBackground<CR>
+
+" Delete trailing white space on save, useful for some filetypes ;)
+if has("autocmd") && exists('#WhitespaceTrailingRemove')
+  autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call WhitespaceTrailingRemove()
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"--------------------------
+" Toggle transparent background
 "--------------------------
 " https://jnrowe.github.io/articles/tips/Toggling_settings_in_vim.html
 " https://stackoverflow.com/a/37720708/3744499
@@ -440,11 +565,9 @@ function! ToggleTransparent()
     let t:is_transparent = 0
   endif
 endfunction
-command! ToggleTransparentBackground call ToggleTransparent()
-nnoremap <leader>tb :ToggleTransparentBackground<CR>
 
 "--------------------------
-" => Toggle colorscheme
+" Toggle colorscheme
 "--------------------------
 function! ColorToggle()
   if &background ==? 'dark'
@@ -460,36 +583,6 @@ function! ColorToggle()
   endif
 endfunction
 
-command! ColorToggle call ColorToggle()
-
-"--------------------------
-" => Misc
-"--------------------------
-
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <leader>mm mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm
-
-""" Spellcheck
-nnoremap <leader>sc setlocal spell!
-
-""" Show marks list and goto
-nnoremap <leader>gm :<C-u>marks<CR>:normal! `
-
-"--------------------------
-" => Fix unwanted key map
-"--------------------------
-try
-  " unmap <C-Space>
-  " unmap <leader>f
-  inoremap <C-@> <Esc>
-  unmap <leader>q
-catch
-endtry
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Global functions.
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "--------------------------
 " FoldColumnToggle
 "--------------------------
@@ -502,16 +595,11 @@ function! FoldColumnToggle()
   endif
 endfunction
 
-command! -nargs=0 FoldColumnToggle :call FoldColumnToggle()
-
 " https://stackoverflow.com/a/51146449
 " a highlight color must be set up for the function to work
 function! Highlight(text)
   :execute "match IncSearch /" . a:text . "/"
 endfunction
-
-command! -nargs=1 Highlight :call Highlight(<q-args>)
-command! -nargs=0 HighlightClear :call Highlight('')
 
 "--------------------------
 " Rename3
@@ -533,8 +621,6 @@ command! -nargs=0 HighlightClear :call Highlight('')
 " Usage:
 "
 " :Rename[!] {newname}
-
-command! -nargs=1 -complete=file -bang Rename :call Rename("<args>", "<bang>")
 
 function! Rename(name, bang)
   let l:curfile = expand("%:p")
@@ -562,8 +648,6 @@ function! TrimWhitespace()
   keeppatterns %s/\s\+$//e
   call winrestview(l:save)
 endfun
-command! TrimWhitespace :call TrimWhitespace()
-
 
 fun! WhitespaceTrailingRemove()
   let save_cursor = getpos(".")
@@ -572,7 +656,6 @@ fun! WhitespaceTrailingRemove()
   call setpos('.', save_cursor)
   call setreg('/', old_query)
 endfun
-command! WhitespaceTrailingRemove :call WhitespaceTrailingRemove()
 
 "--------------------------
 " => EmptyRegisters
@@ -583,7 +666,57 @@ function! EmptyRegisters()
     call setreg(r, [])
   endfor
 endfun
-command! EmptyRegisters :call EmptyRegisters()
+
+"--------------------------
+" => DeleteTillSlash
+"--------------------------
+func! DeleteTillSlash()
+    let g:cmd = getcmdline()
+
+    if has("win16") || has("win32")
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
+    else
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+    endif
+
+    if g:cmd == g:cmd_edited
+        if has("win16") || has("win32")
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
+        else
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+        endif
+    endif
+
+    return g:cmd_edited
+endfunc
+
+func! CurrentFileDir(cmd)
+    return a:cmd . " " . expand("%:p:h") . "/"
+endfunc
+
+"--------------------------
+" => VisualSelection
+"--------------------------
+function! CmdLine(str)
+    call feedkeys(":" . a:str)
+endfunction
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => References

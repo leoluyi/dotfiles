@@ -16,6 +16,7 @@ endif
 call plug#begin('~/.vim_runtime/plugged')
 
 " Plugins already in awesome vimrc:
+
 Plug 'dense-analysis/ale'           " asynchronous linters engine
 Plug 'garbas/vim-snipmate'          " Aims to be a concise vim script that implements some of TextMate's snippets features in Vim
 Plug 'honza/vim-snippets'           " vim-snipmate default snippets (Previously snipmate-snippets)
@@ -31,6 +32,7 @@ Plug 'tpope/vim-sensible'           " Defaults everyone can agree on
 
 
 " nvim/vim8/vim7 compatible:
+
 Plug 'airblade/vim-gitgutter'  " Show git changes to files in gutter
 Plug 'airblade/vim-rooter'  " Changes Vim working directory to project root
 Plug 'ap/vim-css-color'  " Preview colours in source code
@@ -38,6 +40,7 @@ Plug 'Asheq/close-buffers.vim'  " Quickly close (bdelete) several buffers at onc
 Plug 'cespare/vim-toml'  " Vim syntax for TOML
 Plug 'Chiel92/vim-autoformat'  " Formatters (pip install --user black)
 Plug 'christoomey/vim-tmux-navigator'  " Seamless navigation between tmux panes and vim splits
+Plug 'dalance/vseq.vim'  " Generating sequential number vertically
 Plug 'davidhalter/jedi-vim'  " Python IDE (pip install --user jedi)
 Plug 'dbeniamine/cheat.sh-vim'  " A vim plugin to access cheat.sh sheets
 Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)

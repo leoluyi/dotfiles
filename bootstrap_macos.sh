@@ -132,6 +132,7 @@ function install_vim_awesome {
   fi
 
   if [ ! -d ~/.vim_runtime ]; then
+    git clone --depth=1 git@github.com:leoluyi/vimrc.git ~/.vim_runtime 2>/dev/null || \
     git clone --depth=1 https://github.com/leoluyi/vimrc.git ~/.vim_runtime
     bash ~/.vim_runtime/install_awesome_vimrc.sh
   else
