@@ -156,29 +156,39 @@ command -v pyenv &>/dev/null && \
   eval "$(pyenv virtualenv-init -)"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=0
 
-# jenv
+# jenv.
 command -v jenv &>/dev/null && \
   export PATH="$HOME/.jenv/bin:$PATH" && \
   eval "$(jenv init -)"
 
-# fzf.
-[ -f ~/.fzf.bash ] && \
-  source ~/.fzf.bash && \
-  export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
+# fzf - Ripgrep solution that shows hidden files but ignore .git folder
+if command -v fzf &>/dev/null && command -v rg &>/dev/null; then
+  export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
+else
+  export FZF_DEFAULT_COMMAND="find . -type f -not -path '*/\.git/*' -not -regex '.*\(\.pyc\|\.o\|\.obj\|\.svn\|\.swp\|\.class\|\.hg\|\.DS_Store\|\.min\..*\)'"
+fi
 
-if [ -f ~/.fzf.bash ] && command -v fd &>/dev/null; then
+# fzf - Fuzzy completion for bash and zsh.
+if [ -f "$HOME"/.fzf.bash ]; then
+  source "$HOME"/.fzf.bash
+
+  command -v bat &>/dev/null && \
+    export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid,numbers --line-range :300 {} 2>/dev/null || file --mime {}'"
+
   # Use fd (https://github.com/sharkdp/fd) instead of the default find
   # command for listing path candidates.
   # - The first argument to the function ($1) is the base path to start traversal
   # - See the source code (completion.{bash,zsh}) for the details.
-  _fzf_compgen_path() {
-    fd --hidden --follow --exclude ".git" . "$1"
-  }
+  if command -v fd &>/dev/null; then
+    _fzf_compgen_path() {
+      fd --hidden --follow --exclude ".git" . "$1"
+    }
 
-  # Use fd to generate the list for directory completion
-  _fzf_compgen_dir() {
-    fd --type d --hidden --follow --exclude ".git" . "$1"
-  }
+    # Use fd to generate the list for directory completion
+    _fzf_compgen_dir() {
+      fd --type d --hidden --follow --exclude ".git" . "$1"
+    }
+  fi
 fi
 
 # Git diff-so-fancy.

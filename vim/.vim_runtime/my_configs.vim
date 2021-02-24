@@ -1,4 +1,21 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maintainer:
+"       Lu Yi - @leoluyi
+"
+" Sections:
+" => Check pynvim
+" => Some basics sets
+" => Status line
+" => My Shortcut Keys
+" => General abbreviations
+" => Omni complete functions
+" => Custom commands
+" => Helper functions
+" => References
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Check pynvim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -37,15 +54,15 @@ let mapleader = ","
 let maplocalleader = "\<space>"
 nnoremap <leader>, ,
 
-set updatetime=500                    " Faster completion
+set updatetime=500                  " Faster completion
 
-""" Backups
-set hidden                            " Opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
-set history=50                        " Keep 50 lines of command line history
-set nobackup                          " No *~ backup files
-set nowritebackup                     " Do not make a backup before overwriting a file
-set nowrapscan                        " Do not searche wrap around the end of the file
-set noswapfile                        " Do not use a swapfile for the buffer
+""" Backups - Turn backup off, since most stuff is in SVN, git etc. anyway...
+set hidden                          " Opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
+set history=500                     " Keep lines of command line history
+set nobackup                        " No *~ backup files
+set nowritebackup                   " Do not make a backup before overwriting a file
+set nowrapscan                      " Do not searche wrap around the end of the file
+set noswapfile                      " Do not use a swapfile for the buffer
 
 """ Terminal colors
 if has("termguicolors")
@@ -60,6 +77,10 @@ if has("termguicolors")
 endif
 
 """ Colors
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256                " Enable 256 colors palette in Gnome Terminal
+endif
+
 " Most terminals don't handle italics right so gruvbox disables italics for terminals by default
 " https://github.com/gruvbox-community/gruvbox/wiki/Terminal-specific#1-italics-is-disabled
 if has('nvim')
@@ -74,18 +95,47 @@ endtry
 
 set background=dark
 
-" Enable true color
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+if has("gui_running")
+  " Set extra options when running in GUI mode
+  set guioptions-=T
+  set guioptions-=e
+  set t_Co=256
+  set guitablabel=%M\ %t
+endif
 
-""" Editing
-" set clipboard=unnamedplus           " Yank to the system register (*) by default
-set tabstop=4                         " Show existing tab with 4 spaces width
-set softtabstop=0                     " Disable mixed tabs and spaces
-set shiftwidth=2                      " When indenting with '>', use 2 spaces width
-set expandtab                         " On pressing tab, insert 4 spaces
-set nrformats+=alpha                  " Increasing or decreasing alphabets with Ctrl-A and Ctrl-X
+if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1   " Enable true color
+endif
 
-" " yank to clipboard
+""" Editing - Text, tab and indent related
+" set clipboard=unnamedplus         " Yank to the system register (*) by default
+set tabstop=4                       " Show existing tab with 4 spaces width
+set softtabstop=0                   " Disable mixed tabs and spaces
+set shiftwidth=2                    " When indenting with '>', use 2 spaces width
+set expandtab                       " On pressing tab, insert 4 spaces
+set nrformats+=alpha                " Increasing or decreasing alphabets with Ctrl-A and Ctrl-X
+set smarttab " Be smart when using tabs ;)
+
+set autoindent                      " Auto indent
+set smartindent                     " Smart indent
+
+""" Word Wrap
+set linebreak                       " Make Vim break lines without breaking words
+set wrap                            " Wrap lines
+set formatoptions-=t                " When textwidth is set, keeps the visual textwidth but doesn't add new line in insert mode
+" autocmd FileType * setlocal formatoptions-=cro  " Disables automatic commenting on newline. https://stackoverflow.com/q/2280030/3744499
+
+""" Searching
+set ignorecase                      " Ignore case when searching
+set smartcase                       " When searching try to be smart about cases
+set hlsearch                        " Highlight search results
+set incsearch                       " Makes search act like search in modern browsers
+set lazyredraw                      " Don't redraw while executing macros (good performance config)
+set magic                           " For regular expressions turn magic on
+set showmatch                       " Show matching brackets when text indicator is over them
+set mat=2                           " How many tenths of a second to blink when matching brackets
+
+" """ yank to clipboard
 " " https://stackoverflow.com/a/3961954
 " " https://www.markcampbell.me/2016/04/12/setting-up-yank-to-clipboard-on-a-mac-with-vim.html
 " if has("clipboard")
@@ -97,28 +147,40 @@ set nrformats+=alpha                  " Increasing or decreasing alphabets with 
 " endif
 
 """ Folding
-set foldlevel=999                     " Expand all fold levels
-set foldnestmax=3                     " Sets the maximum nesting of folds
-set foldmethod=syntax                 " The kind of folding
-set foldenable                        " Code folding
-set foldcolumn=1                      " Add a bit extra margin to the left
+set foldlevel=999                   " Expand all fold levels
+set foldnestmax=3                   " Sets the maximum nesting of folds
+set foldmethod=syntax               " The kind of folding
+set foldenable                      " Code folding
+set foldcolumn=1                    " Add a bit extra margin to the left
 
 """ Display
 set number relativenumber
-set colorcolumn=80                    " Display a ruler at a specific line
+set ruler                           " Always show current position
+set colorcolumn=80                  " Display a ruler at a specific line
 set cursorline
-set fillchars+=vert:│                 " Split separator
+set fillchars+=vert:│               " Split separator
 set listchars=tab:→\ ,eol:↲,space:·,nbsp:␣,trail:•,precedes:«,extends:»
-" set textwidth=80
+set cmdheight=1                     " Height of the command bar
+set textwidth=500                   " A longer line will be broken after white space to get this width
 " set colorcolumn=+1  " highlight column after 'textwidth'
 " let &colorcolumn=join(range(81,999),",")  " set colorcolumn for the whole screen after 81
 " highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 """ Encoding
-set encoding=utf-8                    " Used internally, always utf-8
-set fileencoding=utf-8                " File-content encoding for the current buffle
-set fileformats=unix,dos,mac
+set encoding=utf-8                  " Used internally, always utf-8
+set fileencoding=utf-8              " File-content encoding for the current buffle
+set fileformats=unix,dos,mac        " Use Unix as the standard file type
 set ttyfast
+
+" Avoid garbled characters in Chinese language windows OS
+let $LANG='en'
+set langmenu=en
+
+try
+  source $VIMRUNTIME/delmenu.vim
+  source $VIMRUNTIME/menu.vim
+catch
+endtry
 
 if has("multi_byte")
   " A list of character encodings considered when starting to edit an existing file
@@ -127,29 +189,44 @@ else
   echoerr "If +multi_byte is not included, you should compile Vim with big features."
 endif
 
+""" Turn on the Wild menu
+set wildmenu
+
 """ Number formats
 set nrformats-=octal
 
 """ Fix backspace indent
 set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
 
-""" Files
-syntax on
-filetype plugin indent on
+""" Files and Buffers
+syntax on                           " Enable syntax highlighting
+filetype plugin indent on           " Enable filetype plugins
 
-""" Word Wrap
-set linebreak                         " Make Vim break lines without breaking words
-set wrap                              " Line wrapping
-set formatoptions-=t                  " When textwidth is set, keeps the visual textwidth but doesn't add new line in insert mode
-" autocmd FileType * setlocal formatoptions-=cro  " Disables automatic commenting on newline. https://stackoverflow.com/q/2280030/3744499
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * silent! checktime
+
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
 
 """ Splits and Tabs
 set splitbelow splitright             " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 
 """ Warnings
 set noerrorbells                      " No annoying sound on errors
+set tm=500
 " set t_vb=                             " No beep or flash
 " set novisualbell                      " No visual bell
+
+if has("gui_macvim")
+  " Properly disable sound on errors on MacVim
+  autocmd GUIEnter * set vb t_vb=
+endif
 
 """ Turn persistent undo on.
 "   means that you can undo even when you close a buffer/VIM.
@@ -159,17 +236,28 @@ try
 catch
 endtry
 
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+
 """ Disable scrollbars (real hackers don't use scrollbars for navigation!)
 set guioptions-=r
 set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 
+""" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
 """ Fix mouse issue using Alacritty terminal
 " set ttymouse=sgr
 
 "----------------------------
-" => Misc
+" -> Misc
 "----------------------------
 """ Automatic toggling between line number modes
 " https://jeffkreeftmeijer.com/vim-number/
@@ -184,11 +272,20 @@ augroup END
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Status line
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => My Shortcut Keys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "----------------------------
-" => General
+" -> General
 "----------------------------
 
 """ Escape
@@ -199,7 +296,14 @@ vnoremap < <gv
 vnoremap > >gv
 
 """ Alternate way to save
+nmap <leader>w :w!<cr>
 nnoremap <C-s> :w<CR>
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+" trick does not work on neovim (https://github.com/neovim/neovim/issues/1716)
+if !has('nvim')
+  command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+endif
 
 """ Add new file in the directory of the open file
 nmap <leader>a :e <C-r>=expand("%:p:h")<CR>/
@@ -210,16 +314,13 @@ nmap <leader>A :e <C-r>=getcwd()<CR>/
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 "----------------------------
-" => Editing mappings
+" -> Editing mappings
 "----------------------------
 
 " Remap VIM 0 to first non-blank character
 map 0 ^
 noremap <leader>0 0
 
-"----------------------------
-" => Editing mappings
-"----------------------------
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 " https://youtu.be/QN4fuSsWTbA?t=664
 nnoremap <M-j> mz:m+<cr>`z
@@ -261,8 +362,24 @@ nnoremap <leader>cp :cprevious<cr>     " previous error
 nnoremap <leader>cl :cl<cr>            " list all errors
 
 "----------------------------
-" => Moving around, tabs, windows and buffers
+" -> Moving around, tabs, windows and buffers
 "----------------------------
+
+""" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 
 """ Splits and tabbed files
 " Make adjusting split sizes a bit more friendly
@@ -324,7 +441,7 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 "----------------------------
-" => Splits and Tabbed Files
+" -> Splits and Tabbed Files
 "----------------------------
 """ Better window navigation
 nnoremap <silent> <C-h> :wincmd h<CR>
@@ -344,7 +461,7 @@ map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
 
 "----------------------------
-" => Visual mode related
+" -> Visual mode related
 "----------------------------
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
@@ -352,7 +469,7 @@ vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "----------------------------
-" => Code editing stuffs
+" -> Code editing stuffs
 "----------------------------
 
 """ <F5> -  Remove all trailing whitespace. https://vim.fandom.com/wiki/Remove_unwanted_spaces
@@ -390,7 +507,7 @@ nnoremap <silent> <leader>N :set number linebreak relativenumber<CR> :setlocal f
 vnoremap <silent> <leader>N :set number linebreak relativenumber<CR> :setlocal foldcolumn=1<CR> :IndentLinesEnable<CR> :ALEEnableBuffer<CR> :GitGutterEnable<CR>
 
 "----------------------------
-" => Parenthesis/bracket
+" -> Parenthesis/bracket
 "----------------------------
 inoremap $) ()<esc>i
 inoremap $] []<esc>i
@@ -402,7 +519,7 @@ nnoremap <localleader>' viw<esc>`>a'<esc>`<i'<esc>
 nnoremap <localleader>" viw<esc>`>a"<esc>`<i"<esc>
 
 "----------------------------
-" => Copy and paste stuffs
+" -> Copy and paste stuffs
 "----------------------------
 " https://zean.be/articles/vim-registers/
 " map paste, yank and delete to named register so the content
@@ -440,13 +557,13 @@ vnoremap <localleader>y  "+y
 vnoremap <localleader>yy "+yy
 
 "--------------------------
-" => Map normal mode commands to insert mode
+" -> Map normal mode commands to insert mode
 "--------------------------
 " Delete to the end of line
 imap <C-k> <C-o>D
 
 "--------------------------
-" => Command mode related
+" -> Command mode related
 "--------------------------
 
 " Smart mappings on the command line
@@ -473,7 +590,19 @@ cmap ½ $
 imap ½ $
 
 "--------------------------
-" => Misc
+" -> Spell checking
+"--------------------------
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+"--------------------------
+" -> Misc mappings
 "--------------------------
 
 " Remove the Windows ^M - when the encodings gets messed up
@@ -498,7 +627,7 @@ map <leader>om :e /tmp/buffer.md<cr>
 map <leader>pp :setlocal paste!<cr>
 
 "--------------------------
-" => Fix unwanted key map
+" -> Fix unwanted key map
 "--------------------------
 
 " Make sure that enter is never overriden in the quickfix window
@@ -641,7 +770,7 @@ function! Rename(name, bang)
 endfunction
 
 "--------------------------
-" => TrimWhitespace
+" TrimWhitespace
 "--------------------------
 function! TrimWhitespace()
   let l:save = winsaveview()
@@ -658,7 +787,7 @@ fun! WhitespaceTrailingRemove()
 endfun
 
 "--------------------------
-" => EmptyRegisters
+" EmptyRegisters
 "--------------------------
 function! EmptyRegisters()
   let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
@@ -668,7 +797,7 @@ function! EmptyRegisters()
 endfun
 
 "--------------------------
-" => DeleteTillSlash
+" DeleteTillSlash
 "--------------------------
 func! DeleteTillSlash()
     let g:cmd = getcmdline()
@@ -695,7 +824,7 @@ func! CurrentFileDir(cmd)
 endfunc
 
 "--------------------------
-" => VisualSelection
+" VisualSelection
 "--------------------------
 function! CmdLine(str)
     call feedkeys(":" . a:str)
@@ -716,6 +845,17 @@ function! VisualSelection(direction, extra_filter) range
 
     let @/ = l:pattern
     let @" = l:saved_reg
+endfunction
+
+"--------------------------
+" for statusbar
+"--------------------------
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

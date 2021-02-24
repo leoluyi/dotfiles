@@ -214,6 +214,12 @@ endif
 
 " fzf.vim ---------------------------------------------------------------------
 
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
+elseif executable('find')
+  let $FZF_DEFAULT_COMMAND="find . -type f -not -path '*/\.git/*' -not -regex '.*\(\.pyc\|\.o\|\.obj\|\.svn\|\.swp\|\.class\|\.hg\|\.DS_Store\|\.min\..*\)'"
+endif
+
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 

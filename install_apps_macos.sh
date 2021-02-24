@@ -116,6 +116,7 @@ function brew_install_cli {
   figlet    `# Banner-like program prints strings as ASCII art` \
   findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
   flake8 \
+  fzf \
   gcc \
   gdal \
   git \
@@ -185,9 +186,14 @@ function brew_install_cli {
 
   # Remove outdated versions from the cellar.
   brew cleanup
+
+  # Setup fzf for bash/zsh completion.
+  local FZF_PREFIX="$(brew --prefix fzf)"
+  [ -x "$FZF_PREFIX"/install ] && yes | "$FZF_PREFIX"/install
 }
 
 
+# Execute functions.
 validate_os macos
 install_xcodecli
 install_homebrew
