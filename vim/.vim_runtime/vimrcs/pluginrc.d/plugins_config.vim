@@ -12,12 +12,23 @@ let s:vim_runtime = expand('<sfile>:p:h')."/.."
 runtime vimrcs/utils.vim
 
 " morhetz/gruvbox -------------------------------------------------------------
-try
-  colorscheme gruvbox
-catch
-endtry
+
+" Most terminals don't handle italics right so gruvbox disables italics for terminals by default
+" https://github.com/gruvbox-community/gruvbox/wiki/Terminal-specific#1-italics-is-disabled
+if has('nvim')
+  let g:gruvbox_italic=1
+endif
 
 let g:gruvbox_inverse=0
+let g:gruvbox_contrast_light='soft'
+
+" sainnhe/gruvbox-material ----------------------------------------------------
+if has('nvim')
+  let g:gruvbox_material_enable_italic = 1
+endif
+
+let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_palette = 'mix'
 
 " terryma/vim-multiple-cursors ------------------------------------------------
 " default mapping
@@ -132,7 +143,7 @@ let g:vim_markdown_math = 1
 let g:vim_markdown_new_list_item_indent = 0
 
 " NCM2 ------------------------------------------------------------------------
-" https://yufanlu.net/2018/09/03/neovim-python/
+" https://github.com/ncm2/ncm2
 if has('nvim') && has('python3') && Has_plugin('ncm2') && Has_plugin('ncm2-ultisnips')
   augroup NCM2
     autocmd!
@@ -143,21 +154,22 @@ if has('nvim') && has('python3') && Has_plugin('ncm2') && Has_plugin('ncm2-ultis
     au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
     au User Ncm2PopupClose set completeopt=menuone
 
-    " When the <Enter> key is pressed while the popup menu is visible, it only
-    " hides the menu. Use this mapping to close the menu and also start a new line:
-    autocmd VimEnter *
-          \ if exists('*pumvisible')
-          \ | execute 'inoremap <expr> <CR> (pumvisible() ? "\<C-y>\<CR>" : "\<CR>")'
-          \ | execute 'inoremap <expr> <C-Space> pumvisible() ? "\<C-n>" : "\<Tab>"'
-          \ | endif
-
-    " Press enter key to trigger snippet expansion
-    " The parameters are the same as `:help feedkeys()`
-    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-
-    " Use <TAB> to select the popup menu:
-    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    " wrap existing omnifunc
+    " Note that omnifunc does not run in background and may probably block the
+    " editor. If you don't want to be blocked by omnifunc too often, you could
+    " add 180ms delay before the omni wrapper:
+    "  'on_complete': ['ncm2#on_complete#delay', 180,
+    "               \ 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
+    autocmd User Ncm2Plugin call ncm2#register_source({
+            \ 'name' : 'css',
+            \ 'priority': 9,
+            \ 'subscope_enable': 1,
+            \ 'scope': ['css','scss'],
+            \ 'mark': 'css',
+            \ 'word_pattern': '[\w\-]+',
+            \ 'complete_pattern': ':\s*',
+            \ 'on_complete': ['ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
+            \ })
 
     " uncomment this block if you use vimtex for LaTex:
     " autocmd Filetype tex call ncm2#register_source({
@@ -172,16 +184,43 @@ if has('nvim') && has('python3') && Has_plugin('ncm2') && Has_plugin('ncm2-ultis
   augroup END
 endif
 
-" set completeopt=menuone,noselect,noinsert
+" suppress the annoying 'match x of y', 'The only match', and 'Pattern not found' messages
 set shortmess+=c
-inoremap <C-c> <ESC>
-" make it fast
-let ncm2#popup_delay = 5
-let ncm2#complete_length = [[1, 1]]
-" Use new fuzzy based matches
-let g:ncm2#matcher = 'substrfuzzy'
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+try
+  " make it fast
+  let ncm2#popup_delay = 5
+  let ncm2#complete_length = [[1, 1]]
+  " Use new fuzzy based matches
+  let g:ncm2#matcher = 'substrfuzzy'
+catch
+endtry
+
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new line:
+inoremap <expr> <CR> (pumvisible() ? "\<C-y>\<CR>" : "\<CR>")
+
+" Use <Tab> or <C-Space> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <C-Space> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " ncm2-ultisnips --------------------------------------------------------------
+" Press enter key to trigger snippet expansion
+" The parameters are the same as `:help feedkeys()`
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+
+" SirVer/ultisnips ------------------------------------------------------------
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+" let g:UltiSnipsExpandTrigger="<CR>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+
 let g:UltiSnipsUsePythonVersion=3
 
 " ncm2-look.vim ---------------------------------------------------------------
@@ -278,7 +317,7 @@ autocmd VimEnter *
 
 " lightline.vim ---------------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'gruvbox_material',
       \ 'active': {
       \   'left': [ ['mode', 'paste', 'zoomstatus'],
       \             ['readonly', 'filename', 'modified', 'fugitive', 'githunks'],
@@ -386,18 +425,21 @@ if Has_plugin('lightline-bufferline')
   let g:lightline#bufferline#enable_devicons = 1
   let g:lightline#bufferline#modified = ' [+]'
   let g:lightline#bufferline#read_only = ' [ro]'
-
-  nmap <Leader>1 <Plug>lightline#bufferline#go(1)
-  nmap <Leader>2 <Plug>lightline#bufferline#go(2)
-  nmap <Leader>3 <Plug>lightline#bufferline#go(3)
-  nmap <Leader>4 <Plug>lightline#bufferline#go(4)
-  nmap <Leader>5 <Plug>lightline#bufferline#go(5)
-  nmap <Leader>6 <Plug>lightline#bufferline#go(6)
-  nmap <Leader>7 <Plug>lightline#bufferline#go(7)
-  nmap <Leader>8 <Plug>lightline#bufferline#go(8)
-  nmap <Leader>9 <Plug>lightline#bufferline#go(9)
-  nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 endif
+
+autocmd VimEnter *
+      \ if exists('*lightline#bufferline#go')
+      \ |   execute('nmap <Leader>1 <Plug>lightline#bufferline#go(1)')
+      \ |   execute('nmap <Leader>2 <Plug>lightline#bufferline#go(2)')
+      \ |   execute('nmap <Leader>3 <Plug>lightline#bufferline#go(3)')
+      \ |   execute('nmap <Leader>4 <Plug>lightline#bufferline#go(4)')
+      \ |   execute('nmap <Leader>5 <Plug>lightline#bufferline#go(5)')
+      \ |   execute('nmap <Leader>6 <Plug>lightline#bufferline#go(6)')
+      \ |   execute('nmap <Leader>7 <Plug>lightline#bufferline#go(7)')
+      \ |   execute('nmap <Leader>8 <Plug>lightline#bufferline#go(8)')
+      \ |   execute('nmap <Leader>9 <Plug>lightline#bufferline#go(9)')
+      \ |   execute('nmap <Leader>0 <Plug>lightline#bufferline#go(10)')
+      \ | endif
 
 if has('gui_running')
   set guioptions-=e
@@ -451,16 +493,18 @@ autocmd VimEnter *
       \ if Has_plugin('Nvim-R')
       \ |   execute "vmap <localleader><CR> <Plug>RDSendSelection"
       \ |   execute "nmap <localleader><CR> <Plug>RDSendLine"
-      \ |   let R_rconsole_width = 75    " Let window always split vertically
-      \ |   let R_min_editor_width = 18
-      \ |   let R_assign = 0  " Disable underscore mapping to assign
-      \ |   let vimrplugin_applescript=0
-      \ |   let vimrplugin_vsplit=1
-      \ |   let vimrplugin_assign = 0
       \ | endif
 
+let R_rconsole_width = 75    " Let window always split vertically
+let R_min_editor_width = 18
+let R_assign = 0  " Disable underscore mapping to assign
+let vimrplugin_applescript=0
+let vimrplugin_vsplit=1
+let vimrplugin_assign = 0
+
 " auto-pairs ------------------------------------------------------------------
-autocmd BufEnter * let b:autopairs_enabled = 0  " Disable by default
+" Disable in vim scripts
+autocmd FileType vim let b:autopairs_enabled = 0
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 let g:AutoPairsShortcutFastWrap = '<M-e>'

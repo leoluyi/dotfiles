@@ -119,3 +119,4 @@ let g:which_key_map['w'] = {
 let g:which_key_map2 =  {}
 let g:which_key_map2[''''] = ["viw<esc>`>a'<esc>`<i'<esc>", 'quote-single']
 let g:which_key_map2['"'] = ['viw<esc>`>a"<esc>`<i"<esc>', 'quote-double']
+let g:which_key_map2['gp'] = ['`[v`]', 're-select last paste']

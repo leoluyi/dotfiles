@@ -19,7 +19,7 @@ call plug#begin('~/.vim_runtime/plugged')
 
 Plug 'dense-analysis/ale'           " asynchronous linters engine
 Plug 'garbas/vim-snipmate'          " Aims to be a concise vim script that implements some of TextMate's snippets features in Vim
-Plug 'honza/vim-snippets'           " vim-snipmate default snippets (Previously snipmate-snippets)
+Plug 'honza/vim-snippets'           " Snippets are separated from the engine
 Plug 'itchyny/lightline.vim'        " A light and configurable statusline/tabline plugin for Vim
 Plug 'jiangmiao/auto-pairs'         " insert or delete brackets, parens, quotes in pair
 Plug 'MarcWeber/vim-addon-mw-utils' " Required by 'vim-snipmate'
@@ -75,6 +75,8 @@ Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers
 Plug 'ryanoasis/vim-devicons'  " Adds file type icons to Vim plugins
 Plug 'sbdchd/neoformat'  " A (Neo)vim plugin for formatting code.
 Plug 'scrooloose/nerdtree'  " File list
+Plug 'sheerun/vim-polyglot'  " A solid language pack for Vim
+Plug 'SirVer/ultisnips'  " The ultimate snippet solution for Vim
 Plug 'stsewd/fzf-checkout.vim'  " Manage branches and tags with fzf
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-repeat'  " enable repeating supported plugin maps with '.'
@@ -83,6 +85,7 @@ Plug 'tweekmonster/braceless.vim'  " Text objects, folding, and more for Python 
 Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
 Plug 'uarun/vim-protobuf' " Syntax highlighting for Google's Protocol Buffers
 Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
+Plug 'vim-test/vim-test'  " Run your tests at the speed of thought
 Plug 'Vimjas/vim-python-pep8-indent'  " Better indenting for python
 Plug 'Xuyuanp/nerdtree-git-plugin'  " A plugin of NERDTree showing git status flags.
 Plug 'Yggdroot/indentLine'  " Show indent guide
@@ -115,12 +118,13 @@ endif
 
 " Plug 'gruvbox-community/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'morhetz/gruvbox'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'mhartington/oceanic-next'
+Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'rakr/vim-colors-rakr'
 Plug 'rakr/vim-one'
+Plug 'sainnhe/gruvbox-material'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Neovim/Vim8 compatible
@@ -163,9 +167,7 @@ if has('nvim') || has('patch-8.2.0')
     Plug 'kristijanhusak/defx-icons'  " Icons for defx
 
     " Optional: for snippet support
-    " based on ultisnips
-    Plug 'ncm2/ncm2-ultisnips'
-    Plug 'SirVer/ultisnips'
+    Plug 'ncm2/ncm2-ultisnips'  " based on ultisnips
   endif
 
   " Others
@@ -175,7 +177,6 @@ endif
 " Neovim only
 if has('nvim')
   " Disable plugins.
-  " Plug 'davidhalter/jedi-vim', { 'on': [] }
   Plug 'scrooloose/nerdtree', { 'on': [] }  " File list
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': [] }
   Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': [] }  " A plugin of NERDTree showing git status flags.

@@ -48,6 +48,12 @@ let g:python3_host_prog = s:user_home . '.pyenv/versions/py3nvim/bin/python'
 
 """ auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 autocmd! BufWritePost $MYVIMRC source %
+autocmd! BufWritePost ~/.vim_runtime/vimrcs/basic.vim,~/.vimrc.local
+      \ source $MYVIMRC
+      \ | if exists('*lightline#colorscheme')
+      \ | call lightline#colorscheme()
+      \ | echo "$MYVIMRC sourced."
+      \ | endif
 
 """ Leader key
 let mapleader = ","
@@ -77,14 +83,10 @@ if has("termguicolors")
 endif
 
 """ Colors
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256                " Enable 256 colors palette in Gnome Terminal
-endif
+set background=dark
 
-" Most terminals don't handle italics right so gruvbox disables italics for terminals by default
-" https://github.com/gruvbox-community/gruvbox/wiki/Terminal-specific#1-italics-is-disabled
-if has('nvim')
-  let g:gruvbox_italic=1
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256                " Enable 256 colors palette in Gnome Terminal
 endif
 
 try
@@ -93,7 +95,6 @@ catch
   colorscheme default
 endtry
 
-set background=dark
 
 if has("gui_running")
   " Set extra options when running in GUI mode
@@ -313,6 +314,9 @@ nmap <leader>A :e <C-r>=getcwd()<CR>/
 """ Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
+""" Quit all withou savings
+nmap <leader>qq :qa!
+
 "----------------------------
 " -> Editing mappings
 "----------------------------
@@ -352,7 +356,7 @@ nnoremap <localleader>O O<Esc>^Da
 
 """ Re-select pasted text
 " https://vim.fandom.com/wiki/Selecting_your_pasted_text
-nmap gp `[v`]
+nmap <localleader>gp `[v`]
 
 """ Quickfix
  " open quickfix window
@@ -402,8 +406,8 @@ noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
 """ TAB in general mode will move to text buffer
-nnoremap <TAB> :bnext<CR>
-vnoremap <TAB> :<C-u>bnext<CR>
+nnoremap <M-TAB> :bnext<CR>
+vnoremap <M-TAB> :<C-u>bnext<CR>
 """ SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
 vnoremap <S-TAB> :<C-u>bprevious<CR>
@@ -660,6 +664,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " => Custom commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+command! -range Reverse <line1>,<line2>call Reverse()
 command! -nargs=0 FoldColumnToggle :call FoldColumnToggle()
 command! -nargs=1 -complete=file -bang Rename :call Rename("<args>", "<bang>")
 command! -nargs=1 Highlight :call Highlight(<q-args>)
@@ -685,18 +690,18 @@ endif
 "--------------------------
 " https://jnrowe.github.io/articles/tips/Toggling_settings_in_vim.html
 " https://stackoverflow.com/a/37720708/3744499
-let t:is_transparent = 0
+let g:is_transparent = 0
 function! ToggleTransparent()
-  if t:is_transparent == 0
+  if g:is_transparent == 0
     hi Normal ctermbg=NONE guibg=NONE
-    let t:is_transparent = 1
+    let g:is_transparent = 1
   else
     hi Normal ctermbg=235 guibg=#282828
     set background=dark
     let l:scheme = 'gruvbox'
     exe "silent! colorscheme " . l:scheme
     exe "silent! LightlineColorscheme " . l:scheme
-    let t:is_transparent = 0
+    let g:is_transparent = 0
   endif
 endfunction
 
@@ -706,7 +711,7 @@ endfunction
 function! ColorToggle()
   if &background ==? 'dark'
     set background=light
-    let l:scheme = 'PaperColor'
+    let l:scheme = 'gruvbox'
     exe "silent! colorscheme " . l:scheme
     exe "silent! LightlineColorscheme " . l:scheme
   else
@@ -863,6 +868,15 @@ function! HasPaste()
     return ''
 endfunction
 
+
+"--------------------------
+" Reverse selected range
+"--------------------------
+function! Reverse() range
+  let l:search = @/
+  call feedkeys(":" . a:firstline . "," . a:lastline . "g/^/m " . (a:firstline-1) . "|nohl" . "\<CR>")
+  let @/ = l:search
+endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => References
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
