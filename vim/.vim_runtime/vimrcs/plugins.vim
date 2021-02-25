@@ -52,7 +52,6 @@ Plug 'haya14busa/incsearch.vim'  " Incrementally highlights ALL pattern matches
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jeetsukumaran/vim-pythonsense'  " Provides text objects and motions for Python classes, methods, functions, and doc strings
 Plug 'jmcantrell/vim-virtualenv'  " Virtualenv support
-Plug 'jremmen/vim-ripgrep'  " Use RipGrep in Vim and display results in a quickfix list
 Plug 'junegunn/gv.vim'  " A git commit browser in Vim
 Plug 'junegunn/vim-easy-align'  " Preview markdown on your modern browser with synchronised scrolling and flexible configuration
 Plug 'kana/vim-textobj-line'  " Text objects for the current line
@@ -95,13 +94,6 @@ if has('python3')
   Plug 'petobens/poet-v'  " Detects and activates virtual environments in your python poetry or pipenv project
 endif
 
-" Deprecated plugins.
-" Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
-" Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
-" Plug 'tacahiroy/ctrlp-funky'  " Function navigator for ctrlp.vim
-" Plug 'terryma/vim-multiple-cursors'  " ctrl+n, ctrl+p, ctrl+x, Esc. True Sublime Text style multiple selections for Vim
-" Plug 'wincent/ferret'  " Find and Replace in Multiple Files
-
 " fzf
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -110,7 +102,17 @@ else
   Plug 'junegunn/fzf.vim'
 endif
 
-" Theme
+""" Deprecated plugins.
+
+" Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
+" Plug 'jremmen/vim-ripgrep'  " Use RipGrep in Vim and display results in a quickfix list
+" Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
+" Plug 'tacahiroy/ctrlp-funky'  " Function navigator for ctrlp.vim
+" Plug 'terryma/vim-multiple-cursors'  " ctrl+n, ctrl+p, ctrl+x, Esc. True Sublime Text style multiple selections for Vim
+" Plug 'wincent/ferret'  " Find and Replace in Multiple Files
+
+""" Theme
+
 " Plug 'gruvbox-community/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'

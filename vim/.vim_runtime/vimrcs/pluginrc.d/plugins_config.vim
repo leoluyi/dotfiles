@@ -6,6 +6,8 @@
 " Also, vim-plug doesn't actually load your plugins, it merely adds their
 " containing folders to the runtimepath option so they will be loaded after your .vimrc
 
+" Load paths
+let s:vim_runtime = expand('<sfile>:p:h')."/.."
 " Load utils
 runtime vimrcs/utils.vim
 
