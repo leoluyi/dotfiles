@@ -4,8 +4,7 @@
 # https://stackoverflow.com/a/677212/3744499
 
 # Homebrew prefix
-# command -v brew &>/dev/null && BREW_PREFIX=$(brew --prefix)
-command -v brew &>/dev/null && BREW_PREFIX=$(dirname $(dirname $(type -p brew)))
+command -v brew &>/dev/null && BREW_PREFIX=$(dirname $(dirname $(type -p brew)))  # faster than `BREW_PREFIX=$(brew --prefix)`
 
 # ============ Command prompt =============
 
@@ -86,18 +85,14 @@ alias less='less -M -i --underline-special'
 # ============ GNU bins ============
 # Use these commands with their normal names, you
 # can add a "gnubin" directory to your PATH from your bashrc like:
-if [ -d "${BREW_PREFIX}/opt" ]; then
-    export PATH="${BREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/coreutils/libexec/gnuman:$MANPATH"
-    export PATH="${BREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/gnu-sed/libexec/gnuman:$MANPATH"
-    export PATH="${BREW_PREFIX}/opt/findutils/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/findutils/libexec/gnuman:$MANPATH"
-    export PATH="${BREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$MANPATH"
-    export PATH="${BREW_PREFIX}/opt/grep/libexec/gnubin:$PATH"
-    export MANPATH="${BREW_PREFIX}/opt/grep/libexec/gnuman:$MANPATH"
-fi
+GNU_UTILS=("coreutils" "findutils" "grep" "gnu-sed" "gawk" "gnu-tar" "gnu-indent")
+for GNU_UTIL in "${GNU_UTILS[@]}";do
+  if [ -d "${BREW_PREFIX}/opt" ]; then
+    export PATH="${BREW_PREFIX}/opt/${GNU_UTIL}/libexec/gnubin:$PATH"
+    export MANPATH="${BREW_PREFIX}/opt/${GNU_UTIL}/libexec/gnuman:$MANPATH"
+  fi
+done
+unset GNU_UTILS
 
 # Enable color support of ls.
 # Detect which `ls` flavor is in use
@@ -113,15 +108,15 @@ fi
 # bash completion
 # https://github.com/scop/bash-completion
 if command -v brew &>/dev/null && [ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
-    # bash-completion@2
-    # Ensure existing Homebrew v1 completions continue to work
-    export BASH_COMPLETION_COMPAT_DIR="${BREW_PREFIX}/etc/bash_completion.d";
-    source "${BREW_PREFIX}/etc/profile.d/bash_completion.sh";
+  # bash-completion@2
+  # Ensure existing Homebrew v1 completions continue to work
+  export BASH_COMPLETION_COMPAT_DIR="${BREW_PREFIX}/etc/bash_completion.d";
+  source "${BREW_PREFIX}/etc/profile.d/bash_completion.sh";
 elif [ -f ${BREW_PREFIX}/etc/bash_completion ]; then
-    # Bash Completion v1 (Deprecated)
-    source ${BREW_PREFIX}/etc/bash_completion;
+  # Bash Completion v1 (Deprecated)
+  source ${BREW_PREFIX}/etc/bash_completion;
 elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
+  source /etc/bash_completion
 fi;
 
 # pipenv completion
