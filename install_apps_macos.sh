@@ -121,9 +121,13 @@ function brew_install_cli {
   gdal \
   git \
   glances    `# cross-platform, text-based command-line tool for monitoring systems` \
+  gawk \
+  gnu-getopt \
+  gnu-indent \
   gnu-sed \
   gnu-tar \
   gnupg \
+  gnutls \
   gotop      `# graphical activity monitor inspired by gtop and vtop` \
   grep \
   grip \
