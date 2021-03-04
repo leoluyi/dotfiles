@@ -28,15 +28,7 @@ au FileType python syn keyword pythonDecorator True None False self
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
 
-" automatic fold based on the indentation
-au FileType python map <buffer> <leader>F :set foldmethod=indent<cr>
-
-au FileType python inoremap <buffer> $r return<Space>
-au FileType python inoremap <buffer> $i import<Space>
-au FileType python inoremap <buffer> $p print<Space>
 au FileType python inoremap <buffer> $f # --- <esc>a
-au FileType python map <buffer> <leader>1 /class<Space>
-au FileType python map <buffer> <leader>2 /def<Space>
 au FileType python map <buffer> <leader>C ?class<Space>
 au FileType python map <buffer> <leader>D ?def<Space>
 au FileType python set cindent

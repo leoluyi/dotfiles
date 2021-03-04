@@ -82,7 +82,6 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-repeat'  " enable repeating supported plugin maps with '.'
 Plug 'tpope/vim-surround'  "cs.., ds., ys.. . Provides mappings to easily delete, change and add such surroundings in pairs.
 Plug 'tweekmonster/braceless.vim'  " Text objects, folding, and more for Python and other indented languages
-Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
 Plug 'uarun/vim-protobuf' " Syntax highlighting for Google's Protocol Buffers
 Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
 Plug 'vim-test/vim-test'  " Run your tests at the speed of thought
@@ -112,9 +111,10 @@ endif
 " Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
 " Plug 'tacahiroy/ctrlp-funky'  " Function navigator for ctrlp.vim
 " Plug 'terryma/vim-multiple-cursors'  " ctrl+n, ctrl+p, ctrl+x, Esc. True Sublime Text style multiple selections for Vim
+" Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
 " Plug 'wincent/ferret'  " Find and Replace in Multiple Files
 
-""" Theme
+""" Color Scheme
 
 " Plug 'gruvbox-community/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -126,6 +126,7 @@ Plug 'rakr/vim-colors-rakr'
 Plug 'rakr/vim-one'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'jacoborus/tender.vim'
 
 " Neovim/Vim8 compatible
 if has('nvim') || has('patch-8.2.0')

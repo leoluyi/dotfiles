@@ -266,7 +266,7 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 
 " You could create a VimEnter / BufEnter autocmd to set up your mapping after vim has finished loading:
 autocmd VimEnter * if exists(':Files')   | execute "nnoremap <leader>f :Files<CR>"   | endif
-autocmd VimEnter * if exists(':Buffers') | execute "nnoremap <leader>b :Buffers<CR>" | endif
+autocmd VimEnter * if exists(':Buffers') | execute "nnoremap <leader>bb :Buffers<CR>" | endif
 autocmd VimEnter * if exists(':History') | execute "nnoremap <leader>m :History<CR>" | endif
 " autocmd VimEnter * if exists(':BTags')   | execute "noremap <Leader>t :BTags<CR>"    | endif
 " autocmd VimEnter * if exists(':Tags')    | execute "noremap <Leader>T :Tags<CR>"     | endif
@@ -467,6 +467,18 @@ let g:ale_python_flake8_options= '--ignore=E309,E402,E501,E702,W291,W293,W391'
 let g:ale_set_highlights = 0  " Disabling highlighting
 let b:ale_fixers = {'python': ['black', 'isort']}
 
+let s:isort_bin = $HOME . "/.pyenv/versions/py3nvim/bin/flake8"
+let s:black_bin = $HOME . "/.pyenv/versions/py3nvim/bin/black"
+
+" if executable(s:isort_bin)
+"   let g:ale_python_isort_executable = s:isort_bin
+"   let g:ale_python_isort_use_global = 1
+" endif
+
+if executable(s:black_bin)
+  let g:ale_python_black_executable = s:black_bin
+endif
+
 " Navigate between errors quickly with key bindings
 " https://github.com/dense-analysis/ale#5xi-how-can-i-navigate-between-errors-quickly
 autocmd VimEnter *
@@ -540,6 +552,7 @@ let g:jedi#rename_command = "<leader>r"
 
 " vim-isort -------------------------------------------------------------------
 let g:vim_isort_map = '<C-i>'
+let g:vim_isort_python_version = 'python3'
 
 " ctrlp-funky -----------------------------------------------------------------
 let g:ctrlp_funky_matchtype = 'path'
@@ -679,7 +692,7 @@ autocmd VimEnter *
 
 " Defx ------------------------------------------------------------------------
 
-if Has_plugin('defx.nvim') && exists('*defx#custom#option')
+if Has_plugin('defx.nvim')
   autocmd FileType defx call s:defx_mappings()
 
   autocmd VimEnter *
@@ -687,27 +700,33 @@ if Has_plugin('defx.nvim') && exists('*defx#custom#option')
         \ | execute "nmap <silent> <Leader>nn :Defx -columns=mark:indent:git:icons:filename:type -floating-preview <cr>"
         \ | endif
 
-  call defx#custom#option('_', {
-        \ 'winwidth': 40,
-        \ 'split': 'vertical',
-        \ 'direction': 'topleft',
-        \ 'show_ignored_files': 0,
-        \ 'buffer_name': '',
-        \ 'toggle': 1,
-        \ 'resume': 1
-        \ })
+  autocmd VimEnter *
+        \ if exists('*defx#custom#option')
+        \ | call defx#custom#option('_', {
+              \ 'winwidth': 40,
+              \ 'split': 'vertical',
+              \ 'direction': 'topleft',
+              \ 'show_ignored_files': 0,
+              \ 'buffer_name': '',
+              \ 'toggle': 1,
+              \ 'resume': 1
+              \ })
+        \ | endif
 
   " defx-git
-  call defx#custom#column('git', 'indicators', {
-    \ 'Modified'  : '✹',
-    \ 'Staged'    : '✚',
-    \ 'Untracked' : '✭',
-    \ 'Renamed'   : '➜',
-    \ 'Unmerged'  : '═',
-    \ 'Ignored'   : '☒',
-    \ 'Deleted'   : '✖',
-    \ 'Unknown'   : '?'
-    \ })
+  autocmd VimEnter *
+        \ if exists('*defx#custom#option')
+        \ | call defx#custom#column('git', 'indicators', {
+          \ 'Modified'  : '✹',
+          \ 'Staged'    : '✚',
+          \ 'Untracked' : '✭',
+          \ 'Renamed'   : '➜',
+          \ 'Unmerged'  : '═',
+          \ 'Ignored'   : '☒',
+          \ 'Deleted'   : '✖',
+          \ 'Unknown'   : '?'
+          \ })
+        \ | endif
 
   hi Defx_git_Untracked guifg=#FF0000
 
