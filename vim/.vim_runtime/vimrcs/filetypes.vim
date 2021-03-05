@@ -22,19 +22,8 @@ au FileType r setlocal shiftwidth=2
 """"""""""""""""""""""""""""""
 " => Python section
 """"""""""""""""""""""""""""""
-let python_highlight_all = 1
-au FileType python syn keyword pythonDecorator True None False self
-
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
-
-au FileType python inoremap <buffer> $f # --- <esc>a
-au FileType python map <buffer> <leader>C ?class<Space>
-au FileType python map <buffer> <leader>D ?def<Space>
-au FileType python set cindent
-au FileType python set cinkeys-=0#
-au FileType python set indentkeys-=0#
-au FileType python setlocal shiftwidth=4
 
 """"""""""""""""""""""""""""""
 " => sql section

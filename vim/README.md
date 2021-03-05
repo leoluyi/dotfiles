@@ -84,5 +84,6 @@ Edit `~/.vim_runtime/my_configs.vim` insetead for **Ultimate vimrc** settings:
 ## References
 
 - [Setting up VIM as an IDE for Python](https://medium.com/@hanspinckaers/setting-up-vim-as-an-ide-for-python-773722142d1d)
+- [Keep your vimrc file clean](https://vim.fandom.com/wiki/Keep_your_vimrc_file_clean)
 - [xu-cheng/dotfiles](https://github.com/xu-cheng/dotfiles/tree/master/home/.config/nvim)
 - [dezull/awesome-vimrc](https://github.com/dezull/awesome-vimrc) - amix's vimrc, modified to use vim plug

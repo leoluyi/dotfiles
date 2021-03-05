@@ -32,6 +32,7 @@ autocmd! BufWritePost ~/.vim_runtime/vimrcs/basic.vim,~/.vimrc.local
 let mapleader = ","
 let maplocalleader = "\<space>"
 nnoremap <leader>, ,
+nnoremap <localleader><Space> <Space>
 
 set updatetime=500                  " Faster completion
 
@@ -332,14 +333,18 @@ nnoremap <localleader>O O<Esc>^Da
 nmap <localleader>gp `[v`]
 
 """ Quickfix
- " open quickfix window
+" open quickfix window
 nnoremap <leader>co :botright copen<cr>
+" close quickfix window
+nnoremap <leader>cc :cclose<cr>
 " open quickfix window if exists
 nnoremap <leader>cw :cw 10<cr>
 " next error
 nnoremap <leader>cn :cnext<cr>
+nnoremap <localleader>] :cnext<CR>
 " previous error
 nnoremap <leader>cp :cprevious<cr>
+nnoremap <localleader>[ :cprevious<CR>
 " list all errors
 nnoremap <leader>cl :cl<cr>
 

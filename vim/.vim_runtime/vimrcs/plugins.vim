@@ -47,6 +47,7 @@ Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
 Plug 'drzel/vim-line-no-indicator'  " Simple and expressive line number indicator
 Plug 'eugen0329/vim-esearch'  " Easy async search and replace across multiple files.
 Plug 'fisadev/vim-isort'  " Sort python imports (pip install --user isort)
+Plug 'Glench/Vim-Jinja2-Syntax'  " An up-to-date jinja2 syntax file
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'  " Syntax highlighting, matching rules and mappings for the original Markdown and extensions
 Plug 'haya14busa/incsearch.vim'  " Incrementally highlights ALL pattern matches
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}

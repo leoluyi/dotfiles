@@ -666,18 +666,22 @@ if Has_plugin('vim-textobj-quote')
 endif
 
 " LeaderF ---------------------------------------------------------------------
-" don't show the help in normal mode
-let g:Lf_HideHelp = 1
 let g:Lf_UseCache = 0
 let g:Lf_UseVersionControlTool = 0
 let g:Lf_IgnoreCurrentBufferName = 1
-" popup mode
+
 let g:Lf_WindowPosition = 'popup'
+let g:Lf_PopupHeight = 0.6
 let g:Lf_PreviewInPopup = 1
-let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
+
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
 let g:Lf_ShortcutF = "<leader>FF"
+
+if Has_plugin('gruvbox_material')
+  let g:Lf_PopupColorscheme = "gruvbox_material"
+endif
 
 autocmd VimEnter *
   \ if exists(':Leaderf')
@@ -691,17 +695,17 @@ autocmd VimEnter *
 " noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
 " Defx ------------------------------------------------------------------------
-
+" https://github.com/Shougo/defx.nvim/blob/master/doc/defx.txt
 if Has_plugin('defx.nvim')
   autocmd FileType defx call s:defx_mappings()
 
   autocmd VimEnter *
         \ if exists(':Defx')
-        \ | execute "nmap <silent> <Leader>nn :Defx -columns=mark:indent:git:icons:filename:type -floating-preview <cr>"
+        \ | execute "nmap <silent> <Leader>nn :Defx `escape(getcwd(), ' :')` -columns=mark:indent:icons:filename:type:size:time<cr>"
         \ | endif
 
   autocmd VimEnter *
-        \ if exists('*defx#custom#option')
+        \ if exists(':Defx')
         \ | call defx#custom#option('_', {
               \ 'winwidth': 40,
               \ 'split': 'vertical',
@@ -713,9 +717,9 @@ if Has_plugin('defx.nvim')
               \ })
         \ | endif
 
-  " defx-git
+  " defx-git - very slow
   autocmd VimEnter *
-        \ if exists('*defx#custom#option')
+        \ if exists(':Defx')
         \ | call defx#custom#column('git', 'indicators', {
           \ 'Modified'  : '✹',
           \ 'Staged'    : '✚',
@@ -744,7 +748,7 @@ if Has_plugin('defx.nvim')
     \ defx#do_action('paste')
     nnoremap <silent><buffer><expr> l
     \ defx#do_action('open')
-    nnoremap <silent><buffer><expr> E
+    nnoremap <silent><buffer><expr> v
     \ defx#do_action('open', 'vsplit')
     nnoremap <silent><buffer><expr> P
     \ defx#do_action('preview')
@@ -859,6 +863,7 @@ let g:floaterm_keymap_new    = ''
 let g:floaterm_keymap_prev   = ''
 let g:floaterm_keymap_next   = ''
 let g:floaterm_keymap_toggle = '<leader>tt'
+let g:floaterm_keymap_kill = '<leader>tk'
 
 let g:floaterm_autoclose=2
 let g:floaterm_autohide=1
