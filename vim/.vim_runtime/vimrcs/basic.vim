@@ -34,10 +34,10 @@ let maplocalleader = "\<space>"
 nnoremap <leader>, ,
 nnoremap <localleader><Space> <Space>
 
-set updatetime=500                  " Faster completion
+set updatetime=500                  " Faster completion and avoid issues with coc.nvim
 
 """ Backups - Turn backup off, since most stuff is in SVN, git etc. anyway...
-set hidden                          " Opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
+set hidden                          " Hide buffers instead of asking if to save them
 set history=500                     " Keep lines of command line history
 set nobackup                        " No *~ backup files
 set nowritebackup                   " Do not make a backup before overwriting a file
@@ -63,10 +63,14 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256                " Enable 256 colors palette in Gnome Terminal
 endif
 
+" Enable default theme if some other is not set
+if !exists("g:colors_name")
+  colorscheme default
+endif
+
 try
   colorscheme gruvbox
 catch
-  colorscheme default
 endtry
 
 
@@ -99,6 +103,11 @@ set linebreak                       " Make Vim break lines without breaking word
 set wrap                            " Wrap lines
 set formatoptions-=t                " When textwidth is set, keeps the visual textwidth but doesn't add new line in insert mode
 " autocmd FileType * setlocal formatoptions-=cro  " Disables automatic commenting on newline. https://stackoverflow.com/q/2280030/3744499
+
+""" Delete comment character when joining commented lines
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
 
 """ Searching
 set ignorecase                      " Ignore case when searching
@@ -134,8 +143,9 @@ set ruler                           " Always show current position
 set colorcolumn=80                  " Display a ruler at a specific line
 set cursorline
 set fillchars+=vert:│               " Split separator
-set listchars=tab:→\ ,eol:↲,space:·,nbsp:␣,trail:•,precedes:«,extends:»
+set listchars=tab:→\ ,eol:↲,space:·,nbsp:␣,trail:•,precedes:«,extends:»  " Set default whitespace characters when using `:set list`
 set cmdheight=1                     " Height of the command bar
+set display+=lastline               " When 'wrap' is on, display last line even if it doesn't fit.
 set textwidth=500                   " A longer line will be broken after white space to get this width
 " set colorcolumn=+1  " highlight column after 'textwidth'
 " let &colorcolumn=join(range(81,999),",")  " set colorcolumn for the whole screen after 81
@@ -221,11 +231,16 @@ set guioptions-=l
 set guioptions-=L
 
 """ Ignore compiled files
+" Disable output, vcs, archive, rails, temp and backup files.
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
+set wildignore+=*.swp,*~,._*
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
+  set wildignore+=.git\*,.hg\*,.svn\*
 else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
 """ Fix mouse issue using Alacritty terminal
@@ -254,6 +269,8 @@ set laststatus=2
 
 " Format the status line
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
+" https://shapeshed.com/vim-statuslines/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => My Shortcut Keys
@@ -291,6 +308,25 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 """ Quit all withou savings
 nmap <leader>qq :qa!
 
+""" Allow for easy copying and pasting
+vnoremap <silent> y y`]
+nnoremap <silent> p p`]
+
+""" Make sure pasting in visual mode doesn't replace paste buffer
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>Repl()
+
+""" Auto center on matched string.
+noremap n nzz
+noremap N Nzz
+
 "----------------------------
 " -> Editing mappings
 "----------------------------
@@ -321,16 +357,20 @@ nnoremap <leader>rc :source $MYVIMRC<CR>
 nnoremap / ms/
 nnoremap ? ms?
 
-""" No highlight search
+""" Clear highlight search
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+endif
 
 """ Insert new line without automatic commenting
 nnoremap <localleader>o o<Esc>^Da
 nnoremap <localleader>O O<Esc>^Da
 
-""" Re-select pasted text
+""" Visually select the text that was last edited/pasted (Vimcast#26).
 " https://vim.fandom.com/wiki/Selecting_your_pasted_text
-nmap <localleader>gp `[v`]
+noremap gV `[v`]
 
 """ Quickfix
 " open quickfix window
@@ -347,6 +387,11 @@ nnoremap <leader>cp :cprevious<cr>
 nnoremap <localleader>[ :cprevious<CR>
 " list all errors
 nnoremap <leader>cl :cl<cr>
+
+""" Expand %% to file name of current buffer in command mode.
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:t') : '%%'
+""" Expand $$ to path of current buffer in command mode.
+cnoremap <expr> $$ getcmdtype() == ':' ? expand('%:h').'/' : '$$'
 
 "----------------------------
 " -> Moving around, tabs, windows and buffers

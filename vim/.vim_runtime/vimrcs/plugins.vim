@@ -23,7 +23,6 @@ Plug 'honza/vim-snippets'           " Snippets are separated from the engine
 Plug 'itchyny/lightline.vim'        " A light and configurable statusline/tabline plugin for Vim
 Plug 'jiangmiao/auto-pairs'         " insert or delete brackets, parens, quotes in pair
 Plug 'MarcWeber/vim-addon-mw-utils' " Required by 'vim-snipmate'
-Plug 'maxbrunsfeld/vim-yankstack'   " A lightweight implementation of emacs's kill-ring
 Plug 'terryma/vim-expand-region'    " Press + to expand the visual selection and _ to shrink it.
 Plug 'tomtom/tlib_vim'              " Required by 'vim-snipmate'
 Plug 'tpope/vim-commentary'         " comment-out by gc
@@ -39,7 +38,6 @@ Plug 'ap/vim-css-color'  " Preview colours in source code
 Plug 'Asheq/close-buffers.vim'  " Quickly close (bdelete) several buffers at once
 Plug 'cespare/vim-toml'  " Vim syntax for TOML
 Plug 'Chiel92/vim-autoformat'  " Formatters (pip install --user black)
-Plug 'christoomey/vim-tmux-navigator'  " Seamless navigation between tmux panes and vim splits
 Plug 'dalance/vseq.vim'  " Generating sequential number vertically
 Plug 'davidhalter/jedi-vim'  " Python IDE (pip install --user jedi)
 Plug 'dbeniamine/cheat.sh-vim'  " A vim plugin to access cheat.sh sheets
@@ -109,7 +107,9 @@ endif
 
 " Plug 'ctrlpvim/ctrlp.vim'  " fuzzy search files
 " Plug 'jremmen/vim-ripgrep'  " Use RipGrep in Vim and display results in a quickfix list
+" Plug 'maxbrunsfeld/vim-yankstack'   " A lightweight implementation of emacs's kill-ring
 " Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
+" Plug 'sheerun/vimrc'  " Basic vim configuration for your .vimrc -- A superset of vim-sensible
 " Plug 'tacahiroy/ctrlp-funky'  " Function navigator for ctrlp.vim
 " Plug 'terryma/vim-multiple-cursors'  " ctrl+n, ctrl+p, ctrl+x, Esc. True Sublime Text style multiple selections for Vim
 " Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
