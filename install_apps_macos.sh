@@ -147,7 +147,6 @@ function brew_install_cli {
   most \
   ncdu       `# NCurses Disk Usage` \
   neofetch \
-  neovim \
   npm \
   openssl \
   p7zip \
@@ -179,6 +178,9 @@ function brew_install_cli {
   youtube-dl \
   2>&1 \
   | grep -Ev '(installed)|(re[-]?install)'
+
+  # Neovim - Nightly version
+  brew install --HEAD neovim
 
   # Install other useful binaries.
   brew install eddieantonio/eddieantonio/imgcat 2>/dev/null
