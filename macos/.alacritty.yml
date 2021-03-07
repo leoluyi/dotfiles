@@ -252,6 +252,14 @@ colors:
     background: '#1d2021'
     foreground: '#ebdbb2'
 
+  # Cursor colors
+  #
+  # Colors which should be used to draw the terminal cursor. If these are
+  # unset, the cursor color will be the inverse of the cell color.
+  cursor:
+  #  text: '#000000'
+    cursor: '#d79921'
+
   # Normal colors
   normal:
     black: '#282828'
