@@ -238,6 +238,11 @@ export PATH="$HOME/.poetry/bin:$PATH"
 # R Framework
 [ -d "/Library/Frameworks/R.framework/Resources" ] && export PATH="/Library/Frameworks/R.framework/Resources:$PATH"
 
+# ============ NVM ===========
+export NVM_DIR="$HOME/.nvm"
+[ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$BREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$BREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 # ============ Footer ============
 # Set locale to fix ssh forwarding problem.
 # https://askubuntu.com/a/144448
