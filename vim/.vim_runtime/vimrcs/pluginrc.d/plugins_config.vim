@@ -122,6 +122,14 @@ let g:indent_guides_guide_size = 1
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1  " This feature turns 'hlsearch' off automatically after searching-related motions.
 
+" Fix: https://github.com/haya14busa/incsearch.vim/issues/79
+" https://github.com/neovim/neovim/issues/3688#issuecomment-574544618
+if has('nvim')
+  set inccommand=nosplit
+  hi Cursor blend=100
+  set guicursor+=a:Cursor/lCursor
+endif
+
 autocmd VimEnter *
   \ if exists(':IncSearchMap')
   \ | execute "map /  <Plug>(incsearch-forward)"
@@ -611,12 +619,6 @@ endif
 autocmd VimEnter *
       \ highlight esearchMatch ctermfg=white ctermbg=204 guifg=#ffffff guibg=#FF3E7B
 
-" incsearch.vim ---------------------------------------------------------------
-" https://github.com/haya14busa/incsearch.vim/issues/79
-if has('nvim')
-  set inccommand=nosplit
-endif
-
 " airblade/vim-gitgutter ------------------------------------------------------
 let g:gitgutter_enabled=1
 autocmd VimEnter *
@@ -880,6 +882,9 @@ autocmd VimEnter *
   \ if exists(':UndotreeToggle')
   \ | execute "nnoremap <silent> <leader>z :Goyo<cr>"
   \ | endif
+
+" romainl/vim-cool ------------------------------------------------------------
+let g:CoolTotalMatches = 1
 
 " garbas/vim-snipmate ---------------------------------------------------------
 " inoremap <C-j> <C-r>=snipMate#TriggerSnippet()<cr>

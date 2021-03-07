@@ -308,10 +308,6 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 """ Quit all withou savings
 nmap <leader>qq :qa!
 
-""" Allow for easy copying and pasting
-vnoremap <silent> y y`]
-nnoremap <silent> p p`]
-
 """ Make sure pasting in visual mode doesn't replace paste buffer
 function! RestoreRegister()
   let @" = s:restore_reg
@@ -392,6 +388,37 @@ nnoremap <leader>cl :cl<cr>
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:t') : '%%'
 """ Expand $$ to path of current buffer in command mode.
 cnoremap <expr> $$ getcmdtype() == ':' ? expand('%:h').'/' : '$$'
+
+"--------------------------
+" -> Map normal mode commands to insert mode
+"--------------------------
+""" Shell readline key bindings borrowed from 'tpope/vim-rsi'
+" https://github.com/tpope/vim-rsi/blob/master/plugin/rsi.vim
+inoremap        <C-A> <C-O>^
+inoremap   <C-X><C-A> <C-A>
+cnoremap        <C-A> <Home>
+cnoremap   <C-X><C-A> <C-A>
+
+inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>strlen(getline('.'))?"0\<Lt>C-D>\<Lt>Esc>kJs":"\<Lt>Left>"
+cnoremap        <C-B> <Left>
+
+inoremap <expr> <C-D> col('.')>strlen(getline('.'))?"\<Lt>C-D>":"\<Lt>Del>"
+cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
+
+inoremap <expr> <C-E> col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"\<Lt>C-E>":"\<Lt>End>"
+
+inoremap <expr> <C-F> col('.')>strlen(getline('.'))?"\<Lt>C-F>":"\<Lt>Right>"
+cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
+
+" Delete to the end of line
+inoremap <C-k> <C-o>D
+
+""" Bash like keys for the command line
+cnoremap <C-A>		<Home>
+cnoremap <C-E>		<End>
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
 
 "----------------------------
 " -> Moving around, tabs, windows and buffers
@@ -557,6 +584,10 @@ nnoremap <localleader>" viw<esc>`>a"<esc>`<i"<esc>
 " map paste, yank and delete to named register so the content
 " will not be overwritten (I know I should just remember...)
 
+""" Allow for easy copying and pasting
+vnoremap <silent> y y`]
+nnoremap <silent> p p`]
+
 " `_` register, the black hole
 nnoremap x "_x
 vnoremap x "_x
@@ -575,10 +606,10 @@ nnoremap cc "0cc
 vnoremap cc "0cc
 
 """ Paste from yanked register
-nnoremap <localleader>P "0P
-nnoremap <localleader>p "0p
-vnoremap <localleader>P "0P
-vnoremap <localleader>p "0p
+nmap <localleader>P "0P
+nmap <localleader>p "0p
+vmap <localleader>P "0P
+vmap <localleader>p "0p
 
 """ Yank to clipboard
 nnoremap <localleader>Y  "+y$
@@ -587,12 +618,6 @@ nnoremap <localleader>yy "+yy
 vnoremap <localleader>Y  "+y$
 vnoremap <localleader>y  "+y
 vnoremap <localleader>yy "+yy
-
-"--------------------------
-" -> Map normal mode commands to insert mode
-"--------------------------
-" Delete to the end of line
-imap <C-k> <C-o>D
 
 "--------------------------
 " -> Command mode related
@@ -607,14 +632,6 @@ cno $c e <C-\>eCurrentFileDir("e")<cr>
 " $q is super useful when browsing on the command line
 " it deletes everything until the last slash
 cno $q <C-\>eDeleteTillSlash()<cr>
-
-" Bash like keys for the command line
-cnoremap <C-A>		<Home>
-cnoremap <C-E>		<End>
-cnoremap <C-K>		<C-U>
-
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
 
 " Map ½ to something useful
 map ½ $

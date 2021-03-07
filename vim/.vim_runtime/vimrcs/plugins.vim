@@ -71,6 +71,7 @@ Plug 'PieterjanMontens/vim-pipenv'  " Pipenv support (depends on 'jmcantrell/vim
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'reedes/vim-textobj-quote'  " Extending Vim to better support typographic ('curly') quote characters
 Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
+Plug 'romainl/vim-cool'  " About A very simple plugin that makes hlsearch more useful
 Plug 'ryanoasis/vim-devicons'  " Adds file type icons to Vim plugins
 Plug 'sbdchd/neoformat'  " A (Neo)vim plugin for formatting code.
 Plug 'scrooloose/nerdtree'  " File list
@@ -109,7 +110,6 @@ endif
 " Plug 'jremmen/vim-ripgrep'  " Use RipGrep in Vim and display results in a quickfix list
 " Plug 'maxbrunsfeld/vim-yankstack'   " A lightweight implementation of emacs's kill-ring
 " Plug 'mileszs/ack.vim'            " Run your favorite full-text search tool from Vim, with an enhanced results list
-" Plug 'sheerun/vimrc'  " Basic vim configuration for your .vimrc -- A superset of vim-sensible
 " Plug 'tacahiroy/ctrlp-funky'  " Function navigator for ctrlp.vim
 " Plug 'terryma/vim-multiple-cursors'  " ctrl+n, ctrl+p, ctrl+x, Esc. True Sublime Text style multiple selections for Vim
 " Plug 'tweekmonster/impsort.vim'  " Color and sort python imports
@@ -132,45 +132,46 @@ Plug 'jacoborus/tender.vim'
 " Neovim/Vim8 compatible
 if has('nvim') || has('patch-8.2.0')
 
-  " NCM2 plugins
   if has("python3")
     " NCM base
     Plug 'ncm2/ncm2'  " awesome autocomplete plugin
     Plug 'roxma/nvim-yarp'  " required by ncm2
 
-    " Autocomplete
+    " Autocomplete - NCM2
     " Plug 'ncm2/ncm2-tmux'
     Plug 'filipekiss/ncm2-look.vim'  " Look.vim completion plugin
     Plug 'ncm2/ncm2-bufword'
     Plug 'ncm2/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
     Plug 'ncm2/ncm2-path'
 
-    " Asyncomplete
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'wellle/tmux-complete.vim'
-
-    " R support
+    " R support - NCM2
     " https://github.com/gaalcaras/ncm-R
     Plug 'gaalcaras/ncm-R'
     Plug 'jalvesaq/Nvim-R'
 
-    " Floaterm
-    Plug 'voldikss/vim-floaterm'  " Use (neo)vim terminal in the floating/popup window.
-
-    " telescope requirements...
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
+    " NCM2 - for snippet support
+    Plug 'ncm2/ncm2-ultisnips'  " based on ultisnips
 
     " File browser.
     Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }  " Requires pynvim
     Plug 'kristijanhusak/defx-git'  " defx git plugin
     Plug 'kristijanhusak/defx-icons'  " Icons for defx
-
-    " Optional: for snippet support
-    Plug 'ncm2/ncm2-ultisnips'  " based on ultisnips
   endif
+
+  " Autocomplete - Asyncomplete
+  " Plug 'prabirshrestha/async.vim'
+  " Plug 'prabirshrestha/asyncomplete.vim'
+  " Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+  " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  " Plug 'prabirshrestha/vim-lsp'
+
+  " Floaterm
+  Plug 'voldikss/vim-floaterm'  " Use (neo)vim terminal in the floating/popup window.
+
+  " telescope requirements...
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
 
   " Others
   Plug 'ThePrimeagen/vim-be-good'  " nvim plugin designed to make you better at Vim Movements
