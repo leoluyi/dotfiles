@@ -65,7 +65,7 @@ function brew_install_app {
 
   # You don't need to install cask anymore, you just need homebrew.
   brew tap homebrew/cask-fonts && \
-  brew install --cask \
+    brew install --cask \
     firefox \
     font-hack-nerd-font \
     font-iosevka-nerd-font \
@@ -80,7 +80,7 @@ function brew_install_app {
     xquartz \
     qlimagesize mdimagesizemdimporter qlcolorcode qlstephen qlmarkdown quicklook-json webpquicklook suspicious-package quicklookase qlvideo \
     2>&1 \
-  | grep -Ev '(Warning)|(re[-]?install)'
+    | grep -Ev '(Warning)|(re[-]?install)'
 
   # Set openinterninal - https://github.com/Ji4n1ng/OpenInTerminal/blob/master/Resources/README-Lite.md
   # defaults write wang.jianing.app.OpenInTerminal-Lite LiteDefaultTerminal Alacritty &>/dev/null
@@ -95,89 +95,89 @@ function brew_install_cli {
   echo "$(tput setaf 2)###### Install CLI with Homebrew ######$(tput sgr 0)"
 
   brew install \
-  ag \
-  asciinema     `# record terminal sessions` \
-  atomicparsley `# setting metadata into MPEG-4` \
-  autopep8 \
-  bash \
-  bash-completion@2 \
-  bash-git-prompt \
-  bat \
-  bfg \
-  black \
-  cmatrix \
-  coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
-  czmq \
-  diff-so-fancy \
-  dive      `# A tool for exploring each layer in a docker image` \
-  dust      `# A more intuitive version of du in rust` \
-  fd \
-  ffmpeg \
-  figlet    `# Banner-like program prints strings as ASCII art` \
-  findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
-  flake8 \
-  fzf \
-  gcc \
-  gdal \
-  git \
-  glances    `# cross-platform, text-based command-line tool for monitoring systems` \
-  gawk \
-  gnu-getopt \
-  gnu-indent \
-  gnu-sed \
-  gnu-tar \
-  gnupg \
-  gnutls \
-  gotop      `# graphical activity monitor inspired by gtop and vtop` \
-  grep \
-  grip \
-  highlight \
-  htop-osx \
-  httpie \
-  jenv \
-  john-jumbo `# password crack` \
-  jq \
-  libpng \
-  libsvg \
-  libxml2 \
-  libzip \
-  lolcat \
-  mas        `# Mac App Store command line interface` \
-  moreutils  `# Some other useful utilities like sponge` \
-  most \
-  ncdu       `# NCurses Disk Usage` \
-  neofetch \
-  npm \
-  openssl \
-  p7zip \
-  pdfcrack   `# pdf password crack` \
-  peco       `# Simplistic interactive filtering tool` \
-  pip-completion \
-  pipenv \
-  plowshare  `# 免空神器` \
-  proj \
-  pyenv \
-  pyenv-virtualenv \
-  qpdf \
-  ranger     `# a terminal browser for Vim` \
-  rename \
-  ripgrep \
-  sc-im \
-  shellcheck \
-  ssh-copy-id \
-  terminal-notifier \
-  thefuck \
-  tig        `# visual tool for Git` \
-  tldr \
-  tmux \
-  tree \
-  vim \
-  wget \
-  wrk        `# Modern HTTP benchmarking tool` \
-  ydiff \
-  youtube-dl \
-  2>&1 \
-  | grep -Ev '(installed)|(re[-]?install)'
+    ag \
+    asciinema     `# record terminal sessions` \
+    atomicparsley `# setting metadata into MPEG-4` \
+    autopep8 \
+    bash \
+    bash-completion@2 \
+    bash-git-prompt \
+    bat \
+    bfg \
+    black \
+    cmatrix \
+    coreutils `# Dont forget to add $(brew --prefix coreutils)/libexec/gnubin to $PATH` \
+    czmq \
+    diff-so-fancy \
+    dive      `# A tool for exploring each layer in a docker image` \
+    dust      `# A more intuitive version of du in rust` \
+    fd \
+    ffmpeg \
+    figlet    `# Banner-like program prints strings as ASCII art` \
+    findutils `# GNU find, locate, updatedb, and xargs, g-prefixed` \
+    flake8 \
+    fzf \
+    gcc \
+    gdal \
+    git \
+    glances    `# cross-platform, text-based command-line tool for monitoring systems` \
+    gawk \
+    gnu-getopt \
+    gnu-indent \
+    gnu-sed \
+    gnu-tar \
+    gnupg \
+    gnutls \
+    gotop      `# graphical activity monitor inspired by gtop and vtop` \
+    grep \
+    grip \
+    highlight \
+    htop-osx \
+    httpie \
+    jenv \
+    john-jumbo `# password crack` \
+    jq \
+    libpng \
+    libsvg \
+    libxml2 \
+    libzip \
+    lolcat \
+    mas        `# Mac App Store command line interface` \
+    moreutils  `# Some other useful utilities like sponge` \
+    most \
+    ncdu       `# NCurses Disk Usage` \
+    neofetch \
+    npm \
+    openssl \
+    p7zip \
+    pdfcrack   `# pdf password crack` \
+    peco       `# Simplistic interactive filtering tool` \
+    pip-completion \
+    pipenv \
+    plowshare  `# 免空神器` \
+    proj \
+    pyenv \
+    pyenv-virtualenv \
+    qpdf \
+    ranger     `# a terminal browser for Vim` \
+    rename \
+    ripgrep \
+    sc-im \
+    shellcheck \
+    ssh-copy-id \
+    terminal-notifier \
+    thefuck \
+    tig        `# visual tool for Git` \
+    tldr \
+    tmux \
+    tree \
+    vim \
+    wget \
+    wrk        `# Modern HTTP benchmarking tool` \
+    ydiff \
+    youtube-dl \
+    2>&1 \
+    | grep -Ev '(installed)|(re[-]?install)'
 
   # Neovim - Nightly version
   brew install --HEAD neovim

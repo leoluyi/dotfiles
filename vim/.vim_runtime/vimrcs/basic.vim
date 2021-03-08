@@ -579,6 +579,8 @@ inoremap $' ''<esc>i
 inoremap $" ""<esc>i
 nnoremap <localleader>' viw<esc>`>a'<esc>`<i'<esc>
 nnoremap <localleader>" viw<esc>`>a"<esc>`<i"<esc>
+vnoremap <localleader>' :<C-u>norm!`>a'<esc>`<i'<esc>
+vnoremap <localleader>" :<C-u>norm!`>a"<esc>`<i"<esc>
 
 "----------------------------
 " -> Copy and paste stuffs
