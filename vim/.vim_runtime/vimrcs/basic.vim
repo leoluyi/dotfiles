@@ -69,6 +69,7 @@ if !exists("g:colors_name")
 endif
 
 try
+  set background=dark
   colorscheme gruvbox
 catch
 endtry
@@ -352,6 +353,8 @@ nnoremap <leader>rc :source $MYVIMRC<CR>
 """ Mark current position to 's' before search, so that you can jump back by hitting <'s>
 nnoremap / ms/
 nnoremap ? ms?
+vnoremap / ms/
+vnoremap ? ms?
 
 """ Clear highlight search
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
@@ -704,16 +707,18 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " => Custom commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+command! -range Opencc <line1>,<line2>call Opencc()
 command! -range Reverse <line1>,<line2>call Reverse()
-command! -nargs=0 FoldColumnToggle :call FoldColumnToggle()
-command! -nargs=1 -complete=file -bang Rename :call Rename("<args>", "<bang>")
-command! -nargs=1 Highlight :call Highlight(<q-args>)
-command! -nargs=0 HighlightClear :call Highlight('')
-command! WhitespaceTrailingRemove :call WhitespaceTrailingRemove()
-command! TrimWhitespace :call TrimWhitespace()
-command! EmptyRegisters :call EmptyRegisters()
+command! -nargs=0 FoldColumnToggle call FoldColumnToggle()
+command! -nargs=1 -complete=file -bang Rename call Rename("<args>", "<bang>")
+command! -nargs=1 Highlight call Highlight(<q-args>)
+command! -nargs=0 HighlightClear call Highlight('')
+command! WhitespaceTrailingRemove call WhitespaceTrailingRemove()
+command! TrimWhitespace call TrimWhitespace()
+command! EmptyRegisters call EmptyRegisters()
 command! ColorToggle call ColorToggle()
 command! ToggleTransparentBackground call ToggleTransparent()
+
 nnoremap <leader>tb :ToggleTransparentBackground<CR>
 
 " Delete trailing white space on save, useful for some filetypes ;)
@@ -724,6 +729,23 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"--------------------------
+" OpenCC
+"--------------------------
+function! Opencc() range
+  let l:save = winsaveview()
+  let l:search = @/
+
+  if a:firstline == a:lastline
+    execute '%!opencc'
+  else
+    execute a:firstline . "," . a:lastline . '!opencc'
+  endif
+
+  let @/ = l:search
+  call winrestview(l:save)
+endfunction
 
 "--------------------------
 " Toggle transparent background
@@ -902,12 +924,11 @@ endfunction
 "--------------------------
 " Returns true if paste mode is enabled
 function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
+  if &paste
+    return 'PASTE MODE  '
+  endif
+  return ''
 endfunction
-
 
 "--------------------------
 " Reverse selected range
@@ -917,6 +938,7 @@ function! Reverse() range
   call feedkeys(":" . a:firstline . "," . a:lastline . "g/^/m " . (a:firstline-1) . "|nohl" . "\<CR>")
   let @/ = l:search
 endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => References
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

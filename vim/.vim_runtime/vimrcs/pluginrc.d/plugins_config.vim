@@ -141,6 +141,10 @@ autocmd VimEnter *
   \ | execute "map #  <Plug>(incsearch-nohl-#)"
   \ | execute "map g* <Plug>(incsearch-nohl-g*)"
   \ | execute "map g# <Plug>(incsearch-nohl-g#)"
+  \ | execute 'nnoremap / ms/'
+  \ | execute 'nnoremap ? ms?'
+  \ | execute 'vnoremap / ms/'
+  \ | execute 'vnoremap ? ms?'
   \ | endif
 
 " vim-markdown ----------------------------------------------------------------
