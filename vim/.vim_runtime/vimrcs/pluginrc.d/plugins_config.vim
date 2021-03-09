@@ -132,8 +132,6 @@ endif
 
 autocmd VimEnter *
   \ if exists(':IncSearchMap')
-  \ | execute "map /  <Plug>(incsearch-forward)"
-  \ | execute "map ?  <Plug>(incsearch-backward)"
   \ | execute "map g/ <Plug>(incsearch-stay)"
   \ | execute "map n  <Plug>(incsearch-nohl-n)"
   \ | execute "map N  <Plug>(incsearch-nohl-N)"
@@ -141,10 +139,6 @@ autocmd VimEnter *
   \ | execute "map #  <Plug>(incsearch-nohl-#)"
   \ | execute "map g* <Plug>(incsearch-nohl-g*)"
   \ | execute "map g# <Plug>(incsearch-nohl-g#)"
-  \ | execute 'nnoremap / ms/'
-  \ | execute 'nnoremap ? ms?'
-  \ | execute 'vnoremap / ms/'
-  \ | execute 'vnoremap ? ms?'
   \ | endif
 
 " vim-markdown ----------------------------------------------------------------
@@ -549,11 +543,12 @@ else
   let g:jedi#completions_enabled = 1
 endif
 
-let g:jedi#popup_on_dot = 1
 let g:jedi#auto_initialization = 1
 let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
+let g:jedi#popup_on_dot = 1
 let g:jedi#show_call_signatures = "1"
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#use_splits_not_buffers = "bottom"
 
 let g:jedi#goto_command = "<leader>gd"
 let g:jedi#goto_assignments_command = "<leader>ga"
@@ -889,6 +884,27 @@ autocmd VimEnter *
 
 " romainl/vim-cool ------------------------------------------------------------
 let g:CoolTotalMatches = 1
+
+" numirias/semshi -------------------------------------------------------------
+" Use Gruvbox colors for python semshi semantic highlighter
+" Custom highlighting
+function! SemshiHighlights() abort
+  " hi semshiGlobal          ctermfg=167 guifg=#fb4934
+  hi semshiImported        ctermfg=214 guifg=#fabd2f cterm=bold gui=bold
+  hi semshiParameter       ctermfg=142  guifg=#98971a
+  hi semshiParameterUnused cterm=underline ctermfg=106 gui=underline guifg=#665c54
+  hi semshiBuiltin         ctermfg=208 guifg=#fe8019
+  hi semshiAttribute       ctermfg=108  guifg=fg
+  hi semshiSelf            ctermfg=109 guifg=#85a598
+  " hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
+endfunction
+
+augroup SemshiColors
+  autocmd!
+  autocmd ColorScheme * call SemshiHighlights()
+augroup END
+
+let g:semshi#excluded_hl_groups = ['local', 'imported']
 
 " garbas/vim-snipmate ---------------------------------------------------------
 " inoremap <C-j> <C-r>=snipMate#TriggerSnippet()<cr>

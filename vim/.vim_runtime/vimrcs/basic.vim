@@ -458,6 +458,9 @@ map <leader>tk <C-w>t<C-w>K
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
+""" Switch between buffers
+nnoremap <leader><Tab> <C-^>
+
 """ TAB in general mode will move to text buffer
 nnoremap <M-TAB> :bnext<CR>
 vnoremap <M-TAB> :<C-u>bnext<CR>
@@ -466,20 +469,22 @@ nnoremap <S-TAB> :bprevious<CR>
 vnoremap <S-TAB> :<C-u>bprevious<CR>
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Close all the buffers
-map <leader>ba :bufdo bd<cr>
+nnoremap <leader>ba :bufdo bd<cr>
+
+" Close current buffer and close the window split
+nnoremap <leader>bd :bd<CR>
 
 """ Close a buffer without closing the window?
 " https://stackoverflow.com/a/19619038/3744499
 " (Close the current buffer and move to the alternative one)
-autocmd VimEnter *
-  \ if exists(':Bclose')
-  \ | execute "nnoremap <leader>bd :Bclose<CR>"
-  \ | else
-  \ | execute "nnoremap <leader>bd :b#<bar>bd#<CR>"
-  \ | endif
+if exists(':Bclose')
+  nnoremap <localleader>bd :Bclose<CR>
+else
+  nnoremap <localleader>bd :b#<bar>bd#<CR>
+endif
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
@@ -680,6 +685,20 @@ map <leader>om :e /tmp/buffer.md<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
+""" Fix gx in opening URLs
+" https://github.com/vim/vim/issues/4738#issuecomment-714609892
+if has('macunix')
+  function! OpenURLUnderCursor()
+    let s:uri = matchstr(getline('.'), '[a-z]*:\/\/[^ >,;()]*')
+    let s:uri = shellescape(s:uri, 1)
+    if s:uri != ''
+      silent exec "!open '".s:uri."'"
+      :redraw!
+    endif
+  endfunction
+  nnoremap gx :call OpenURLUnderCursor()<CR>
+
+endif
 "--------------------------
 " -> Fix unwanted key map
 "--------------------------
@@ -709,17 +728,17 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " => Custom commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" command! -nargs=1 -complete=file -bang Rename call Rename("<args>", "<bang>")
+command! -nargs=0 FoldColumnToggle call FoldColumnToggle()
+command! -nargs=0 HighlightClear call Highlight('')
+command! -nargs=1 Highlight call Highlight(<q-args>)
 command! -range Opencc <line1>,<line2>call Opencc()
 command! -range Reverse <line1>,<line2>call Reverse()
-command! -nargs=0 FoldColumnToggle call FoldColumnToggle()
-command! -nargs=1 -complete=file -bang Rename call Rename("<args>", "<bang>")
-command! -nargs=1 Highlight call Highlight(<q-args>)
-command! -nargs=0 HighlightClear call Highlight('')
-command! WhitespaceTrailingRemove call WhitespaceTrailingRemove()
-command! TrimWhitespace call TrimWhitespace()
-command! EmptyRegisters call EmptyRegisters()
 command! ColorToggle call ColorToggle()
+command! EmptyRegisters call EmptyRegisters()
 command! ToggleTransparentBackground call ToggleTransparent()
+command! TrimWhitespace call TrimWhitespace()
+command! WhitespaceTrailingRemove call WhitespaceTrailingRemove()
 
 nnoremap <leader>tb :ToggleTransparentBackground<CR>
 

@@ -39,6 +39,7 @@ Plug 'Asheq/close-buffers.vim'  " Quickly close (bdelete) several buffers at onc
 Plug 'cespare/vim-toml'  " Vim syntax for TOML
 Plug 'Chiel92/vim-autoformat'  " Formatters (pip install --user black)
 Plug 'dalance/vseq.vim'  " Generating sequential number vertically
+Plug 'danro/rename.vim'  " Rename the current file in the vim buffer + retain relative path
 Plug 'davidhalter/jedi-vim'  " Python IDE (pip install --user jedi)
 Plug 'dbeniamine/cheat.sh-vim'  " A vim plugin to access cheat.sh sheets
 Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
@@ -57,8 +58,8 @@ Plug 'kana/vim-textobj-line'  " Text objects for the current line
 Plug 'kana/vim-textobj-user'  " Depencency of reedes/vim-textobj-quote
 Plug 'lambdalisue/suda.vim'  " Read or write files with sudo command
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }  " Shows keybindings in popup
+Plug 'liuchengxu/vista.vim'  " Viewer & Finder for LSP symbols and tags like tagbar
 Plug 'machakann/vim-highlightedyank'
-Plug 'majutsushi/tagbar'  " Show tags in a bar (functions etc) for easy browsing
 Plug 'matze/vim-move'   " Move lines and selections up and down
 Plug 'maximbaz/lightline-ale'  " Make linter in statusline awesome (pip install --user flake8)
 Plug 'mbbill/undotree'  " The undo history visualizer for VIM
@@ -68,6 +69,7 @@ Plug 'mhinz/vim-startify'  " The fancy start screen for Vim
 Plug 'ntpeters/vim-better-whitespace'  " Better whitespace highlighting for Vim
 Plug 'pangloss/vim-javascript'  " Vastly improved Javascript indentation and syntax support in Vim
 Plug 'PieterjanMontens/vim-pipenv'  " Pipenv support (depends on 'jmcantrell/vim-virtualenv')
+Plug 'preservim/tagbar'  " Show tags in a bar (functions etc) for easy browsing
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'reedes/vim-textobj-quote'  " Extending Vim to better support typographic ('curly') quote characters
 Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
@@ -84,6 +86,7 @@ Plug 'tpope/vim-surround'  "cs.., ds., ys.. . Provides mappings to easily delete
 Plug 'tweekmonster/braceless.vim'  " Text objects, folding, and more for Python and other indented languages
 Plug 'uarun/vim-protobuf' " Syntax highlighting for Google's Protocol Buffers
 Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
+Plug 'vim-python/python-syntax'  " Python syntax highlighting for Vim
 Plug 'vim-test/vim-test'  " Run your tests at the speed of thought
 Plug 'Vimjas/vim-python-pep8-indent'  " Better indenting for python
 Plug 'Xuyuanp/nerdtree-git-plugin'  " A plugin of NERDTree showing git status flags.
@@ -156,6 +159,9 @@ if has('nvim') || has('patch-8.2.0')
     Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }  " Requires pynvim
     Plug 'kristijanhusak/defx-git'  " defx git plugin
     Plug 'kristijanhusak/defx-icons'  " Icons for defx
+
+    " Python syntax highlighting
+    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " Semantic Highlighting for Python in Neovim
   endif
 
   " Autocomplete - Asyncomplete
