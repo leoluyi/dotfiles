@@ -481,9 +481,9 @@ nnoremap <leader>bd :bd<CR>
 " https://stackoverflow.com/a/19619038/3744499
 " (Close the current buffer and move to the alternative one)
 if exists(':Bclose')
-  nnoremap <localleader>bd :Bclose<CR>
+  nnoremap <localleader>bc :Bclose<CR>
 else
-  nnoremap <localleader>bd :b#<bar>bd#<CR>
+  nnoremap <localleader>bc :b#<bar>bd#<CR>
 endif
 
 " Don't close window, when deleting a buffer
@@ -668,7 +668,7 @@ map <leader>s? z=
 noremap <leader>mm mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm
 
 """ Spellcheck
-nnoremap <leader>sc setlocal spell!
+nnoremap <leader>sc :setlocal spell!<CR>
 
 """ Show marks list and goto
 nnoremap <leader>gm :<C-u>marks<CR>:normal! `

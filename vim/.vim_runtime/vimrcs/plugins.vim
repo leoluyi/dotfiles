@@ -44,6 +44,7 @@ Plug 'davidhalter/jedi-vim'  " Python IDE (pip install --user jedi)
 Plug 'dbeniamine/cheat.sh-vim'  " A vim plugin to access cheat.sh sheets
 Plug 'dhruvasagar/vim-zoom'  " Toggle zoom in / out individual windows (splits)
 Plug 'drzel/vim-line-no-indicator'  " Simple and expressive line number indicator
+Plug 'ervandew/supertab'  " Perform all your vim insert mode completions with Tab
 Plug 'eugen0329/vim-esearch'  " Easy async search and replace across multiple files.
 Plug 'fisadev/vim-isort'  " Sort python imports (pip install --user isort)
 Plug 'Glench/Vim-Jinja2-Syntax'  " An up-to-date jinja2 syntax file
@@ -70,6 +71,7 @@ Plug 'ntpeters/vim-better-whitespace'  " Better whitespace highlighting for Vim
 Plug 'pangloss/vim-javascript'  " Vastly improved Javascript indentation and syntax support in Vim
 Plug 'PieterjanMontens/vim-pipenv'  " Pipenv support (depends on 'jmcantrell/vim-virtualenv')
 Plug 'preservim/tagbar'  " Show tags in a bar (functions etc) for easy browsing
+Plug 'psf/black'  " The uncompromising Python code formatter
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'reedes/vim-textobj-quote'  " Extending Vim to better support typographic ('curly') quote characters
 Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
