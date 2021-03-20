@@ -148,7 +148,7 @@ cask "adoptopenjdk8"
 cask "alacritty"
 cask "betterzip"
 cask "bloomrpc"
-cask "brackets"
+cask "brave-browser"
 cask "charles"
 cask "deckset"
 cask "docker"
@@ -213,13 +213,11 @@ mas "CSView", id: 1167193104
 mas "Easy CSV Editor", id: 1171346381
 mas "Gifski", id: 1351639930
 mas "iStat Menus", id: 1319778037
-mas "LINE", id: 539883307
 mas "Messenger", id: 1480068668
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Movist", id: 461788075
 mas "Quick Colour Picker", id: 1453741555
 mas "Speedtest", id: 1153157709
-mas "Telegram", id: 747648890
 mas "The Unarchiver", id: 425424353
 mas "WeChat", id: 836500024
 mas "Xnip", id: 1221250572
