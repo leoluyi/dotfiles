@@ -237,8 +237,20 @@
 		</array>
 		<key>ProcessesCombine</key>
 		<true/>
+		<key>Sensors-Limits-Updated</key>
+		<true/>
+		<key>Sensors_MenubarMode</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>0</string>
+				<key>uuid</key>
+				<string>3C733924-53B7-4569-B4D4-F5EE2FF70334</string>
+			</dict>
+		</array>
 		<key>StatusItems-Order</key>
 		<array>
+			<integer>5</integer>
 			<integer>4</integer>
 			<integer>2</integer>
 			<integer>6</integer>
@@ -266,11 +278,11 @@
 		<key>Zarya-TLE</key>
 		<dict>
 			<key>time</key>
-			<real>1554313439.4546142</real>
+			<real>1616937551.805407</real>
 			<key>tle</key>
 			<string>ISS (ZARYA)             
-1 25544U 98067A   19024.69130787  .00000289  00000-0  11946-4 0  9991
-2 25544  51.6429 354.9058 0004630 308.2748  50.7575 15.53168972152956</string>
+1 25544U 98067A   21087.39139213  .00002048  00000-0  45393-4 0  9991
+2 25544  51.6461  22.3419 0003044 153.4826 303.0746 15.48956491276073</string>
 		</dict>
 	</dict>
 	<key>version</key>
