@@ -661,6 +661,25 @@ map <leader>sa zg
 map <leader>s? z=
 
 "--------------------------
+" -> Execute code in vim
+"--------------------------
+
+augroup exe_code
+  autocmd!
+  " Execute Python code.
+  autocmd FileType python nnoremap <buffer> <leader>r
+    \ :sp<CR>:term python3 %<CR>:startinsert<CR>
+
+  " Execute Bash code.
+  autocmd FileType bash,sh nnoremap <buffer> <leader>r
+    \ :sp<CR>:term bash %<CR>:startinsert<CR>
+
+  " Execute JavaScript code.
+  autocmd FileType javascript nnoremap <buffer> <leader>r
+    \ :sp<CR>:term nodejs %<CR>:startinsert<CR>
+augroup END
+
+"--------------------------
 " -> Misc mappings
 "--------------------------
 
