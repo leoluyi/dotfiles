@@ -72,6 +72,7 @@ Plug 'pangloss/vim-javascript'  " Vastly improved Javascript indentation and syn
 Plug 'PieterjanMontens/vim-pipenv'  " Pipenv support (depends on 'jmcantrell/vim-virtualenv')
 Plug 'preservim/tagbar'  " Show tags in a bar (functions etc) for easy browsing
 Plug 'psf/black'  " The uncompromising Python code formatter
+Plug 'puremourning/vimspector'  " A multi-language debugging system for Vim
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'reedes/vim-textobj-quote'  " Extending Vim to better support typographic ('curly') quote characters
 Plug 'rhysd/conflict-marker.vim'  " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
