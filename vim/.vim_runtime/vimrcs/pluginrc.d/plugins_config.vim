@@ -919,6 +919,9 @@ augroup END
 
 let g:semshi#excluded_hl_groups = ['local', 'imported']
 
+" vim-python/python-syntax ----------------------------------------------------
+let g:python_highlight_all = 1
+
 " garbas/vim-snipmate ---------------------------------------------------------
 " inoremap <C-j> <C-r>=snipMate#TriggerSnippet()<cr>
 " snoremap <C-j> <esc>i<right><C-r>=snipMate#TriggerSnippet()<cr>
