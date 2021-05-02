@@ -195,6 +195,10 @@ if command -v diff-so-fancy &>/dev/null; then
 fi
 
 # ============ Env ============
+
+# Homebrew
+[ -f "$HOME/.config/Brewfile" ] && export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
+
 # Use nvim as default editor.
 if command -v nvim &>/dev/null; then
   export EDITOR=nvim
