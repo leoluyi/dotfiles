@@ -107,7 +107,7 @@ fi
 
 # bash completion
 # https://github.com/scop/bash-completion
-if command -v brew &>/dev/null && [ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
+if [ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
   # bash-completion@2
   # Ensure existing Homebrew v1 completions continue to work
   export BASH_COMPLETION_COMPAT_DIR="${BREW_PREFIX}/etc/bash_completion.d";
@@ -147,7 +147,7 @@ command -v thefuck &>/dev/null && eval "$(thefuck --alias)"
 
 # pyenv.
 command -v pyenv &>/dev/null && \
-  eval "$(pyenv init -)" && \
+  eval "$(pyenv init - --no-rehash)" && \
   eval "$(pyenv virtualenv-init -)"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=0
 
