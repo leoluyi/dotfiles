@@ -107,7 +107,7 @@ fi
 
 # bash completion
 # https://github.com/scop/bash-completion
-if [ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
+if command -v brew &>/dev/null && [ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
   # bash-completion@2
   # Ensure existing Homebrew v1 completions continue to work
   export BASH_COMPLETION_COMPAT_DIR="${BREW_PREFIX}/etc/bash_completion.d";
@@ -120,7 +120,17 @@ elif [ -f /etc/bash_completion ]; then
 fi;
 
 # pipenv completion
-command -v pipenv &>/dev/null && eval "$(pipenv --completion)"
+if command -v pipenv &>/dev/null; then
+  _pipenv_completion() {
+      local IFS=$'\t'
+      COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
+                     COMP_CWORD=$COMP_CWORD \
+                     _PIPENV_COMPLETE=complete-bash $1 ) )
+      return 0
+  }
+
+  complete -F _pipenv_completion -o default pipenv
+fi
 
 # pipx completion
 if [ $(command -v register-python-argcomplete &>/dev/null) ] && [ $(command -v pipx &>/dev/null) ]; then
@@ -147,7 +157,7 @@ command -v thefuck &>/dev/null && eval "$(thefuck --alias)"
 
 # pyenv.
 command -v pyenv &>/dev/null && \
-  eval "$(pyenv init - --no-rehash)" && \
+  eval "$(pyenv init -)" && \
   eval "$(pyenv virtualenv-init -)"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=0
 
@@ -195,10 +205,6 @@ if command -v diff-so-fancy &>/dev/null; then
 fi
 
 # ============ Env ============
-
-# Homebrew
-[ -f "$HOME/.config/Brewfile" ] && export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
-
 # Use nvim as default editor.
 if command -v nvim &>/dev/null; then
   export EDITOR=nvim
