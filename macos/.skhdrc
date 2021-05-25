@@ -1,14 +1,15 @@
 # open terminal
 # cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
-shift + alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
+# shift + alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
+shift + alt - return : open -na /Applications/Alacritty.app
 alt - return : ~/.scripts/iterm.sh
 ctrl + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 # focus window
-alt - h : yabai -m window --focus west
+alt - h : yabai -m window --focus west || yabai -m display --focus next
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+alt - l : yabai -m window --focus east || yabai -m display --focus prev
 
 # swap window
 shift + cmd - h : yabai -m window --swap west
@@ -17,10 +18,10 @@ shift + cmd - k : yabai -m window --swap north
 shift + cmd - l : yabai -m window --swap east
 
 # move window
-shift + alt - h : yabai -m window --warp west
+shift + alt - h : yabai -m window --warp west || yabai -m window --display next
 shift + alt - j : yabai -m window --warp south
 shift + alt - k : yabai -m window --warp north
-shift + alt - l : yabai -m window --warp east
+shift + alt - l : yabai -m window --warp east || yabai -m window --display prev
 
 # balance size of windows
 shift + alt - 0 : yabai -m space --balance
