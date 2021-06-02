@@ -50,11 +50,11 @@ Plug 'fisadev/vim-isort'  " Sort python imports (pip install --user isort)
 Plug 'Glench/Vim-Jinja2-Syntax'  " An up-to-date jinja2 syntax file
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'  " Syntax highlighting, matching rules and mappings for the original Markdown and extensions
 Plug 'haya14busa/incsearch.vim'  " Incrementally highlights ALL pattern matches
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}  " Preview markdown on your modern browser with synchronised scrolling and flexible configuration
 Plug 'jeetsukumaran/vim-pythonsense'  " Provides text objects and motions for Python classes, methods, functions, and doc strings
 Plug 'jmcantrell/vim-virtualenv'  " Virtualenv support
 Plug 'junegunn/gv.vim'  " A git commit browser in Vim
-Plug 'junegunn/vim-easy-align'  " Preview markdown on your modern browser with synchronised scrolling and flexible configuration
+Plug 'junegunn/vim-easy-align'  " A Vim alignment plugin
 Plug 'kana/vim-textobj-line'  " Text objects for the current line
 Plug 'kana/vim-textobj-user'  " Depencency of reedes/vim-textobj-quote
 Plug 'lambdalisue/suda.vim'  " Read or write files with sudo command
