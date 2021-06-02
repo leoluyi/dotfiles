@@ -667,6 +667,7 @@ let g:yankstack_map_keys = 0
 filetype plugin on       " may already be in your .vimrc
 
 if Has_plugin('vim-textobj-quote')
+  let g:textobj#quote#educate = 0
   augroup textobj_quote
     autocmd!
     autocmd FileType markdown call textobj#quote#init({'educate': 0})
