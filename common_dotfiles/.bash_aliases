@@ -9,7 +9,7 @@ if command -v nvim &>/dev/null; then
 fi
 
 # ls sort by most recently modified.
-alias lsr='ls -haltr'
+alias lsr='ls -hAltr --time-style=long-iso'
 
 # Just lazy.
 alias f='fuck'
