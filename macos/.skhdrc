@@ -18,10 +18,10 @@ shift + cmd - k : yabai -m window --swap north
 shift + cmd - l : yabai -m window --swap east
 
 # move window
-shift + alt - h : yabai -m window --warp west || yabai -m window --display next
+shift + alt - h : yabai -m window --warp west # || yabai -m window --display next
 shift + alt - j : yabai -m window --warp south
 shift + alt - k : yabai -m window --warp north
-shift + alt - l : yabai -m window --warp east || yabai -m window --display prev
+shift + alt - l : yabai -m window --warp east # || yabai -m window --display prev
 
 # balance size of windows
 shift + alt - 0 : yabai -m space --balance
