@@ -574,14 +574,6 @@ let g:jedi#rename_command = "<leader>r"
 let g:vim_isort_map = '<C-i>'
 let g:vim_isort_python_version = 'python3'
 
-" ctrlp-funky -----------------------------------------------------------------
-let g:ctrlp_funky_matchtype = 'path'
-let g:ctrlp_funky_syntax_highlight = 1
-if Has_plugin('ctrlp-funky')
-  nnoremap <Leader>fu :CtrlPFunky<Cr>
-  nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-endif
-
 " vim-esearch -----------------------------------------------------------------
 
 let g:esearch = {}
@@ -673,11 +665,12 @@ if Has_plugin('vim-textobj-quote')
     autocmd FileType markdown call textobj#quote#init({'educate': 0})
     autocmd FileType textile call textobj#quote#init({'educate': 0})
     autocmd FileType text call textobj#quote#init({'educate': 0})
-  augroup END
 
-  " You can replace straight quotes in existing text with curly quotes, and visa versa
-  map <silent> <leader>qc <Plug>ReplaceWithCurly
-  map <silent> <leader>qs <Plug>ReplaceWithStraight
+    " You can replace straight quotes in existing text with curly quotes, and visa versa
+    autocmd VimEnter *
+    \ | execute "map <silent> <leader>qc <Plug>ReplaceWithCurly"
+    \ | execute "map <silent> <leader>qs <Plug>ReplaceWithStraight"
+  augroup END
 endif
 
 " LeaderF ---------------------------------------------------------------------
