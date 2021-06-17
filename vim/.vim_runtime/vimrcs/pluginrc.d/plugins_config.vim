@@ -665,11 +665,9 @@ if Has_plugin('vim-textobj-quote')
     autocmd FileType markdown call textobj#quote#init({'educate': 0})
     autocmd FileType textile call textobj#quote#init({'educate': 0})
     autocmd FileType text call textobj#quote#init({'educate': 0})
-
-    " You can replace straight quotes in existing text with curly quotes, and visa versa
     autocmd VimEnter *
-    \ | execute "map <silent> <leader>qc <Plug>ReplaceWithCurly"
-    \ | execute "map <silent> <leader>qs <Plug>ReplaceWithStraight"
+      \   execute "map <silent> <leader>qc <Plug>ReplaceWithCurly"
+      \ | execute "map <silent> <leader>qs <Plug>ReplaceWithStraight"
   augroup END
 endif
 
