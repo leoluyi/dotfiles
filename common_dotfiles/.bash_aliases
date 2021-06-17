@@ -71,3 +71,7 @@ alias ducks='du -cksh -- * | sort -rh | head'
   && alias dark='alacritty-colorscheme -c $HOME/.alacritty.yml -t gruvbox.yaml' \
   && alias colorlist='alacritty-colorscheme -c $HOME/.alacritty.yml -l' \
   && alias colorapply='alacritty-colorscheme -c $HOME/.alacritty.yml -a'
+
+# tmux.
+(command -v tmux &>/dev/null) \
+  && alias tm='tmux attach || tmux new'
