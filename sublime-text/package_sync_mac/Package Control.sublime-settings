@@ -91,6 +91,6 @@
 		"Virtualenv",
 		"Whitespace",
 		"WordCount",
-		"Zen Tabs"
-	]
+		"Zen Tabs",
+	],
 }
