@@ -212,8 +212,11 @@ function hlsdl-mp4() {
   local url="$1"
   local title="$2"
 
+  local out="${title}.mp4"
+  rm -f "$out"
+
   [ -z "$title" ] && title=$(date +'%Y%m%dT%H%M%S')
-  hlsdl -q -b -o "${title}.mp4" "$url"
+  hlsdl -q -b -o "$out" "$url"
 }
 
 
