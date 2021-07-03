@@ -51,6 +51,8 @@
 				<string>7205F738-B505-409A-A53B-AFDDD40BDC5C</string>
 			</dict>
 		</array>
+		<key>Battery_StackerMenubarFontStyle</key>
+		<integer>0</integer>
 		<key>CPU_DropdownOrderDisabled</key>
 		<string></string>
 		<key>CPU_MenubarCombineCores</key>
@@ -189,19 +191,21 @@
 		<true/>
 		<key>Network_DataFormat</key>
 		<integer>3</integer>
+		<key>Network_MenubarFontStyle</key>
+		<integer>1</integer>
 		<key>Network_MenubarMode</key>
 		<array>
 			<dict>
 				<key>key</key>
 				<string>3</string>
 				<key>uuid</key>
-				<string>7C241E79-E9EC-401E-92B8-442A8CAB62B6</string>
+				<string>3A6DBBBC-B4AB-4EE8-AF78-D412EEEEAAA1</string>
 			</dict>
 			<dict>
 				<key>key</key>
 				<string>0</string>
 				<key>uuid</key>
-				<string>5A42907C-7387-4F2D-9AFA-76C2DF6FA5F8</string>
+				<string>72BE6103-206E-4378-B407-9941F8C6F8DB</string>
 			</dict>
 		</array>
 		<key>Network_StatusCheckFlatten</key>
@@ -239,20 +243,27 @@
 		<true/>
 		<key>Sensors-Limits-Updated</key>
 		<true/>
+		<key>Sensors_MenubarFontStyle</key>
+		<integer>1</integer>
 		<key>Sensors_MenubarMode</key>
 		<array>
 			<dict>
 				<key>key</key>
+				<string>2</string>
+				<key>uuid</key>
+				<string>269AA86A-EEC8-4E8E-8B52-30340B115919</string>
+			</dict>
+			<dict>
+				<key>key</key>
 				<string>0</string>
 				<key>uuid</key>
-				<string>3C733924-53B7-4569-B4D4-F5EE2FF70334</string>
+				<string>B678AB60-A8CE-407D-9A34-ABBEB6ED4018</string>
 			</dict>
 		</array>
 		<key>StatusItems-Order</key>
 		<array>
-			<integer>5</integer>
 			<integer>4</integer>
-			<integer>2</integer>
+			<integer>5</integer>
 			<integer>6</integer>
 			<integer>1</integer>
 		</array>
@@ -278,11 +289,11 @@
 		<key>Zarya-TLE</key>
 		<dict>
 			<key>time</key>
-			<real>1616937551.805407</real>
+			<real>1619878809.7616911</real>
 			<key>tle</key>
 			<string>ISS (ZARYA)             
-1 25544U 98067A   21087.39139213  .00002048  00000-0  45393-4 0  9991
-2 25544  51.6461  22.3419 0003044 153.4826 303.0746 15.48956491276073</string>
+1 25544U 98067A   21121.33026878  .00001471  00000-0  34890-4 0  9995
+2 25544  51.6436 214.4885 0002711 304.5115 162.7888 15.48966855281333</string>
 		</dict>
 	</dict>
 	<key>version</key>
