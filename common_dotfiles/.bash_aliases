@@ -2,7 +2,7 @@
 alias sudo='sudo '
 
 # Neovim
-if command -v nvim &>/dev/null; then
+if command -v nvim >/dev/null; then
   alias ovim="command vim"
   alias vim="nvim"
   alias vi="nvim"
@@ -54,11 +54,11 @@ alias less='less -r'
 alias ducks='du -cksh -- * | sort -rh | head'
 
 # subl + pipenv virtualenv.
-(command -v pipenv &>/dev/null) && (command -v subl &>/dev/null) \
+(command -v pipenv >/dev/null) && (command -v subl >/dev/null) \
   && alias subl-pipenv='pipenv --venv && pipenv run subl'
 
 # youtube-dl.
-(command -v youtube-dl &>/dev/null) \
+(command -v youtube-dl >/dev/null) \
   && alias youtube-dl-mp4='youtube-dl -f "bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/mp4"' \
   && alias youtube-dl-best='youtube-dl -f "bestvideo[height<=1080][ext=mp4]+bestaudio/best[height<=720][ext=mp4]"' \
   && alias youtube-dl-m4a='youtube-dl -f bestaudio[ext=m4a] --embed-thumbnail --add-metadata' \
@@ -66,12 +66,16 @@ alias ducks='du -cksh -- * | sort -rh | head'
   && alias youtube-dl-list-mp4='youtube-dl -ci -o "%(playlist_index)s-%(title)s.%(ext)s" -f "bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/mp4" --yes-playlist'
 
 # Alacritty theme.
-(command -v alacritty-colorscheme &>/dev/null) \
+(command -v alacritty-colorscheme >/dev/null) \
   && alias light='alacritty-colorscheme -c $HOME/.alacritty.yml -t PaperColor.yaml' \
   && alias dark='alacritty-colorscheme -c $HOME/.alacritty.yml -t gruvbox.yaml' \
   && alias colorlist='alacritty-colorscheme -c $HOME/.alacritty.yml -l' \
   && alias colorapply='alacritty-colorscheme -c $HOME/.alacritty.yml -a'
 
 # tmux.
-(command -v tmux &>/dev/null) \
+(command -v tmux >/dev/null) \
   && alias tm='tmux attach || tmux new'
+
+# tty-clock
+(command -v tty-clock >/dev/null) \
+  && alias clock='tty-clock -sc -f "%a, %d %b %Y %T %Z%z"'
