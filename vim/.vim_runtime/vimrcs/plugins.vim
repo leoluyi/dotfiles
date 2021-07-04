@@ -84,8 +84,9 @@ Plug 'sheerun/vim-polyglot'  " A solid language pack for Vim
 Plug 'SirVer/ultisnips'  " The ultimate snippet solution for Vim
 Plug 'stsewd/fzf-checkout.vim'  " Manage branches and tags with fzf
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'tpope/vim-eunuch'  "Helpers for UNIX
 Plug 'tpope/vim-repeat'  " enable repeating supported plugin maps with '.'
-Plug 'tpope/vim-surround'  "cs.., ds., ys.. . Provides mappings to easily delete, change and add such surroundings in pairs.
+Plug 'tpope/vim-surround'  " cs.., ds., ys.. . Provides mappings to easily delete, change and add such surroundings in pairs.
 Plug 'tweekmonster/braceless.vim'  " Text objects, folding, and more for Python and other indented languages
 Plug 'uarun/vim-protobuf' " Syntax highlighting for Google's Protocol Buffers
 Plug 'unblevable/quick-scope'  " Lightning fast left-right movement in Vim
