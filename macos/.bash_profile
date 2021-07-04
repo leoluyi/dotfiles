@@ -15,6 +15,10 @@ export LSCOLORS=Exgxcxdxbxegedabagacad
 # enables color for iTerm
 export TERM=xterm-256color
 
+# A collection of LS_COLORS definitions.
+# https://www.nordtheme.com/docs/ports/dircolors/installation
+[ -r "$HOME/.dir_colors" ] && eval $(gdircolors -b "$HOME/.dir_colors")
+
 # The various escape codes that we can use to color our prompt.
 #   Based on work by woods
 #
@@ -52,7 +56,7 @@ PS1="${BOLD}${YELLOW}\u${RESET}${BOLD}@${GREEN}\h:${RESET} ${BOLD}${BLUE}\w${RES
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
 for file in ~/.{bash_aliases*,bash_env,path,bash_prompt,exports,aliases,utils*,extra}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+    [ -r "$file" ] && source "$file";
 done;
 
 # Alias definitions.
@@ -112,10 +116,10 @@ if command -v brew &>/dev/null && [ -r "${BREW_PREFIX}/etc/profile.d/bash_comple
   # Ensure existing Homebrew v1 completions continue to work
   export BASH_COMPLETION_COMPAT_DIR="${BREW_PREFIX}/etc/bash_completion.d";
   source "${BREW_PREFIX}/etc/profile.d/bash_completion.sh";
-elif [ -f ${BREW_PREFIX}/etc/bash_completion ]; then
+elif [ -r ${BREW_PREFIX}/etc/bash_completion ]; then
   # Bash Completion v1 (Deprecated)
   source ${BREW_PREFIX}/etc/bash_completion;
-elif [ -f /etc/bash_completion ]; then
+elif [ -r /etc/bash_completion ]; then
   source /etc/bash_completion
 fi;
 
@@ -141,7 +145,7 @@ fi
 
 # bash-git-prompt.
 # https://github.com/magicmonty/bash-git-prompt#via-homebrew-on-mac-os-x
-if command -v brew &>/dev/null && [ -f "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+if command -v brew &>/dev/null && [ -r "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   __GIT_PROMPT_DIR=${BREW_PREFIX}/opt/bash-git-prompt/share
   GIT_PROMPT_ONLY_IN_REPO=1
   source "${BREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh"
@@ -179,7 +183,7 @@ else
 fi
 
 # fzf - Fuzzy completion for bash and zsh.
-if [ -f "$HOME"/.fzf.bash ]; then
+if [ -r "$HOME"/.fzf.bash ]; then
   source "$HOME"/.fzf.bash
 
   command -v bat &>/dev/null && \
@@ -267,5 +271,5 @@ export LC_CTYPE=en_US.UTF-8
 
 # command -v neofetch &>/dev/null && neofetch --size 30% --iterm2
 # command -v neofetch &>/dev/null \
-#   && [ -f "$HOME/.config/ascii/batman.ascii" ] \
+#   && [ -r "$HOME/.config/ascii/batman.ascii" ] \
 #   && neofetch --source "$HOME/.config/ascii/batman.ascii"
