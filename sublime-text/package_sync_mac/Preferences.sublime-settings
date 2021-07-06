@@ -35,13 +35,10 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"DashDoc",
-		"Flask Completions",
 		"Highlight Dodgy Chars",
 		"Highlight Trailing Whitespace",
 		"Icon Fonts",
 		"Markdown",
-		"OpenHere",
 		"Vintage",
 	],
 	"indent_guide_options":
