@@ -193,6 +193,11 @@ if has('nvim')
   Plug 'scrooloose/nerdtree', { 'on': [] }  " File list
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': [] }
   Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': [] }  " A plugin of NERDTree showing git status flags.
+
+  " Treesitter
+  Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  Plug 'RRethy/nvim-treesitter-textsubjects'
 endif
 
 if has('nvim-0.4.2') || has('patch-8.1.2114')
