@@ -76,6 +76,10 @@ alias ducks='du -cksh -- * | sort -rh | head'
 (command -v tmux >/dev/null) \
   && alias tm='tmux attach || tmux new'
 
-# tty-clock
+# tty-clock.
 (command -v tty-clock >/dev/null) \
   && alias clock='tty-clock -sc -f "%a, %d %b %Y %T %Z%z"'
+
+# matrix.
+(command -v cmatrix >/dev/null) \
+  && alias matrix='cmatrix'
