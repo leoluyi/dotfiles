@@ -5,6 +5,10 @@ colors:
     background: '#1d2021'
     foreground: '#ebdbb2'
 
+  cursor:
+  #  text: '#000000'
+    cursor: '#d79921'
+
   # Normal colors
   normal:
     black:   '#282828'
