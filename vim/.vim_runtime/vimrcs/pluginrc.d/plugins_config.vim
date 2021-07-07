@@ -229,6 +229,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
 let g:UltiSnipsUsePythonVersion=3
 
+" garbas/vim-snipmate ---------------------------------------------------------
+let g:snipMate = { 'snippet_version' : 1 }
+" inoremap <C-j> <C-r>=snipMate#TriggerSnippet()<cr>
+" snoremap <C-j> <esc>i<right><C-r>=snipMate#TriggerSnippet()<cr>
+
 " ncm2-look.vim ---------------------------------------------------------------
 autocmd FileType markdown :let b:ncm2_look_enabled = 1
 let g:ncm2_look_mark = '📖'
@@ -861,9 +866,6 @@ autocmd VimEnter *
   \ | execute "nmap <silent> <leader>u :UndotreeToggle<CR>"
   \ | endif
 
-" garbas/vim-snipmate ---------------------------------------------------------
-let g:snipMate = { 'snippet_version' : 1 }
-
 " voldikss/vim-floaterm -------------------------------------------------------
 let g:floaterm_keymap_new    = ''
 let g:floaterm_keymap_prev   = ''
@@ -913,7 +915,3 @@ let g:semshi#excluded_hl_groups = ['local', 'imported']
 
 " vim-python/python-syntax ----------------------------------------------------
 let g:python_highlight_all = 1
-
-" garbas/vim-snipmate ---------------------------------------------------------
-" inoremap <C-j> <C-r>=snipMate#TriggerSnippet()<cr>
-" snoremap <C-j> <esc>i<right><C-r>=snipMate#TriggerSnippet()<cr>

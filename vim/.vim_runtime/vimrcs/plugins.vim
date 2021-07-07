@@ -18,7 +18,7 @@ call plug#begin('~/.vim_runtime/plugged')
 " Plugins already in awesome vimrc:
 
 Plug 'dense-analysis/ale'           " asynchronous linters engine
-Plug 'garbas/vim-snipmate'          " Aims to be a concise vim script that implements some of TextMate's snippets features in Vim
+Plug 'garbas/vim-snipmate'          " A snippet engine.
 Plug 'honza/vim-snippets'           " Snippets are separated from the engine
 Plug 'itchyny/lightline.vim'        " A light and configurable statusline/tabline plugin for Vim
 Plug 'jiangmiao/auto-pairs'         " insert or delete brackets, parens, quotes in pair
@@ -81,7 +81,7 @@ Plug 'ryanoasis/vim-devicons'  " Adds file type icons to Vim plugins
 Plug 'sbdchd/neoformat'  " A (Neo)vim plugin for formatting code.
 Plug 'scrooloose/nerdtree'  " File list
 Plug 'sheerun/vim-polyglot'  " A solid language pack for Vim
-Plug 'SirVer/ultisnips'  " The ultimate snippet solution for Vim
+Plug 'SirVer/ultisnips'  " The ultimate snippet engine
 Plug 'stsewd/fzf-checkout.vim'  " Manage branches and tags with fzf
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-eunuch'  "Helpers for UNIX
