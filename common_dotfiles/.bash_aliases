@@ -4,8 +4,10 @@ alias sudo='sudo '
 # Neovim
 if command -v nvim >/dev/null; then
   alias ovim="command vim"
-  alias vim="nvim"
   alias vi="nvim"
+  alias vim="nvim"
+  alias view="nvim -R"
+  alias vimdiff="nvim -d"
 fi
 
 # ls sort by most recently modified.

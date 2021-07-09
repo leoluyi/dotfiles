@@ -248,7 +248,7 @@ export PIPENV_IGNORE_VIRTUALENVS=1
 
 # ============ Path for binaries ============
 # User specific environment and startup programs
-export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.scripts:$PATH"
 
 # Poetry.
 # https://python-poetry.org/docs/

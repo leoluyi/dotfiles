@@ -28,7 +28,7 @@ fi
 # https://stackoverflow.com/a/28937338/3744499
 echo
 echo "2. Remove alpha channel in images and resize..."
-echo "$img_files" | xargs -d"\n" -P0 -I_ convert "_" -resize "${min_width}x" -background black -alpha remove -alpha off "_"
+echo "$img_files" | xargs -d"\n" -P0 -I_ convert "_" -resize "${min_width}x" -background white -alpha remove -alpha off "_"
 
 echo
 echo "3. Combining images to 'output.pdf'"
