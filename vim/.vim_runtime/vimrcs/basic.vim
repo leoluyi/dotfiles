@@ -758,6 +758,7 @@ command! -range Reverse <line1>,<line2>call Reverse()
 command! ColorToggle call ColorToggle()
 command! EmptyRegisters call EmptyRegisters()
 command! ToggleTransparentBackground call ToggleTransparent()
+command! TrimEndLines call TrimEndLines()
 command! TrimWhitespace call TrimWhitespace()
 command! WhitespaceTrailingRemove call WhitespaceTrailingRemove()
 
@@ -765,7 +766,10 @@ nnoremap <leader>tb :ToggleTransparentBackground<CR>
 
 " Delete trailing white space on save, useful for some filetypes ;)
 if has("autocmd") && exists(':WhitespaceTrailingRemove')
-  autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call WhitespaceTrailingRemove()
+  augroup TRIM_WHITESPACE
+    autocmd!
+    autocmd BufWritePre *.txt,*.md,*.sc,*.scala,*.R,*.js,*.py,*.wiki,*.sh,*.coffee :call WhitespaceTrailingRemove() | :call TrimEndLines()
+  augroup END
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -886,7 +890,7 @@ endfunction
 "--------------------------
 " TrimWhitespace
 "--------------------------
-function! TrimWhitespace()
+fun! TrimWhitespace()
   let l:save = winsaveview()
   keeppatterns %s/\s\+$//e
   call winrestview(l:save)
@@ -899,6 +903,14 @@ fun! WhitespaceTrailingRemove()
   call setpos('.', save_cursor)
   call setreg('/', old_query)
 endfun
+
+function! TrimEndLines()
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  silent! %s#\($\n\s*\)\+\%$##
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
+endfunction
 
 "--------------------------
 " EmptyRegisters
