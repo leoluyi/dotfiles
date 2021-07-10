@@ -44,33 +44,34 @@ let g:which_key_map.9 = 'which_key_ignore'
 let g:which_key_map[','] = {
       \ 'name': 'which_key_ignore' }
 
-let g:which_key_map['n']  = [ 'Hide Linenumber',                  'linenumber-hide'  ]
-let g:which_key_map['N']  = [ 'Show Linenumber',                  'linenumber-show'  ]
-let g:which_key_map['mm'] = [ "mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm", 'Remove Windows ^M' ]
-let g:which_key_map['nn'] = [':Defx',                             'defx-open']
-let g:which_key_map['pp'] = [':setlocal paste!',                  'toggle-paste']
-let g:which_key_map['a']  = [':e <C-r>=getcwd()<CR>/',            'new-file-in-current-buf-dir']
-let g:which_key_map['A']  = [':e %:h/',                           'new-file-in-pwd']
+let g:which_key_map['n']  = [ '\<ESC>\<ESC>,n',  'linenumber-hide'  ]
+let g:which_key_map['N']  = [ '\<ESC>\<ESC>,N',  'linenumber-show'  ]
+let g:which_key_map['mm'] = [ '\<ESC>\<ESC>,mm',  'Remove Windows ^M' ]
+let g:which_key_map['nn'] = [ '\<ESC>\<ESC>,nn',  'defx-open']
+let g:which_key_map['pp'] = { 'name':  'toggle-paste'}
+let g:which_key_map['a']  = { 'name':  'new-file-in-current-buf-dir'}
+let g:which_key_map['A']  = { 'name':  'new-file-in-pwd'}
 
 " FZF.
-let g:which_key_map['f'] = [ ':Files',   'fzf-files'     ]
-let g:which_key_map['b'] = [ ':Buffers', 'fzf-buffers'   ]
-let g:which_key_map['m'] = [ ':History', 'fzf-mru'       ]
+let g:which_key_map['f'] = { 'name':  'fzf-files'     }
+let g:which_key_map['b'] = { 'name':  'fzf-buffers'   }
+let g:which_key_map['m'] = { 'name':  'fzf-mru'       }
 
 let g:which_key_map['t'] = {
       \ 'name' : '+tabs',
-      \ 'h': ['<C-w>t<C-w>H',                        'tab-vert-to-horiz'],
-      \ 'k': ['<C-w>t<C-w>K',                        'tab-horiz-to-vert'],
-      \ 'l': [':execute "tabn ".g:lasttab<CR>',      'toggle-last-tabs'],
-      \ 'e': [':tabedit <C-r>=expand("%:p:h")<cr>/', 'tab-new-in-pwd'],
+      \ 'h': { 'name': 'tab-vert-to-horiz' },
+      \ 'k': { 'name': 'tab-horiz-to-vert' },
+      \ 'l': { 'name': 'toggle-last-tabs' },
+      \ 'e': { 'name': 'tab-new-in-pwd' },
       \ }
 
 let g:which_key_map['b'] = {
       \ 'name' : '+buffers',
-      \ 'd' : [':Bclose',         'buffer-delete'],
-      \ 'o' : [':Bdelete hidden', 'buffer-only'],
-      \ 'a' : [':bufdo bd',       'delete-all-buffers'],
-      \ 'h' : ['Startify',        'home-buffer'],
+      \ 'c' : { 'name': 'buffer-delete'},
+      \ 'd' : { 'name': 'close-current-buffer-window-split'},
+      \ 'o' : { 'name': 'buffer-only'},
+      \ 'a' : { 'name': 'delete-all-buffers'},
+      \ 'h' : { 'name': 'home-buffer'},
       \ }
 
 let g:which_key_map['s'] = {
@@ -96,27 +97,27 @@ let g:which_key_map['g'] = {
 
 let g:which_key_map['w'] = {
       \ 'name' : '+windows',
-      \ 'w' : ['<C-W>w',     'other-window']          ,
-      \ 'd' : ['<C-W>c',     'delete-window']         ,
-      \ '-' : ['<C-W>s',     'split-window-below']    ,
-      \ '|' : ['<C-W>v',     'split-window-right']    ,
-      \ '2' : ['<C-W>v',     'layout-double-columns'] ,
-      \ 'h' : ['<C-W>h',     'window-left']           ,
-      \ 'j' : ['<C-W>j',     'window-below']          ,
-      \ 'l' : ['<C-W>l',     'window-right']          ,
-      \ 'k' : ['<C-W>k',     'window-up']             ,
-      \ 'H' : ['<C-W>5<',    'expand-window-left']    ,
-      \ 'J' : [':resize +5', 'expand-window-below']   ,
-      \ 'L' : ['<C-W>5>',    'expand-window-right']   ,
-      \ 'K' : [':resize -5', 'expand-window-up']      ,
-      \ '=' : ['<C-W>=',     'balance-window']        ,
-      \ 's' : ['<C-W>s',     'split-window-below']    ,
-      \ 'v' : ['<C-W>v',     'split-window-below']    ,
-      \ '?' : ['Windows',    'fzf-window']            ,
+      \ 'w' : { 'name': 'other-window' },
+      \ 'd' : { 'name': 'delete-window' },
+      \ '-' : { 'name': 'split-window-below' },
+      \ '|' : { 'name': 'split-window-right' },
+      \ '2' : { 'name': 'layout-double-columns' },
+      \ 'h' : { 'name': 'window-left' },
+      \ 'j' : { 'name': 'window-below' },
+      \ 'l' : { 'name': 'window-right' },
+      \ 'k' : { 'name': 'window-up' },
+      \ 'H' : { 'name': 'expand-window-left' },
+      \ 'J' : { 'name': 'expand-window-below' },
+      \ 'L' : { 'name': 'expand-window-right' },
+      \ 'K' : { 'name': 'expand-window-up' },
+      \ '=' : { 'name': 'balance-window' },
+      \ 's' : { 'name': 'split-window-below' },
+      \ 'v' : { 'name': 'split-window-below' },
+      \ '?' : { 'name': 'fzf-window' },
       \ }
 
 " localleader -----------------------------------------------------------------
 let g:which_key_map2 =  {}
-let g:which_key_map2[''''] = ["viw<esc>`>a'<esc>`<i'<esc>", 'quote-single']
-let g:which_key_map2['"'] = ['viw<esc>`>a"<esc>`<i"<esc>', 'quote-double']
-let g:which_key_map2['gp'] = ['`[v`]', 're-select last paste']
+let g:which_key_map2[''''] = { 'name':  'quote-single' }
+let g:which_key_map2['"']  = { 'name':  'quote-double' }
+let g:which_key_map2['gp'] = { 'name':  're-select last paste' }
