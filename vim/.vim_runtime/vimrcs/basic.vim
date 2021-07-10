@@ -481,9 +481,9 @@ nnoremap <leader>bd :bd<CR>
 " https://stackoverflow.com/a/19619038/3744499
 " (Close the current buffer and move to the alternative one)
 if exists(':Bclose')
-  nnoremap <localleader>bc :Bclose<CR>
+  nnoremap <leader>bc :Bclose<CR>
 else
-  nnoremap <localleader>bc :b#<bar>bd#<CR>
+  nnoremap <leader>bc :b#<bar>bd#<CR>
 endif
 
 " Don't close window, when deleting a buffer
@@ -584,8 +584,10 @@ inoremap $' ''<esc>i
 inoremap $" ""<esc>i
 nnoremap <localleader>' viw<esc>`>a'<esc>`<i'<esc>
 nnoremap <localleader>" viw<esc>`>a"<esc>`<i"<esc>
+nnoremap <localleader>` viw<esc>`>a`<esc>`<i`<esc>
 vnoremap <localleader>' :<C-u>norm!`>a'<esc>`<i'<esc>
 vnoremap <localleader>" :<C-u>norm!`>a"<esc>`<i"<esc>
+vnoremap <localleader>` :<C-u>norm!`>a`<esc>`<i`<esc>
 
 "----------------------------
 " -> Copy and paste stuffs
@@ -762,7 +764,7 @@ command! WhitespaceTrailingRemove call WhitespaceTrailingRemove()
 nnoremap <leader>tb :ToggleTransparentBackground<CR>
 
 " Delete trailing white space on save, useful for some filetypes ;)
-if has("autocmd") && exists('#WhitespaceTrailingRemove')
+if has("autocmd") && exists(':WhitespaceTrailingRemove')
   autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call WhitespaceTrailingRemove()
 endif
 
