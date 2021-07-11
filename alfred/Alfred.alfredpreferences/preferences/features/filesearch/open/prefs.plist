@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>keyword</key>
-	<string>find</string>
+	<string>fd</string>
 </dict>
 </plist>
