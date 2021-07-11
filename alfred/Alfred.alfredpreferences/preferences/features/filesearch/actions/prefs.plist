@@ -38,5 +38,7 @@
 	<false/>
 	<key>showWithTab</key>
 	<true/>
+	<key>sortByUsage</key>
+	<true/>
 </dict>
 </plist>
