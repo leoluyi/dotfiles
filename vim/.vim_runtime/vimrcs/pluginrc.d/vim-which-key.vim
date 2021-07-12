@@ -1,27 +1,35 @@
-" To register the descriptions when using the on-demand load feature,
-" use the autocmd hook to call which_key#register(), e.g., register for the Space key:
-autocmd! User vim-which-key
-  \   call which_key#register(',', 'g:which_key_map')
-  \ | call which_key#register('<Space>', 'g:which_key_map2')
-" call which_key#register(',', "g:which_key_map")
-" call which_key#register('<Space>', "g:which_key_map2")
+" Load paths
+let s:vim_runtime = expand('<sfile>:p:h')."/.."
+" Load utils
+runtime vimrcs/utils.vim
 
-" Map leader to which_key
-autocmd BufEnter *
-  \ if exists(':WhichKey')
-  \ | execute "nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>"
-  \ | execute "vnoremap <silent> <leader>      :<c-u>WhichKeyVisual ','<CR>"
-  \ | execute "nnoremap <silent> <localleader> :<c-u>WhichKey '<Space>'<CR>"
-  \ | execute "vnoremap <silent> <localleader> :<c-u>WhichKeyVisual '<Space>'<CR>"
-  \ | endif
+augroup VIM_WHICH_KEY
+  " To register the descriptions when using the on-demand load feature,
+  " use the autocmd hook to call which_key#register(), e.g., register for the Space key:
+  autocmd! User vim-which-key
+    \ if exists(':WhichKey') && !has('nvim')
+    \ | call which_key#register(',', 'g:which_key_map')
+    \ | call which_key#register('<Space>', 'g:which_key_map2')
+  " call which_key#register(',', 'g:which_key_map')
+  " call which_key#register('<Space>', 'g:which_key_map2')
+
+  " Map leader to which_key
+  autocmd! BufEnter *
+    \ if exists(':WhichKey') && !has('nvim')
+    \ | execute "nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>"
+    \ | execute "vnoremap <silent> <leader>      :<c-u>WhichKeyVisual ','<CR>"
+    \ | execute "nnoremap <silent> <localleader> :<c-u>WhichKey '<Space>'<CR>"
+    \ | execute "vnoremap <silent> <localleader> :<c-u>WhichKeyVisual '<Space>'<CR>"
+    \ | endif
+
+  " Hide status line
+  autocmd! FileType which_key
+  autocmd  FileType which_key set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+augroup END
 
 " Not a fan of floating windows for this
 let g:which_key_use_floating_win = 0
-
-" Hide status line
-autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Define a separator
 let g:which_key_sep = '→'

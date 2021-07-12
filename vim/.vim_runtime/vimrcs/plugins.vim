@@ -59,7 +59,6 @@ Plug 'junegunn/vim-easy-align'  " A Vim alignment plugin
 Plug 'kana/vim-textobj-line'  " Text objects for the current line
 Plug 'kana/vim-textobj-user'  " Depencency of reedes/vim-textobj-quote
 Plug 'lambdalisue/suda.vim'  " Read or write files with sudo command
-Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }  " Shows keybindings in popup
 Plug 'liuchengxu/vista.vim'  " Viewer & Finder for LSP symbols and tags like tagbar
 Plug 'machakann/vim-highlightedyank'
 Plug 'matze/vim-move'   " Move lines and selections up and down
@@ -199,6 +198,8 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'RRethy/nvim-treesitter-textsubjects'
+
+  Plug 'folke/which-key.nvim'
 endif
 
 if has('nvim-0.4.2') || has('patch-8.1.2114')
@@ -217,6 +218,8 @@ if !has('nvim')
 
   " Disable ncm2-jedi.
   Plug 'ncm2/ncm2-jedi', { 'on': [] }  " fast python completion (use ncm2 if you want type info or snippet support)
+
+  Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }  " Shows keybindings in popup
 endif
 
 " Vim7 only
