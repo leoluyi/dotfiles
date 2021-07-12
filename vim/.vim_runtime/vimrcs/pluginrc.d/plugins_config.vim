@@ -863,7 +863,7 @@ autocmd VimEnter *
 " mbbill/undotree -------------------------------------------------------------
 autocmd VimEnter *
   \ if exists(':UndotreeToggle')
-  \ | execute "nmap <silent> <leader>u :UndotreeToggle<CR>"
+  \ | execute "nnoremap <silent> <leader>u :UndotreeToggle<CR>"
   \ | endif
 
 " voldikss/vim-floaterm -------------------------------------------------------
@@ -879,14 +879,14 @@ let g:floaterm_autohide=1
 " airblade/vim-rooter ---------------------------------------------------------
 let g:rooter_silent_chdir = 0
 
-" Vimroom ---------------------------------------------------------------------
+" junegunn/goyo.vim -----------------------------------------------------------
 let g:goyo_width=100
 let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
 
 autocmd VimEnter *
-  \ if exists(':UndotreeToggle')
-  \ | execute "nnoremap <silent> <leader>z :Goyo<cr>"
+  \ if exists(':Goyo')
+  \ | execute "nnoremap <silent> <leader>z :Goyo<CR>"
   \ | endif
 
 " romainl/vim-cool ------------------------------------------------------------

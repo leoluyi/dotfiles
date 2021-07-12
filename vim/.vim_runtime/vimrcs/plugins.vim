@@ -53,6 +53,7 @@ Plug 'haya14busa/incsearch.vim'  " Incrementally highlights ALL pattern matches
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}  " Preview markdown on your modern browser with synchronised scrolling and flexible configuration
 Plug 'jeetsukumaran/vim-pythonsense'  " Provides text objects and motions for Python classes, methods, functions, and doc strings
 Plug 'jmcantrell/vim-virtualenv'  " Virtualenv support
+Plug 'junegunn/goyo.vim'  " Distraction-free writing in Vim
 Plug 'junegunn/gv.vim'  " A git commit browser in Vim
 Plug 'junegunn/vim-easy-align'  " A Vim alignment plugin
 Plug 'kana/vim-textobj-line'  " Text objects for the current line
