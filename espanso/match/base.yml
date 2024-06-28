@@ -1,0 +1,43 @@
+# espanso match file
+
+# For a complete introduction, visit the official docs at: https://espanso.org/docs/
+
+# You can use this file to define the base matches (aka snippets)
+# that will be available in every application when using espanso.
+
+# Matches are substitution rules: when you type the "trigger" string
+# it gets replaced by the "replace" string.
+
+# And much more! For more information, visit the docs: https://espanso.org/docs/
+matches:
+  # Print the current date
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+
+  # Use Espanso as password expander:
+  # 1.  Add an "application password" to keychain (Screenshot: https://u.lillefar.dk/q2BI5m)
+  # 2.  Add snippet to espanso config file where some-password is identical to account name for your keychain.
+
+  # ```
+  # - triggers: [":pass:"]
+  #     replace: "{{output}}"
+  #     vars:
+  #       - name: output
+  #         type: shell
+  #         params:
+  #           cmd: "security find-generic-password -a '<account_name>' -w"
+  # ```
+
+  # 3.  First time you run the expander you will be required to enter your macos password.
+  - triggers: [":1pass"]
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "security find-generic-password -a 'leoluyi' -w"

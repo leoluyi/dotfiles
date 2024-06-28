@@ -1,0 +1,15 @@
+[
+    {
+        "keys": ["ctrl_alt+/"],
+        "command": "afn_show_filenames",
+        "context":
+        [
+            { "key": "afn_use_keybinding", "operator": "equal", "operand": true }
+        ]
+    },
+    {
+        "keys": ["ctrl+shift+o"],
+        "command": "prompt_open_folder"
+    },
+    { "keys": "ctrl+shift+alt+t", "command": "open_terminal" },
+]

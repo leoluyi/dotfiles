@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+__usage="Usage: hlsdl-mp4 <url> [title]";
+
+if [ -z "$1" ]; then
+    echo "$__usage";
+    exit 1;
+fi
+
+main ()
+{
+    local url="$1";
+    local title="$2";
+    local out;
+    [ -z "$title" ] && title=$(date +'%Y%m%dT%H%M%S');
+    out="${title}.mp4";
+    rm -f "$out" && hlsdl -q -b -o "$out" "$url"
+}
+
+main "$1" "$2"

@@ -1,0 +1,87 @@
+#!/usr/bin/env sh
+
+# the scripting-addition must be loaded manually if
+# you are running yabai on macOS Big Sur. Uncomment
+# the following line to have the injection performed
+# when the config is executed during startup.
+#
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+#
+# see this wiki page for information:
+#  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
+#  - https://www.josean.com/posts/yabai-setup
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# bar settings
+yabai -m config status_bar                   off
+yabai -m config status_bar_text_font         "Helvetica Neue:Bold:12.0"
+yabai -m config status_bar_icon_font         "FontAwesome:Regular:12.0"
+yabai -m config status_bar_background_color  0xff202020
+yabai -m config status_bar_foreground_color  0xffa8a8a8
+yabai -m config status_bar_space_icon_strip  I II III IV V VI VII VIII IX X
+yabai -m config status_bar_power_icon_strip   
+yabai -m config status_bar_space_icon        
+yabai -m config status_bar_clock_icon        
+
+# global settings
+yabai -m config mouse_follows_focus          off
+yabai -m config focus_follows_mouse          off
+yabai -m config window_origin_display        default
+yabai -m config window_placement             second_child
+yabai -m config window_topmost               off
+yabai -m config window_shadow                on
+yabai -m config window_opacity               off
+yabai -m config window_opacity_duration      0.0
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.90
+yabai -m config window_border                off
+yabai -m config window_border_blur           off
+yabai -m config window_border_width          3
+yabai -m config active_window_border_color   0xff3C82B6
+yabai -m config normal_window_border_color   0xff505050
+yabai -m config insert_window_border_color   0xffd75f5f
+yabai -m config split_ratio                  0.50
+yabai -m config auto_balance                 off
+
+# modifier for clicking and dragging with mouse.
+yabai -m config mouse_modifier               alt
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+
+# general space settings
+yabai -m config layout                       float
+yabai -m config top_padding                  10
+yabai -m config bottom_padding               10
+yabai -m config left_padding                 10
+yabai -m config right_padding                10
+yabai -m config window_gap                   10
+
+# Override default layout for space 2 only
+yabai -m space 2 --label terminal
+yabai -m space 3 --label ide
+
+yabai -m config --space=terminal layout bsp
+yabai -m config --space=ide layout bsp
+
+# < https://github.com/koekeishiya/yabai/issues/719#issuecomment-728140216 >
+focus_window () {
+    SPACE_NAME=$(yabai -m query --spaces --space | jq ".label")
+    WINDOW_ID=$(yabai -m query --windows --space | jq ".[] | select (.app=${SPACE_NAME}).id")
+    yabai -m window --focus "${WINDOW_ID}"
+}
+# focus window after active space changes
+yabai -m signal --add event=space_changed action="focus_window"
+# focus window after active display changes
+yabai -m signal --add event=display_changed action="focus_window"
+
+# float system preferences
+yabai -m rule --add app!='^(Alacritty|iTerm2|WezTerm)$' manage=off
+yabai -m rule --add title='^Preferences$' sticky=on layer=above manage=off
+yabai -m rule --add app='^Alacritty$' space=terminal border=off
+yabai -m rule --add app='^WezTerm$' space=terminal border=off
+
+echo "yabai configuration loaded.."

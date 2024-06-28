@@ -1,0 +1,38 @@
+; vim: ft=gitconfig
+; < https://www.npmjs.com/package/@metahub/cz-conventional-commit >
+; < https://github.com/fteem/git-semantic-commits >
+[alias]
+    build = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"build($2): $3\" \"${@:4}\"; else git commit -m \"build: $1\" \"${@:2}\"; fi' _"
+    chore = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"chore($2): $3\" \"${@:4}\"; else git commit -m \"chore: $1\" \"${@:2}\"; fi' _"
+    ci = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"ci($2): $3\" \"${@:4}\"; else git commit -m \"ci: $1\" \"${@:2}\"; fi' _"
+    docs = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"docs($2): $3\" \"${@:4}\"; else git commit -m \"docs: $1\" \"${@:2}\"; fi' _"
+    feat = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"feat($2): $3\" \"${@:4}\"; else git commit -m \"feat: $1\" \"${@:2}\"; fi' _"
+    fix = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"fix($2): $3\" \"${@:4}\"; else git commit -m \"fix: $1\" \"${@:2}\"; fi' _"
+    perf = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"perf($2): $3\" \"${@:4}\"; else git commit -m \"perf: $1\" \"${@:2}\"; fi' _"
+    refactor = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"refactor($2): $3\" \"${@:4}\"; else git commit -m \"refactor: $1\" \"${@:2}\"; fi' _"
+    revert = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"revert($2): $3\" \"${@:4}\"; else git commit -m \"revert: $1\" \"${@:2}\"; fi' _"
+    style = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"style($2): $3\" \"${@:4}\"; else git commit -m \"style: $1\" \"${@:2}\"; fi' _"
+    test = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"test($2): $3\" \"${@:4}\"; else git commit -m \"test: $1\" \"${@:2}\"; fi' _"
+
+    build-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"build($2): $3 🛠\" \"${@:4}\"; else git commit -m \"build: $1\" \"${@:2}\"; fi' _"
+    chore-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"chore($2): $3 ♻️\" \"${@:4}\"; else git commit -m \"chore: $1\" \"${@:2}\"; fi' _"
+    ci-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"ci($2): $3 ⚙️\" \"${@:4}\"; else git commit -m \"ci: $1\" \"${@:2}\"; fi' _"
+    docs-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"docs($2): $3 📚\" \"${@:4}\"; else git commit -m \"docs: $1\" \"${@:2}\"; fi' _"
+    feat-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"feat($2): $3 ✨\" \"${@:4}\"; else git commit -m \"feat: $1\" \"${@:2}\"; fi' _"
+    fix-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"fix($2): $3 🐛\" \"${@:4}\"; else git commit -m \"fix: $1\" \"${@:2}\"; fi' _"
+    perf-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"perf($2): $3 🚀\" \"${@:4}\"; else git commit -m \"perf: $1\" \"${@:2}\"; fi' _"
+    refactor-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"refactor($2): $3 📦\" \"${@:4}\"; else git commit -m \"refactor: $1\" \"${@:2}\"; fi' _"
+    revert-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"revert($2): $3 🗑\" \"${@:4}\"; else git commit -m \"revert: $1\" \"${@:2}\"; fi' _"
+    style-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"style($2): $3 💎\" \"${@:4}\"; else git commit -m \"style: $1\" \"${@:2}\"; fi' _"
+    test-emoji = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"test($2): $3 🚨\" \"${@:4}\"; else git commit -m \"test: $1\" \"${@:2}\"; fi' _"
+
+    build-bang = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"build($2)!: $3 🛠\" \"${@:4}\"; else git commit -m \"build!: $1\" \"${@:2}\"; fi' _"
+    chore-bang = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"chore($2)!: $3 ♻️\" \"${@:4}\"; else git commit -m \"chore!: $1\" \"${@:2}\"; fi' _"
+    ci-bang = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"ci($2)!: $3 ⚙️\"; else git commit -m \"ci!: $1\" \"${@:2}\"; fi' _"
+    feat-bang = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"feat($2)!: $3 ✨\"; else git commit -m \"feat!: $1\" \"${@:2}\"; fi' _"
+    fix-bang = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"fix($2)!: $3 🐛\"; else git commit -m \"fix!: $1\" \"${@:2}\"; fi' _"
+    perf-bang = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"perf($2)!: $3 🚀\"; else git commit -m \"perf!: $1\" \"${@:2}\"; fi' _"
+    refactor-bang = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"refactor($2)!: $3 📦\"; else git commit -m \"refactor!: $1\" \"${@:2}\"; fi' _"
+    revert-bang = "!bash -c 'if [ \"$1\" = \"-s\" ] || [ \"$1\" = \"--scope\" ]; then git commit -m \"revert($2)!: $3 🗑\"; else git commit -m \"revert!: $1\" \"${@:2}\"; fi' _"
+
+    conventional-commits = !"echo \" feat\t\t✨ Features. A new feature\n fix\t\t🐛 Bug Fixes. A bug Fix\n docs\t\t📚 Documentation. Documentation only changes\n style\t\t💎 Styles. Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)\n refactor \t📦 Code Refactoring. A code change that neither fixes a bug nor adds a feature\n perf\t\t🚀 Performance Improvements. A code change that improves performance\n test\t\t🚨 Tests. Adding missing tests or correcting existing tests\n build\t\t🛠  Builds. Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)\n ci\t\t  Continuous Integrations. Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)\n chore\t\t♻️  Chores. Other changes that don't modify src or test files\n revert\t\t🗑  Reverts. Reverts a previous commit\n\""

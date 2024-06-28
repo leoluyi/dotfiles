@@ -1,0 +1,34 @@
+#!/bin/bash
+# Default programs.
+if command -v nvim >/dev/null; then
+  export VISUAL=nvim
+else
+  export VISUAL=vim
+fi
+
+export EDITOR=nvim
+export GIT_EDITOR="${EDITOR-}"
+
+[ -f "$HOME"/.env_vars ] && source "$HOME"/.env_vars
+
+# ============ Env for other program settings ============
+# Set "most" as pager.
+command -v most >/dev/null && export PAGER=most
+
+# Enable syntax-highlighting in less.
+# brew install source-highlight
+if command -v highlight >/dev/null; then
+  export LESSOPEN="| $(which highlight) --out-format xterm256 --quiet --force --style=base16/gruvbox-dark-medium %s"
+  export LESS=" -R "
+elif command -v src-hilite-lesspipe.sh >/dev/null; then
+  # GNU source-highlight < git://git.savannah.gnu.org/src-highlite.git >
+  export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+  export LESS=" -R "
+fi
+
+# Fix pyenv bug from git-core. (shims do not work with gettext)
+# https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
+export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
+
+# env for pipenv.
+export PIPENV_IGNORE_VIRTUALENVS=1

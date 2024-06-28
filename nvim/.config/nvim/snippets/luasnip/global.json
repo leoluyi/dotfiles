@@ -1,0 +1,27 @@
+{
+  "modeline-filetype (#)": {
+    "prefix": "# vim",
+    "body": [
+      "# vim: set ft=$1:",
+      ""
+    ]
+  },
+  "modeline-filetype (--)": {
+    "prefix": "-- vim",
+    "body": [ "-- vim: set ft=$1:", "" ]
+  },
+  "modeline-fold (#)": {
+    "prefix": "# vim",
+    "body": [
+      "# vim: fdm=marker:fdl=2",
+      ""
+    ]
+  },
+  "modeline-fold (--)": {
+    "prefix": "-- vim",
+    "body": [
+      "-- vim: fdm=marker:fdl=2",
+      ""
+    ]
+  }
+}

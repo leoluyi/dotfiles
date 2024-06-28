@@ -1,0 +1,3 @@
+# ====== MacOS only ======
+
+alias sourcetree='open -a SourceTree'

@@ -1,0 +1,1 @@
+powershell.exe "& 'C:\Windows\System32\bash.exe' -c 'sudo /etc/init.d/ssh start && sudo /usr/bin/systemctl start systemd-user-sessions.service'"

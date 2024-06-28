@@ -1,0 +1,17 @@
+{
+    "sync": true,
+    "sync_folder": "/home/ts1050391/dotfiles/sublime-text/package_sync_linux",
+    "files_to_include": [
+        "*.sublime-build",
+        "*.sublime-commands",
+        "*.sublime-completions",
+        "*.sublime-keymap",
+        "*.sublime-menu",
+        "*.sublime-settings",
+        "*.sublime-snippet",
+        "*.sublime-macro",
+        "*.tmLanguage",
+        "*.tmTheme",
+        "*.py"
+    ],
+}

@@ -1,0 +1,67 @@
+# Enable aliases to be sudo'ed.
+alias sudo='sudo '
+
+# Enable aliases for watch.
+alias watch='watch -n1 '
+
+# sets up proper alias commands when called.
+alias ll='ls -lvhaF --time-style="+%Y-%m-%d %H:%M"'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Always enable colored `grep` output.
+# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# More information for pager
+alias less='less -r -M -i --underline-special'
+
+# Neovim.
+if command -v nvim >/dev/null; then
+  alias ovim="command vim"
+  alias vi="nvim"
+  alias vim="nvim"
+  alias view="nvim -R"
+  alias vimdiff="nvim -d"
+fi
+
+# ls sort by most recently modified.
+alias lrt='ls -hlrt --time-style=long-iso'
+
+# Print each PATH entry on a separate line.
+alias path='echo -e ${PATH//:/\\n}'
+
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# IP addresses.
+alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
+#alias localip="ipconfig getifaddr en0"
+alias myips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Kill all the tabs in Chrome to free up memory.
+# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# Fancy commands output.
+alias du='du -k'
+alias df='df -kT'
+alias free='free -h'
+
+# Find the largest top 10 files and directories.
+alias ducks='du -cksh -- * .[^.]* | sort -rh | head'
+
+# temp folder.
+alias cdtemp='cd $(mktemp -d)'
+
+# Toggle shell history.
+alias history-off='set +o history'
+alias history-on='set -o history'
+# Clear last hour history.
+alias history-clearlast20="[ -f $HISTFILE ] && HISTTIMEFORMAT='%s ' history | awk -v d1=\"$(date --date='-20 min' '+%s')\" '(\$2 > d1 ) { print \$2 }' | xargs -I {} sed -i '/^.*:{}:/{N;d;}' $HISTFILE && history -c && history -r"
+alias history-clear='[ -f "$HISTFILE" ] && cat /dev/null > "$HISTFILE" && history -c'

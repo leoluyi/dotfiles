@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# Use bat as preview engine.
+# < https://github.com/sharkdp/bat/issues/357 >
+command -v batcat >/dev/null && _bat_bin='batcat' || _bat_bin='bat'
+command -v fdfind >/dev/null && _fd_bin='fdfind' || _fd_bin='fd'
+
+export _bat_bin
+export _fd_bin
+
+export FZF_PREVIEW_COMMAND="{ [ -f {} ] && $_bat_bin --theme=OneHalfDark --style=header,grid,changes --wrap never --line-range :300 --color always {} ; } || { [ -d {} ] && tree -C {} ; } || cat {} || file --mime {}"
+
+export FZF_DEFAULT_OPTS="
+--preview '{ $FZF_PREVIEW_COMMAND ; } 2>/dev/null'
+--preview-window 'right:60%:hidden'
+--bind '?:toggle-preview'
+--min-height 30
+--keep-right
+--ansi
+--no-mouse
+"
+
+# Gruvbox.
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#   --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
+#   --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54'
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+if command -v "$_fd_bin" >/dev/null; then
+  export FZF_DEFAULT_COMMAND="$_fd_bin --type file --color=always --follow --hidden -E '.git' -E '*.plist'"
+  export FZF_ALT_C_COMMAND="$_fd_bin --type d --color=always --follow --hidden --exclude .git"
+
+  _fzf_compgen_path() {
+    eval "$_fd_bin --type file --color=always --follow --hidden -E '.git' -E '*.plist' . $1"
+  }
+
+  # Use fd to generate the list for directory completion
+  _fzf_compgen_dir() {
+    eval "$_fd_bin --type d --color=always --follow --hidden --exclude '.git' . $1"
+  }
+fi
+
+if command -v glow >/dev/null && command -v "$_fd_bin" >/dev/null; then
+  _fzf_complete_glow() {
+    _fzf_complete --multi --reverse -- "$@" < <(
+      eval "$_fd_bin --type file --color=always --follow --hidden --exclude '.git' --extension md"
+    )
+  }
+
+  _fzf_complete_glow_post() {
+    # Escape unusual characters on filenames
+    # < https://unix.stackexchange.com/a/359912/184321 >
+    xargs -d'\n' printf "%q\n"
+  }
+  [ -n "$BASH" ] && complete -F _fzf_complete_glow -o default -o bashdefault glow
+fi
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_ALT_C_OPTS="--preview-window 'down:60%'"

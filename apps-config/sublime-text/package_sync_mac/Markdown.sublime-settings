@@ -1,0 +1,10 @@
+{
+    "color_scheme": "MarkdownEditor.sublime-color-scheme",
+    "draw_centered": false,
+    "line_numbers": true,
+    "word_wrap": true,
+    "rulers":
+    [
+        80
+    ],
+}

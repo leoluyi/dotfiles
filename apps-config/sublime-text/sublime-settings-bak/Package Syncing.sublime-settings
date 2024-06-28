@@ -1,0 +1,17 @@
+{
+    "sync": true,
+    "sync_folder": "/Users/leoluyi/Dropbox/leo_workspace/dotfiles/sublime-text/package_sync_mac",
+    "files_to_include": [
+        "*.sublime-build",
+        "*.sublime-commands",
+        "*.sublime-completions",
+        "*.sublime-keymap",
+        "*.sublime-menu",
+        "*.sublime-settings",
+        "*.sublime-snippet",
+        "*.sublime-macro",
+        "*.tmLanguage",
+        "*.tmTheme",
+        "*.py"
+    ],
+}

@@ -1,0 +1,8 @@
+{
+  "shellcheck-disable": {
+    "prefix": ["# disable"],
+    "body": [
+      "shellcheck disable=$1"
+    ]
+  }
+}

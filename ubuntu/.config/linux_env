@@ -1,0 +1,47 @@
+# vim: set ft=sh:
+
+# ============ Proxy ============
+# export http_proxy="8.8.8.8"
+# export https_proxy=$http_proxy
+# export HTTP_PROXY=$http_proxy
+# export HTTPS_PROXY=$http_proxy
+export no_proxy="localhost,127.0.0.1"
+
+# ============ Env ============
+# Use nvim as default editor.
+if command -v nvim >/dev/null; then
+  export VISUAL=nvim
+else
+  export VISUAL=vim
+fi
+export EDITOR="${VISUAL-}"
+export GIT_EDITOR="${EDITOR-}"
+
+# Set "most" as pager.
+command -v most >/dev/null && export PAGER=most
+
+# Enable syntax-highlighting in less.
+
+if command -v highlight >/dev/null; then
+  export LESSOPEN="| $(which highlight) --out-format xterm256 --quiet --force --style=molokai %s"
+  export LESS=" -R "
+elif command -v src-hilite-lesspipe.sh >/dev/null; then
+  # GNU source-highlight < git://git.savannah.gnu.org/src-highlite.git >
+  export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+  export LESS=" -R "
+elif [ -x /usr/share/source-highlight/src-hilite-lesspipe.sh ]; then
+  # Pipe Highlight to less.
+  export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+  export LESS=" -R "
+fi
+
+# Fix pyenv bug from git-core. (shims do not work with gettext)
+# https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
+export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
+
+# env for pipenv.
+export PIPENV_IGNORE_VIRTUALENVS=1
+
+# ============ Path for binaries ============
+# Homebrew.
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"

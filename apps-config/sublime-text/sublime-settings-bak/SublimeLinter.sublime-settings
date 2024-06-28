@@ -1,0 +1,42 @@
+// SublimeLinter Settings - User
+{
+    "debug": true,
+    
+    "paths": {
+        "linux": ["~/.pyenv/shims/"],
+        "osx": ["~/.pyenv/shims/"],
+        "windows": ["C:/Anaconda3/Scripts/"]
+    },
+
+    "gutter_theme": "Knob",
+    "linters": {
+        "flake8": {
+            "disable": false,
+            "args": [
+                "--max-line-length", "100",
+                "--ignore", "E309,E501,W291,W293,W391"
+            ]
+        }
+    },
+
+    "styles": [
+        {
+            "mark_style": "stippled_underline",
+            "priority": 1,
+            "scope": "region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter",
+            "icon": "warning",
+            "types": [
+                "warning"
+            ]
+        },
+        {
+            "mark_style": "stippled_underline",
+            "priority": 1,
+            "scope": "region.redish markup.deleted.sublime_linter markup.error.sublime_linter",
+            "icon": "error",
+            "types": [
+                "error"
+            ]
+        }
+    ],
+}

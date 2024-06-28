@@ -1,0 +1,5 @@
+filter_class: "company.thebrowser.Browser"
+
+extra_includes:
+  - "../match/_email.yml"
+  - "../match/_barcode.yml"

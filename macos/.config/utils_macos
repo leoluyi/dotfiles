@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+# ====== MacOS only ======
+
+# Install (one or multiple) selected application(s)
+# using "brew search" as source input
+# mnemonic [B]rew [I]nstall [P]lugin
+brew-install() {
+  local inst
+  inst=$(brew search . | fzf -m)
+
+  if [[ $inst ]]; then
+    for prog in $inst; do
+      brew install "$prog"
+    done
+  fi
+}
+
+# Update (one or multiple) selected application(s)
+# mnemonic [B]rew [U]pgrade [P]lugin
+
+brew-upgrade() {
+  local upd
+  upd=$(brew leaves | fzf -m)
+
+  if [[ $upd ]]; then
+    for prog in $upd; do
+      brew upgrade "$prog"
+    done
+  fi
+}
+
+brew-cask-upgrade() {
+  local upd
+  upd="$(brew list --casks | fzf -m)"
+
+  if [[ $upd ]]; then
+    for prog in $upd; do
+      brew upgrade "$prog"
+    done
+  fi
+}
+
+# Delete (one or multiple) selected application(s)
+# mnemonic [B]rew [C]lean [P]lugin (e.g. uninstall)
+brew-uninstall() {
+  local uninst
+  uninst=$(brew leaves | fzf -m)
+
+  if [[ $uninst ]]; then
+    for prog in $uninst; do
+      brew uninstall "$prog"
+    done
+  fi
+}
+
+# Install or open the webpage for the selected application
+# using brew cask search as input source
+# and display a info quickview window for the currently marked application
+brew-cask-install() {
+    local token
+    token=$(brew search --casks . | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
+
+    if [ "x$token" != "x" ]; then
+      echo "(I)nstall or open the (h)omepage of $token (I/h): "
+      read -r input
+      if [ "$input" = "i" ] || [ "$input" = "I" ]; then
+        brew install --cask "$token"
+      fi
+      if [ "$input" = "h" ] || [ "$input" = "H" ]; then
+        brew cask home "$token"
+      fi
+    fi
+}
+
+# Uninstall or open the webpage for the selected application
+# using brew list as input source (all brew cask installed applications)
+# and display a info quickview window for the currently marked application
+brew-cask-uninstall() {
+    local token
+    token=$(brew list --cask | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
+
+    if [ "x$token" != "x" ]; then
+      echo "(U)ninstall or open the (h)omepage of $token: (U/h)"
+      read -r input
+      if [ "$input" = "u" ] || [ "$input" = "U" ]; then
+          brew uninstall "$token"
+      fi
+      if [ "$input" = "h" ] || [ "$token" = "h" ]; then
+          brew cask home "$token"
+      fi
+    fi
+}

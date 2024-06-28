@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# alias: brew bundle-dump
+if [ -d "$HOME"/.dotfiles/homebrew ]; then
+  brew bundle dump --file=$HOME/.dotfiles/homebrew/Brewfile --describe --force $*
+  sed -i '/microsoft-auto-update/d' "$HOME"/.dotfiles/homebrew/Brewfile
+  echo "Brewfile has been updated: '$HOME/.dotfiles/homebrew/Brewfile'"
+else
+  echo "Error: directory '$HOME/.dotfiles/homebrew' does not exist."
+fi

@@ -1,0 +1,139 @@
+# ~/.config/starship.toml
+
+# Prompt-wide configuration options:
+add_newline = false
+command_timeout = 1_200
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[character]
+success_symbol = "[❯](bold cyan)"
+error_symbol = "[❯](bold red)"
+
+[status]
+disabled = false
+symbol = "✖ "
+map_symbol = false
+
+[username]
+format = "[$user]($style)"
+style_user = "bold yellow"
+style_root = "bold red"
+show_always = true
+
+[hostname]
+disabled = false
+ssh_only = false
+format = "@[$hostname](bold green) "
+# trim_at = ".companyname.com"
+
+[directory]
+truncation_length = 5
+truncation_symbol = "…/"
+style = 'bold blue'
+use_os_path_sep	= false
+
+[time]
+time_format = "%R"
+format = "[$time]($style) "
+style = "white"
+disabled = false
+
+[memory_usage]
+disabled = false
+threshold = 85
+symbol = " "
+style = "bold dimmed white"
+format = "$symbol[mem ${ram_pct}( | ${swap})]($style) "
+
+# battery.
+[battery]
+full_symbol = "🔋"
+charging_symbol = "🔌"
+discharging_symbol = "⚡"
+
+[[battery.display]]  # "bold red" style when capacity is between 0% and 10%
+threshold = 10
+style = "bold red"
+
+[[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
+threshold = 30
+style = "bold yellow"
+
+[cmd_duration]
+min_time = 1_000
+format = '- took [$duration](bold yellow)'
+disabled = false
+
+# git
+[git_branch]
+format = " [$symbol$branch]($style) "
+symbol = "🍣 "
+style = "bold yellow"
+
+[git_commit]
+commit_hash_length = 8
+tag_symbol = "🔖 "
+style = "bold white"
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "[🍒 PICKING](bold red)"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+up_to_date = "[✓](bold green)"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+conflicted = "[⚔️ ](red)"
+untracked = "[..${count}](cyan)"
+stashed = "⚑ "
+modified = "[✚ ${count}](red)"
+deleted = "[- ${count}](yellow)"
+staged = "[● ${count}](yellow)"
+renamed = "[» ${count}](yellow)"
+
+style = "bright-white"
+
+# env variable.
+[env_var]
+disabled = true
+variable = "SHELL"
+default = "unknown shell"
+
+[container]
+disabled = true
+
+# kubernetes
+[kubernetes]
+symbol = "⛵ "
+style = "dimmed green"
+disabled = false
+
+[kubernetes.context_aliases]
+"dev.local.cluster.k8s" = "dev"
+
+# docker.
+[docker_context]
+symbol = "🐳 "
+disabled = false
+
+# Programming languages.
+[golang]
+symbol = " "
+
+[python]
+symbol = "🐍"
+style = "bold green"
+
+[rlang]
+format = "with [📐 $version](blue bold) "
+disabled = true
+
+[julia]
+format = "[$symbol$version]($style) "
+symbol = "ஃ "
+style = "bold green"

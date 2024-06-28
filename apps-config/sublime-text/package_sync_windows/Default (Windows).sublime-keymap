@@ -1,0 +1,5 @@
+[
+    { "keys": ["ctrl+shift+o"], "command": "prompt_open_folder" },
+    { "keys": ["ctrl+alt+c"], "command": "cancel_build" },
+    { "keys": ["ctrl+shift+alt+t"], "command": "open_terminal_project_folder" }
+]

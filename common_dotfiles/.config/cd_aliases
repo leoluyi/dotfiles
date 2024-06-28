@@ -1,0 +1,14 @@
+# vim: set ft=sh:
+
+# Shortcuts.
+
+alias config='[ -d ~/.config ] && cd ~/.config || echo "~/.config not found"'
+alias db='[ -d ~/Dropbox ] && cd ~/Dropbox || echo "~/Dropbox not found"'
+alias dl='[ -d ~/Downloads ] && cd ~/Downloads || echo "~/Downloads not found"'
+alias dotfiles='[ -d ~/.dotfiles ] && cd ~/.dotfiles || echo "~/.dotfiles not found"'
+alias note='[ -d ~/_notes-vault ] && cd ~/_notes-vault || echo "~/_notes-vault not found"'
+alias repo='[ -d ~/_repos ] && cd ~/_repos || echo "~/_repos not found"'
+alias snippet='[ -d ~/_repos/code-snippet ] && cd ~/_repos/code-snippet || echo "~/_repos/code-snippet not found"'
+alias temp='[ -d ~/Downloads/.temp ] && cd ~/Downloads/.temp || echo "~/Downloads/.temp not found"'
+
+alias ctbc-repo='[ -d ~/Dropbox/Work/CTBC/ctbc-workspace/ctbc-repos ] && cd ~/Dropbox/Work/CTBC/ctbc-workspace/ctbc-repos || echo "~/Dropbox/Work/CTBC/ctbc-workspace/ctbc-repos not found"'

@@ -1,0 +1,36 @@
+# XDG Paths.
+# https://wiki.archlinux.org/title/XDG_Base_Directory
+
+# ~/ Clean-up.
+# export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"  # This line will break some DMs
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export DBT_PROFILES_DIR="$XDG_CONFIG_HOME"/dbt
+export DOTFILES="$XDG_CONFIG_HOME"
+export GEM_HOME="$XDG_DATA_HOME"/ruby/gems
+export GEM_PATH="$XDG_DATA_HOME"/ruby/gems
+export GEM_SPEC_CACHE="$XDG_DATA_HOME"/ruby/specs
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export GOPATH="$XDG_DATA_HOME"/go
+export MOST_INITFILE="$XDG_CONFIG_HOME"/mostrc
+export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export NVM_DIR="$XDG_DATA_HOME"/nvm
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
+export PYTHONUSERBASE="$XDG_DATA_HOME"/python
+export R_ENVIRON_USER="$XDG_CONFIG_HOME"/R/Renviron
+export R_HISTFILE="$XDG_STATE_HOME"/Rhistory
+export R_MAKEVARS_USER="$XDG_CONFIG_HOME"/R/Makevars
+export R_PROFILE_USER="$XDG_CONFIG_HOME"/R/Rprofile
+export REDISCLI_HISTFILE="$XDG_DATA_HOME"/redis/rediscli_history
+export REDISCLI_RCFILE="$XDG_CONFIG_HOME"/redis/redisclirc
+export SQLITE_HISTORY="$XDG_DATA_HOME"/sqlite_history
+export WGETRC="$XDG_CONFIG_HOME"/wgetrc
+export XSERVERRC="$XDG_DATA_HOME"/xserverrc
+
+# Disable less histfiles.
+export LESSHISTFILE="-"

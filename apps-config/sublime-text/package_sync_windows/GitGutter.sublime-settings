@@ -1,0 +1,9 @@
+{
+    "git_binary": {
+        "default": "",
+        "wondows": "C:/Program Files/Git/cmd/git.exe",
+        "linux": "/usr/bin/git",
+        "osx": "/usr/bin/git",
+    },
+    "debug": true,
+}

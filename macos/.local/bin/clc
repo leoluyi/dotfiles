@@ -1,0 +1,47 @@
+#!/bin/sh
+# clc - Cross-platform (cl)ipboard (c)opy
+
+# < https://github.com/thezeroalpha/dotfiles/blob/master/scripts/clc >
+#
+#  <command> | clc    - copies stdin to clipboard
+#  clc <file>         - copies a file's contents to clipboard
+
+file=$1
+os=$(uname -s | tr '[:upper:]' '[:lower:]')
+case "$os" in
+  linux*)
+    if command -v xclip 1>/dev/null 2>&1; then
+      if [ -z "$file" ]; then
+        xclip -in -selection clipboard
+      else
+        xclip -in -selection clipboard "$file"
+      fi
+    elif command -v xsel 1>/dev/null 2>&1; then
+      if [ -z "$file" ]; then
+        xsel --clipboard --input
+      else
+        xsel --clipboard --input < "$file"
+      fi
+    else
+      printf "xclip/xsel not installed\n"
+    fi
+    ;;
+  darwin*)
+    if [ -z "$file" ]; then
+      pbcopy
+    else
+      pbcopy < "$file"
+    fi
+    ;;
+  msys*|cygwin*|mingw*|nt|win*)
+    if [ -z "$file" ]; then
+      cat > /dev/clipboard
+    else
+      cat "$file" > /dev/clipboard
+    fi
+    ;;
+  *)
+    printf "clc: Platform %s not supported.\n" "$os"
+    return 1
+    ;;
+esac

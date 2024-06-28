@@ -1,0 +1,7 @@
+{
+"cmd": ["/Users/leoluyi/.pyenv/shims/python", "-u", "$file"],
+"env": {"PYTHONIOENCODING": "utf8"},
+"selector": "source.python",
+"file_regex": "file \"(...*?)\", line ([0-9]+)",
+"encoding": "utf8",
+}

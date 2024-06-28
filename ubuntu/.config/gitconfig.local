@@ -1,0 +1,9 @@
+; vim: ft=gitconfig
+
+[user]
+    name = Lu Yi
+    email = leoluyiwork@gmail.com
+    signingkey =
+
+[commit]
+    gpgsign = false

@@ -1,0 +1,10 @@
+matches:
+  - trigger: ":mail"
+    replace: "leo0650@gmail.com"
+
+  - trigger: ":contact"
+    replace: |
+      Hi,
+      Thank you for contacting us!
+      Best regards,
+      The Support Team

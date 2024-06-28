@@ -1,0 +1,3 @@
+# Fix nvimcom conflict with use of renv
+# https://github.com/jalvesaq/Nvim-R/issues/445#issuecomment-635419033
+RENV_CONFIG_EXTERNAL_LIBRARIES="~/R/x86_64-pc-linux-gnu-library/3.6"

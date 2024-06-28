@@ -1,0 +1,5 @@
+filter_class: "com.google.Chrome"
+
+extra_includes:
+  - "../match/_email.yml"
+  - "../match/_barcode.yml"

@@ -1,0 +1,5 @@
+# vim: set ft=bash:
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/bash/history"
+export HISTSIZE=
+export HISTFILESIZE=5000
+export HISTTIMEFORMAT="[%F %T] "

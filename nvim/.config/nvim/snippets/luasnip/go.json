@@ -1,0 +1,63 @@
+{
+  "chi middleware": {
+    "prefix": ["chim"],
+    "body": [
+      "func ${1:Middleware}(next http.Handler) http.Handler {",
+      "\treturn http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {",
+      "",
+      "\t\tctx := context.WithValue(r.Context(), ${2:CtxKey}, ${3:CtxValue})",
+      "\t\tnext.ServeHTTP(w, r.WithContext(ctx))",
+      "\t})",
+      "}"
+    ]
+  },
+
+  "chi middleware params": {
+    "prefix": ["chimp"],
+    "body": [
+      "func ${1:Middleware}(${2:param} ${Type}) func(next http.Handler) http.Handler {",
+      "\treturn func(next http.Handler) http.Handler {",
+      "\t\tfn := func(w http.ResponseWriter, r *http.Request) {",
+      "",
+      "\t\t\tctx := context.WithValue(r.Context(), ${3:CtxKey}, ${4:CtxValue})",
+      "\t\t\tnext.ServeHTTP(w, r.WithContext(ctx))",
+      "\t\t}",
+      "\t\treturn http.HandlerFunc(fn)",
+      "\t}",
+      "}"
+    ]
+  },
+
+  "testify suite": {
+    "prefix": ["tsu"],
+    "body": [
+      "import (",
+      "\t\"github.com/stretchr/testify/suite\"",
+      "\t\"testing\"",
+      ")",
+      "",
+      "func Test${1:Type}TestSuite(t *testing.T) {",
+      "\tsuite.Run(t, new(${1:Type}TestSuite))",
+      "}",
+      "",
+      "type ${1:Type}TestSuite struct {",
+      "\tsuite.Suite",
+      "\t${2}",
+      "\t// VariableThatShouldStartAtFive int",
+      "}",
+      "",
+      "func (s *${1:Type}TestSuite) SetupTest() {",
+      "\t// suite.VariableThatShouldStartAtFive = 5",
+      "}",
+      "",
+      "func (s *${1:Type}TestSuite) Test_something() {",
+      "\t// suite.Equal(suite.VariableThatShouldStartAtFive, 5)",
+      "}"
+    ],
+    "description": "table-driven tests < https://gist.github.com/namsral/04ee7c39064e2e53d1000c1a56d07d6f >"
+  },
+  "create type": {
+    "prefix": ["ct"],
+    "body": []
+  }
+}
