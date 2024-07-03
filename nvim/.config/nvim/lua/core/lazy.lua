@@ -29,7 +29,6 @@ require("lazy").setup({
     { import = "plugins" },
     { import = "plugins.coding" },
     { import = "plugins.editor" },
-    { import = "plugins.extras" },
     { import = "plugins.lsp" },
     { import = "plugins.ui" },
     { import = "plugins.util" },
@@ -37,7 +36,8 @@ require("lazy").setup({
     -- === Optional plugins. (Must place this at the end of spec) ===
 
     { import = "plugins.extras.dap" },
-    { import = "plugins.extras.gx" },
+    { import = "plugins.extras.note" },
+    { import = "plugins.extras.coding" },
 
     { import = "plugins.extras.lang.docker" },
     { import = "plugins.extras.lang.go" },
@@ -45,9 +45,6 @@ require("lazy").setup({
     { import = "plugins.extras.lang.markdown" },
     { import = "plugins.extras.lang.python" },
     { import = "plugins.extras.lang.java" },
-
-    { import = "plugins.extras.coding.compiler" },
-    { import = "plugins.extras.coding.dbt" },
 
     { import = "plugins.extras.ai.copilot" },
     { import = "plugins.extras.ai.chatgpt" },
