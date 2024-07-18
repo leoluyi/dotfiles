@@ -8,7 +8,6 @@ return {
   { 'tpope/vim-repeat' },   -- enable repeating supported plugin maps with '.'
   { 'tpope/vim-sensible' }, -- Defaults everyone can agree on
   { 'tpope/vim-surround' }, -- cs.., ds., ys.. . Provides mappings to easily delete, change and add such surroundings in pairs.
-  -- { "tpope/vim-unimpaired" },  -- Pairs of handy bracket mappings
 
   { 'Asheq/close-buffers.vim' },  -- Quickly close (bdelete) several buffers at once
   { 'dalance/vseq.vim' },  -- Generating sequential number vertically
