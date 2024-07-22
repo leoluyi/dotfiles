@@ -432,6 +432,8 @@ cask "stats"
 cask "sublime-text"
 # Application for inspecting installer packages
 cask "suspicious-package"
+# Interior design application
+cask "sweet-home3d"
 # Quicklook extension for source files
 cask "syntax-highlight"
 # Tool for liberating data tables trapped inside PDF files
@@ -446,6 +448,8 @@ cask "the-archive"
 cask "tiles"
 # Stopwatch, alarm clock, and clock utility
 cask "timer"
+# Charting and social-networking for investment traders
+cask "tradingview"
 # Open-source BitTorrent client
 cask "transmission"
 # Open-source code editor
