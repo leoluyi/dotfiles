@@ -123,7 +123,7 @@ command -v nnn >/dev/null \
   && export NNN_PLUG='p:preview-tui;f:finder;'
 
 # Astro.
-command -v astro >/dev/null && eval "$(astro completion bash | sed '0,/# bash completion/d')"
+command -v astro >/dev/null && eval "$(astro completion bash 2>/dev/null | sed '0,/# bash completion/d')"
 
 # Poetry.
 # https://python-poetry.org/docs/
