@@ -9,11 +9,12 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-      -- which key integration.
+      -- which-key integration.
       {
         "folke/which-key.nvim",
         optional = true,
         opts = {
+          mode = { "n", "x" },
           spec = {
             { "<leader>k", group = "Neotree" }
           },
@@ -155,11 +156,9 @@ return {
             modified  = "", -- or " ", but this is redundant info if you use git_status_colors on the name
             deleted   = "✘ ",-- this can only be used in the git_status source
             renamed   = " ",-- this can only be used in the git_status source
-            -- renamed = "» ",
 
             -- Status type.
             untracked = " ",
-            -- ignored   = " ",
             ignored = "◌ ",
             unstaged  = "󰄗 ",
             staged    = " ",

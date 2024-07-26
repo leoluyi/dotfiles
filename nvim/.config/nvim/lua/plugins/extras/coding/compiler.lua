@@ -6,7 +6,7 @@ return {
     dependencies = { "stevearc/overseer.nvim" },
     keys = {
       { "<leader>bb", "<cmd>CompilerOpen<cr>", desc = "[C]ompiler Open - [B]uild " },
-      { "<leader>kc", "<cmd>CompilerToggleResults<cr>", desc = "Toggle Build Results" },
+      -- { "<leader>kc", "<cmd>CompilerToggleResults<cr>", desc = "Toggle Build Results" },
     },
     config = function(_, opts)
       require("compiler").setup(opts)
