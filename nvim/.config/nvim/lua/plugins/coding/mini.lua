@@ -12,7 +12,8 @@ return {
       optional = true,
       opts = {
         spec = {
-          { "gs", group = "+mini-surround" }
+          mode = { "x", "v" },
+          { "gs", group = "mini-surround" }
         },
       },
     },

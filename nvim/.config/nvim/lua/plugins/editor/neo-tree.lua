@@ -13,12 +13,11 @@ return {
       {
         "folke/which-key.nvim",
         optional = true,
-        opts = function(_, opts)
-          if require("helpers.util").has("neo-tree.nvim") then
-            if opts.defaults == nil then opts.defaults = {} end
-            opts.defaults["<leader>k"] = { name = "+Neotree" }
-          end
-        end,
+        opts = {
+          spec = {
+            { "<leader>k", group = "Neotree" }
+          },
+        },
       },
     },
     keys = {

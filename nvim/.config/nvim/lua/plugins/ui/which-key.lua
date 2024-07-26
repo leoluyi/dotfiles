@@ -66,6 +66,7 @@ return {
       { "<leader>w", group = "Workspace" },
       { "<leader>x", group = "TroubleToggle" },
       { "<leader>y", group = "Yank" },
+      { "<leader>z", group = "zoom" },
     })
 
     wk.add({

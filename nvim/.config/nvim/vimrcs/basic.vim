@@ -1,4 +1,4 @@
-" vim: fdm=marker:fdl=1
+" vim: fdm=marker
 " Use zR to expand all foldings.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer:
@@ -45,11 +45,6 @@ cnoremap <C-n> <Down>
 
 " -> Moving around, tabs, windows and buffers {{{2
 "----------------------------
-
-""" Switch between buffers.
-" nnoremap <leader>b :ls<CR>:b<Space>
-nnoremap <leader><Tab> <C-^>
-nnoremap <C-6> <C-^>
 
 " Close all the buffers
 nnoremap <leader>ba :bufdo bd<cr>

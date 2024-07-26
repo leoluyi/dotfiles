@@ -8,6 +8,10 @@ local map = require("helpers.util").map
 -- Excape vim (use autocmds instead to exclude certain filetypes.)
 -- map({ "i", "x" }, "<C-c>", "<esc>", { desc = "Escape" })
 
+-- Switch between buffers.
+map({ "n", "x" }, "<leader><tab>", "<c-^>", { desc = "Switch between buffers" })
+map({ "n", "x" }, "<c-6>", "<c-^>", { desc = "Switch between buffers" })
+
 -- Quit all.
 map({ "n", "x" }, "<leader>qq", ":qa!", { desc = "Quit all", silent = false })
 map({ "n", "x" }, "<leader>ww", ":wa",  { desc = "Save all", silent = false })
