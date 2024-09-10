@@ -307,7 +307,7 @@ brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
 # Terminal utility for exploring and arranging tabular data
 brew "saulpw/vd/visidata"
-# Sdkman - The Software Development Kit Manager
+# SDKMAN! the Software Development Kit Manager
 brew "sdkman/tap/sdkman-cli"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
@@ -446,8 +446,6 @@ cask "temurin@17"
 cask "the-archive"
 # Window manager
 cask "tiles"
-# Stopwatch, alarm clock, and clock utility
-cask "timer"
 # Charting and social-networking for investment traders
 cask "tradingview"
 # Open-source BitTorrent client
