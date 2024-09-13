@@ -195,38 +195,6 @@ brew_install_cli() {
 }
 
 
-# install_tmux_awesome() {
-#   echo "$(tput setaf 2)###### Install Tmux Awesome ######$(tput sgr 0)"
-#
-#   # Install .tmux awesome
-#   if [ ! -d ~/.tmux ]; then
-#     git clone https://github.com/gpakosz/.tmux.git ~/.tmux
-#   else
-#     echo ".tmux awesome is already installed."
-#   fi
-#
-#   [ -f ~/.tmux/.tmux.conf ] && ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf
-#
-#   if [ "$1" == "-f" ] && [ -d ~/.tmux ]; then
-#     echo 'Upgrade ~/.tmux ...'
-#     pushd ~/.tmux && git pull --rebase
-#     popd || return
-#   fi
-#
-#   # Install Tmux Plugin Manager
-#   TPM="$HOME/.tmux/plugins/tpm"
-#   if [ ! -d "$TPM" ]; then
-#     echo "Installing tmux plugins manager ..."
-#     git clone https://github.com/tmux-plugins/tpm "$TPM"
-#   fi
-#
-#   # Install tmux plugins
-#   if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ]; then
-#     export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
-#     "$TPM"/bin/install_plugins
-#   fi
-# }
-
 install_go_completion() {
   echo "$(tput setaf 2)###### Install go-complete ######$(tput sgr 0)"
   command -v go >/dev/null \
@@ -263,7 +231,6 @@ install_homebrew
 command -v brew >/dev/null && brew bundle install --no-lock --file="${_SCRIPT_DIR}"/homebrew/Brewfile
 # command -v brew >/dev/null && xargs brew install < "${_SCRIPT_DIR}"/homebrew/leaves.txt
 
-install_pipx_packages
 install_alacritty_theme_switch
 install_go_completion
 post_insatll_config
@@ -272,7 +239,6 @@ unset \
   install_xcodecli \
   install_homebrew \
   install_alacritty_theme_switch \
-  install_pipx_packages \
   install_go_completion \
   post_insatll_config \
   &>/dev/null
