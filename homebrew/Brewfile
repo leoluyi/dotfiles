@@ -416,8 +416,6 @@ cask "quicklookase"
 cask "r"
 # Control your tools with a few keystrokes
 cask "raycast"
-# Detects which app receives a keyboard shortcut (hotkey)
-cask "shortcutdetective"
 # React client for Simplenote
 cask "simplenote"
 # Utility to resize and position application windows
