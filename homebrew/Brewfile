@@ -326,7 +326,7 @@ cask "background-music"
 # Desktop password and login vault
 cask "bitwarden"
 # Virtual Audio Driver
-cask "blackhole-2ch"
+cask "blackhole-16ch"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
 # Write, edit, and chat about your code with AI
@@ -416,6 +416,8 @@ cask "quicklookase"
 cask "r"
 # Control your tools with a few keystrokes
 cask "raycast"
+# Detects which app receives a keyboard shortcut (hotkey)
+cask "shortcutdetective"
 # React client for Simplenote
 cask "simplenote"
 # Utility to resize and position application windows
@@ -488,6 +490,7 @@ mas "Microsoft Remote Desktop", id: 1295203466
 mas "Movist", id: 461788075
 mas "Owlfiles", id: 510282524
 mas "Pomosh", id: 1515791898
+mas "Prodrafts", id: 1545810067
 mas "Quick Colour Picker", id: 1453741555
 mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
