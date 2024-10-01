@@ -69,7 +69,7 @@ command -v youtube-dl >/dev/null \
 command -v yt-dlp >/dev/null \
   && alias yt-dlp-mp4='yt-dlp -f "bestvideo[height<=1080][vcodec^=avc][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -S "res:1080,ext:mp4:m4a"' \
   && alias yt-dlp-formats='yt-dlp -F' \
-  && alias yt-dlp-m4a='yt-dlp -f "ba" -x --audio-format mpa' \
+  && alias yt-dlp-m4a='yt-dlp -f "ba" -x --audio-format m4a --embed-thumbnail' \
   && alias yt-dlp-playlist='yt-dlp -f "bestvideo[height<=1080][vcodec^=avc][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -S "res:1080,ext:mp4:m4a" --yes-playlist -o "%(playlist)s/%(playlist_index)s - %(title)s-%(id)s.%(ext)s" --embed-chapters' \
   2>/dev/null
 
