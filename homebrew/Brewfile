@@ -305,8 +305,6 @@ brew "jesseduffield/lazygit/lazygit"
 brew "koekeishiya/formulae/skhd"
 # A tiling window manager for macOS based on binary space partitioning.
 brew "koekeishiya/formulae/yabai"
-# Terminal utility for exploring and arranging tabular data
-brew "saulpw/vd/visidata"
 # SDKMAN! the Software Development Kit Manager
 brew "sdkman/tap/sdkman-cli"
 # Password manager that keeps all passwords secure behind one password
@@ -321,8 +319,6 @@ cask "alt-tab"
 cask "appcleaner"
 # Chromium based browser
 cask "arc"
-# Audio utility
-cask "background-music"
 # Desktop password and login vault
 cask "bitwarden"
 # Virtual Audio Driver
@@ -386,8 +382,6 @@ cask "mongodb-compass"
 # Re-mounts write-protected NTFS volumes
 cask "mounty"
 cask "mysides"
-# Open-source software for live streaming and screen recording
-cask "obs"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Finder Toolbar app to open the current directory in Editor
@@ -506,7 +500,6 @@ vscode "donjayamanne.githistory"
 vscode "eamodio.gitlens"
 vscode "editorconfig.editorconfig"
 vscode "fabiospampinato.vscode-open-in-finder"
-vscode "fivetran.dbt-language-server"
 vscode "formulahendry.auto-close-tag"
 vscode "formulahendry.code-runner"
 vscode "github.copilot"
