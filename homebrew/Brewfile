@@ -375,6 +375,7 @@ cask "keka"
 cask "keyboardcleantool"
 # Open-source keystroke visualiser
 cask "keycastr"
+# Provides updates to various Microsoft products
 # Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
 # Interactive tool for analyzing MongoDB data
@@ -480,7 +481,6 @@ mas "iPreview", id: 1519213509
 mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
 mas "Messenger", id: 1480068668
-mas "Microsoft Remote Desktop", id: 1295203466
 mas "Movist", id: 461788075
 mas "Owlfiles", id: 510282524
 mas "Pomosh", id: 1515791898
@@ -490,6 +490,7 @@ mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
 mas "Todoist", id: 585829637
 mas "WeChat", id: 836500024
+mas "Windows App", id: 1295203466
 mas "Xnip", id: 1221250572
 mas "簡約錄音機", id: 989175722
 vscode "alexeyvax.vscode-open-native-terminal"
@@ -553,6 +554,7 @@ vscode "vittorioromeo.expand-selection-to-scope"
 vscode "vivaxy.vscode-conventional-commits"
 vscode "vmware.vscode-boot-dev-pack"
 vscode "vmware.vscode-spring-boot"
+vscode "vscjava.vscode-gradle"
 vscode "vscjava.vscode-java-debug"
 vscode "vscjava.vscode-java-dependency"
 vscode "vscjava.vscode-java-pack"
