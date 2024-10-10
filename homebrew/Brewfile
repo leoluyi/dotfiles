@@ -295,8 +295,6 @@ brew "coursier/formulas/coursier"
 brew "eddieantonio/eddieantonio/imgcat"
 # FlyteCtl is a command line tool to interact with a Flyte cluster.
 brew "flyteorg/tap/flytectl"
-# Everything you need to get started with Heroku
-brew "heroku/brew/heroku"
 # Oracle Instant Client Basic Lite x64
 brew "instantclienttap/instantclient/instantclient-basiclite"
 # A simple terminal UI for git commands, written in Go
