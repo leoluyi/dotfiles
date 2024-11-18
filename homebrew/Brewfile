@@ -19,6 +19,10 @@ tap "sdkman/tap"
 tap "ubuntu/microk8s"
 # Search tool like grep, but optimized for programmers
 brew "ack"
+# OpenType text shaping engine
+brew "harfbuzz"
+# Development kit for the Java programming language
+brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
 # Download with resuming and segmented downloading
@@ -75,8 +79,14 @@ brew "eza"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg@6"
 # Banner-like program prints strings as ASCII art
 brew "figlet"
 # Collection of GNU find, xargs, and locate
@@ -107,16 +117,22 @@ brew "gnu-indent"
 brew "gnu-tar"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
 # Generate introspection data for GObject libraries
 brew "gobject-introspection"
 # Terminal based graphical activity monitor inspired by gtop and vtop
 brew "gotop"
+# ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
+brew "libheif"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # GNU grep, egrep and fgrep
 brew "grep"
 # GitHub Markdown previewer
 brew "grip"
+# Toolkit for creating graphical user interfaces
+brew "gtk4"
 # Kubernetes package manager
 brew "helm"
 # Convert source code to formatted text with syntax highlighting
@@ -155,6 +171,8 @@ brew "lazydocker"
 brew "lf"
 # Implementation of the file(1) command
 brew "libmagic"
+# Shared library for mediainfo
+brew "libmediainfo"
 # Library for SVG files
 brew "libsvg"
 # CLI for the Linode API
@@ -205,6 +223,10 @@ brew "pipx"
 brew "plowshare"
 # Tool for managing OCI containers and pods
 brew "podman"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Cross-platform application and UI framework
+brew "qt@5"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler-qt5"
 # Monitor data's progress through a pipe
@@ -357,8 +379,6 @@ cask "hot"
 cask "iina"
 # Markdown editor
 cask "inkdrop"
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2"
 # Menu bar calendar
 cask "itsycal"
 # Menu bar manager
@@ -415,10 +435,6 @@ cask "shortcutdetective"
 cask "simplenote"
 # Utility to resize and position application windows
 cask "sizeup"
-# Video chat, voice call and instant messaging application
-cask "skype"
-# Graphical client for Git version control
-cask "sourcetree"
 # Music streaming service
 cask "spotify"
 # Create, edit, browse SQLite databases
