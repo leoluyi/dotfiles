@@ -55,7 +55,6 @@ return {
         "markdown_inline",
         "python",
         "query",
-        "r",
         "regex",
         "rst",
         "rust",
