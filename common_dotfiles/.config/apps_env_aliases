@@ -111,10 +111,18 @@ command -v peaclock >/dev/null \
 command -v zoxide >/dev/null \
   && eval "$(zoxide init bash)"
 
+# homebrew.
+[ -d "$HOME"/.dotfiles/homebrew/ ] \
+  && alias brew-dump-leaves='brew leaves > "$HOME"/.dotfiles/homebrew/leaves.txt'
+
+# linuxbrew.
+[ -x "$HOME/.linuxbrew/bin/brew" ] && eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
+[ -x /home/linuxbrew/.linuxbrew/bin/brew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # ============ Apps env ============ {{{2
 
-# ImageMagick.
-export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
+# ImageMagick. --- WARN: Slow??
+# export DYLD_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:$DYLD_LIBRARY_PATH"
 
 # nnn.
 command -v nnn >/dev/null \
@@ -123,7 +131,7 @@ command -v nnn >/dev/null \
   && export NNN_PLUG='p:preview-tui;f:finder;'
 
 # Astro.
-command -v astro >/dev/null && eval "$(astro completion bash 2>/dev/null | sed '0,/# bash completion/d')"
+# command -v astro >/dev/null && eval "$(astro completion bash 2>/dev/null | sed '0,/# bash completion/d')"
 
 # Poetry.
 # https://python-poetry.org/docs/
@@ -225,14 +233,6 @@ if command -v diff-so-fancy >/dev/null; then
   }
 fi
 
-# homebrew.
-[ -d "$HOME"/.dotfiles/homebrew/ ] \
-  && alias brew-dump-leaves='brew leaves > "$HOME"/.dotfiles/homebrew/leaves.txt'
-
-# linuxbrew.
-[ -x "$HOME/.linuxbrew/bin/brew" ] && eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
-[ -x /home/linuxbrew/.linuxbrew/bin/brew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 # MS-SQL.
 export PATH="$PATH:/opt/mssql-tools/bin"
 
@@ -262,9 +262,9 @@ unset _os_name
 # ============ Completions ============ {{{2
 
 # pipx.
-if command -v register-python-argcomplete >/dev/null && command -v pipx >/dev/null; then
-  eval "$(register-python-argcomplete pipx 2>/dev/null)"
-fi
+# if command -v register-python-argcomplete >/dev/null && command -v pipx >/dev/null; then
+#   eval "$(register-python-argcomplete pipx 2>/dev/null)"
+# fi
 
 # pipenv.
 # https://pipenv.pypa.io/en/latest/advanced/#shell-completion
