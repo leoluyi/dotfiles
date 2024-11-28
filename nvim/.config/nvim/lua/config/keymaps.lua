@@ -141,7 +141,7 @@ map({ "n", "x" }, "<localleader>P", '"0P', { desc = "Paste from yacked register"
 -- """ Yank to clipboard
 map({ "n", "x" }, "<localleader>y",  '"+y',  { desc = "(clipboard) Yank" })
 map({ "n", "x" }, "<localleader>yy", '"+yy', { desc = "(clipboard) Yank line" })
-map({ "n", "x" }, "<localleader>Y$", '"+y$', { desc = "(clipboard) Yank to the end" })
+map({ "n", "x" }, "<localleader>Y",  '"+y$', { desc = "(clipboard) Yank to the end" })
 
 -- Code editing stuffs ============================================================{{{2
 

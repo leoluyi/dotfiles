@@ -63,7 +63,7 @@ return {
   {
     'mbbill/undotree',
     keys = {
-      { "<leader>U", ":UndotreeToggle<CR>", desc = "Undotree toggle" },
+      { "<leader>uu", ":UndotreeToggle<CR>", desc = "Undotree toggle" },
     },
   },
   { 'mg979/vim-visual-multi', branch = 'master' },  -- Multiple cursors plugin for vim/neovim

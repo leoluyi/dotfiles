@@ -46,9 +46,10 @@ require("lazy").setup({
     { import = "plugins.extras.lang.python" },
     { import = "plugins.extras.lang.java" },
 
-    { import = "plugins.extras.ai.copilot" },
-    { import = "plugins.extras.ai.chatgpt" },
-    { import = "plugins.extras.ai.copilotchat" },
+    { import = "plugins.extras.ai.avante" },
+    -- { import = "plugins.extras.ai.copilot" },
+    -- { import = "plugins.extras.ai.chatgpt" },
+    -- { import = "plugins.extras.ai.copilotchat" },
     -- { import = "plugins.extras.ai.codeium" },
   },
   defaults = {
