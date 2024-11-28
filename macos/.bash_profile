@@ -138,6 +138,13 @@ for file in "$HOME"/.config/{bash/*,*aliases*,*env,path,bash_prompt,exports,util
   [ -f "$file" ] && [ -r "$file" ] && source "$file";
 done;
 
+# Load secrets.
+if [ -d "$HOME/.secrets" ]; then
+  for secret in "$HOME"/.secrets/*; do
+    [ -f "$secret" ] && [ -r "$secret" ] && source "$secret"
+  done
+fi
+
 # ============ Footer ============
 # Set locale to fix ssh forwarding problem.
 # https://askubuntu.com/a/144448

@@ -66,7 +66,7 @@ map({ "n", "x" }, "j", "v:count <= 1 ? 'gj' : 'm''' . v:count . 'j'", { desc = "
 map({ "n", "x" }, "k", "v:count <= 1 ? 'gk' : 'm''' . v:count . 'k'", { desc = "Up",   expr = true, silent = true })
 
 -- save file
-map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file", silent = false })
+map({ "n", "x" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file", silent = false })
 
 -- better indenting
 map("v", "<", "<gv")
