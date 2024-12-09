@@ -173,29 +173,29 @@ map("v", "<localleader>>",  ":<C-u>norm!`>a><esc>`<i<<esc>f>", { desc = "(surrou
 -- windows, tabs, buffers ========================================================={{{2
 
 -- Make adjusing split sizes a bit more friendly.
-map("n", "<c-s-left>",  "<cmd>vertical resize -2<cr>", { desc = "Resize left" })
-map("n", "<c-s-right>", "<cmd>vertical resize +2<cr>", { desc = "Resize right" })
-map("n", "<c-s-up>",    "<cmd>resize   +2<cr>", { desc = "Resize up" })
-map("n", "<c-s-down>",  "<cmd>resize   -2<cr>", { desc = "Resize down" })
+map("n", "<c-s-left>",  "<cmd>vertical resize -2<cr>", { desc = "window increase width" })
+map("n", "<c-s-right>", "<cmd>vertical resize +2<cr>", { desc = "window decrease width" })
+map("n", "<c-s-up>",    "<cmd>resize   +2<cr>", { desc = "window increase hight" })
+map("n", "<c-s-down>",  "<cmd>resize   -2<cr>", { desc = "window decrease hight" })
 
-map("n", "<leader>w<left>",  "<cmd>vertical resize -2<cr>", { desc = "Resize left" })
-map("n", "<leader>w<right>", "<cmd>vertical resize +2<cr>", { desc = "Resize right" })
-map("n", "<leader>w<up>",    "<cmd>resize   +2<cr>", { desc = "Resize up" })
-map("n", "<leader>w<down>",  "<cmd>resize   -2<cr>", { desc = "Resize down" })
+map("n", "<leader>w<left>",  "<cmd>vertical resize -2<cr>", { desc = "window increase width" })
+map("n", "<leader>w<right>", "<cmd>vertical resize +2<cr>", { desc = "window decrease width" })
+map("n", "<leader>w<up>",    "<cmd>resize   +2<cr>",        { desc = "window increase hight" })
+map("n", "<leader>w<down>",  "<cmd>resize   -2<cr>",        { desc = "window decrease hight" })
 
 -- Move between windows.
-map("n", "<c-h>", "<c-w>h", { desc = "Move left" })
-map("n", "<c-l>", "<c-w>l", { desc = "Move right" })
+map("n", "<c-h>", "<c-w>h", { desc = "window move left" })
+map("n", "<c-l>", "<c-w>l", { desc = "window move right" })
 -- map("n", "<c-j>", "<c-w>j", { desc = "Move down" })
 -- map("n", "<c-k>", "<c-w>k", { desc = "Move up" })
 
 -- Rotate windows.
-map("n", "<leader>wh", "<c-w>t<c-w>H", { desc = "Window [H]orizontal rotate" })
-map("n", "<leader>wk", "<c-w>t<c-w>K", { desc = "Window Vertical rotate" })
-map("n", "<leader>ws", "<c-w>r", { desc = "Window [S]wap" })
+map("n", "<leader>wh", "<c-w>t<c-w>H", { desc = "window [H]orizontal rotate" })
+map("n", "<leader>wk", "<c-w>t<c-w>K", { desc = "window Vertical rotate" })
+map("n", "<leader>ws", "<c-w>r", { desc = "window [S]wap" })
 
 -- Resize windows.
-map("n", "<leader>w=", "<c-w>=", { desc = "Window even size" })
+map("n", "<leader>w=", "<c-w>=", { desc = "window even size" })
 
 -- Zoom a window in and out.
 map("n", "<leader>zz", "<c-w>_ | <c-w>|", { desc = "Zoom window in" })

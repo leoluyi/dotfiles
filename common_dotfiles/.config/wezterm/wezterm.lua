@@ -20,11 +20,18 @@ return {
   -- window_background_opacity = 0.20,
   window_decorations = "RESIZE",
   keys = {
-    {
-      key = "Enter",
-      mods = "CMD",
-      action = wezterm.action.ToggleFullScreen,
-    },
+    { key = "Enter", mods = "CMD", action = wezterm.action.ToggleFullScreen, },
+
+    -- Disable defaults.
+    -- $ wezterm show-keys --lua | grep -E '(LeftArrow|RightArrow|keys|key_tables|mode)'
+	{ key = "LeftArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "LeftArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "RightArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "RightArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "UpArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "UpArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "DownArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "DownArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
   },
   mouse_bindings = {
     -- < https://github.com/wez/wezterm/issues/119#issuecomment-1206593847 >
