@@ -34,6 +34,7 @@ return {
 	{ key = "DownArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
 	{ key = "DownArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
     { key = "t", mods = "CMD|ALT", action = wezterm.action_callback(function(window, pane) helpers.theme_switcher(window, pane) end) },
+    { key = 'y', mods = 'CMD|ALT', action = wezterm.action.EmitEvent 'toggle-colorscheme' },
   },
   mouse_bindings = {
     -- < https://github.com/wez/wezterm/issues/119#issuecomment-1206593847 >

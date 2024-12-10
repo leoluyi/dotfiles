@@ -10,6 +10,13 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
   && alias alacritty-theme-dark='sed -i "s#\(.\+/themes/\)[^.]\+\([.]toml\)#\1everforest_dark_hard\2#; s#^opacity =.\+\$#opacity = 0.95#" $HOME/.config/alacritty/alacritty.toml && unset theme' \
   && alias alacritty-theme-light='sed -i "s#\(.\+/themes/\)[^.]\+\([.]toml\)#\1rose-pine-dawn\2#; s#^opacity =.\+\$#opacity = 1.0#" $HOME/.config/alacritty/alacritty.toml && export theme=light'
 
+# Alacritty theme.
+# (command -v alacritty-colorscheme >/dev/null) \
+#   && alias light='alacritty-colorscheme -c $HOME/.alacritty.yml -t PaperColor.yaml' \
+#   && alias dark='alacritty-colorscheme -c $HOME/.alacritty.yml -t gruvbox.yaml' \
+#   && alias colorlist='alacritty-colorscheme -c $HOME/.alacritty.yml -l' \
+#   && alias colorapply='alacritty-colorscheme -c $HOME/.alacritty.yml -a'
+
 # golang.
 command -v go >/dev/null \
   && alias go-mod-example='go mod init example.com/m'
@@ -72,13 +79,6 @@ command -v yt-dlp >/dev/null \
   && alias yt-dlp-m4a='yt-dlp -f "ba" -x --audio-format m4a --embed-thumbnail' \
   && alias yt-dlp-playlist='yt-dlp -f "bestvideo[height<=1080][vcodec^=avc][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -S "res:1080,ext:mp4:m4a" --yes-playlist -o "%(playlist)s/%(playlist_index)s - %(title)s-%(id)s.%(ext)s" --embed-chapters' \
   2>/dev/null
-
-# Alacritty theme.
-(command -v alacritty-colorscheme >/dev/null) \
-  && alias light='alacritty-colorscheme -c $HOME/.alacritty.yml -t PaperColor.yaml' \
-  && alias dark='alacritty-colorscheme -c $HOME/.alacritty.yml -t gruvbox.yaml' \
-  && alias colorlist='alacritty-colorscheme -c $HOME/.alacritty.yml -l' \
-  && alias colorapply='alacritty-colorscheme -c $HOME/.alacritty.yml -a'
 
 # tmux.
 command -v tmux >/dev/null \

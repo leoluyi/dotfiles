@@ -8,9 +8,12 @@ local M = {}
 wezterm.on('toggle-colorscheme', function(window, pane)
   local overrides = window:get_config_overrides() or {}
   if not overrides.color_scheme then
-    overrides.color_scheme = 'Builtin Solarized Light'
+    -- overrides.color_scheme = "PaperColor Light (base16)"
+    overrides.color_scheme = "Papercolor Light (Gogh)"
+    overrides.window_background_opacity = 0.95
   else
     overrides.color_scheme = nil
+    overrides.window_background_opacity = nil
   end
   window:set_config_overrides(overrides)
 end)
