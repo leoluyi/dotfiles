@@ -10,13 +10,6 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
   && alias alacritty-theme-dark='sed -i "s#\(.\+/themes/\)[^.]\+\([.]toml\)#\1everforest_dark_hard\2#; s#^opacity =.\+\$#opacity = 0.95#" $HOME/.config/alacritty/alacritty.toml && unset theme' \
   && alias alacritty-theme-light='sed -i "s#\(.\+/themes/\)[^.]\+\([.]toml\)#\1rose-pine-dawn\2#; s#^opacity =.\+\$#opacity = 1.0#" $HOME/.config/alacritty/alacritty.toml && export theme=light'
 
-# Alacritty theme.
-# (command -v alacritty-colorscheme >/dev/null) \
-#   && alias light='alacritty-colorscheme -c $HOME/.alacritty.yml -t PaperColor.yaml' \
-#   && alias dark='alacritty-colorscheme -c $HOME/.alacritty.yml -t gruvbox.yaml' \
-#   && alias colorlist='alacritty-colorscheme -c $HOME/.alacritty.yml -l' \
-#   && alias colorapply='alacritty-colorscheme -c $HOME/.alacritty.yml -a'
-
 # golang.
 command -v go >/dev/null \
   && alias go-mod-example='go mod init example.com/m'
