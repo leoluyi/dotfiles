@@ -14,11 +14,9 @@ return {
           -- formatters.
           "stylua",
           "prettier",
-          "black",
-          "isort",
           "shfmt",
           -- linters.
-          "flake8",
+          "ruff",
           "yamllint",
         }
       },

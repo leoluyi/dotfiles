@@ -4,13 +4,18 @@ return {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<localleader>f", function()
-        require("conform").format({
-          lsp_fallback = true,
-          async = false,
-          timeout_ms = 1000,
-        })
-      end, mode = { "n", "x" }, desc = "Format file or range (in visual mode)" },
+      {
+        "<localleader>f",
+        function()
+          require("conform").format({
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 1000,
+          })
+        end,
+        mode = { "n", "x" },
+        desc = "Format file or range (in visual mode)",
+      },
     },
     opts = {
       formatters_by_ft = {
@@ -23,16 +28,16 @@ return {
             return { "isort", "black" }
           end
         end,
-        javascript = { { "prettierd", "prettier" } },
-        typescript = { { "prettierd", "prettier" } },
-        javascriptreact = { { "prettierd", "prettier" } },
-        typescriptreact = { { "prettierd", "prettier" } },
-        json = { { "prettierd", "prettier" } },
-        graphql = { { "prettierd", "prettier" } },
+        javascript = { "prettierd", "prettier", stop_after_first = true },
+        typescript = { "prettierd", "prettier", stop_after_first = true },
+        javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+        typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+        json = { "prettierd", "prettier", stop_after_first = true },
+        graphql = { "prettierd", "prettier", stop_after_first = true },
         java = { "google-java-format" },
         kotlin = { "ktlint" },
         ruby = { "standardrb" },
-        markdown = { { "prettierd", "prettier" } },
+        markdown = { "prettierd", "prettier", stop_after_first = true },
         erb = { "htmlbeautifier" },
         html = { "htmlbeautifier" },
         bash = { "beautysh" },
@@ -40,12 +45,15 @@ return {
         rust = { "rustfmt" },
         yaml = { "yamlfix" },
         toml = { "taplo" },
-        css = { { "prettierd", "prettier" } },
-        scss = { { "prettierd", "prettier" } },
-        sh = { { "shfmt" } },
+        css = { "prettierd", "prettier", stop_after_first = true },
+        scss = { "prettierd", "prettier", stop_after_first = true },
+        sh = { "shfmt" },
       },
 
       formatters = {
+        stylua = {
+          prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+        },
         black = {
           args = {
             "--quiet",
@@ -57,9 +65,8 @@ return {
         },
         shfmt = {
           prepend_args = { "-i", "2" },
-        }
+        },
       },
-
     },
   },
 }

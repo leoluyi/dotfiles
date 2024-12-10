@@ -1,7 +1,19 @@
+-- https://www.reddit.com/r/wezterm/comments/1bbq6ro/i_implemented_a_theme_switcher/
 local wezterm = require("wezterm")
 local act = wezterm.action
 
 local M = {}
+
+-- https://github.com/wez/wezterm/issues/4429
+wezterm.on('toggle-colorscheme', function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  if not overrides.color_scheme then
+    overrides.color_scheme = 'Builtin Solarized Light'
+  else
+    overrides.color_scheme = nil
+  end
+  window:set_config_overrides(overrides)
+end)
 
 M.theme_switcher = function(window, pane)
   -- get builting color schemes
