@@ -291,6 +291,8 @@ brew "tmux"
 brew "tree"
 # Digital clock in ncurses
 brew "tty-clock"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
 # Vi 'workalike' with many additional features
 brew "vim"
 # Executes a program periodically, showing output fullscreen
@@ -327,8 +329,6 @@ brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
 # SDKMAN! the Software Development Kit Manager
 brew "sdkman/tap/sdkman-cli"
-+# Extremely fast Python package installer and resolver, written in Rust
-+brew "uv"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password

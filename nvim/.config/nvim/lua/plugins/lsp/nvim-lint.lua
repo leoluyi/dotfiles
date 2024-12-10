@@ -19,18 +19,18 @@ return {
 
       -- Linger configs.
       -- < https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters >
-      linters.ruff.args = {
-        "check",
-        "--force-exclude",
-        "--quiet",
-        "--stdin-filename",
-        "--ignore=E309,E402,E501,E702,W291,W293,W391,W503",
-        get_file_name,
-        "--no-fix",
-        "--output-format",
-        "json",
-        "-",
-      }
+      -- linters.ruff.args = {
+      --   "check",
+      --   "--force-exclude",
+      --   "--quiet",
+      --   "--stdin-filename",
+      --   "--ignore=E309,E402,E501,E702,W291,W293,W391,W503",
+      --   get_file_name,
+      --   "--no-fix",
+      --   "--output-format",
+      --   "json",
+      --   "-",
+      -- }
 
       -- linters.flake8.args = {
       --   "--format=%(path)s:%(row)d:%(col)d:%(code)s:%(text)s",
