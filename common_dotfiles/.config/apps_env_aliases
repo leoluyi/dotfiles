@@ -5,6 +5,9 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 # ============ Aliases ============ {{{2
 
+alias theme-light='export theme=light'
+alias theme-dark='export theme=dark'
+
 # Alacritty.
 [ -f "$HOME/.config/alacritty/alacritty.toml" ] \
   && alias alacritty-theme-dark='sed -i "s#\(.\+/themes/\)[^.]\+\([.]toml\)#\1everforest_dark_hard\2#; s#^opacity =.\+\$#opacity = 0.95#" $HOME/.config/alacritty/alacritty.toml && unset theme' \

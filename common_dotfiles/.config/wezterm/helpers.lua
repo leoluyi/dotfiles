@@ -9,8 +9,8 @@ wezterm.on('toggle-colorscheme', function(window, pane)
   local overrides = window:get_config_overrides() or {}
   if not overrides.color_scheme then
     -- overrides.color_scheme = "PaperColor Light (base16)"
-    overrides.color_scheme = "Papercolor Light (Gogh)"
-    overrides.window_background_opacity = 0.95
+    overrides.color_scheme = "rose-pine-dawn"
+    overrides.window_background_opacity = 0.97
   else
     overrides.color_scheme = nil
     overrides.window_background_opacity = nil
