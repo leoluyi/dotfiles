@@ -1,7 +1,8 @@
 -- < https://github.com/omerxx/dotfiles/blob/master/wezterm/wezterm.lua >
-local wezterm = require "wezterm"
+local wezterm = require("wezterm")
+local helpers = require("helpers")
+
 return {
-  -- color_scheme = 'termnial.sexy',
   color_scheme = "Catppuccin Mocha",
   enable_tab_bar = false,
   font_size = 16.0,
@@ -32,6 +33,7 @@ return {
 	{ key = "UpArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
 	{ key = "DownArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
 	{ key = "DownArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+    { key = "k", mods = "CMD|ALT", action = wezterm.action_callback(function(window, pane) helpers.theme_switcher(window, pane) end) },
   },
   mouse_bindings = {
     -- < https://github.com/wez/wezterm/issues/119#issuecomment-1206593847 >
