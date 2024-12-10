@@ -16,7 +16,7 @@ return {
         "json-lsp",
         "lua-language-server",
         "pyright",
-        "ruff-lsp",
+        "ruff",
         "sqlls",
         "tailwindcss-language-server",
         "taplo",  -- TOML

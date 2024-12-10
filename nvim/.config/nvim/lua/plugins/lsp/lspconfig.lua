@@ -179,24 +179,30 @@ return {
         },
       })
 
-      lspconfig.pyright.setup({
+      lspconfig.ruff.setup({
         on_attach = lsp_attach,
         capabilities = capabilities,
         root_dir = util.root_pattern(".git", "setup.py", "Pipfile", "Pipfile.lock", "pyproject.toml"),
-        settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              diagnosticMode = "workspace",
-              useLibraryCodeForTypes = true,
-              typeCheckingMode = false,
-            }
-          }
-        },
-        on_init = function(client)
-          client.config.settings.python.pythonPath = lsp_util.get_python_path(client.config.root_dir)
-        end,
       })
+
+      -- lspconfig.pyright.setup({
+      --   on_attach = lsp_attach,
+      --   capabilities = capabilities,
+      --   root_dir = util.root_pattern(".git", "setup.py", "Pipfile", "Pipfile.lock", "pyproject.toml"),
+      --   settings = {
+      --     python = {
+      --       analysis = {
+      --         autoSearchPaths = true,
+      --         diagnosticMode = "workspace",
+      --         useLibraryCodeForTypes = true,
+      --         typeCheckingMode = false,
+      --       }
+      --     }
+      --   },
+      --   on_init = function(client)
+      --     client.config.settings.python.pythonPath = lsp_util.get_python_path(client.config.root_dir)
+      --   end,
+      -- })
 
       lspconfig.jsonls.setup({
         on_attach = lsp_attach,

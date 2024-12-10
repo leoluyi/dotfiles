@@ -4,7 +4,7 @@ return {
   {
     "mfussenegger/nvim-lint",
     enabled = true,
-    event = { "BufReadPre", "BufNewFile" }, -- Load on buffer read/new
+    events = { "BufWritePost", "BufReadPost", "InsertLeave" },
     config = function()
       local lint = require("lint")
       local linters = lint.linters
