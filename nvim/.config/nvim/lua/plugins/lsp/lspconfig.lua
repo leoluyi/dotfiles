@@ -179,6 +179,7 @@ return {
         },
       })
 
+      -- < https://docs.astral.sh/ruff/editors/setup/ >
       lspconfig.ruff.setup({
         on_attach = lsp_attach,
         capabilities = capabilities,
@@ -190,14 +191,24 @@ return {
         capabilities = capabilities,
         root_dir = util.root_pattern(".git", "setup.py", "Pipfile", "Pipfile.lock", "pyproject.toml"),
         settings = {
+          pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+          },
           python = {
             analysis = {
-              autoSearchPaths = true,
-              diagnosticMode = "workspace",
-              useLibraryCodeForTypes = true,
-              typeCheckingMode = false,
-            }
-          }
+              -- Ignore all files for analysis to exclusively use Ruff for linting
+              ignore = { '*' },
+            },
+          },
+          -- python = {
+          --   analysis = {
+          --     autoSearchPaths = true,
+          --     diagnosticMode = "workspace",
+          --     useLibraryCodeForTypes = true,
+          --     typeCheckingMode = false,
+          --   }
+          -- }
         },
         on_init = function(client)
           client.config.settings.python.pythonPath = lsp_util.get_python_path(client.config.root_dir)
