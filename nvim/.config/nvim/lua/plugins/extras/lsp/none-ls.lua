@@ -16,8 +16,6 @@ return {
           "prettier",
           "shfmt",
           -- linters.
-          "ruff",
-          "flake8",
           "yamllint",
         }
       },

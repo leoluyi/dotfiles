@@ -9,6 +9,7 @@ return {
       -- https://mason-registry.dev/registry/list
       -- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
       ensure_installed = {
+        -- LSP.
         "bash-language-server",
         "buf-language-server",  -- Protobuf
         "golangci-lint-langserver",
@@ -16,13 +17,16 @@ return {
         "json-lsp",
         "lua-language-server",
         "pyright",
-        "ruff",
         "sqlls",
         "tailwindcss-language-server",
-        "taplo",  -- TOML
         "typescript-language-server",
         "vim-language-server",
         "yaml-language-server",
+
+        -- Linters, Formatters.
+        "flake8",
+        "ruff",
+        "taplo",  -- TOML
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
