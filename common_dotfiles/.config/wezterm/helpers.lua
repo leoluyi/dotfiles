@@ -1,11 +1,10 @@
--- https://www.reddit.com/r/wezterm/comments/1bbq6ro/i_implemented_a_theme_switcher/
 local wezterm = require("wezterm")
 local act = wezterm.action
 
 local M = {}
 
 -- https://github.com/wez/wezterm/issues/4429
-wezterm.on('toggle-colorscheme', function(window, pane)
+wezterm.on("toggle-colorscheme", function(window, pane)
   local overrides = window:get_config_overrides() or {}
   if not overrides.color_scheme then
     -- overrides.color_scheme = "PaperColor Light (base16)"
@@ -18,6 +17,7 @@ wezterm.on('toggle-colorscheme', function(window, pane)
   window:set_config_overrides(overrides)
 end)
 
+-- https://www.reddit.com/r/wezterm/comments/1bbq6ro/i_implemented_a_theme_switcher/
 M.theme_switcher = function(window, pane)
   -- get builting color schemes
   local schemes = wezterm.get_builtin_color_schemes()
@@ -42,18 +42,11 @@ M.theme_switcher = function(window, pane)
 
       -- execute 'sed' shell command to replace the line
       -- responsible of colorscheme in my config
-      action = wezterm.action_callback(function(inner_window, inner_pane, _, label)
-        inner_window:perform_action(
-          act.SpawnCommandInNewTab({
-            args = {
-              "sed",
-              "-i",
-              "'s/color_scheme.*$/color_scheme = \"" .. label .. "\"/'",
-              config_path,
-            },
-          }),
-          inner_pane
-        )
+      action = wezterm.action_callback(function(inner_window, _, _, label)
+        local overrides = inner_window:get_config_overrides() or {}
+        overrides.color_scheme = label
+        overrides.window_background_opacity = 0.90
+        inner_window:set_config_overrides(overrides)
       end),
     }),
     pane
