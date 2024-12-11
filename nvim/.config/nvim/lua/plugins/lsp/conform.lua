@@ -19,11 +19,25 @@ return {
       },
     },
     opts = {
-      format_on_save = {
-        -- I recommend these options. See :help conform.format for details.
-        lsp_format = "fallback",
-        timeout_ms = 500,
-      },
+      format_on_save = function(bufnr)
+        local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+        if
+          vim.tbl_contains({
+            "python",
+            "lua",
+            "java",
+            "javascript",
+          }, ft)
+        then
+          return {
+            -- I recommend these options. See :help conform.format for details.
+            lsp_format = "fallback",
+            timeout_ms = 500,
+          }
+        else
+          return nil
+        end
+      end,
 
       formatters_by_ft = {
         lua = { "stylua" },
@@ -44,6 +58,7 @@ return {
         java = { "google-java-format" },
         kotlin = { "ktlint" },
         ruby = { "standardrb" },
+        makefile = { "checkmake" },
         markdown = { "prettierd", "prettier", stop_after_first = true },
         erb = { "htmlbeautifier" },
         html = { "htmlbeautifier" },

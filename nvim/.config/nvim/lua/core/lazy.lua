@@ -46,8 +46,6 @@ require("lazy").setup({
     { import = "plugins.extras.lang.python" },
     { import = "plugins.extras.lang.java" },
 
-    { import = "plugins.extras.lsp.none-ls" },
-
     { import = "plugins.extras.ai.avante" },
     -- { import = "plugins.extras.ai.copilot" },
     -- { import = "plugins.extras.ai.chatgpt" },
@@ -61,7 +59,7 @@ require("lazy").setup({
   },
   install = {
     -- try to load one of these colorschemes when starting an installation during startup
-    colorscheme = { "habamax" }
+    colorscheme = { "habamax" },
   },
   checker = { enabled = false }, -- automatically check for plugin updates
   performance = {

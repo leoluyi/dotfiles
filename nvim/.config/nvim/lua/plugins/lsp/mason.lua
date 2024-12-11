@@ -11,7 +11,7 @@ return {
       ensure_installed = {
         -- LSP.
         "bash-language-server",
-        "buf-language-server",  -- Protobuf
+        "buf-language-server", -- Protobuf
         "golangci-lint-langserver",
         "gopls",
         "json-lsp",
@@ -24,9 +24,10 @@ return {
         "yaml-language-server",
 
         -- Linters, Formatters.
+        "checkmake",
         "flake8",
         "ruff",
-        "taplo",  -- TOML
+        "taplo", -- TOML
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
