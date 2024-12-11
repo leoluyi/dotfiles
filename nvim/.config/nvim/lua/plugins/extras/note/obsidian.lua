@@ -8,7 +8,7 @@ return {
   {
     -- < https://github.com/epwalsh/obsidian.nvim >
     "epwalsh/obsidian.nvim",
-    version = "*",  -- recommended, use latest release instead of latest commit
+    version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
     ft = "markdown",
     dependencies = {
@@ -33,13 +33,15 @@ return {
       --     "find_command = { 'fd', '--type', 'f', '--extension', 'md' }," ..
       --     -- "additional_args = function(opts) return { '--extension', 'md' } end," ..
       --     "})<cr>", desc = "Search Notes" },
-      { "<leader>og", "<cmd>lua require('telescope.builtin').live_grep({" ..
-          "additional_args = function(opts) return { '--glob', '*.md' } end" ..
-          "search_dirs = {'/Users/leoluyi/Dropbox/_notes-vault'}," ..
-          "prompt_title = '  Live Grep (Obsidian)', layout_strategy = 'vertical'," ..
-          "layout_config = { height = 0.95, preview_cutoff = 1, mirror = true } })<cr>",
-        desc = "[G]rep in Notes" },
-
+      {
+        "<leader>og",
+        "<cmd>lua require('telescope.builtin').live_grep({"
+          .. "additional_args = function(opts) return { '--glob', '*.md' } end"
+          .. "search_dirs = {'/Users/leoluyi/Dropbox/_notes-vault'},"
+          .. "prompt_title = '  Live Grep (Obsidian)', layout_strategy = 'vertical',"
+          .. "layout_config = { height = 0.95, preview_cutoff = 1, mirror = true } })<cr>",
+        desc = "[G]rep in Notes",
+      },
     },
 
     opts = {
@@ -60,8 +62,8 @@ return {
 
       ui = {
         -- Disable some things below here because I set these manually for all Markdown files using treesitter
-        checkboxes = { },
-        bullets = {  },
+        checkboxes = {},
+        bullets = {},
       },
 
       -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
