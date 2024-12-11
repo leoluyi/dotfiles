@@ -17,6 +17,7 @@ return {
           "shfmt",
           -- linters.
           "ruff",
+          "flake8",
           "yamllint",
         }
       },
