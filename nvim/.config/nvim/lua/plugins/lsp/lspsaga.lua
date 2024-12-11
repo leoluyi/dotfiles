@@ -1,5 +1,6 @@
 -- A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
 -- < https://github.com/nvimdev/lspsaga.nvim >
+-- < https://nvimdev.github.io/lspsaga/ >
 -- < https://github.com/kkharji/lspsaga.nvim >
 
 return {
@@ -7,11 +8,11 @@ return {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach",
     dependencies = {
-      {"nvim-tree/nvim-web-devicons"},
-      {"nvim-treesitter/nvim-treesitter"},
+      { "nvim-tree/nvim-web-devicons" },
+      { "nvim-treesitter/nvim-treesitter" },
     },
     keys = {
-      { "K", "<cmd>Lspsaga hover_doc<cr>", desc="Hover Doc" },
+      { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover Doc" },
     },
     opts = {
       preview = {
@@ -24,7 +25,7 @@ return {
       },
       request_timeout = 2000,
       finder = {
-        jump_to = 'p',
+        jump_to = "p",
         edit = { "o", "<CR>" },
         vsplit = "v",
         split = "s",
@@ -58,7 +59,7 @@ return {
         keys = {
           exec_action = "o",
           quit = "q",
-          go_action = "g"
+          go_action = "g",
         },
       },
       rename = {
@@ -116,16 +117,16 @@ return {
         -- Border type can be single, double, rounded, solid, shadow.
         border = "rounded",
         winblend = 0,
-        diagnostic = ' ',
-        info = ' ',
-        warn = ' ',
+        diagnostic = " ",
+        info = " ",
+        warn = " ",
         expand = "",
         collapse = "",
         preview = " ",
         code_action = "💡",
         incoming = " ",
         outgoing = " ",
-        hover = ' ',
+        hover = " ",
         kind = {},
       },
     },

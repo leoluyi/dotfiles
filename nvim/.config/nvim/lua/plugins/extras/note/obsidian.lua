@@ -17,7 +17,11 @@ return {
     },
     keys = {
       { "<leader>o", desc = "+Obsidian" },
-      { "<leader>oo", ":cd /Users/leoluyi/Dropbox/_notes-vault<cr>", desc = "Navigate to Vault" },
+      {
+        "<leader>oo",
+        "<cmd>cd /Users/leoluyi/Library/CloudStorage/Dropbox/_notes-vault<cr>",
+        desc = "Navigate to Vault",
+      },
       -- { "<leader>os", ":ObsidianSearch<cr>", desc = "ObsidianSearch" },
       { "<leader>oa", ":ObsidianNew<cr>", desc = "ObsidianNew [A]dd note" },
       { "<leader>ot", ":ObsidianTemplate<cr>", desc = "Insert Obsidian [T]emplate" },
@@ -29,7 +33,7 @@ return {
 
       -- search for files in full vault
       -- { "<leader>os", "<cmd>lua require('telescope.builtin').find_files({" ..
-      --     "search_dirs = {'/Users/leoluyi/Dropbox/_notes-vault'}," ..
+      --     "search_dirs = {'/Users/leoluyi/Library/CloudStorage/Dropbox/_notes-vault'}," ..
       --     "find_command = { 'fd', '--type', 'f', '--extension', 'md' }," ..
       --     -- "additional_args = function(opts) return { '--extension', 'md' } end," ..
       --     "})<cr>", desc = "Search Notes" },
@@ -37,7 +41,7 @@ return {
         "<leader>og",
         "<cmd>lua require('telescope.builtin').live_grep({"
           .. "additional_args = function(opts) return { '--glob', '*.md' } end"
-          .. "search_dirs = {'/Users/leoluyi/Dropbox/_notes-vault'},"
+          .. "search_dirs = {'/Users/leoluyi/Library/CloudStorage/Dropbox/_notes-vault'},"
           .. "prompt_title = '  Live Grep (Obsidian)', layout_strategy = 'vertical',"
           .. "layout_config = { height = 0.95, preview_cutoff = 1, mirror = true } })<cr>",
         desc = "[G]rep in Notes",
@@ -48,7 +52,7 @@ return {
       workspaces = {
         {
           name = "Notes",
-          path = "/Users/leoluyi/Dropbox/_notes-vault",
+          path = "/Users/leoluyi/Library/CloudStorage/Dropbox/_notes-vault",
         },
       },
 
