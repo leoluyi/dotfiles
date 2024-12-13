@@ -10,7 +10,9 @@ local default_vimgrep_arguments = {
   "--column",
   "--smart-case",
   -- "-u" -- not to respect .gitignore
-  "--hidden", "--glob", "!**/.git/*",
+  "--hidden",
+  "--glob",
+  "!**/.git/*",
 }
 
 return {
@@ -30,47 +32,64 @@ return {
       { "nvim-telescope/telescope-fzy-native.nvim" },
       { "nvim-telescope/telescope-live-grep-args.nvim" },
       { "echasnovski/mini.fuzzy", version = false },
-      { "fdschmidt93/telescope-egrepify.nvim" }
+      { "fdschmidt93/telescope-egrepify.nvim" },
     },
-    keys = function ()
+    keys = function()
       local ok, telescope = pcall(require, "telescope")
-      if not ok then return end
+      if not ok then
+        return
+      end
 
       local util = require("helpers.telescope")
       return {
-        { '<leader>T', ':Telescope<Space>', desc = "Telescope..." },
+        { "<leader>T", ":Telescope<Space>", desc = "Telescope..." },
 
         -- Find files.
         { "<leader>cc", util.search_dotfiles, desc = "Neovim config files" },
-        { "<c-p>",      util.builtin("files"), desc = "[F]ind [F]iles (root dir)" },
+        { "<c-p>", util.builtin("files"), desc = "[F]ind [F]iles (root dir)" },
         { "<leader>ff", util.all_files, desc = "[F]ind [F]iles (all in cwd)" },
         { "<leader>fF", util.builtin("files", { cwd = false }), desc = "[F]ind [F]iles (cwd)" },
         { "<leader>fm", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-        { "<leader>m",  util.builtin("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (root dir)" },
+        { "<leader>m", util.builtin("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (root dir)" },
         { "<leader><space>", util.buffers, desc = "[F]ind [B]uffers" },
         {
-          "<leader>fb", util.builtin("buffers", {
-            prompt_title = "  Buffers", results_title=false, winblend = 10, path_display={ "truncate" },
-            layout_strategy = "vertical", layout_config = { width = 0.60, height = 0.55 }}),
-          desc = "[F]ind [B]uffers (root dir)"
+          "<leader>fb",
+          util.builtin("buffers", {
+            prompt_title = "  Buffers",
+            results_title = false,
+            winblend = 10,
+            path_display = { "truncate" },
+            layout_strategy = "vertical",
+            layout_config = { width = 0.60, height = 0.55 },
+          }),
+          desc = "[F]ind [B]uffers (root dir)",
         },
 
         -- Git.
         { "<leader>gb", "Telescope git_branches", desc = "Telescope git_branches" },
         -- Git worktree.
         { "<leader>gm", telescope.extensions.git_worktree.create_git_worktree, desc = "Git Make worktrees" },
-        { "<leader>gw", telescope.extensions.git_worktree.git_worktrees, desc = "Git Worktrees"  },
+        { "<leader>gw", telescope.extensions.git_worktree.git_worktrees, desc = "Git Worktrees" },
         -- Search.
         { "<leader>sb", util.buffer_dir, desc = "Search [B]uffer dir" },
         { "<leader>sf", "<cmd>Telescope filetypes<cr>", desc = "Search [F]iletype" },
         { "<leader>sc", "<cmd>Telescope colorscheme<cr>", desc = "Search [C]olorscheme" },
         -- { "<leader>sD", function() telescope.extensions.diff.diff_files({ hidden = true }) end, desc = "Search [D]iff 2 files" },
-        { "<leader>sD", function() telescope.extensions.diff.diff_current({ hidden = true }) end, desc = "Search [D]iff current file" },
+        {
+          "<leader>sD",
+          function()
+            telescope.extensions.diff.diff_current({ hidden = true })
+          end,
+          desc = "Search [D]iff current file",
+        },
         -- Diagnostics.
         {
           "<leader>se",
-          util.builtin("diagnostics", { severity_limit="WARN", initial_mode="normal", layout_config = { preview_width = 0.50 } }),
-          desc = "✨Lsp Diagnostics [E]rrors (workspace)"
+          util.builtin(
+            "diagnostics",
+            { severity_limit = "WARN", initial_mode = "normal", layout_config = { preview_width = 0.50 } }
+          ),
+          desc = "✨Lsp Diagnostics [E]rrors (workspace)",
         },
         -- {
         --   "<leader>sg",
@@ -101,79 +120,92 @@ return {
           function()
             local get_root = require("helpers.telescope").get_root
             telescope.extensions.egrepify.egrepify({
-              prompt_title = '  Live Grep (args)',
+              prompt_title = "  Live Grep (args)",
               layout_strategy = "vertical",
-              layout_config = { height = 0.95, preview_cutoff = 1, mirror = true, },
+              layout_config = { height = 0.95, preview_cutoff = 1, mirror = true },
               cwd = get_root(),
             })
           end,
-          desc = "[G]rep (args)"
+          desc = "[G]rep (args)",
         },
 
         {
           "<leader>sG",
           util.builtin("live_grep", {
-            prompt_title = '  Live Grep (cwd)',
+            prompt_title = "  Live Grep (cwd)",
             layout_strategy = "vertical",
-            layout_config = { height = 0.95, preview_cutoff = 1, mirror = true, },
+            layout_config = { height = 0.95, preview_cutoff = 1, mirror = true },
             cwd = false,
           }),
-          desc = "[G]rep (cwd)"
+          desc = "[G]rep (cwd)",
         },
 
-        { "<leader>sh",  "<cmd>Telescope help_tags<cr>", desc = "Search [H]elp" },
-        { "<leader>sk",  "<cmd>Telescope keymaps<cr>", desc = "Search [K]eymaps" },
+        { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Search [H]elp" },
+        { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Search [K]eymaps" },
         { "<leader>sld", "<cmd>Telescope lsp_definitions<cr>", desc = "Search Lsp [D]efinitions" },
         { "<leader>slr", "<cmd>Telescope lsp_refereces<cr>", desc = "Search Lsp [R]eferences" },
-        { "<leader>sm",  "<cmd>Telescope marks<cr>", desc = "Search [M]arks" },
-        { "<leader>sn",  util.nvim_config, desc = "Search [N]vim Config" },
-        { "<leader>so",  "<cmd>Telescope resume<cr>", desc = "Search Resume" },
-        { "<leader>sp",  "<cmd>Telescope projects<cr>", desc = "Search [P]rojects" },
-        { "<leader>sr",  "<cmd>Telescope registers<cr>", desc = "Search [R]egisters" },
-        { "<leader>ss",  util.builtin("treesitter", { layout_config = { preview_width = 0.55 }}), desc = "Search [S]ymbols" },
-        { "<leader>st",  "<cmd>Telescope filetypes<cr>", desc = "Search [F]iletypes" },
+        { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Search [M]arks" },
+        { "<leader>sn", util.nvim_config, desc = "Search [N]vim Config" },
+        { "<leader>so", "<cmd>Telescope resume<cr>", desc = "Search Resume" },
+        { "<leader>sp", "<cmd>Telescope projects<cr>", desc = "Search [P]rojects" },
+        { "<leader>sr", "<cmd>Telescope registers<cr>", desc = "Search [R]egisters" },
+        {
+          "<leader>ss",
+          util.builtin("treesitter", { layout_config = { preview_width = 0.55 } }),
+          desc = "Search [S]ymbols",
+        },
+        { "<leader>st", "<cmd>Telescope filetypes<cr>", desc = "Search [F]iletypes" },
         {
           "<leader>sw",
           util.builtin("grep_string", {
-            path_display={ "truncate" },
+            path_display = { "truncate" },
             layout_strategy = "vertical",
-            layout_config = { height = 0.95, preview_cutoff = 1, mirror = true, },
+            layout_config = { height = 0.95, preview_cutoff = 1, mirror = true },
           }),
-          desc = 'Search current [W]ord (root dir)'
+          desc = "Search current [W]ord (root dir)",
         },
         {
           "<leader>sw",
-          function ()
+          function()
             local text = vim.getVisualSelection()
             util.builtin("live_grep", {
-              prompt_title = '  Live Grep (root dir)',
+              prompt_title = "  Live Grep (root dir)",
               layout_strategy = "vertical",
-              layout_config = { height = 0.95, preview_cutoff = 1, mirror = true, },
+              layout_config = { height = 0.95, preview_cutoff = 1, mirror = true },
               default_text = text,
             })()
           end,
           mode = { "v", "x" },
-          desc = 'Search current [W]ord (root dir)'
+          desc = "Search current [W]ord (root dir)",
         },
         {
-          "<leader>sd", function ()
+          "<leader>sd",
+          function()
             require("telescope").extensions.file_browser.file_browser({
-              cwd_to_path = false, grouped = true, files = false, depth = false, initial_mode="normal",
-              select_buffer = true, respect_gitignore = true })
+              cwd_to_path = false,
+              grouped = true,
+              files = false,
+              depth = false,
+              initial_mode = "normal",
+              select_buffer = true,
+              respect_gitignore = true,
+            })
           end,
-          desc = "Search Working [D]irectory"
+          desc = "Search Working [D]irectory",
         },
 
         -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L271
         {
           "<leader>/",
-          function() require("telescope.builtin").current_buffer_fuzzy_find(util.finders.center_list) end,
-          desc = "[/] Fuzzily search in current buffer"
+          function()
+            require("telescope.builtin").current_buffer_fuzzy_find(util.finders.center_list)
+          end,
+          desc = "[/] Fuzzily search in current buffer",
         },
       }
     end,
 
-    opts = function ()
+    opts = function()
       local actions = require("telescope.actions")
       local fb_actions = require("telescope").extensions.file_browser.actions
       local lga_actions = require("telescope-live-grep-args.actions")
@@ -194,13 +226,13 @@ return {
 
             ---@diagnostic disable-next-line: unused-local
             timeout_hook = function(filepath, bufnr, opts)
-              local cmd = {"echo", "timeout"}
+              local cmd = { "echo", "timeout" }
               require("telescope.previewers.utils").job_maker(cmd, bufnr, opts)
             end,
 
             filesize_hook = function(filepath, bufnr, opts)
               local max_bytes = 10000
-              local cmd = {"head", "-c", max_bytes, filepath}
+              local cmd = { "head", "-c", max_bytes, filepath }
               require("telescope.previewers.utils").job_maker(cmd, bufnr, opts)
             end,
           },
@@ -216,12 +248,14 @@ return {
           grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
           qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
-          path_display={ "truncate" },
+          path_display = { "truncate" },
           -- path_display={ "smart" },
 
           file_ignore_patterns = {
             "%.plist",
-            "%.png", "%.jpg", "%.gif",
+            "%.png",
+            "%.jpg",
+            "%.gif",
             "%.data",
             "node_modules",
             ".DS_Store",
@@ -237,6 +271,7 @@ return {
               ["<TAB>"] = actions.toggle_selection,
               ["<C-TAB>"] = actions.toggle_selection + actions.move_selection_next,
               ["<S-TAB>"] = actions.toggle_selection + actions.move_selection_previous,
+              ["d"] = actions.delete_buffer,
             },
             i = {
               ["<C-/>"] = "which_key",
@@ -254,17 +289,20 @@ return {
         pickers = {
           find_files = { mappings = multi_open_mappings },
           git_files = { mappings = multi_open_mappings },
-          oldfiles   = { mappings = multi_open_mappings },
+          oldfiles = { mappings = multi_open_mappings },
           buffers = {
             sort_lastused = true,
             ignore_current_buffer = true,
           },
           live_grep = {
             -- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
-            additional_args = function(_) return {
-              "--hidden",
-              "--glob", "!**/.git/*",
-            } end,
+            additional_args = function(_)
+              return {
+                "--hidden",
+                "--glob",
+                "!**/.git/*",
+              }
+            end,
           },
           colorscheme = {
             enable_preview = true,
@@ -348,13 +386,12 @@ return {
               },
             },
           },
-
         },
       }
     end,
 
     config = function(_, opts)
-      require('telescope').setup(opts)
+      require("telescope").setup(opts)
 
       -- ====== 🔭 Extensions =====
       local load_extensions = function()
@@ -375,5 +412,4 @@ return {
       end
     end,
   },
-
 }
