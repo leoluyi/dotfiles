@@ -9,12 +9,12 @@ local map = require("helpers.util").map
 -- map({ "i", "x" }, "<C-c>", "<esc>", { desc = "Escape" })
 
 -- Switch between buffers.
-map({ "n", "x" }, "<leader><tab>", "<c-^>", { desc = "Switch between buffers" })
-map({ "n", "x" }, "<c-6>", "<c-^>", { desc = "Switch between buffers" })
+map({ "n", "x" }, "<leader><tab>", "<c-^>", { desc = "Alternate buffer" })
+map({ "n", "x" }, "<c-6>", "<c-^>", { desc = "Alternate buffer" })
 
 -- Quit all.
 map({ "n", "x" }, "<leader>qq", ":qa!", { desc = "Quit all", silent = false })
-map({ "n", "x" }, "<leader>ww", ":wa",  { desc = "Save all", silent = false })
+map({ "n", "x" }, "<leader>ww", ":wa", { desc = "Save all", silent = false })
 
 -- Allow gf to open non-existent file.
 map({ "n", "x" }, "gf", "<cmd>e <cfile><cr>", { desc = "Open file" })
@@ -38,21 +38,25 @@ map("n", "J", "mzJ`z", { desc = "Join lines" })
 
 -- Toggle number and relativenumber for cursor copy-paste.
 map(
-  { "n", "x" }, "<leader>n",
-  ':set nonumber nolinebreak norelativenumber<CR>'..
-  ':set nolist<CR>'..
-  ':setlocal foldcolumn=0<CR> :set signcolumn=no<CR> :set statuscolumn=<CR>'..
-  ':silent! IBLDisable<CR>' .. ':lua vim.g.miniindentscope_disable = true<CR>',
+  { "n", "x" },
+  "<leader>n",
+  ":set nonumber nolinebreak norelativenumber<CR>"
+    .. ":set nolist<CR>"
+    .. ":setlocal foldcolumn=0<CR> :set signcolumn=no<CR> :set statuscolumn=<CR>"
+    .. ":silent! IBLDisable<CR>"
+    .. ":lua vim.g.miniindentscope_disable = true<CR>",
   { desc = "Toggle on statuscol", silent = true }
 )
 map(
-  { "n", "x" }, "<leader>N",
-  ":set number linebreak relativenumber<CR>" ..
-  ":setlocal foldcolumn=auto<CR> :set signcolumn=auto<CR>" ..
-  ":set list<CR>" ..
-  ":if luaeval('StatusCol')->type() == v:t_func <bar> set statuscolumn=%!v:lua.StatusCol() <bar> else <bar>" ..
-  "set statuscolumn& <bar> endif<CR>" ..
-  ":silent! IBLEnable<CR>" .. ':lua vim.g.miniindentscope_disable = false<CR>',
+  { "n", "x" },
+  "<leader>N",
+  ":set number linebreak relativenumber<CR>"
+    .. ":setlocal foldcolumn=auto<CR> :set signcolumn=auto<CR>"
+    .. ":set list<CR>"
+    .. ":if luaeval('StatusCol')->type() == v:t_func <bar> set statuscolumn=%!v:lua.StatusCol() <bar> else <bar>"
+    .. "set statuscolumn& <bar> endif<CR>"
+    .. ":silent! IBLEnable<CR>"
+    .. ":lua vim.g.miniindentscope_disable = false<CR>",
   { desc = "Toggle off statuscol", silent = true }
 )
 
@@ -61,9 +65,9 @@ map(
 -- better up/down.
 -- Make <C-u> / <C-d> / <count>j / <count>k added to the jump list mark.
 map({ "n", "x" }, "<c-d>", "m'<c-d>", { desc = "Move down", silent = true })
-map({ "n", "x" }, "<c-u>", "m'<c-u>", { desc = "Move up",   silent = true })
+map({ "n", "x" }, "<c-u>", "m'<c-u>", { desc = "Move up", silent = true })
 map({ "n", "x" }, "j", "v:count <= 1 ? 'gj' : 'm''' . v:count . 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "k", "v:count <= 1 ? 'gk' : 'm''' . v:count . 'k'", { desc = "Up",   expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count <= 1 ? 'gk' : 'm''' . v:count . 'k'", { desc = "Up", expr = true, silent = true })
 
 -- save file
 map({ "n", "x" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file", silent = false })
@@ -109,10 +113,30 @@ map("n", "gV", "`[v`]", { desc = "Select last changed" })
 
 -- Copy and paste stuffs =========================================================={{{2
 
-map("n", "<leader>yf", '<cmd>let @"=expand("%:t")<cr>:echo "(filename copied) <C-R>=expand("%:t")<cr>"<cr>', { desc = "Copy filename", silent = false })
-map("n", "<leader>yc", '<cmd>let @+=expand("%:p:h")<cr>:echo "(cwd copied) <C-R>=expand("%:p:h")<CR>"<CR>', { desc = "(clipboard) Copy cwd", silent = false })
-map("n", "<leader>yp", '<cmd>let @+=expand("%:p")<cr>:echo "(abs-path copied to clipboard) <C-R>=expand("%:p")<CR>"<CR>', { desc = "(clipboard) Copy absolute path", silent = false })
-map("n", "<leader>y.", '<cmd>let @+=expand("%:p")<cr>:echo "(rel-path copied to clipboard) <C-R>=expand("%:p")<CR>"<CR>', { desc = "(clipboard) Copy relative path", silent = false })
+map(
+  "n",
+  "<leader>yf",
+  '<cmd>let @"=expand("%:t")<cr>:echo "(filename copied) <C-R>=expand("%:t")<cr>"<cr>',
+  { desc = "Copy filename", silent = false }
+)
+map(
+  "n",
+  "<leader>yc",
+  '<cmd>let @+=expand("%:p:h")<cr>:echo "(cwd copied) <C-R>=expand("%:p:h")<CR>"<CR>',
+  { desc = "(clipboard) Copy cwd", silent = false }
+)
+map(
+  "n",
+  "<leader>yp",
+  '<cmd>let @+=expand("%:p")<cr>:echo "(abs-path copied to clipboard) <C-R>=expand("%:p")<CR>"<CR>',
+  { desc = "(clipboard) Copy absolute path", silent = false }
+)
+map(
+  "n",
+  "<leader>y.",
+  '<cmd>let @+=expand("%:p")<cr>:echo "(rel-path copied to clipboard) <C-R>=expand("%:p")<CR>"<CR>',
+  { desc = "(clipboard) Copy relative path", silent = false }
+)
 
 -- """ Automatically jump to the end of the text you paste.
 -- " paste multiple lines of text as many times as I want, just type ppppp.
@@ -127,11 +151,11 @@ map({ "n", "x" }, "x", '"_x', { desc = "(black hole) Delete" })
 map({ "n", "x" }, "X", '"_X', { desc = "(black hole) Delete" })
 
 -- """ Cut to yanked register
-map({ "n", "x" }, "<localleader>C",  '"0C',  { desc = "(yanked) Cut" })
-map({ "n", "x" }, "<localleader>D",  '"0D',  { desc = "(yanked) Delete to the end" })
-map({ "n", "x" }, "<localleader>d",  '"0d',  { desc = "(yanked) Delete" })
+map({ "n", "x" }, "<localleader>C", '"0C', { desc = "(yanked) Cut" })
+map({ "n", "x" }, "<localleader>D", '"0D', { desc = "(yanked) Delete to the end" })
+map({ "n", "x" }, "<localleader>d", '"0d', { desc = "(yanked) Delete" })
 map({ "n", "x" }, "<localleader>dd", '"0dd', { desc = "(yanked) Delete line" })
-map({ "n", "x" }, "<localleader>x",  '"0x',  { desc = "(yanked) Delete" })
+map({ "n", "x" }, "<localleader>x", '"0x', { desc = "(yanked) Delete" })
 map({ "n", "x" }, "<localleader>cc", '"0cc', { desc = "(yanked) Change" })
 
 -- """ Paste from yanked register
@@ -139,49 +163,49 @@ map({ "n", "x" }, "<localleader>p", '"0p', { desc = "Paste from yacked register"
 map({ "n", "x" }, "<localleader>P", '"0P', { desc = "Paste from yacked register" })
 
 -- """ Yank to clipboard
-map({ "n", "x" }, "<localleader>y",  '"+y',  { desc = "(clipboard) Yank" })
+map({ "n", "x" }, "<localleader>y", '"+y', { desc = "(clipboard) Yank" })
 map({ "n", "x" }, "<localleader>yy", '"+yy', { desc = "(clipboard) Yank line" })
-map({ "n", "x" }, "<localleader>Y",  '"+y$', { desc = "(clipboard) Yank to the end" })
+map({ "n", "x" }, "<localleader>Y", '"+y$', { desc = "(clipboard) Yank to the end" })
 
 -- Code editing stuffs ============================================================{{{2
 
 -- Parenthesis/bracket/quotes ====================================================={{{2
 
-map("n", "<localleader>'",  "viw<esc>`>a'<esc>mm`<i'<esc>`ml", { desc = "(surround) Single quote" })
-map("n", "<localleader>\"", "viw<esc>`>a\"<esc>mm`<i\"<esc>`ml", { desc = "(surround) Double quote" })
-map("n", "<localleader>`",  "viw<esc>`>a`<esc>mm`<i`<esc>`ml", { desc = "(surround) Backtick" })
-map("n", "<localleader>(",  "viw<esc>`>a)<esc>`<i(<esc>%", { desc = "(surround) Parenthesis" })
-map("n", "<localleader>)",  "viw<esc>`>a)<esc>`<i(<esc>%", { desc = "(surround) Parenthesis" })
-map("n", "<localleader>[",  "viw<esc>`>a<space>]<esc>`<i[<space><esc>h%", { desc = "(surround) Square bracket" })
-map("n", "<localleader>]",  "viw<esc>`>a]<esc>`<i[<esc>%", { desc = "(surround) Square bracket" })
-map("n", "<localleader>{",  "viw<esc>`>a<space>}<esc>`<i{<space><esc>h%", { desc = "(surround) Curly bracket" })
-map("n", "<localleader>}",  "viw<esc>`>a}<esc>`<i{<esc>%", { desc = "(surround) Curly bracket" })
-map("n", "<localleader><",  "viw<esc>`>a<space>><esc>`<i<<space><esc>f>", { desc = "(surround) Angle bracket" })
-map("n", "<localleader>>",  "viw<esc>`>a><esc>`<i<<esc>f>", { desc = "(surround) Angle bracket" })
-map("v", "<localleader>'",  ":<C-u>norm!`>a'<esc>mm`<i'<esc>`ml", { desc = "(surround) Single quote" })
-map("v", "<localleader>\"", ":<C-u>norm!`>a\"<esc>mm`<i\"<esc>`ml", { desc = "(surround) Double quote" })
-map("v", "<localleader>`",  ":<C-u>norm!`>a`<esc>mm`<i`<esc>`ml", { desc = "(surround) Backtick" })
-map("v", "<localleader>(",  ":<C-u>norm!`>a)<esc>`<i(<esc>%", { desc = "(surround) Parenthesis" })
-map("v", "<localleader>)",  ":<C-u>norm!`>a)<esc>`<i(<esc>%", { desc = "(surround) Parenthesis" })
-map("v", "<localleader>[",  ":<C-u>norm!`>a<space>]<esc>`<i[<space><esc>h%", { desc = "(surround) Square bracket" })
-map("v", "<localleader>]",  ":<C-u>norm!`>a]<esc>`<i[<esc>%", { desc = "(surround) Square bracket" })
-map("v", "<localleader>{",  ":<C-u>norm!`>a<space>}<esc>`<i{<space><esc>h%", { desc = "(surround) Curly bracket" })
-map("v", "<localleader>}",  ":<C-u>norm!`>a}<esc>`<i{<esc>%", { desc = "(surround) Curly bracket" })
-map("v", "<localleader><",  ":<C-u>norm!`>a<space>><esc>`<i<<space><esc>f>", { desc = "(surround) Angle bracket" })
-map("v", "<localleader>>",  ":<C-u>norm!`>a><esc>`<i<<esc>f>", { desc = "(surround) Angle bracket" })
+map("n", "<localleader>'", "viw<esc>`>a'<esc>mm`<i'<esc>`ml", { desc = "(surround) Single quote" })
+map("n", '<localleader>"', 'viw<esc>`>a"<esc>mm`<i"<esc>`ml', { desc = "(surround) Double quote" })
+map("n", "<localleader>`", "viw<esc>`>a`<esc>mm`<i`<esc>`ml", { desc = "(surround) Backtick" })
+map("n", "<localleader>(", "viw<esc>`>a)<esc>`<i(<esc>%", { desc = "(surround) Parenthesis" })
+map("n", "<localleader>)", "viw<esc>`>a)<esc>`<i(<esc>%", { desc = "(surround) Parenthesis" })
+map("n", "<localleader>[", "viw<esc>`>a<space>]<esc>`<i[<space><esc>h%", { desc = "(surround) Square bracket" })
+map("n", "<localleader>]", "viw<esc>`>a]<esc>`<i[<esc>%", { desc = "(surround) Square bracket" })
+map("n", "<localleader>{", "viw<esc>`>a<space>}<esc>`<i{<space><esc>h%", { desc = "(surround) Curly bracket" })
+map("n", "<localleader>}", "viw<esc>`>a}<esc>`<i{<esc>%", { desc = "(surround) Curly bracket" })
+map("n", "<localleader><", "viw<esc>`>a<space>><esc>`<i<<space><esc>f>", { desc = "(surround) Angle bracket" })
+map("n", "<localleader>>", "viw<esc>`>a><esc>`<i<<esc>f>", { desc = "(surround) Angle bracket" })
+map("v", "<localleader>'", ":<C-u>norm!`>a'<esc>mm`<i'<esc>`ml", { desc = "(surround) Single quote" })
+map("v", '<localleader>"', ':<C-u>norm!`>a"<esc>mm`<i"<esc>`ml', { desc = "(surround) Double quote" })
+map("v", "<localleader>`", ":<C-u>norm!`>a`<esc>mm`<i`<esc>`ml", { desc = "(surround) Backtick" })
+map("v", "<localleader>(", ":<C-u>norm!`>a)<esc>`<i(<esc>%", { desc = "(surround) Parenthesis" })
+map("v", "<localleader>)", ":<C-u>norm!`>a)<esc>`<i(<esc>%", { desc = "(surround) Parenthesis" })
+map("v", "<localleader>[", ":<C-u>norm!`>a<space>]<esc>`<i[<space><esc>h%", { desc = "(surround) Square bracket" })
+map("v", "<localleader>]", ":<C-u>norm!`>a]<esc>`<i[<esc>%", { desc = "(surround) Square bracket" })
+map("v", "<localleader>{", ":<C-u>norm!`>a<space>}<esc>`<i{<space><esc>h%", { desc = "(surround) Curly bracket" })
+map("v", "<localleader>}", ":<C-u>norm!`>a}<esc>`<i{<esc>%", { desc = "(surround) Curly bracket" })
+map("v", "<localleader><", ":<C-u>norm!`>a<space>><esc>`<i<<space><esc>f>", { desc = "(surround) Angle bracket" })
+map("v", "<localleader>>", ":<C-u>norm!`>a><esc>`<i<<esc>f>", { desc = "(surround) Angle bracket" })
 
 -- windows, tabs, buffers ========================================================={{{2
 
 -- Make adjusing split sizes a bit more friendly.
-map("n", "<c-s-left>",  "<cmd>vertical resize -2<cr>", { desc = "window increase width" })
+map("n", "<c-s-left>", "<cmd>vertical resize -2<cr>", { desc = "window increase width" })
 map("n", "<c-s-right>", "<cmd>vertical resize +2<cr>", { desc = "window decrease width" })
-map("n", "<c-s-up>",    "<cmd>resize   +2<cr>", { desc = "window increase hight" })
-map("n", "<c-s-down>",  "<cmd>resize   -2<cr>", { desc = "window decrease hight" })
+map("n", "<c-s-up>", "<cmd>resize   +2<cr>", { desc = "window increase hight" })
+map("n", "<c-s-down>", "<cmd>resize   -2<cr>", { desc = "window decrease hight" })
 
-map("n", "<leader>w<left>",  "<cmd>vertical resize -2<cr>", { desc = "window increase width" })
+map("n", "<leader>w<left>", "<cmd>vertical resize -2<cr>", { desc = "window increase width" })
 map("n", "<leader>w<right>", "<cmd>vertical resize +2<cr>", { desc = "window decrease width" })
-map("n", "<leader>w<up>",    "<cmd>resize   +2<cr>",        { desc = "window increase hight" })
-map("n", "<leader>w<down>",  "<cmd>resize   -2<cr>",        { desc = "window decrease hight" })
+map("n", "<leader>w<up>", "<cmd>resize   +2<cr>", { desc = "window increase hight" })
+map("n", "<leader>w<down>", "<cmd>resize   -2<cr>", { desc = "window decrease hight" })
 
 -- Move between windows.
 map("n", "<c-h>", "<c-w>h", { desc = "window move left" })
@@ -213,24 +237,26 @@ map("v", "<localleader>s", ":s/\\%V", { desc = "(selected) Replace with...", sil
 
 -- " Replace current selection with ...
 -- < https://stackoverflow.com/a/676619/3744499 >
-map("v",
-  "<localleader>S", "\"my:%s/\\V<c-r>=escape(@m,'/\\')<cr>/<c-r>=escape(@m,'/\\')<cr>/g<left><left>",
+map(
+  "v",
+  "<localleader>S",
+  "\"my:%s/\\V<c-r>=escape(@m,'/\\')<cr>/<c-r>=escape(@m,'/\\')<cr>/g<left><left>",
   { desc = "(global) Replace selected with...", silent = false }
 )
 
 -- Folding ========================================================================{{{2
 
-map({ "n", "x" }, "z0", ":setlocal foldlevel=0<CR>",   { desc = "Fold level 0", silent = false })
-map({ "n", "x" }, "z1", ":setlocal foldlevel=1<CR>",   { desc = "Fold level 1", silent = false })
-map({ "n", "x" }, "z2", ":setlocal foldlevel=2<CR>",   { desc = "Fold level 2", silent = false })
-map({ "n", "x" }, "z3", ":setlocal foldlevel=3<CR>",   { desc = "Fold level 3", silent = false })
-map({ "n", "x" }, "z4", ":setlocal foldlevel=4<CR>",   { desc = "Fold level 4", silent = false })
+map({ "n", "x" }, "z0", ":setlocal foldlevel=0<CR>", { desc = "Fold level 0", silent = false })
+map({ "n", "x" }, "z1", ":setlocal foldlevel=1<CR>", { desc = "Fold level 1", silent = false })
+map({ "n", "x" }, "z2", ":setlocal foldlevel=2<CR>", { desc = "Fold level 2", silent = false })
+map({ "n", "x" }, "z3", ":setlocal foldlevel=3<CR>", { desc = "Fold level 3", silent = false })
+map({ "n", "x" }, "z4", ":setlocal foldlevel=4<CR>", { desc = "Fold level 4", silent = false })
 map({ "n", "x" }, "z9", ":setlocal foldlevel=999<CR>", { desc = "Fold level ∞", silent = false })
 
 map("i", "<F9>", "<c-o>za", { desc = "Toggle fold" })
-map("n", "<F9>", "za",      { desc = "Toggle fold" })
+map("n", "<F9>", "za", { desc = "Toggle fold" })
 map("o", "<F9>", "<c-c>za", { desc = "Toggle fold" })
-map("x", "<F9>", "zf",      { desc = "Toggle fold" })
+map("x", "<F9>", "zf", { desc = "Toggle fold" })
 
 function ToggleLineWrap()
   if vim.wo.wrap then
@@ -249,6 +275,6 @@ vim.cmd("command! ToggleLineWrap lua ToggleLineWrap()")
 
 -- Misc ==========================================================================={{{2
 
-map("n", "<localleader>n", "a<c-r>=expand(\"%:t\")<cr><esc>", { desc = "Insert current filename" })
+map("n", "<localleader>n", 'a<c-r>=expand("%:t")<cr><esc>', { desc = "Insert current filename" })
 map("n", "<localleader>M", "mmHmt:%s/<C-v><cr>//ge<cr>'tzt'm", { desc = "Remove the Windows ^M", noremap = true }) -- < https://stackoverflow.com/q/71081529/3744499 >
 map("n", "<leader>up", "<cmd>setlocal paste!<cr>", { desc = "Toggle [P]aste mode", silent = false })
