@@ -70,7 +70,7 @@ map({ "n", "x" }, "j", "v:count <= 1 ? 'gj' : 'm''' . v:count . 'j'", { desc = "
 map({ "n", "x" }, "k", "v:count <= 1 ? 'gk' : 'm''' . v:count . 'k'", { desc = "Up", expr = true, silent = true })
 
 -- save file
-map({ "n", "x" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file", silent = false })
+-- map({ "n", "x" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file", silent = false })
 
 -- better indenting
 map("v", "<", "<gv")
@@ -91,7 +91,7 @@ map({ "n", "v" }, "/", "ms/", { desc = "Search", silent = false })
 map({ "n", "v" }, "?", "ms?", { desc = "Search", silent = false })
 
 -- Clear search with <esc>
-map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+-- map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
 -- Move lines using ALT+[jk] or Command+Opt+[jk] on mac
 -- < https://youtu.be/QN4fuSsWTbA?t=664 >

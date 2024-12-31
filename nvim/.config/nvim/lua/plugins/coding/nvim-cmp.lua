@@ -3,11 +3,11 @@ return {
   -- Completion Engine.
   -- https://github.com/hrsh6th/nvim-cmp#recommended-configuration
   {
-    'hrsh7th/nvim-cmp', -- A completion plugin for neovim coded in Lua.
+    "hrsh7th/nvim-cmp", -- A completion plugin for neovim coded in Lua.
     version = false, -- last release is way too old
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-      "L3MON4D3/LuaSnip",  -- Snippet Engine for Neovim written in Lua.
+      "L3MON4D3/LuaSnip", -- Snippet Engine for Neovim written in Lua.
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lsp",
@@ -34,7 +34,7 @@ return {
 
     opts = function()
       local cmp = require("cmp")
-      local icons = require "helpers.icons"
+      local icons = require("helpers.icons")
       local defaults = require("cmp.config.default")()
 
       -- helper functions.
@@ -51,7 +51,9 @@ return {
         -- < https://github.com/hrsh7th/nvim-cmp/issues/60#issuecomment-1247574145 >
         enabled = function()
           local buftype = vim.api.nvim_buf_get_option(0, "buftype")
-          if buftype == "prompt" then return false end
+          if buftype == "prompt" then
+            return false
+          end
           return true
         end,
 
@@ -61,7 +63,7 @@ return {
         snippet = {
           -- REQUIRED - you must specify a snippet engine
           expand = function(args)
-            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
           end,
         },
         preselect = cmp.PreselectMode.None,
@@ -82,16 +84,16 @@ return {
         },
         mapping = cmp.mapping.preset.insert({
           -- See < https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/mapping.lua#L36 >
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<Esc>'] = cmp.mapping.close(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<Esc>"] = cmp.mapping.close(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<S-CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
-          }),  -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ['<C-Space>'] = cmp.mapping(function(fallback)
+          }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<C-Space>"] = cmp.mapping(function(fallback)
             -- Super-Tab like mapping for vim-vsnip.
             -- < https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip >
             if cmp.visible() then
@@ -159,11 +161,11 @@ return {
         },
         sources = {
           -- The order will be used to the completion menu's sort order.
-          { name = 'nvim_lsp' },
-          { name = 'nvim_lsp_signature_help' },
-          { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'buffer' },
+          { name = "nvim_lsp" },
+          { name = "nvim_lsp_signature_help" },
+          { name = "luasnip" },
+          { name = "path" },
+          { name = "buffer" },
         },
         experimental = {
           ghost_text = {
@@ -174,51 +176,51 @@ return {
       }
     end,
 
-    config = function (_, opts)
-      local cmp = require('cmp')
+    config = function(_, opts)
+      local cmp = require("cmp")
 
       -- Setup nvim-cmp.
       cmp.setup(opts)
 
       -- Set configuration for specific filetype.
       ---@diagnostic disable-next-line: missing-fields
-      cmp.setup.filetype('markdown', {
+      cmp.setup.filetype("markdown", {
         sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'path' },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "path" },
         }, {
-            { name = 'buffer' },
-            { name = 'dictionary', keyword_length = 2 },
-          })
+          { name = "buffer" },
+          { name = "dictionary", keyword_length = 2 },
+        }),
       })
 
-      cmp.setup.filetype( "sql", {
+      cmp.setup.filetype("sql", {
         sources = {
-          { name = 'vim-dadbod-completion' },
-          { name = 'buffer' },
+          { name = "vim-dadbod-completion" },
+          { name = "buffer" },
         },
       })
 
       -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
       ---@diagnostic disable-next-line: missing-fields
-      cmp.setup.cmdline('/', {
+      cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-          { name = 'buffer' }
-        }
+          { name = "buffer" },
+        },
       })
 
       -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
       ---@diagnostic disable-next-line: missing-fields
-      cmp.setup.cmdline(':', {
+      cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = 'path' }
+          { name = "path" },
         }, {
-            { name = 'cmdline' }
-          })
+          { name = "cmdline" },
+        }),
       })
-    end
+    end,
   },
 }

@@ -65,7 +65,7 @@ return {
       { "<leader>uu", ":UndotreeToggle<CR>", desc = "Undotree toggle" },
     },
   },
-  { "mg979/vim-visual-multi", branch = "master" }, -- Multiple cursors plugin for vim/neovim
+  -- { "mg979/vim-visual-multi", branch = "master" }, -- Multiple cursors plugin for vim/neovim
   { "rhysd/conflict-marker.vim" }, -- Highlight, Jump and Resolve Conflict Markers Quickly in Vim
 
   -- Language specific plugins.
