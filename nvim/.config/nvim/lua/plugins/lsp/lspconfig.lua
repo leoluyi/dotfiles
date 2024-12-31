@@ -42,25 +42,25 @@ return {
         print(vim.inspect(vim.lsp.get_active_clients()))
       end
 
-      vim.api.nvim_create_user_command('LspServerCapabilities', print_lsp_capabilities, {})
+      vim.api.nvim_create_user_command("LspServerCapabilities", print_lsp_capabilities, {})
 
       -- Diagnostics: linting and formatting --------------------------------------{{{2
       -- < https://github.com/neovim/nvim-lspconfig/wiki/UI-customization >
 
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = ""})
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
 
       local border = {
-        {"╭", "LspFloatWinBorder"},
-        {"─", "LspFloatWinBorder"},
-        {"╮", "LspFloatWinBorder"},
-        {"│", "LspFloatWinBorder"},
-        {"╯", "LspFloatWinBorder"},
-        {"─", "LspFloatWinBorder"},
-        {"╰", "LspFloatWinBorder"},
-        {"│", "LspFloatWinBorder"},
+        { "╭", "LspFloatWinBorder" },
+        { "─", "LspFloatWinBorder" },
+        { "╮", "LspFloatWinBorder" },
+        { "│", "LspFloatWinBorder" },
+        { "╯", "LspFloatWinBorder" },
+        { "─", "LspFloatWinBorder" },
+        { "╰", "LspFloatWinBorder" },
+        { "│", "LspFloatWinBorder" },
       }
 
       -- options for vim.diagnostic.config()
@@ -74,13 +74,13 @@ return {
           spacing = 2,
           source = "if_many",
           severity = { min = vim.diagnostic.severity.WARN },
-          prefix = '■', -- Could be '●', '▎', 'x'
+          prefix = "■", -- Could be '●', '▎', 'x'
         },
         severity_sort = true,
 
         -- Use a function to dynamically turn signs off and on, using buffer local variables
         signs = function(bufnr, _)
-          local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, 'show_signs')
+          local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, "show_signs")
           -- No buffer local variable set, so just enable by default
           if not ok then
             return { severity = { min = vim.diagnostic.severity.INFO } }
@@ -101,10 +101,8 @@ return {
       vim.diagnostic.config(global_diagnostic_config)
 
       -- :help vim.lsp.diagnostic.on_publish_diagnostics
-      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics,
-        global_diagnostic_config
-      )
+      vim.lsp.handlers["textDocument/publishDiagnostics"] =
+        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, global_diagnostic_config)
 
       -- Configuration of the individual language servers -------------------------{{{2
 
@@ -127,15 +125,15 @@ return {
         },
       })
 
-      lspconfig.golangci_lint_ls.setup{
+      lspconfig.golangci_lint_ls.setup({
         -- < https://github.com/nametake/golangci-lint-langserver#configuration-for-nvim-lspconfig >
         -- < https://golangci-lint.run/usage/linters/ >
         on_attach = lsp_attach,
         capabilities = capabilities,
         init_options = {
-          command = { "golangci-lint", "run", '-E', 'revive', "-E", "govet", "--out-format", "json" }
+          command = { "golangci-lint", "run", "-E", "revive", "-E", "govet", "--out-format", "json" },
         },
-      }
+      })
 
       lspconfig.gopls.setup({
         -- < https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls >
@@ -156,7 +154,7 @@ return {
             ["ui.staticcheck"] = true,
             ["ui.verboseOutput"] = true,
           },
-        }
+        },
       })
 
       -- INFO: https://github.com/folke/neodev.nvim
@@ -171,10 +169,10 @@ return {
         capabilities = capabilities,
         settings = {
           Lua = {
-            diagnostics = { globals = {  'vim' } },
+            diagnostics = { globals = { "vim" } },
             completion = {
-              callSnippet = "Replace"
-            }
+              callSnippet = "Replace",
+            },
           },
         },
       })
@@ -198,7 +196,7 @@ return {
           python = {
             analysis = {
               -- Ignore all files for analysis to exclusively use Ruff for linting
-              ignore = { '*' },
+              ignore = { "*" },
             },
           },
           -- python = {
@@ -244,7 +242,6 @@ return {
         on_attach = lsp_attach,
         capabilities = capabilities,
       })
-
     end,
   },
 }
