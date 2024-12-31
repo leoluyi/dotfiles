@@ -31,10 +31,10 @@ return {
       set({ "n", "v" }, "<C-s>", function()
         mc.matchSkipCursor(1)
       end)
-      set({ "n", "v" }, "<C-,>", function()
+      set({ "n", "v" }, "<C-m>", function()
         mc.matchAddCursor(-1)
       end)
-      set({ "n", "v" }, "<C-m>", function()
+      set({ "n", "v" }, "<C-,>", function()
         mc.matchSkipCursor(-1)
       end)
 
