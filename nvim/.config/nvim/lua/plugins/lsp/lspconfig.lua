@@ -39,7 +39,7 @@ return {
       -- User commands ------------------------------------------------------------{{{2
 
       local function print_lsp_capabilities()
-        print(vim.inspect(vim.lsp.get_active_clients()))
+        print(vim.inspect(vim.lsp.get_clients()))
       end
 
       vim.api.nvim_create_user_command("LspServerCapabilities", print_lsp_capabilities, {})
