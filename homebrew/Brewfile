@@ -289,6 +289,8 @@ brew "tldr"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Vulnerability scanner for container images, file systems, and Git repos
+brew "trivy"
 # Digital clock in ncurses
 brew "tty-clock"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -500,6 +502,7 @@ mas "Messenger", id: 1480068668
 mas "Movist", id: 461788075
 mas "Owlfiles", id: 510282524
 mas "PDFgear", id: 6469021132
+mas "Perplexity", id: 6714467650
 mas "Pomosh", id: 1515791898
 mas "Prodrafts", id: 1545810067
 mas "Quick Colour Picker", id: 1453741555
