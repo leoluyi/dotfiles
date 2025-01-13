@@ -29,6 +29,8 @@ brew "ammonite-repl"
 brew "aria2"
 # Record and share terminal sessions
 brew "asciinema"
+# Tool for managing OCI containers and pods
+brew "podman"
 # To build and run Airflow DAGs locally and interact with the Astronomer API
 brew "astro"
 # MPEG-4 command-line tool
@@ -221,8 +223,6 @@ brew "pip-tools"
 brew "pipx"
 # Download/upload tool for popular file sharing websites
 brew "plowshare"
-# Tool for managing OCI containers and pods
-brew "podman"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Cross-platform application and UI framework
