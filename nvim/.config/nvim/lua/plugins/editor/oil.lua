@@ -6,11 +6,18 @@ return {
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
     lazy = false,
+    enabled = false,
     keys = {
       -- Open parent directory in the current window.
       { "-", "<cmd>Oil<cr>", desc = "(Oil) Open parent directory" },
       -- Open parent directory in a floating window.
-      { "<space>-", function() require("oil").toggle_float() end, desc = "(Oil) Open parent directory" },
+      {
+        "<localleader>-",
+        function()
+          require("oil").toggle_float()
+        end,
+        desc = "(Oil) Open parent directory",
+      },
     },
     opts = {
       -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
@@ -163,5 +170,5 @@ return {
         },
       },
     },
-  }
+  },
 }
