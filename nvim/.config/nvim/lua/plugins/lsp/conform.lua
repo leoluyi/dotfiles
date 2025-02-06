@@ -44,7 +44,7 @@ return {
         svelte = { { "prettierd", "prettier" } },
         python = function(bufnr)
           if require("conform").get_formatter_info("ruff_format", bufnr).available then
-            return { "ruff_format" }
+            return { "ruff_fix", "ruff_format" }
           else
             return { "isort", "black" }
           end
@@ -75,6 +75,21 @@ return {
       formatters = {
         stylua = {
           prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+        },
+        ruff_fix = {
+          -- isort using ruff < https://stackoverflow.com/a/78156861 >
+          args = {
+            "check",
+            "--select",
+            "I,RUF022",
+            "--fix",
+            "--force-exclude",
+            "--exit-zero",
+            "--no-cache",
+            "--stdin-filename",
+            "$FILENAME",
+            "-",
+          },
         },
         black = {
           args = {
