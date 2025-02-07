@@ -5,7 +5,7 @@ return {
     "echasnovski/mini.files",
     version = false,
     -- No need to copy this inside `setup()`. Will be used automatically.
-    enabled = true,
+    enabled = false,
     keys = {
       { "-", "<cmd>lua MiniFiles.open()<cr>", desc = "Open Mini-files" },
     },

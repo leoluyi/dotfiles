@@ -10,30 +10,30 @@ return {
         },
       },
       linters = {
-        -- flake8 =  {
-        --   args = {
-        --     "--format=%(path)s:%(row)d:%(col)d:%(code)s:%(text)s",
-        --     "--no-show-source",
-        --     "--extend-ignore",
-        --     "E309,E402,E501,E702,W291,W293,W391,W503",
-        --     "-",
-        --   }
-        -- },
-
-        ruff = {
+        flake8 = {
           args = {
-            "check",
-            "--force-exclude",
-            "--quiet",
-            "--stdin-filename",
-            "--ignore=E309,E402,E501,E702,W291,W293,W391,W503",
-            vim.api.nvim_buf_get_name(0),
-            "--no-fix",
-            "--output-format",
-            "json",
+            "--format=%(path)s:%(row)d:%(col)d:%(code)s:%(text)s",
+            "--no-show-source",
+            "--extend-ignore",
+            "E309,E402,E501,E702,W291,W293,W391,W503",
             "-",
           },
         },
+
+        -- ruff = {
+        --   args = {
+        --     "check",
+        --     "--force-exclude",
+        --     "--quiet",
+        --     "--stdin-filename",
+        --     "--ignore=E309,E402,E501,E702,W291,W293,W391,W503",
+        --     vim.api.nvim_buf_get_name(0),
+        --     "--no-fix",
+        --     "--output-format",
+        --     "json",
+        --     "-",
+        --   },
+        -- },
       },
     },
   },

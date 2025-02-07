@@ -19,6 +19,8 @@ tap "sdkman/tap"
 tap "ubuntu/microk8s"
 # Search tool like grep, but optimized for programmers
 brew "ack"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Development kit for the Java programming language
@@ -233,8 +235,6 @@ brew "poppler-qt5"
 brew "pv"
 # Password generator
 brew "pwgen"
-# Pyenv plugin to manage virtualenv
-brew "pyenv-virtualenv"
 # Generic machine emulator and virtualizer
 brew "qemu"
 # Tools for and transforming and inspecting PDF files

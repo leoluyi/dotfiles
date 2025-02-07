@@ -176,22 +176,22 @@ __GOROOT="$(go env GOROOT 2>/dev/null)"
   && export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
 
 # pyenv.
-if shopt -q login_shell && [ -d "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  export PYENV_VIRTUALENV_DISABLE_PROMPT=0
-fi
-
-if shopt -q login_shell && [ -d "/pyenv/.pyenv" ]; then
-  export PYENV_ROOT="/pyenv/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  export PYENV_VIRTUALENV_DISABLE_PROMPT=0
-fi
-
-if command -v pyenv >/dev/null; then
-  eval "$(pyenv init - --no-rehash)" \
-    && eval "$(pyenv virtualenv-init -)"
-fi
+# if shopt -q login_shell && [ -d "$HOME/.pyenv" ]; then
+#   export PYENV_ROOT="$HOME/.pyenv"
+#   export PATH="$PYENV_ROOT/bin:$PATH"
+#   export PYENV_VIRTUALENV_DISABLE_PROMPT=0
+# fi
+#
+# if shopt -q login_shell && [ -d "/pyenv/.pyenv" ]; then
+#   export PYENV_ROOT="/pyenv/.pyenv"
+#   export PATH="$PYENV_ROOT/bin:$PATH"
+#   export PYENV_VIRTUALENV_DISABLE_PROMPT=0
+# fi
+#
+# if command -v pyenv >/dev/null; then
+#   eval "$(pyenv init - --no-rehash)" \
+#     && eval "$(pyenv virtualenv-init -)"
+# fi
 
 # SDKMAN.
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!

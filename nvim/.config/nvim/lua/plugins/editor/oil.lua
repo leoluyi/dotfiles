@@ -2,11 +2,10 @@ return {
   {
     -- < https://github.com/stevearc/oil.nvim >
     "stevearc/oil.nvim",
-    -- enabled = false,
+    enabled = true,
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
     lazy = false,
-    enabled = false,
     keys = {
       -- Open parent directory in the current window.
       { "-", "<cmd>Oil<cr>", desc = "(Oil) Open parent directory" },
