@@ -57,7 +57,7 @@ return {
       set({ "n", "v" }, "<localleader>x", mc.deleteCursor)
 
       -- Add and remove cursors with control + left click.
-      set("n", "<c-leftmouse>", mc.handleMouse)
+      -- set("n", "<c-leftmouse>", mc.handleMouse)
 
       -- Easy way to add and remove cursors using the main cursor.
       set({ "n", "v" }, "<c-q>", mc.toggleCursor)
