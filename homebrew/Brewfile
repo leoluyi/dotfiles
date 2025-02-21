@@ -349,7 +349,7 @@ cask "bitwarden"
 cask "blackhole-16ch"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
-# Write, edit, and chat about your code with AI
+# Server and cloud storage browser
 cask "cyberduck"
 # Universal database tool and SQL client
 cask "dbeaver-community"
