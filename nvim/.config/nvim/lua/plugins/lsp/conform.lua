@@ -15,7 +15,7 @@ return {
           })
         end,
         mode = { "n", "x" },
-        desc = "Format file or range",
+        desc = "(conform) Format file or range",
       },
     },
     opts = {
