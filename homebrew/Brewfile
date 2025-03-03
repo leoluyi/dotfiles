@@ -431,6 +431,8 @@ cask "quicklookase"
 cask "r"
 # Control your tools with a few keystrokes
 cask "raycast"
+# Screenshot measurement and annotation tool
+cask "shottr"
 # React client for Simplenote
 cask "simplenote"
 # Utility to resize and position application windows
@@ -507,7 +509,6 @@ mas "Telegram", id: 747648890
 mas "Todoist", id: 585829637
 mas "WeChat", id: 836500024
 mas "Windows App", id: 1295203466
-mas "Xnip", id: 1221250572
 mas "簡約錄音機", id: 989175722
 vscode "alexeyvax.vscode-open-native-terminal"
 vscode "bastienboutonnet.vscode-dbt"
