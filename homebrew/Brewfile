@@ -349,6 +349,8 @@ cask "bitwarden"
 cask "blackhole-16ch"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
+# AI chatbot for many LLMs
+cask "chatwise"
 # Server and cloud storage browser
 cask "cyberduck"
 # Universal database tool and SQL client
@@ -506,7 +508,6 @@ mas "Prodrafts", id: 1545810067
 mas "Quick Colour Picker", id: 1453741555
 mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
-mas "Todoist", id: 585829637
 mas "WeChat", id: 836500024
 mas "Windows App", id: 1295203466
 mas "簡約錄音機", id: 989175722
