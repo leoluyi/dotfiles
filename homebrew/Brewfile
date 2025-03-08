@@ -355,6 +355,8 @@ cask "chatwise"
 cask "cyberduck"
 # Universal database tool and SQL client
 cask "dbeaver-community"
+# Network traffic analyser
+cask "debookee"
 # Presentations from Markdown
 cask "deckset"
 # App to build and share containerised applications and microservices
@@ -383,6 +385,8 @@ cask "hot"
 cask "iina"
 # Markdown editor
 cask "inkdrop"
+# Tool for multi-language users
+cask "input-source-pro"
 # Menu bar calendar
 cask "itsycal"
 # Menu bar manager
@@ -413,6 +417,8 @@ cask "openineditor-lite"
 cask "openinterminal"
 # Finder Toolbar app to open the current directory in Terminal
 cask "openinterminal-lite"
+# Replacement for Docker Desktop
+cask "orbstack"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
 # Collaboration platform for API development
