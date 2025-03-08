@@ -417,8 +417,6 @@ cask "openineditor-lite"
 cask "openinterminal"
 # Finder Toolbar app to open the current directory in Terminal
 cask "openinterminal-lite"
-# Replacement for Docker Desktop
-cask "orbstack"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
 # Collaboration platform for API development
