@@ -11,7 +11,6 @@ return {
       ensure_installed = {
         -- LSP.
         "bash-language-server",
-        "buf-language-server", -- Protobuf
         "golangci-lint-langserver",
         "gopls",
         "json-lsp",
