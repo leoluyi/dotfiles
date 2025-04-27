@@ -78,20 +78,8 @@ run = 'layout tiling'
 if.app-id = 'com.github.wez.wezterm'
 run = ['layout tiling', 'move-node-to-workspace T']
 
-[[on-window-detected]]
-if.app-id = 'com.google.Chrome'
-run = "move-node-to-workspace B"
 
 # 'main' binding mode declaration
-[[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
-run = "move-node-to-workspace B"
-
-# 'main' binding mode declaration
-[[on-window-detected]]
-if.app-id = 'com.apple.Safari'
-run = "move-node-to-workspace B"
-
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
