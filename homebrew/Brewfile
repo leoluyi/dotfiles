@@ -13,16 +13,17 @@ tap "instantclienttap/instantclient"
 tap "jesseduffield/lazygit"
 tap "koekeishiya/formulae"
 tap "microsoft/mssql-release"
+tap "nikitabobko/tap"
 tap "noborus/tap"
 tap "saulpw/vd"
 tap "sdkman/tap"
 tap "ubuntu/microk8s"
 # Search tool like grep, but optimized for programmers
 brew "ack"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Development kit for the Java programming language
 brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
@@ -187,7 +188,7 @@ brew "lolcat"
 brew "mas"
 # Unified display of technical and tag data for audio/video
 brew "media-info"
-# Scala build tool
+# Fast, scalable JVM build tool
 brew "mill"
 # Run a Kubernetes cluster locally
 brew "minikube"
@@ -325,16 +326,14 @@ brew "flyteorg/tap/flytectl"
 brew "instantclienttap/instantclient/instantclient-basiclite"
 # A simple terminal UI for git commands, written in Go
 brew "jesseduffield/lazygit/lazygit"
-# Simple hotkey-daemon for macOS.
-brew "koekeishiya/formulae/skhd"
-# A tiling window manager for macOS based on binary space partitioning.
-brew "koekeishiya/formulae/yabai"
 # SDKMAN! the Software Development Kit Manager
 brew "sdkman/tap/sdkman-cli"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
+# AeroSpace is an i3-like tiling window manager for macOS
+cask "aerospace"
 # GPU-accelerated terminal emulator
 cask "alacritty"
 # Enable Windows-like alt-tab
@@ -483,38 +482,6 @@ cask "xquartz"
 cask "zed"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "1Password for Safari", id: 1569813296
-mas "Accelerate", id: 1459809092
-mas "AdGuard for Safari", id: 1440147259
-mas "Annotate", id: 918207447
-mas "AS Timer", id: 512464723
-mas "AutoMounter", id: 1160435653
-mas "Be Focused", id: 973134470
-mas "bonjourrStartpage", id: 1615431236
-mas "ColorSlurp", id: 1287239339
-mas "CotEditor", id: 1024640650
-mas "CSView", id: 1167193104
-mas "Dark Reader for Safari", id: 1438243180
-mas "Easy CSV Editor", id: 1171346381
-mas "Gifski", id: 1351639930
-mas "Hush", id: 1544743900
-mas "iMovie", id: 408981434
-mas "iPreview", id: 1519213509
-mas "Keynote", id: 409183694
-mas "LINE", id: 539883307
-mas "Messenger", id: 1480068668
-mas "Movist", id: 461788075
-mas "Owlfiles", id: 510282524
-mas "PDFgear", id: 6469021132
-mas "Perplexity", id: 6714467650
-mas "Pomosh", id: 1515791898
-mas "Prodrafts", id: 1545810067
-mas "Quick Colour Picker", id: 1453741555
-mas "Speedtest", id: 1153157709
-mas "Telegram", id: 747648890
-mas "WeChat", id: 836500024
-mas "Windows App", id: 1295203466
-mas "簡約錄音機", id: 989175722
 vscode "alexeyvax.vscode-open-native-terminal"
 vscode "bastienboutonnet.vscode-dbt"
 vscode "christian-kohler.path-intellisense"
