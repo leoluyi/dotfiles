@@ -41,6 +41,11 @@ return {
         helpers.theme_switcher(window, pane)
       end),
     },
+    {
+      key = "w",
+      mods = "CMD|SHIFT",
+      action = wezterm.action.CloseCurrentTab({ confirm = false }),
+    },
     { key = "y", mods = "CMD|ALT", action = wezterm.action.EmitEvent("toggle-colorscheme") },
   },
   mouse_bindings = {
@@ -68,6 +73,7 @@ return {
       action = wezterm.action.Nop,
     },
   },
+
   window_close_confirmation = "NeverPrompt",
   skip_close_confirmation_for_processes_named = {
     "bash",
@@ -79,5 +85,6 @@ return {
     "cmd.exe",
     "pwsh.exe",
     "powershell.exe",
+    "nvim",
   },
 }
