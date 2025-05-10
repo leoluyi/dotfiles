@@ -74,11 +74,11 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
-run = ['layout tiling', 'move-node-to-workspace T']
+run = ['layout tiling', 'move-node-to-workspace 2']
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = ['layout tiling', 'move-node-to-workspace T']
+run = ['layout tiling', 'move-node-to-workspace 2']
 
 
 # 'main' binding mode declaration
