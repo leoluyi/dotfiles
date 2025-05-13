@@ -60,8 +60,11 @@ return {
           { "<leader>dPc", function() require('dap-python').test_class() end, desc = "(dap-python) Debug Class" },
         },
         config = function()
-          local path = require("mason-registry").get_package("debugpy"):get_install_path()
-          require("dap-python").setup(path .. "/venv/bin/python")
+          if vim.fn.has("win32") == 1 then
+            require("dap-python").setup(require("helpers.util").get_pkg_path("debugpy", "/venv/Scripts/pythonw.exe"))
+          else
+            require("dap-python").setup(require("helpers.util").get_pkg_path("debugpy", "/venv/bin/python"))
+          end
         end,
       },
     },

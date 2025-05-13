@@ -3,7 +3,7 @@ local M = {}
 -- < User > ======================================================================={{{2
 
 function M.path_join(...)
-  local args = {...}
+  local args = { ... }
   local parts = {}
 
   for _, part in ipairs(args) do
@@ -16,7 +16,7 @@ function M.path_join(...)
     end
   end
 
-  return table.concat(parts, '/')
+  return table.concat(parts, "/")
 end
 
 function M.map(mode, lhs, rhs, opts)
@@ -38,10 +38,10 @@ function M.dirname(path)
     return path
   end
 
-  local result = path:gsub('/[^/]+$', ''):gsub('/$', '')
+  local result = path:gsub("/[^/]+$", ""):gsub("/$", "")
 
   if #result == 0 then
-    return '/'
+    return "/"
   end
 
   return result
@@ -54,13 +54,13 @@ local api = vim.api
 -------- This function is taken from https://github.com/norcalli/nvim_utils
 function M.nvim_create_augroups(definitions)
   for group_name, definition in pairs(definitions) do
-    api.nvim_command('augroup ' .. group_name)
-    api.nvim_command('autocmd!')
+    api.nvim_command("augroup " .. group_name)
+    api.nvim_command("autocmd!")
     for _, def in ipairs(definition) do
-      local command = 'autocmd ' .. table.concat(def, ' ')
+      local command = "autocmd " .. table.concat(def, " ")
       api.nvim_command(command)
     end
-    api.nvim_command('augroup END')
+    api.nvim_command("augroup END")
   end
 end
 
@@ -68,6 +68,28 @@ end
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/util/init.lua
 
 local Util = require("lazy.core.util")
+
+--- Gets a path to a package in the Mason registry.
+--- Prefer this to `get_package`, since the package might not always be
+--- available yet and trigger errors.
+---@param pkg string
+---@param path? string
+---@param opts? { warn?: boolean }
+function M.get_pkg_path(pkg, path, opts)
+  local warn = vim.health.warn or vim.health.report_warn
+  pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
+  local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
+  opts = opts or {}
+  opts.warn = opts.warn == nil and true or opts.warn
+  path = path or ""
+  local ret = root .. "/packages/" .. pkg .. "/" .. path
+  if opts.warn and not vim.loop.fs_stat(ret) and not require("lazy.core.config").headless() then
+    warn(
+      ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(pkg, path)
+    )
+  end
+  return ret
+end
 
 ---@param on_attach fun(client, buffer)
 function M.on_attach(on_attach)
@@ -278,28 +300,28 @@ function M.log(...)
 end
 
 function M.safe_require(name, opts)
-  opts = vim.tbl_extend("force", {silent = false}, opts or {})
+  opts = vim.tbl_extend("force", { silent = false }, opts or {})
   local status, module = pcall(require, name)
-  if (status) then
+  if status then
     return module
   else
     if not opts.silent then
-      print(string.format("WARNING: error loading lua module \"%s\"", name))
+      print(string.format('WARNING: error loading lua module "%s"', name))
     end
     return nil
   end
 end
 
 function M.current_word()
-  return api.nvim_call_function("expand", {"<cword>"})
+  return api.nvim_call_function("expand", { "<cword>" })
 end
 
 function M.buf_text()
   local bufnr = vim.api.nvim_win_get_buf(0)
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, vim.api.nvim_buf_line_count(bufnr), true)
-  local text = ''
+  local text = ""
   for i, line in ipairs(lines) do
-    text = text .. line .. '\n'
+    text = text .. line .. "\n"
   end
   return text
 end
@@ -307,20 +329,20 @@ end
 -- Function to get current seleted text
 -- < https://gitlab.com/jrop/dotfiles/-/blob/master/.config/nvim/lua/my/utils.lua#L13 >
 function M.buf_vtext()
-  local a_orig = vim.fn.getreg('a')
+  local a_orig = vim.fn.getreg("a")
   local mode = vim.fn.mode()
-  if mode ~= 'v' and mode ~= 'V' then
+  if mode ~= "v" and mode ~= "V" then
     vim.cmd([[normal! gv]])
   end
   vim.cmd([[silent! normal! "aygv]])
-  local text = vim.fn.getreg('a')
-  vim.fn.setreg('a', a_orig)
+  local text = vim.fn.getreg("a")
+  vim.fn.setreg("a", a_orig)
   return text
 end
 
 function M.buf_text_or_vtext()
   local mode = vim.fn.mode()
-  if mode == 'v' or mode == 'V' then
+  if mode == "v" or mode == "V" then
     return M.buf_vtext()
   end
   return M.buf_text()
@@ -332,7 +354,7 @@ function M.buf_get_filetype(bufnr)
 end
 
 function M.exists(expr)
-  return api.nvim_eval(string.format("exists(\"%s\")", expr)) ~= 0
+  return api.nvim_eval(string.format('exists("%s")', expr)) ~= 0
 end
 
 -- From https://github.com/nanotee/nvim-lua-guide
@@ -346,7 +368,6 @@ function M.put(...)
   print(table.concat(objects, " "))
   return ...
 end
-
 
 _G.put = M.put
 
