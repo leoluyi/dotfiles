@@ -4,6 +4,7 @@ return {
   {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
+    enabled = false,
     cmd = "Copilot",
     build = ":Copilot auth",
     keys = {
@@ -39,15 +40,15 @@ return {
         },
         layout = {
           position = "right", -- | top | left | right
-          ratio = 0.4
+          ratio = 0.4,
         },
       },
       filetypes = {
         yaml = true,
         markdown = true,
         help = false,
-        sh = function ()
-          if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
+        sh = function()
+          if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
             -- disable for .env files
             return false
           end
@@ -58,7 +59,7 @@ return {
     config = function(_, opts)
       require("copilot").setup(opts)
       -- highlight CopilotSuggestion
-      vim.cmd[[highlight CopilotSuggestion guibg=#555555 ctermbg=8]]
+      vim.cmd([[highlight CopilotSuggestion guibg=#555555 ctermbg=8]])
 
       -- Disable copilot for certain filetypes.
       -- < https://github.com/zbirenbaum/copilot.lua/issues/74#issuecomment-1443751721 >
@@ -69,7 +70,7 @@ return {
           pattern = pattern,
           callback = function(args)
             local client = vim.lsp.get_client_by_id(args.data.client_id)
-            if client.name == 'copilot' then
+            if client.name == "copilot" then
               vim.defer_fn(function()
                 vim.cmd("silent Copilot detach")
               end, 0)
@@ -77,7 +78,6 @@ return {
           end,
         })
       end
-
     end,
   },
 
@@ -87,7 +87,9 @@ return {
     event = "VeryLazy",
     opts = function(_, opts)
       local util_ok, Util = pcall(require, "helpers.util")
-      if not util_ok then return end
+      if not util_ok then
+        return
+      end
       local colors = {
         [""] = Util.fg("DiagnosticInfo"),
         ["Normal"] = Util.fg("DiagnosticOk"),
@@ -96,7 +98,9 @@ return {
       }
 
       -- if opts has to key "sections", create it without copying the original table
-      if not opts.sections then opts.sections = { lualine_x = {} } end
+      if not opts.sections then
+        opts.sections = { lualine_x = {} }
+      end
 
       table.insert(opts.sections.lualine_x, 2, {
         function()
@@ -116,8 +120,6 @@ return {
           return colors[status.status] or colors[""]
         end,
       })
-
     end,
   },
-
 }
