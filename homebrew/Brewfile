@@ -59,8 +59,6 @@ brew "cheat"
 brew "cmake"
 # Console Matrix
 brew "cmatrix"
-# Access VS Code through the browser
-brew "code-server"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # POSIX-compliant descendant of NetBSD's ash (the Almquist SHell)
@@ -283,8 +281,6 @@ brew "terminal-notifier"
 brew "the_silver_searcher"
 # Text interface for Git repositories
 brew "tig"
-# Terminal image and video viewer
-brew "timg"
 # Simplified and community-driven man pages
 brew "tldr"
 # Terminal multiplexer

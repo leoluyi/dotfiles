@@ -228,7 +228,7 @@ install_xcodecli
 install_homebrew
 
 # Insatll brew apps.
-command -v brew >/dev/null && brew bundle install --no-lock --file="${_SCRIPT_DIR}"/homebrew/Brewfile
+command -v brew >/dev/null && brew bundle install --no-upgrade --file="${_SCRIPT_DIR}"/homebrew/Brewfile
 # command -v brew >/dev/null && xargs brew install < "${_SCRIPT_DIR}"/homebrew/leaves.txt
 
 install_alacritty_theme_switch
