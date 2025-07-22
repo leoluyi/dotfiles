@@ -127,8 +127,6 @@ brew "pkgconf"
 brew "gobject-introspection"
 # Terminal based graphical activity monitor inspired by gtop and vtop
 brew "gotop"
-# ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
-brew "libheif"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # GNU grep, egrep and fgrep
@@ -149,6 +147,8 @@ brew "httrack"
 brew "ical-buddy"
 # Tool to report network interface bandwidth
 brew "ifstat"
+# ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
+brew "libheif"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # GNU utilities for networking
