@@ -62,7 +62,7 @@ brew "cmatrix"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # POSIX-compliant descendant of NetBSD's ash (the Almquist SHell)
-brew "dash"
+brew "dash-shell"
 # Utility to replace problematic characters in filenames
 brew "detox"
 # Good-lookin' diffs with diff-highlight and more
@@ -356,7 +356,7 @@ cask "debookee"
 # Presentations from Markdown
 cask "deckset"
 # App to build and share containerised applications and microservices
-cask "docker"
+cask "docker-desktop"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
 # Cross-platform Text Expander written in Rust
@@ -430,7 +430,7 @@ cask "quicklook-json"
 # Quick Look generator for Adobe Swatch Exchange files
 cask "quicklookase"
 # Environment for statistical computing and graphics
-cask "r"
+cask "r-app"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Screenshot measurement and annotation tool
@@ -492,6 +492,7 @@ mas "CotEditor", id: 1024640650
 mas "CSView", id: 1167193104
 mas "Dark Reader for Safari", id: 1438243180
 mas "Easy CSV Editor", id: 1171346381
+mas "Elmedia Video Player", id: 1044549675
 mas "Gifski", id: 1351639930
 mas "Hush", id: 1544743900
 mas "iMovie", id: 408981434
