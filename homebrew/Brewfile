@@ -23,12 +23,12 @@ tap "ubuntu/microk8s"
 brew "ack"
 # OpenType text shaping engine
 brew "harfbuzz"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
 # Development kit for the Java programming language
 brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Download with resuming and segmented downloading
 brew "aria2"
 # Record and share terminal sessions
@@ -429,8 +429,6 @@ cask "qlvideo"
 cask "quicklook-json"
 # Quick Look generator for Adobe Swatch Exchange files
 cask "quicklookase"
-# Environment for statistical computing and graphics
-cask "r-app"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Screenshot measurement and annotation tool
