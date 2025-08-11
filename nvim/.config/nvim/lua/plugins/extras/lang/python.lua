@@ -71,6 +71,7 @@ return {
   },
   {
     "linux-cultist/venv-selector.nvim",
+    enabled = false,
     dependencies = {
       "neovim/nvim-lspconfig",
       "mfussenegger/nvim-dap",

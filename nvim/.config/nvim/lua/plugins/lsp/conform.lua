@@ -59,7 +59,7 @@ return {
         kotlin = { "ktlint" },
         ruby = { "standardrb" },
         makefile = { "checkmake" },
-        markdown = { "prettierd", "prettier", stop_after_first = true },
+        markdown = { "markdownlint-cli2", "prettierd", "prettier", stop_after_first = true },
         erb = { "htmlbeautifier" },
         html = { "htmlbeautifier" },
         bash = { "beautysh" },

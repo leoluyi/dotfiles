@@ -25,6 +25,7 @@ return {
         -- Linters, Formatters.
         "checkmake",
         "flake8",
+        "markdownlint-cli2",
         "ruff",
         "taplo", -- TOML
       },
