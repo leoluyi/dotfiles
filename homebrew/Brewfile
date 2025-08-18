@@ -171,6 +171,8 @@ brew "kompose"
 brew "kube-linter"
 # Lazier way to manage everything docker
 brew "lazydocker"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Terminal file manager
 brew "lf"
 # Implementation of the file(1) command
@@ -191,6 +193,8 @@ brew "media-info"
 brew "mill"
 # Run a Kubernetes cluster locally
 brew "minikube"
+# SIMD-accelerated C++ JSON parser
+brew "simdjson"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
 # Collection of tools that nobody wrote when UNIX was young
@@ -321,8 +325,6 @@ brew "eddieantonio/eddieantonio/imgcat"
 brew "flyteorg/tap/flytectl"
 # Oracle Instant Client Basic Lite x64
 brew "instantclienttap/instantclient/instantclient-basiclite"
-# A simple terminal UI for git commands, written in Go
-brew "jesseduffield/lazygit/lazygit"
 # SDKMAN! the Software Development Kit Manager
 brew "sdkman/tap/sdkman-cli"
 # Password manager that keeps all passwords secure behind one password
