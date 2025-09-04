@@ -63,5 +63,5 @@ alias cdtemp='cd $(mktemp -d)'
 alias history-off='set +o history'
 alias history-on='set -o history'
 # Clear last hour history.
-alias history-clearlast20="[ -f $HISTFILE ] && HISTTIMEFORMAT='%s ' history | awk -v d1=\"$(date --date='-20 min' '+%s')\" '(\$2 > d1 ) { print \$2 }' | xargs -I {} sed -i '/^.*:{}:/{N;d;}' $HISTFILE && history -c && history -r"
+alias history-clearlast20="[ -f $HISTFILE ] && HISTTIMEFORMAT='%s ' history | awk -v d1=\"\$(date --date='-20 min' '+%s')\" '(\$2 > d1 ) { print \$2 }' | xargs -I {} sed -i '/^.*:{}:/{N;d;}' $HISTFILE && history -c && history -r"
 alias history-clear='[ -f "$HISTFILE" ] && cat /dev/null > "$HISTFILE" && history -c'
