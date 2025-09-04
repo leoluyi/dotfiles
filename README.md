@@ -8,7 +8,7 @@
 rm -rf ~/.dotfiles \
   && git clone https://github.com/leoluyi/dotfiles.git ~/.dotfiles \
   && cd ~/.dotfiles \
-  && source ./bootstrap_macos.sh
+  && ./bootstrap_macos.sh
 ```
 
 Alternatively, to update while avoiding the confirmation prompt:
