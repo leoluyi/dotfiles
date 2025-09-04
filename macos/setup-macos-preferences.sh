@@ -51,11 +51,14 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool t
 
 # ====== Dock ======
 
-# Dock > Size:
+# Dock > Size: base size of Dock icons
 defaults write com.apple.dock tilesize -int 48
 
 # Dock > Magnification
 defaults write com.apple.dock largesize -int 68
+
+# Enable magnification
+defaults write com.apple.dock magnification -bool true
 
 # Dock > Minimize windows into application icon
 defaults write com.apple.dock minimize-to-application -bool false
@@ -77,6 +80,7 @@ defaults write com.apple.dock mru-spaces -bool false
 # Group by app by default in Expose:
 defaults write com.apple.dock expose-group-by-app -bool true
 
+# Restart Dock to apply changes
 killall Dock
 
 # Automatically quit printer app once the print jobs complete
