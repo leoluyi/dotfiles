@@ -30,7 +30,7 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 When setting up a new Mac, you may want to set some sensible macOS defaults:
 
 ```bash
-./macos/set_defaults.sh
+./macos/setup-macos-preferences.sh
 ```
 ```
 
