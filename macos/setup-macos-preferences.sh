@@ -69,6 +69,12 @@ defaults write com.apple.dock autohide -bool false
 # Show recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
 
+# ====== Hotspot ======
+
+# right-bottom corner (start screensaver)
+defaults write com.apple.dock wvous-br-corner -int 5
+defaults write com.apple.dock wvous-br-modifier -int 0
+
 # ====== Mission Control ======
 
 # Disable the crash reporter
