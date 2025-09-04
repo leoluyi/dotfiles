@@ -1,4 +1,5 @@
 tap "1password/tap"
+tap "anchore/grype"
 tap "beeftornado/rmtree"
 tap "carlocab/personal"
 tap "charmbracelet/tap"
@@ -6,6 +7,7 @@ tap "coursier/formulas"
 tap "eddieantonio/eddieantonio"
 tap "felixkratz/formulae"
 tap "flyteorg/tap"
+tap "heroku/brew"
 tap "instantclienttap/instantclient"
 tap "jesseduffield/lazygit"
 tap "koekeishiya/formulae"
@@ -23,10 +25,10 @@ brew "harfbuzz"
 brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
 # Download with resuming and segmented downloading
 brew "aria2"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Record and share terminal sessions
 brew "asciinema"
 # Tool for managing OCI containers and pods
@@ -478,7 +480,6 @@ cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "Accelerate", id: 1459809092
 mas "AdGuard for Safari", id: 1440147259
-mas "Annotate", id: 918207447
 mas "AS Timer", id: 512464723
 mas "AutoMounter", id: 1160435653
 mas "Be Focused", id: 973134470
@@ -489,6 +490,7 @@ mas "CSView", id: 1167193104
 mas "Dark Reader for Safari", id: 1438243180
 mas "Easy CSV Editor", id: 1171346381
 mas "Elmedia Video Player", id: 1044549675
+mas "GarageBand", id: 682658836
 mas "Gifski", id: 1351639930
 mas "Hush", id: 1544743900
 mas "iMovie", id: 408981434
@@ -497,18 +499,18 @@ mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
 mas "Messenger", id: 1480068668
 mas "Movist", id: 461788075
+mas "Numbers", id: 409203825
 mas "Owlfiles", id: 510282524
+mas "Pages", id: 409201541
 mas "PDFgear", id: 6469021132
 mas "Perplexity", id: 6714467650
-mas "Pomosh", id: 1515791898
 mas "Prodrafts", id: 1545810067
-mas "Quick Colour Picker", id: 1453741555
 mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
 mas "WeChat", id: 836500024
 mas "Windows App", id: 1295203466
-mas "簡約錄音機", id: 989175722
 vscode "alexeyvax.vscode-open-native-terminal"
+vscode "altimateai.vscode-altimate-mcp-server"
 vscode "bastienboutonnet.vscode-dbt"
 vscode "christian-kohler.path-intellisense"
 vscode "doggy8088.quicktype-refresh"
@@ -528,12 +530,14 @@ vscode "joeberria.statusbarerror"
 vscode "marp-team.marp-vscode"
 vscode "mhutchie.git-graph"
 vscode "mohsen1.prettify-json"
+vscode "ms-azuretools.vscode-containers"
 vscode "ms-azuretools.vscode-docker"
 vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 vscode "ms-python.debugpy"
 vscode "ms-python.isort"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
 vscode "ms-toolsai.jupyter"
 vscode "ms-toolsai.jupyter-keymap"
 vscode "ms-toolsai.jupyter-renderers"
@@ -557,6 +561,7 @@ vscode "randomfractalsinc.vscode-data-preview"
 vscode "redhat.java"
 vscode "redhat.vscode-yaml"
 vscode "reditorsupport.r"
+vscode "reditorsupport.r-syntax"
 vscode "rickynormandeau.mariana-pro"
 vscode "ritwickdey.liveserver"
 vscode "samuelcolvin.jinjahtml"

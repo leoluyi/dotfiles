@@ -214,8 +214,8 @@ install_alacritty_theme_switch () {
 
 post_insatll_config() {
   echo "$(tput setaf 2)###### Post-install Config ######$(tput sgr 0)"
-  yabai --start-service
-  skhd --start-service
+  command -v yabai && yabai --start-service
+  command -v skhd && skhd --start-service
 
   # Fix python.
   [ -f /opt/homebrew/bin/python ] && ln -sf ./python3 /opt/homebrew/bin/python
