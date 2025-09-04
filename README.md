@@ -14,7 +14,7 @@ rm -rf ~/.dotfiles \
 Alternatively, to update while avoiding the confirmation prompt:
 
 ```bash
-set -- -f; source bootstrap_macos.sh
+set -- -f; bash bootstrap_macos.sh
 ```
 
 ### Install Homebrew formulae
