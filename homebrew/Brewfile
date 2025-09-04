@@ -309,8 +309,6 @@ brew "yt-dlp"
 brew "zenity"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# A vulnerability scanner for container images and filesystems
-brew "grype"
 # Extract, view, and test RAR archives
 brew "carlocab/personal/unrar"
 # Launcher for Coursier
@@ -371,6 +369,8 @@ cask "font-noto-sans-cjk"
 cask "font-ubuntu-nerd-font"
 # Web browser
 cask "google-chrome"
+# A vulnerability scanner for container images and filesystems
+cask "grype"
 # Utility to hide menu bar items
 cask "hiddenbar"
 # Menu bar application that displays the CPU speed limit due to thermal issues
