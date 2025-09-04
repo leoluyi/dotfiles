@@ -1,5 +1,4 @@
 tap "1password/tap"
-tap "anchore/grype"
 tap "beeftornado/rmtree"
 tap "carlocab/personal"
 tap "charmbracelet/tap"
@@ -311,7 +310,7 @@ brew "zenity"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # A vulnerability scanner for container images and filesystems
-brew "anchore/grype/grype"
+brew "grype"
 # Extract, view, and test RAR archives
 brew "carlocab/personal/unrar"
 # Launcher for Coursier
