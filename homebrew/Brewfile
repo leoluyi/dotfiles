@@ -509,6 +509,7 @@ mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
 mas "WeChat", id: 836500024
 mas "Windows App", id: 1295203466
+mas "Xnip", id: 1221250572
 vscode "alexeyvax.vscode-open-native-terminal"
 vscode "altimateai.vscode-altimate-mcp-server"
 vscode "bastienboutonnet.vscode-dbt"
