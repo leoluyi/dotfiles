@@ -131,6 +131,8 @@ brew "graphviz"
 brew "grep"
 # GitHub Markdown previewer
 brew "grip"
+# Vulnerability scanner for container images and filesystems
+brew "grype"
 # Toolkit for creating graphical user interfaces
 brew "gtk4"
 # Kubernetes package manager
@@ -201,6 +203,8 @@ brew "moreutils"
 brew "most"
 # NCurses Disk Usage
 brew "ncdu"
+# Incremental parsing library
+brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # HTTP/2 C Library
@@ -371,8 +375,6 @@ cask "font-noto-sans-cjk"
 cask "font-ubuntu-nerd-font"
 # Web browser
 cask "google-chrome"
-# A vulnerability scanner for container images and filesystems
-cask "grype"
 # Utility to hide menu bar items
 cask "hiddenbar"
 # Menu bar application that displays the CPU speed limit due to thermal issues

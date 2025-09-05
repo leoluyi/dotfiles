@@ -34,6 +34,7 @@ return {
 
     -- @type TSConfig
     opts = {
+      auto_install = true,
       ensure_installed = {
         "bash",
         "c_sharp",
