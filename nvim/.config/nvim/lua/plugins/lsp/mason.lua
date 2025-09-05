@@ -9,6 +9,9 @@ return {
       -- https://mason-registry.dev/registry/list
       -- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
       ensure_installed = {
+        -- Tools.
+        "tree-sitter-cli",
+
         -- LSP.
         "bash-language-server",
         "golangci-lint-langserver",
