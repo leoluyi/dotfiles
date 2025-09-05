@@ -227,7 +227,11 @@ fi
 # System Preferences > Trackpad
 ################################################################################
 
-# Tap to click
+# Trackpad speed.
+defaults write -g com.apple.trackpad.scaling -float 1
+killall SystemUIServer
+
+# Tap to click.
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 
