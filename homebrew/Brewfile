@@ -1,5 +1,4 @@
 tap "1password/tap"
-tap "anchore/grype"
 tap "beeftornado/rmtree"
 tap "carlocab/personal"
 tap "charmbracelet/tap"
@@ -25,10 +24,10 @@ brew "harfbuzz"
 brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
-# Download with resuming and segmented downloading
-brew "aria2"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.13"
+# Download with resuming and segmented downloading
+brew "aria2"
 # Record and share terminal sessions
 brew "asciinema"
 # Tool for managing OCI containers and pods
@@ -397,6 +396,8 @@ cask "keka"
 cask "keyboardcleantool"
 # Open-source keystroke visualiser
 cask "keycastr"
+# Agent-centric IDE with spec-driven development
+cask "kiro"
 # Provides updates to various Microsoft products
 # Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
