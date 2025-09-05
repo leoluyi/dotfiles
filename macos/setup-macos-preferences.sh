@@ -228,7 +228,7 @@ fi
 ################################################################################
 
 # Trackpad speed.
-defaults write -g com.apple.trackpad.scaling -float 1
+defaults write -g com.apple.trackpad.scaling -float 0.875
 killall SystemUIServer
 
 # Tap to click.
