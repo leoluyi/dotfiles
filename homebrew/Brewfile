@@ -1,4 +1,5 @@
 tap "1password/tap"
+tap "anchore/grype"
 tap "beeftornado/rmtree"
 tap "carlocab/personal"
 tap "charmbracelet/tap"
@@ -24,10 +25,10 @@ brew "harfbuzz"
 brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
 # Download with resuming and segmented downloading
 brew "aria2"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Record and share terminal sessions
 brew "asciinema"
 # Tool for managing OCI containers and pods
