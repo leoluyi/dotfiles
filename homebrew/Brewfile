@@ -219,6 +219,8 @@ brew "opencc"
 brew "openjdk@17"
 # 7-Zip (high compression file archiver) implementation
 brew "p7zip"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
 # PDF files password cracker
 brew "pdfcrack"
 # Bash completion for Pip
