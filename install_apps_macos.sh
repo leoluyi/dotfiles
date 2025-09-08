@@ -195,12 +195,6 @@ brew_install_cli() {
 }
 
 
-install_go_completion() {
-  echo "$(tput setaf 2)###### Install go-complete ######$(tput sgr 0)"
-  command -v go >/dev/null \
-    && go insatll github.com/posener/complete/gocomplete@latest
-}
-
 install_alacritty_theme_switch () {
   # ats < https://www.npmjs.com/package/alacritty-theme-switch/v/1.1.11 >
   echo "$(tput setaf 2)###### Install alacritty-theme-switch ######$(tput sgr 0)"
@@ -232,14 +226,12 @@ command -v brew >/dev/null && brew bundle install --no-upgrade --file="${_SCRIPT
 # command -v brew >/dev/null && xargs brew install < "${_SCRIPT_DIR}"/homebrew/leaves.txt
 
 install_alacritty_theme_switch
-install_go_completion
 post_insatll_config
 
 unset \
   install_xcodecli \
   install_homebrew \
   install_alacritty_theme_switch \
-  install_go_completion \
   post_insatll_config \
   &>/dev/null
 
