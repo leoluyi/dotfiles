@@ -31,9 +31,11 @@ return {
       local lombok_jar = path_join(vim.fn.expand("$MASON/packages/jdtls"), "lombok.jar")
 
       return {
-        -- How to find the root dir for a given filename. The default comes from
-        -- lspconfig which provides a function specifically for java projects.
-        root_dir = require("lspconfig.server_configurations.jdtls").default_config.root_dir,
+        -- How to find the root dir for a given filename.
+        -- Using vim.fs.root instead of lspconfig's root_dir function
+        root_dir = function(fname)
+          return vim.fs.root(fname, { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" })
+        end,
 
         -- How to find the project name for a given root dir.
         project_name = function(root_dir)

@@ -30,8 +30,6 @@ return {
       },
     },
     config = function()
-      local lspconfig = require("lspconfig")
-      local util = require("lspconfig.util")
       local lsp_util = require("helpers.lsp_util")
       local lsp_attach = lsp_util.lsp_attach
       local signs = require("helpers.icons").diagnostics
@@ -108,14 +106,19 @@ return {
 
       -- < https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md>
 
-      lspconfig.bashls.setup({
+      vim.lsp.config.bashls = {
+        cmd = { "bash-language-server", "start" },
+        filetypes = { "sh", "bash" },
+        root_markers = { ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
         cmd_env = { GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)" },
-        filetypes = { "sh", "bash" },
-      })
+      }
 
-      lspconfig.eslint.setup({
+      vim.lsp.config.eslint = {
+        cmd = { "vscode-eslint-language-server", "--stdio" },
+        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+        root_markers = { ".eslintrc.js", ".eslintrc.json", "package.json", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
         settings = {
@@ -123,21 +126,27 @@ return {
             enable = true,
           },
         },
-      })
+      }
 
-      lspconfig.golangci_lint_ls.setup({
+      vim.lsp.config.golangci_lint_ls = {
         -- < https://github.com/nametake/golangci-lint-langserver#configuration-for-nvim-lspconfig >
         -- < https://golangci-lint.run/usage/linters/ >
+        cmd = { "golangci-lint-langserver" },
+        filetypes = { "go", "gomod" },
+        root_markers = { "go.work", "go.mod", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
         init_options = {
           command = { "golangci-lint", "run", "-E", "revive", "-E", "govet", "--out-format", "json" },
         },
-      })
+      }
 
-      lspconfig.gopls.setup({
+      vim.lsp.config.gopls = {
         -- < https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls >
         -- < https://github.com/golang/tools/blob/master/gopls/doc/settings.md >
+        cmd = { "gopls" },
+        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+        root_markers = { "go.work", "go.mod", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
         settings = {
@@ -155,7 +164,7 @@ return {
             ["ui.verboseOutput"] = true,
           },
         },
-      })
+      }
 
       -- INFO: https://github.com/folke/neodev.nvim
       local neodev_ok, neodev = pcall(require, "neodev")
@@ -163,8 +172,11 @@ return {
         neodev.setup()
       end
 
-      lspconfig.lua_ls.setup({
+      vim.lsp.config.lua_ls = {
         -- INFO: fix global vim < https://www.reddit.com/r/neovim/comments/khk335/comment/hy1775w/ >
+        cmd = { "lua-language-server" },
+        filetypes = { "lua" },
+        root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
         settings = {
@@ -175,19 +187,23 @@ return {
             },
           },
         },
-      })
+      }
 
       -- < https://docs.astral.sh/ruff/editors/setup/ >
-      lspconfig.ruff.setup({
+      vim.lsp.config.ruff = {
+        cmd = { "ruff", "server", "--preview" },
+        filetypes = { "python" },
+        root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
-        root_dir = util.root_pattern(".git", "setup.py", "Pipfile", "Pipfile.lock", "pyproject.toml"),
-      })
+      }
 
-      lspconfig.pyright.setup({
+      vim.lsp.config.pyright = {
+        cmd = { "pyright-langserver", "--stdio" },
+        filetypes = { "python" },
+        root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
-        root_dir = util.root_pattern(".git", "setup.py", "Pipfile", "Pipfile.lock", "pyproject.toml"),
         settings = {
           pyright = {
             -- Using Ruff's import organizer
@@ -211,37 +227,55 @@ return {
         on_init = function(client)
           client.config.settings.python.pythonPath = lsp_util.get_python_path(client.config.root_dir)
         end,
-      })
+      }
 
-      lspconfig.jsonls.setup({
+      vim.lsp.config.jsonls = {
+        cmd = { "vscode-json-language-server", "--stdio" },
+        filetypes = { "json", "jsonc" },
+        root_markers = { "package.json", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
-      })
+      }
 
-      lspconfig.sqlls.setup({
+      vim.lsp.config.sqlls = {
+        cmd = { "sql-language-server", "up", "--method", "stdio" },
+        filetypes = { "sql", "mysql" },
+        root_markers = { ".sqllsrc.json", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
-      })
+      }
 
-      lspconfig.taplo.setup({
+      vim.lsp.config.taplo = {
+        cmd = { "taplo", "lsp", "stdio" },
+        filetypes = { "toml" },
+        root_markers = { "*.toml", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
-      })
+      }
 
-      lspconfig.ts_ls.setup({
+      vim.lsp.config.ts_ls = {
+        cmd = { "typescript-language-server", "--stdio" },
+        filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+        root_markers = { "tsconfig.json", "package.json", "jsconfig.json", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
-      })
+      }
 
-      lspconfig.vimls.setup({
+      vim.lsp.config.vimls = {
+        cmd = { "vim-language-server", "--stdio" },
+        filetypes = { "vim" },
+        root_markers = { "strange.vim", ".vim", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
-      })
+      }
 
-      lspconfig.yamlls.setup({
+      vim.lsp.config.yamlls = {
+        cmd = { "yaml-language-server", "--stdio" },
+        filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
+        root_markers = { ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
-      })
+      }
     end,
   },
 }
