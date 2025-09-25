@@ -25,10 +25,10 @@ brew "harfbuzz"
 brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
-# Download with resuming and segmented downloading
-brew "aria2"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.13"
+# Download with resuming and segmented downloading
+brew "aria2"
 # Record and share terminal sessions
 brew "asciinema"
 # Tool for managing OCI containers and pods
@@ -349,6 +349,8 @@ cask "blackhole-16ch"
 cask "chatgpt"
 # AI chatbot for many LLMs
 cask "chatwise"
+# Terminal-based AI coding assistant
+cask "claude-code"
 # Server and cloud storage browser
 cask "cyberduck"
 # Universal database tool and SQL client
@@ -409,6 +411,8 @@ cask "mongodb-compass"
 # Re-mounts write-protected NTFS volumes
 cask "mounty"
 cask "mysides"
+# VPN client for secure internet access and private browsing
+cask "nordvpn"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Finder Toolbar app to open the current directory in Editor
