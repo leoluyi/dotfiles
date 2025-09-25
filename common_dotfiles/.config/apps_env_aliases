@@ -120,6 +120,9 @@ command -v zoxide >/dev/null \
 # ImageMagick. --- WARN: Slow??
 # export DYLD_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib:$DYLD_LIBRARY_PATH"
 
+# Claude Code.
+export CLAUDE_BASH_NO_LOGIN=1
+
 # nnn.
 command -v nnn >/dev/null \
   && alias nnn='command nnn -R' \
