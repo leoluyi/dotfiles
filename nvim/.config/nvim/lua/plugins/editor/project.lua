@@ -4,6 +4,7 @@ return {
   {
     "ahmedkhalf/project.nvim",
     main = 'project_nvim',
+    -- enabled = false,
     keys = {
       { "<leader>cd", "<cmd>ProjectRoot<cr>", desc = "cd to project root" },
     },
