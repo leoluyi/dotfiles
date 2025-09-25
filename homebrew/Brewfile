@@ -99,6 +99,10 @@ brew "fortune"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
+# SIMD-accelerated C++ JSON parser
+brew "simdjson"
+# Interact with Google Gemini AI models from the command-line
+brew "gemini-cli"
 # Highest-quality GIF encoder based on pngquant
 brew "gifski"
 # Distributed revision control system
@@ -193,8 +197,6 @@ brew "media-info"
 brew "mill"
 # Run a Kubernetes cluster locally
 brew "minikube"
-# SIMD-accelerated C++ JSON parser
-brew "simdjson"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
 # Collection of tools that nobody wrote when UNIX was young
