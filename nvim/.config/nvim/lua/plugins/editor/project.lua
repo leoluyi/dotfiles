@@ -1,12 +1,13 @@
 return {
   -- Project.
-  -- < https://github.com/ahmedkhalf/project.nvim >
+  -- < https://github.com/DrKJeff16/project.nvim >
   {
-    "ahmedkhalf/project.nvim",
+    "DrKJeff16/project.nvim",
     main = 'project_nvim',
     keys = {
       { "<leader>cd", "<cmd>ProjectRoot<cr>", desc = "cd to project root" },
     },
+    ---@type Project.Config.Options
     opts = {
       -- Manual mode doesn't automatically change your root directory, so you have
       -- the option to manually do so using `:ProjectRoot` command.
@@ -31,5 +32,7 @@ return {
       -- * win
       scope_chdir = 'global',
     },
+
+    cond = vim.fn.has('nvim-0.11') == 1, -- RECOMMENDED
   },
 }
