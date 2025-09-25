@@ -8,7 +8,7 @@ return {
       { "]", group = "next" },
       { "g", group = "goto" },
       { "z", group = "fold" },
-    }
+    },
   },
 
   keys = {
@@ -45,29 +45,29 @@ return {
       { "<leader>8", hidden = true },
       { "<leader>9", hidden = true },
 
-      { "<leader>b",  group = "Buffer" },
-      { "<leader>c",  group = "Code|+Config" },
-      { "<leader>d",  group = "Dap|+Diagnostics" },
-      { "<leader>f",  group = "Find" },
-      { "<leader>g",  group = "Git" },
+      { "<leader>b", group = "Buffer" },
+      { "<leader>c", group = "Code|+Config" },
+      { "<leader>d", group = "Dap|+Diagnostics" },
+      { "<leader>f", group = "Find Files..." },
+      { "<leader>g", group = "Git" },
       { "<leader>gc", group = "Lspsaga [C]all trace" },
       { "<leader>gd", group = "Diffview" },
       { "<leader>gh", group = "Hunk" },
-      { "<leader>k",  group = "Neotree" },
-      { "<leader>K",  group = "Cheat" },
-      { "<leader>l",  group = "Lsp" },
+      { "<leader>k", group = "Neotree" },
+      { "<leader>K", group = "Cheat" },
+      { "<leader>l", group = "Lsp" },
       { "<leader>lc", group = "Lspsaga [C]all" },
-      { "<leader>q",  group = "Quit" },
-      { "<leader>r",  group = "Resize|+Rotate" },
-      { "<leader>s",  group = "Search" },
+      { "<leader>q", group = "Quit" },
+      { "<leader>r", group = "Resize|+Rotate" },
+      { "<leader>s", group = "Search" },
       { "<leader>sl", group = "Lsp" },
-      { "<leader>t",  group = "Terminal|Neotest" },
-      { "<leader>u",  group = "Toggle" },
-      { "<leader>v",  group = "VenvSelect" },
-      { "<leader>w",  group = "Workspace" },
-      { "<leader>x",  group = "TroubleToggle" },
-      { "<leader>y",  group = "Yank" },
-      { "<leader>z",  group = "Zoom" },
+      { "<leader>t", group = "Terminal|Neotest" },
+      { "<leader>u", group = "Toggle" },
+      { "<leader>v", group = "VenvSelect" },
+      { "<leader>w", group = "Workspace" },
+      { "<leader>x", group = "TroubleToggle" },
+      { "<leader>y", group = "Yank" },
+      { "<leader>z", group = "Zoom" },
     })
 
     wk.add({
@@ -80,6 +80,5 @@ return {
       { "<localleader>g", group = "Git" },
       { "<localleader>r", group = "Refactor" },
     })
-
-  end
+  end,
 }

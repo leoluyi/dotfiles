@@ -72,7 +72,6 @@ return {
         { "<leader>gw", telescope.extensions.git_worktree.git_worktrees, desc = "Git Worktrees" },
         -- Search.
         { "<leader>sb", util.buffer_dir, desc = "Search [B]uffer dir" },
-        { "<leader>sf", "<cmd>Telescope filetypes<cr>", desc = "Search [F]iletype" },
         { "<leader>sc", "<cmd>Telescope colorscheme<cr>", desc = "Search [C]olorscheme" },
         -- { "<leader>sD", function() telescope.extensions.diff.diff_files({ hidden = true }) end, desc = "Search [D]iff 2 files" },
         {
@@ -154,7 +153,7 @@ return {
           util.builtin("treesitter", { layout_config = { preview_width = 0.55 } }),
           desc = "Search [S]ymbols",
         },
-        { "<leader>st", "<cmd>Telescope filetypes<cr>", desc = "Search [F]iletypes" },
+        { "<leader>st", "<cmd>Telescope filetypes<cr>", desc = "Search File[T]ypes" },
         {
           "<leader>sw",
           util.builtin("grep_string", {
