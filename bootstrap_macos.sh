@@ -51,7 +51,10 @@ use_gnu_bash() {
       # Switch to using brew-installed bash as default shell
       echo "${HOMEBREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
     else
-      echo "${HOMEBREW_PREFIX}/bin/bash"' not installed'
+      echo "/etc/shells not modified"
+      if [ ! -f "${HOMEBREW_PREFIX}/bin/bash" ]; then
+        echo "${HOMEBREW_PREFIX}/bin/bash"' not installed'
+      fi
     fi
 
     if [ "$SHELL" != "${HOMEBREW_PREFIX}/bin/bash" ]; then
