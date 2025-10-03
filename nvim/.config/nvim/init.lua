@@ -4,13 +4,13 @@ local _, _ = pcall(require, "impatient")
 -- Define leader key before any key mappings.
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
-vim.api.nvim_set_keymap('n', '<localleader><Space>', '<Space>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>,', ',', { noremap = true })
+vim.api.nvim_set_keymap("n", "<localleader><Space>", "<Space>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>,", ",", { noremap = true })
 
-require('core.lazy') -- Plugin manager.
-require('core.options') -- Options.
-require('core.autocmds') -- Autocmd.
-require('config.keymaps') -- Keymaps.
+require("core.lazy") -- Plugin manager.
+require("core.options") -- Options.
+require("core.autocmds") -- Autocmd.
+require("config.keymaps") -- Keymaps.
 require("config.vimrc") -- Other vim settings.
 require("config.global_statusline")
 require("config.colorscheme")
@@ -28,6 +28,9 @@ vim.g.netrw_list_hide = [[\~$,\.swp$,\.DS_Store,\.so,\.zip,\.git,^\.\=/\=$]]
 -- https://github.com/frans-johansson/lazy-nvim-starter - Starter boilerplate with lazy plugin manager.
 -- https://github.com/LazyVim/starter
 -- https://www.lazyvim.org/
+
+-- https://dotfyle.com/
+-- https://github.com/craftzdog/dotfiles-public
 -- https://github.com/ThePrimeagen/init.lua
 -- https://github.com/nvim-lua/kickstart.nvim
 -- https://github.com/NvChad/NvChad
