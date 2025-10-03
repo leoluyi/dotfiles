@@ -41,41 +41,15 @@ return {
   {
     "mfussenegger/nvim-dap",
     optional = true,
-    dependencies = {
-      {
-        "mfussenegger/nvim-dap-python",
-        dependencies = {
-          -- which key integration
-          "folke/which-key.nvim",
-          optional = true,
-          opts = {
-            defaults = {
-              ["<leader>dP"] = { name = "+(dap) Python" },
-            },
-          },
-        },
-        -- stylua: ignore
-        keys = {
-          { "<leader>dPt", function() require('dap-python').test_method() end, desc = "(dap-python) Debug Method" },
-          { "<leader>dPc", function() require('dap-python').test_class() end, desc = "(dap-python) Debug Class" },
-        },
-        config = function()
-          if vim.fn.has("win32") == 1 then
-            require("dap-python").setup(require("helpers.util").get_pkg_path("debugpy", "/venv/Scripts/pythonw.exe"))
-          else
-            require("dap-python").setup(require("helpers.util").get_pkg_path("debugpy", "/venv/bin/python"))
-          end
-        end,
-      },
-    },
+    dependencies = {},
   },
+
   {
     "linux-cultist/venv-selector.nvim",
     enabled = false,
     dependencies = {
       "neovim/nvim-lspconfig",
       "mfussenegger/nvim-dap",
-      "mfussenegger/nvim-dap-python", --optional
       { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
     },
     lazy = false,
