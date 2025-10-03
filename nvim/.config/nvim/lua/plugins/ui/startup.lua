@@ -1,10 +1,11 @@
 return {
   {
-    'goolord/alpha-nvim',
+    "goolord/alpha-nvim",
     lazy = false,
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function ()
-        require'alpha'.setup(require'alpha.themes.startify'.config)
-    end
+    dependencies = { "echasnovski/mini.icons" },
+    config = function()
+      -- require("alpha").setup(require("alpha.themes.startify").config)
+      require("alpha").setup(require("alpha.themes.dashboard").config)
+    end,
   },
 }

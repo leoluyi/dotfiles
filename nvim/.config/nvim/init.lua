@@ -1,5 +1,8 @@
 -- vim: fdm=marker:fdl=1
-local _, _ = pcall(require, "impatient")
+-- local _, _ = pcall(require, "impatient")
+if vim.loader then
+  vim.loader.enable()
+end
 
 -- Define leader key before any key mappings.
 vim.g.mapleader = ","
