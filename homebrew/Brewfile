@@ -351,6 +351,8 @@ cask "blackhole-16ch"
 cask "chatgpt"
 # AI chatbot for many LLMs
 cask "chatwise"
+# Anthropic's official Claude AI desktop app
+cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code"
 # Server and cloud storage browser
