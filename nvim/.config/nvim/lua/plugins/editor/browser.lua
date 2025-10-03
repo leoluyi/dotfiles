@@ -4,11 +4,12 @@ return {
     dependencies = { "nvim-telescope/telescope.nvim" },
     keys = {
       {
-        "<leader>b",
+        "<leader>G",
         function()
-          require("browse").browse({ bookmarks = bookmarks })
+          require("browse").input_search()
         end,
-        desc = "Google search",
+        mode = { "n", "x" },
+        desc = "(browse) [G]oogle search",
       },
     },
     opts = {
