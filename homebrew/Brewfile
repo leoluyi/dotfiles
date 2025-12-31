@@ -99,10 +99,6 @@ brew "fortune"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
-# SIMD-accelerated C++ JSON parser
-brew "simdjson"
-# Interact with Google Gemini AI models from the command-line
-brew "gemini-cli"
 # Highest-quality GIF encoder based on pngquant
 brew "gifski"
 # Distributed revision control system
@@ -197,6 +193,8 @@ brew "media-info"
 brew "mill"
 # Run a Kubernetes cluster locally
 brew "minikube"
+# SIMD-accelerated C++ JSON parser
+brew "simdjson"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
 # Collection of tools that nobody wrote when UNIX was young
@@ -413,8 +411,6 @@ cask "mongodb-compass"
 # Re-mounts write-protected NTFS volumes
 cask "mounty"
 cask "mysides"
-# VPN client for secure internet access and private browsing
-cask "nordvpn"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Finder Toolbar app to open the current directory in Editor
@@ -485,6 +481,8 @@ cask "wezterm"
 cask "xquartz"
 # Multiplayer code editor
 cask "zed"
+# Gecko based web browser
+cask "zen"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
@@ -609,7 +607,6 @@ go "github.com/fatih/gomodifytags"
 go "github.com/abenz1267/gomvp"
 go "golang.org/x/tools/cmd/gonew"
 go "golang.org/x/tools/gopls"
-go "golang.org/x/tools/cmd/gorename"
 go "github.com/cweill/gotests/gotests"
 go "gotest.tools/gotestsum"
 go "golang.org/x/vuln/cmd/govulncheck"
