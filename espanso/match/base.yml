@@ -35,9 +35,9 @@ matches:
 
   # 3.  First time you run the expander you will be required to enter your macos password.
   - triggers: [":1pass"]
-    replace: "{{output}}"
+    replace: "{{1pass_key}}"
     vars:
-      - name: output
+      - name: 1pass_key
         type: shell
         params:
-          cmd: "security find-generic-password -a 'leoluyi' -w"
+          cmd: "security find-generic-password -a 'leoluyi' -s 'espanso_1pass_key' -w 2>/dev/null || true"
