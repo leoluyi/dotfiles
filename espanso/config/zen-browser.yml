@@ -1,0 +1,5 @@
+filter_class: "app.zen-browser.zen"
+
+extra_includes:
+  - "../match/_email.yml"
+  - "../match/_barcode.yml"
