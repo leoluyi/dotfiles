@@ -83,7 +83,7 @@ brew "fastfetch"
 brew "fd"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
-# Play, record, convert, and stream audio and video
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
@@ -99,6 +99,10 @@ brew "fortune"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
+# SIMD-accelerated C++ JSON parser
+brew "simdjson"
+# Interact with Google Gemini AI models from the command-line
+brew "gemini-cli"
 # Highest-quality GIF encoder based on pngquant
 brew "gifski"
 # Distributed revision control system
@@ -149,7 +153,7 @@ brew "ical-buddy"
 brew "ifstat"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
-# Tools and libraries to manipulate images in many formats
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # GNU utilities for networking
 brew "inetutils"
@@ -193,8 +197,6 @@ brew "media-info"
 brew "mill"
 # Run a Kubernetes cluster locally
 brew "minikube"
-# SIMD-accelerated C++ JSON parser
-brew "simdjson"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
 # Collection of tools that nobody wrote when UNIX was young
@@ -332,11 +334,13 @@ cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
 # AeroSpace is an i3-like tiling window manager for macOS
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 # GPU-accelerated terminal emulator
 cask "alacritty"
 # Enable Windows-like alt-tab
 cask "alt-tab"
+# Inspect application bundles
+cask "apparency"
 # Application uninstaller
 cask "appcleaner"
 # Chromium based browser
@@ -365,6 +369,8 @@ cask "deckset"
 cask "docker-desktop"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
+# Cross-platform Text Expander written in Rust
+cask "espanso"
 # Flip clock screensaver
 cask "fliqlo"
 cask "font-hack-nerd-font"
@@ -411,6 +417,8 @@ cask "mongodb-compass"
 # Re-mounts write-protected NTFS volumes
 cask "mounty"
 cask "mysides"
+# VPN client for secure internet access and private browsing
+cask "nordvpn"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Finder Toolbar app to open the current directory in Editor
@@ -504,7 +512,6 @@ mas "iMovie", id: 408981434
 mas "iPreview", id: 1519213509
 mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
-mas "Messenger", id: 1480068668
 mas "Movist", id: 461788075
 mas "Owlfiles", id: 510282524
 mas "PDFgear", id: 6469021132
@@ -607,6 +614,7 @@ go "github.com/fatih/gomodifytags"
 go "github.com/abenz1267/gomvp"
 go "golang.org/x/tools/cmd/gonew"
 go "golang.org/x/tools/gopls"
+go "golang.org/x/tools/cmd/gorename"
 go "github.com/cweill/gotests/gotests"
 go "gotest.tools/gotestsum"
 go "golang.org/x/vuln/cmd/govulncheck"
