@@ -407,8 +407,6 @@ cask "keka"
 cask "keyboardcleantool"
 # Open-source keystroke visualiser
 cask "keycastr"
-# Agent-centric IDE with spec-driven development
-cask "kiro"
 # Open-source firewall to block unknown outgoing connections
 cask "lulu"
 # Provides updates to various Microsoft products
