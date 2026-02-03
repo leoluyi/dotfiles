@@ -409,16 +409,18 @@ cask "keyboardcleantool"
 cask "keycastr"
 # Agent-centric IDE with spec-driven development
 cask "kiro"
+# Open-source firewall to block unknown outgoing connections
+cask "lulu"
 # Provides updates to various Microsoft products
 # Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
 # Interactive tool for analyzing MongoDB data
 cask "mongodb-compass"
+# Tool to control external monitor brightness & volume
+cask "monitorcontrol"
 # Re-mounts write-protected NTFS volumes
 cask "mounty"
 cask "mysides"
-# VPN client for secure internet access and private browsing
-cask "nordvpn"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Finder Toolbar app to open the current directory in Editor
@@ -427,6 +429,8 @@ cask "openineditor-lite"
 cask "openinterminal"
 # Finder Toolbar app to open the current directory in Terminal
 cask "openinterminal-lite"
+# Colour picker for colours onscreen
+cask "pika"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
 # Collaboration platform for API development
