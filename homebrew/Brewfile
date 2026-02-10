@@ -7,6 +7,7 @@ tap "coursier/formulas"
 tap "eddieantonio/eddieantonio"
 tap "felixkratz/formulae"
 tap "flyteorg/tap"
+tap "gromgit/fuse"
 tap "heroku/brew"
 tap "instantclienttap/instantclient"
 tap "jesseduffield/lazygit"
@@ -325,6 +326,8 @@ brew "coursier/formulas/coursier"
 brew "eddieantonio/eddieantonio/imgcat"
 # FlyteCtl is a command line tool to interact with a Flyte cluster.
 brew "flyteorg/tap/flytectl"
+# Read-write NTFS driver for FUSE
+brew "gromgit/fuse/ntfs-3g-mac"
 # Oracle Instant Client Basic Lite x64
 brew "instantclienttap/instantclient/instantclient-basiclite"
 # SDKMAN! the Software Development Kit Manager
@@ -409,6 +412,8 @@ cask "keyboardcleantool"
 cask "keycastr"
 # Open-source firewall to block unknown outgoing connections
 cask "lulu"
+# File system integration
+cask "macfuse"
 # Provides updates to various Microsoft products
 # Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
