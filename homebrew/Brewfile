@@ -368,6 +368,8 @@ cask "dbeaver-community"
 cask "debookee"
 # Presentations from Markdown
 cask "deckset"
+# UI to create reproducible developer environments based on a devcontainer.json
+cask "devpod"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Client for the Dropbox cloud storage service
