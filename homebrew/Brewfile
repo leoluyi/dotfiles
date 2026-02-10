@@ -486,6 +486,8 @@ cask "tiles"
 cask "tradingview"
 # Open-source BitTorrent client
 cask "transmission"
+# Configurable document editor that supports Markdown
+cask "typora"
 # Open-source code editor
 cask "visual-studio-code"
 # Quick Look plugin for webp files
