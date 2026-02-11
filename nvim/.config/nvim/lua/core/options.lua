@@ -94,7 +94,8 @@ opt.colorcolumn = "88" -- Display a ruler at a specific column
 opt.list = true -- Display whitespace
 opt.cmdheight = 1 -- Height of the command bar
 opt.display:append("lastline") -- When wrap is on, display last line even if it doesn't fit
-opt.textwidth = 9999 -- Never wrap lines
+-- opt.textwidth = 9999 -- Never wrap lines
+opt.textwidth = 88
 opt.linebreak = true -- Make Vim break lines without breaking words
 
 -- Encoding {{{2
