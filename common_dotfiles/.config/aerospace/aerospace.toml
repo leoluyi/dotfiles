@@ -70,7 +70,7 @@ outer.right = 6
 # Make All Windows Float by Default.
 [[on-window-detected]]
 check-further-callbacks = true
-run = 'layout floating'
+run = ['layout floating', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
