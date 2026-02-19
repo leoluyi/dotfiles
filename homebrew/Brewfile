@@ -198,6 +198,8 @@ brew "media-info"
 brew "mill"
 # Run a Kubernetes cluster locally
 brew "minikube"
+# Deep clean and optimize your Mac
+brew "mole"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
 # Collection of tools that nobody wrote when UNIX was young
