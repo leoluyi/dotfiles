@@ -2,7 +2,7 @@
 # Ref: https://www.reddit.com/r/ClaudeAI/comments/1mw5h5g/wrote_my_own_global_claudeclaudemd_how_does_it/
 
 # Claude Code configuration
-model: claude-sonnet-4-20250514  # Using Claude Sonnet 4
+# model: claude-sonnet-4-20250514  # Using Claude Sonnet 4
 temperature: 0.7  # Balanced creativity vs consistency
 max_tokens: 4000
 # Add any other model parameters here
