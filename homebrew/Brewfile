@@ -82,10 +82,10 @@ brew "eza"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -104,6 +104,8 @@ brew "gawk"
 brew "simdjson"
 # Interact with Google Gemini AI models from the command-line
 brew "gemini-cli"
+# GitHub command-line tool
+brew "gh"
 # Highest-quality GIF encoder based on pngquant
 brew "gifski"
 # Distributed revision control system
@@ -636,3 +638,4 @@ go "github.com/josharian/impl"
 go "github.com/tmc/json-to-struct"
 go "go.uber.org/mock/mockgen"
 go "github.com/kyoh86/richgo"
+go "github.com/swaggo/swag/cmd/swag"
