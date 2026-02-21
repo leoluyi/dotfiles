@@ -6,4 +6,4 @@ expose _DOCKER_PS_COMPOSE='{{.Label "com.docker.compose.project"}}\t{{.Label "co
 
 alias docker-ls-compose='docker container ls --all
   --filter label=com.docker.compose.project
-  --format "table '"$_DOCKER_PS_COMPOSE\t$_DOCKER_PS_BASE"
+  --format "table '"$_DOCKER_PS_COMPOSE\t$_DOCKER_PS_BASE"'"'

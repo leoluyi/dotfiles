@@ -76,6 +76,7 @@ fix_bash_completion() {
 
   # Docker completion
   DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
+  BASH_COMPLETION_COMPAT_DIR="${BASH_COMPLETION_COMPAT_DIR:-$(brew --prefix 2>/dev/null)/etc/bash_completion.d}"
   if [ -w "${BASH_COMPLETION_COMPAT_DIR}" ] && [ -d "${DOCKER_ETC}" ]; then
     ln -sf "${DOCKER_ETC}/docker.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker
     ln -sf "${DOCKER_ETC}/docker-machine.bash-completion" "${BASH_COMPLETION_COMPAT_DIR}"/docker-machine
