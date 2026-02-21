@@ -161,7 +161,7 @@ brew_install_cli() {
     ranger     `# a terminal browser for Vim` \
     rename \
     ripgrep \
-    sc-im \    `# Terminal Spreadsheet Editor (csv)` \
+    sc-im      `# Terminal Spreadsheet Editor (csv)` \
     shellcheck \
     skopeo     `# Work with remote images registries - retrieving information, images, signing content` \
     ssh-copy-id \
