@@ -123,6 +123,10 @@ command -v zoxide >/dev/null \
 # Claude Code.
 export CLAUDE_BASH_NO_LOGIN=1
 
+# fabric-ai.
+command -v fabric-ai >/dev/null \
+  && alias fabric='fabric-ai'
+
 # nnn.
 command -v nnn >/dev/null \
   && alias nnn='command nnn -R' \
