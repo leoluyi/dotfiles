@@ -54,6 +54,38 @@ stow -t "$HOME" nvim
 stow -n -t "$HOME" common_dotfiles
 ```
 
+## Fabric AI Patterns
+
+Custom [fabric](https://github.com/danielmiessler/fabric) patterns live in `common_dotfiles/.config/fabric/patterns/`. Only custom patterns are tracked — the 250+ built-in patterns that fabric downloads are not committed here.
+
+### Adding a new custom pattern
+
+Create it directly in the dotfiles repo, then stow:
+
+```bash
+mkdir -p ~/.dotfiles/common_dotfiles/.config/fabric/patterns/<pattern-name>
+$EDITOR ~/.dotfiles/common_dotfiles/.config/fabric/patterns/<pattern-name>/system.md
+
+# Stow will symlink the new pattern into ~/.config/fabric/patterns/
+stow -t "$HOME" common_dotfiles
+```
+
+### Adopting an existing pattern from `~/.config/fabric/patterns/`
+
+```bash
+# Copy the pattern into the dotfiles repo
+cp -r ~/.config/fabric/patterns/<pattern-name> \
+      ~/.dotfiles/common_dotfiles/.config/fabric/patterns/
+
+# Remove the original (stow needs the slot to be free)
+rm -rf ~/.config/fabric/patterns/<pattern-name>
+
+# Create the symlink
+stow -t "$HOME" common_dotfiles
+```
+
+> **Note:** `~/.config/fabric/.env` (API keys) is gitignored. See [Secrets](#secrets--local-overrides) for how to manage it.
+
 ## Secrets & Local Overrides
 
 Never commit credentials or machine-specific settings to this repo. Two escape hatches are auto-sourced by `.bash_profile` on every shell startup:

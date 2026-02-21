@@ -19,6 +19,8 @@ alacritty.theme-switch-backup.yml
 
 # Credentials.
 .bash_env
+common_dotfiles/.config/fabric/.env
+common_dotfiles/.config/fabric/unique_patterns.txt
 
 # Sublime Text.
 *History.sublime-settings
