@@ -22,6 +22,9 @@ alacritty.theme-switch-backup.yml
 common_dotfiles/.config/fabric/.env
 common_dotfiles/.config/fabric/unique_patterns.txt
 
+# Fabric downloaded data (not custom patterns).
+common_dotfiles/.config/fabric/strategies/
+
 # Sublime Text.
 *History.sublime-settings
 
