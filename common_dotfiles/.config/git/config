@@ -65,7 +65,7 @@
     st = status -s --ignore-submodules=dirty
     sw = switch
     unchange = update-index --assume-unchanged  # Difference Between 'assume-unchanged' and 'skip-worktree'. < https://stackoverflow.com/a/13631525/3744499 >
-    unchanged = !"git ls-files -v | grep '^[[:lower:]]' || echo '(No unchenged files found)'"
+    unchanged = !"git ls-files -v | grep '^[[:lower:]]' || echo '(No unchanged files found)'"
     unskip = update-index --no-skip-worktree
     unstage = reset HEAD --
     wip = !"git add -A; git commit -m \"WIP: $(date)\""

@@ -149,11 +149,11 @@ sync_sublimetext_config() {
 make_xdg_dirs() {
   local config_home=${XDG_CONFIG_HOME:-$HOME/.config}
   local cache_home=${XDG_CACHE_HOME:-$HOME/.cache}
-  local date_home=${XDG_DATA_HOME:-$HOME/.data}
+  local data_home=${XDG_DATA_HOME:-$HOME/.local/share}
 
   mkdir -p "$cache_home"
   mkdir -p "$config_home"
-  mkdir -p "$date_home"
+  mkdir -p "$data_home"
 }
 
 link_espanso_configs() {
@@ -162,7 +162,7 @@ link_espanso_configs() {
   killall espanso || true
   local espanso_config_path="$HOME/Library/Application Support/espanso"
   [ -d "$espanso_config_path" ] && rm -rf "$espanso_config_path"
-  echo "ln -sf ${_SCRIPT_DIR}/espanso" "$espanso_config_path"
+  echo "ln -sf ${_SCRIPT_DIR}/espanso $espanso_config_path"
   ln -s "${_SCRIPT_DIR}/espanso" "$espanso_config_path"
 }
 
@@ -212,7 +212,7 @@ _sync_dotfiles_rsync() {
   #   >/dev/null;
 
   # Link Brewfile for synchrizing settings.
-  ln -f "$_SCRIPT_DIR/config/Brewfile" "$config_home/Brewfile"
+  ln -f "$_SCRIPT_DIR/homebrew/Brewfile" "$config_home/Brewfile"
 }
 
 sync_dotfiles() {
@@ -263,11 +263,10 @@ fix_bash_completion
 link_espanso_configs
 link_virtualenv
 sync_sublimetext_config
-sync_nvim_config $FORCE
+sync_nvim_config "$FORCE"
 make_xdg_dirs
 install_scripts
-sync_nvim_config
-sync_dotfiles $FORCE "$(get_os)"
+sync_dotfiles "$FORCE" "$(get_os)"
 finally
 
 unset \
