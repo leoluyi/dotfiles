@@ -41,8 +41,7 @@ require("lazy").setup({
 
     { import = "plugins.extras.lang.docker" },
     { import = "plugins.extras.lang.go" },
-    { import = "plugins.extras.lang.makefile" },
-    { import = "plugins.extras.lang.markdown" },
+{ import = "plugins.extras.lang.markdown" },
     { import = "plugins.extras.lang.python" },
     { import = "plugins.extras.lang.java" },
 
