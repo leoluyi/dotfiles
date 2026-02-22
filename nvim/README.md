@@ -129,7 +129,7 @@ nvim/
 | **neo-tree** | File tree sidebar |
 | **oil.nvim** | Edit filesystem as a buffer, `-` to open parent |
 | **flash.nvim** | Fast motion with label hints |
-| **quick-scope** | Highlight `f`/`t` jump targets |
+| **eyeliner.nvim** | Highlight unique `f`/`F`/`t`/`T` jump targets per word |
 | **nvim-surround** | Add / change / delete surrounding characters |
 | **mini.ai** | Extended text objects (functions, classes, arguments) |
 | **mini.trailspace** | Trailing whitespace highlight + trim |
@@ -158,7 +158,6 @@ nvim/
 | **Scala** | nvim-metals |
 | **Lua** | lua_ls (with neodev), stylua |
 | **Bash** | bashls, shfmt |
-| **Go** | gopls |
 | **SQL** | sqlls, vim-dadbod-ui |
 | **YAML** | yamlls |
 | **JSON** | jsonls |

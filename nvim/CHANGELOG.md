@@ -7,6 +7,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## 2026-02-23
+
+### Changed
+
+- Replaced `unblevable/quick-scope` (VimL, global vars) with `jinh0/eyeliner.nvim` (Lua, `opts` table). Split `qs_buftype_blacklist` into `disabled_buftypes` and `disabled_filetypes` as eyeliner distinguishes the two.
+- Eyeliner highlights (`EyelinerPrimary`: bold + underline, `EyelinerSecondary`: underline) are reapplied on every `ColorScheme` change, preserving the plugin's default foreground colors.
+
 ## 2026-02-22
 
 ### Removed
