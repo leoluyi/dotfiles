@@ -55,12 +55,19 @@ M.keymaps = function(client, bufnr)
   --- toggle inlay hints
   vim.g.inlay_hints_visible = false
   local function toggle_inlay_hints()
-    -- vim.lsp.inlay_hint is a table (with .enable) on Neovim 0.11+;
-    -- on Neovim 0.10 it is a plain function with signature (bufnr, bool).
+    -- Both Neovim 0.10 and 0.11+ expose vim.lsp.inlay_hint as a table, but
+    -- the .enable() signature differs:
+    --   0.10:  enable(bufnr, bool)
+    --   0.11+: enable(bool, { bufnr = bufnr })
     local function set_hints(enabled)
       if type(vim.lsp.inlay_hint) == "table" then
-        vim.lsp.inlay_hint.enable(enabled, { bufnr = bufnr })
+        if vim.fn.has("nvim-0.11") == 1 then
+          vim.lsp.inlay_hint.enable(enabled, { bufnr = bufnr })
+        else
+          vim.lsp.inlay_hint.enable(bufnr, enabled)
+        end
       else
+        -- pre-0.10 plain-function form
         vim.lsp.inlay_hint(bufnr, enabled)
       end
     end
@@ -81,8 +88,23 @@ M.keymaps = function(client, bufnr)
   --- toggle diagnostics
   vim.g.diagnostics_visible = true
   local function toggle_diagnostics()
-    vim.g.diagnostics_visible = not vim.g.diagnostics_visible
-    vim.diagnostic.enable(vim.g.diagnostics_visible)
+    -- vim.diagnostic.enable(bool, opts) is the 0.10+ API.
+    -- Pre-0.10: use disable(bufnr) / enable(bufnr) instead.
+    if vim.g.diagnostics_visible then
+      vim.g.diagnostics_visible = false
+      if vim.fn.has("nvim-0.10") == 1 then
+        vim.diagnostic.enable(false, { bufnr = bufnr })
+      else
+        vim.diagnostic.disable(bufnr)
+      end
+    else
+      vim.g.diagnostics_visible = true
+      if vim.fn.has("nvim-0.10") == 1 then
+        vim.diagnostic.enable(true, { bufnr = bufnr })
+      else
+        vim.diagnostic.enable(bufnr)
+      end
+    end
   end
   map("n", "<leader>ud", toggle_diagnostics, "Lsp Toggle [D]iagnostics")
   map("n", "<leader>uh", toggle_inlay_hints, "Lsp Toggle Inlay [H]ints")
