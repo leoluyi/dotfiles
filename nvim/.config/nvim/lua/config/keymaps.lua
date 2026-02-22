@@ -321,7 +321,7 @@ map("n", "<localleader>R", "<cmd>ReindentAll<cr>", { desc = "Re-indent buffer" }
 
 -- AI pipe ========================================================================{{{2
 
-local _fabric_suggest = { cmd = { "fabric-ai", "-p", "suggest" } }
+local _fabric_suggest = { cmd = { "fabric-ai", "-p", "suggest_pattern" } }
 
 map("n", "<leader>ai", function()
   local line = vim.fn.line(".")
