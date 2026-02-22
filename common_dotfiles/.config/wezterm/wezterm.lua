@@ -74,6 +74,8 @@ return {
     },
   },
 
+  enable_kitty_keyboard = true,
+
   window_close_confirmation = "NeverPrompt",
   skip_close_confirmation_for_processes_named = {
     "bash",
