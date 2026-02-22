@@ -49,24 +49,42 @@ M.keymaps = function(client, bufnr)
     map("n", "<leader>lco", "<cmd>Lspsaga outgoing_calls<CR>", "Lsp Outgoing Calls")
   end
 
-  -- Toggle diagnostics
+  -- Other keymaps.
+  -- < https://github.com/gennaro-tedesco/dotfiles/blob/7385fa7f2d28b9b3ac5f18f52894127e433ab81c/nvim/lua/plugins/lsp.lua#L46-L59>
+
+  --- toggle inlay hints
+  vim.g.inlay_hints_visible = false
+  local function toggle_inlay_hints()
+    -- vim.lsp.inlay_hint is a table (with .enable) on Neovim 0.11+;
+    -- on Neovim 0.10 it is a plain function with signature (bufnr, bool).
+    local function set_hints(enabled)
+      if type(vim.lsp.inlay_hint) == "table" then
+        vim.lsp.inlay_hint.enable(enabled, { bufnr = bufnr })
+      else
+        vim.lsp.inlay_hint(bufnr, enabled)
+      end
+    end
+
+    if vim.g.inlay_hints_visible then
+      vim.g.inlay_hints_visible = false
+      set_hints(false)
+    else
+      if client.server_capabilities.inlayHintProvider then
+        vim.g.inlay_hints_visible = true
+        set_hints(true)
+      else
+        print("no inlay hints available")
+      end
+    end
+  end
+
+  --- toggle diagnostics
   vim.g.diagnostics_visible = true
   local function toggle_diagnostics()
     vim.g.diagnostics_visible = not vim.g.diagnostics_visible
     vim.diagnostic.enable(vim.g.diagnostics_visible)
   end
   map("n", "<leader>ud", toggle_diagnostics, "Lsp Toggle [D]iagnostics")
-
-  -- Toggle inlay hints (Neovim 0.10+)
-  vim.g.inlay_hints_visible = false
-  local function toggle_inlay_hints()
-    if client.server_capabilities.inlayHintProvider then
-      vim.g.inlay_hints_visible = not vim.g.inlay_hints_visible
-      vim.lsp.inlay_hint.enable(vim.g.inlay_hints_visible, { bufnr = bufnr })
-    else
-      print("no inlay hints available")
-    end
-  end
   map("n", "<leader>uh", toggle_inlay_hints, "Lsp Toggle Inlay [H]ints")
 end
 
