@@ -4,7 +4,7 @@
 
 command -v llm >/dev/null || return 0
 
-export LLM_MODEL="claude-sonnet-4-6"
+export LLM_MODEL="claude-sonnet-4.6"
 
 # Generate a shell command from a natural-language description.
 # Usage: llm-cmd "list all files modified in the last 24 hours"
