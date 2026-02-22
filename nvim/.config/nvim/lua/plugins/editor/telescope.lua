@@ -50,7 +50,7 @@ return {
         { "<leader>ff", util.all_files, desc = "[F]ind [F]iles (all in cwd)" },
         { "<leader>fF", util.builtin("files", { cwd = false }), desc = "[F]ind [F]iles (cwd)" },
         { "<leader>fm", "<cmd>Telescope oldfiles<cr>", desc = "[M]ost Recent" },
-        { "<leader>m", util.builtin("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (root dir)" },
+        { "<leader>m", util.builtin("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (root dir)" },
         { "<leader><space>", util.buffers, desc = "[F]ind [B]uffers" },
         {
           "<leader>fb",

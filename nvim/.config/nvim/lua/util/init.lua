@@ -65,7 +65,7 @@ end
 ---@return string
 function M.norm(path)
   if path:sub(1, 1) == "~" then
-    local home = vim.loop.os_homedir()
+    local home = vim.uv.os_homedir()
     if home:sub(-1) == "\\" or home:sub(-1) == "/" then
       home = home:sub(1, -2)
     end
@@ -76,7 +76,7 @@ function M.norm(path)
 end
 
 function M.is_win()
-  return vim.loop.os_uname().sysname:find("Windows") ~= nil
+  return vim.uv.os_uname().sysname:find("Windows") ~= nil
 end
 
 -- < https://github.com/nanotee/nvim-lua-guide > =================================={{{2

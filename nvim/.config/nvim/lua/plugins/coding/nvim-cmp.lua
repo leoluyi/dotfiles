@@ -39,10 +39,6 @@ return {
 
       -- helper functions.
       local has_words_before = function()
-        if not table.unpack then
-          table.unpack = unpack
-        end
-
         local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
       end
@@ -50,7 +46,7 @@ return {
       return {
         -- < https://github.com/hrsh7th/nvim-cmp/issues/60#issuecomment-1247574145 >
         enabled = function()
-          local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+          local buftype = vim.bo[0].buftype
           if buftype == "prompt" then
             return false
           end

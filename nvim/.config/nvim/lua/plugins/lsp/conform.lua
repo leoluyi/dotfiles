@@ -20,7 +20,7 @@ return {
     },
     opts = {
       format_on_save = function(bufnr)
-        local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+        local ft = vim.bo[bufnr].filetype
         if
           vim.tbl_contains({
             "python",
