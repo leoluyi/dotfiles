@@ -1,0 +1,68 @@
+# vim: ft=sh:
+# shellcheck shell=bash
+# AI shell integrations via llm CLI (https://llm.datasette.io/)
+
+command -v llm >/dev/null || return 0
+
+export LLM_MODEL="claude-sonnet-4-6"
+
+# Generate a shell command from a natural-language description.
+# Usage: llm-cmd "list all files modified in the last 24 hours"
+llm-cmd() {
+    if [ -z "$1" ]; then
+        echo "Usage: llm-cmd <natural language description>" >&2
+        return 1
+    fi
+    llm -m "${LLM_MODEL}" \
+        --system "Output only a single bash command with no explanation, no markdown, and no backticks. The command must run on macOS." \
+        "$*"
+}
+
+# Explain a command or piped content.
+# Usage: llm-explain "find . -name '*.py' -exec grep foo {} +"
+# Usage: some-command 2>&1 | llm-explain
+llm-explain() {
+    local input
+    if [ -t 0 ]; then
+        if [ -z "$1" ]; then
+            echo "Usage: llm-explain <command>  OR  <cmd> | llm-explain" >&2
+            return 1
+        fi
+        input="$*"
+    else
+        input="$(cat)"
+        [ -n "$1" ] && input="$* -- output: $input"
+    fi
+    llm -m "${LLM_MODEL}" \
+        --system "You are a concise shell expert. Explain the following bash command or output clearly and briefly." \
+        "$input"
+}
+
+# Pipe a failing command's output for a fix suggestion.
+# Usage: some-command 2>&1 | llm-fix
+llm-fix() {
+    local input
+    if [ -t 0 ]; then
+        echo "Usage: <failing-command> 2>&1 | llm-fix" >&2
+        return 1
+    fi
+    input="$(cat)"
+    llm -m "${LLM_MODEL}" \
+        --system "You are a concise shell expert. Given this error output, provide the corrected bash command or a brief fix. Output only the fix, no extra explanation." \
+        "$input"
+}
+
+# Alt+a: replace current readline line (treated as natural language) with a
+# generated bash command. Runs silently; leaves original text on failure.
+_llm_inline_suggest() {
+    [ -z "$READLINE_LINE" ] && return
+    local suggestion
+    suggestion=$(llm -m "${LLM_MODEL}" \
+        --system "Output only a single bash command with no explanation, no markdown, and no backticks. The command must run on macOS." \
+        "$READLINE_LINE" 2>/dev/null)
+    if [ -n "$suggestion" ]; then
+        READLINE_LINE="$suggestion"
+        READLINE_POINT=${#READLINE_LINE}
+    fi
+}
+bind -x '"\ea": _llm_inline_suggest'

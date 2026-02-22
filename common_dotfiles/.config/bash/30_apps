@@ -1,8 +1,6 @@
 # vim: ft=sh:fdm=marker:fdl=3
 # shellcheck shell=bash disable=SC1091,SC2034
 
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-
 # ============ Aliases ============ {{{2
 
 alias theme-light='export theme=light'
@@ -24,7 +22,8 @@ alias de='deactivate'
 
 # R.
 command -v R >/dev/null \
-  && alias r='R --no-save --no-restore'
+  && alias r='R --no-save --no-restore' \
+  && alias R='R --no-save --no-restore'
 
 # podman.
 # command -v podman >/dev/null \
@@ -89,15 +88,15 @@ command -v cmatrix >/dev/null \
   && alias matrix='cmatrix'
 
 # The fuck.
-command -v thefuck >/dev/null && eval "$(thefuck --alias)"
+command -v thefuck >/dev/null && fuck() {
+    unset -f fuck
+    eval "$(thefuck --alias)"
+    fuck "$@"
+}
 
 # glow - A markdown TUI
 command -v glow >/dev/null \
   && alias glow="PAGER='less -r' command glow -p"
-
-# R.
-command -v R >/dev/null \
-  && alias R='R --no-save --no-restore'
 
 # peaclock.
 command -v peaclock >/dev/null \
@@ -123,10 +122,6 @@ command -v zoxide >/dev/null \
 # Claude Code.
 export CLAUDE_BASH_NO_LOGIN=1
 
-# fabric-ai.
-command -v fabric-ai >/dev/null \
-  && alias fabric='fabric-ai'
-
 # nnn.
 command -v nnn >/dev/null \
   && alias nnn='command nnn -R' \
@@ -145,21 +140,23 @@ if [ "$(uname -s)" = "Darwin" ]; then
   [ -d "/Library/Frameworks/R.framework/Resources" ] && export PATH="/Library/Frameworks/R.framework/Resources:$PATH"
 fi
 
-if [ "$(uname -s)" = "Darwin" ]; then
-  ## for MacOS.
-  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-else
-  ## for Linux.
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
+# nvm - lazy-load: initializes on first use of nvm/node/npm/npx.
+_nvm_lazy_load() {
+    unset -f nvm node npm npx
+    if [ "$(uname -s)" = "Darwin" ]; then
+        [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+        [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+    else
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    fi
+}
+nvm()  { _nvm_lazy_load; nvm  "$@"; }
+node() { _nvm_lazy_load; node "$@"; }
+npm()  { _nvm_lazy_load; npm  "$@"; }
+npx()  { _nvm_lazy_load; npx  "$@"; }
 
 # Go.
-__GOROOT="$(go env GOROOT 2>/dev/null)"
-[ -d "$__GOROOT" ] \
-  && export GOROOT="$__GOROOT" && unset __GOROOT
-
 [ -d /usr/local/go/bin ] \
   && export PATH="$PATH:/usr/local/go/bin"
 
@@ -209,24 +206,6 @@ __GOROOT="$(go env GOROOT 2>/dev/null)"
 [ -d "$HOME/.jenv/bin" ] && export PATH="$HOME/.jenv/bin:$PATH"
 # very slow < https://github.com/jenv/jenv/issues/178 >
 # command -v jenv >/dev/null && eval "$(jenv init -)"
-
-# fzf - Ripgrep solution that shows hidden files but ignore .git folder
-if command -v fzf >/dev/null; then
-  if command -v rg >/dev/null; then
-    export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
-  else
-    export FZF_DEFAULT_COMMAND="find . -type f -not -path '*/\.git/*' -not -regex '.*\(\.pyc\|\.o\|\.obj\|\.svn\|\.swp\|\.class\|\.hg\|\.DS_Store\|\.min\..*\)'"
-  fi
-fi
-
-# fzf - Fuzzy completion for bash and zsh.
-if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf.bash" ]; then
-  . "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf.bash"
-elif [ -f "$HOME/.fzf.bash" ]; then
-  . "$HOME/.fzf.bash"
-fi
-
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf_config" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf_config"
 
 # Git diff-so-fancy.
 # https://github.com/so-fancy/diff-so-fancy

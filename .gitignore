@@ -17,6 +17,9 @@ alacritty.theme-switch-backup.yml
 # Alfred workflows.
 **/Alfred.alfredpreferences/workflows/
 
+# Local bash overrides (not tracked).
+common_dotfiles/.config/bash/99_extra
+
 # Credentials.
 .bash_env
 common_dotfiles/.config/fabric/.env
