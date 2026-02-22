@@ -1,34 +1,21 @@
 return {
-
-  -- < https://www.lazyvim.org/plugins/linting#nvim-lint >
   -- < https://github.com/mfussenegger/nvim-lint >
   {
     "mfussenegger/nvim-lint",
     enabled = true,
     opts = {
       events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-      linters_by_ft = {
-        -- Use the "*" filetype to run linters on all filetypes.
-        -- ['*'] = { 'global linter' },
-        -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
-        -- ['_'] = { 'fallback linter' },
-        -- ["*"] = { "typos" },
-      },
-      linters = {
-        -- -- Example of using selene only when a selene.toml file is present
-        -- selene = {
-        --   -- `condition` is another LazyVim extension that allows you to
-        --   -- dynamically enable/disable linters based on the context.
-        --   condition = function(ctx)
-        --     return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
-        --   end,
-        -- },
-      },
+      -- Add linters per filetype here, e.g.:
+      --   linters_by_ft = { python = { "ruff" }, go = { "golangcilint" } }
+      -- Use "*" to run on all filetypes, "_" as a fallback for unconfigured ones.
+      linters_by_ft = {},
+      -- Per-linter overrides (args, condition, etc.)
+      linters = {},
     },
     config = function(_, opts)
       local M = {}
-
       local lint = require("lint")
+
       for name, linter in pairs(opts.linters) do
         if type(linter) == "table" and type(lint.linters[name]) == "table" then
           lint.linters[name] = vim.tbl_deep_extend("force", lint.linters[name], linter)
@@ -57,8 +44,6 @@ return {
         -- Use nvim-lint's logic first:
         -- * checks if linters exist for the full filetype first
         -- * otherwise will split filetype by "." and add all those linters
-        -- * this differs from conform.nvim which only uses the first filetype that has a formatter
-        local Util = require("lazy.core.util")
         local names = lint._resolve_linter_by_ft(vim.bo.filetype)
 
         -- Create a copy of the names table to avoid modifying the original.
@@ -78,7 +63,7 @@ return {
         names = vim.tbl_filter(function(name)
           local linter = lint.linters[name]
           if not linter then
-            Util.warn("Linter not found: " .. name, { title = "nvim-lint" })
+            vim.notify("Linter not found: " .. name, vim.log.levels.WARN, { title = "nvim-lint" })
           end
           return linter and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
         end, names)

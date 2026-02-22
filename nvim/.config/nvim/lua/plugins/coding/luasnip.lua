@@ -40,8 +40,7 @@ return {
     },
     config = function (_, opts)
       local luasnip = require "luasnip"
-      local config_home = require("config.rtp").config_home
-      local luasnip_snippet_dir = config_home .. '/snippets/luasnip'
+      local luasnip_snippet_dir = vim.fn.stdpath("config") .. '/snippets/luasnip'
 
       luasnip.setup(opts)
 

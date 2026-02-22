@@ -18,7 +18,7 @@ lua/
 │   ├── autocmds.lua        # Autocommands (including global statusline)
 │   └── colorscheme.lua     # Theme configuration
 ├── util/                   # Utility functions (use require("util") for main module)
-│   ├── init.lua            # Core utilities (map(), path ops, LSP helpers)
+│   ├── init.lua            # Core utilities (map(), path ops, has(), fg())
 │   ├── lsp.lua             # LSP utilities (Python path, capabilities, attachment)
 │   ├── lsp_keymaps.lua     # LSP-specific key mappings
 │   ├── icons.lua           # Icon definitions for UI elements
@@ -27,9 +27,7 @@ lua/
 │   ├── treesitter.lua      # Treesitter helpers (disable for large files)
 │   ├── colorscheme.lua     # Colorscheme utilities
 │   ├── buffers.lua         # Buffer utilities
-│   ├── root.lua            # Project root detection
-│   ├── globals.lua         # Global variable definitions
-│   └── keys.lua            # Key utilities
+│   └── root.lua            # Project root detection
 └── plugins/                # Plugin specifications organized by category
     ├── colorscheme.lua     # 10+ color themes
     ├── treesitter.lua      # Syntax tree parsing

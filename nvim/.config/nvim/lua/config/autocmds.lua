@@ -1,7 +1,6 @@
 -- vim: fdm=marker:fdl=2
 
-local nvim_create_augroups  = require("util").nvim_create_augroups
-local map  = require("util").map
+local map = require("util").map
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("core_" .. name, { clear = true })
@@ -61,42 +60,56 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
--- < https://github.com/norcalli/nvim_utils > ====================================={{{2
+-- Miscellaneous ================================================================= {{{2
 
--- Usage:
---
--- local autocmds = {
---     open_folds = {
---         {"BufReadPost,FileReadPost", "*", "normal zR"}
---     }
--- }
+-- Reload file if changed on disk.
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  group = augroup("AutoCheckTime"),
+  callback = function()
+    vim.cmd("silent! checktime")
+  end,
+})
 
-local autocmds = {
-  AutoCheckTime = {
-    { "FocusGained,BufEnter", "*", "silent! checktime" }
-  },
-  RestoreCursorPosition = {
-    -- < https://github.com/neovim/neovim/issues/16339#issuecomment-1457394370 >
-    { "BufReadPost", "*", [[if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]] }
-  },
-  NumberToggle = {
-    --  Automatic toggling between line number modes
-    --  < https://jeffkreeftmeijer.com/vim-number/ >
-    --  < https://github.com/jeffkreeftmeijer/vim-numbertoggle >
-    { "BufEnter,FocusGained,InsertLeave", "*", "if &nu && mode() != 'i' | set rnu   | endif" },
-    { "BufLeave,FocusLost,InsertEnter"  , "*", "if &nu                  | set nornu | endif" },
-  },
-  FoldColumnToggle = {
-    { "BufEnter, FocusGained,InsertLeave", "*", "if &fcl && mode() != 'i' | set fcl   | endif" },
-    { "BufLeave, FocusLost,InsertEnter"  , "*", "if &fcl                  | set nofcl | endif" },
-  },
-  FixKeyCr = {
-    -- " Make sure that enter is never overriden in the quickfix window
-    { "BufReadPost", "quickfix", "nnoremap <buffer> <CR> <CR>" }
-  },
-}
+-- Restore cursor to last known position when opening a buffer.
+-- < https://github.com/neovim/neovim/issues/16339#issuecomment-1457394370 >
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = augroup("RestoreCursorPosition"),
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
 
-nvim_create_augroups(autocmds)
+-- Automatic toggling between absolute and relative line number modes.
+-- < https://jeffkreeftmeijer.com/vim-number/ >
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
+  group = augroup("NumberToggle"),
+  callback = function()
+    if vim.wo.number and vim.fn.mode() ~= "i" then
+      vim.wo.relativenumber = true
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
+  group = augroup("NumberToggle"),
+  callback = function()
+    if vim.wo.number then
+      vim.wo.relativenumber = false
+    end
+  end,
+})
+
+-- Make sure <CR> is not overridden in the quickfix window.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("FixKeyCr"),
+  pattern = "qf",
+  callback = function(ev)
+    vim.keymap.set("n", "<CR>", "<CR>", { buffer = ev.buf, noremap = true })
+  end,
+})
 
 -- < https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua > {{{2
 -- < https://www.lazyvim.org/configuration/general#auto-commands >

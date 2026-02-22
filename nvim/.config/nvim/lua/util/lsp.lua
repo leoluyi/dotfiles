@@ -94,17 +94,10 @@ end
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer.
 M.lsp_attach = function(client, bufnr)
-  print("[LSP] Attaching to client: " .. client.name)
-
-  -- Avoiding LSP formatting conflicts.
-  -- < https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts >
+  -- Disable formatting for all servers except gopls (conform handles it).
   -- < https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ >
   if client.name ~= "gopls" then
-    if vim.fn.has("nvim-0.8") then
-      client.server_capabilities.documentFormattingProvider = false -- 0.8 and later
-    else
-      client.server_capabilities.document_formatting = false -- 0.7 and earlier
-    end
+    client.server_capabilities.documentFormattingProvider = false
   end
 
   -- < https://docs.astral.sh/ruff/editors/setup/#neovim >

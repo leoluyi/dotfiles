@@ -11,7 +11,7 @@ end
 
 M.disable_file_handle = function(_, buf)
   local max_filesize = 1024000 -- 100 KB
-  local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+  local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
   local filetype = vim.bo.filetype
   local file_ext = vim.fn.expand("%:e")
   local excluded_filetypes = {

@@ -4,7 +4,7 @@ return {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     keys = {
-      { '<leader>uP', autopairs_toggle, desc = 'Toggle Auto[P]airs' },
+      { '<leader>uP', function() _G.autopairs_toggle() end, desc = 'Toggle Auto[P]airs' },
     },
     opts = {
       check_ts = true,
