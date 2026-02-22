@@ -22,11 +22,9 @@ common_dotfiles/.config/bash/99_extra
 
 # Credentials.
 .bash_env
-common_dotfiles/.config/fabric/.env
-common_dotfiles/.config/fabric/unique_patterns.txt
 
-# Fabric downloaded data (not custom patterns).
-common_dotfiles/.config/fabric/strategies/
+# Fabric (entire config directory ignored).
+common_dotfiles/.config/fabric/
 
 # Sublime Text.
 *History.sublime-settings

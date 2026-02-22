@@ -102,7 +102,6 @@ espanso/
 | `20_aliases` | General shell aliases |
 | `21_cd_aliases` | Directory navigation aliases |
 | `30_apps` | Per-app aliases, env vars, PATH additions; lazy-loads nvm/thefuck |
-| `40_fabric` | fabric AI pattern helpers |
 | `41_llm` | `llm-cmd`, `llm-explain`, `llm-fix`, `Alt+a` readline keybind |
 | `50_fzf` | fzf keybindings and completion (must load after bash_completion.sh) |
 | `60_utils` | Utility functions |

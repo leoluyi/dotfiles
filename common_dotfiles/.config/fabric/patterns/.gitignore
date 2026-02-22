@@ -1,5 +1,0 @@
-# Ignore all downloaded fabric patterns; only track custom ones explicitly.
-*
-!.gitignore
-!ai/
-!ai/**
