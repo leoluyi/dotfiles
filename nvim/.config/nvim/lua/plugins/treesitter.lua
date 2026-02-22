@@ -74,7 +74,7 @@ return {
 
       incremental_selection = {
         enable = true,
-        disable = require("helpers.treesitter").disable_file_handle,
+        disable = require("util.treesitter").disable_file_handle,
         keymaps = {
           init_selection = "<C-space>",
           node_incremental = "<C-space>",
@@ -85,7 +85,7 @@ return {
 
       indent = {
         enable = true,
-        disable = require("helpers.treesitter").disable_file_handle,
+        disable = require("util.treesitter").disable_file_handle,
       },
 
       highlight = {
@@ -93,7 +93,7 @@ return {
         enable = true,
 
         -- disable treesitter for large files
-        disable = require("helpers.treesitter").disable_file_handle,
+        disable = require("util.treesitter").disable_file_handle,
 
         -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -107,17 +107,17 @@ return {
         -- the illuminate plugin is better than this
         highlight_definitions = {
           enable = false,
-          disable = require("helpers.treesitter").disable_file_handle,
+          disable = require("util.treesitter").disable_file_handle,
           -- Set to false if you have an `updatetime` of ~100.
           clear_on_cursor_move = true,
         },
         highlight_current_scope = {
           enable = false,
-          disable = require("helpers.treesitter").disable_file_handle,
+          disable = require("util.treesitter").disable_file_handle,
         },
         smart_rename = {
           enable = true,
-          disable = require("helpers.treesitter").disable_file_handle,
+          disable = require("util.treesitter").disable_file_handle,
           keymaps = {
             smart_rename = "<localleader>ra",
           },
@@ -126,7 +126,7 @@ return {
 
       playground = {
         enable = true,
-        disable = require("helpers.treesitter").disable_file_handle,
+        disable = require("util.treesitter").disable_file_handle,
         updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
         persist_queries = false, -- Whether the query persists across vim sessions
         keybindings = {

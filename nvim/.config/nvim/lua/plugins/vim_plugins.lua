@@ -6,11 +6,7 @@ return {
   { "tpope/vim-eunuch" }, -- Helpers for UNIX
   { "tpope/vim-fugitive" }, -- A Git wrapper so awesome
   { "tpope/vim-repeat" }, -- enable repeating supported plugin maps with '.'
-  { "tpope/vim-sensible" }, -- Defaults everyone can agree on
-
-  { "Asheq/close-buffers.vim" }, -- Quickly close (bdelete) several buffers at once
   { "dalance/vseq.vim" }, -- Generating sequential number vertically
-  { "danro/rename.vim", lazy = false }, -- Rename the current file in the vim buffer + retain relative path
   {
     -- Instant table creation
     "dhruvasagar/vim-table-mode",
@@ -25,7 +21,6 @@ return {
   },
   { "dhruvasagar/vim-zoom" }, -- Toggle zoom in / out individual windows (splits)
   { "dkarter/bullets.vim", lazy = false }, -- automated bullet lists
-  { "junegunn/gv.vim" }, -- A git commit browser in Vim
   {
     "junegunn/vim-easy-align",
     keys = function()
@@ -69,12 +64,6 @@ return {
   { "rhysd/conflict-marker.vim" }, -- Highlight, Jump and Resolve Conflict Markers Quickly in Vim
 
   -- Language specific plugins.
-  {
-    "PieterjanMontens/vim-pipenv",
-    dependencies = { "jmcantrell/vim-virtualenv", ft = { "python" } },
-    ft = { "python" },
-  }, -- Pipenv support
-  { "plasticboy/vim-markdown", ft = { "markdown" } }, -- Syntax highlighting, matching rules and mappings for the original Markdown and extensions
   { "mzlogin/vim-markdown-toc", ft = { "markdown" } }, -- Generate table of contents for Markdown files
   -- }}}
 }

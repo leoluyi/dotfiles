@@ -9,7 +9,7 @@ return {
         "folke/which-key.nvim",
         optional = true,
         opts = function(_, opts)
-          if require("helpers.util").has("text-case.nvim") then
+          if require("util").has("text-case.nvim") then
             if opts.defaults == nil then opts.defaults = {} end
             opts.defaults["gC"] = { name = "+Text-Case" }
           end

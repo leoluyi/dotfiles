@@ -1,6 +1,6 @@
 -- vim: set foldmethod=marker foldlevel=2:
 
-local root_util = require("helpers.root")
+local root_util = require("util.root")
 
 -- https://github.com/ThePrimeagen/init.lua/blob/master/after/plugin/telescope.lua
 -- https://github.com/whatsthatsmell/dots/blob/master/public%20dots/vim-nvim/lua/joel/telescope/init.lua

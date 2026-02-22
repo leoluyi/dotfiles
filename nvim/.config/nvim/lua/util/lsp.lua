@@ -1,10 +1,10 @@
 ---@diagnostic disable: undefined-field
-local path_join = require("helpers.util").path_join
-local dirname = require("helpers.util").dirname
+local path_join = require("util").path_join
+local dirname = require("util").dirname
 local api = vim.api
 local lsp = vim.lsp
-local lsp_keymaps = require("helpers.lsp_keymaps").keymaps
-local formatting_keymaps = require("helpers.lsp_keymaps").formatting_keymaps
+local lsp_keymaps = require("util.lsp_keymaps").keymaps
+local formatting_keymaps = require("util.lsp_keymaps").formatting_keymaps
 
 --
 

@@ -1,7 +1,7 @@
 -- vim: fdm=marker:fdl=2
 
-local nvim_create_augroups  = require("helpers.util").nvim_create_augroups
-local map  = require("helpers.util").map
+local nvim_create_augroups  = require("util").nvim_create_augroups
+local map  = require("util").map
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("core_" .. name, { clear = true })
@@ -143,5 +143,15 @@ vim.api.nvim_create_autocmd("FileType", {
     -- not to list the above file types in buflist.
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
+
+-- Global statusline. < https://www.youtube.com/watch?v=jH5PNvJIa6o >
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = vim.api.nvim_create_augroup("global_statusline", { clear = true }),
+  pattern = "*",
+  callback = function()
+    vim.opt.laststatus = 3
+    vim.api.nvim_set_hl(0, "WinSeparator", { bg = "NONE" })
   end,
 })

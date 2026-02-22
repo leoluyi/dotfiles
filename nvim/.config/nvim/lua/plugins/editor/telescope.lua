@@ -40,7 +40,7 @@ return {
         return
       end
 
-      local util = require("helpers.telescope")
+      local util = require("util.telescope")
       return {
         { "<leader>T", ":Telescope<Space>", desc = "Telescope..." },
 
@@ -103,7 +103,7 @@ return {
         -- {
         --   "<leader>sg",
         --   function()
-        --     local get_root = require("helpers.telescope").get_root
+        --     local get_root = require("util.telescope").get_root
         --     telescope.extensions.live_grep_args.live_grep_args({
         --       prompt_title = '  Live Grep (args)',
         --       layout_strategy = "vertical",
@@ -117,7 +117,7 @@ return {
         {
           "<leader>sg",
           function()
-            local get_root = require("helpers.telescope").get_root
+            local get_root = require("util.telescope").get_root
             telescope.extensions.egrepify.egrepify({
               prompt_title = "  Live Grep (args)",
               layout_strategy = "vertical",
@@ -211,7 +211,7 @@ return {
 
       -- Mappings for opening multiple files from find_files, etc.
       -- < https://github.com/nvim-telescope/telescope.nvim/issues/1048 >
-      local multi_open_mappings = require("helpers.telescope-multiopen")
+      local multi_open_mappings = require("util.telescope-multiopen")
 
       return {
         defaults = {

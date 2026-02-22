@@ -10,13 +10,11 @@ vim.g.maplocalleader = " "
 vim.api.nvim_set_keymap("n", "<localleader><Space>", "<Space>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>,", ",", { noremap = true })
 
-require("core.lazy") -- Plugin manager.
-require("core.options") -- Options.
-require("core.autocmds") -- Autocmd.
-require("config.keymaps") -- Keymaps.
-require("config.vimrc") -- Other vim settings.
-require("config.global_statusline")
-require("config.colorscheme")
+require("config.lazy")        -- Plugin manager.
+require("config.options")     -- Options.
+require("config.keymaps")     -- Keymaps.
+require("config.autocmds")    -- Autocommands.
+require("config.colorscheme") -- Colorscheme.
 
 -- netrw.
 vim.g.netrw_altfile = 1

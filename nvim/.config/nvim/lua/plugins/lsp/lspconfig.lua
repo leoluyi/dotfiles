@@ -3,7 +3,7 @@
 -- < https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md >
 -- < https://github.com/VonHeikemen/lsp-zero.nvim >
 
-local capabilities = require("helpers.lsp_util").capabilities
+local capabilities = require("util.lsp").capabilities
 
 return {
   {
@@ -21,7 +21,7 @@ return {
       {
         "hrsh7th/cmp-nvim-lsp",
         cond = function()
-          return require("helpers.util").has("nvim-cmp")
+          return require("util").has("nvim-cmp")
         end,
         config = function()
           -- nvim-cmp completion settings
@@ -30,9 +30,9 @@ return {
       },
     },
     config = function()
-      local lsp_util = require("helpers.lsp_util")
+      local lsp_util = require("util.lsp")
       local lsp_attach = lsp_util.lsp_attach
-      local signs = require("helpers.icons").diagnostics
+      local signs = require("util.icons").diagnostics
 
       -- User commands ------------------------------------------------------------{{{2
 

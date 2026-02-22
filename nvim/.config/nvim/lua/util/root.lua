@@ -1,5 +1,5 @@
-local Util = require("helpers.util")
-local lsp_util = require("helpers.lsp_util")
+local Util = require("util")
+local lsp_util = require("util.lsp")
 
 ---@class lazyvim.util.root
 ---@overload fun(): string

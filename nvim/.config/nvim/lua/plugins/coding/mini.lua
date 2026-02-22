@@ -134,7 +134,7 @@ return {
     config = function(_, opts)
       require("mini.ai").setup(opts)
       -- register all text objects with which-key
-      if require("helpers.util").has("which-key.nvim") then
+      if require("util").has("which-key.nvim") then
         local objects = {
           { " ", desc = "whitespace" },
           { '"', desc = '" string' },

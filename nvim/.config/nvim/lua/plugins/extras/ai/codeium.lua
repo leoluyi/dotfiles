@@ -26,7 +26,7 @@ return {
     optional = true,
     event = "VeryLazy",
     opts = function(_, opts)
-      local util_ok, Util = pcall(require, "helpers.util")
+      local util_ok, Util = pcall(require, "util")
       if not util_ok then return end
       local colors = {
         [""] = Util.fg("DiagnosticInfo"),
