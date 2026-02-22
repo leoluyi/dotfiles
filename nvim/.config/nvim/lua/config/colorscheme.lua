@@ -6,7 +6,7 @@ if os.getenv("theme") == "light" then
   vim.o.background = "light"
 end
 
-local get_if_available = require("helpers.colorscheme").get_if_available
+local get_if_available = require("util.colorscheme").get_if_available
 
 -- Uncomment the colorscheme to use it. ==============================================
 

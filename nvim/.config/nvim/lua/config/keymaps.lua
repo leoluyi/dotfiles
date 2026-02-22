@@ -1,7 +1,7 @@
 -- vim: fdm=marker:fdl=2
 -- < https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua >
 
-local map = require("helpers.util").map
+local map = require("util").map
 
 -- General ========================================================================{{{2
 
@@ -278,3 +278,43 @@ vim.cmd("command! ToggleLineWrap lua ToggleLineWrap()")
 map("n", "<localleader>n", 'a<c-r>=expand("%:t")<cr><esc>', { desc = "Insert current filename" })
 map("n", "<localleader>M", "mmHmt:%s/<C-v><cr>//ge<cr>'tzt'm", { desc = "Remove the Windows ^M", noremap = true }) -- < https://stackoverflow.com/q/71081529/3744499 >
 map("n", "<leader>up", "<cmd>setlocal paste!<cr>", { desc = "Toggle [P]aste mode", silent = false })
+
+-- Shell readline-style insert mode bindings (from tpope/vim-rsi) ================={{{2
+-- < https://github.com/tpope/vim-rsi/blob/master/plugin/rsi.vim >
+
+map("i", "<C-a>", "<C-o>^", { desc = "Beginning of line" })
+map("i", "<C-b>", "<Left>", { desc = "Move left" })
+vim.keymap.set("i", "<C-d>", function()
+  return vim.fn.col(".") > #vim.fn.getline(".") and "<C-D>" or "<Del>"
+end, { expr = true, desc = "Delete char" })
+vim.keymap.set("i", "<C-e>", function()
+  return (vim.fn.col(".") > #vim.fn.getline(".") or vim.fn.pumvisible() == 1) and "<C-E>" or "<End>"
+end, { expr = true, desc = "End of line" })
+map("i", "<C-f>", "<Right>", { desc = "Move right" })
+
+-- Bash-like command line bindings
+map("c", "<C-a>", "<Home>", { desc = "Beginning of line" })
+map("c", "<C-e>", "<End>", { desc = "End of line" })
+map("c", "<C-p>", "<Up>", { desc = "Previous history" })
+map("c", "<C-n>", "<Down>", { desc = "Next history" })
+map("c", "<C-b>", "<Left>", { desc = "Move left" })
+map("c", "<C-f>", "<Right>", { desc = "Move right" })
+
+-- Fix Ctrl+@ in some terminals
+vim.keymap.set("i", "<C-@>", "<Esc>", { noremap = true, silent = true, desc = "Escape" })
+
+-- Buffer management =============================================================={{{2
+
+map("n", "<leader>ba", "<cmd>bufdo bd<cr>", { desc = "Close all buffers" })
+map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Close buffer and window" })
+map("n", "<leader>bc", "<cmd>b#|bd#<cr>", { desc = "Close buffer keep window" })
+
+-- Re-indent entire buffer ========================================================{{{2
+
+vim.api.nvim_create_user_command("ReindentAll", function()
+  local view = vim.fn.winsaveview()
+  vim.cmd("normal! gg=G")
+  vim.fn.winrestview(view)
+end, { desc = "Re-indent entire buffer" })
+
+map("n", "<localleader>R", "<cmd>ReindentAll<cr>", { desc = "Re-indent buffer" })

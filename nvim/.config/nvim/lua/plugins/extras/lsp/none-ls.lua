@@ -46,8 +46,8 @@ return {
 
   config = function (_, opts)
     local nls = require("null-ls")
-    local formatting_keymaps = require('helpers.lsp_keymaps').formatting_keymaps
-    local lsp_keymaps = require('helpers.lsp_keymaps').keymaps
+    local formatting_keymaps = require('util.lsp_keymaps').formatting_keymaps
+    local lsp_keymaps = require('util.lsp_keymaps').keymaps
 
     -- Formatting on save.
     -- local lsp_formatting = function(bufnr)

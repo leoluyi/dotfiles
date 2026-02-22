@@ -1,8 +1,6 @@
 -- vim: fdm=marker:fdl=2
 -- < https://www.lazyvim.org/configuration/general#options >
 
-local config_home = require("config.rtp").config_home
-
 local opt = vim.opt
 local o = vim.o
 
@@ -209,6 +207,8 @@ vim.filetype.add({
     [".*%.postman_collection"] = "json",
     ["Jenkinsfile.*"] = "groovy",
     ["%.config/git/*"] = "gitconfig",
+    [".*%.hql"] = "hive",
+    [".*%.jinja"] = "htmljinja",
   },
 })
 

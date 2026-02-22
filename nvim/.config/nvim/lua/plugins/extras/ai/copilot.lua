@@ -86,7 +86,7 @@ return {
     optional = true,
     event = "VeryLazy",
     opts = function(_, opts)
-      local util_ok, Util = pcall(require, "helpers.util")
+      local util_ok, Util = pcall(require, "util")
       if not util_ok then
         return
       end
@@ -104,7 +104,7 @@ return {
 
       table.insert(opts.sections.lualine_x, 2, {
         function()
-          local icon = require("helpers.icons").kinds.Copilot
+          local icon = require("util.icons").kinds.Copilot
           local status = require("copilot.api").status.data
           return icon .. (status.message or "")
         end,

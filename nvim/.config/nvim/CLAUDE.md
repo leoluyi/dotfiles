@@ -4,20 +4,52 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture Overview
 
-This is a comprehensive Neovim configuration built on top of the Lazy.nvim plugin manager. The configuration is organized in a modular structure with clear separation of concerns:
+This is a comprehensive Neovim configuration built on top of the Lazy.nvim plugin manager. The configuration is organized in a modular structure with clear separation of concerns.
 
 ### Core Structure
 
-- **`init.lua`** - Main entry point that sets leader keys and requires all core modules
-- **`lua/core/`** - Core Neovim functionality:
-  - `lazy.lua` - Plugin manager setup and configuration
-  - `options.lua` - Vim options and settings (tabs, search, display, etc.)
-  - `autocmds.lua` - Autocommands
-- **`lua/config/`** - Configuration modules:
-  - `keymaps.lua` - Key mappings
-  - `colorscheme.lua` - Theme configuration
-  - `global_statusline.lua` - Status line setup
-  - `vimrc.lua` - Additional vim settings
+```
+init.lua                    # Entry point: leader keys + require config modules
+lua/
+├── config/                 # All core user configuration
+│   ├── lazy.lua            # Plugin manager setup
+│   ├── options.lua         # Vim options (tabs, search, display, filetype detection)
+│   ├── keymaps.lua         # Key mappings
+│   ├── autocmds.lua        # Autocommands (including global statusline)
+│   └── colorscheme.lua     # Theme configuration
+├── util/                   # Utility functions (use require("util") for main module)
+│   ├── init.lua            # Core utilities (map(), path ops, LSP helpers)
+│   ├── lsp.lua             # LSP utilities (Python path, capabilities, attachment)
+│   ├── lsp_keymaps.lua     # LSP-specific key mappings
+│   ├── icons.lua           # Icon definitions for UI elements
+│   ├── telescope.lua       # Telescope helper functions
+│   ├── telescope-multiopen.lua  # Multi-file opening for Telescope
+│   ├── treesitter.lua      # Treesitter helpers (disable for large files)
+│   ├── colorscheme.lua     # Colorscheme utilities
+│   ├── buffers.lua         # Buffer utilities
+│   ├── root.lua            # Project root detection
+│   ├── globals.lua         # Global variable definitions
+│   └── keys.lua            # Key utilities
+└── plugins/                # Plugin specifications organized by category
+    ├── colorscheme.lua     # 10+ color themes
+    ├── treesitter.lua      # Syntax tree parsing
+    ├── vim_plugins.lua     # Tpope collection (fugitive, surround, etc.)
+    ├── coding/             # Completion, snippets, coding tools
+    ├── editor/             # Editor enhancements (telescope, neo-tree, git, etc.)
+    ├── lsp/                # Language Server Protocol configuration
+    ├── ui/                 # UI enhancements (lualine, bufferline, etc.)
+    ├── util/               # Utility plugins (yanky)
+    └── extras/             # Optional feature sets:
+        ├── ai/             # AI integration (Avante, Copilot, etc.)
+        ├── coding/         # Refactoring, compiler, code snapshots
+        ├── dap/            # Debug Adapter Protocol
+        ├── lang/           # Language-specific configs (Go, Python, Java, etc.)
+        ├── lsp/            # Extra LSP tools (none-ls)
+        └── note/           # Note-taking tools (Obsidian)
+after/
+└── ftplugin/               # Filetype-specific settings (Lua only)
+snippets/luasnip/           # LuaSnip custom snippets
+```
 
 ### Plugin Organization
 
@@ -30,8 +62,10 @@ Plugins are organized into logical categories under `lua/plugins/`:
 - **`util/`** - Utility plugins
 - **`extras/`** - Optional feature sets:
   - `ai/` - AI integration (Avante, Copilot, etc.)
+  - `coding/` - Extra coding tools (refactoring, compiler)
   - `dap/` - Debug Adapter Protocol
   - `lang/` - Language-specific configurations (Go, Python, Java, etc.)
+  - `lsp/` - Extra LSP tools
   - `note/` - Note-taking tools
 
 ### Key Configuration Patterns
@@ -39,12 +73,14 @@ Plugins are organized into logical categories under `lua/plugins/`:
 1. **Leader Keys**: Primary leader is `,`, local leader is `<Space>`
 2. **Plugin Loading**: Uses lazy loading with the Lazy.nvim plugin manager
 3. **LSP Setup**: Mason for LSP server management, configured in `lua/plugins/lsp/`
-4. **Modular Extras**: Optional language and feature support in `extras/` directory
+4. **Utilities**: Helper functions in `lua/util/` — `require("util")` for the main module
+5. **Modular Extras**: Optional language and feature support in `extras/` directory
 
 ### Important Files
 
 - **`lazy-lock.json`** - Plugin version lockfile (similar to package-lock.json)
-- **`lua/helpers/util.lua`** - Utility functions including keymap helpers
+- **`lua/util/init.lua`** - Main utility functions including keymap helpers
+- **`lua/util/lsp.lua`** - LSP utilities (capabilities, Python path detection)
 - **`snippets/luasnip/`** - Custom code snippets for various languages
 
 ## Common Development Commands
@@ -68,8 +104,8 @@ Plugins are organized into logical categories under `lua/plugins/`:
 
 ## Development Notes
 
-- Configuration uses Lua exclusively (no Vimscript)
-- **LSP Configuration**: Uses native `vim.lsp.config` API (Neovim 0.11+) instead of deprecated nvim-lspconfig
+- Configuration uses **Lua exclusively** (no Vimscript)
+- **LSP Configuration**: Uses native `vim.lsp.config` API (Neovim 0.11+)
 - Folding is configured with marker-based folding (`fdm=marker:fdl=1` or `fdm=marker:fdl=2`)
 - Mouse is completely disabled for keyboard-centric workflow
 - Uses relative line numbers with absolute current line
@@ -82,4 +118,7 @@ When adding new plugins or configurations:
 - Place core functionality in appropriate `lua/plugins/` subdirectory
 - Use `lua/plugins/extras/` for optional or language-specific features
 - Follow the existing pattern of one plugin per file with descriptive names
-- Use the helper utility functions from `lua/helpers/util.lua` for consistent key mappings
+- Use the helper utility functions from `lua/util/` for consistent key mappings:
+  - `require("util").map(mode, lhs, rhs, opts)` - Safe keymap with Lazy handler awareness
+  - `require("util.lsp")` - LSP utilities
+  - `require("util.icons")` - Icon definitions

@@ -15,7 +15,7 @@ return {
           return ""
         end
       end
-      local icons = require("helpers.icons")
+      local icons = require("util.icons")
       local mode_map = {
         ["n"] = "N",
         ["no"] = "O-PENDING",

@@ -34,7 +34,7 @@ return {
 
     opts = function()
       local cmp = require("cmp")
-      local icons = require("helpers.icons")
+      local icons = require("util.icons")
       local defaults = require("cmp.config.default")()
 
       -- helper functions.

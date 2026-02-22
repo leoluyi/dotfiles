@@ -10,7 +10,7 @@ return {
       "folke/which-key.nvim",
       optional = true,
       opts = function(_, opts)
-        if require("helpers.util").has("noice.nvim") then
+        if require("util").has("noice.nvim") then
           if opts.defaults == nil then opts.defaults = {} end
           opts.defaults["<leader>sn"] = { name = "+noice" }
         end

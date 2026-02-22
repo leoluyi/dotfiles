@@ -5,10 +5,10 @@
 -- < https://github.com/Nawy/nvim-config-examples/blob/main/lsp-java/ftplugin/java.lua >
 -- < https://github.com/ikws4/.dotfiles/blob/main/nvim/.config/nvim/after/ftplugin/java.lua >
 
-local path_join = require("helpers.util").path_join
-local lsp_attach = require("helpers.lsp_util").lsp_attach
-local capabilities = require("helpers.lsp_util").capabilities
--- local Util = require("helpers.util")
+local path_join = require("util").path_join
+local lsp_attach = require("util.lsp").lsp_attach
+local capabilities = require("util.lsp").capabilities
+-- local Util = require("util")
 
 local java_filetypes = { "java", "pom.xml" }
 
