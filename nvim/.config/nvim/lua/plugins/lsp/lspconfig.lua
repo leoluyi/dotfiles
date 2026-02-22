@@ -1,9 +1,6 @@
 -- vim: fdm=marker:fdl=2
 -- < https://github.com/neovim/nvim-lspconfig >
 -- < https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md >
--- < https://github.com/VonHeikemen/lsp-zero.nvim >
-
-local capabilities = require("util.lsp").capabilities
 
 return {
   {
@@ -15,7 +12,7 @@ return {
     },
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf" },
-      { "folke/neodev.nvim" },
+      { "folke/neodev.nvim",  opts = {} },
       { "folke/lsp-colors.nvim" },
       { "mason.nvim" },
       {
@@ -23,16 +20,19 @@ return {
         cond = function()
           return require("util").has("nvim-cmp")
         end,
-        config = function()
-          -- nvim-cmp completion settings
-          require("cmp_nvim_lsp").default_capabilities(capabilities)
-        end,
       },
     },
     config = function()
       local lsp_util = require("util.lsp")
       local lsp_attach = lsp_util.lsp_attach
       local signs = require("util.icons").diagnostics
+
+      -- Extend capabilities with nvim-cmp completions if available.
+      local capabilities = lsp_util.capabilities
+      local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      if ok then
+        capabilities = vim.tbl_deep_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
+      end
 
       -- User commands ------------------------------------------------------------{{{2
 
@@ -98,10 +98,6 @@ return {
 
       vim.diagnostic.config(global_diagnostic_config)
 
-      -- :help vim.lsp.diagnostic.on_publish_diagnostics
-      vim.lsp.handlers["textDocument/publishDiagnostics"] =
-        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, global_diagnostic_config)
-
       -- Configuration of the individual language servers -------------------------{{{2
 
       -- < https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md>
@@ -166,12 +162,6 @@ return {
         },
       }
 
-      -- INFO: https://github.com/folke/neodev.nvim
-      local neodev_ok, neodev = pcall(require, "neodev")
-      if neodev_ok then
-        neodev.setup()
-      end
-
       vim.lsp.config.lua_ls = {
         -- INFO: fix global vim < https://www.reddit.com/r/neovim/comments/khk335/comment/hy1775w/ >
         cmd = { "lua-language-server" },
@@ -215,14 +205,6 @@ return {
               ignore = { "*" },
             },
           },
-          -- python = {
-          --   analysis = {
-          --     autoSearchPaths = true,
-          --     diagnosticMode = "workspace",
-          --     useLibraryCodeForTypes = true,
-          --     typeCheckingMode = false,
-          --   }
-          -- }
         },
         on_init = function(client)
           client.config.settings.python.pythonPath = lsp_util.get_python_path(client.config.root_dir)
