@@ -321,16 +321,29 @@ map("n", "<localleader>R", "<cmd>ReindentAll<cr>", { desc = "Re-indent buffer" }
 
 -- AI pipe ========================================================================{{{2
 
+local _fabric_suggest = { cmd = { "fabric-ai", "-p", "suggest" } }
+
 map("n", "<leader>ai", function()
   local line = vim.fn.line(".")
-  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), line, line)
-end, { desc = "AI: ask (replace line)" })
+  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), line, line, _fabric_suggest)
+end, { desc = "AI: suggest (replace line)" })
 
 map("x", "<leader>ai", function()
   local start_line = vim.fn.line("'<")
   local end_line = vim.fn.line("'>")
-  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), start_line, end_line)
-end, { desc = "AI: ask (replace selection)" })
+  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), start_line, end_line, _fabric_suggest)
+end, { desc = "AI: suggest (replace selection)" })
+
+map("n", "<leader>ab", function()
+  local line = vim.fn.line(".")
+  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), line, line, { system = require("util.llm").SYSTEM_BLOG })
+end, { desc = "AI: blog style (replace line)" })
+
+map("x", "<leader>ab", function()
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), start_line, end_line, { system = require("util.llm").SYSTEM_BLOG })
+end, { desc = "AI: blog style (replace selection)" })
 
 map("n", "<leader>ac", function()
   local line = vim.fn.line(".")

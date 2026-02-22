@@ -2,15 +2,16 @@ local M = {}
 
 local MODEL = "claude-sonnet-4.6"
 
-M.SYSTEM_ASK = "Answer clearly and concisely in a formal blog writing style. Limit to 2-3 short paragraphs. Use markdown formatting."
+M.SYSTEM_BLOG = "Answer clearly and concisely in a formal blog writing style. Limit to 2-3 short paragraphs. Use markdown formatting."
 M.SYSTEM_CODE = "Output only the code. No explanation, no preamble, no markdown fences, no trailing commentary."
 
--- Replace [start_line, end_line] (1-indexed, inclusive) in bufnr with the LLM
--- response to the text currently occupying those lines. Runs asynchronously.
--- opts.system overrides the default system prompt.
+-- Replace [start_line, end_line] (1-indexed, inclusive) in bufnr with the
+-- output of an external command fed the text on those lines via stdin.
+-- opts.cmd    — full command table; defaults to llm with opts.system
+-- opts.system — system prompt passed to llm (only used when opts.cmd is absent)
 function M.query_replace(bufnr, start_line, end_line, opts)
   opts = opts or {}
-  local system = opts.system or M.SYSTEM_ASK
+  local cmd = opts.cmd or { "llm", "-m", MODEL, "--system", opts.system or M.SYSTEM_BLOG }
 
   local lines = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, end_line, true)
   local text = table.concat(lines, "\n")
@@ -23,7 +24,7 @@ function M.query_replace(bufnr, start_line, end_line, opts)
   vim.notify("llm: querying…", vim.log.levels.INFO)
 
   vim.system(
-    { "llm", "-m", MODEL, "--system", system },
+    cmd,
     { text = true, stdin = text },
     vim.schedule_wrap(function(result)
       if result.code ~= 0 then
