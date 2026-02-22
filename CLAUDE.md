@@ -81,6 +81,7 @@ espanso/
 
 - **`common_dotfiles/.config/`** - XDG-compliant configs: bash, zsh, git, tmux, fzf, ranger, starship, alacritty, wezterm, etc.
 - **`common_dotfiles/.local/bin/`** - User scripts (fzgit, ffmpeg helpers, screenshot, etc.)
+- **`common_dotfiles/.config/bash/`** - Modular bash config with numeric-prefix load order (see Shell Configuration Chain)
 - **`common_dotfiles/.claude/`** - Claude Code global config (CLAUDE.md, settings)
 - **`nvim/`** - Standalone Stow package for Neovim (Lazy.nvim based, Lua only)
 - **`macos/`** - macOS setup scripts (not stowed; run directly)
@@ -92,11 +93,20 @@ espanso/
 
 ### Shell Configuration Chain
 
-The bash config uses XDG paths (`~/.config/bash/`). Key files:
-- `.bash_profile` → sources `.bashrc`
-- `.bashrc` → sources modular files from `.config/bash/`
+`.bash_profile` (in `macos/`) sources every file in `~/.config/bash/` in alphanumeric order, then sources every file under `~/.secrets/`. The numeric prefix controls load order:
 
-The shell supports both Bash and Zsh via shared config patterns.
+| File | Purpose |
+|---|---|
+| `00_xdg_env` | XDG base dirs + tool-specific `$HOME` vars; `$DOTFILES` → repo root |
+| `10_env` | General environment variables |
+| `20_aliases` | General shell aliases |
+| `21_cd_aliases` | Directory navigation aliases |
+| `30_apps` | Per-app aliases, env vars, PATH additions; lazy-loads nvm/thefuck |
+| `40_fabric` | fabric AI pattern helpers |
+| `41_llm` | `llm-cmd`, `llm-explain`, `llm-fix`, `Alt+a` readline keybind |
+| `50_fzf` | fzf keybindings and completion (must load after bash_completion.sh) |
+| `60_utils` | Utility functions |
+| `99_extra` | Local machine overrides — gitignored, create manually as needed |
 
 ### Git Configuration
 
