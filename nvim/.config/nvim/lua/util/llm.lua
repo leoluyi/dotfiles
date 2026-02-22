@@ -2,7 +2,7 @@ local M = {}
 
 local MODEL = "claude-sonnet-4.6"
 
-M.SYSTEM_ASK = "Answer thoroughly in a formal blog writing style. Use markdown formatting."
+M.SYSTEM_ASK = "Answer clearly and concisely in a formal blog writing style. Limit to 2-3 short paragraphs. Use markdown formatting."
 M.SYSTEM_CODE = "Output only the code. No explanation, no preamble, no markdown fences, no trailing commentary."
 
 -- Replace [start_line, end_line] (1-indexed, inclusive) in bufnr with the LLM
