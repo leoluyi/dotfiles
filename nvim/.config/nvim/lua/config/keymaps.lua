@@ -318,3 +318,16 @@ vim.api.nvim_create_user_command("ReindentAll", function()
 end, { desc = "Re-indent entire buffer" })
 
 map("n", "<localleader>R", "<cmd>ReindentAll<cr>", { desc = "Re-indent buffer" })
+
+-- AI pipe ========================================================================{{{2
+
+map("n", "<leader>ai", function()
+  local line = vim.fn.line(".")
+  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), line, line)
+end, { desc = "AI: replace line with LLM response" })
+
+map("x", "<leader>ai", function()
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), start_line, end_line)
+end, { desc = "AI: replace selection with LLM response" })
