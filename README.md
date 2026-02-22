@@ -106,17 +106,28 @@ EOF
 
 The directory lives entirely outside the dotfiles repo and should never be committed anywhere.
 
-### `~/.config/extra` — local machine overrides
+### `~/.config/bash/99_extra` — local machine overrides
 
-For settings that are real config (not secrets) but shouldn't be shared — e.g., work-specific aliases, host-specific paths.
+For settings that are real config (not secrets) but shouldn't be shared — e.g., work-specific aliases, host-specific paths. Sourced automatically by `.bash_profile` as the last file in `~/.config/bash/`.
 
 ```bash
-# Example: ~/.config/extra
+# Example: ~/.config/bash/99_extra
 export WORK_PROXY="http://proxy.corp:3128"
 alias vpn='openconnect corp.example.com'
 ```
 
-This file is not part of the stow package, so it won't be created by bootstrap. Create it manually as needed.
+This file is gitignored and won't be created by bootstrap. Create it manually as needed.
+
+## AI / LLM Shell Integrations
+
+Shell functions powered by the [`llm` CLI](https://llm.datasette.io/) live in `common_dotfiles/.config/bash/41_llm`. Requires the `llm-anthropic` plugin (`llm install llm-anthropic`) and an `ANTHROPIC_API_KEY` in `~/.secrets/`.
+
+| Function | Usage | Description |
+|---|---|---|
+| `llm-cmd` | `llm-cmd "list files modified today"` | Translate natural language to a shell command |
+| `llm-explain` | `llm-explain "find . -mtime -1"` or `cmd 2>&1 \| llm-explain` | Explain a command or piped output |
+| `llm-fix` | `failing-cmd 2>&1 \| llm-fix` | Suggest a fix for a failing command's error output |
+| `Alt+a` | Type a description on the prompt, press `Alt+a` | Replace the current readline line with a generated command |
 
 ## Cheatsheets
 
