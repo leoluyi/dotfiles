@@ -2,7 +2,7 @@ local M = {}
 
 local MODEL = "claude-sonnet-4.6"
 
-M.SYSTEM_ASK = "Answer thoroughly in a casual, conversational tone. Use plain text without markdown formatting."
+M.SYSTEM_ASK = "Answer thoroughly in a casual, conversational tone. Use markdown formatting."
 M.SYSTEM_CODE = "Output only the code. No explanation, no preamble, no markdown fences, no trailing commentary."
 
 -- Replace [start_line, end_line] (1-indexed, inclusive) in bufnr with the LLM
