@@ -306,7 +306,7 @@ vim.keymap.set("i", "<C-@>", "<Esc>", { noremap = true, silent = true, desc = "E
 -- Buffer management =============================================================={{{2
 
 map("n", "<leader>ba", "<cmd>bufdo bd<cr>", { desc = "Close all buffers" })
-map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Close buffer and window" })
+map("n", "<leader>bd", "<cmd>bd | close<cr>", { desc = "Close buffer and window" })
 map("n", "<leader>bc", "<cmd>b#|bd#<cr>", { desc = "Close buffer keep window" })
 
 -- Re-indent entire buffer ========================================================{{{2
