@@ -1,5 +1,8 @@
 local M = {}
 
+local is_nvim_011 = vim.fn.has("nvim-0.11") == 1
+local is_nvim_010 = vim.fn.has("nvim-0.10") == 1
+
 -- https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
 M.formatting_keymaps = function(client, bufnr)
   if not client.supports_method("textDocument/formatting") then return end
@@ -53,15 +56,19 @@ M.keymaps = function(client, bufnr)
   -- < https://github.com/gennaro-tedesco/dotfiles/blob/7385fa7f2d28b9b3ac5f18f52894127e433ab81c/nvim/lua/plugins/lsp.lua#L46-L59>
 
   --- toggle inlay hints
-  vim.g.inlay_hints_visible = false
+  vim.b[bufnr].inlay_hints_visible = false
   local function toggle_inlay_hints()
+    if vim.lsp.inlay_hint == nil then
+      print("inlay hints not supported in this Neovim version")
+      return
+    end
     -- Both Neovim 0.10 and 0.11+ expose vim.lsp.inlay_hint as a table, but
     -- the .enable() signature differs:
     --   0.10:  enable(bufnr, bool)
     --   0.11+: enable(bool, { bufnr = bufnr })
     local function set_hints(enabled)
       if type(vim.lsp.inlay_hint) == "table" then
-        if vim.fn.has("nvim-0.11") == 1 then
+        if is_nvim_011 then
           vim.lsp.inlay_hint.enable(enabled, { bufnr = bufnr })
         else
           vim.lsp.inlay_hint.enable(bufnr, enabled)
@@ -72,12 +79,12 @@ M.keymaps = function(client, bufnr)
       end
     end
 
-    if vim.g.inlay_hints_visible then
-      vim.g.inlay_hints_visible = false
+    if vim.b[bufnr].inlay_hints_visible then
+      vim.b[bufnr].inlay_hints_visible = false
       set_hints(false)
     else
       if client.server_capabilities.inlayHintProvider then
-        vim.g.inlay_hints_visible = true
+        vim.b[bufnr].inlay_hints_visible = true
         set_hints(true)
       else
         print("no inlay hints available")
@@ -86,20 +93,20 @@ M.keymaps = function(client, bufnr)
   end
 
   --- toggle diagnostics
-  vim.g.diagnostics_visible = true
+  vim.b[bufnr].diagnostics_visible = true
   local function toggle_diagnostics()
     -- vim.diagnostic.enable(bool, opts) is the 0.10+ API.
     -- Pre-0.10: use disable(bufnr) / enable(bufnr) instead.
-    if vim.g.diagnostics_visible then
-      vim.g.diagnostics_visible = false
-      if vim.fn.has("nvim-0.10") == 1 then
+    if vim.b[bufnr].diagnostics_visible then
+      vim.b[bufnr].diagnostics_visible = false
+      if is_nvim_010 then
         vim.diagnostic.enable(false, { bufnr = bufnr })
       else
         vim.diagnostic.disable(bufnr)
       end
     else
-      vim.g.diagnostics_visible = true
-      if vim.fn.has("nvim-0.10") == 1 then
+      vim.b[bufnr].diagnostics_visible = true
+      if is_nvim_010 then
         vim.diagnostic.enable(true, { bufnr = bufnr })
       else
         vim.diagnostic.enable(bufnr)
