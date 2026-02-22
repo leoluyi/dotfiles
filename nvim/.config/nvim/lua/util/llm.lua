@@ -60,7 +60,7 @@ function M.query_replace_fabric_auto(bufnr, start_line, end_line)
         vim.notify("llm error: " .. (r1.stderr or "non-zero exit"), vim.log.levels.ERROR)
         return
       end
-      local pattern_name = (r1.stdout or ""):match("###%s+`([^`]+)`")
+      local pattern_name = (r1.stdout or ""):match("###[^`\n]*`([^`]+)`")
       if not pattern_name then
         vim.notify("llm: could not extract pattern name from suggest_pattern output", vim.log.levels.ERROR)
         return
