@@ -126,15 +126,13 @@ fi
 export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.scripts:$PATH"
 
 # ============ Load the shell dotfiles ============
-# * You may want to put all your additions into a separate file like
-#   ~/.bash_aliases, instead of adding them here directly.
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don't want to commit.
-# * issue(fzf): # fzf must come after `bash_completion.sh`, it appears to
-#   remove the cd completion.
-#   < https://github.com/junegunn/fzf/issues/872#issuecomment-721933250 >
+# Files in ~/.config/bash/ are loaded in alphanumeric order.
+# Use numeric prefixes (00_, 10_, ...) to control load order.
+# Add local overrides in ~/.config/bash/99_extra (gitignored).
+# NOTE: 50_fzf must load after bash_completion.sh above.
+# https://github.com/junegunn/fzf/issues/872#issuecomment-721933250
 
-for file in "$HOME"/.config/{bash/*,*aliases*,*env,path,bash_prompt,exports,utils*,extra}; do
+for file in "$HOME"/.config/bash/*; do
   [ -f "$file" ] && [ -r "$file" ] && source "$file";
 done;
 

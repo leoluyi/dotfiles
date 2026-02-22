@@ -287,15 +287,3 @@ gsw() {
 #  done
 #}
 
-# Query AI via Fabric.
-ai() {
-    if ! command -v fabric-ai >/dev/null 2>&1; then
-        echo "fabric-ai is not installed. Aborting." >&2
-        return 1
-    fi
-    if [ -z "$1" ]; then
-        echo "Usage: ai <your question>"
-        return 1
-    fi
-    echo "$*" | fabric-ai -p ai
-}

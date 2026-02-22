@@ -180,6 +180,8 @@ brew "kube-linter"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Command-line interface for running LLMs
+brew "llm"
 # Terminal file manager
 brew "lf"
 # Implementation of the file(1) command

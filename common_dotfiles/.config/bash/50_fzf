@@ -1,0 +1,22 @@
+# vim: set ft=sh:
+# shellcheck shell=bash
+# fzf shell integration.
+# NOTE: fzf must load after bash_completion.sh.
+# https://github.com/junegunn/fzf/issues/872#issuecomment-721933250
+
+command -v fzf >/dev/null || return 0
+
+# Use ripgrep when available — shows hidden files, ignores .git.
+if command -v rg >/dev/null; then
+  export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
+else
+  export FZF_DEFAULT_COMMAND="find . -type f -not -path '*/\.git/*' -not -regex '.*\(\.pyc\|\.o\|\.obj\|\.svn\|\.swp\|\.class\|\.hg\|\.DS_Store\|\.min\..*\)'"
+fi
+
+if [ -f "${XDG_CONFIG_HOME}/fzf/fzf.bash" ]; then
+  . "${XDG_CONFIG_HOME}/fzf/fzf.bash"
+elif [ -f "$HOME/.fzf.bash" ]; then
+  . "$HOME/.fzf.bash"
+fi
+
+[ -f "${XDG_CONFIG_HOME}/fzf/fzf_config" ] && . "${XDG_CONFIG_HOME}/fzf/fzf_config"
