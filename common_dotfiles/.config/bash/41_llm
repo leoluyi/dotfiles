@@ -4,7 +4,8 @@
 
 command -v llm >/dev/null || return 0
 
-export LLM_MODEL="claude-sonnet-4.6"
+LLM_MODEL="claude-sonnet-4.6"
+_LLM_CMD_SYSTEM="Output only a single bash command with no explanation, no markdown, and no backticks. The command must run on $(uname -s)."
 
 # Generate a shell command from a natural-language description.
 # Usage: llm-cmd "list all files modified in the last 24 hours"
@@ -14,7 +15,7 @@ llm-cmd() {
         return 1
     fi
     llm -m "${LLM_MODEL}" \
-        --system "Output only a single bash command with no explanation, no markdown, and no backticks. The command must run on macOS." \
+        --system "${_LLM_CMD_SYSTEM}" \
         "$*"
 }
 
@@ -31,7 +32,7 @@ llm-explain() {
         input="$*"
     else
         input="$(cat)"
-        [ -n "$1" ] && input="$* -- output: $input"
+        [ -n "$1" ] && input="Command: $* -- Output: $input"
     fi
     llm -m "${LLM_MODEL}" \
         --system "You are a concise shell expert. Explain the following bash command or output clearly and briefly." \
@@ -58,7 +59,7 @@ _llm_inline_suggest() {
     [ -z "$READLINE_LINE" ] && return
     local suggestion
     suggestion=$(llm -m "${LLM_MODEL}" \
-        --system "Output only a single bash command with no explanation, no markdown, and no backticks. The command must run on macOS." \
+        --system "${_LLM_CMD_SYSTEM}" \
         "$READLINE_LINE" 2>/dev/null)
     if [ -n "$suggestion" ]; then
         READLINE_LINE="$suggestion"
