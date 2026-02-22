@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "$BASH_SOURCE")" || exit 1;
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 _SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
@@ -78,35 +78,13 @@ sync_nvim_config() {
 
 sync_sublimetext_config() {
   echo "$(tput setaf 2)###### Sublime Text Settings ######$(tput sgr 0)"
-
-  SUBL_CONFIG_PATH=~/"Library/Application Support/Sublime Text 3"
-
-  # Link subl binary
-  SUBL_BINARY="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
-  if [ -x "${SUBL_BINARY}" ]; then
-    ln -sf "${SUBL_BINARY}" /opt/homebrew/bin/
-  fi
-
-  # Fix bad Anaconda completion
-  # https://github.com/DamnWidget/anaconda#auto-complete-for-import-behaves-badly
-  py_completion="${SUBL_CONFIG_PATH}/Packages/Python/Completion Rules.tmPreferences"
-  if [ ! -f "$py_completion" ]; then
-    mkdir -p "${SUBL_CONFIG_PATH}/Packages/Python" &&
-      curl -fsSL -o "$py_completion" https://raw.githubusercontent.com/DamnWidget/anaconda/master/Completion%20Rules.tmPreferences &&
-      rm -f "${SUBL_CONFIG_PATH}/Cache/Python/Completion Rules.tmPreferences.cache"
-  fi
-}
-
-
-sync_sublimetext_config() {
-  echo "$(tput setaf 2)###### Sublime Text Settings ######$(tput sgr 0)"
   SUBL_CONFIG_PATH=~/.config/sublime-text-3
   SUBL_SETTINGS="${SUBL_CONFIG_PATH}/Packages/User"
 
   ## Sync settings.
-  mkdir -p $SUBL_SETTINGS
+  mkdir -p "$SUBL_SETTINGS"
   [ -d ./apps-config/sublime-text/package_sync_linux/ ] \
-    && cp ./apps-config/sublime-text/package_sync_linux/* $SUBL_SETTINGS
+    && cp ./apps-config/sublime-text/package_sync_linux/* "$SUBL_SETTINGS"
 
   # Fix bad Anaconda completion.
   # https://github.com/DamnWidget/anaconda#auto-complete-for-import-behaves-badly
@@ -166,7 +144,7 @@ _sync_dotfiles_rsync() {
   #   >/dev/null;
 
   # Link Brewfile for synchrizing settings.
-  ln -f "$_SCRIPT_DIR/config/Brewfile" "$config_home/Brewfile"
+  ln -f "$_SCRIPT_DIR/homebrew/Brewfile" "$config_home/Brewfile"
 }
 
 
@@ -188,7 +166,7 @@ sync_dotfiles() {
       _sync_dotfiles_stow "$os"
     else
       read -rp "$(tput setaf 3)"'Command `stow` not found. Install `(S)tow` or use `(r)sync` instead? (S/r) '"$(tput sgr 0)" stow_or_rsync
-      if [ -z "$stow_or_rsync" ] || [[ $stow_or_rsync =~ ^[Ss]$ ]]; then brew install stow && _sync_dotfiles_stow "$os"; fi
+      if [ -z "$stow_or_rsync" ] || [[ $stow_or_rsync =~ ^[Ss]$ ]]; then apt-get install -y stow && _sync_dotfiles_stow "$os"; fi
       [[ $stow_or_rsync =~ ^[Rr]$ ]] && _sync_dotfiles_rsync "$os"
     fi
   fi

@@ -101,13 +101,13 @@ function install_python3 {
 
   yum install -y make gcc gcc-c++ openssl-devel bzip2-devel zlib-devel
   curl -fsSLo /tmp/Python-${PYTHON_VERSION}.tgz https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
-    && tar xxzf Python-${PYTHON_VERSION}.tgz -C /tmp \
+    && tar xzf Python-${PYTHON_VERSION}.tgz -C /tmp \
     && cd /tmp/Python-${PYTHON_VERSION} \
     && ./configure --enable-optimizations \
     && make clean && make && make install
 
   [ -x /usr/local/bin/python3 ] \
-    && /usr/local/bin/python3 -m pip install --system --
+    && /usr/local/bin/python3 -m pip install --system -- \
     neovim pynvim jedi flake8 autopep8
 
   cd "${old_dir}"

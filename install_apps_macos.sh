@@ -161,7 +161,7 @@ brew_install_cli() {
     ranger     `# a terminal browser for Vim` \
     rename \
     ripgrep \
-    sc-im \    `# Terminal Spreadsheet Editor (csv)` \
+    sc-im      `# Terminal Spreadsheet Editor (csv)` \
     shellcheck \
     skopeo     `# Work with remote images registries - retrieving information, images, signing content` \
     ssh-copy-id \
@@ -206,7 +206,7 @@ install_alacritty_theme_switch () {
 }
 
 
-post_insatll_config() {
+post_install_config() {
   echo "$(tput setaf 2)###### Post-install Config ######$(tput sgr 0)"
   command -v yabai && yabai --start-service
   command -v skhd && skhd --start-service
@@ -221,18 +221,18 @@ validate_os macos
 install_xcodecli
 install_homebrew
 
-# Insatll brew apps.
+# Install brew apps.
 command -v brew >/dev/null && brew bundle install --no-upgrade --file="${_SCRIPT_DIR}"/homebrew/Brewfile
 # command -v brew >/dev/null && xargs brew install < "${_SCRIPT_DIR}"/homebrew/leaves.txt
 
 install_alacritty_theme_switch
-post_insatll_config
+post_install_config
 
 unset \
   install_xcodecli \
   install_homebrew \
   install_alacritty_theme_switch \
-  post_insatll_config \
+  post_install_config \
   &>/dev/null
 
 echo "$(tput setaf 2)###### Finished ######$(tput sgr 0)"

@@ -101,8 +101,8 @@ install_tldr() {
   echo "$(tput setaf 2)###### Installing tldr ######$(tput sgr 0)"
 
   local loc=/usr/local/bin/tldr  # elevated privileges needed for some locations
-  sudo wget -qO $loc https://4e4.win/tldr
-  sudo chmod +x $loc
+  sudo wget -qO "$loc" https://4e4.win/tldr
+  sudo chmod +x "$loc"
 }
 
 install_neovim() {
@@ -235,7 +235,7 @@ install_r() {
     # dd the rrutter4.0 PPA for R itself (same as CRAN).
     #sudo add-apt-repository --enable-source --yes "ppa:marutter/rrutter4.0"
     local release_codename=$(lsb_release -cd | grep Codename | cut -f2)
-    sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(release_codename)-cran40/"
+    sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu ${release_codename}-cran40/"
     # Add the c4d4u.teams repo for over 4k CRAN packages.
     sudo add-apt-repository --enable-source --yes "ppa:marutter/c2d4u4.0+"
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
@@ -496,7 +496,7 @@ install_linuxbrew() {
 
 install_fzf_local() {
   git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME"/.fzf \
-    && "$HOME"/.fzf/instal
+    && "$HOME"/.fzf/install
 }
 
 install_nvm () {
