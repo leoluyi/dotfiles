@@ -18,7 +18,20 @@ local function is_inlay_hints_enabled(bufnr)
   end
 end
 
--- Apply inlay-hint enable/disable, handling API differences across Neovim versions:
+-- Query the current diagnostic state for bufnr, handling API differences:
+--   0.10+:   is_enabled({ bufnr = bufnr })
+--   pre-0.10: is_disabled(bufnr) negated; defaults to true if neither exists
+local function is_diagnostics_enabled(bufnr)
+  if is_nvim_010 and vim.diagnostic and vim.diagnostic.is_enabled then
+    return vim.diagnostic.is_enabled({ bufnr = bufnr })
+  elseif vim.diagnostic and vim.diagnostic.is_disabled then
+    return not vim.diagnostic.is_disabled(bufnr)
+  end
+  return true
+end
+
+-- Apply inlay-hint enable/disable, handling API differences across Neovim versions.
+-- Returns false and emits a one-time warning when the API is unavailable.
 --   0.11+:   enable(bool, { bufnr = bufnr })
 --   0.10:    enable(bufnr, bool)
 --   pre-0.10: plain-function vim.lsp.inlay_hint(bufnr, bool)
@@ -29,8 +42,13 @@ local function set_inlay_hints(bufnr, enabled)
     else
       vim.lsp.inlay_hint.enable(bufnr, enabled)
     end
-  else
+    return true
+  elseif type(vim.lsp.inlay_hint) == "function" then
     vim.lsp.inlay_hint(bufnr, enabled)
+    return true
+  else
+    vim.notify_once("inlay hints not supported in this Neovim version", vim.log.levels.WARN)
+    return false
   end
 end
 
@@ -104,34 +122,24 @@ M.keymaps = function(client, bufnr)
   vim.b[bufnr].inlay_hints_visible = is_inlay_hints_enabled(bufnr)
 
   local function toggle_inlay_hints()
-    if vim.lsp.inlay_hint == nil then
-      vim.notify("inlay hints not supported in this Neovim version", vim.log.levels.WARN)
-      return
-    end
     if vim.b[bufnr].inlay_hints_visible then
-      vim.b[bufnr].inlay_hints_visible = false
-      set_inlay_hints(bufnr, false)
+      if set_inlay_hints(bufnr, false) then
+        vim.b[bufnr].inlay_hints_visible = false
+      end
     else
       if client.server_capabilities.inlayHintProvider then
-        vim.b[bufnr].inlay_hints_visible = true
-        set_inlay_hints(bufnr, true)
+        if set_inlay_hints(bufnr, true) then
+          vim.b[bufnr].inlay_hints_visible = true
+        end
       else
-        vim.notify("no inlay hints available", vim.log.levels.WARN)
+        vim.notify_once("no inlay hints available", vim.log.levels.WARN)
       end
     end
   end
 
   --- toggle diagnostics
   -- Seed state from the actual current value rather than assuming a default.
-  local diag_initially_enabled
-  if is_nvim_010 and vim.diagnostic.is_enabled then
-    diag_initially_enabled = vim.diagnostic.is_enabled({ bufnr = bufnr })
-  elseif vim.diagnostic and vim.diagnostic.is_disabled then
-    diag_initially_enabled = not vim.diagnostic.is_disabled(bufnr)
-  else
-    diag_initially_enabled = true
-  end
-  vim.b[bufnr].diagnostics_visible = diag_initially_enabled
+  vim.b[bufnr].diagnostics_visible = is_diagnostics_enabled(bufnr)
 
   local function toggle_diagnostics()
     if vim.b[bufnr].diagnostics_visible then
