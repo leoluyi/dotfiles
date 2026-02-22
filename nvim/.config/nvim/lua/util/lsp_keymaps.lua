@@ -1,5 +1,8 @@
 local M = {}
 
+local is_nvim_011 = vim.fn.has("nvim-0.11") == 1
+local is_nvim_010 = vim.fn.has("nvim-0.10") == 1
+
 -- https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
 M.formatting_keymaps = function(client, bufnr)
   if not client.supports_method("textDocument/formatting") then return end
@@ -49,24 +52,68 @@ M.keymaps = function(client, bufnr)
     map("n", "<leader>lco", "<cmd>Lspsaga outgoing_calls<CR>", "Lsp Outgoing Calls")
   end
 
-  -- Toggle diagnostics
-  vim.g.diagnostics_visible = true
-  local function toggle_diagnostics()
-    vim.g.diagnostics_visible = not vim.g.diagnostics_visible
-    vim.diagnostic.enable(vim.g.diagnostics_visible)
-  end
-  map("n", "<leader>ud", toggle_diagnostics, "Lsp Toggle [D]iagnostics")
+  -- Other keymaps.
+  -- < https://github.com/gennaro-tedesco/dotfiles/blob/7385fa7f2d28b9b3ac5f18f52894127e433ab81c/nvim/lua/plugins/lsp.lua#L46-L59>
 
-  -- Toggle inlay hints (Neovim 0.10+)
-  vim.g.inlay_hints_visible = false
+  --- toggle inlay hints
+  vim.b[bufnr].inlay_hints_visible = false
   local function toggle_inlay_hints()
-    if client.server_capabilities.inlayHintProvider then
-      vim.g.inlay_hints_visible = not vim.g.inlay_hints_visible
-      vim.lsp.inlay_hint.enable(vim.g.inlay_hints_visible, { bufnr = bufnr })
+    if vim.lsp.inlay_hint == nil then
+      print("inlay hints not supported in this Neovim version")
+      return
+    end
+    -- Both Neovim 0.10 and 0.11+ expose vim.lsp.inlay_hint as a table, but
+    -- the .enable() signature differs:
+    --   0.10:  enable(bufnr, bool)
+    --   0.11+: enable(bool, { bufnr = bufnr })
+    local function set_hints(enabled)
+      if type(vim.lsp.inlay_hint) == "table" then
+        if is_nvim_011 then
+          vim.lsp.inlay_hint.enable(enabled, { bufnr = bufnr })
+        else
+          vim.lsp.inlay_hint.enable(bufnr, enabled)
+        end
+      else
+        -- pre-0.10 plain-function form
+        vim.lsp.inlay_hint(bufnr, enabled)
+      end
+    end
+
+    if vim.b[bufnr].inlay_hints_visible then
+      vim.b[bufnr].inlay_hints_visible = false
+      set_hints(false)
     else
-      print("no inlay hints available")
+      if client.server_capabilities.inlayHintProvider then
+        vim.b[bufnr].inlay_hints_visible = true
+        set_hints(true)
+      else
+        print("no inlay hints available")
+      end
     end
   end
+
+  --- toggle diagnostics
+  vim.b[bufnr].diagnostics_visible = true
+  local function toggle_diagnostics()
+    -- vim.diagnostic.enable(bool, opts) is the 0.10+ API.
+    -- Pre-0.10: use disable(bufnr) / enable(bufnr) instead.
+    if vim.b[bufnr].diagnostics_visible then
+      vim.b[bufnr].diagnostics_visible = false
+      if is_nvim_010 then
+        vim.diagnostic.enable(false, { bufnr = bufnr })
+      else
+        vim.diagnostic.disable(bufnr)
+      end
+    else
+      vim.b[bufnr].diagnostics_visible = true
+      if is_nvim_010 then
+        vim.diagnostic.enable(true, { bufnr = bufnr })
+      else
+        vim.diagnostic.enable(bufnr)
+      end
+    end
+  end
+  map("n", "<leader>ud", toggle_diagnostics, "Lsp Toggle [D]iagnostics")
   map("n", "<leader>uh", toggle_inlay_hints, "Lsp Toggle Inlay [H]ints")
 end
 
