@@ -44,7 +44,6 @@ lua/
         ├── coding/         # Refactoring, compiler, code snapshots
         ├── dap/            # Debug Adapter Protocol
         ├── lang/           # Language-specific configs (Go, Python, Java, etc.)
-        ├── lsp/            # Extra LSP tools (none-ls)
         └── note/           # Note-taking tools (Obsidian)
 after/
 └── ftplugin/               # Filetype-specific settings (Lua only)
@@ -65,7 +64,6 @@ Plugins are organized into logical categories under `lua/plugins/`:
   - `coding/` - Extra coding tools (refactoring, compiler)
   - `dap/` - Debug Adapter Protocol
   - `lang/` - Language-specific configurations (Go, Python, Java, etc.)
-  - `lsp/` - Extra LSP tools
   - `note/` - Note-taking tools
 
 ### Key Configuration Patterns
