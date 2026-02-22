@@ -1,11 +1,17 @@
 local M = {}
 
 local MODEL = "claude-sonnet-4.6"
-local SYSTEM = "Be concise. Reply in plain text, no markdown formatting unless the content is code."
+
+M.SYSTEM_ASK = "Answer thoroughly and clearly. Use plain text without markdown formatting."
+M.SYSTEM_CODE = "Output only the code. No explanation, no preamble, no markdown fences, no trailing commentary."
 
 -- Replace [start_line, end_line] (1-indexed, inclusive) in bufnr with the LLM
 -- response to the text currently occupying those lines. Runs asynchronously.
-function M.query_replace(bufnr, start_line, end_line)
+-- opts.system overrides the default system prompt.
+function M.query_replace(bufnr, start_line, end_line, opts)
+  opts = opts or {}
+  local system = opts.system or M.SYSTEM_ASK
+
   local lines = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, end_line, true)
   local text = table.concat(lines, "\n")
 
@@ -17,7 +23,7 @@ function M.query_replace(bufnr, start_line, end_line)
   vim.notify("llm: querying…", vim.log.levels.INFO)
 
   vim.system(
-    { "llm", "-m", MODEL, "--system", SYSTEM },
+    { "llm", "-m", MODEL, "--system", system },
     { text = true, stdin = text },
     vim.schedule_wrap(function(result)
       if result.code ~= 0 then

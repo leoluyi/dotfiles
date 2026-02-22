@@ -324,10 +324,21 @@ map("n", "<localleader>R", "<cmd>ReindentAll<cr>", { desc = "Re-indent buffer" }
 map("n", "<leader>ai", function()
   local line = vim.fn.line(".")
   require("util.llm").query_replace(vim.api.nvim_get_current_buf(), line, line)
-end, { desc = "AI: replace line with LLM response" })
+end, { desc = "AI: ask (replace line)" })
 
 map("x", "<leader>ai", function()
   local start_line = vim.fn.line("'<")
   local end_line = vim.fn.line("'>")
   require("util.llm").query_replace(vim.api.nvim_get_current_buf(), start_line, end_line)
-end, { desc = "AI: replace selection with LLM response" })
+end, { desc = "AI: ask (replace selection)" })
+
+map("n", "<leader>ac", function()
+  local line = vim.fn.line(".")
+  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), line, line, { system = require("util.llm").SYSTEM_CODE })
+end, { desc = "AI: code only (replace line)" })
+
+map("x", "<leader>ac", function()
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+  require("util.llm").query_replace(vim.api.nvim_get_current_buf(), start_line, end_line, { system = require("util.llm").SYSTEM_CODE })
+end, { desc = "AI: code only (replace selection)" })
