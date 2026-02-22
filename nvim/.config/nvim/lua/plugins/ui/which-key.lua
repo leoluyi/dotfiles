@@ -59,7 +59,7 @@ return {
       { "<leader>lc", group = "Lspsaga [C]all" },
       { "<leader>q", group = "Quit" },
       { "<leader>r", group = "Resize|+Rotate" },
-      { "<leader>s", group = "Search" },
+      { "<leader>s", group = "(Telescope) Search" },
       { "<leader>sl", group = "Lsp" },
       { "<leader>t", group = "Terminal|Neotest" },
       { "<leader>u", group = "Toggle" },
