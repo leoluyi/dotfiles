@@ -10,7 +10,7 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export DBT_PROFILES_DIR="$XDG_CONFIG_HOME"/dbt
-export DOTFILES="$XDG_CONFIG_HOME"
+export DOTFILES="$HOME/.dotfiles"
 export GEM_HOME="$XDG_DATA_HOME"/ruby/gems
 export GEM_PATH="$XDG_DATA_HOME"/ruby/gems
 export GEM_SPEC_CACHE="$XDG_DATA_HOME"/ruby/specs
