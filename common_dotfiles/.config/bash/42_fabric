@@ -4,6 +4,8 @@
 
 command -v fabric-ai >/dev/null || return 0
 
+alias fabric='fabric-ai'
+
 # General fabric-ai query.
 # Usage: ?? <question>
 # Usage: <cmd> | ??  [context hint]
