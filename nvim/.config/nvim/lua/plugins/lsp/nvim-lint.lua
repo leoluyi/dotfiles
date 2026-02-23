@@ -8,7 +8,10 @@ return {
       -- Add linters per filetype here, e.g.:
       --   linters_by_ft = { python = { "ruff" }, go = { "golangcilint" } }
       -- Use "*" to run on all filetypes, "_" as a fallback for unconfigured ones.
-      linters_by_ft = {},
+      linters_by_ft = {
+        sh   = { "shellcheck" },
+        bash = { "shellcheck" },
+      },
       -- Per-linter overrides (args, condition, etc.)
       linters = {},
     },

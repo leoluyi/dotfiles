@@ -27,6 +27,7 @@ return {
         "golangci-lint",   -- CLI tool; required by golangci-lint-langserver
         "markdownlint-cli2",
         "ruff",            -- also used as LSP server and formatter
+        "shellcheck",      -- used by nvim-lint for sh/bash
 
         -- Formatters.
         "beautysh",
