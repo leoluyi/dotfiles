@@ -29,10 +29,10 @@ M.theme_switcher = function(window, pane)
       -- execute 'sed' shell command to replace the line
       -- responsible of colorscheme in my config
       action = wezterm.action_callback(function(inner_window, _, _, label)
-        local overrides = inner_window:get_config_overrides() or {}
-        overrides.color_scheme = label
-        overrides.window_background_opacity = 0.90
-        inner_window:set_config_overrides(overrides)
+        inner_window:set_config_overrides({
+          color_scheme = label,
+          window_background_opacity = 0.90,
+        })
       end),
     }),
     pane
