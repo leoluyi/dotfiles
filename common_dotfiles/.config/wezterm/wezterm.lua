@@ -3,8 +3,9 @@ local wezterm = require("wezterm")
 local helpers = require("helpers")
 
 return {
-  -- color_scheme = "Catppuccin Mocha",
-  color_scheme = "rose-pine-moon",
+  -- color_scheme = "OceanicNext (base16)",
+  -- color_scheme = "EverforestDark (Gogh)",
+  color_scheme = "Gruvbox dark, soft (base16)",
   enable_tab_bar = false,
   font_size = 16.0,
   font = wezterm.font("JetBrains Mono"),
