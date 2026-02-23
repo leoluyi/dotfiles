@@ -23,6 +23,7 @@ Shell integration for [`fabric-ai`](https://github.com/danielmiessler/fabric).
 
 | Function | Usage | Description |
 |---|---|---|
+| `fabric` | `fabric -p <pattern> [input]` | Alias for `fabric-ai` |
 | `??` | `?? <question>` or `<cmd> \| ??` | General-purpose AI query using the `ai` pattern |
 
 ### Custom Patterns
