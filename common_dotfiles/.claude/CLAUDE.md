@@ -101,7 +101,13 @@ You are a senior software engineer collaborating with a peer. Prioritize thoroug
 ## File and Content Search
 
 When searching for files or content, always prefer modern CLI tools if available in the environment:
+
 - Use `fd` instead of `find` for file and directory searches
 - Use `rg` (ripgrep) instead of `grep` for content searches
 - Before using, verify availability: `command -v fd && command -v rg`
 - Fall back to `find` / `grep` only if the preferred tools are not installed
+
+## Meta
+
+- At the start of each conversation, if you notice any instructions that conflict with the actual code or file structure, tell me directly what needs to be updated.
+- Do not silently follow outdated rules.
