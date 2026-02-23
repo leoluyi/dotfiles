@@ -3,21 +3,6 @@ local act = wezterm.action
 
 local M = {}
 
--- https://github.com/wez/wezterm/issues/4429
-wezterm.on("toggle-colorscheme", function(window, pane)
-  local overrides = window:get_config_overrides() or {}
-  if not overrides.color_scheme then
-    -- overrides.color_scheme = "PaperColor Light (base16)"
-    -- overrides.color_scheme = "Tokyo Night Day"
-    overrides.color_scheme = "Catppuccin Latte"
-    overrides.window_background_opacity = 0.97
-  else
-    overrides.color_scheme = nil
-    overrides.window_background_opacity = nil
-  end
-  window:set_config_overrides(overrides)
-end)
-
 -- https://www.reddit.com/r/wezterm/comments/1bbq6ro/i_implemented_a_theme_switcher/
 M.theme_switcher = function(window, pane)
   -- get builting color schemes

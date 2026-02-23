@@ -2,6 +2,8 @@
 local wezterm = require("wezterm")
 local helpers = require("helpers")
 
+local light_color_scheme = "Catppuccin Latte"
+
 return {
   -- color_scheme = "OceanicNext (base16)",
   -- color_scheme = "EverforestDark (Gogh)",
@@ -47,7 +49,21 @@ return {
       mods = "CMD|SHIFT",
       action = wezterm.action.CloseCurrentTab({ confirm = false }),
     },
-    { key = "y", mods = "CMD|ALT", action = wezterm.action.EmitEvent("toggle-colorscheme") },
+    {
+      key = "y",
+      mods = "CMD|ALT",
+      action = wezterm.action_callback(function(window, _)
+        local overrides = window:get_config_overrides() or {}
+        if not overrides.color_scheme then
+          overrides.color_scheme = light_color_scheme
+          overrides.window_background_opacity = 0.97
+        else
+          overrides.color_scheme = nil
+          overrides.window_background_opacity = nil
+        end
+        window:set_config_overrides(overrides)
+      end),
+    },
   },
   mouse_bindings = {
     -- < https://github.com/wez/wezterm/issues/119#issuecomment-1206593847 >
