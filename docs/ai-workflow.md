@@ -50,3 +50,22 @@ To add a new custom pattern:
    ```bash
    stow -R -t "$HOME" common_dotfiles
    ```
+
+## Claude Code Plugins
+
+Installed via `install_apps_macos.sh`. To install manually: `claude plugin install <name>`.
+
+### everything-claude-code
+
+[everything-claude-code](https://github.com/affaan-m/everything-claude-code) — agents, skills, hooks, and rules for AI-assisted development workflows.
+
+**Agents:** `architect`, `build-error-resolver`, `code-reviewer`, `database-reviewer`, `doc-updater`, `e2e-runner`, `go-build-resolver`, `go-reviewer`, `planner`, `python-reviewer`, `refactor-cleaner`, `security-reviewer`, `tdd-guide`
+
+**Skills:** `plan`, `tdd`, `security-review`, `learn-eval`, `continuous-learning`, `e2e`, `refactor-clean`, `go-review`, `python-review`, and more
+
+**Hooks (always-on):**
+- Blocks dev servers (`npm run dev`, etc.) outside tmux
+- Blocks ad-hoc `.md`/`.txt` creation outside `docs/`, `README`, `CLAUDE`, etc.
+- Reminds to use tmux for long-running commands; review reminder before `git push`
+- Session start/end: loads previous context, persists state, evaluates for learnable patterns
+- Post-edit: Prettier format, TypeScript check, `console.log` warning
