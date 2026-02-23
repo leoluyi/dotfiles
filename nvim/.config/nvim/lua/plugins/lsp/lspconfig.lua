@@ -44,11 +44,6 @@ return {
       -- Diagnostics: linting and formatting --------------------------------------{{{2
       -- < https://github.com/neovim/nvim-lspconfig/wiki/UI-customization >
 
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-      end
-
       local border = {
         { "╭", "LspFloatWinBorder" },
         { "─", "LspFloatWinBorder" },
@@ -75,16 +70,15 @@ return {
         },
         severity_sort = true,
 
-        -- Use a function to dynamically turn signs off and on, using buffer local variables
-        signs = function(bufnr, _)
-          local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, "show_signs")
-          -- No buffer local variable set, so just enable by default
-          if not ok then
-            return { severity = { min = vim.diagnostic.severity.INFO } }
-          end
-
-          return result
-        end,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = signs.Error,
+            [vim.diagnostic.severity.WARN]  = signs.Warn,
+            [vim.diagnostic.severity.INFO]  = signs.Info,
+            [vim.diagnostic.severity.HINT]  = signs.Hint,
+          },
+          severity = { min = vim.diagnostic.severity.INFO },
+        },
 
         float = {
           header = "■ Diagnostics:",
@@ -127,7 +121,7 @@ return {
         on_attach = lsp_attach,
         capabilities = capabilities,
         init_options = {
-          command = { "golangci-lint", "run", "-E", "revive", "-E", "govet", "--out-format", "json" },
+          command = { "golangci-lint", "run", "--enable", "revive", "--enable", "govet", "--out-format", "json" },
         },
       }
 
@@ -165,7 +159,7 @@ return {
         capabilities = capabilities,
         settings = {
           Lua = {
-            diagnostics = { globals = { "vim" } },
+            -- diagnostics.globals = { "vim" } is handled by lazydev.nvim
             completion = {
               callSnippet = "Replace",
             },
@@ -224,7 +218,7 @@ return {
       vim.lsp.config.taplo = {
         cmd = { "taplo", "lsp", "stdio" },
         filetypes = { "toml" },
-        root_markers = { "*.toml", ".git" },
+        root_markers = { "taplo.toml", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
       }
@@ -240,7 +234,7 @@ return {
       vim.lsp.config.vimls = {
         cmd = { "vim-language-server", "--stdio" },
         filetypes = { "vim" },
-        root_markers = { "strange.vim", ".vim", ".git" },
+        root_markers = { ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
       }
