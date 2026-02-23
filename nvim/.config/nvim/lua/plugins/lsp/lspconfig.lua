@@ -12,7 +12,6 @@ return {
     },
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf" },
-      { "folke/neodev.nvim",  opts = {} },
       { "folke/lsp-colors.nvim" },
       { "mason.nvim" },
       {
@@ -117,11 +116,6 @@ return {
         root_markers = { ".eslintrc.js", ".eslintrc.json", "package.json", ".git" },
         on_attach = lsp_attach,
         capabilities = capabilities,
-        settings = {
-          format = {
-            enable = true,
-          },
-        },
       }
 
       vim.lsp.config.golangci_lint_ls = {
@@ -259,5 +253,17 @@ return {
         capabilities = capabilities,
       }
     end,
+  },
+
+  -- Replacement for neodev.nvim; hooks via LspAttach so it works with
+  -- vim.lsp.config (Neovim 0.11+ native API).
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
   },
 }

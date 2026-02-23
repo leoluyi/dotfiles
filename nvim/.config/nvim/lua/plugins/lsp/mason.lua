@@ -9,7 +9,7 @@ return {
       -- https://mason-registry.dev/registry/list
       -- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
       ensure_installed = {
-        -- LSP.
+        -- LSP servers.
         "bash-language-server",
         "eslint-lsp",
         "golangci-lint-langserver",
@@ -18,22 +18,24 @@ return {
         "lua-language-server",
         "pyright",
         "sqlls",
-        "tailwindcss-language-server",
         "typescript-language-server",
         "vim-language-server",
         "yaml-language-server",
 
-        -- Linters, Formatters.
-        "beautysh", -- bash
-        "black",
+        -- Linters.
         "checkmake",
-        "isort",
+        "golangci-lint",   -- CLI tool; required by golangci-lint-langserver
         "markdownlint-cli2",
+        "ruff",            -- also used as LSP server and formatter
+
+        -- Formatters.
+        "beautysh",
+        "black",
+        "isort",
         "prettierd",
-        "ruff",
         "shfmt",
         "stylua",
-        "taplo", -- TOML
+        "taplo",           -- also used as LSP server
         "yamlfix",
       },
     },
