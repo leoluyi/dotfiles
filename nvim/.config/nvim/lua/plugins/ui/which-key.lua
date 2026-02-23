@@ -7,6 +7,8 @@ return {
       { "[", group = "prev" },
       { "]", group = "next" },
       { "g", group = "goto" },
+      { "gc", group = "Comment" },
+      { "gb", group = "Comment (block)" },
       { "z", group = "fold" },
     },
   },

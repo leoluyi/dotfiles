@@ -22,11 +22,12 @@ Leaders: `,` = `<leader>` · `<Space>` = `<localleader>`
 - [Telescope (Fuzzy Finder)](#telescope-fuzzy-finder)
 - [Terminal](#terminal)
 - [Diagnostics & Quickfix](#diagnostics--quickfix)
+- [Commenting](#commenting)
 - [Code Actions & Refactoring](#code-actions--refactoring)
 - [DAP (Debugger)](#dap-debugger)
 - [UI Toggles](#ui-toggles)
 - [Notes (Obsidian)](#notes-obsidian)
-- [AI (CopilotChat)](#ai-copilotchat)
+- [AI](#ai)
 - [Language: Go](#language-go)
 - [Language: Java](#language-java)
 
@@ -385,6 +386,22 @@ Powered by toggleterm.nvim:
 
 ---
 
+## Commenting
+
+Powered by Comment.nvim.
+
+| Key | Mode | Action |
+|---|---|---|
+| `<localleader>//` | n | Toggle line comment (current line) |
+| `<localleader>/` | v | Toggle line comment (selection) |
+| `gc{motion}` | n | Comment with motion (e.g. `gc3j`, `gcip`) |
+| `gbc` | n | Toggle block comment (current line) |
+| `gb{motion}` | n | Block comment with motion |
+| `gco` / `gcO` | n | Add comment on line below / above |
+| `gcA` | n | Add comment at end of line |
+
+---
+
 ## Code Actions & Refactoring
 
 | Key | Mode | Action |
@@ -446,22 +463,23 @@ Powered by toggleterm.nvim:
 
 ---
 
-## AI (CopilotChat)
+## AI
 
-| Key | Action |
-|---|---|
-| `<leader>ah` | CopilotChat help |
-| `<leader>ap` | CopilotChat prompts |
-| `<leader>ae` | Explain code |
-| `<leader>at` | Generate tests |
-| `<leader>ar` | Code review |
-| `<leader>aR` | Refactor |
-| `<leader>an` | Better naming |
-| `<leader>ad` | Generate docs |
-| `<leader>af` | Fix diagnostics |
-| `<leader>ac` | Generate commit message |
-| `<leader>ai` | Inline chat |
-| `<leader>aq` | Ask question |
+### Claude Code (claude-code.nvim)
+
+| Key | Mode | Action |
+|---|---|---|
+| `<C-,>` | n/t | Toggle Claude Code terminal |
+| `<leader>cC` | n | Resume recent Claude conversation |
+| `<leader>cV` | n | Toggle verbose output |
+
+### Supermaven (inline completions)
+
+| Key | Mode | Action |
+|---|---|---|
+| `<C-l>` | i | Accept suggestion |
+| `<C-j>` | i | Accept next word |
+| `<C-]>` | i | Dismiss suggestion |
 
 ---
 
