@@ -23,8 +23,17 @@ common_dotfiles/.config/bash/99_extra
 # Credentials.
 .bash_env
 
-# Fabric (entire config directory ignored).
-common_dotfiles/.config/fabric/
+# Fabric - ignore auto-generated/sensitive content; track custom patterns only.
+common_dotfiles/.config/fabric/.env
+common_dotfiles/.config/fabric/unique_patterns.txt
+common_dotfiles/.config/fabric/sessions/
+common_dotfiles/.config/fabric/contexts/
+common_dotfiles/.config/fabric/strategies/
+common_dotfiles/.config/fabric/extensions/
+# Ignore all downloaded patterns; un-ignore custom patterns below.
+common_dotfiles/.config/fabric/patterns/*
+!common_dotfiles/.config/fabric/patterns/ai
+!common_dotfiles/.config/fabric/patterns/ai/**
 
 # Sublime Text.
 *History.sublime-settings
