@@ -9,11 +9,9 @@ return {
       -- https://mason-registry.dev/registry/list
       -- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
       ensure_installed = {
-        -- Tools.
-        "tree-sitter-cli",
-
         -- LSP.
         "bash-language-server",
+        "eslint-lsp",
         "golangci-lint-langserver",
         "gopls",
         "json-lsp",
@@ -26,11 +24,17 @@ return {
         "yaml-language-server",
 
         -- Linters, Formatters.
+        "beautysh", -- bash
+        "black",
         "checkmake",
-        "flake8",
+        "isort",
         "markdownlint-cli2",
+        "prettierd",
         "ruff",
+        "shfmt",
+        "stylua",
         "taplo", -- TOML
+        "yamlfix",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
