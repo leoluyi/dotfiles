@@ -206,6 +206,16 @@ install_alacritty_theme_switch () {
 }
 
 
+install_claude_plugins() {
+  echo "$(tput setaf 2)###### Install Claude Code Plugins ######$(tput sgr 0)"
+  if ! command -v claude >/dev/null; then
+    echo "(Skip) claude CLI not found."
+    return
+  fi
+  claude plugin install everything-claude-code@everything-claude-code
+}
+
+
 post_install_config() {
   echo "$(tput setaf 2)###### Post-install Config ######$(tput sgr 0)"
   command -v yabai && yabai --start-service
@@ -226,12 +236,14 @@ command -v brew >/dev/null && brew bundle install --no-upgrade --file="${_SCRIPT
 # command -v brew >/dev/null && xargs brew install < "${_SCRIPT_DIR}"/homebrew/leaves.txt
 
 install_alacritty_theme_switch
+install_claude_plugins
 post_install_config
 
 unset \
   install_xcodecli \
   install_homebrew \
   install_alacritty_theme_switch \
+  install_claude_plugins \
   post_install_config \
   &>/dev/null
 
