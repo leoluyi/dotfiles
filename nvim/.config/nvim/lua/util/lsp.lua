@@ -4,7 +4,6 @@ local dirname = require("util").dirname
 local api = vim.api
 local lsp = vim.lsp
 local lsp_keymaps = require("util.lsp_keymaps").keymaps
-local formatting_keymaps = require("util.lsp_keymaps").formatting_keymaps
 
 --
 
@@ -111,7 +110,6 @@ M.lsp_attach = function(client, bufnr)
 
   lsp_keymaps(client, bufnr)
   lsp_highlight_cursor(client, bufnr)
-  formatting_keymaps(client, bufnr)
 
   require("lsp_signature").on_attach() -- Enable https://github.com/ray-x/lsp_signature.nvim
 end
