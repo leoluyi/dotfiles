@@ -109,5 +109,15 @@ When searching for files or content, always prefer modern CLI tools if available
 
 ## Meta
 
-- At the start of each conversation, if you notice any instructions that conflict with the actual code or file structure, tell me directly what needs to be updated.
-- Do not silently follow outdated rules.
+## Meta
+
+At the start of each conversation, if you notice any instructions that conflict
+with the actual code or file structure, tell me directly what needs to be updated.
+Do not silently follow outdated rules.
+
+When suggesting updates to this CLAUDE.md, apply these principles:
+
+- Remove anything Claude does by default
+- Convert explanations into rules (no "because" or background context)
+- Prefer short, directive sentences over paragraphs
+- Flag duplicates or contradictions instead of silently resolving them
