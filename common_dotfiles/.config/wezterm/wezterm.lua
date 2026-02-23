@@ -54,7 +54,7 @@ return {
       mods = "CMD|ALT",
       action = wezterm.action_callback(function(window, _)
         local overrides = window:get_config_overrides() or {}
-        if not overrides.color_scheme then
+        if overrides.color_scheme ~= light_color_scheme then
           overrides.color_scheme = light_color_scheme
           overrides.window_background_opacity = 0.97
         else
