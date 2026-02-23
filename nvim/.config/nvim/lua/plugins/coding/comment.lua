@@ -18,20 +18,20 @@ return {
     ---@type string|fun():string
     ignore = nil,
 
-    ---LHS of toggle mappings in NORMAL + VISUAL mode
+    ---LHS of toggle mappings in NORMAL mode
     ---@type table
     toggler = {
       ---Line-comment toggle keymap
       line = '<Localleader>//',
       ---Block-comment toggle keymap
-      block = 'gcb',
+      block = 'gbc',
     },
 
     ---LHS of operator-pending mappings in NORMAL + VISUAL mode
     ---@type table
     opleader = {
       ---Line-comment keymap
-      line = '<Localleader>/',
+      line = 'gc',
       ---Block-comment keymap
       block = 'gb',
     },
@@ -40,11 +40,11 @@ return {
     ---@type table
     extra = {
       ---Add comment on the line above
-      above = '<Localleader>/O',
+      above = 'gcO',
       ---Add comment on the line below
-      below = '<Localleader>/o',
+      below = 'gco',
       ---Add comment at the end of line
-      eol = '<Localleader>/A',
+      eol = 'gcA',
     },
 
     ---Create basic (operator-pending) and extended mappings for NORMAL + VISUAL mode
@@ -70,6 +70,15 @@ return {
     ---Post-hook, called after commenting is done
     ---@type fun(ctx: CommentCtx)
     post_hook = nil,
-  }
+  },
+  config = function(_, opts)
+    require('Comment').setup(opts)
 
+    -- Visual mode: <Space>/ to toggle linewise comment on selection
+    local api = require('Comment.api')
+    vim.keymap.set('x', '<Localleader>/', function()
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<ESC>', true, false, true), 'nx', false)
+      api.toggle.linewise(vim.fn.visualmode())
+    end, { desc = 'Comment: toggle linewise (visual)' })
+  end,
 }
