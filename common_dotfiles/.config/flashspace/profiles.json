@@ -1,0 +1,125 @@
+{
+  "profiles" : [
+    {
+      "id" : "36CB4552-D573-4446-99F9-0D7CE7B0A690",
+      "name" : "Default",
+      "workspaces" : [
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "company.thebrowser.Browser",
+              "iconPath" : "/Applications/Arc.app/Contents/Resources/AppIcon.icns",
+              "name" : "Arc"
+            },
+            {
+              "bundleIdentifier" : "com.google.Chrome",
+              "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
+              "name" : "Google Chrome"
+            },
+            {
+              "bundleIdentifier" : "com.apple.Safari",
+              "iconPath" : "/Applications/Safari.app/Contents/Resources/AppIcon.icns",
+              "name" : "Safari"
+            },
+            {
+              "bundleIdentifier" : "com.apple.mail",
+              "iconPath" : "/System/Applications/Mail.app/Contents/Resources/ApplicationIcon.icns",
+              "name" : "Mail"
+            },
+            {
+              "bundleIdentifier" : "app.zen-browser.zen",
+              "iconPath" : "/Applications/Zen.app/Contents/Resources/firefox.icns",
+              "name" : "Zen"
+            }
+          ],
+          "assignAppShortcut" : "opt+shift+1",
+          "display" : "Built-in Retina Display",
+          "id" : "1B5C031D-7B75-4372-9BB6-706C47AE6A07",
+          "name" : "Web",
+          "openAppsOnActivation" : false,
+          "shortcut" : "opt+1"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "abnerworks.Typora",
+              "iconPath" : "/Applications/Typora.app/Contents/Resources/AppIcon.icns",
+              "name" : "Typora"
+            },
+            {
+              "bundleIdentifier" : "md.obsidian",
+              "iconPath" : "/Applications/Obsidian.app/Contents/Resources/icon.icns",
+              "name" : "Obsidian"
+            },
+            {
+              "bundleIdentifier" : "dev.zed.Zed",
+              "iconPath" : "/Applications/Zed.app/Contents/Resources/Zed.icns",
+              "name" : "Zed"
+            },
+            {
+              "bundleIdentifier" : "com.coteditor.CotEditor",
+              "iconPath" : "/Applications/CotEditor.app/Contents/Resources/AppIcon.icns",
+              "name" : "CotEditor"
+            },
+            {
+              "bundleIdentifier" : "com.automattic.simplenote",
+              "iconPath" : "/Applications/Simplenote.app/Contents/Resources/icon.icns",
+              "name" : "Simplenote"
+            },
+            {
+              "bundleIdentifier" : "com.github.wez.wezterm",
+              "iconPath" : "/Applications/WezTerm.app/Contents/Resources/terminal.icns",
+              "name" : "WezTerm"
+            }
+          ],
+          "assignAppShortcut" : "opt+shift+2",
+          "display" : "Built-in Retina Display",
+          "id" : "76EF73BD-CE78-421D-99F1-10F67737066A",
+          "name" : "Focus",
+          "openAppsOnActivation" : false,
+          "shortcut" : "opt+2"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.anthropic.claudefordesktop",
+              "iconPath" : "/Applications/Claude.app/Contents/Resources/electron.icns",
+              "name" : "Claude"
+            },
+            {
+              "bundleIdentifier" : "com.openai.chat",
+              "iconPath" : "/Applications/ChatGPT.app/Contents/Resources/AppIcon.icns",
+              "name" : "ChatGPT"
+            }
+          ],
+          "assignAppShortcut" : "opt+shift+3",
+          "display" : "Built-in Retina Display",
+          "id" : "B66EBBB5-7F3B-4454-91DF-BD18D77475DD",
+          "name" : "Reference",
+          "openAppsOnActivation" : false,
+          "shortcut" : "opt+3"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "jp.naver.line.mac",
+              "iconPath" : "/Applications/LINE.app/Contents/Resources/LiquidGlass_LINE.icns",
+              "name" : "LINE"
+            },
+            {
+              "bundleIdentifier" : "com.spotify.client",
+              "iconPath" : "/Applications/Spotify.app/Contents/Resources/AppIcon.icns",
+              "name" : "Spotify"
+            }
+          ],
+          "assignAppShortcut" : "opt+shift+4",
+          "display" : "Built-in Retina Display",
+          "id" : "0A4D42F8-1EC7-4FB7-AED5-9C418AEF728D",
+          "name" : "Background",
+          "openAppsOnActivation" : false,
+          "shortcut" : "opt+4"
+        }
+      ]
+    }
+  ]
+}
