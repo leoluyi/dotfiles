@@ -27,6 +27,11 @@
               "name" : "Mail"
             },
             {
+              "bundleIdentifier" : "jp.naver.line.mac",
+              "iconPath" : "/Applications/LINE.app/Contents/Resources/LiquidGlass_LINE.icns",
+              "name" : "LINE"
+            },
+            {
               "bundleIdentifier" : "app.zen-browser.zen",
               "iconPath" : "/Applications/Zen.app/Contents/Resources/firefox.icns",
               "name" : "Zen"
@@ -42,15 +47,21 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "abnerworks.Typora",
-              "iconPath" : "/Applications/Typora.app/Contents/Resources/AppIcon.icns",
-              "name" : "Typora"
-            },
-            {
-              "bundleIdentifier" : "md.obsidian",
-              "iconPath" : "/Applications/Obsidian.app/Contents/Resources/icon.icns",
-              "name" : "Obsidian"
-            },
+              "bundleIdentifier" : "com.github.wez.wezterm",
+              "iconPath" : "/Applications/WezTerm.app/Contents/Resources/terminal.icns",
+              "name" : "WezTerm"
+            }
+          ],
+          "assignAppShortcut" : "opt+shift+2",
+          "display" : "Built-in Retina Display",
+          "id" : "76EF73BD-CE78-421D-99F1-10F67737066A",
+          "name" : "Term",
+          "openAppsOnActivation" : false,
+          "shortcut" : "opt+2",
+          "symbolIconName" : "apple.terminal.fill"
+        },
+        {
+          "apps" : [
             {
               "bundleIdentifier" : "dev.zed.Zed",
               "iconPath" : "/Applications/Zed.app/Contents/Resources/Zed.icns",
@@ -67,17 +78,23 @@
               "name" : "Simplenote"
             },
             {
-              "bundleIdentifier" : "com.github.wez.wezterm",
-              "iconPath" : "/Applications/WezTerm.app/Contents/Resources/terminal.icns",
-              "name" : "WezTerm"
+              "bundleIdentifier" : "abnerworks.Typora",
+              "iconPath" : "/Applications/Typora.app/Contents/Resources/AppIcon.icns",
+              "name" : "Typora"
+            },
+            {
+              "bundleIdentifier" : "md.obsidian",
+              "iconPath" : "/Applications/Obsidian.app/Contents/Resources/icon.icns",
+              "name" : "Obsidian"
             }
           ],
-          "assignAppShortcut" : "opt+shift+2",
+          "assignAppShortcut" : "opt+shift+3",
           "display" : "Built-in Retina Display",
-          "id" : "76EF73BD-CE78-421D-99F1-10F67737066A",
-          "name" : "Focus",
+          "id" : "B510F845-477D-493E-A054-27996D5183A7",
+          "name" : "Text",
           "openAppsOnActivation" : false,
-          "shortcut" : "opt+2"
+          "shortcut" : "opt+3",
+          "symbolIconName" : "text.document.fill"
         },
         {
           "apps" : [
@@ -92,32 +109,28 @@
               "name" : "ChatGPT"
             }
           ],
-          "assignAppShortcut" : "opt+shift+3",
+          "assignAppShortcut" : "opt+shift+4",
           "display" : "Built-in Retina Display",
           "id" : "B66EBBB5-7F3B-4454-91DF-BD18D77475DD",
-          "name" : "Reference",
+          "name" : "Ref",
           "openAppsOnActivation" : false,
-          "shortcut" : "opt+3"
+          "shortcut" : "opt+4",
+          "symbolIconName" : "graduationcap.circle.fill"
         },
         {
           "apps" : [
-            {
-              "bundleIdentifier" : "jp.naver.line.mac",
-              "iconPath" : "/Applications/LINE.app/Contents/Resources/LiquidGlass_LINE.icns",
-              "name" : "LINE"
-            },
             {
               "bundleIdentifier" : "com.spotify.client",
               "iconPath" : "/Applications/Spotify.app/Contents/Resources/AppIcon.icns",
               "name" : "Spotify"
             }
           ],
-          "assignAppShortcut" : "opt+shift+4",
           "display" : "Built-in Retina Display",
           "id" : "0A4D42F8-1EC7-4FB7-AED5-9C418AEF728D",
-          "name" : "Background",
+          "name" : "Bg",
           "openAppsOnActivation" : false,
-          "shortcut" : "opt+4"
+          "shortcut" : "opt+9",
+          "symbolIconName" : "music.note.list"
         }
       ]
     }
