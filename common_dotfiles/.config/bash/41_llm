@@ -53,6 +53,37 @@ llm-fix() {
         "$input"
 }
 
+# Generate a commit message from staged changes.
+# Usage: git-msg
+git-msg() {
+    local diff
+    diff=$(git diff --cached)
+    if [ -z "$diff" ]; then
+        echo "No staged changes. Run \`git add\` first." >&2
+        return 1
+    fi
+    echo "$diff" | llm -m "${LLM_MODEL}" \
+        --system "You are an expert at writing git commit messages. Output only a single conventional commit message (type: subject, optional body). No markdown, no backticks, no extra explanation." \
+        "Write a commit message for this diff:"
+}
+
+# Generate a commit message and optionally commit.
+# Usage: git-commit-ai
+git-commit-ai() {
+    local diff msg confirm
+    diff=$(git diff --cached)
+    if [ -z "$diff" ]; then
+        echo "No staged changes. Run \`git add\` first." >&2
+        return 1
+    fi
+    msg=$(echo "$diff" | llm -m "${LLM_MODEL}" \
+        --system "You are an expert at writing git commit messages. Output only a single conventional commit message (type: subject, optional body). No markdown, no backticks, no extra explanation." \
+        "Write a commit message for this diff:")
+    echo "Proposed: $msg"
+    read -r -p "Use this message? [y/N] " confirm
+    [[ $confirm == [yY] ]] && git commit -m "$msg"
+}
+
 # Alt+a: replace current readline line (treated as natural language) with a
 # generated bash command. Runs silently; leaves original text on failure.
 _llm_inline_suggest() {

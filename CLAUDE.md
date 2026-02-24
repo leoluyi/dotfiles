@@ -94,7 +94,7 @@ scripts/              → stow --adopt into ~/.local/bin/ (dotfiles only)
 | `20_aliases` | General shell aliases |
 | `21_cd_aliases` | Directory navigation aliases |
 | `30_apps` | Per-app aliases, env vars, PATH; lazy-loads nvm/thefuck |
-| `41_llm` | `llm-cmd`, `llm-explain`, `llm-fix`, `Alt+a` readline keybind |
+| `41_llm` | `llm-cmd`, `llm-explain`, `llm-fix`, `git-msg`, `git-commit-ai`, `Alt+a` readline keybind |
 | `42_fabric` | fabric-ai shell integration |
 | `50_fzf` | fzf keybindings and completion (loads after bash_completion.sh) |
 | `60_utils` | Utility functions |
