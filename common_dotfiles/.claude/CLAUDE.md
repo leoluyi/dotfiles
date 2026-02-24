@@ -98,17 +98,6 @@ You are a senior software engineer collaborating with a peer. Prioritize thoroug
 - 如果環境有 `gemini` CLI 可以使用，你可以直接用 `gemini -p "xxx"` 來呼叫 gemini cli 這個工具做事情，gemini cli 的上下文 token 很大，你可以用它找專案裡的程式碼，上網查資料等。但禁止使用它修改或刪除檔案。
 - 以下是一個使用範例: `Bash(gemini -p "找出專案裡使用 xAI 的地方")`
 
-## File and Content Search
-
-When searching for files or content, always prefer modern CLI tools if available in the environment:
-
-- Use `fd` instead of `find` for file and directory searches
-- Use `rg` (ripgrep) instead of `grep` for content searches
-- Before using, verify availability: `command -v fd && command -v rg`
-- Fall back to `find` / `grep` only if the preferred tools are not installed
-
-## Meta
-
 ## Meta
 
 At the start of each conversation, if you notice any instructions that conflict
