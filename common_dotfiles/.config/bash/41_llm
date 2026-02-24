@@ -66,4 +66,5 @@ _llm_inline_suggest() {
         READLINE_POINT=${#READLINE_LINE}
     fi
 }
-bind -x '"\ea": _llm_inline_suggest'
+# Only bind in interactive shells — readline is not available in non-interactive contexts.
+[[ $- == *i* ]] && bind -x '"\ea": _llm_inline_suggest'
