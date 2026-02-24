@@ -20,6 +20,8 @@ tap "sdkman/tap"
 tap "ubuntu/microk8s"
 # Search tool like grep, but optimized for programmers
 brew "ack"
+# All-in-one AI-Powered CLI Chat & Copilot
+brew "aichat"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Development kit for the Java programming language
@@ -162,6 +164,8 @@ brew "libheif"
 brew "imagemagick"
 # GNU utilities for networking
 brew "inetutils"
+# CLI wrapper for basic network utilities on macOS - ip command
+brew "iproute2mac"
 # Sort Python imports automatically
 brew "isort"
 # Extract Digicam setting info from EXIF JPEG headers
@@ -182,8 +186,6 @@ brew "kube-linter"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
-# Command-line interface for running LLMs
-brew "llm"
 # Terminal file manager
 brew "lf"
 # Implementation of the file(1) command
@@ -194,6 +196,8 @@ brew "libmediainfo"
 brew "libsvg"
 # CLI for the Linode API
 brew "linode-cli"
+# Access large language models from the command-line
+brew "llm"
 # Rainbows and unicorns in your console!
 brew "lolcat"
 # Mac App Store command-line interface
@@ -320,6 +324,8 @@ brew "watch"
 brew "wget"
 # HTTP benchmarking tool
 brew "wrk"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
 # View colored diff with side by side and auto pager support
 brew "ydiff"
 # Feature-rich command-line audio/video downloader
@@ -556,7 +562,6 @@ vscode "editorconfig.editorconfig"
 vscode "fabiospampinato.vscode-open-in-finder"
 vscode "formulahendry.auto-close-tag"
 vscode "formulahendry.code-runner"
-vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "ibm.output-colorizer"
