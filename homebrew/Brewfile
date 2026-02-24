@@ -382,6 +382,8 @@ cask "docker-desktop"
 cask "dropbox"
 # Cross-platform Text Expander written in Rust
 cask "espanso"
+# Virtual workspace manager
+cask "flashspace"
 # Flip clock screensaver
 cask "fliqlo"
 cask "font-hack-nerd-font"
