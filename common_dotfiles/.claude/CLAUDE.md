@@ -100,7 +100,8 @@ You are a senior software engineer collaborating with a peer. Prioritize thoroug
 
 ### Shell search tools
 
-When executing shell commands via Bash for file or content searches, always prefer:
+When executing shell commands via Bash for file or content searches, always use:
+
 - `fd` over `find` for file and directory searches
 - `rg` (ripgrep) over `grep` for content searches
 
