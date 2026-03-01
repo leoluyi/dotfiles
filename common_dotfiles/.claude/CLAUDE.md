@@ -110,13 +110,9 @@ Fall back to `find` / `grep` only if the preferred tools are not installed.
 
 ## Meta
 
-At the start of each conversation, if you notice any instructions that conflict
-with the actual code or file structure, tell me directly what needs to be updated.
-Do not silently follow outdated rules.
+When suggesting updates to this CLAUDE.md, always add the following line to the top of the file:
 
-When suggesting updates to this CLAUDE.md, apply these principles:
+```
+The role of this file is to describe common mistakes and confusion points that agents might encounter as they work in this project. If you ever encounter something in the project that surprises you, please alert the developer working with you and indicate that this is the case in the AgentMD file to help prevent future agents from having the same issue.
+```
 
-- Remove anything Claude does by default
-- Convert explanations into rules (no "because" or background context)
-- Prefer short, directive sentences over paragraphs
-- Flag duplicates or contradictions instead of silently resolving them
