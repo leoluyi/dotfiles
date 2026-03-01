@@ -1,5 +1,6 @@
 tap "1password/tap"
 tap "anchore/grype"
+tap "arimxyer/tap"
 tap "beeftornado/rmtree"
 tap "carlocab/personal"
 tap "charmbracelet/tap"
@@ -7,6 +8,7 @@ tap "coursier/formulas"
 tap "eddieantonio/eddieantonio"
 tap "felixkratz/formulae"
 tap "flyteorg/tap"
+tap "gromgit/brewtils"
 tap "gromgit/fuse"
 tap "heroku/brew"
 tap "instantclienttap/instantclient"
@@ -198,6 +200,8 @@ brew "libsvg"
 brew "linode-cli"
 # Access large language models from the command-line
 brew "llm"
+# Find what models run on your hardware
+brew "llmfit"
 # Rainbows and unicorns in your console!
 brew "lolcat"
 # Mac App Store command-line interface
@@ -334,6 +338,8 @@ brew "yt-dlp"
 brew "zenity"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Fast CLI and TUI for browsing AI model information from models.dev
+brew "arimxyer/tap/models"
 # Extract, view, and test RAR archives
 brew "carlocab/personal/unrar"
 # Launcher for Coursier
@@ -342,6 +348,8 @@ brew "coursier/formulas/coursier"
 brew "eddieantonio/eddieantonio/imgcat"
 # FlyteCtl is a command line tool to interact with a Flyte cluster.
 brew "flyteorg/tap/flytectl"
+# Interactive TUI for Homebrew
+brew "gromgit/brewtils/taproom"
 # Read-write NTFS driver for FUSE
 brew "gromgit/fuse/ntfs-3g-mac"
 # Oracle Instant Client Basic Lite x64
