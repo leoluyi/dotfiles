@@ -6,7 +6,36 @@ command -v fabric-ai >/dev/null || return 0
 
 alias fabric='fabric-ai'
 
-# General fabric-ai query.
+# --- Content consumption ---
+# Usage: pbpaste | wisdom
+# Usage: cat article.txt | wisdom
+alias wisdom='fabric-ai -p extract_wisdom -s'
+
+# Usage: pbpaste | summarize
+alias summarize='fabric-ai -p summarize -s'
+
+# Usage: pbpaste | paper
+alias paper='fabric-ai -p summarize_paper -s'
+
+# --- Writing assistance ---
+# Usage: pbpaste | improve
+alias improve='fabric-ai -p improve_writing -s'
+
+# --- Developer workflow ---
+# Usage: git diff --staged | git-cmsg
+alias git-cmsg='fabric-ai -p create_git_diff_commit -s'
+
+# Usage: git diff main...HEAD | git-summary
+alias git-summary='fabric-ai -p summarize_git_changes -s'
+
+# --- Critical thinking / analysis ---
+# Usage: pbpaste | fallacies
+alias fallacies='fabric-ai -p find_logical_fallacies -s'
+
+# Usage: pbpaste | ideas
+alias ideas='fabric-ai -p extract_ideas -s'
+
+# --- General fabric-ai query ---
 # Usage: ?? <question>
 # Usage: <cmd> | ??  [context hint]
 #
