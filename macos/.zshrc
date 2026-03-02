@@ -1,7 +1,7 @@
 # ============ Load the shell dotfiles ============
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
-for file in "$HOME/.config/"(zsh_aliases*|aliases|env|zsh_env|path|bash_prompt|exports|utils*|extra); do
+for file in "$HOME/.config/"(zsh_aliases*|aliases|*env|zsh_env|path|bash_prompt|exports|utils*|extra); do
   [ -f "$file" ] && [ -r "$file" ] && source "$file";
 done;
 
