@@ -1,4 +1,39 @@
-# vim: set ft=bash:
+# vim: set ft=sh:
+# shellcheck shell=sh
+
+# Default editor.
+if command -v nvim >/dev/null; then
+  export VISUAL=nvim
+  export EDITOR=nvim
+else
+  export VISUAL=vim
+  export EDITOR=vim
+fi
+export GIT_EDITOR="${EDITOR}"
+
+# Pager.
+command -v most >/dev/null && export PAGER=most
+
+# Enable syntax-highlighting in less.
+if command -v highlight >/dev/null; then
+  export LESSOPEN="| $(command -v highlight) --out-format xterm256 --quiet --force --style=base16/gruvbox-dark-medium %s"
+  export LESS=" -R "
+elif command -v src-hilite-lesspipe.sh >/dev/null; then
+  export LESSOPEN="| $(command -v src-hilite-lesspipe.sh) %s"
+  export LESS=" -R "
+fi
+
+# Fix pyenv bug from git-core (shims do not work with gettext).
+# https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
+export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
+
+# pipenv.
+export PIPENV_IGNORE_VIRTUALENVS=1
+
+# Source local env overrides (gitignored).
+[ -f "$HOME/.env_vars" ] && . "$HOME/.env_vars"
+
+# bash history (ignored in zsh).
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/bash/history"
 export HISTSIZE=
 export HISTFILESIZE=5000

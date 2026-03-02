@@ -1,9 +1,12 @@
 # ============ Load the shell dotfiles ============
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
-for file in "$HOME/.config/"(zsh_aliases*|aliases|*env|zsh_env|path|bash_prompt|exports|utils*|extra); do
+for file in "$HOME/.config/"(zsh_aliases*|aliases|zsh_env|path|bash_prompt|exports|utils*|extra); do
   [ -f "$file" ] && [ -r "$file" ] && source "$file";
 done;
+
+# Shared env vars (editor, pager, etc.) — also loaded by bash via ~/.config/bash/10_env.
+[ -f "$HOME/.config/bash/10_env" ] && source "$HOME/.config/bash/10_env"
 
 # for file in "$HOME/."(zsh_aliases*|aliases|env|zsh_env|path|bash_prompt|exports|utils*|extra); do
 #   [ -f "$file" ] && [ -r "$file" ] && source "$file";
