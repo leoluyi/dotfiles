@@ -35,6 +35,11 @@
               "bundleIdentifier" : "app.zen-browser.zen",
               "iconPath" : "/Applications/Zen.app/Contents/Resources/firefox.icns",
               "name" : "Zen"
+            },
+            {
+              "bundleIdentifier" : "com.apple.finder",
+              "iconPath" : "/System/Library/CoreServices/Finder.app/Contents/Resources/Finder.icns",
+              "name" : "Finder"
             }
           ],
           "assignAppShortcut" : "opt+shift+1",
