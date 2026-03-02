@@ -7,25 +7,29 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "prettier": {
+    "allowed": true
+  },
+  "relative_line_numbers": "wrapped",
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
-    "dark": "Zed (Default)"
+    "dark": "Zed (Default)",
   },
   "base_keymap": "SublimeText",
   "telemetry": {
     "metrics": false,
-    "diagnostics": false
+    "diagnostics": false,
   },
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "One Dark"
+    "dark": "One Dark",
   },
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "cursor_blink": false,
   "vim_mode": true,
-  "relative_line_numbers": true,
-  "restore_on_startup": "none"
+  "restore_on_startup": "empty_tab",
+  }
 }
