@@ -32,7 +32,7 @@ return {
         },
 
         sources = {
-          default = { "lsp", "path", "snippets", "buffer" },
+          default = { "lsp", "path", "snippets", "lazydev", "buffer" },
           per_filetype = {
             markdown = { "lsp", "path", "snippets", "buffer", "dictionary" },
             sql      = { "dadbod", "buffer" },
@@ -48,6 +48,14 @@ return {
               name   = "vim-dadbod-completion",
               module = "blink.compat.source",
             },
+            lsp = {
+              async = true,
+            },
+            lazydev = {
+              name = "LazyDev",
+              module = "lazydev.integrations.blink",
+              fallbacks = { "lsp" },
+            },
           },
         },
 
@@ -58,8 +66,20 @@ return {
           ["<C-e>"] = { "cancel", "fallback" },
           ["<Up>"]  = { "select_prev", "fallback" },
           ["<Down>"] = { "select_next", "fallback" },
-          ["<Tab>"]  = {},  -- owned by luasnip
-          ["<S-Tab>"] = {}, -- owned by luasnip
+          ["<Tab>"] = {
+            function(cmp)
+              if cmp.is_menu_visible() then return cmp.select_next() end
+              if cmp.snippet_active() then return cmp.snippet_forward() end
+            end,
+            "fallback",
+          },
+          ["<S-Tab>"] = {
+            function(cmp)
+              if cmp.is_menu_visible() then return cmp.select_prev() end
+              if cmp.snippet_active() then return cmp.snippet_backward() end
+            end,
+            "fallback",
+          },
         },
 
         completion = {

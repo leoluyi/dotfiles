@@ -14,26 +14,6 @@ return {
         end,
       },
     },
-    -- stylua: ignore
-    keys = {
-      {
-        "<tab>",
-        function()
-          return require("luasnip").expand_or_jumpable() and "<Plug>luasnip-expand-or-jump" or "<tab>"
-        end,
-        expr = true, silent = true, mode = "i", noremap =false,
-      },
-      { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-      -- For changing choices in choiceNodes (not strictly necessary for a basic setup).
-      {
-        "<c-e>",
-        function()
-          return require("luasnip").choice_active() and "<Plug>luasnip-next-choice" or "<c-e>"
-        end,
-        expr = true, silent = true, mode = { "i", "s" },
-      },
-    },
     opts = {
       history = true,
       delete_check_events = "TextChanged",
