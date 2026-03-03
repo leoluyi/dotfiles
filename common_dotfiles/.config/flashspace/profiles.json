@@ -55,6 +55,11 @@
               "bundleIdentifier" : "com.github.wez.wezterm",
               "iconPath" : "/Applications/WezTerm.app/Contents/Resources/terminal.icns",
               "name" : "WezTerm"
+            },
+            {
+              "bundleIdentifier" : "org.alacritty",
+              "iconPath" : "/Applications/Alacritty.app/Contents/Resources/alacritty.icns",
+              "name" : "Alacritty"
             }
           ],
           "assignAppShortcut" : "opt+shift+2",
