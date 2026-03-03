@@ -3,3 +3,4 @@
 model: openai:gpt-5.2
 clients:
 - type: openai
+- type: claude
