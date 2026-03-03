@@ -130,10 +130,10 @@ alt-comma = 'layout accordion horizontal vertical'
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 # Only focus-navigate when the current window is tiled (not floating).
 # %{window-layout} returns 'floating' for floating windows.
-alt-h = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus left' '''
-alt-j = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus down' '''
-alt-k = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus up' '''
-alt-l = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus right' '''
+alt-h = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus --ignore-floating left' '''
+alt-j = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus --ignore-floating down' '''
+alt-k = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus --ignore-floating up' '''
+alt-l = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus --ignore-floating right' '''
 
 alt-f = 'layout floating tiling'
 alt-z = 'fullscreen'

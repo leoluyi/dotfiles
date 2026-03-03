@@ -47,6 +47,7 @@ return {
       { "<leader>8", hidden = true },
       { "<leader>9", hidden = true },
 
+      { "<leader>a", group = "AI" },
       { "<leader>b", group = "Buffer" },
       { "<leader>c", group = "Code|+Config" },
       { "<leader>d", group = "Dap|+Diagnostics" },
