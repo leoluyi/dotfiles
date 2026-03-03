@@ -128,10 +128,12 @@ alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
+# Only focus-navigate when the current window is tiled (not floating).
+# %{window-layout} returns 'floating' for floating windows.
+alt-h = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus left' '''
+alt-j = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus down' '''
+alt-k = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus up' '''
+alt-l = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --format "%{window-layout}")" != "floating" ] && aerospace focus right' '''
 
 alt-f = 'layout floating tiling'
 alt-z = 'fullscreen'
