@@ -4,10 +4,22 @@ alias sudo='sudo '
 # Enable aliases for watch.
 alias watch='watch -n1 '
 
-# sets up proper alias commands when called.
-alias ll='ls -lvhaF --time-style="+%Y-%m-%d %H:%M"'
-alias la='ls -A'
-alias l='ls -CF'
+# ls / eza
+if command -v eza >/dev/null; then
+  alias ls='eza --group-directories-first'
+  alias ll='eza -lh --git --group-directories-first --time-style=long-iso --icons'
+  alias la='eza -lah --git --group-directories-first --time-style=long-iso'
+  alias l='eza -F'
+  alias lrt='eza -lh --sort=modified --time-style=long-iso --icons'
+  alias lx='eza -lh --sort=extension --icons'
+  alias lss='eza --group-directories-first --icons'
+  alias lt='eza --tree --level=2 --icons'
+else
+  alias ll='ls -lvhaF --time-style="+%Y-%m-%d %H:%M"'
+  alias la='ls -A'
+  alias l='ls -CF'
+  alias lrt='ls -hlrt --time-style=long-iso'
+fi
 
 # Always enable colored `grep` output.
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
@@ -26,9 +38,6 @@ if command -v nvim >/dev/null; then
   alias view="nvim -R"
   alias vimdiff="nvim -d"
 fi
-
-# ls sort by most recently modified.
-alias lrt='ls -hlrt --time-style=long-iso'
 
 # Print each PATH entry on a separate line.
 alias path='echo -e ${PATH//:/\\n}'
