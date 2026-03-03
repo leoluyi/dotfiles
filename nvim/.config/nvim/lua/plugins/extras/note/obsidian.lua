@@ -19,7 +19,7 @@ return {
       { "<leader>o", desc = "+Obsidian" },
       {
         "<leader>oo",
-        "<cmd>cd /Users/leoluyi/Library/CloudStorage/Dropbox/_notes-vault<cr>",
+        "<cmd>cd /Users/leoluyi/Library/CloudStorage/Dropbox/__notes-vault<cr>",
         desc = "Navigate to Vault",
       },
       -- { "<leader>os", ":ObsidianSearch<cr>", desc = "ObsidianSearch" },
