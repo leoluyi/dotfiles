@@ -52,7 +52,7 @@ return {
       workspaces = {
         {
           name = "Notes",
-          path = "/Users/leoluyi/Library/CloudStorage/Dropbox/_notes-vault",
+          path = "/Users/leoluyi/Library/CloudStorage/Dropbox/__notes-vault",
         },
       },
 
