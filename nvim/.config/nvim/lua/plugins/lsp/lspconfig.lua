@@ -14,23 +14,17 @@ return {
       { "folke/neoconf.nvim", cmd = "Neoconf" },
       { "folke/lsp-colors.nvim" },
       { "mason.nvim" },
-      {
-        "hrsh7th/cmp-nvim-lsp",
-        cond = function()
-          return require("util").has("nvim-cmp")
-        end,
-      },
     },
     config = function()
       local lsp_util = require("util.lsp")
       local lsp_attach = lsp_util.lsp_attach
       local signs = require("util.icons").diagnostics
 
-      -- Extend capabilities with nvim-cmp completions if available.
+      -- Extend capabilities with blink.cmp completions if available.
       local capabilities = lsp_util.capabilities
-      local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      local ok, blink = pcall(require, "blink.cmp")
       if ok then
-        capabilities = vim.tbl_deep_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
+        capabilities = vim.tbl_deep_extend("force", capabilities, blink.get_lsp_capabilities())
       end
 
       -- User commands ------------------------------------------------------------{{{2

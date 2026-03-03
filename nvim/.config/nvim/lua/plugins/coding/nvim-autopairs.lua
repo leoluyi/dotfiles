@@ -36,13 +36,6 @@ return {
 
       npairs.setup(opts)
 
-      -- If you want insert `(` after select function or method item
-      local status_ok, cmp = pcall(require, 'cmp')
-      if status_ok then
-        local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-        cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
-      end
-
       -- Add spaces between parentheses.
       -- https://github.com/windwp/nvim-autopairs/wiki/Custom-rules#add-spaces-between-parentheses
       npairs.add_rules {

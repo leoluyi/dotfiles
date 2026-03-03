@@ -2,6 +2,7 @@ return {
   {
     "mistricky/codesnap.nvim",
     build = "make",
+    cmd = { "CodeSnap", "CodeSnapSave", "CodeSnapHighlight", "CodeSnapSaveHighlight", "CodeSnapASCII" },
     opts = {
       border = "rounded",
       mac_window_bar = true,

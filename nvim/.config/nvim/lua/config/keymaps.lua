@@ -288,7 +288,7 @@ vim.keymap.set("i", "<C-d>", function()
   return vim.fn.col(".") > #vim.fn.getline(".") and "<C-D>" or "<Del>"
 end, { expr = true, desc = "Delete char" })
 vim.keymap.set("i", "<C-e>", function()
-  return (vim.fn.col(".") > #vim.fn.getline(".") or vim.fn.pumvisible() == 1) and "<C-E>" or "<End>"
+  return vim.fn.col(".") > #vim.fn.getline(".") and "<C-E>" or "<End>"
 end, { expr = true, desc = "End of line" })
 map("i", "<C-f>", "<Right>", { desc = "Move right" })
 
