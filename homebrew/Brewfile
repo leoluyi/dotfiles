@@ -89,10 +89,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -445,6 +445,7 @@ cask "keycastr"
 cask "lulu"
 # File system integration
 cask "macfuse"
+# Provides updates to various Microsoft products
 # Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
 # Interactive tool for analyzing MongoDB data
@@ -567,6 +568,7 @@ vscode "alexeyvax.vscode-open-native-terminal"
 vscode "altimateai.vscode-altimate-mcp-server"
 vscode "bastienboutonnet.vscode-dbt"
 vscode "christian-kohler.path-intellisense"
+vscode "davidanson.vscode-markdownlint"
 vscode "doggy8088.quicktype-refresh"
 vscode "donjayamanne.githistory"
 vscode "eamodio.gitlens"
@@ -574,7 +576,6 @@ vscode "editorconfig.editorconfig"
 vscode "fabiospampinato.vscode-open-in-finder"
 vscode "formulahendry.auto-close-tag"
 vscode "formulahendry.code-runner"
-vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "ibm.output-colorizer"
@@ -622,8 +623,6 @@ vscode "samuelcolvin.jinjahtml"
 vscode "scala-lang.scala"
 vscode "shd101wyy.markdown-preview-enhanced"
 vscode "tomoki1207.pdf"
-vscode "visualstudioexptteam.intellicode-api-usage-examples"
-vscode "visualstudioexptteam.vscodeintellicode"
 vscode "vittorioromeo.expand-selection-to-scope"
 vscode "vivaxy.vscode-conventional-commits"
 vscode "vmware.vscode-boot-dev-pack"
@@ -665,3 +664,5 @@ go "github.com/tmc/json-to-struct"
 go "go.uber.org/mock/mockgen"
 go "github.com/kyoh86/richgo"
 go "github.com/swaggo/swag/cmd/swag"
+uv "csvfaker"
+uv "img2pdf"
