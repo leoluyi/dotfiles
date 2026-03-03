@@ -11,8 +11,6 @@ return {
       { "<leader>li", ":LspInfo<cr>", desc = "LspInfo" },
     },
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf" },
-      { "folke/lsp-colors.nvim" },
       { "mason.nvim" },
     },
     config = function()

@@ -5,17 +5,6 @@ return {
     dependencies = {
       "L3MON4D3/LuaSnip",
       { "saghen/blink.compat", version = "*", lazy = true, opts = {} },
-      {
-        "uga-rosa/cmp-dictionary",
-        lazy = true,
-        opts = {
-          dic = { ["markdown"] = { "/usr/share/dict/words" } },
-          exact_length = 2,
-          first_case_insensitive = false,
-          document = { enable = false, command = { "wn", "${label}", "-over" } },
-        },
-      },
-      "kristijanhusak/vim-dadbod-completion",
     },
 
     opts = function()
@@ -33,21 +22,7 @@ return {
 
         sources = {
           default = { "lsp", "path", "snippets", "lazydev", "buffer" },
-          per_filetype = {
-            markdown = { "lsp", "path", "snippets", "buffer", "dictionary" },
-            sql      = { "dadbod", "buffer" },
-          },
           providers = {
-            dictionary = {
-              name         = "dictionary",
-              module       = "blink.compat.source",
-              score_offset = -3,
-              opts         = { keyword_length = 2 },
-            },
-            dadbod = {
-              name   = "vim-dadbod-completion",
-              module = "blink.compat.source",
-            },
             lsp = {
               async = true,
             },
@@ -113,8 +88,6 @@ return {
                       snippets   = "[Snippet]",
                       path       = "[Path]",
                       buffer     = "[Buffer]",
-                      dictionary = "[Dict]",
-                      dadbod     = "[DB]",
                     }
                     return labels[ctx.source_name] or ("[" .. ctx.source_name .. "]")
                   end,

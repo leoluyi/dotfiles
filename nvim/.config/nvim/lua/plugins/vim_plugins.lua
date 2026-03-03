@@ -2,25 +2,6 @@
 return {
   -- Vim plugins. -----------------------------------------------------------------{{{3
 
-  -- tpope.
-  { "tpope/vim-eunuch" }, -- Helpers for UNIX
-  { "tpope/vim-fugitive" }, -- A Git wrapper so awesome
-  { "tpope/vim-repeat" }, -- enable repeating supported plugin maps with '.'
-  { "dalance/vseq.vim" }, -- Generating sequential number vertically
-  {
-    -- Instant table creation
-    "dhruvasagar/vim-table-mode",
-    keys = function()
-      return {
-        { "<Leader>um", ":TableModeToggle<CR>", mode = { "n", "x" }, desc = "Toggle [M]arkdown table mode" },
-      }
-    end,
-    configs = function()
-      vim.g.table_mode_disable_mappings = 0
-    end,
-  },
-  { "dhruvasagar/vim-zoom" }, -- Toggle zoom in / out individual windows (splits)
-  { "dkarter/bullets.vim", lazy = false }, -- automated bullet lists
   {
     "junegunn/vim-easy-align",
     keys = function()
@@ -45,25 +26,10 @@ return {
     end,
   }, -- A Vim alignment plugin
   {
-    "lambdalisue/suda.vim",
-    config = function()
-      if vim.fn.exists(":SudaWrite") > 0 then
-        vim.api.nvim_create_user_command("W", "w suda://%", {})
-      else
-        vim.api.nvim_create_user_command("W", "w !sudo tee > /dev/null %", {})
-      end
-    end,
-  }, -- Read or write files with sudo command
-  {
     "mbbill/undotree",
     keys = {
       { "<leader>uu", ":UndotreeToggle<CR>", desc = "Undotree toggle" },
     },
   },
-  -- { "mg979/vim-visual-multi", branch = "master" }, -- Multiple cursors plugin for vim/neovim
-  { "rhysd/conflict-marker.vim" }, -- Highlight, Jump and Resolve Conflict Markers Quickly in Vim
-
-  -- Language specific plugins.
-  { "mzlogin/vim-markdown-toc", ft = { "markdown" } }, -- Generate table of contents for Markdown files
   -- }}}
 }

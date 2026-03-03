@@ -127,19 +127,19 @@ M.search_dotfiles = function()
 end
 
 M.nvim_config = function()
-  require("telescope").extensions.file_browser.file_browser {
-    prompt_title = "  NVim Config Browse",
+  require("telescope.builtin").find_files({
+    prompt_title = "NVim Config Browse",
     cwd = "~/.config/nvim/",
     path_display = { "smart" },
-    initial_mode = "normal",
-  }
+    hidden = true,
+  })
 end
 
 M.file_browser = function()
-  require("telescope").extensions.file_browser.file_browser {
-    prompt_title = "  File Browser",
-    initial_mode = "normal",
-  }
+  require("telescope.builtin").find_files({
+    prompt_title = "File Browser",
+    hidden = true,
+  })
 end
 
 local function telescope_buffer_dir()
@@ -147,15 +147,10 @@ local function telescope_buffer_dir()
 end
 
 M.buffer_dir = function()
-  require("telescope").extensions.file_browser.file_browser({
-    path = "%:p:h",
+  require("telescope.builtin").find_files({
+    prompt_title = "Buffer Dir",
     cwd = telescope_buffer_dir(),
-    respect_gitignore = false,
     hidden = true,
-    grouped = true,
-    previewer = true,
-    initial_mode = "normal",
-    layout_config = { height = 40 }
   })
 end
 

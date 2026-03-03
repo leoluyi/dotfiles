@@ -12,8 +12,6 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       {
-        "nvim-treesitter/nvim-treesitter-refactor",
-        "nvim-treesitter/playground",
         {
           "nvim-treesitter/nvim-treesitter-textobjects",
           init = function()
@@ -37,7 +35,6 @@ return {
       auto_install = true,
       ensure_installed = {
         "bash",
-        "c_sharp",
         "cpp",
         "css",
         "dockerfile",
@@ -59,7 +56,6 @@ return {
         "regex",
         "rst",
         "rust",
-        "scala",
         "scss",
         "toml",
         "vim",
@@ -100,47 +96,6 @@ return {
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
-      },
-
-      -- https://github.com/nvim-treesitter/nvim-treesitter-refactor
-      refactor = {
-        -- the illuminate plugin is better than this
-        highlight_definitions = {
-          enable = false,
-          disable = require("util.treesitter").disable_file_handle,
-          -- Set to false if you have an `updatetime` of ~100.
-          clear_on_cursor_move = true,
-        },
-        highlight_current_scope = {
-          enable = false,
-          disable = require("util.treesitter").disable_file_handle,
-        },
-        smart_rename = {
-          enable = true,
-          disable = require("util.treesitter").disable_file_handle,
-          keymaps = {
-            smart_rename = "<localleader>ra",
-          },
-        },
-      },
-
-      playground = {
-        enable = true,
-        disable = require("util.treesitter").disable_file_handle,
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-        persist_queries = false, -- Whether the query persists across vim sessions
-        keybindings = {
-          toggle_query_editor = 'o',
-          toggle_hl_groups = 'i',
-          toggle_injected_languages = 't',
-          toggle_anonymous_nodes = 'a',
-          toggle_language_display = 'I',
-          focus_language = 'f',
-          unfocus_language = 'F',
-          update = 'R',
-          goto_node = '<cr>',
-          show_help = '?',
-        },
       },
     },
 

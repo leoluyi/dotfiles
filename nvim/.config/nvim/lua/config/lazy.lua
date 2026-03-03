@@ -35,19 +35,12 @@ require("lazy").setup({
 
     -- === Optional plugins. (Must place this at the end of spec) ===
 
-    { import = "plugins.extras.dap" },
-    { import = "plugins.extras.note" },
-    { import = "plugins.extras.coding" },
-
-    { import = "plugins.extras.lang.docker" },
     { import = "plugins.extras.lang.go" },
-{ import = "plugins.extras.lang.markdown" },
     { import = "plugins.extras.lang.python" },
     { import = "plugins.extras.lang.java" },
+    { import = "plugins.extras.lang.markdown" },
 
-    { import = "plugins.extras.ai.avante" },
     { import = "plugins.extras.ai.claude-code" },
-    -- { import = "plugins.extras.ai.copilot" },
     { import = "plugins.extras.ai.supermaven" },
   },
   defaults = {

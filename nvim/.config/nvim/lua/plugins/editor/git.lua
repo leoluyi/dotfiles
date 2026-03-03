@@ -5,11 +5,9 @@ return {
     "NeogitOrg/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
 
       -- Only one of these is needed, not both.
       "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua", -- optional
     },
     config = true,
     keys = {
@@ -23,25 +21,6 @@ return {
       { "<leader>gc", ":Neogit commit<cr>", desc = "Neogit commit" },
       { "<leader>gp", ":Neogit push<cr>", desc = "Neogit push" },
       { "<leader>gP", ":Neogit pull<cr>", desc = "Neogit pull" },
-      -- { "<leader>gR", ":Neogit rebase", desc = "Neogit rebase" },
-      -- { "<leader>gS", ":Neogit stash", desc = "Neogit stash" },
-      -- { "<leader>gT", ":Neogit stash-pop", desc = "Neogit stash-pop" },
-      -- { "<leader>gU", ":Neogit pull-unmerged", desc = "Neogit pull-unmerged" },
-      -- { "<leader>gW", ":Neogit worktree", desc = "Neogit worktree" },
-      -- { "<leader>g?", ":Neogit help", desc = "Neogit help" },
-    },
-  },
-
-  {
-    "tpope/vim-fugitive",
-    lazy = false,
-    keys = {
-      { "<leader>ga", "<cmd>Git add %<cr>", desc = "Git add" },
-      -- { "<leader>gf", "<cmd>diffget //2<cr>", desc = "Git diffget //2" },
-      -- { "<leader>gs", "<cmd>Git<cr>", desc = "Git" },
-      -- { "<leader>gj", "<cmd>diffget //3<cr>", desc = "Git diffget //3" },
-      -- { "<leader>gp", "<cmd>Git push<cr>", desc = "Git push" },
-      { "<localleader>gR", "<cmd>Git restore -- %<cr>", desc = "Git restore -- %" },
     },
   },
 
@@ -63,9 +42,6 @@ return {
     },
     opts = {
       signs = {
-        -- delete = { text = "" },
-        -- topdelete = { text = "" },
-        -- changedelete = { text = "▎" },
         add = { text = "▎" },
         change = { text = "▎" },
         delete = { text = "▁" },
@@ -108,6 +84,10 @@ return {
         -- Navigation.
         map("n", "]h", "<cmd>Gitsigns next_hunk<cr>", { desc = "Gitsigns next_hunk" })
         map("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", { desc = "Gitsigns prev_hunk" })
+
+        -- Buffer-level operations (replaces vim-fugitive).
+        map("n", "<leader>ga", gs.stage_buffer, { desc = "Git stage buffer" })
+        map("n", "<localleader>gR", gs.reset_buffer, { desc = "Git reset buffer" })
 
         -- Hunk.
         map("n", "<localleader>hb", function()
@@ -159,6 +139,4 @@ return {
       vim.api.nvim_create_user_command("GitsignsEnable", enable_signs, {})
     end,
   },
-
-  { "ThePrimeagen/git-worktree.nvim" },
 }
