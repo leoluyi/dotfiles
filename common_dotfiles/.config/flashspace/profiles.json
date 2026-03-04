@@ -135,6 +135,7 @@
               "name" : "Spotify"
             }
           ],
+          "assignAppShortcut" : "opt+shift+9",
           "display" : "Built-in Retina Display",
           "id" : "0A4D42F8-1EC7-4FB7-AED5-9C418AEF728D",
           "name" : "Bg",
