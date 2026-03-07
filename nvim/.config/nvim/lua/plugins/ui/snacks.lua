@@ -18,7 +18,13 @@ return {
       scroll = { enabled = true },
       terminal = { enabled = true },
       zen = { enabled = true },
-      picker = { enabled = true },
+      picker = {
+        enabled = true,
+        layout = {
+          preset = "default",
+          layout = { width = 0.8 },
+        },
+      },
     },
     init = function()
       -- Disable mini.trailspace on dashboard; must use SnacksDashboardOpened
