@@ -42,11 +42,11 @@ M.keymaps = function(client, bufnr)
   map("n", "gF",  "<cmd>Lspsaga lsp_finder<CR>", "Lsp [F]inder (Lspsaga)")
 
   -- Workspace
-  map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder,    "[W]orkspace [A]dd Folder")
-  map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-  map("n", "<leader>wl", function()
+  map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder,    "Lsp [W]orkspace [A]dd Folder")
+  map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, "Lsp [W]orkspace [R]emove Folder")
+  map("n", "<leader>lwl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, "[W]orkspace [L]ist Folders")
+  end, "Lsp [W]orkspace [L]ist Folders")
 
   -- Diagnostics
   map("n", "<leader>dd", function() vim.diagnostic.open_float({ scope = "line" }) end, "Lsp [D]iagnostics (current line)")

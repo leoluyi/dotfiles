@@ -81,7 +81,6 @@ return {
       autocmd!
       " buffer-local mappings
       autocmd FileType go nnoremap <buffer> <Leader>gr      :GoRun<space><C-r>=expand("%")<CR>
-      autocmd FileType go nnoremap <buffer> <Leader>gR      :GoRun<space>
       autocmd FileType go nnoremap <buffer> <Localleader>gc :lua require('go.comment').gen()<CR>
       augroup END
 

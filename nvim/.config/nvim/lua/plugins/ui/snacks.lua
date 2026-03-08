@@ -41,7 +41,7 @@ return {
       { "<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal" },
       { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
       { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-      { "<leader>z", function() Snacks.zen() end, desc = "Zen Mode" },
+      { "<leader>uZ", function() Snacks.zen() end, desc = "Zen Mode" },
       { "<leader>uD", function() Snacks.dim() end, desc = "Toggle Dim" },
       { "<leader>un", function() Snacks.notifier.show_history() end, desc = "Notification History" },
       -- Picker: files

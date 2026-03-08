@@ -34,8 +34,8 @@ return {
         "folke/which-key.nvim",
         optional = true,
         opts = {
-          defaults = {
-            ["<leader>ug"] = { name = "+Toggle Gitsigns" },
+          spec = {
+            { "<leader>ug", group = "Toggle Gitsigns" },
           },
         },
       },
@@ -90,17 +90,17 @@ return {
         map("n", "<leader>gR", gs.reset_buffer, { desc = "Git reset buffer" })
 
         -- Hunk.
-        map("n", "<localleader>hb", function()
+        map("n", "<leader>hb", function()
           gs.blame_line({ full = true })
         end, { desc = "Gitsigns Hunk Blame line" })
-        map("n", "<localleader>hh", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Gitsigns preview_hunk" })
-        map("n", "<localleader>hr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Gitsigns reset_hunk" })
-        map("n", "<localleader>hs", "<cmd>Gitsigns stage_hunk<CR>", { desc = "Gitsigns stage_hunk" })
-        map("n", "<localleader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>", { desc = "Gitsigns undo_stage_hunk" })
-        map("x", "<localleader>hr", function()
+        map("n", "<leader>hh", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Gitsigns preview_hunk" })
+        map("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Gitsigns reset_hunk" })
+        map("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>", { desc = "Gitsigns stage_hunk" })
+        map("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>", { desc = "Gitsigns undo_stage_hunk" })
+        map("x", "<leader>hr", function()
           gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, { desc = "Gitsigns reset_hunk" })
-        map("x", "<localleader>hs", function()
+        map("x", "<leader>hs", function()
           gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, { desc = "Gitsigns stage_hunk" })
 
