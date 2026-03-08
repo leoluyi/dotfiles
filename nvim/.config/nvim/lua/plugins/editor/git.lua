@@ -87,7 +87,7 @@ return {
 
         -- Buffer-level operations (replaces vim-fugitive).
         map("n", "<leader>ga", gs.stage_buffer, { desc = "Git stage buffer" })
-        map("n", "<localleader>gR", gs.reset_buffer, { desc = "Git reset buffer" })
+        map("n", "<leader>gR", gs.reset_buffer, { desc = "Git reset buffer" })
 
         -- Hunk.
         map("n", "<localleader>hb", function()
@@ -107,11 +107,11 @@ return {
         -- Toggle.
         map(
           "n",
-          "<leader>ugb",
+          "<leader>hB",
           "<cmd>Gitsigns toggle_current_line_blame<CR>",
           { desc = "Gitsigns toggle_current_line_blame" }
         )
-        map("n", "<leader>ugd", "<cmd>Gitsigns toggle_deleted<CR>", { desc = "Gitsigns toggle_deleted" })
+        map("n", "<leader>hD", "<cmd>Gitsigns toggle_deleted<CR>", { desc = "Gitsigns toggle_deleted" })
 
         -- Text object
         map("o", "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Gitsigns select_hunk" })
