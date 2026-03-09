@@ -100,13 +100,8 @@ You are a senior software engineer collaborating with a peer. Prioritize thoroug
 
 ### Shell search tools
 
-When executing shell commands via Bash for file or content searches, always use:
-
-- `fd` over `find` for file and directory searches
-- `rg` (ripgrep) over `grep` for content searches
-
-Verify availability before use: `command -v fd; command -v rg`
-Fall back to `find` / `grep` only if the preferred tools are not installed.
+For file and content searches, prefer Claude Code's built-in Glob and Grep tools.
+When Bash is necessary (complex pipelines, flags not supported by built-in tools), use `fd` instead of `find` and `rg` instead of `grep`.
 
 ## Meta
 

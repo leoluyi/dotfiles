@@ -121,6 +121,7 @@ command -v zoxide >/dev/null \
 
 # Claude Code.
 export CLAUDE_BASH_NO_LOGIN=1
+export ECC_DISABLED_HOOKS=pre:write:doc-file-warning
 
 # nnn.
 command -v nnn >/dev/null \
