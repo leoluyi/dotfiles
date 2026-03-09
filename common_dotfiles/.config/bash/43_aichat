@@ -1,0 +1,9 @@
+# vim: ft=sh:
+# shellcheck shell=bash
+# aichat shell integration (https://github.com/sigoden/aichat)
+
+command -v aichat >/dev/null || return 0
+
+# Usage: ?? <question>
+# Usage: <cmd> | ??
+alias ??='aichat'

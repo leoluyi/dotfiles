@@ -34,22 +34,3 @@ alias fallacies='fabric-ai -p find_logical_fallacies -s'
 
 # Usage: pbpaste | ideas
 alias ideas='fabric-ai -p extract_ideas -s'
-
-# --- General fabric-ai query ---
-# Usage: ?? <question>
-# Usage: <cmd> | ??  [context hint]
-#
-# NOTE: `function ??` keyword form is required — `??()` would be glob-expanded
-# at source time (matching any 2-char filename in cwd).
-function ?? {
-    if [ -t 0 ]; then
-        [ -z "$*" ] && { printf 'Usage: ?? <question>  OR  <cmd> | ??\n' >&2; return 1; }
-        printf '%s' "$*" | fabric-ai -p ai
-    else
-        if [ -n "$*" ]; then
-            { printf '%s\n' "$*"; cat; } | fabric-ai -p ai
-        else
-            fabric-ai -p ai
-        fi
-    fi
-}
