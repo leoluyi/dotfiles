@@ -97,9 +97,17 @@ pack() {
   realdir="$(cd "$src" && pwd)"
   local name="${realdir##*/}"
   local out="${2:-${name}.tar.gz}"
-  tar --exclude-vcs --exclude-vcs-ignores --exclude="$out" \
-    -czf "$out" -C "$(dirname "$realdir")" "$name"
-  echo "$out ($(du -h "$out" | cut -f1))"
+  local tmpfile
+  tmpfile="$(mktemp "${TMPDIR:-/tmp}/pack.XXXXXX.tar.gz")"
+  if tar --exclude-vcs --exclude-vcs-ignores \
+    -czf "$tmpfile" -C "$(dirname "$realdir")" "$name"; then
+    mv "$tmpfile" "$out"
+    echo "$out ($(du -h "$out" | cut -f1))"
+  else
+    rm -f "$tmpfile"
+    echo "pack: tar failed" >&2
+    return 1
+  fi
 }
 
 ## ex - archive extractor.
