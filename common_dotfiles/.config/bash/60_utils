@@ -66,26 +66,71 @@ tree-gitignore() {
   fi
 }
 
+## pack - archive a directory, respecting .gitignore.
+## usage: pack [-h] [dir] [output.tar.gz]
+pack() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "usage: pack [-h] [dir] [output.tar.gz]"
+    echo ""
+    echo "Archive a directory as .tar.gz, excluding VCS files and"
+    echo "respecting .gitignore patterns."
+    echo ""
+    echo "  dir           directory to pack (default: current directory)"
+    echo "  output.tar.gz output filename (default: <dirname>.tar.gz)"
+    echo ""
+    echo "Examples:"
+    echo "  pack              pack pwd -> <dirname>.tar.gz"
+    echo "  pack mydir        pack mydir -> mydir.tar.gz"
+    echo "  pack mydir a.tgz  pack mydir -> a.tgz"
+    echo ""
+    echo "Uses --exclude-vcs and --exclude-vcs-ignores to skip .git/"
+    echo "and files matched by .gitignore."
+    return 0
+  fi
+  local src="${1:-.}"
+  src="${src%/}"
+  if [ ! -d "$src" ]; then
+    echo "pack: '$src' is not a directory" >&2
+    return 1
+  fi
+  local realdir
+  realdir="$(cd "$src" && pwd)"
+  local name="${realdir##*/}"
+  local out="${2:-${name}.tar.gz}"
+  tar --exclude-vcs --exclude-vcs-ignores --exclude="$out" \
+    -czf "$out" -C "$(dirname "$realdir")" "$name"
+  echo "$out ($(du -h "$out" | cut -f1))"
+}
+
 ## ex - archive extractor.
 ## usage: ex <file>
 ex() {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
+  if [ $# -eq 0 ]; then
+    echo "usage: ex <file>" >&2
+    return 1
+  fi
+  if [ -f "$1" ] ; then
+    case "$1" in
+      *.tar.bz2)   tar xjf "$1"        ;;
+      *.tar.gz)    tar xzf "$1"        ;;
+      *.tar.xz)    tar xJf "$1"        ;;
+      *.tar.zst)   tar --zstd -xf "$1" ;;
+      *.bz2)       bunzip2 "$1"        ;;
+      *.rar)       unrar x "$1"        ;;
+      *.gz)        gunzip "$1"         ;;
+      *.tar)       tar xf "$1"         ;;
+      *.tbz2)      tar xjf "$1"        ;;
+      *.tgz)       tar xzf "$1"        ;;
+      *.txz)       tar xJf "$1"        ;;
+      *.xz)        xz -d "$1"          ;;
+      *.zip)       unzip "$1"          ;;
+      *.Z)         uncompress "$1"     ;;
+      *.7z)        7z x "$1"           ;;
+      *)           echo "'$1' cannot be extracted via ex()" >&2; return 1 ;;
     esac
   else
-    echo "'$1' is not a valid file"
+    echo "'$1' is not a valid file" >&2
+    return 1
   fi
 }
 
