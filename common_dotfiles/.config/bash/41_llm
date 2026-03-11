@@ -130,3 +130,8 @@ _llm_inline_suggest() {
 }
 # Only bind in interactive shells — readline is not available in non-interactive contexts.
 [[ $- == *i* ]] && bind -x '"\ea": _llm_inline_suggest'
+
+# Claude Code - project-free chat in a disposable temp directory.
+claude-chat() {
+  (cd "$(mktemp -d)" && claude "$@")
+}
