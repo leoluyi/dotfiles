@@ -117,7 +117,8 @@ run = ['layout tiling']
 # end tell'
 # '''
 
-alt-enter = 'exec-and-forget open -na /Applications/WezTerm.app'
+# alt-enter = 'exec-and-forget open -na /Applications/WezTerm.app'
+alt-enter = 'exec-and-forget open -na /Applications/Ghostty.app'
 alt-cmd-r = 'reload-config'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
@@ -181,4 +182,4 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
 [mode.apps.binding]
-alt-w = ['exec-and-forget open -na /Applications/WezTerm.app', 'mode main']
+# alt-w = ['exec-and-forget open -na /Applications/WezTerm.app', 'mode main']

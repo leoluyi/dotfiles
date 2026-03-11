@@ -31,6 +31,7 @@ link-url = true
 #  Clipboard & Keybindings
 # =====================
 clipboard-paste-protection = true
+copy-on-select = clipboard
 keybind = cmd+c=copy_to_clipboard
 keybind = cmd+v=paste_from_clipboard
 keybind = cmd+comma=open_config
