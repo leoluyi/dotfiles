@@ -1,0 +1,59 @@
+# =====================
+#  Appearance
+# =====================
+font-size = 16
+scrollback-limit = 10000
+background-opacity = 0.85
+background-blur-radius = 40
+window-decoration = false
+window-padding-x = 8
+window-padding-y = 5
+
+# Everforest Dark Hard
+# https://gist.github.com/leoluyi/d07a138f65ebd99b48f0fc8125b9b58b
+background = #272e33
+foreground = #d3c6aa
+cursor-color = #d79921
+
+palette = 0=#414b50
+palette = 1=#e67e80
+palette = 2=#a7c080
+palette = 3=#dbbc7f
+palette = 4=#7fbbb3
+palette = 5=#d699b6
+palette = 6=#83c092
+palette = 7=#d3c6aa
+palette = 8=#475258
+palette = 9=#e67e80
+palette = 10=#a7c080
+palette = 11=#dbbc7f
+palette = 12=#7fbbb3
+palette = 13=#d699b6
+palette = 14=#83c092
+palette = 15=#d3c6aa
+
+# =====================
+#  System & Keyboard
+# =====================
+shell-integration-features = no-cursor
+macos-option-as-alt = true
+quit-after-last-window-closed = true
+confirm-close-surface = false
+desktop-notifications = true
+
+# =====================
+#  Cursor & Mouse
+# =====================
+cursor-style = block
+cursor-style-blink = false
+mouse-hide-while-typing = true
+link-url = true
+
+# =====================
+#  Clipboard & Keybindings
+# =====================
+clipboard-paste-protection = true
+keybind = cmd+c=copy_to_clipboard
+keybind = cmd+v=paste_from_clipboard
+keybind = cmd+comma=open_config
+keybind = cmd+shift+comma=reload_config

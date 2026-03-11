@@ -6,7 +6,7 @@
   "centerCursorOnFocusChange" : false,
   "centerCursorOnWorkspaceChange" : false,
   "changeWorkspaceOnAppAssign" : true,
-  "checkForUpdatesAutomatically" : false,
+  "checkForUpdatesAutomatically" : true,
   "cornerHiddenApps" : [
 
   ],
