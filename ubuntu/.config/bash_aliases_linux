@@ -1,8 +1,5 @@
 # ====== Linux only ======
 
-# https://github.com/Mayccoll/Gogh
-alias term-color='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
-
 [ -d "$HOME/workspace/repos" ] \
   && alias repo='cd "$HOME/workspace/repos"'
 

@@ -23,8 +23,8 @@ fi
 # Always enable colored `grep` output.
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias fgrep='grep -F --color=auto'
+alias egrep='grep -E --color=auto'
 
 # More information for pager
 alias less='less -r -M -i --underline-special'
@@ -52,14 +52,10 @@ alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 #alias localip="ipconfig getifaddr en0"
 alias myips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-# Kill all the tabs in Chrome to free up memory.
-# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
-alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-
 # Fancy commands output.
 alias du='du -k'
 alias df='df -kT'
-alias free='free -h'
+command -v free >/dev/null && alias free='free -h'
 
 # Find the largest top 10 files and directories.
 alias ducks='du -cksh -- * .[^.]* | sort -rh | head'
