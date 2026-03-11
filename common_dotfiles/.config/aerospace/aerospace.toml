@@ -84,7 +84,6 @@ run = ['layout tiling']
 if.app-id = 'com.mitchellh.ghostty'
 run = ['layout tiling']
 
-
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -118,7 +117,7 @@ run = ['layout tiling']
 # end tell'
 # '''
 
-alt-enter = 'exec-and-forget open -a /Applications/WezTerm.app'
+alt-enter = 'exec-and-forget open -na /Applications/WezTerm.app'
 alt-cmd-r = 'reload-config'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
@@ -182,4 +181,4 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
 [mode.apps.binding]
-alt-w = ['exec-and-forget open -a /Applications/WezTerm.app', 'mode main']
+alt-w = ['exec-and-forget open -na /Applications/WezTerm.app', 'mode main']
