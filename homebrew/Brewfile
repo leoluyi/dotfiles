@@ -89,10 +89,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -323,6 +323,8 @@ brew "tty-clock"
 brew "uv"
 # Vi 'workalike' with many additional features
 brew "vim"
+# Pager/text based browser
+brew "w3m"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Internet file retriever
@@ -577,6 +579,7 @@ vscode "editorconfig.editorconfig"
 vscode "fabiospampinato.vscode-open-in-finder"
 vscode "formulahendry.auto-close-tag"
 vscode "formulahendry.code-runner"
+vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "ibm.output-colorizer"
 vscode "innoverio.vscode-dbt-power-user"
