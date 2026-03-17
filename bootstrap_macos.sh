@@ -162,9 +162,9 @@ link_espanso_configs() {
 
   killall espanso || true
   local espanso_config_path="$HOME/Library/Application Support/espanso"
-  [ -d "$espanso_config_path" ] && rm -rf "$espanso_config_path"
+  [ -e "$espanso_config_path" ] || [ -L "$espanso_config_path" ] && rm -rf "$espanso_config_path"
   echo "ln -sf ${_SCRIPT_DIR}/espanso $espanso_config_path"
-  ln -s "${_SCRIPT_DIR}/espanso" "$espanso_config_path"
+  ln -sf "${_SCRIPT_DIR}/espanso" "$espanso_config_path"
 }
 
 _sync_dotfiles_stow() {
