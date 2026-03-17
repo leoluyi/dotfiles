@@ -38,7 +38,7 @@ return {
       })
     end,
     keys = {
-      { "<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal" },
+      { "<c-\\>", function() Snacks.terminal() end, desc = "Toggle Terminal" },
       { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
       { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       { "<leader>uZ", function() Snacks.zen() end, desc = "Zen Mode" },
@@ -75,6 +75,12 @@ return {
       { "<leader>slr", function() Snacks.picker.lsp_references() end, desc = "LSP References" },
       -- Picker: git
       { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+      -- Tool terminals
+      { "<leader>tp", function() Snacks.terminal("python3") end, desc = "Python REPL" },
+      { "<leader>tn", function() Snacks.terminal("node") end, desc = "Node REPL" },
+      { "<leader>th", function() Snacks.terminal("htop") end, desc = "htop" },
+      { "<leader>td", function() Snacks.terminal("lazydocker") end, desc = "Lazydocker" },
+      { "<leader>tu", function() Snacks.terminal("ncdu") end, desc = "ncdu" },
     },
   },
 }

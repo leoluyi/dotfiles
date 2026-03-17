@@ -355,18 +355,18 @@ These keymaps are set on LSP attach (defined in `lua/util/lsp_keymaps.lua` and l
 
 ## Terminal
 
-Powered by toggleterm.nvim:
+Powered by [Snacks.nvim](https://github.com/folke/snacks.nvim):
 
 | Key | Action |
 |---|---|
 | `<C-\>` | Toggle floating terminal |
-| `<leader>tg` | lazygit |
-| `<leader>td` | lazydocker |
-| `<leader>tn` | node REPL |
-| `<leader>tu` | ncdu |
-| `<leader>th` | htop |
+|`<leader>gg` | Lazygit |
 | `<leader>tp` | Python REPL |
-| `<leader>tr` | Send line to terminal |
+| `<leader>tn` | Node REPL |
+| `<leader>th` | htop |
+| `<leader>td` | Lazydocker |
+| `<leader>tu` | ncdu |
+| `<C-,>` | Toggle Claude Code terminal |
 
 ---
 

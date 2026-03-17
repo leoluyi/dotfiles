@@ -63,7 +63,7 @@ return {
       { "<leader>r", group = "Resize|+Rotate" },
       { "<leader>s", group = "Search..." },
       { "<leader>sl", group = "Search Lsp" },
-      { "<leader>t", group = "Terminal|Neotest" },
+      { "<leader>t", group = "Terminal" },
       { "<leader>u", group = "Toggle" },
       { "<leader>v", group = "VenvSelect" },
       { "<leader>w", group = "Window" },
