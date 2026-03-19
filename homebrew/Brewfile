@@ -71,6 +71,8 @@ brew "dash-shell"
 brew "detox"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
+# Git diff pager based on delta but with a file tree
+brew "diffnav"
 # Load/unload environment variables based on $PWD
 brew "direnv"
 # Tool for exploring each layer in a docker image

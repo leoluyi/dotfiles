@@ -38,7 +38,8 @@
 	clone-github = !"f() { git clone \"git@github.com:$1.git\"; }; f"
 	cm = commit -m
 	co = checkout
-	df = !"f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"; command -v diff-so-fancy >/dev/null && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX || git diff --color \"$@\" | less --tabs=4 -RFX; }; f"
+    #df = !"f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"; command -v diff-so-fancy >/dev/null && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX || git diff --color \"$@\" | less --tabs=4 -RFX; }; f"
+	df = diff
 	dfc = !"git df --cached"
 	dfs = !"git df --name-status --find-renames"
 	dump = cat-file -p
@@ -108,12 +109,6 @@
 	submodulesummary = 1
 [help]
 	autocorrect = 30
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [diff-so-fancy]
 	stripLeadingSymbols = false
 	changeHunkIndicators = true
@@ -121,3 +116,4 @@
 	helper = cache --timeout 7200
 [pager]
 	branch = false
+	diff = diffnav
