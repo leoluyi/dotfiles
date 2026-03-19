@@ -71,6 +71,8 @@ brew "dash-shell"
 brew "detox"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
+# Load/unload environment variables based on $PWD
+brew "direnv"
 # Tool for exploring each layer in a docker image
 brew "dive"
 # Isolated development environments using Docker
@@ -565,6 +567,7 @@ mas "Prodrafts", id: 1545810067
 mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
 mas "WeChat", id: 836500024
+mas "Welly", id: 1521402269
 mas "Windows App", id: 1295203466
 mas "Xnip", id: 1221250572
 vscode "alexeyvax.vscode-open-native-terminal"
