@@ -1,5 +1,8 @@
 worktree-path = "{{ repo_path }}/../{{ branch | sanitize }}"
 
+[post-start]
+copy = "wt step copy-ignored"
+
 # # User Configuration
 #
 # Create with `wt config create`.
@@ -61,11 +64,11 @@ worktree-path = "{{ repo_path }}/../{{ branch | sanitize }}"
 # # [commit.generation]
 # # command = "llm -m claude-haiku-4.5"
 #
-# ### aichat
-#
-# # [commit.generation]
-# # command = "aichat -m claude:claude-haiku-4.5"
-#
+### aichat
+
+[commit.generation]
+command = "aichat -m claude:claude-haiku-4.5"
+
 # See LLM commits docs (https://worktrunk.dev/llm-commits/) for setup and Custom prompt templates (#custom-prompt-templates) for template customization.
 #
 # ## Command config
