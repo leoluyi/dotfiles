@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 
 # ---------------------------------------------------------------------------
 # Install Java (Temurin 17 & 21), Maven, and Gradle via SDKMAN
@@ -44,6 +44,21 @@ init_sdkman() {
   fi
 }
 
+# --- Version resolver -------------------------------------------------------
+
+resolve_temurin_version() {
+  local major="$1"
+  local resolved
+  resolved="$(sdk list java 2>/dev/null \
+    | grep -oE "${major}\.[0-9]+(\.[0-9]+)?-tem" \
+    | head -1)"
+  if [[ -z "$resolved" ]]; then
+    error "Could not resolve Temurin version for Java $major"
+    return 1
+  fi
+  printf '%s' "$resolved"
+}
+
 # --- Install helper ---------------------------------------------------------
 
 install_if_missing() {
@@ -77,16 +92,21 @@ main() {
   echo
 
   init_sdkman
+  export sdkman_auto_answer=true
 
   # Java versions
   info "--- Java (Temurin) ---"
-  install_if_missing java "17-tem"
-  install_if_missing java "21-tem"
+  local java17 java21
+  java17="$(resolve_temurin_version 17)"
+  java21="$(resolve_temurin_version 21)"
+  info "  Resolved: Java 17 -> $java17, Java 21 -> $java21"
+  install_if_missing java "$java17"
+  install_if_missing java "$java21"
   echo
 
-  # Set Java 21 as default
-  info "--- Setting Java 21-tem as default ---"
-  sdk default java "21-tem" < /dev/null
+  # Set Java 21 as default (use native binary to avoid legacy deprecation notice)
+  info "--- Setting Java $java21 as default ---"
+  "${SDKMAN_DIR}/libexec/default" java "$java21"
   echo
 
   # Build tools
