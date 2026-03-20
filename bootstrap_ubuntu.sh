@@ -104,13 +104,14 @@ _sync_dotfiles_stow() {
   local os="$1"
 
   mkdir -p "$config_home"
+  mkdir -p "$HOME/.local/bin"
 
   home_src_folders=("common_dotfiles" "tmux" "$os")
 
   for folder in "${home_src_folders[@]}"; do
     echo "$(tput setaf 3)Stow $folder ...$(tput sgr 0)"
     #stow -vt  "$HOME" --ignore='(\.sh)|(\.keep)|(\.DS_Store)' -D "$folder" 2>&1 | grep -v '^BUG'
-    stow --restow -v --dotfiles -t "$HOME" --ignore='(\.sh)|(\.keep)|(\.DS_Store)|(\.md)' --override='.' "$folder" \
+    stow --restow -v --dotfiles -t "$HOME" --ignore='(\.keep)|(\.DS_Store)|(\.md)' --override='.' "$folder" \
       2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2) \
       >/dev/null
   done
@@ -173,22 +174,12 @@ sync_dotfiles() {
 }
 
 
-install_scripts() {
-  echo "$(tput setaf 2)###### Install Scripts ######$(tput sgr 0)"
-  mkdir -p "$HOME/.local/bin"
-  if command -v stow >/dev/null; then
-    stow -v -t "$HOME" -D scripts 2>&1 | grep -v '^BUG'
-    stow -v -t "$HOME" --ignore='^[^.].+' scripts 2>&1 | grep -v '^BUG'
-  fi
-}
-
 
 validate_os "ubuntu"
 sync_nvim_config
 # sync_sublimetext_config
 link_py_virtualenv
 sync_dotfiles $FORCE "$(get_os)"
-install_scripts
 
 unset \
   sync_nvim_config \
@@ -197,7 +188,6 @@ unset \
   _sync_dotfiles_stow \
   _sync_dotfiles_rsync \
   sync_dotfiles \
-  install_scripts \
   >/dev/null
 
 

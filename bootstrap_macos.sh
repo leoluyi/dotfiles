@@ -174,13 +174,14 @@ _sync_dotfiles_stow() {
   local os="$1"
 
   mkdir -p "$config_home"
+  mkdir -p "$HOME/.local/bin"
 
   home_src_folders=("common_dotfiles" "$os")
 
   for folder in "${home_src_folders[@]}"; do
     echo "$(tput setaf 3)Stow $folder ...$(tput sgr 0)"
     #stow -vt  "$HOME" --ignore='(\.sh)|(\.keep)|(\.DS_Store)' -D "$folder" 2>&1 | grep -v '^BUG'
-    stow --adopt -v --dotfiles -t "$HOME" --ignore='(\.sh)|(\.keep)|(\.DS_Store)|(README\.md)|(\.xml)' --override='.' "$folder" \
+    stow --adopt -v --dotfiles -t "$HOME" --ignore='(\.keep)|(\.DS_Store)|(README\.md)|(\.xml)' --override='.' "$folder" \
       2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2) \
       >/dev/null
   done
@@ -243,15 +244,6 @@ sync_dotfiles() {
   [ ! -d "$HOME/.local/share/bash" ] && mkdir -p "$HOME/.local/share/bash"
 }
 
-install_scripts() {
-  echo "$(tput setaf 2)###### Install Scripts ######$(tput sgr 0)"
-  mkdir -p "$HOME/.local/bin"
-  if command -v stow >/dev/null; then
-    #stow -vt "$HOME" -D scripts 2>&1 | grep -v '^BUG'
-    stow --adopt -vt "$HOME" --ignore='^[^.].+' --override='.' scripts 2>&1 | grep -v '^BUG'
-  fi
-}
-
 finally() {
   [ "$_SCRIPT_DIR" != "$HOME"/.dotfiles ] && ln -sfn "$_SCRIPT_DIR" "$HOME"/.dotfiles
   [ -d "$HOME/Dropbox/_repos" ] && ln -sfn "$HOME/Dropbox/_repos" ~/_repos
@@ -266,7 +258,6 @@ link_virtualenv
 sync_sublimetext_config
 sync_nvim_config "$FORCE"
 make_xdg_dirs
-install_scripts
 sync_dotfiles "$FORCE" "$(get_os)"
 finally
 
@@ -281,7 +272,6 @@ unset \
   _sync_dotfiles_stow \
   _sync_dotfiles_rsync \
   sync_dotfiles \
-  install_scripts \
   >/dev/null
 
 echo "$(tput setaf 2)###### Source Bash Settings ######$(tput sgr 0)"
