@@ -152,6 +152,7 @@ _nvm_lazy_load() {
         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     fi
 }
+export -f _nvm_lazy_load
 nvm()  { _nvm_lazy_load; nvm  "$@"; }
 node() { _nvm_lazy_load; node "$@"; }
 npm()  { _nvm_lazy_load; npm  "$@"; }
