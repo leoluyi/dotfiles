@@ -7,20 +7,21 @@ set -euo pipefail
 echo "Installing Claude Code plugins..."
 
 # Add marketplaces
-claude plugin add-marketplace superpowers-dev --source github --repo obra/superpowers
-claude plugin add-marketplace everything-claude-code --source github --repo affaan-m/everything-claude-code
-claude plugin add-marketplace claude-code-skills --source github --repo alirezarezvani/claude-skills
-claude plugin add-marketplace knowledge-work-plugins --source github --repo anthropics/knowledge-work-plugins
-claude plugin add-marketplace yvictor-skills --source github --repo Yvictor/skills
+claude plugin marketplace add obra/superpowers
+claude plugin marketplace add affaan-m/everything-claude-code
+claude plugin marketplace add alirezarezvani/claude-skills
+claude plugin marketplace add anthropics/knowledge-work-plugins
+# WARNING: This command may silently fail due to a CLI bug — the marketplace
+# may not appear in known_marketplaces.json. Verify manually after running.
+claude plugin marketplace add Yvictor/skills
 
 # Install and enable plugins
 claude plugin install everything-claude-code@everything-claude-code
 claude plugin install superpowers@superpowers-dev
 claude plugin install engineering-advanced-skills@claude-code-skills
 claude plugin install engineering@knowledge-work-plugins
+# WARNING: This install may fail if the Yvictor/skills marketplace wasn't
+# registered successfully (see warning above).
 claude plugin install dev-workflow@yvictor-skills
-
-# Install standalone skills
-claude install-skill Jyo238/checkpoint
 
 echo "Done! All plugins installed."
