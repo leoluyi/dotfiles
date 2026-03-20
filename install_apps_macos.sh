@@ -212,7 +212,7 @@ install_claude_plugins() {
     echo "(Skip) claude CLI not found."
     return
   fi
-  claude plugin install everything-claude-code@everything-claude-code
+  bash "${_SCRIPT_DIR}/scripts/install-claude-plugins.sh"
 }
 
 
