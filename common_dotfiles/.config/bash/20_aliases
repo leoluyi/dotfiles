@@ -7,8 +7,8 @@ alias watch='watch -n1 '
 # ls / eza
 if command -v eza >/dev/null; then
   alias ls='eza --group-directories-first --icons=auto'
-  alias ll='eza -l --git --group-directories-first --time-style=long-iso --icons=auto'
-  alias la='eza -la --git --group-directories-first --time-style=long-iso --icons=auto'
+  alias ll='eza -la --git --group-directories-first --time-style=long-iso --icons=auto'
+  alias la='eza -a --git --group-directories-first --icons=auto'
   alias l='eza -F=auto --icons=auto'
   alias lrt='eza -l --sort=modified --time-style=long-iso --icons=auto'
   alias lx='eza -l --sort=extension --icons=auto'
