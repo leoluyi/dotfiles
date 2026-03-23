@@ -30,6 +30,9 @@ export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
 # pipenv.
 export PIPENV_IGNORE_VIRTUALENVS=1
 
+# Everything Claude Code (ECC) hooks.
+export ECC_DISABLED_HOOKS="pre:write:doc-file-warning"
+
 # Source local env overrides (gitignored).
 [ -f "$HOME/.env_vars" ] && . "$HOME/.env_vars"
 
