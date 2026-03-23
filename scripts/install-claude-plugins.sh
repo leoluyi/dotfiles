@@ -15,6 +15,7 @@ claude plugin marketplace add anthropics/knowledge-work-plugins
 # may not appear in known_marketplaces.json. Verify manually after running.
 claude plugin marketplace add Yvictor/skills
 claude plugin marketplace add max-sixty/worktrunk
+claude plugin marketplace add jarrodwatts/claude-hud
 
 # Install and enable plugins
 claude plugin install everything-claude-code@everything-claude-code
@@ -25,5 +26,6 @@ claude plugin install engineering@knowledge-work-plugins
 # registered successfully (see warning above).
 claude plugin install dev-workflow@yvictor-skills
 claude plugin install worktrunk@worktrunk
+claude plugin install claude-hud@claude-hud
 
 echo "Done! All plugins installed."
