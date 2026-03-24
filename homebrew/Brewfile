@@ -83,6 +83,8 @@ brew "docker-compose"
 brew "dos2unix"
 # More intuitive version of du in rust
 brew "dust"
+# Linux utility to get information on filesystems, like df but better
+brew "dysk"
 # Run arbitrary commands when files change
 brew "entr"
 # Modern, maintained replacement for ls
