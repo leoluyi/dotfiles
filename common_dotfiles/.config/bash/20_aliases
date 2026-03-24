@@ -69,3 +69,10 @@ alias history-on='set -o history'
 # Clear last hour history.
 alias history-clearlast20="[ -f $HISTFILE ] && HISTTIMEFORMAT='%s ' history | awk -v d1=\"\$(date --date='-20 min' '+%s')\" '(\$2 > d1 ) { print \$2 }' | xargs -I {} sed -i '/^.*:{}:/{N;d;}' $HISTFILE && history -c && history -r"
 alias history-clear='[ -f "$HISTFILE" ] && cat /dev/null > "$HISTFILE" && history -c'
+
+# Claude Code.
+if command -v claude >/dev/null; then
+  alias c='claude'
+  alias ch='claude --chrome'
+  alias cs='claude --dangerously-skip-permissions'
+fi
