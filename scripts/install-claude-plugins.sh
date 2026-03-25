@@ -26,6 +26,7 @@ run claude plugin marketplace add Yvictor/skills
 run claude plugin marketplace add max-sixty/worktrunk
 run claude plugin marketplace add shyuan/shyuan-marketplace
 run claude plugin marketplace add jarrodwatts/claude-hud
+run claude plugin marketplace add jeffallan/claude-skills
 # claude-statusline is installed via npx, not as a plugin
 
 # Install and enable plugins
@@ -39,6 +40,7 @@ run claude plugin install dev-workflow@yvictor-skills
 run claude plugin install worktrunk@worktrunk
 run claude plugin install claude-hud@claude-hud
 run claude plugin install writing-humanizer@shyuan-marketplace
+run claude plugin install fullstack-dev-skills@jeffallan
 # Install claude-statusline via npx
 run npx @kamranahmedse/claude-statusline
 
