@@ -48,6 +48,19 @@ clone_or_pull() {
 }
 run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing
 
+# Create slash command for avoid-ai-writing skill
+mkdir -p ~/.claude/commands
+cat > ~/.claude/commands/clean-ai-writing.md << 'CMDEOF'
+---
+description: Audit and rewrite content to remove AI writing patterns
+---
+
+$ARGUMENTS
+
+Read and follow the instructions in ~/.claude/skills/avoid-ai-writing/SKILL.md
+CMDEOF
+echo "+ Created ~/.claude/commands/clean-ai-writing.md"
+
 # --- ykdojo/claude-code-tips quick setup (Tip 45) ---
 # Installs cc-safe, configures MCP lazy-load, permissions, attribution, etc.
 # Default skips: 3 (status-line), 4 (auto-updates), 9 (aliases), 10 (fork-shortcut)
