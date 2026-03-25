@@ -48,6 +48,17 @@ clone_or_pull() {
 }
 run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing
 
+# --- ykdojo/claude-code-tips quick setup (Tip 45) ---
+# Installs cc-safe, configures MCP lazy-load, permissions, attribution, etc.
+# Default skips: 3 (status-line), 4 (auto-updates), 9 (aliases), 10 (fork-shortcut)
+read -p "Run ykdojo/claude-code-tips setup script? [y/N]: " run_tips_setup
+if [[ "$run_tips_setup" =~ ^[Yy]$ ]]; then
+  echo "Running setup with skip: 3 4 9 10..."
+  if ! echo "3 4 9 10" | bash <(curl -s https://raw.githubusercontent.com/ykdojo/claude-code-tips/main/scripts/setup.sh); then
+    FAILURES+=("ykdojo/claude-code-tips setup script")
+  fi
+fi
+
 if [[ ${#FAILURES[@]} -gt 0 ]]; then
   echo ""
   echo "WARNING: ${#FAILURES[@]} command(s) failed:"
