@@ -40,6 +40,14 @@ run claude plugin install claude-hud@claude-hud
 # Install claude-statusline via npx
 run npx @kamranahmedse/claude-statusline
 
+# Install git-cloned skills
+mkdir -p ~/.claude/skills
+clone_or_pull() {
+  local repo="$1" dest="$2"
+  git clone "$repo" "$dest" 2>/dev/null || git -C "$dest" pull
+}
+run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing
+
 if [[ ${#FAILURES[@]} -gt 0 ]]; then
   echo ""
   echo "WARNING: ${#FAILURES[@]} command(s) failed:"
