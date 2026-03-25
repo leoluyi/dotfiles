@@ -24,6 +24,7 @@ run claude plugin marketplace add anthropics/knowledge-work-plugins
 # may not appear in known_marketplaces.json. Verify manually after running.
 run claude plugin marketplace add Yvictor/skills
 run claude plugin marketplace add max-sixty/worktrunk
+run claude plugin marketplace add shyuan/shyuan-marketplace
 run claude plugin marketplace add jarrodwatts/claude-hud
 # claude-statusline is installed via npx, not as a plugin
 
@@ -37,6 +38,7 @@ run claude plugin install engineering@knowledge-work-plugins
 run claude plugin install dev-workflow@yvictor-skills
 run claude plugin install worktrunk@worktrunk
 run claude plugin install claude-hud@claude-hud
+run claude plugin install writing-humanizer@shyuan-marketplace
 # Install claude-statusline via npx
 run npx @kamranahmedse/claude-statusline
 
