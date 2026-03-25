@@ -40,7 +40,7 @@ run claude plugin install dev-workflow@yvictor-skills
 run claude plugin install worktrunk@worktrunk
 run claude plugin install claude-hud@claude-hud
 run claude plugin install writing-humanizer@shyuan-marketplace
-run claude plugin install fullstack-dev-skills@jeffallan
+run claude plugin install fullstack-dev-skills@fullstack-dev-skills
 # Install claude-statusline via npx
 run npx @kamranahmedse/claude-statusline
 
