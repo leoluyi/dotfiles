@@ -23,10 +23,10 @@ Each section must sit under the parent that owns its concern. Common misplacemen
 
 | Content | Wrong parent | Right parent |
 |---------|-------------|-------------|
-| Artifact storage, security scanning | Model inference | Deployment & release |
-| Monitoring & auto-rollback | Model lifecycle | Observability |
-| Canary deployment strategy | Model lifecycle | Deployment & release |
-| Decommission / retirement flow | Model lifecycle | Operations |
+| Artifact storage, security scanning | Core service | Deployment & release |
+| Monitoring & auto-rollback | Service lifecycle | Observability |
+| Canary deployment strategy | Service lifecycle | Deployment & release |
+| Decommission / retirement flow | Service lifecycle | Operations |
 
 **Action**: If a section's content belongs to 2+ other sections, it should not exist as a standalone section. Split and merge into the correct owners.
 
@@ -34,7 +34,7 @@ Each section must sit under the parent that owns its concern. Common misplacemen
 
 Before writing any requirement, check if it is already covered elsewhere:
 
-- Cosign signing, Trivy scanning, Audit Log entries are typically covered by a general deployment/release section. Do not repeat them in domain-specific sections.
+- Cross-cutting concerns (signing, scanning, audit logging) are typically covered by a general deployment/release section. Do not repeat them in domain-specific sections.
 - Cross-references (e.g., "see 3.1.5.1") are acceptable. Restating the same requirement in both places is not.
 - When deleting a section, grep the entire document for its section number and update all references (tables, cross-references, footnotes).
 
@@ -42,8 +42,8 @@ Before writing any requirement, check if it is already covered elsewhere:
 
 Every requirement must address a real pain point. Ask:
 
-- Is this specific to the domain (e.g., model artifacts are 100GB+ -- genuinely different from normal container images)?
-- Or is this standard practice already covered by general infrastructure (e.g., SHA-256 checksum -- any OCI artifact has this)?
+- Is this specific to the domain (e.g., artifacts are 100GB+ -- genuinely different from typical deployments)?
+- Or is this standard practice already covered by general infrastructure (e.g., checksum verification -- any package manager does this)?
 
 If it's standard practice, delete it. Only keep domain-specific requirements that would not be met by the general process.
 
@@ -51,7 +51,7 @@ If it's standard practice, delete it. Only keep domain-specific requirements tha
 
 After editing a section, check that its content does not contradict design principles stated elsewhere in the document. Common violations:
 
-- Storage section says "不依賴節點本地磁碟" while resource management section says "單機自主 with local NVMe"
+- One section says "不依賴本地儲存" while another section's design requires local storage
 - Appendix defines baselines as "由廠商提出" while main body references those baselines as acceptance criteria
 
 **Action**: Grep for key terms (design principles, architecture choices) and verify all sections align.
@@ -91,12 +91,12 @@ After any structural change (section move, delete, renumber):
 Every bullet point must be a complete sentence that explains **what** and **why**. Reject:
 
 ```
-BAD:  - CSI / container-native persistent volumes (PV/PVC)
-BAD:  - HA (control plane and critical services)
-BAD:  - Backup/restore (config, data, indexes)
+BAD:  - 持久卷（PV/PVC）
+BAD:  - HA（控制面與關鍵服務）
+BAD:  - 備份/還原（設定、資料、索引）
 
-GOOD: - All storage must be mounted as container-native persistent volumes (PV/PVC) via CSI drivers, not dependent on node-local disks.
-GOOD: - The K8s control plane and critical services (inference engine, API Gateway, vector DB) must be deployed in a high-availability architecture. Single-node failure must not interrupt service.
+GOOD: - 所有儲存須透過 CSI 驅動掛載為持久卷（PV/PVC），不依賴節點本地磁碟。
+GOOD: - 控制面與關鍵服務須部署為高可用架構，單節點故障不中斷服務。
 ```
 
 ### Mandatory: Section Context
@@ -105,17 +105,17 @@ Each section must open with 1-2 sentences explaining **why this matters** before
 
 ```
 BAD:
-#### 3.3.2 Storage
-- PV/PVC support
-- High throughput
-- Tiered storage
+#### 3.3.2 儲存
+- PV/PVC 支援
+- 高吞吐
+- 分層儲存
 
 GOOD:
-#### 3.3.2 Storage
-The AI platform's storage needs differ from typical applications: model files are tens of GB, vector indexes require sustained high-throughput reads, and audit logs must be retained long-term and remain tamper-proof.
+#### 3.3.2 儲存
+本平台的儲存需求與一般應用不同：核心檔案動輒數十 GB，索引需要持續高吞吐讀寫，稽核日誌須長期保留且不可竄改。
 
-**Requirements:**
-- All storage must be mounted via CSI...
+**需求：**
+- 所有儲存須透過 CSI 驅動掛載...
 ```
 
 ### Prohibited Patterns
@@ -124,7 +124,7 @@ The AI platform's storage needs differ from typical applications: model files ar
 |---------|---------|-----|
 | AI filler words | 確保、從而、旨在、進而、致力、賦能、全面地、有效地 | Rewrite directly. 確保 -> 使; delete filler entirely. |
 | Chinese slash enumeration | 輸入/輸出、角色/權限/用途、熱/溫/冷 | Use 頓號：輸入、輸出；角色、權限、用途。English technical terms keep slash (see Allowed Patterns). |
-| Summary table noise | 摘要表中用括號補充細節：`模型服務（含 KV Cache）` | 摘要表只寫項目名稱，細節留給對應章節。`模型服務` 即可。 |
+| Summary table noise | 摘要表中用括號補充細節：`核心服務（含快取機制）` | 摘要表只寫項目名稱，細節留給對應章節。`核心服務` 即可。 |
 | Contrarian structure | 不是 A 而是 B; 並非 A，而是 B | State B directly without negating A. |
 | Hedging | 可能、若 (as uncertainty) | Use definitive language. 可能需要 -> 須; 若不大 -> delete the hedge. |
 | Vague official-speak | 應審慎評估、有待觀察 | State the concrete criteria or action. |
@@ -141,11 +141,11 @@ The AI platform's storage needs differ from typical applications: model files ar
 
 | Pattern | Why it's fine |
 |---------|--------------|
-| Em dashes for technical explanation | `AWQ / GPTQ -- reduces model from 16-bit to 8-bit` is standard in technical docs |
+| Em dashes for technical explanation | `AWQ / GPTQ -- 將精度從 16-bit 降至 8-bit` is standard in technical docs |
 | Bold labels in requirement lists | `**Identity**: each system has a unique ID...` is standard RFP format |
 | Bullet-heavy sections | RFPs are list-oriented documents by nature |
-| "不是" for concept boundary | `管理粒度是 collection，不是租戶` is a factual boundary, not a contrarian structure |
-| "作為" in factual role assignment | `以 ArgoCD 作為 GitOps CD 引擎` is stating a technology choice, not copula inflation |
+| "不是" for concept boundary | `管理粒度是資料集，不是租戶` is a factual boundary, not a contrarian structure |
+| "作為" in factual role assignment | `以 X 作為 Y 引擎` is stating a technology choice, not copula inflation |
 | "提升" in technical context | `用於提升排序品質` describes a component's function, not empty praise |
 | 具體而言 as list intro | Acceptable when followed by concrete items; it is a list introducer, not filler |
 | English term slashes | `JWT / OAuth2`, `SSE / WebSocket`, `AWQ / GPTQ / INT8` — standard notation for alternative technologies |
