@@ -47,6 +47,25 @@ Every requirement must address a real pain point. Ask:
 
 If it's standard practice, delete it. Only keep domain-specific requirements that would not be met by the general process.
 
+### 3b. Cross-Section Consistency
+
+After editing a section, check that its content does not contradict design principles stated elsewhere in the document. Common violations:
+
+- Storage section says "不依賴節點本地磁碟" while resource management section says "單機自主 with local NVMe"
+- Appendix defines baselines as "由廠商提出" while main body references those baselines as acceptance criteria
+
+**Action**: Grep for key terms (design principles, architecture choices) and verify all sections align.
+
+### 3c. Appendix Bloat
+
+An appendix earns its place only if it adds concrete, quantifiable information not already in the main body. Kill appendices where:
+
+- Most rows say "由廠商提出" or equivalent — that is not a baseline, it is punting the requirement
+- The concrete values (e.g., 99.9% uptime, RPO/RTO numbers) are generic enterprise standards already implied by main-body sections
+- The appendix merely restates requirements from the main body in table form
+
+**Action**: Move any concrete numbers worth keeping into their parent sections, update all references, then delete the appendix.
+
 ### 4. Section Justification
 
 A section earns its place by having a concrete use case in the current phase:
@@ -104,6 +123,8 @@ The AI platform's storage needs differ from typical applications: model files ar
 | Pattern | Example | Fix |
 |---------|---------|-----|
 | AI filler words | 確保、從而、旨在、進而、致力、賦能、全面地、有效地 | Rewrite directly. 確保 -> 使; delete filler entirely. |
+| Chinese slash enumeration | 輸入/輸出、角色/權限/用途、熱/溫/冷 | Use 頓號：輸入、輸出；角色、權限、用途。English technical terms keep slash (see Allowed Patterns). |
+| Summary table noise | 摘要表中用括號補充細節：`模型服務（含 KV Cache）` | 摘要表只寫項目名稱，細節留給對應章節。`模型服務` 即可。 |
 | Contrarian structure | 不是 A 而是 B; 並非 A，而是 B | State B directly without negating A. |
 | Hedging | 可能、若 (as uncertainty) | Use definitive language. 可能需要 -> 須; 若不大 -> delete the hedge. |
 | Vague official-speak | 應審慎評估、有待觀察 | State the concrete criteria or action. |
@@ -127,6 +148,7 @@ The AI platform's storage needs differ from typical applications: model files ar
 | "作為" in factual role assignment | `以 ArgoCD 作為 GitOps CD 引擎` is stating a technology choice, not copula inflation |
 | "提升" in technical context | `用於提升排序品質` describes a component's function, not empty praise |
 | 具體而言 as list intro | Acceptable when followed by concrete items; it is a list introducer, not filler |
+| English term slashes | `JWT / OAuth2`, `SSE / WebSocket`, `AWQ / GPTQ / INT8` — standard notation for alternative technologies |
 | Structured uniformity | RFPs are inherently structured and uniform; do not break formatting conventions for the sake of "rhythm variation" |
 
 ---
