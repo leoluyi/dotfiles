@@ -47,6 +47,8 @@ Every requirement must address a real pain point. Ask:
 
 If it's standard practice, delete it. Only keep domain-specific requirements that would not be met by the general process.
 
+**Infrastructure standard practice test**: If a section could appear verbatim in any K8s/cloud platform RFP with zero modification (e.g., secret management, HA control plane, CPU sizing, backup/restore), it is infrastructure boilerplate, not a domain-specific requirement. Either delete it or move it to the infrastructure layer where it belongs — do not give it a standalone section in the application layer.
+
 ### 3b. Cross-Section Consistency
 
 After editing a section, check that its content does not contradict design principles stated elsewhere in the document. Common violations:
@@ -66,11 +68,23 @@ An appendix earns its place only if it adds concrete, quantifiable information n
 
 **Action**: Move any concrete numbers worth keeping into their parent sections, update all references, then delete the appendix.
 
+### 3d. Thin Section Consolidation
+
+A section with only 1-2 bullet points and no opening context explaining **why it matters** is a sign it does not justify standalone existence. Merge it into the nearest parent or sibling section as additional bullets or a short paragraph.
+
+**Test**: If removing the section header and indenting its content under a neighbor loses zero information, the section should not exist independently.
+
 ### 4. Section Justification
 
-A section earns its place by having a concrete use case in the current phase:
+A section earns its place by meeting **both** criteria:
 
-- **Has first-phase use case**: Keep as a full section with requirements.
+1. **Has a concrete use case** in the current or next phase
+2. **Has enough substance** to warrant standalone treatment (opening context + 3+ requirements)
+
+Decision tree:
+
+- **Has first-phase use case + sufficient substance**: Keep as a full section with requirements.
+- **Has first-phase use case but thin (1-2 bullets)**: Merge into the nearest related section.
 - **Has second-phase use case with clear scope**: Keep as a subsection or remark (blockquote) under the related first-phase section.
 - **No concrete use case, only "might need later"**: Demote to a one-sentence remark. Do not create a standalone section for speculative needs.
 
