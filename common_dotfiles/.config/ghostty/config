@@ -6,9 +6,11 @@ font-size = 16
 scrollback-limit = 10000
 background-opacity = 0.85
 background-blur-radius = 40
-window-decoration = false
-window-padding-x = 8
-window-padding-y = 5
+window-decoration = true
+window-padding-x = 12
+window-padding-y = 10
+macos-titlebar-style = hidden
+macos-icon = blueprint
 
 # =====================
 #  System & Keyboard
