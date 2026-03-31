@@ -51,6 +51,9 @@ clone_or_pull() {
   git clone "$repo" "$dest" 2>/dev/null || git -C "$dest" pull
 }
 run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing
+run clone_or_pull https://github.com/garrytan/gstack ~/.claude/skills/gstack
+echo "NOTE: gstack requires Bun v1.0+ (https://bun.sh)"
+(cd ~/.claude/skills/gstack && ./setup)
 
 
 # --- ykdojo/claude-code-tips quick setup (Tip 45) ---
