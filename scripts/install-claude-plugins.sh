@@ -18,29 +18,27 @@ echo "Installing Claude Code plugins..."
 # Add marketplaces
 run claude plugin marketplace add obra/superpowers
 run claude plugin marketplace add affaan-m/everything-claude-code
-run claude plugin marketplace add alirezarezvani/claude-skills
+# run claude plugin marketplace add alirezarezvani/claude-skills  # engineering-advanced-skills — removed, redundant with ECC + superpowers
 run claude plugin marketplace add anthropics/knowledge-work-plugins
 # WARNING: This command may silently fail due to a CLI bug — the marketplace
 # may not appear in known_marketplaces.json. Verify manually after running.
 run claude plugin marketplace add Yvictor/skills
-run claude plugin marketplace add max-sixty/worktrunk
-run claude plugin marketplace add shyuan/shyuan-marketplace
+# run claude plugin marketplace add shyuan/shyuan-marketplace  # writing-humanizer — removed, redundant with ECC avoid-ai-writing
 run claude plugin marketplace add jarrodwatts/claude-hud
-run claude plugin marketplace add jeffallan/claude-skills
+# run claude plugin marketplace add jeffallan/claude-skills  # fullstack-dev-skills — removed, ~80% redundant with ECC
 # claude-statusline is installed via npx, not as a plugin
 
 # Install and enable plugins
 run claude plugin install everything-claude-code@everything-claude-code
 run claude plugin install superpowers@superpowers-dev
-run claude plugin install engineering-advanced-skills@claude-code-skills
+# run claude plugin install engineering-advanced-skills@claude-code-skills  # removed, redundant with ECC + superpowers
 run claude plugin install engineering@knowledge-work-plugins
 # WARNING: This install may fail if the Yvictor/skills marketplace wasn't
 # registered successfully (see warning above).
 run claude plugin install dev-workflow@yvictor-skills
-run claude plugin install worktrunk@worktrunk
 run claude plugin install claude-hud@claude-hud
-run claude plugin install writing-humanizer@shyuan-marketplace
-run claude plugin install fullstack-dev-skills@fullstack-dev-skills
+# run claude plugin install writing-humanizer@shyuan-marketplace  # removed, redundant with ECC avoid-ai-writing
+# run claude plugin install fullstack-dev-skills@fullstack-dev-skills  # removed, ~80% redundant with ECC
 # Install claude-statusline via npx
 run npx @kamranahmedse/claude-statusline
 
