@@ -84,6 +84,8 @@ brew "docker-compose"
 brew "dos2unix"
 # More intuitive version of du in rust
 brew "dust"
+# Linux utility to get information on filesystems, like df but better
+brew "dysk"
 # Run arbitrary commands when files change
 brew "entr"
 # Modern, maintained replacement for ls
@@ -94,10 +96,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -432,8 +434,6 @@ cask "font-ubuntu-nerd-font"
 cask "ghostty"
 # Web browser
 cask "google-chrome"
-# Utility to hide menu bar items
-cask "hiddenbar"
 # Menu bar application that displays the CPU speed limit due to thermal issues
 cask "hot"
 # Free and open-source media player
@@ -541,6 +541,8 @@ cask "visual-studio-code"
 cask "webpquicklook"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
+# Native desktop client for WhatsApp
+cask "whatsapp"
 # Open-source version of the X.Org X Window System
 cask "xquartz"
 # Multiplayer code editor
@@ -576,6 +578,7 @@ mas "Prodrafts", id: 1545810067
 mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
 mas "WeChat", id: 836500024
+mas "Welly", id: 1521402269
 mas "Windows App", id: 1295203466
 mas "Xnip", id: 1221250572
 vscode "alexeyvax.vscode-open-native-terminal"
