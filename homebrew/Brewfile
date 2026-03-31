@@ -398,6 +398,8 @@ cask "chatwise"
 cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code"
+# OpenAI's coding agent that runs in your terminal
+cask "codex"
 # Server and cloud storage browser
 cask "cyberduck"
 # Universal database tool and SQL client
