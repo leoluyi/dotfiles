@@ -294,6 +294,8 @@ brew "rust"
 brew "sbt"
 # Spreadsheet program for the terminal, using ncurses
 brew "sc-im"
+# Smart session manager for the terminal
+brew "sesh"
 # Shell Script Compiler
 brew "shc"
 # Static analysis and lint tool, for (ba)sh scripts
