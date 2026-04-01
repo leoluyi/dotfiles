@@ -1,2 +1,2 @@
-macos-config-snapshots
-.*\.md
+# Ignore everything except dotfiles (files/dirs starting with .)
+^[^.]
