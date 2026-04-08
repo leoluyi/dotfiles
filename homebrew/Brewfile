@@ -96,10 +96,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -582,16 +582,14 @@ mas "Prodrafts", id: 1545810067
 mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
 mas "WeChat", id: 836500024
+mas "Welly", id: 1521402269
 mas "Windows App", id: 1295203466
 mas "Xnip", id: 1221250572
 vscode "alexeyvax.vscode-open-native-terminal"
-vscode "altimateai.vscode-altimate-mcp-server"
-vscode "bastienboutonnet.vscode-dbt"
+vscode "charliermarsh.ruff"
 vscode "christian-kohler.path-intellisense"
-vscode "davidanson.vscode-markdownlint"
 vscode "doggy8088.quicktype-refresh"
 vscode "donjayamanne.githistory"
-vscode "eamodio.gitlens"
 vscode "editorconfig.editorconfig"
 vscode "fabiospampinato.vscode-open-in-finder"
 vscode "formulahendry.auto-close-tag"
@@ -599,20 +597,16 @@ vscode "formulahendry.code-runner"
 vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "ibm.output-colorizer"
-vscode "innoverio.vscode-dbt-power-user"
 vscode "jinhyuk.replace-curly-quotes"
 vscode "joeberria.statusbarerror"
 vscode "marp-team.marp-vscode"
 vscode "mhutchie.git-graph"
 vscode "mohsen1.prettify-json"
-vscode "ms-azuretools.vscode-containers"
 vscode "ms-azuretools.vscode-docker"
 vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 vscode "ms-python.debugpy"
-vscode "ms-python.isort"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
-vscode "ms-python.vscode-python-envs"
 vscode "ms-toolsai.jupyter"
 vscode "ms-toolsai.jupyter-keymap"
 vscode "ms-toolsai.jupyter-renderers"
@@ -636,10 +630,10 @@ vscode "randomfractalsinc.vscode-data-preview"
 vscode "redhat.java"
 vscode "redhat.vscode-yaml"
 vscode "reditorsupport.r"
-vscode "reditorsupport.r-syntax"
 vscode "rickynormandeau.mariana-pro"
 vscode "ritwickdey.liveserver"
 vscode "samuelcolvin.jinjahtml"
+vscode "saoudrizwan.claude-dev"
 vscode "scala-lang.scala"
 vscode "shd101wyy.markdown-preview-enhanced"
 vscode "tomoki1207.pdf"
