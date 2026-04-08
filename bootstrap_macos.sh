@@ -181,7 +181,7 @@ _sync_dotfiles_stow() {
   for folder in "${home_src_folders[@]}"; do
     echo "$(tput setaf 3)Stow $folder ...$(tput sgr 0)"
     #stow -vt  "$HOME" --ignore='(\.sh)|(\.keep)|(\.DS_Store)' -D "$folder" 2>&1 | grep -v '^BUG'
-    stow --adopt -v --dotfiles -t "$HOME" --ignore='(\.keep)|(\.DS_Store)|(README\.md)|(\.xml)' --override='.' "$folder" \
+    stow --adopt -v --dotfiles -t "$HOME" --override='.' "$folder" \
       2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2) \
       >/dev/null
   done

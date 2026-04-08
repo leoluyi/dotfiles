@@ -1,2 +1,5 @@
-# Ignore everything except dotfiles (files/dirs starting with .)
-^[^.]
+# Ignore non-dotfiles at top level (path regexp: contains / so stow matches full path)
+/[^.][^/]*
+# Common junk
+.*\.DS_Store
+.*\.keep
