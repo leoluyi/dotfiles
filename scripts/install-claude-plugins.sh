@@ -48,7 +48,7 @@ run npx @kamranahmedse/claude-statusline
 mkdir -p ~/.claude/skills
 clone_or_pull() {
   local repo="$1" dest="$2"
-  git clone "$repo" "$dest" 2>/dev/null || git -C "$dest" pull
+  git clone "$repo" "$dest" 2>/dev/null || git -C "$dest" pull --rebase --autostash
 }
 run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing
 run clone_or_pull https://github.com/garrytan/gstack ~/.claude/skills/gstack
