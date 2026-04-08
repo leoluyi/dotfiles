@@ -25,6 +25,7 @@ run claude plugin marketplace add anthropics/knowledge-work-plugins
 run claude plugin marketplace add Yvictor/skills
 # run claude plugin marketplace add shyuan/shyuan-marketplace  # writing-humanizer — removed, redundant with ECC avoid-ai-writing
 run claude plugin marketplace add jarrodwatts/claude-hud
+run claude plugin marketplace add forrestchang/andrej-karpathy-skills
 # run claude plugin marketplace add jeffallan/claude-skills  # fullstack-dev-skills — removed, ~80% redundant with ECC
 # claude-statusline is installed via npx, not as a plugin
 
@@ -37,12 +38,13 @@ run claude plugin install engineering@knowledge-work-plugins
 # registered successfully (see warning above).
 run claude plugin install dev-workflow@yvictor-skills
 run claude plugin install claude-hud@claude-hud
+run claude plugin install andrej-karpathy-skills@karpathy-skills
 # run claude plugin install writing-humanizer@shyuan-marketplace  # removed, redundant with ECC avoid-ai-writing
 # run claude plugin install fullstack-dev-skills@fullstack-dev-skills  # removed, ~80% redundant with ECC
 # Install claude-statusline via npx
 run npx @kamranahmedse/claude-statusline
 
-# Install git-cloned skills
+# Standalone skill repos (not marketplace plugins)
 mkdir -p ~/.claude/skills
 clone_or_pull() {
   local repo="$1" dest="$2"
@@ -52,6 +54,7 @@ run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/sk
 run clone_or_pull https://github.com/garrytan/gstack ~/.claude/skills/gstack
 echo "NOTE: gstack requires Bun v1.0+ (https://bun.sh)"
 (cd ~/.claude/skills/gstack && ./setup)
+run clone_or_pull https://github.com/mattpocock/skills ~/.claude/skills/mattpocock-skills
 
 
 # --- ykdojo/claude-code-tips quick setup (Tip 45) ---
