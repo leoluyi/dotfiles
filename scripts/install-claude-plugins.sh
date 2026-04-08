@@ -48,13 +48,21 @@ run npx @kamranahmedse/claude-statusline
 mkdir -p ~/.claude/skills
 clone_or_pull() {
   local repo="$1" dest="$2"
-  git clone "$repo" "$dest" 2>/dev/null || git -C "$dest" pull --rebase --autostash
+  if git clone "$repo" "$dest" 2>/dev/null; then
+    return
+  fi
+  git -C "$dest" pull --rebase --autostash || {
+    git -C "$dest" rebase --abort 2>/dev/null || true
+    git -C "$dest" merge --abort 2>/dev/null || true
+    git -C "$dest" checkout .
+    git -C "$dest" pull --rebase --autostash
+  }
 }
 run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing
 run clone_or_pull https://github.com/garrytan/gstack ~/.claude/skills/gstack
 echo "NOTE: gstack requires Bun v1.0+ (https://bun.sh)"
 (cd ~/.claude/skills/gstack && ./setup)
-run clone_or_pull https://github.com/mattpocock/skills ~/.claude/skills/mattpocock-skills
+npx skills@latest add mattpocock/skills -g -y --all
 
 
 # --- ykdojo/claude-code-tips quick setup (Tip 45) ---
