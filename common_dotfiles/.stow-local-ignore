@@ -1,3 +1,4 @@
 # Common junk
 .*\.DS_Store
 .*\.keep
+.*\.gitignore
