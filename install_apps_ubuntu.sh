@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# SECURITY NOTE: This script uses `curl|bash` and `wget|bash` patterns to install
+# third-party tools (Homebrew, nvm, pyenv, starship, etc.). These are standard
+# install methods for these projects but rely on HTTPS trust and DNS integrity.
+# Review the scripts before running in sensitive environments.
+
 # Check if has sudo privilege
 if ! sudo -v; then
   echo Aborted! Must have sudo privilege.;
@@ -529,7 +534,7 @@ main() {
   install_fzf_local
   install_git
   install_linuxbrew
-  install_neovim $FORCE
+  install_neovim "$FORCE"
   install_pyenv
   install_ripgrep
   install_tldr

@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# SECURITY NOTE: This script uses `curl|bash` to install Homebrew. This is the
+# standard install method but relies on HTTPS trust and DNS integrity.
+# Review the script before running in sensitive environments.
+
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 _SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 

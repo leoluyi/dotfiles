@@ -22,7 +22,7 @@ print_help() {
   welcome_msg="$welcome_msg the path for destination files\n"
   welcome_msg="$welcome_msg$C_NCYAN  -l\t\t$C_LCYAN Apply symlinks to Espanso dir\n"
   welcome_msg="$welcome_msg$C_NCYAN  -r\t\t$C_LCYAN Removes symlink (original files remain intact)"
-  echo -e $welcome_msg$C_RESET
+  echo -e "$welcome_msg$C_RESET"
   exit 1
 }
 
@@ -41,14 +41,14 @@ set_paths() {
   ESPANSO_SRC_PATH=${ESPANSO_SRC_PATH:=$(pwd)}
 
   # Ensure the Espanso config destination directory exists
-  if [ ! -d $ESPANSO_DEST_PATH ] ; then
+  if [ ! -d "$ESPANSO_DEST_PATH" ] ; then
     echo -e "$C_ERR Cannot fine Espanso destination directory at $C_UNDER$ESPANSO_DEST_PATH$C_RESET"
     echo -e "\033[0;33mYou can manually specify this path using the -d option$C_RESET"
     exit 0
   fi
 
   # And check the source directory exisits
-  if [ ! -d $ESPANSO_SRC_PATH ] ; then
+  if [ ! -d "$ESPANSO_SRC_PATH" ] ; then
     echo -e "$C_ERR Cannot fine Espanso source directory at $C_UNDER$ESPANSO_SRC_PATH$C_RESET"
     echo -e "\033[0;33mYou can manually specify this path using the -s option$C_RESET"
     exit 0
@@ -58,9 +58,9 @@ set_paths() {
 # Checks that path is a symlink, then recurisivley removes it
 remove_link() {
   set_paths
-  if [ -s $ESPANSO_DEST_PATH ] ; then
+  if [ -s "$ESPANSO_DEST_PATH" ] ; then
     echo "will remove $ESPANSO_DEST_PATH"
-    find $ESPANSO_DEST_PATH -not -path "default.yml" -type l -delete
+    find "$ESPANSO_DEST_PATH" -not -path "default.yml" -type l -delete
   fi
 }
 
