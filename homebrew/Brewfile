@@ -96,10 +96,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# Play, record, convert, and stream select audio and video codecs
-brew "ffmpeg"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -396,12 +396,12 @@ cask "bitwarden"
 cask "blackhole-16ch"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
-# AI chatbot for many LLMs
-cask "chatwise"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
-cask "claude-code"
+cask "claude-code@latest"
+# Ghostty-based terminal with vertical tabs and notifications for AI coding agents
+cask "cmux"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
 # Server and cloud storage browser
@@ -539,6 +539,8 @@ cask "transmission"
 cask "typora"
 # Open-source code editor
 cask "visual-studio-code"
+# Terminal emulator
+cask "wave"
 # Quick Look plugin for webp files
 cask "webpquicklook"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
@@ -580,7 +582,6 @@ mas "Prodrafts", id: 1545810067
 mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
 mas "WeChat", id: 836500024
-mas "Welly", id: 1521402269
 mas "Windows App", id: 1295203466
 mas "Xnip", id: 1221250572
 vscode "alexeyvax.vscode-open-native-terminal"
