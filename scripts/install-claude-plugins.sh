@@ -15,6 +15,11 @@ run() {
 
 echo "Installing Claude Code plugins..."
 
+# Remove orphan marketplaces (no enabled plugins, just wasting disk)
+for orphan in claude-code-skills worktrunk shyuan-marketplace fullstack-dev-skills; do
+  claude plugin marketplace remove "$orphan" 2>/dev/null || true
+done
+
 # Add marketplaces
 run claude plugin marketplace add obra/superpowers
 run claude plugin marketplace add affaan-m/everything-claude-code
@@ -59,9 +64,9 @@ clone_or_pull() {
   }
 }
 run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing
-run clone_or_pull https://github.com/garrytan/gstack ~/.claude/skills/gstack
-echo "NOTE: gstack requires Bun v1.0+ (https://bun.sh)"
-(cd ~/.claude/skills/gstack && ./setup)
+# run clone_or_pull https://github.com/garrytan/gstack ~/.claude/skills/gstack  # removed, ~90% redundant with ECC + superpowers (bare skill names clash)
+# echo "NOTE: gstack requires Bun v1.0+ (https://bun.sh)"
+# (cd ~/.claude/skills/gstack && ./setup)
 npx skills@latest add mattpocock/skills -g -y --all
 
 
