@@ -420,6 +420,8 @@ cask "docker-desktop"
 cask "dropbox"
 # Cross-platform Text Expander written in Rust
 cask "espanso"
+# Per-application volume mixer, equalizer, and audio router
+cask "finetune"
 # Virtual workspace manager
 cask "flashspace"
 # Flip clock screensaver
