@@ -54,7 +54,7 @@ clone_or_pull() {
   git -C "$dest" pull --rebase --autostash || {
     git -C "$dest" rebase --abort 2>/dev/null || true
     git -C "$dest" merge --abort 2>/dev/null || true
-    git -C "$dest" checkout .
+    git -C "$dest" reset --hard origin/HEAD
     git -C "$dest" pull --rebase --autostash
   }
 }
