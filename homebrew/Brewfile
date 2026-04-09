@@ -304,6 +304,8 @@ brew "shellcheck"
 brew "skopeo"
 # Source-code syntax highlighter
 brew "source-highlight"
+# Toolkit to help you get started with Spec-Driven Development
+brew "specify"
 # Add a public key to a remote machine's authorized_keys file
 brew "ssh-copy-id"
 # Cross-shell prompt for astronauts
