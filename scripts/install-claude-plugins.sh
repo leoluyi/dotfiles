@@ -68,6 +68,7 @@ run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/sk
 # echo "NOTE: gstack requires Bun v1.0+ (https://bun.sh)"
 # (cd ~/.claude/skills/gstack && ./setup)
 npx skills@latest add mattpocock/skills -g -y --all
+npx skills@latest add leoluyi/skills -g -y
 
 
 # --- ykdojo/claude-code-tips quick setup (Tip 45) ---
