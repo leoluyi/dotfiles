@@ -4,7 +4,3 @@
 # But not these files...
 !.gitignore
 !CLAUDE.md
-!skills/
-skills/*
-!skills/rfp-writing/
-!skills/rfp-writing/SKILL.md
