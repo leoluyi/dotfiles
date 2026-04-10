@@ -1,0 +1,11 @@
+#!/bin/bash
+# Restart espanso after macOS wake to recover from SecureInput / event tap issues
+
+LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/sleepwatcher"
+mkdir -p "$LOG_DIR"
+
+sleep 2
+killall espanso 2>/dev/null
+sleep 1
+open -a Espanso
+echo "$(date): wake hook fired" >> "$LOG_DIR/wakeup.log"

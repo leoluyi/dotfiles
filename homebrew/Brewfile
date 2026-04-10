@@ -302,6 +302,8 @@ brew "shc"
 brew "shellcheck"
 # Work with remote images registries
 brew "skopeo"
+# Monitors sleep, wakeup, and idleness of a Mac
+brew "sleepwatcher", restart_service: :changed
 # Source-code syntax highlighter
 brew "source-highlight"
 # Toolkit to help you get started with Spec-Driven Development
