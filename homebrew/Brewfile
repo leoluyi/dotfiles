@@ -22,6 +22,7 @@ tap "saulpw/vd"
 tap "sdkman/tap"
 tap "slp/krunkit"
 tap "ubuntu/microk8s"
+tap "xykong/tap"
 # Search tool like grep, but optimized for programmers
 brew "ack"
 # All-in-one AI-Powered CLI Chat & Copilot
@@ -412,8 +413,6 @@ cask "codex"
 cask "cyberduck"
 # Universal database tool and SQL client
 cask "dbeaver-community"
-# Network traffic analyser
-cask "debookee"
 # Presentations from Markdown
 cask "deckset"
 # UI to create reproducible developer environments based on a devcontainer.json
@@ -430,6 +429,8 @@ cask "finetune"
 cask "flashspace"
 # Flip clock screensaver
 cask "fliqlo"
+# Beautiful Markdown previews in macOS Finder QuickLook
+cask "xykong/tap/flux-markdown"
 cask "font-hack-nerd-font"
 cask "font-iosevka-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
@@ -476,7 +477,6 @@ cask "mongodb-compass"
 cask "monitorcontrol"
 # Re-mounts write-protected NTFS volumes
 cask "mounty"
-cask "mysides"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Finder Toolbar app to open the current directory in Editor
@@ -497,8 +497,6 @@ cask "qladdict"
 cask "qlmarkdown"
 # Quick Look plugin for plaintext files without an extension
 cask "qlstephen"
-# Quick Look plugin for JSON files
-cask "quicklook-json"
 # Thumbnails, static previews, cover art and metadata for video files
 cask "quicklook-video"
 # Quick Look generator for Adobe Swatch Exchange files
