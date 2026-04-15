@@ -1,0 +1,68 @@
+#!/bin/bash
+# espanso-ensure-running: ensure espanso is healthy on macOS.
+# Called by sleepwatcher wake hook and a periodic launchd watchdog.
+# Exit codes: 0 = running (already or started), 1 = start failed, 2 = espanso binary missing.
+
+set -u
+set -o pipefail
+
+ESPANSO="/opt/homebrew/bin/espanso"
+LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/espanso-watchdog"
+LOG_FILE="$LOG_DIR/watchdog.log"
+LOCKDIR="/tmp/espanso-ensure-running.lock.d"
+
+mkdir -p "$LOG_DIR"
+
+log() {
+  printf '%s [pid %s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$$" "$1" >> "$LOG_FILE"
+}
+
+if ! mkdir "$LOCKDIR" 2>/dev/null; then
+  log "another instance is running (lock held), exiting"
+  exit 0
+fi
+trap 'rmdir "$LOCKDIR" 2>/dev/null' EXIT
+
+if [ ! -x "$ESPANSO" ]; then
+  log "espanso binary not found at $ESPANSO, exiting"
+  exit 2
+fi
+
+if "$ESPANSO" status >/dev/null 2>&1; then
+  log "already running, no action"
+  exit 0
+fi
+
+log "not running, starting"
+pkill -9 -f '/Espanso.app/Contents/MacOS/espanso' 2>/dev/null || true
+sleep 1
+
+try_start() {
+  "$ESPANSO" start >/dev/null 2>&1 &
+  for _ in 1 2 3 4 5; do
+    sleep 1
+    if "$ESPANSO" status >/dev/null 2>&1; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+if try_start; then
+  log "started successfully"
+  exit 0
+fi
+
+# Fallback: launchd service may be de-registered (seen after manual espanso stop
+# or reinstalls) — `espanso start` returns launchctl exit 3. Re-register and retry.
+log "start failed, attempting service register and retry"
+"$ESPANSO" service register >/dev/null 2>&1 || true
+sleep 1
+
+if try_start; then
+  log "started successfully after service register"
+  exit 0
+fi
+
+log "FAILED to start"
+exit 1

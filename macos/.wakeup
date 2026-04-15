@@ -3,9 +3,14 @@
 
 LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/sleepwatcher"
 mkdir -p "$LOG_DIR"
+exec >>"$LOG_DIR/wakeup.log" 2>&1
 
-sleep 2
-killall espanso 2>/dev/null
+echo "$(date '+%Y-%m-%d %H:%M:%S'): wake hook fired"
+
+sleep 3
+pkill -9 -f '/Espanso.app/Contents/MacOS/espanso' 2>/dev/null || true
 sleep 1
-open -a Espanso
-echo "$(date): wake hook fired" >> "$LOG_DIR/wakeup.log"
+
+/Users/leoluyi/.local/bin/espanso-ensure-running
+rc=$?
+echo "$(date '+%Y-%m-%d %H:%M:%S'): delegated to espanso-ensure-running (exit=$rc)"
