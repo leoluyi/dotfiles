@@ -462,8 +462,6 @@ cask "keka"
 cask "keyboardcleantool"
 # Open-source keystroke visualiser
 cask "keycastr"
-# Open-source firewall to block unknown outgoing connections
-cask "lulu"
 # File system integration
 cask "macfuse"
 # Meet, chat, call, and collaborate in just one place
