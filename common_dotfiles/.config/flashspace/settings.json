@@ -41,7 +41,7 @@
   "showMenuBarTitle" : true,
   "showRecentWorkspaceWhenActivatedTwice" : false,
   "showSpaceControl" : "opt+0",
-  "showWorkspaceSwitcher" : "opt+tab",
+  "showWorkspaceSwitcher" : "opt+`",
   "skipEmptyWorkspacesOnSwitch" : true,
   "spaceControlCurrentDisplayWorkspaces" : false,
   "spaceControlHideEmptyWorkspaces" : false,
@@ -63,7 +63,7 @@
   "toggleTheFocusedAppFloating" : "opt+shift+f",
   "workspaceSwitcherCurrentDisplayWorkspaces" : true,
   "workspaceSwitcherShowScreenshots" : true,
-  "workspaceSwitcherSortByLastActivation" : false,
+  "workspaceSwitcherSortByLastActivation" : true,
   "workspaceSwitcherVisibleWorkspaces" : 5,
   "workspaceTransitionDimming" : 0.2,
   "workspaceTransitionDuration" : 0.3
