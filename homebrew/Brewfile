@@ -96,10 +96,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# Play, record, convert, and stream select audio and video codecs
-brew "ffmpeg"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -498,6 +498,8 @@ cask "quicklook-video"
 cask "quicklookase"
 # Control your tools with a few keystrokes
 cask "raycast"
+# 7-Zip derivative GUI
+cask "shichizip"
 # Screenshot measurement and annotation tool
 cask "shottr"
 # React client for Simplenote
@@ -604,6 +606,7 @@ vscode "joeberria.statusbarerror"
 vscode "marp-team.marp-vscode"
 vscode "mhutchie.git-graph"
 vscode "mohsen1.prettify-json"
+vscode "ms-azuretools.vscode-containers"
 vscode "ms-azuretools.vscode-docker"
 vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 vscode "ms-python.debugpy"
@@ -632,6 +635,7 @@ vscode "randomfractalsinc.vscode-data-preview"
 vscode "redhat.java"
 vscode "redhat.vscode-yaml"
 vscode "reditorsupport.r"
+vscode "reditorsupport.r-syntax"
 vscode "rickynormandeau.mariana-pro"
 vscode "ritwickdey.liveserver"
 vscode "samuelcolvin.jinjahtml"
