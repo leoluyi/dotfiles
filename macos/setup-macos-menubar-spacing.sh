@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 # [Can the spacing of menu bar apps be modified in macOS Big Sur and later?](https://apple.stackexchange.com/a/465674/318584)
 # [macOS - Reddit](https://www.reddit.com/r/MacOS/)
 
 defaults -currentHost write -globalDomain NSStatusItemSpacing -int 4
-defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 5
+defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 8
+
+echo "Done. Log out and back in (or restart) for changes to take effect."
 
 # In Terminal/commandline, run:
 #
