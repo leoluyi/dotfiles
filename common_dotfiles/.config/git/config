@@ -1,6 +1,7 @@
 [core]
 	autocrlf = input
 	excludesfile = ~/.config/git/gitignore_global
+	attributesfile = ~/.config/git/gitattributes_global
 	quotepath = false
 	eol = lf
 	editor = vim

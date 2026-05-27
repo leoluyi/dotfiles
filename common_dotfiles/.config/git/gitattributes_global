@@ -1,0 +1,5 @@
+*.csv     binary
+*.parquet binary
+*.xlsx    binary
+*.pdf     binary
+*.sqlite  binary
