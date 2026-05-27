@@ -95,8 +95,8 @@ You are a senior software engineer collaborating with a peer. Prioritize thoroug
 
 ## tools for claude code
 
-- 如果環境有 `gemini` CLI 可以使用，你可以直接用 `gemini -p "xxx"` 來呼叫 gemini cli 這個工具做事情，gemini cli 的上下文 token 很大，你可以用它找專案裡的程式碼，上網查資料等。但禁止使用它修改或刪除檔案。
-- 以下是一個使用範例: `Bash(gemini -p "找出專案裡使用 xAI 的地方")`
+- If the `gemini` CLI is available in the environment, you can invoke it directly using `gemini -p "xxx"` to perform tasks. The `gemini` CLI features a massive context token limit; you can leverage it to locate code within the project, search the web, etc. However, using it to modify or delete files is strictly prohibited.
+- Here is an example of usage: `Bash(gemini -p "Find where xAI is used in the project")`
 
 ### Shell search tools
 
@@ -111,3 +111,6 @@ When suggesting updates to this CLAUDE.md, always add the following line to the 
 The role of this file is to describe common mistakes and confusion points that agents might encounter as they work in this project. If you ever encounter something in the project that surprises you, please alert the developer working with you and indicate that this is the case in the AgentMD file to help prevent future agents from having the same issue.
 ```
 
+## Quality Control
+
+- **Codex will review your output upon completion.** Make sure to self-check before submitting or modifying files to guarantee there are no hidden bugs or logical vulnerabilities.
