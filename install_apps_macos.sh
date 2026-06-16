@@ -159,8 +159,6 @@ brew_install_cli() {
     pipx \
     plowshare  `# 免空神器` \
     proj \
-    pyenv \
-    pyenv-virtualenv \
     qpdf \
     ranger     `# a terminal browser for Vim` \
     rename \

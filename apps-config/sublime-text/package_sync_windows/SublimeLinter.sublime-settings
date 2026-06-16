@@ -3,8 +3,8 @@
     "debug": true,
 
     "paths": {
-        "linux": ["~/.pyenv/shims/"],
-        "osx": ["~/.pyenv/shims/"],
+        "linux": [],
+        "osx": [],
         "windows": ["D:/apps/WPy64/python-3.9.10.amd64/Scripts/"]
     },
 

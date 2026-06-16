@@ -3,8 +3,8 @@
     "debug": true,
 
     "paths": {
-        "linux": ["~/.pyenv/shims/"],
-        "osx": ["~/.pyenv/shims/"],
+        "linux": [],
+        "osx": [],
         "windows": ["C:/Anaconda3/Scripts/"]
     },
 

@@ -210,7 +210,6 @@ function main {
   install_git
   install_linuxbrew
   install_neovim $FORCE
-  install_pyenv
   upgrade_tmux
 
   unset \
@@ -223,7 +222,6 @@ function main {
     install_git \
     install_linuxbrew \
     install_neovim \
-    install_pyenv \
     install_r \
     install_ripgrep \
     install_rstudio \

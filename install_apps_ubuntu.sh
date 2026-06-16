@@ -275,25 +275,6 @@ install_rstudio() {
 }
 
 
-install_pyenv() {
-  echo "$(tput setaf 2)###### Install pyenv ######$(tput sgr 0)"
-
-  local pyenv_path
-  pyenv_path=/pyenv/.pyenv
-
-  command -v $pyenv_path/bin/pyenv >/dev/null && echo "=> (Skip) pyenv has been already installed ($pyenv_path/bin/pyenv)." && return 0
-
-  sudo apt install -qq -y --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-
-  #sudo rm -rf /pyenv
-  #sudo mkdir -p /pyenv
-  #sudo bash -c 'curl -fsSL https://pyenv.run | PYENV_ROOT='$pyenv_path' bash'
-  #sudo chmod -R 777 $pyenv_path >/dev/null 2>&1
-
-  curl -fsSL https://pyenv.run | bash
-}
-
-
 install_diff_so_fancy() {
   echo "$(tput setaf 2)###### Installing diff-so-fancy ######$(tput sgr 0)"
 
@@ -535,7 +516,6 @@ main() {
   install_git
   install_linuxbrew
   install_neovim "$FORCE"
-  install_pyenv
   install_ripgrep
   install_tldr
   install_nvm

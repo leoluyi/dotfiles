@@ -23,10 +23,6 @@ elif command -v src-hilite-lesspipe.sh >/dev/null; then
   export LESS=" -R "
 fi
 
-# Fix pyenv bug from git-core (shims do not work with gettext).
-# https://github.com/pyenv/pyenv/issues/688#issuecomment-316237422
-export GIT_INTERNAL_GETTEXT_TEST_FALLBACKS=1
-
 # pipenv.
 export PIPENV_IGNORE_VIRTUALENVS=1
 

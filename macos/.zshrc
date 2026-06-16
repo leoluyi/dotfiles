@@ -94,7 +94,6 @@ plugins=(
   osx
   pip
   pipenv
-  pyenv
   ripgrep
   virtualenv
 )

@@ -103,7 +103,6 @@ podman
 poppler-qt5
 pv
 pwgen
-pyenv-virtualenv
 qemu
 qpdf
 qt
