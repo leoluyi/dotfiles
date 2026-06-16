@@ -470,6 +470,8 @@ cask "openineditor-lite"
 cask "openinterminal"
 # Finder Toolbar app to open the current directory in Terminal
 cask "openinterminal-lite"
+# Replacement for Docker Desktop
+cask "orbstack"
 # Colour picker for colours onscreen
 cask "pika"
 # Browse, manage, inspect containers and images
