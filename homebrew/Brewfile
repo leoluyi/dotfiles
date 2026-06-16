@@ -1,27 +1,17 @@
-tap "1password/tap"
-tap "anchore/grype"
-tap "arimxyer/tap"
-tap "beeftornado/rmtree"
-tap "carlocab/personal"
-tap "charmbracelet/tap"
-tap "coursier/formulas"
-tap "eddieantonio/eddieantonio"
-tap "felixkratz/formulae"
-tap "flyteorg/tap"
-tap "gromgit/brewtils"
-tap "gromgit/fuse"
-tap "heroku/brew"
-tap "instantclienttap/instantclient"
-tap "jesseduffield/lazygit"
-tap "koekeishiya/formulae"
-tap "microsoft/mssql-release"
-tap "nikitabobko/tap"
-tap "noborus/tap"
-tap "oven-sh/bun"
-tap "saulpw/vd"
-tap "sdkman/tap"
-tap "slp/krunkit"
-tap "ubuntu/microk8s"
+tap "1password/tap", trusted: true
+tap "beeftornado/rmtree", trusted: true
+tap "carlocab/personal", trusted: true
+tap "coursier/formulas", trusted: true
+tap "eddieantonio/eddieantonio", trusted: true
+tap "flyteorg/tap", trusted: true
+tap "gromgit/brewtils", trusted: true
+tap "gromgit/fuse", trusted: true
+tap "instantclienttap/instantclient", trusted: true
+tap "nikitabobko/tap", trusted: true
+tap "oven-sh/bun", trusted: true
+tap "reyamira/tap", trusted: true
+tap "sdkman/tap", trusted: true
+tap "slp/krunkit", trusted: true
 # Search tool like grep, but optimized for programmers
 brew "ack"
 # All-in-one AI-Powered CLI Chat & Copilot
@@ -96,10 +86,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -356,8 +346,6 @@ brew "yt-dlp"
 brew "zenity"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# A fast TUI and CLI for browsing AI models, benchmarks, and coding agents
-brew "arimxyer/tap/models"
 # Extract, view, and test RAR archives
 brew "carlocab/personal/unrar"
 # Launcher for Coursier
@@ -374,6 +362,8 @@ brew "gromgit/fuse/ntfs-3g-mac"
 brew "instantclienttap/instantclient/instantclient-basiclite"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun"
+# A fast TUI and CLI for browsing AI models, benchmarks, and coding agents
+brew "reyamira/tap/models"
 # SDKMAN! the Software Development Kit Manager
 brew "sdkman/tap/sdkman-cli"
 # A CLI tool to start Linux KVM or macOS Hypervisor framework virtual machines using the libkrun platform.
@@ -576,7 +566,6 @@ mas "iMovie", id: 408981434
 mas "iPreview", id: 1519213509
 mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
-mas "Markdown Preview", id: 6739955340
 mas "Movist", id: 461788075
 mas "NordVPN", id: 905953485
 mas "Owlfiles", id: 510282524

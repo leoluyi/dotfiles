@@ -1,0 +1,18 @@
+{
+  "trustedtaps": [
+    "1password/tap",
+    "beeftornado/rmtree",
+    "carlocab/personal",
+    "coursier/formulas",
+    "eddieantonio/eddieantonio",
+    "flyteorg/tap",
+    "gromgit/brewtils",
+    "gromgit/fuse",
+    "instantclienttap/instantclient",
+    "nikitabobko/tap",
+    "oven-sh/bun",
+    "reyamira/tap",
+    "sdkman/tap",
+    "slp/krunkit"
+  ]
+}
