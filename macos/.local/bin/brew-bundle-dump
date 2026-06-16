@@ -1,9 +1,40 @@
 #!/usr/bin/env bash
 # alias: brew bundle-dump
-if [ -d "$HOME"/.dotfiles/homebrew ]; then
-  brew bundle dump --file=$HOME/.dotfiles/homebrew/Brewfile --describe --force $*
-  sed -i '/microsoft-auto-update/d' "$HOME"/.dotfiles/homebrew/Brewfile
-  echo "Brewfile has been updated: '$HOME/.dotfiles/homebrew/Brewfile'"
-else
-  echo "Error: directory '$HOME/.dotfiles/homebrew' does not exist."
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+Usage: ${0##*/} [brew-bundle-options...]
+
+Dump installed Homebrew packages to the dotfiles Brewfile, overwriting it.
+The microsoft-auto-update cask is stripped from the result automatically.
+
+  Brewfile: \$HOME/.dotfiles/homebrew/Brewfile
+
+Options:
+  -h, --help    Show this help and exit
+
+Extra arguments are passed through to \`brew bundle dump\`.
+EOF
+}
+
+case "${1:-}" in
+  -h|--help) usage; exit 0 ;;
+esac
+
+readonly HOMEBREW_DIR="$HOME/.dotfiles/homebrew"
+readonly BREWFILE="$HOMEBREW_DIR/Brewfile"
+
+if [ ! -d "$HOMEBREW_DIR" ]; then
+  echo "Error: directory '$HOMEBREW_DIR' does not exist." >&2
+  exit 1
 fi
+
+brew bundle dump --file="$BREWFILE" --force "$@"
+
+# Drop the microsoft-auto-update cask (managed outside this Brewfile).
+# Use a temp file instead of `sed -i` to stay portable across BSD/GNU sed.
+tmp="$(mktemp)"
+grep -v 'microsoft-auto-update' "$BREWFILE" >"$tmp" && mv "$tmp" "$BREWFILE"
+
+echo "Brewfile has been updated: '$BREWFILE'"

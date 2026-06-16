@@ -6,6 +6,27 @@
 set -u
 set -o pipefail
 
+usage() {
+  cat <<EOF
+Usage: ${0##*/}
+
+Ensure espanso is running and healthy on macOS. Intended to be invoked by the
+sleepwatcher wake hook and a periodic launchd watchdog.
+
+Exit codes:
+  0  running (already or started)
+  1  start failed
+  2  espanso binary missing
+
+Options:
+  -h, --help    Show this help and exit
+EOF
+}
+
+case "${1:-}" in
+  -h|--help) usage; exit 0 ;;
+esac
+
 ESPANSO="/opt/homebrew/bin/espanso"
 LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/espanso-watchdog"
 LOG_FILE="$LOG_DIR/watchdog.log"

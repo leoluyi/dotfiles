@@ -1,10 +1,35 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+Usage: ${0##*/}
+
+Organize markdown notes from the vault inbox into tag-named folders.
+Each note's first \`tags:\` value becomes its destination subfolder.
+
+  Vault:  \$HOME/_notes-vault
+  Source: inbox/
+  Dest:   notes/<tag>/
+
+Options:
+  -h, --help    Show this help and exit
+EOF
+}
+
+case "${1:-}" in
+  -h|--help) usage; exit 0 ;;
+esac
 
 # Directory containing markdown files
 VAULT_DIR="$HOME/_notes-vault"
 SOURCE_DIR="inbox"
 DEST_DIR="notes"
 
+if [ ! -d "$VAULT_DIR/$SOURCE_DIR" ]; then
+  echo "Error: source directory '$VAULT_DIR/$SOURCE_DIR' does not exist." >&2
+  exit 1
+fi
 
 # Iterate through all markdown files in the source directory
 find "$VAULT_DIR/$SOURCE_DIR" -type f -name "*.md" | while read -r file; do

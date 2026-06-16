@@ -1,3 +1,24 @@
 #!/usr/bin/env bash
 # alias: brew bundle-cleanup
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+Usage: ${0##*/} [brew-bundle-options...]
+
+Uninstall Homebrew packages that are not listed in the dotfiles Brewfile.
+
+  Brewfile: \$HOME/.dotfiles/homebrew/Brewfile
+
+Options:
+  -h, --help    Show this help and exit
+
+Extra arguments are passed through to \`brew bundle cleanup\`.
+EOF
+}
+
+case "${1:-}" in
+  -h|--help) usage; exit 0 ;;
+esac
+
 brew bundle cleanup --file="$HOME/.dotfiles/homebrew/Brewfile" --force "$@"
