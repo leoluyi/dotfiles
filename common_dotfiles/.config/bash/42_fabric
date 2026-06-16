@@ -4,33 +4,38 @@
 
 command -v fabric-ai >/dev/null || return 0
 
-alias fabric='fabric-ai'
+# The Homebrew binary is named `fabric-ai`, but fabric uses its own invocation
+# name (argv[0]) as a pattern shortcut: any name other than `fabric` is treated
+# as a pattern to load, so a bare `fabric-ai` fails with "pattern 'fabric-ai'
+# not found". Re-exec under argv[0]=fabric (in a subshell so the interactive
+# shell is not replaced) to restore the upstream-intended behavior.
+fabric() { ( exec -a fabric fabric-ai "$@" ); }
 
 # --- Content consumption ---
 # Usage: pbpaste | wisdom
 # Usage: cat article.txt | wisdom
-alias wisdom='fabric-ai -p extract_wisdom -s'
+alias wisdom='fabric -p extract_wisdom -s'
 
 # Usage: pbpaste | summarize
-alias summarize='fabric-ai -p summarize -s'
+alias summarize='fabric -p summarize -s'
 
 # Usage: pbpaste | paper
-alias paper='fabric-ai -p summarize_paper -s'
+alias paper='fabric -p summarize_paper -s'
 
 # --- Writing assistance ---
 # Usage: pbpaste | improve
-alias improve='fabric-ai -p improve_writing -s'
+alias improve='fabric -p improve_writing -s'
 
 # --- Developer workflow ---
 # Usage: git diff --staged | git-cmsg
-alias git-cmsg='fabric-ai -p create_git_diff_commit -s'
+alias git-cmsg='fabric -p create_git_diff_commit -s'
 
 # Usage: git diff main...HEAD | git-summary
-alias git-summary='fabric-ai -p summarize_git_changes -s'
+alias git-summary='fabric -p summarize_git_changes -s'
 
 # --- Critical thinking / analysis ---
 # Usage: pbpaste | fallacies
-alias fallacies='fabric-ai -p find_logical_fallacies -s'
+alias fallacies='fabric -p find_logical_fallacies -s'
 
 # Usage: pbpaste | ideas
-alias ideas='fabric-ai -p extract_ideas -s'
+alias ideas='fabric -p extract_ideas -s'
