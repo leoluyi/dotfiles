@@ -14,5 +14,8 @@
     "reyamira/tap",
     "sdkman/tap",
     "slp/krunkit"
+  ],
+  "trustedcasks": [
+    "wunderlandmedia/tap/hotkeyclash"
   ]
 }
