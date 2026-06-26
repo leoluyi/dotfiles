@@ -35,6 +35,35 @@ and Dock into dark mode.
 
 ---
 
+## Espanso auto-start: "espanso is already running" popup on reboot
+
+If a **"espanso is already running"** dialog appears on every reboot, espanso is
+being auto-started twice at login:
+
+1. The launchd agent `~/Library/LaunchAgents/com.federicoterzi.espanso.plist`
+   (`RunAtLoad=true`) — the canonical `espanso service register` path that this
+   repo manages and that `setup-espanso-watchdog.sh` relies on. **Keep this one.**
+2. An app Login Item that `Espanso.app` registers for itself ("Open at Login",
+   under System Settings > General > Login Items & Extensions).
+
+Both fire at boot; whichever loses the race finds the live instance and shows the
+popup. The fix is to remove the redundant app Login Item (mechanism 2) and let
+launchd be the single starter:
+
+```bash
+./disable-espanso-app-login-item.sh
+```
+
+The script is idempotent and safe to re-run. Espanso's onboarding re-adds the
+Login Item on a fresh install, so run it again after (re)installing espanso. The
+first run triggers a one-time macOS Automation consent prompt (terminal driving
+System Events) — approve it for the delete to take effect.
+
+The `espanso-watchdog` is unrelated to this popup: it only calls `espanso start`
+when `espanso status` reports it down, so it no-ops when espanso is already up.
+
+---
+
 ## macOS `bash_profile`
 
 Download bash_profile:
