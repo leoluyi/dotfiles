@@ -451,6 +451,8 @@ cask "keka"
 cask "keyboardcleantool"
 # Open-source keystroke visualiser
 cask "keycastr"
+# Create, edit, browse SQLite databases
+cask "letos"
 # File system integration
 cask "macfuse"
 # Meet, chat, call, and collaborate in just one place
@@ -499,8 +501,6 @@ cask "simplenote"
 cask "sizeup"
 # Music streaming service
 cask "spotify"
-# Create, edit, browse SQLite databases
-cask "sqlitestudio"
 # System monitor for the menu bar
 cask "stats"
 # Text editor for code, markup and prose
