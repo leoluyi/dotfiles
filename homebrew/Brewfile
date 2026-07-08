@@ -458,6 +458,8 @@ cask "keycastr"
 cask "letos"
 # File system integration
 cask "macfuse"
+# Screenshot and screen recording tool
+cask "macshot"
 # Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
 # Interactive tool for analyzing MongoDB data
