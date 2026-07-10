@@ -11,7 +11,6 @@ tap "nikitabobko/tap", trusted: true
 tap "oven-sh/bun", trusted: true
 tap "sdkman/tap", trusted: true
 tap "slp/krunkit", trusted: true
-tap "wunderlandmedia/tap"
 # Search tool like grep, but optimized for programmers
 brew "ack"
 # All-in-one AI-Powered CLI Chat & Copilot
@@ -86,10 +85,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -432,8 +431,6 @@ cask "ghostty"
 cask "google-chrome"
 # Menu bar application that displays the CPU speed limit due to thermal issues
 cask "hot"
-# Menu bar app that detects keyboard shortcut conflicts
-cask "wunderlandmedia/tap/hotkeyclash", trusted: true
 # Free and open-source media player
 cask "iina"
 # Markdown editor
@@ -532,8 +529,6 @@ cask "tiles"
 cask "tradingview"
 # Open-source BitTorrent client
 cask "transmission"
-# Configurable document editor that supports Markdown
-cask "typora"
 # Open-source code editor
 cask "visual-studio-code"
 # Terminal emulator
@@ -572,7 +567,6 @@ mas "iMovie", id: 408981434
 mas "iPreview", id: 1519213509
 mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
-mas "Markdown Preview", id: 6739955340
 mas "Movist", id: 461788075
 mas "NordVPN", id: 905953485
 mas "Owlfiles", id: 510282524
