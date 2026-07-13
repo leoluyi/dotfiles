@@ -35,7 +35,7 @@ run claude plugin marketplace add forrestchang/andrej-karpathy-skills
 # claude-statusline is installed via npx, not as a plugin
 
 # Install and enable plugins
-run claude plugin install everything-claude-code@everything-claude-code
+run claude plugin install ecc@everything-claude-code
 run claude plugin install superpowers@superpowers-dev
 # run claude plugin install engineering-advanced-skills@claude-code-skills  # removed, redundant with ECC + superpowers
 run claude plugin install engineering@knowledge-work-plugins
