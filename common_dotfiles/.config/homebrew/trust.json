@@ -13,8 +13,5 @@
     "oven-sh/bun",
     "sdkman/tap",
     "slp/krunkit"
-  ],
-  "trustedcasks": [
-    "wunderlandmedia/tap/hotkeyclash"
   ]
 }
