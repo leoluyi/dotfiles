@@ -102,8 +102,8 @@ You are a senior software engineer collaborating with a peer. Prioritize thoroug
 
 ## tools for claude code
 
-- If the `gemini` CLI is available in the environment, you can invoke it directly using `gemini -p "xxx"` to perform tasks. The `gemini` CLI features a massive context token limit; you can leverage it to locate code within the project, search the web, etc. However, using it to modify or delete files is strictly prohibited.
-- Here is an example of usage: `Bash(gemini -p "Find where xAI is used in the project")`
+- If the Antigravity CLI is available in the environment (binary name `agy`), you can invoke it directly using `agy -p "xxx"` to perform tasks. It features a massive context token limit; you can leverage it to locate code within the project, search the web, etc. However, using it to modify or delete files is strictly prohibited.
+- Here is an example of usage: `Bash(agy -p "Find where xAI is used in the project")`
 
 ### Python tooling
 
