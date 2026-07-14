@@ -21,7 +21,6 @@ for orphan in claude-code-skills worktrunk shyuan-marketplace fullstack-dev-skil
 done
 
 # Add marketplaces
-run claude plugin marketplace add obra/superpowers
 run claude plugin marketplace add affaan-m/everything-claude-code
 # run claude plugin marketplace add alirezarezvani/claude-skills  # engineering-advanced-skills — removed, redundant with ECC + superpowers
 run claude plugin marketplace add anthropics/knowledge-work-plugins
@@ -36,16 +35,19 @@ run claude plugin marketplace add forrestchang/andrej-karpathy-skills
 
 # Install and enable plugins
 run claude plugin install ecc@everything-claude-code
-run claude plugin install superpowers@superpowers-dev
+run claude plugin install superpowers@claude-plugins-official
 # run claude plugin install engineering-advanced-skills@claude-code-skills  # removed, redundant with ECC + superpowers
 run claude plugin install engineering@knowledge-work-plugins
+run claude plugin install claude-hud@claude-hud
+run claude plugin install andrej-karpathy-skills@karpathy-skills
+
 # WARNING: This install may fail if the Yvictor/skills marketplace wasn't
 # registered successfully (see warning above).
 run claude plugin install dev-workflow@yvictor-skills
-run claude plugin install claude-hud@claude-hud
-run claude plugin install andrej-karpathy-skills@karpathy-skills
+
 # run claude plugin install writing-humanizer@shyuan-marketplace  # removed, redundant with ECC avoid-ai-writing
 # run claude plugin install fullstack-dev-skills@fullstack-dev-skills  # removed, ~80% redundant with ECC
+
 # Install claude-statusline via npx
 run npx @kamranahmedse/claude-statusline
 
