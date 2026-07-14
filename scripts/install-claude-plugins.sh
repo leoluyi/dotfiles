@@ -36,6 +36,19 @@ run claude plugin marketplace add forrestchang/andrej-karpathy-skills
 # Install and enable plugins
 run claude plugin install ecc@everything-claude-code
 run claude plugin install superpowers@claude-plugins-official
+# Lean mattpocock/skills: neutralize superpowers' SessionStart auto-fire (the
+# "You have superpowers / 1% rule" bootstrap injection) while keeping its skills
+# available for explicit invocation. Re-applied on every install because the
+# plugin cache is managed and a `claude plugin update` restores the original hook.
+for hj in ~/.claude/plugins/cache/claude-plugins-official/superpowers/*/hooks/hooks.json; do
+  [ -f "$hj" ] || continue
+  if command -v jq >/dev/null 2>&1; then
+    tmp="$(mktemp)" && jq 'del(.hooks.SessionStart)' "$hj" >"$tmp" && mv "$tmp" "$hj"
+  else
+    printf '{\n  "hooks": {}\n}\n' >"$hj"
+  fi
+  echo "+ neutralized superpowers SessionStart hook: $hj"
+done
 # run claude plugin install engineering-advanced-skills@claude-code-skills  # removed, redundant with ECC + superpowers
 run claude plugin install engineering@knowledge-work-plugins
 run claude plugin install claude-hud@claude-hud
@@ -70,7 +83,13 @@ run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/sk
 # echo "NOTE: gstack requires Bun v1.0+ (https://bun.sh)"
 # (cd ~/.claude/skills/gstack && ./setup)
 npx skills@latest add mattpocock/skills -g -y --all
+# mattpocock ships obsidian-vault pinned to their own vault path; drop it so our
+# forked version (in leoluyi/skills) installs cleanly instead of being skipped as
+# a name conflict. Order matters: remove AFTER mattpocock's --all, BEFORE leoluyi.
+npx skills@latest remove obsidian-vault -g -y 2>/dev/null || true
 npx skills@latest add leoluyi/skills -g -y
+# Official Anthropic writing skill: brainstorm -> curate -> draft -> polish, section by section
+npx skills@latest add anthropics/skills -g -y -s doc-coauthoring
 
 
 # --- ykdojo/claude-code-tips quick setup (Tip 45) ---
