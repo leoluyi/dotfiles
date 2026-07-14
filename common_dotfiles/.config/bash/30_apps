@@ -125,7 +125,7 @@ command -v wt >/dev/null \
 
 # Claude Code.
 export CLAUDE_BASH_NO_LOGIN=1
-export ECC_DISABLED_HOOKS="pre:write:doc-file-warning,pre:bash:gateguard-fact-force"
+export ECC_DISABLED_HOOKS="pre:write:doc-file-warning,pre:bash:gateguard-fact-force,pre:edit-write:gateguard-fact-force"
 
 # nnn.
 command -v nnn >/dev/null \
