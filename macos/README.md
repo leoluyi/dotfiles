@@ -51,7 +51,7 @@ popup. The fix is to remove the redundant app Login Item (mechanism 2) and let
 launchd be the single starter:
 
 ```bash
-./disable-espanso-app-login-item.sh
+../scripts/macos/disable-espanso-app-login-item.sh
 ```
 
 The script is idempotent and safe to re-run. Espanso's onboarding re-adds the

@@ -37,10 +37,20 @@ set -- -f; bash bootstrap_macos.sh
 ./install_apps_ubuntu.sh  # Ubuntu
 ```
 
-### macOS system defaults
+### macOS setup scripts
+
+macOS-only setup scripts live under `scripts/macos/` (run from repo root). Cross-platform installers stay at `scripts/` root.
 
 ```bash
-./macos/setup-macos-preferences.sh
+./scripts/macos/setup-macos-preferences.sh        # system defaults (Finder, Dock, etc.)
+./scripts/macos/setup-macos-keyboard-shortcuts.sh # import symbolic hotkeys
+./scripts/macos/setup-macos-menubar-spacing.sh    # menu bar item spacing
+./scripts/macos/setup-macos-bash.sh               # install bash 5.x via Homebrew
+./scripts/macos/setup-quicklook-markdown.sh       # make Markdown Preview the Quick Look .md engine
+./scripts/macos/fix-quicklook.sh                  # clear quarantine on legacy .qlgenerator plugins
+./scripts/macos/setup-espanso-watchdog.sh         # install espanso-watchdog launchd agent
+./scripts/macos/disable-espanso-app-login-item.sh # remove espanso's duplicate login item
+./scripts/macos/setup-OpenInTerminal-Lite-*.sh    # set OpenInTerminal-Lite default terminal
 ```
 
 ### Stow a specific package

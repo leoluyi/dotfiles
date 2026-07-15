@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-SRC=/Users/leoluyi/.dotfiles/macos/com.leoluyi.espanso-watchdog.plist
+SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/com.leoluyi.espanso-watchdog.plist"
 DEST="$HOME/Library/LaunchAgents/com.leoluyi.espanso-watchdog.plist"
 
 mkdir -p "$HOME/Library/LaunchAgents" "$HOME/.local/state/espanso-watchdog"
