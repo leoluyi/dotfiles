@@ -21,6 +21,10 @@ for orphan in claude-code-skills worktrunk shyuan-marketplace fullstack-dev-skil
 done
 
 # Add marketplaces
+# Official Anthropic marketplace — carries superpowers (pinned to an obra/superpowers
+# SHA). Must be registered before `claude plugin install superpowers@claude-plugins-official`,
+# otherwise the install fails with "not found in marketplace".
+run claude plugin marketplace add anthropics/claude-plugins-official
 run claude plugin marketplace add affaan-m/everything-claude-code
 # run claude plugin marketplace add alirezarezvani/claude-skills  # engineering-advanced-skills — removed, redundant with ECC + superpowers
 run claude plugin marketplace add anthropics/knowledge-work-plugins
