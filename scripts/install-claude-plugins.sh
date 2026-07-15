@@ -65,8 +65,13 @@ run claude plugin install dev-workflow@yvictor-skills
 # run claude plugin install writing-humanizer@shyuan-marketplace  # removed, redundant with ECC avoid-ai-writing
 # run claude plugin install fullstack-dev-skills@fullstack-dev-skills  # removed, ~80% redundant with ECC
 
-# Install claude-statusline via npx
-run npx @kamranahmedse/claude-statusline
+# statusline.sh is now vendored in dotfiles (common_dotfiles/.claude/statusline.sh)
+# and stow-symlinked into ~/.claude by bootstrap. It carries a local patch that adds
+# a strategic-compact threshold % (✍️ 9%→37%) on top of the upstream script.
+# `npx @kamranahmedse/claude-statusline` reinstalls the pristine upstream file and
+# would overwrite the patch, so it stays disabled. To resync from upstream, re-run it
+# once, then re-apply the patch and re-vendor common_dotfiles/.claude/statusline.sh.
+# run npx @kamranahmedse/claude-statusline
 
 # Standalone skill repos (not marketplace plugins)
 mkdir -p ~/.claude/skills

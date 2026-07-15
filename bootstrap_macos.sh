@@ -178,6 +178,15 @@ _sync_dotfiles_stow() {
 
   home_src_folders=("common_dotfiles" "$os")
 
+  # statusline.sh is vendored (common_dotfiles/.claude/statusline.sh) and stow-linked.
+  # A prior `npx @kamranahmedse/claude-statusline` (or the upstream default) leaves a
+  # REAL file at ~/.claude/statusline.sh; `stow --adopt` would then absorb it and
+  # clobber the vendored patched copy. Drop any non-symlink so stow links ours instead.
+  # Idempotent: once linked it is a symlink and this is skipped.
+  if [ -e "$HOME/.claude/statusline.sh" ] && [ ! -L "$HOME/.claude/statusline.sh" ]; then
+    rm -f "$HOME/.claude/statusline.sh"
+  fi
+
   for folder in "${home_src_folders[@]}"; do
     echo "$(tput setaf 3)Stow $folder ...$(tput sgr 0)"
     stow -v --dotfiles -t "$HOME" -D "$folder" \
