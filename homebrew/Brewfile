@@ -103,10 +103,6 @@ brew "fortune"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
-# SIMD-accelerated C++ JSON parser
-brew "simdjson"
-# Interact with Google Gemini AI models from the command-line
-brew "gemini-cli"
 # GitHub command-line tool
 brew "gh"
 # Highest-quality GIF encoder based on pngquant
@@ -213,6 +209,8 @@ brew "minikube"
 brew "models"
 # Deep clean and optimize your Mac
 brew "mole"
+# SIMD-accelerated C++ JSON parser
+brew "simdjson"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
 # Collection of tools that nobody wrote when UNIX was young
@@ -377,6 +375,8 @@ cask "nikitabobko/tap/aerospace"
 cask "alacritty"
 # Enable Windows-like alt-tab
 cask "alt-tab"
+# Terminal interface for Antigravity agents
+cask "antigravity-cli"
 # Inspect application bundles
 cask "apparency"
 # Application uninstaller
