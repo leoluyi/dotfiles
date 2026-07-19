@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Claude Code Plugins Installation Script
+# CLI agent (Claude Code, Codex) plugin and skill installation script
 # Generated: 2026-03-10
 
 set -uo pipefail
@@ -34,6 +34,7 @@ run claude plugin marketplace add yvictor/skills
 # run claude plugin marketplace add shyuan/shyuan-marketplace  # writing-humanizer — removed, redundant with ECC avoid-ai-writing
 run claude plugin marketplace add jarrodwatts/claude-hud
 run claude plugin marketplace add forrestchang/andrej-karpathy-skills
+run claude plugin marketplace add JuliusBrussee/caveman
 # run claude plugin marketplace add jeffallan/claude-skills  # fullstack-dev-skills — removed, ~80% redundant with ECC
 # claude-statusline is installed via npx, not as a plugin
 
@@ -58,6 +59,7 @@ done
 run claude plugin install engineering@knowledge-work-plugins
 run claude plugin install claude-hud@claude-hud
 run claude plugin install andrej-karpathy-skills@karpathy-skills
+run claude plugin install caveman@caveman
 
 # WARNING: This install may fail if the Yvictor/skills marketplace wasn't
 # registered successfully (see warning above).
@@ -100,6 +102,8 @@ npx skills@latest remove obsidian-vault -g -y 2>/dev/null || true
 npx skills@latest add leoluyi/skills -g -y
 # Official Anthropic writing skill: brainstorm -> curate -> draft -> polish, section by section
 npx skills@latest add anthropics/skills -g -y -s doc-coauthoring
+# caveman is also installed as a Claude Code plugin above; this line targets Codex CLI
+npx skills@latest add JuliusBrussee/caveman -g -a codex -y
 
 
 # --- ykdojo/claude-code-tips quick setup (Tip 45) ---
