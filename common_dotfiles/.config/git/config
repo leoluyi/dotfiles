@@ -26,6 +26,7 @@
 	process = git-lfs filter-process
 [alias]
 	aa = add --all
+	aaic = "!git add -A && git aic"
 	ac = !"git add -A && git commit -m"
 	aca = "!gaca() { git add -A && git commit --reuse-message=HEAD --amend ;}; gaca"
 	acp = "!gacp() { git add -A && git commit --reuse-message=HEAD --amend && git push -f ;}; gacp"
