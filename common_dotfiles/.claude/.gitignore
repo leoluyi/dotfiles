@@ -5,3 +5,9 @@
 !.gitignore
 !CLAUDE.md
 !statusline.sh
+
+# ...and these vendored subdirectories (whitelist dir, then file)
+!commands/
+!commands/decide.md
+!output-styles/
+!output-styles/decide.md
