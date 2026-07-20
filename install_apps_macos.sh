@@ -214,7 +214,7 @@ install_claude_plugins() {
     echo "(Skip) claude CLI not found."
     return
   fi
-  bash "${_SCRIPT_DIR}/scripts/install-cli-agent-extensions.sh"
+  bash "${_SCRIPT_DIR}/scripts/install-ai-agent-extensions.sh"
 }
 
 

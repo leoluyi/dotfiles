@@ -90,7 +90,7 @@ clone_or_pull() {
     git -C "$dest" pull --rebase --autostash
   }
 }
-run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing
+# run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing  # removed
 # run clone_or_pull https://github.com/garrytan/gstack ~/.claude/skills/gstack  # removed, ~90% redundant with ECC + superpowers (bare skill names clash)
 # echo "NOTE: gstack requires Bun v1.0+ (https://bun.sh)"
 # (cd ~/.claude/skills/gstack && ./setup)
