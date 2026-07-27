@@ -2,7 +2,11 @@
 
 追蹤一個間歇性故障：AeroSpace 全域快捷鍵整組沒反應，重啟 AeroSpace 後恢復。
 
-狀態：**等待故障重現以取得證據**（2026-07-27 起）
+狀態：**等待故障重現以取得證據**（2026-07-27 起）。
+升級到 `0.21.3-Beta` 後尚未重現。2026-07-27 18:38 有一次採證，但屬誤報（見下方採證紀錄）。
+
+**採證前先確認症狀**：快捷鍵真的沒反應（按 `alt-z` 測），才是本案。
+視窗排版怪、視窗併不起來，是另一回事，多半是 floating 狀態。
 
 ## 症狀
 
@@ -20,7 +24,20 @@
 | `macos-titlebar-style = hidden` 影響追蹤 | 症狀是按鍵失效，與視窗幾何無關 |
 | TCC Accessibility 授權在升級後失效 | 授權正常，`list-windows` 一直有回應 |
 | config 誤綁 `aerospace enable off` | config 內無任何 `enable` 綁定 |
-| floating 視窗沒被列出 = 追蹤壞掉 | 誤判。floating 視窗本來就不出現在 `list-windows`，`list-apps` 顯示所有 app 都有被認到 |
+| floating 視窗沒被列出 = 追蹤壞掉 | 誤判，但當初的排除理由也是錯的。詳見下方「floating 視窗的正確行為」 |
+
+## floating 視窗的正確行為
+
+先前這份文件寫「floating 視窗本來就不出現在 `list-windows`」——**這是錯的**。
+floating 視窗會照常列出，`%{window-layout}` 欄位顯示 `floating`：
+
+```sh
+aerospace list-windows --all --format '%{window-id} | %{window-layout} | %{app-name} | %{window-title}'
+```
+
+`window-layout` 的實際取值包含 `floating`、`h_accordion`、`h_tiles`、
+`macos_native_window_of_hidden_app`（app 被 cmd-h 隱藏）。
+判斷一個視窗在不在 tiling tree 裡，要看這個欄位，不能看它有沒有被列出來。
 
 ## 待驗證的假設
 
@@ -52,6 +69,45 @@ fork bash 並對 server 發兩次 CLI request。連按時有堆積可能。目�
 
 `aerodiag` 會用 `aerospace enable on --fail-if-noop` 當場測試並修復。
 若報告顯示 "WAS DISABLED"，即為此因。
+
+## 採證紀錄
+
+### 2026-07-27 18:38 — 誤報，非本案
+
+報告：`~/.local/state/aerodiag/20260727-183815.txt`
+
+當下回報的症狀是「兩個 Ghostty 視窗認不得彼此、無法併成同一組」，不是快捷鍵失效。
+`alt-z` 當場正常，四個假設全部落空：
+
+| 假設 | 報告數值 |
+|---|---|
+| 1 Secure Input | `STATUS: OFF` |
+| 2 sleep/wake | 16:29 啟動，17:22 / 17:27 / 17:33 三次睡醒 |
+| 3 server 卡死 | `responsive` |
+| 4 management 被關 | `already enabled (normal)` |
+
+順帶排除輸入法佈局因素：`KeyboardLayout Name = ABC`。
+
+真正原因是視窗 30412 處於 `floating`、32588 處於 `h_accordion`。floating 視窗不在
+tiling tree 內，`join-with` 與 `move` 都併不進去，看起來就像兩個獨立的 manage group。
+在各自視窗開的新視窗會走 `on-window-detected` 拿到 `layout tiling`，因此能與同組併起來。
+
+修復（不需重啟 AeroSpace）：
+
+```sh
+aerospace layout tiling --window-id <window-id>
+```
+
+視窗如何變成 floating 未確認，兩個候選：
+
+1. 誤按 `alt-f`（`aerospace.toml` 綁 `layout floating tiling`，純 toggle、無視覺回饋、
+   位置緊鄰 `alt-h/j/k/l`）。
+2. AeroSpace 16:29 重啟時 `on-window-detected` 的 race：catch-all 的 `layout floating`
+   先跑，Ghostty 專屬的 `layout tiling` 後跑，若後者未生效即停在 floating。
+
+無法從事後狀態區分這兩者。下次遇到，先記下是否剛重啟過 AeroSpace。
+
+**原本的 hotkey 故障至今未在 0.21.3-Beta 上重現。**
 
 ## 故障時怎麼做
 
