@@ -8,6 +8,6 @@
 
 # ...and these vendored subdirectories (whitelist dir, then file)
 !commands/
-!commands/decide.md
+!commands/options.md
 !output-styles/
-!output-styles/decide.md
+!output-styles/options.md
