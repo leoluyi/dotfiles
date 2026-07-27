@@ -127,5 +127,5 @@ Hand this report to Claude Code from ~/.dotfiles -- it picks up the
 investigation context automatically:
 
   cd ~/.dotfiles && claude
-  > aerospace hotkeys died again, here is the aerodiag report: <paste $REPORT>
+  > aerospace window management issue shows again, here is the aerodiag report: <paste $REPORT>
 EOF
