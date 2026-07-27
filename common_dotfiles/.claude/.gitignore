@@ -8,6 +8,7 @@
 
 # ...and these vendored subdirectories (whitelist dir, then file)
 !commands/
+!commands/autopilot.md
 !commands/options.md
 !output-styles/
 !output-styles/options.md
