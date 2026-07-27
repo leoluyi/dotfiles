@@ -82,6 +82,7 @@
 	undo = "!f() { if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo \"[undo] skip: not a git repository\"; exit 0; fi; echo \"[undo] Undo Last Commit: git reset HEAD~\"; git reset HEAD~; }; f"
 	unskip = update-index --no-skip-worktree
 	unstage = reset HEAD --
+	up = "!f() { git pull --rebase --prune \"$@\" && git submodule update --init --recursive ;}; f"
 	wip = !"git add -A; git commit -m \"WIP: $(date)\""
 [color]
 	ui = true
