@@ -63,7 +63,11 @@ collect() {
 
   section 'AeroSpace server responsiveness (5s timeout)'
   local out
-  out=$(run_timeout 5 aerospace list-windows --all 2>&1)
+  # window-layout is the deciding evidence for the floating-window failure mode:
+  # a floating window IS listed, it just sits outside the tiling tree. Without
+  # this field the report looks identical to a healthy one. See the doc.
+  out=$(run_timeout 5 aerospace list-windows --all \
+    --format '%{window-id} | %{workspace} | %{window-layout} | %{app-name} | %{window-title}' 2>&1)
   if [ $? -eq 124 ]; then
     printf 'STALLED: list-windows did not return within 5s\n'
   else

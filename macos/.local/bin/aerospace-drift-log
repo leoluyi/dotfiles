@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+#
+# aerospace-drift-log - sample tiling-app windows and record floating drift.
+#
+# Answers one question the after-the-fact aerodiag report cannot: when a
+# terminal window ends up `floating`, was it born that way (on-window-detected
+# callback lost the race) or did it start tiled and change later (something is
+# resetting it post-detection)? Those two answers need different fixes.
+#
+# Runs from launchd every 60s. Writes only on state CHANGE, so a quiet log
+# means nothing drifted -- see docs/aerospace-hotkey-debug.md.
+
+set -uo pipefail
+
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/aerospace-drift"
+SEEN="$STATE_DIR/seen.tsv"
+LOG="$STATE_DIR/drift.log"
+mkdir -p "$STATE_DIR"
+touch "$SEEN"
+
+# Apps the config puts under tiling. A floating window here is the anomaly;
+# for every other app floating is the configured default and not interesting.
+TILING_APPS='com.mitchellh.ghostty|org.alacritty|com.github.wez.wezterm'
+
+NOW=$(date +%s)
+STAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
+note() { printf '%s\t%s\n' "$STAMP" "$1" >>"$LOG"; }
+
+if ! pgrep -x AeroSpace >/dev/null 2>&1; then
+  # Recorded so a gap in the log is never mistaken for "nothing drifted".
+  note $'AEROSPACE_DOWN\t-\t-'
+  exit 0
+fi
+
+# Built with an explicit tab variable: AeroSpace takes the separator literally
+# and does not expand a backslash-t escape.
+tab=$'\t'
+windows=$(aerospace list-windows --all \
+  --format "%{window-id}${tab}%{app-bundle-id}${tab}%{window-layout}${tab}%{app-name}" 2>/dev/null)
+if [ -z "$windows" ]; then
+  note $'QUERY_FAILED\t-\t-'
+  exit 0
+fi
+
+# Carry forward only the windows still alive, so the state file cannot grow
+# without bound and a recycled window-id starts clean.
+next_seen=""
+
+while IFS=$'\t' read -r wid bundle layout app; do
+  [ -n "$wid" ] || continue
+  printf '%s' "$bundle" | grep -Eq "^($TILING_APPS)$" || continue
+
+  # An app hidden with cmd-H reports macos_native_window_of_hidden_app, which
+  # masks the real layout. That is a missing observation, not a state -- keep
+  # the previous record untouched rather than recording a false transition.
+  case "$layout" in
+    floating) state=floating ;;
+    macos_native_window_of_hidden_app) state=unobservable ;;
+    *) state=tiled ;;
+  esac
+
+  prev=$(awk -F'\t' -v w="$wid" '$1 == w { print; exit }' "$SEEN")
+
+  if [ -z "$prev" ]; then
+    if [ "$state" = unobservable ]; then
+      continue  # nothing learned yet; record on a later sample
+    fi
+    next_seen+="$wid"$'\t'"$NOW"$'\t'"$state"$'\t'"$state"$'\n'
+    [ "$state" = floating ] && note "BORN_FLOATING"$'\t'"$wid"$'\t'"$app"
+    continue
+  fi
+
+  first_seen=$(printf '%s' "$prev" | cut -f2)
+  first_state=$(printf '%s' "$prev" | cut -f3)
+  last_state=$(printf '%s' "$prev" | cut -f4)
+
+  if [ "$state" = unobservable ]; then
+    next_seen+="$prev"$'\n'
+    continue
+  fi
+
+  if [ "$state" != "$last_state" ]; then
+    age=$((NOW - first_seen))
+    if [ "$state" = floating ]; then
+      note "DRIFTED_TO_FLOATING"$'\t'"$wid"$'\t'"$app (age ${age}s, first seen as $first_state)"
+    else
+      note "RECOVERED_TO_TILED"$'\t'"$wid"$'\t'"$app (age ${age}s)"
+    fi
+  fi
+
+  next_seen+="$wid"$'\t'"$first_seen"$'\t'"$first_state"$'\t'"$state"$'\n'
+done <<<"$windows"
+
+printf '%s' "$next_seen" >"$SEEN"

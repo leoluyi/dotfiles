@@ -1,6 +1,16 @@
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
+# The only breaking change from config-version 1 is that `persistent-workspaces`
+# no longer defaults to the workspaces inferred from the right hand side of key
+# bindings -- it now falls back to an empty array. This config declares no
+# workspace bindings at all (spaces are managed by FlashSpace, AeroSpace only
+# tiles within one space), so the inferred value was already empty and the
+# migration is behaviour-preserving. Do NOT add `persistent-workspaces` here to
+# "be explicit": that would create persistent workspaces that did not exist before.
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+config-version = 2
+
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
@@ -67,11 +77,22 @@ outer.top = 6
 outer.right = 6
 
 
-# Float all windows by default; WezTerm and Alacritty use tiling layout.
-[[on-window-detected]]
-check-further-callbacks = true
-run = ['layout floating']
-
+# Float all windows by default; the terminals below use tiling layout.
+#
+# Order matters. Callbacks are processed top-down and the first matching block
+# wins unless it sets check-further-callbacks. So the specific tiling rules must
+# come FIRST and the catch-all float rule LAST.
+#
+# The inverse ordering (catch-all float with check-further-callbacks = true,
+# then per-app tiling overrides) is upstream's own documented example, but it
+# makes every terminal window depend on TWO callbacks both firing: float, then
+# rescue back to tiling. If the second one does not take effect the window is
+# left floating and drops out of the tiling tree. That is the failure mode
+# tracked in docs/aerospace-hotkey-debug.md -- both captured incidents were
+# Ghostty windows stuck in `floating`.
+#
+# With this ordering each window is handled by exactly one callback, so there is
+# no second step left to fail. End behaviour is identical.
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
 run = ['layout tiling']
@@ -83,6 +104,13 @@ run = ['layout tiling']
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = ['layout tiling']
+
+# Catch-all, must stay last. `if = 'true'` is required: omitting `if` entirely is
+# rejected as error-prone, since it reads like a rule that was meant to be
+# narrowed and silently swallows every window instead.
+[[on-window-detected]]
+if = 'true'
+run = ['layout floating']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
