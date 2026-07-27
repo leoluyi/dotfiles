@@ -3,7 +3,7 @@ description: Run the whole plan to completion autonomously, then commit, push an
 argument-hint: [what to build, or blank to continue current plan]
 model: sonnet
 effort: high
-allowed-tools: Read, Edit, Write, Glob, Grep, Agent, TodoWrite, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(git switch:*), Bash(git checkout:*), Bash(git branch:*), Bash(git push:*), Bash(gh pr create:*), Bash(gh pr view:*)
+allowed-tools: Read, Edit, Write, Glob, Grep, Agent, TodoWrite, EnterWorktree, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(git switch:*), Bash(git checkout:*), Bash(git branch:*), Bash(git push:*), Bash(gh pr create:*), Bash(gh pr view:*)
 ---
 
 This is **autonomous mode**. Run to completion. Do not come back to me between
@@ -30,25 +30,140 @@ placeholder comments, no partial work reported as finished, no emojis, no
 hardcoded secrets, immutable patterns, files under 800 lines, comprehensive
 error handling.
 
+## Delegation model
+
+You are the **orchestrator**, not the implementer. Default to spawning a
+subagent; doing it inline is the exception you justify to yourself, not the
+other way round. A long autonomous run dies of context exhaustion, and every
+file a subagent reads is a file you did not have to hold.
+
+Delegate by default:
+
+- **Recon.** Anything that means sweeping the codebase to find where something
+  lives, how a pattern is used, or what already exists. Ask for the conclusion,
+  not the file dumps.
+- **Implementation of a scoped task.** One todo item with a clear boundary is
+  one subagent.
+- **Fixing a broken build, test or type error.** See *Self-repair*.
+- **Irreversible decisions.** See *Escalation*.
+- **Review before shipping.** See *Verification gate*.
+
+Keep in the main loop, always:
+
+- Task breakdown and TodoWrite. The list is yours; subagents do not own it.
+- Small or cross-cutting edits — a rename across five files, a signature change
+  that ripples, wiring two subagents' output together. Briefing an agent on
+  these costs more than doing them.
+- Integration and coherence. After each subagent returns, read the actual diff
+  it produced. A subagent's report is a claim, not evidence.
+- Running the verification gate.
+- Every git and `gh` operation. Subagents never commit, never push, never open a
+  PR. Say so in their briefs.
+
+**Parallelism:** before dispatching, write down the file scope of each pending
+todo. Todos whose scopes are disjoint go out as multiple `Agent` calls in a
+single message so they run concurrently. Todos whose scopes overlap run one at a
+time — you fan out on independence, not on impatience. If you cannot state a
+todo's file scope, it is not decomposed enough to delegate yet.
+
+**Agent types and models:** pick from the agent types this session actually
+lists; do not invent names. Read-only sweeps go to a search agent (`Explore` if
+present), implementation to `general-purpose` or a language-specific agent when
+one exists. Leave `model` unset for implementation work so it inherits this
+run's mid-tier model. Set `model: "opus"` only for decision and review agents.
+Pass `run_in_background: false` when you need the result before you can continue,
+which is nearly always.
+
 ## Sequence
 
 1. **Scope it.** If $ARGUMENTS is non-empty, that is the job. If it is empty,
    the job is the plan already established in this conversation — continue it
    from wherever it stands.
-2. **Plan it.** Write the full task breakdown to TodoWrite before touching code,
-   with real granularity. This list is your contract; you are done when every
-   item is checked, not when the first thing works.
-3. **Branch.** Never work on the default branch. If you are on it, create a
-   descriptive branch first.
-4. **Build it.** Work the list top to bottom. Fix what breaks. Keep going.
-5. **Verify.** See *Verification gate*.
-6. **Ship.** Commit, push, open a ready PR.
+2. **Recon.** Spawn a search agent to map the code the job touches: which files,
+   which existing patterns and conventions, what already solves part of this.
+   Skip only when the job is a file you are already holding.
+3. **Plan it.** Write the full task breakdown to TodoWrite before touching code,
+   with real granularity, each item carrying its file scope. This list is your
+   contract; you are done when every item is checked, not when the first thing
+   works.
+4. **Isolate.** Never work on the default branch. Create a descriptive branch —
+   or a worktree, see *Isolation* below. This is the last moment the tree is
+   clean, so decide here and not later.
+5. **Build it.** Work the list top to bottom, dispatching per the delegation
+   model. Read each returned diff before marking the item done. Fix what breaks.
+   Keep going.
+6. **Review and verify.** See *Verification gate*.
+7. **Ship.** Commit, push, open a ready PR.
+
+## Isolation: branch by default, worktree for a big job
+
+A branch on the current tree is the default and covers most runs. A worktree is
+for the case where this run is going to occupy the repository for a long time
+and you should not be holding my working tree hostage while it does.
+
+Use `EnterWorktree` only when **all** of these hold — this command is the
+explicit instruction that authorises the tool, but the preconditions are not
+negotiable:
+
+- The working tree is clean. `EnterWorktree` does not carry uncommitted changes
+  across; anything dirty stays behind in the original directory, stranded and
+  invisible to the rest of this run.
+- $ARGUMENTS is non-empty. An empty invocation means "continue the plan already
+  under way in this conversation", which usually implies edits in flight — see
+  the previous point.
+- The job does not depend on unpushed local commits. The default base ref is
+  `fresh`, which branches from `origin/<default-branch>`, so local-only history
+  will not be there.
+- The plan from step 3 is genuinely large: many files, more than one subsystem,
+  or long enough that you would not want it interleaved with whatever else I am
+  doing in this repo. A handful of files in one directory is a branch, not a
+  worktree.
+
+If any of those fails, branch in place and move on. Do not try to make the
+conditions true — do not stash, do not commit unrelated work to clear the tree,
+do not push local commits so the base ref will see them.
+
+Once inside, everything else is unchanged: same sequence, same gate, same
+shipping. Do not call `ExitWorktree` yourself — the work lives there and I
+decide what happens to it. Put the worktree path in the final report.
+
+Subagent-level isolation is a different mechanism, and `isolation: "worktree"`
+on an `Agent` call is **forbidden here**. Not because of its cost — because a
+worktree branches from the remote default and therefore cannot see the edits you
+have made and not yet committed. Under this delegation model you keep the small
+and cross-cutting changes in the main loop, so an isolated agent would be
+writing against stale signatures, stale helpers and stale conventions, and you
+would not find out until you merged it back. On top of that it solves a problem
+you do not have: the parallelism rule already guarantees concurrent agents write
+to disjoint files. Let them work in the tree you are actually in.
+
+## Briefing subagents
+
+A subagent inherits none of this conversation. It cannot see the plan, the
+decisions already made, or what the previous agent just did. An underspecified
+brief is the main way delegation produces worse code than doing it inline, so
+every implementation brief carries:
+
+- the goal, stated as the outcome, not as "continue the work"
+- the exact files to change, and the files to read first for context
+- the conventions already established in this codebase that it must match,
+  including any decision the escalation agent already settled
+- the constraints from CLAUDE.md that bite here — immutability, error handling,
+  no placeholder comments, file size
+- how to check its own work, and the instruction to run that check
+- an explicit **do not**: no commits, no pushes, no branch changes, no work
+  outside the stated file scope, no widening the task
+
+Require it to return: what it changed file by file, what it verified and the
+actual result, what it chose not to do, and anything it found that contradicts
+the brief. If it returns a contradiction, that is signal — resolve it before
+dispatching the next agent, and escalate it if it is an irreversible call.
 
 ## Escalation: high-tier model for decisions, mid-tier for the work
 
 This command pins the main loop to a mid-tier model at high reasoning effort,
-deliberately. Implementation runs here, and it runs with room to think — so
-"this is hard" is not by itself a reason to escalate. Judgement calls are.
+deliberately. Implementation runs at that tier — so "this is hard" is not by
+itself a reason to escalate. Judgement calls are.
 
 When you hit a decision that is expensive to reverse — architecture, data model,
 public interface shape, library selection, migration strategy, scope cuts, or
@@ -66,33 +181,53 @@ codebases — do not pick it yourself and do not ask me. Spawn a decision agent:
 
 Wait for it, take its decision as settled, and implement it. Do not re-litigate
 it, do not blend it with your own preference, do not escalate the same question
-twice. Record the decision and its rationale for the final summary.
+twice. Carry the decision into the brief of every implementation agent it
+affects, and record it and its rationale for the final summary.
 
 Do **not** escalate reversible or mechanical choices — naming, file placement,
-which helper to extract, formatting, obvious bug fixes. Those are yours. A run
-that escalates everything is as broken as one that escalates nothing.
+which helper to extract, formatting, obvious bug fixes. Those are yours, or the
+implementation agent's. A run that escalates everything is as broken as one that
+escalates nothing.
 
 ## Self-repair, bounded
 
-When something breaks, fix it yourself. Read the actual error, form a hypothesis,
-change one thing, re-run.
+When something breaks, fix it. Read the actual error, form a hypothesis, change
+one thing, re-run. A build, type or test failure with a legible error is good
+subagent work — hand it the error text, the failing command and the files
+involved, and let it burn its context on the trace instead of yours.
 
 The bound is **three attempts per distinct blocker**, and each attempt must rest
-on a *different* hypothesis. Re-running the same fix with cosmetic variation
-does not count as an attempt, it counts as a loop — cut it immediately. If the
-third hypothesis fails, that blocker is a hard stop.
+on a *different* hypothesis. The count is per blocker, not per agent: a subagent
+that came back having tried two hypotheses leaves you one, and its brief must
+ask it to report the hypotheses it tried so you can count them. Re-running the
+same fix with cosmetic variation does not count as an attempt, it counts as a
+loop — cut it immediately. A subagent that dies or returns nothing spends one
+attempt. If the third hypothesis fails, that blocker is a hard stop.
 
 Never route around a blocker by weakening the thing that caught it. Do not
 delete or skip a failing test, loosen a type, widen an exception handler, or
-comment out the assertion. If the test is genuinely wrong, fix the test and say
-so explicitly in the summary.
+comment out the assertion — and forbid it in the brief, because an agent under
+pressure to return green will do exactly this. If the test is genuinely wrong,
+fix the test and say so explicitly in the summary.
 
 ## Verification gate
 
-Before you may commit, the repo's own checks must be green. Discover them rather
-than assuming — look at `package.json` scripts, `Makefile`, `justfile`,
-`pyproject.toml`, CI workflow files — and run whatever the project actually
-defines for build, test, lint and typecheck.
+Before you may commit, two things must pass.
+
+**Review.** Dispatch review agents in parallel over the full diff — at minimum
+correctness, plus a security pass whenever the change touches input handling,
+auth, credentials, network calls or persisted data. Use `model: "opus"` for
+these; a reviewer that misses the bug is worse than no reviewer. Fix what they
+find that is real, within the three-attempt bound. You are allowed to reject a
+finding, but say which and why in the final report.
+
+**Checks.** The repo's own checks must be green, and **you run them yourself in
+the main loop.** Discover them rather than assuming — look at `package.json`
+scripts, `Makefile`, `justfile`, `pyproject.toml`, CI workflow files — and run
+whatever the project actually defines for build, test, lint and typecheck. A
+subagent may fix a failure, but its report that the failure is fixed is not the
+gate. You must see the green output yourself, because a hard stop you cannot
+audit is not a hard stop.
 
 Red light means you may not commit. Fix it within the three-attempt bound, or
 hard stop. Do not commit with a caveat, do not commit "so the work isn't lost",
@@ -128,17 +263,21 @@ found and what you need. Do not push, do not open a PR.
 3. **The task requires a destructive or irreversible operation** — force-push,
    deleting a branch or history rewrite, altering a migration that has already
    run against real data, `rm -rf`, touching production configuration or
-   credentials, anything that reaches outside this repo.
+   credentials, anything that reaches outside this repo. This binds your
+   subagents too: brief them to return the request rather than perform it.
 4. **You find a security problem or leaked secret** — hardcoded credentials, an
    auth bypass, an injection hole. Stop and report it. Do not quietly fix it and
    fold it into the PR; a silent security fix is a security fix nobody reviewed.
 
 Anything not on this list — ambiguity, unexpected complexity, a design you
-dislike, a missing dependency, a flaky test, an unclear requirement — you handle
-yourself and report at the end.
+dislike, a missing dependency, a flaky test, an unclear requirement, a subagent
+that comes back empty — you handle yourself and report at the end.
 
 ## Final report
 
 One summary at the end covering: what shipped, the PR link, the decisions the
-high-tier model made, the assumptions you made unilaterally, the verification
-results, and anything you deliberately left out of scope.
+high-tier model made, the assumptions you made unilaterally, the review findings
+and which you rejected, the verification results, and anything you deliberately
+left out of scope, and the worktree path if you used one. Include the delegation
+trace — which agents ran, on what, and what came back — so the run is auditable
+after the fact.
