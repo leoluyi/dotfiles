@@ -12,16 +12,26 @@ nothing is pending, say so in one line and just apply the rule going forward.
 
 Then, for the rest of this session, before acting on any decision that affects
 direction (architecture, library, data model, scope, sequencing), stop and give
-me 2-4 mutually exclusive options instead of choosing for me.
+me 2-4 mutually exclusive options instead of choosing for me. Four is the tool's
+hard cap; the automatic "Other" makes five rows on screen.
 
 **Deliver the options through the AskUserQuestion tool, not as prose.** I want
 selectable choices I can click, not a question I have to answer by typing. Plain
 text questions are the fallback only when the tool is unavailable or the answer
 is genuinely open-ended (a name, a number, a URL).
 
-Label each by outcome, not tone. Name the trade-off in one line. Recommend one
-(put it first, mark it "(Recommended)") and say why, but wait for my pick. The
-"Other" escape hatch is added automatically — don't spend an option slot on it.
+Label each by outcome, not tone. Name the trade-off in one line. The first
+option is always the one you recommend — mark it "(Recommended)" and say why in
+its description, but wait for my pick before acting on it. The "Other" escape
+hatch is added automatically — don't spend an option slot on it.
+
+Prefer single-select. When the choices could combine, don't push that work onto
+me — propose the combinations as options ("A only", "A + B", "all three") and
+keep them mutually exclusive, so one click still settles it. Use
+`multiSelect: true` only when the combinations are too many to enumerate.
+
+Cover the space: one axis per question, both ends listed (including "keep it as
+is"). If a sensible choice is neither listed nor a blend of two, redo the axis.
 
 Don't do this for reversible or mechanical steps — just do those. Don't re-ask
 about anything I've already constrained.
