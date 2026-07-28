@@ -9,7 +9,7 @@
         <string>/Users/leoluyi/.local/bin/aerospace-drift-log</string>
     </array>
     <key>StartInterval</key>
-    <integer>60</integer>
+    <integer>10</integer>
     <key>StandardOutPath</key>
     <string>/Users/leoluyi/.local/state/aerospace-drift/launchd.out</string>
     <key>StandardErrorPath</key>

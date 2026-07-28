@@ -4,7 +4,12 @@
 
 狀態：**等待故障重現以取得證據**（2026-07-27 起）。
 升級後尚未重現。目前實際執行版本為 `0.21.2-Beta`（CLI 與 app 一致）。
-已有兩次採證（07-27 18:38、07-28 00:04），皆屬誤報，真正原因都是 floating 視窗。
+已有三次採證（07-27 18:38、07-28 00:04、07-28 07:27），皆屬誤報，真正原因都是 floating 視窗。
+
+**floating 漂移已升格為獨立的主線問題**，而且它不是本文件原本追的 hotkey 案。
+目前確定的是：視窗**先 tiled、後來才變 floating**（漂移記錄器 31:0 壓倒性），
+而三個現成的解釋（出生時的 callback race、FlashSpace 的 hide/show、sleep/wake）
+都已被實測排除。詳見「2026-07-28 21:30 — 全面複查」。
 
 **先分流症狀**：目前兩次採證都不是本案，先排掉常見的那個再說。
 
@@ -175,6 +180,78 @@ error-prone 而拒絕載入設定。
 要分辨「一出生就是 floating」與「本來好好的後來變了」，已加上 `aerospace-drift-log`，
 見下方。這兩個答案指向完全不同的修法。
 
+### 2026-07-28 07:27 — 第三次採證，同樣是 floating
+
+報告：`~/.local/state/aerodiag/20260728-072701.txt`
+
+四個假設第四度全部落空：Secure Input `OFF`、server `responsive`、
+`already enabled (normal)`、`KeyboardLayout Name = ABC`。這次報告已含 `window-layout`，
+一眼就看得到真正狀態：
+
+```
+9536 | 1 | floating     | Ghostty | ⠂ Merge PR and delete feature branch
+9902 | 1 | h_accordion  | Ghostty | ~/.skills
+9912 | 1 | h_accordion  | Ghostty | aerodiag
+```
+
+9536 自 03:47:54 起 floating，撐到 07:27 仍是 floating —— 這是唯一一筆「單一視窗、
+沒有回復、長時間停留」的漂移。CotEditor 與 Chrome 的 floating 屬設計如此，不是異常。
+
+### 2026-07-28 21:30 — 全面複查，三個機制被實測排除
+
+#### 最重要的一件事：00:24 的修正從來沒有生效過
+
+**AeroSpace 不會自動重載 config**。實測方式：在 `~/.config/aerospace/aerospace.toml`
+加一個 `alt-ctrl-shift-f12` 綁定，16 秒後查詢執行中的 server：
+
+```sh
+aerospace config --get mode.main.binding --json   # 看不到新綁定
+```
+
+而 AeroSpace 進程自 **2026-07-27 22:16:16** 起未曾重啟（`ps -o lstart=`），config 檔是
+00:24 才改的。所以 **01:21 之後蒐集到的所有漂移證據，都是舊 config（catch-all float 在前
++ 專屬規則 rescue）產生的**，`on-window-detected` 反轉順序這個修正等於還沒上場。
+2026-07-28 21:28 已執行 `aerospace reload-config`，新順序自此才真正生效。
+
+註：`aerospace config --get` 只讀得到 `mode` 子樹（`config --major-keys` 的輸出只有
+`.`、`mode`、`mode.*.binding`）。所有 scalar key 與 `on-window-detected` 都回
+`No value at key token '...'`，**這不代表該設定不存在**，別拿它當「config 沒載入」的證據。
+判斷是否重載過，只能靠 `mode.*.binding` 的內容差異。
+
+#### 漂移記錄器的判決：31 筆全是 DRIFTED，0 筆 BORN_FLOATING
+
+```
+31 DRIFTED_TO_FLOATING / 30 RECOVERED_TO_TILED / 0 BORN_FLOATING
+ 0 QUERY_FAILED        /  0 AEROSPACE_DOWN
+```
+
+視窗一律先 tiled、後來才變 floating。**候選 2（出生時的 callback race）在舊 config 下
+就已經不是觀察到的失效模式**——順序反轉即使是對的寫法，修的也不是這件事。
+
+時間分布：全部集中在 01:21–03:47，之後到 21:29 為止 17.5 小時一筆都沒有（期間機器多半
+在睡，且 9902/9912 全程維持 tiled）。
+
+#### 被實測排除的三個機制
+
+| 假設 | 實驗 | 結果 |
+|---|---|---|
+| FlashSpace 的 hide/show 觸發重新偵測，重跑 callback chain 時掉進 race | 手動 `layout floating --window-id 9912` → 隱藏 Ghostty → 取消隱藏 | 仍是 `floating`。**unhide 不會重跑 `on-window-detected`**；舊 config 若重跑，rescue 那步會把它拉回 tiling。這條路斷了 |
+| `aerospace enable off` 讓視窗被回報成 floating | 當場 `enable off` 再查 list-windows | server 直接拒絕回應（`AeroSpace server is disabled and doesn't accept commands`），**不是**回報 floating。漂移期間日誌沒有任何 `QUERY_FAILED`，所以當時管理沒被關掉 |
+| sleep/wake 掉失 | 對 `pmset -g log` | 01:21–03:47 全部漂移期間**沒有任何 sleep 事件**，第一次 sleep 是 03:57。時間對不上 |
+
+順帶確認：隱藏中的視窗確實回報 `macos_native_window_of_hidden_app`，漂移記錄器把它當
+「沒有觀測到」的處理是對的。
+
+#### 開放問題
+
+一度懷疑這 31 筆其實是使用者自己按 alt-f 的修復動作被記下來（60 秒取樣分不出「同時發生的
+事件」與「5 秒內對三個視窗各按一次」，而 `layout floating tiling` 是嚴格 toggle，對已 tiled
+的視窗按一輪就是全部變 floating）。**使用者已確認可以排除 alt-f**，所以漂移是自發的。
+
+那麼剩下的問題是：成對出現的 `RECOVERED_TO_TILED`（多數在 1–2 分鐘後）是人工修的，
+還是它自己回去的？若也是自發，代表這不是單向漂移而是**來回震盪**，那就要往
+「AeroSpace 在某些過渡狀態下短暫回報 floating」這個方向查，而不是「有東西把視窗 float 掉」。
+
 ### 採證能力的已知盲點
 
 `aerodiag` 現在會印 `window-layout`，但那只擋得住第一種失效模式。第二種 ——
@@ -216,6 +293,12 @@ ERROR: Failed to parse <output-format>. Can't parse '...'
 判讀：收一兩天。若清一色 `BORN_FLOATING`，callback 順序的修改就是解答；
 若出現 `DRIFTED_TO_FLOATING`，拿時間戳去對 `pmset -g log` 的 sleep/wake，
 以及當下是否剛 cmd-h 過某個 app。
+
+**第一輪（60 秒取樣，01:21–03:47）已判讀完畢：31 筆全是 `DRIFTED_TO_FLOATING`，
+`BORN_FLOATING` 掛零，sleep/wake 也對不上。** 見上方 21:30 那則。
+取樣間隔已改為 10 秒，目的是讓「同一個事件同時打到多個視窗」與「有人在幾秒內逐一操作」
+在時間軸上分得開 —— 但這只是機率上的改善，不是決定性的：真正同時發生的事件與 10 秒內
+完成的一輪操作仍然無法區分。
 
 **這是臨時的調查用儀器，不是常駐服務。** 結論出來後照 setup 腳本開頭的說明移除。
 
