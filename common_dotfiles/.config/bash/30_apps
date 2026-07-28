@@ -126,6 +126,10 @@ command -v wt >/dev/null \
 # Claude Code.
 export CLAUDE_BASH_NO_LOGIN=1
 export ECC_DISABLED_HOOKS="pre:write:doc-file-warning,pre:bash:gateguard-fact-force,pre:edit-write:gateguard-fact-force"
+# ecc plugin cost controls, see docs/ecc-plugin-token-cost.md.
+export ECC_SESSION_START_CONTEXT=off
+export ECC_HOOK_PROFILE=minimal
+export ECC_CONTEXT_MONITOR_COST_WARNINGS=off
 
 # nnn.
 command -v nnn >/dev/null \
