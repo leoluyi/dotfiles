@@ -39,11 +39,11 @@ note() { printf '%s\t%s\n' "$STAMP" "$1" >>"$LOG"; }
 # Only the transition INTO floating is captured. Recoveries add no information
 # and the dumps are tens of KB each.
 capture_ax() {
-  local wid=$1 app=$2
+  local wid=$1 app=$2 fs=$3 prev_fs=$4
   local file="$AX_DIR/$(date '+%Y%m%d-%H%M%S')-$wid.txt"
   {
-    printf 'captured:  %s\nwindow-id: %s\napp:       %s\nloadavg:   %s\n' \
-      "$STAMP" "$wid" "$app" "$(sysctl -n vm.loadavg 2>/dev/null)"
+    printf 'captured:   %s\nwindow-id:  %s\napp:        %s\nfullscreen: %s (previous sample: %s)\nloadavg:    %s\n' \
+      "$STAMP" "$wid" "$app" "$fs" "$prev_fs" "$(sysctl -n vm.loadavg 2>/dev/null)"
     printf '\n=== CPU of the processes involved ===\n'
     ps -Ao pid=,%cpu=,%mem=,comm= | grep -Ei 'AeroSpace|ghostty' | grep -v grep
     printf '\n=== aerospace debug-windows --window-id %s ===\n' "$wid"
@@ -60,8 +60,16 @@ fi
 # Built with an explicit tab variable: AeroSpace takes the separator literally
 # and does not expand a backslash-t escape.
 tab=$'\t'
+# `window-is-fullscreen` is orthogonal to `window-layout`: a fullscreen window
+# still reports its parent layout (`h_accordion`, ...), never `floating`, so
+# fullscreen alone cannot produce a drift record. It is sampled anyway because
+# AeroSpace clears the flag silently on a new window, a workspace switch or an
+# unhide -- without it in the log there is no way to tell afterwards whether a
+# window had just been dropped out of fullscreen when it drifted.
+#
+# app-name is kept last: it is the only free-text field.
 windows=$(aerospace list-windows --all \
-  --format "%{window-id}${tab}%{app-bundle-id}${tab}%{window-layout}${tab}%{app-name}" 2>/dev/null)
+  --format "%{window-id}${tab}%{app-bundle-id}${tab}%{window-layout}${tab}%{window-is-fullscreen}${tab}%{app-name}" 2>/dev/null)
 if [ -z "$windows" ]; then
   note $'QUERY_FAILED\t-\t-'
   exit 0
@@ -71,7 +79,7 @@ fi
 # without bound and a recycled window-id starts clean.
 next_seen=""
 
-while IFS=$'\t' read -r wid bundle layout app; do
+while IFS=$'\t' read -r wid bundle layout fs app; do
   [ -n "$wid" ] || continue
   printf '%s' "$bundle" | grep -Eq "^($TILING_APPS)$" || continue
 
@@ -90,10 +98,10 @@ while IFS=$'\t' read -r wid bundle layout app; do
     if [ "$state" = unobservable ]; then
       continue  # nothing learned yet; record on a later sample
     fi
-    next_seen+="$wid"$'\t'"$NOW"$'\t'"$state"$'\t'"$state"$'\n'
+    next_seen+="$wid"$'\t'"$NOW"$'\t'"$state"$'\t'"$state"$'\t'"$fs"$'\n'
     if [ "$state" = floating ]; then
-      note "BORN_FLOATING"$'\t'"$wid"$'\t'"$app"
-      capture_ax "$wid" "$app"
+      note "BORN_FLOATING"$'\t'"$wid"$'\t'"$app (fullscreen=$fs)"
+      capture_ax "$wid" "$app" "$fs" "-"
     fi
     continue
   fi
@@ -101,23 +109,28 @@ while IFS=$'\t' read -r wid bundle layout app; do
   first_seen=$(printf '%s' "$prev" | cut -f2)
   first_state=$(printf '%s' "$prev" | cut -f3)
   last_state=$(printf '%s' "$prev" | cut -f4)
+  # Absent in records written before the fullscreen column existed.
+  last_fs=$(printf '%s' "$prev" | cut -f5)
+  [ -n "$last_fs" ] || last_fs=unknown
 
+  # The layout is masked while the app is hidden but the fullscreen flag is
+  # still readable, so keep tracking it rather than freezing the whole record.
   if [ "$state" = unobservable ]; then
-    next_seen+="$prev"$'\n'
+    next_seen+="$wid"$'\t'"$first_seen"$'\t'"$first_state"$'\t'"$last_state"$'\t'"$fs"$'\n'
     continue
   fi
 
   if [ "$state" != "$last_state" ]; then
     age=$((NOW - first_seen))
     if [ "$state" = floating ]; then
-      note "DRIFTED_TO_FLOATING"$'\t'"$wid"$'\t'"$app (age ${age}s, first seen as $first_state)"
-      capture_ax "$wid" "$app"
+      note "DRIFTED_TO_FLOATING"$'\t'"$wid"$'\t'"$app (age ${age}s, first seen as $first_state, fullscreen=$fs, previous sample=$last_fs)"
+      capture_ax "$wid" "$app" "$fs" "$last_fs"
     else
-      note "RECOVERED_TO_TILED"$'\t'"$wid"$'\t'"$app (age ${age}s)"
+      note "RECOVERED_TO_TILED"$'\t'"$wid"$'\t'"$app (age ${age}s, fullscreen=$fs)"
     fi
   fi
 
-  next_seen+="$wid"$'\t'"$first_seen"$'\t'"$first_state"$'\t'"$state"$'\n'
+  next_seen+="$wid"$'\t'"$first_seen"$'\t'"$first_state"$'\t'"$state"$'\t'"$fs"$'\n'
 done <<<"$windows"
 
 printf '%s' "$next_seen" >"$SEEN"

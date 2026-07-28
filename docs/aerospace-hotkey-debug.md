@@ -7,9 +7,14 @@
 已有三次採證（07-27 18:38、07-28 00:04、07-28 07:27），皆屬誤報，真正原因都是 floating 視窗。
 
 **floating 漂移已升格為獨立的主線問題**，而且它不是本文件原本追的 hotkey 案。
-目前確定的是：視窗**先 tiled、後來才變 floating**（漂移記錄器 31:0 壓倒性），
-而三個現成的解釋（出生時的 callback race、FlashSpace 的 hide/show、sleep/wake）
-都已被實測排除。詳見「2026-07-28 21:30 — 全面複查」。
+目前確定的是：視窗**先 tiled、後來才變 floating**（漂移記錄器 31:0 壓倒性）。
+已被實測排除的機制：出生時的 callback race、FlashSpace 的 hide/show、sleep/wake、
+`enable off`、標題變動觸發 re-detection、`alt-f` 誤按、`alt-z`（fullscreen）。
+唯一還活著的假設是「Ghostty 忙到 AX 查詢逾時，AeroSpace 把視窗重判為不可 tile」，
+一次 140 秒的負載實驗沒能重現，但該次沒把 Ghostty 壓到滿載，不算推翻。
+
+自 2026-07-28 21:28 `reload-config`（新 callback 順序首次生效）至今**沒有再發生漂移**，
+但同期機器多半閒置，這段靜默沒有證據價值。
 
 **先分流症狀**：目前兩次採證都不是本案，先排掉常見的那個再說。
 
@@ -291,19 +296,78 @@ AeroSpace 沒有任何機制會把 floating container 裡的視窗自己搬回 t
 任何事件的情況下閃現一兩次又消失。若會，10 秒取樣的日誌就必須整批重新解讀，只有「持續
 floating 超過 N 次取樣」才算數。
 
-#### 高頻取樣（進行中）
+#### 高頻取樣：兩輪都是空的，取樣器已退場
 
-2026-07-28 21:53 起跑 20 分鐘的 200ms 取樣器，驗證上述假象假設。
-腳本與日誌都在該次 session 的 scratchpad：`burst-sample.sh` / `burst.log`
-（一次性診斷工具，沒有進 repo）。它記錄每次 transition 並附上「前一個狀態撐了幾個 sample」。
+200ms 取樣器（一次性工具，沒有進 repo）跑了兩輪，記錄每次 transition 並附上
+「前一個狀態撐了幾個 sample」，用來分辨閃現與真漂移：
 
-判讀：
+| 輪次 | 條件 | 樣本 | transition | query failure |
+|---|---|---|---|---|
+| 21:53–22:13 | 機器閒置 | 4381（3.7 Hz） | **0** | 0 |
+| 22:51–22:54 | 下方的負載實驗期間 | — | **0** | 0 |
 
-| 觀察 | 結論 |
+兩輪都命中「完全沒有 transition」這格，也就是**這兩段時間根本沒事發生**，
+觀測假象假設既沒被證實也沒被推翻。實測頻率只有 3.7 Hz（270ms/次），
+因為每次取樣都要 spawn 一次 `aerospace` CLI，要抓 200ms 級的閃現已在解析度邊緣。
+
+取樣器已刪除。要重驗假象假設，得挑一段**確定會漂移**的時段再架一次，
+在漂移不可預測之前，繼續掛著只是白燒 CPU。
+
+### 2026-07-28 22:51 — 負載觸發實驗：陰性，但曝露不足
+
+主流假設是「Ghostty UI thread 忙到 AX 查詢逾時 → AeroSpace 把視窗重判為不可 tile」，
+因為那是唯一符合證據形狀的機制：31 筆漂移每次都同時打到 3–4 個 Ghostty 視窗，
+沒有 sleep/wake、沒有使用者操作。與其守株待兔，直接製造負載試著重現。
+
+負載必須打在**可見的** Ghostty 視窗上：隱藏或在別的 workspace 的視窗不 render，
+UI thread 是閒的，AX 路徑完全沒被壓到。腳本是 `aero-load-probe.sh`
+（一次性工具，沒有進 repo），4 個 CPU burner ＋ 2 個持續高吞吐輸出的 Ghostty 視窗。
+
+| 項目 | 數值 |
 |---|---|
-| floating `held` 只有 1–5 個 sample | 200ms–1 秒的閃現＝觀測假象，10 秒取樣那 30 筆要整批重新解讀 |
-| floating `held` 數百以上 | 真漂移，改看同時間的 AX dump |
-| 完全沒有 transition | 這段時間沒事發生，需要挑忙碌時段重跑 |
+| loadavg | 2.59 → **8.28**（8 核） |
+| 曝露時間 | 22:51:33–22:53:53，**140 秒** |
+| 200ms 取樣器 transition | 0 |
+| 漂移記錄器事件 | 0 |
+
+**這不算推翻負載假設**，兩個理由：
+
+1. 140 秒太短。歷史上 31 筆漂移分散在 2.5 小時、間隔 10–40 分鐘，這種頻率下抽不到很正常。
+2. 更重要的是**關鍵條件沒達成**。trace 顯示 AeroSpace 全程 6–37%、Ghostty 5–42%，
+   兩個進程都沒滿載 —— loadavg 8 是 burner 撐起來的，不是 Ghostty。負載打錯地方了。
+
+要再試，得拿掉 spew 的節流改成連續高吞吐輸出，把 Ghostty 單一進程壓到 100% 以上，
+並且跑 20 分鐘以上。目前這條路線暫時擱置。
+
+### 2026-07-28 23:05 — alt-z（fullscreen）假設出局，但撿到一個真行為
+
+新假設：某個 Ghostty 視窗用 `alt-z` 放大很久之後，tiling 就壞掉。
+`alt-z = 'fullscreen'`，是 AeroSpace 自己的 fullscreen，config 內沒有
+`macos-native-fullscreen` 的綁定。實測四條路徑：
+
+| 實驗 | `window-layout` | `window-is-fullscreen` |
+|---|---|---|
+| `fullscreen on` | `h_accordion`（不變） | false → **true** |
+| fullscreen 期間開新視窗 | `h_accordion` | true → **false**（自己掉了） |
+| fullscreen ＋ 切 workspace 再切回 | `h_accordion` | true → **false**（自己掉了） |
+| fullscreen ＋ hide/unhide | `h_accordion` | true → **false**（自己掉了） |
+
+**`window-is-fullscreen` 與 `window-layout` 完全正交，任何路徑都沒有產生 `floating`。**
+所以 fullscreen 不可能讓視窗掉出 tiling tree，漂移記錄器把它歸進 `tiled` 也沒有被騙
+—— 過去 31 筆的解讀不需要重來。
+
+反過來說，既然新視窗、切 workspace、unhide 三種日常操作都會清掉 fullscreen，
+「長時間維持放大」這個前提在這台機器的使用模式下幾乎不成立，假設本身也被削弱。
+
+註：實測的是**轉換**，不是「真的放大好幾小時」。但要維持數小時 fullscreen，
+只有完全不動桌面才做得到。
+
+#### 撿到的真行為：fullscreen 會被默默清掉
+
+AeroSpace 遇到新視窗誕生、workspace 切換、unhide，都會無聲地把 fullscreen 旗標清掉
+（之後再下 `fullscreen off` 會回 `Already not fullscreen`）。
+**「放大的視窗自己縮回去」不是 bug 也不是漏按，是這個行為。** 不影響 tiling，
+但會讓人誤以為 `alt-z` 沒生效。
 
 ### 採證能力的已知盲點
 
@@ -335,6 +399,13 @@ ERROR: Failed to parse <output-format>. Can't parse '...'
 | `DRIFTED_TO_FLOATING` | 本來 tiled、後來變 floating → 事後被重設，附視窗存活秒數 |
 | `RECOVERED_TO_TILED` | 變回 tiled（通常是手動修的） |
 | `AEROSPACE_DOWN` / `QUERY_FAILED` | 取樣失敗，避免日誌空白被誤讀成「沒漂移」 |
+
+每筆事件都附上當下的 `window-is-fullscreen` 與**前一次取樣**的值。fullscreen 不會
+造成漂移（見上方 23:05 那則），但 AeroSpace 會在新視窗、切 workspace、unhide 時默默
+清掉這個旗標，沒有記下來的話事後無從得知漂移前一刻視窗是不是剛被踢出 fullscreen。
+`seen.tsv` 因此多了第五欄；舊格式的四欄紀錄讀到的是空值，會顯示成 `unknown`。
+app 被隱藏時 layout 讀不到，但 fullscreen 旗標仍讀得到，所以隱藏期間只凍結 layout、
+繼續追蹤 fullscreen。
 
 進入 floating 的那一刻（`BORN_FLOATING` / `DRIFTED_TO_FLOATING`）會自動抓一份
 `aerospace debug-windows --window-id N`，連同 loadavg 與 AeroSpace／Ghostty 的 %CPU 存到
@@ -396,6 +467,8 @@ aerodiag
   這是本案第一次真正更動 `aerospace.toml`。
 - 2026-07-28：新增 `macos/.local/bin/aerospace-drift-log` 與
   `scripts/macos/setup-aerospace-drift-log.sh`，已載入 launchd。
+- 2026-07-28：漂移記錄器加採 `%{window-is-fullscreen}`，事件與 AX dump 都會帶上
+  當下與前一次取樣的值，補掉「漂移前是不是剛離開 fullscreen」這個盲點。
 - 2026-07-28：`aerospace.toml` 遷移到 `config-version = 2`，消除載入時的警告。
   v2 唯一的破壞性變更是 `persistent-workspaces` 不再從 key binding 推導、改為
   fallback 空陣列；本 config 沒有任何 workspace 綁定（space 由 FlashSpace 管），
