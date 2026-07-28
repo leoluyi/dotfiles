@@ -12,8 +12,9 @@
 
 harness 自己算出來 ecc 每個 session 的 always-on 成本是 **~23,030 tokens**，
 是其他九個 plugin 加總（~2,709）的 8.5 倍；而使用者到目前為止只用過其中兩個 skill。
-更麻煩的不是這 23k，是 ecc 的 363 個 skill 名稱把 **skill listing 的字元預算吃光**，
-導致使用者自己寫的 skill 在 listing 裡只剩名字、沒有 description。
+ecc 的 363 個 skill 名稱也確實壓縮了 skill listing 的字元預算，但影響比初版本文
+所寫的小得多：實際只有四個自有 skill 掉了 description，缺口 890 字元。
+修正推導見下方〈skill listing 有預算〉一節與 [skill-discoverability.md](./skill-discoverability.md)。
 
 ## 權威數字
 
@@ -81,18 +82,31 @@ MCP servers (1)  chrome-devtools  (tool schemas resolved at runtime; not counted
   `/Users/leoluyi/.claude/plugins/cache/claude-plugins-official/superpowers/6.2.0/skills/*/SKILL.md`
   裡都寫得好好的。
 
-**這才是真正的傷害。** 200k context 的 1% 約 2,000 tokens；而光是 ecc 的 363 個名字
-（`- ecc:<name>` 形式）就是 8,298 字元、約 2,100–2,600 tokens。名字是**無條件**進 listing 的
-（"always contains every skill name"），所以 ecc 一個 plugin 就把整個預算佔滿，
-其他所有 skill 只能拿到名字。description 沒了，Claude 就沒有關鍵字可以比對，
-自動觸發 skill 的能力等於被廢掉。
+> **更正（2026-07-28，同日後續調查）**：本節初版把預算算成「200k context 的 1% ≈ 2,000
+> tokens」，並據此推論「ecc 一個 plugin 就把整個預算佔滿，其他 skill 只剩名字、自動觸發
+> 等於被廢掉」。**這個推論是錯的**，錯在兩個換算：
+>
+> - `claude-opus-5` 的 `context` 是 `{window:1e6, native_1m:true}`，不是 200k。
+> - 字元/token 的換算由 `kC()` 決定，只有 `isg` 白名單裡的舊 model 回 4，其餘回 **3**；
+>   `claude-opus-5` 不在名單內。
+>
+> 實際預算是 `1,000,000 × 3 × 0.01 = 30,000 字元 = 10,000 tokens`，比初版寫的大 5 倍。
+> 完整推導、公式驗證與補救選項見 [skill-discoverability.md](./skill-discoverability.md)。
+
+ecc 的 363 個名字（`- ecc:<name>` 形式）是 8,298 字元。名字**無條件**進 listing
+（"always contains every skill name"），所以這 8,298 字元從 30,000 的預算裡扣掉，
+確實壓縮了留給 description 的空間，但沒有佔滿。
+
+實測結果：28 個自有 skill 裡 **24 個保住完整 description**，只有 `review`、`tdd`、
+`setup-pre-commit`、`autopilot` 四個被砍，總缺口 **890 字元**。落選原因不只是排名——
+貪婪迴圈遇到放不下不會 break，會繼續試下一個，所以在預算邊緣**短的 description 勝出**；
+`review` 的 description 有 417 字元，這是它落選的直接原因。
 
 agent listing 則**沒有**這個預算機制：本 session 的 67 個 ecc agent 全部帶完整
 description 和 `(Tools: ...)`。約 15,000 字元、**~4,000–5,000 tokens**，
-而且只要 plugin 開著就無法迴避。
-
-> 未驗證：官方文件沒有明說 agent listing 是否也有預算。此處結論來自本 session 的實際觀察
-> （67 個全帶完整 description），不是文件陳述。
+而且只要 plugin 開著就無法迴避。此點後續已在 binary 中確認：`fvd()` 輸出完整
+`whenToUse` 而無上限，唯一的防線是 `/doctor` 在 `nPa=15000` tok 時發出警告
+（見 [skill-discoverability.md](./skill-discoverability.md)）。
 
 ### MCP：chrome-devtools
 
@@ -136,8 +150,11 @@ node .../chrome-devtools-mcp/build/src/telemetry/watchdog/main.js --parent-pid=.
 - `disabledMcpjsonServers` —— 只管 `.mcp.json`（專案層），不是 plugin 層。
 - `disableBundledSkills` —— 只管 Claude Code 內建 skill，文件明言
   「Skills from plugins, `.claude/skills/`, and `.claude/commands/` are unaffected」。
-- `skillListingBudgetFraction` / `skillListingMaxDescChars` —— 可以把 listing 預算調大，
-  但那是花更多 token 去容納 ecc，方向相反。
+- `skillListingBudgetFraction`（預設 `0.01`）/ `skillListingMaxDescChars`（預設 `1536`）
+  —— 兩個都真的存在、都有 Zod schema（後續在 binary 中確認）。可以把 listing 預算調大，
+  但調到 `0.02` 以上時多出來的空間約九成會被 ecc 的 score-0 description 吃掉。
+  另有 env var `SLASH_COMMAND_TOOL_CHAR_BUDGET` 直接設字元預算、繞過 fraction。
+  細節見 [skill-discoverability.md](./skill-discoverability.md)。
 
 至於 `$P/.claude/ecc-tools.json` 裡的 `profile: "full"` / `selectedComponents`：那是
 `install.sh` 選擇性安裝流程的產物（見 `$P/docs/SELECTIVE-INSTALL-ARCHITECTURE.md`），
@@ -307,8 +324,9 @@ claude plugin disable ecc@everything-claude-code
 
 - always-on 名目 −23,030 tok；其中**確定省下**的是 agent listing 的 ~4,000–5,000 tok
   和 MCP 名稱的 ~425 tok。
-- skill listing 預算釋出約 2,100–2,600 tokens 的名字空間 —— 使用者自己的 skill
-  和 superpowers 會**拿回 description**，自動觸發才會正常運作。這比省 token 更重要。
+- skill listing 釋出 8,298 字元的名字空間，四個掉描述的自有 skill（缺口 890 字元）
+  會**拿回 description**。但這一項不必靠停用 plugin 達成，見
+  [skill-discoverability.md](./skill-discoverability.md) 的補救選項。
 - 每次 tool call 少 6–15 支 node process，Edit 少約 1.5 秒。
 - 少三支常駐 process（chrome-devtools-mcp，~380MB）。
 - 複製出來的兩個 skill 只花約 70 tokens。
@@ -467,9 +485,6 @@ session 內則用 `/context`（Skills 那一列已經是套過預算後的實際
 
 ## 未驗證項目
 
-- agent listing 是否也有字元預算。本文結論來自本 session 的觀察，官方文件未著墨。
-- `skillListingBudgetFraction` 的預設值。skills 文件只說「The budget scales at 1% of the
-  model's context window」，settings 頁的該列在抓取時被截斷，沒拿到明確 default。
 - plugin MCP server 寫入 `disabledMcpServers` 時的確切字串。
 - `mcp-health-check` 對 plugin-scoped MCP tool 名稱解析失敗，是讀 code 推論，未實測觸發。
 
