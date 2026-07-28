@@ -252,6 +252,59 @@ aerospace config --get mode.main.binding --json   # 看不到新綁定
 還是它自己回去的？若也是自發，代表這不是單向漂移而是**來回震盪**，那就要往
 「AeroSpace 在某些過渡狀態下短暫回報 floating」這個方向查，而不是「有東西把視窗 float 掉」。
 
+### 2026-07-28 22:05 — detection 探針：假設 B 出局，而且出現矛盾
+
+在 `on-window-detected` 最前面插一個純記錄的 callback（`check-further-callbacks = true`，
+行為不變），量測 detection 實際觸發頻率。**`exec-and-forget` 在 0.21.2 的
+`on-window-detected` 裡是合法的**，`reload-config` 接受。
+
+```toml
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+check-further-callbacks = true
+run = ['''exec-and-forget bash -c 'printf "%s\t%s\n" "$(date +%T)" "${AEROSPACE_WINDOW_ID:-unknown}" >> ~/.local/state/aerospace-drift/detect.log' ''']
+```
+
+| 條件 | 結果 |
+|---|---|
+| 60 秒正常運作（兩個 Ghostty 視窗跑著 Claude Code，標題持續變動） | **0 筆** |
+| 開一個新 Ghostty 視窗（陽性對照） | **2 筆**，帶新的 window-id |
+
+`on-window-detected` **只在真正的新視窗觸發，不會因為標題變動重跑**。探針本身有效
+（陽性對照有反應），所以 0 筆是真的 0 筆。**「標題變動觸發 re-detection」這條假設出局。**
+探針已於量測後移除，config 與 repo 版本一致。
+
+#### 由此產生的矛盾
+
+AeroSpace 沒有任何機制會把 floating container 裡的視窗自己搬回 tiling tree，唯一會做這件事
+的是 `on-window-detected` 命中 `layout tiling`。但現在確認 detection 不會重跑，而 alt-f
+與腳本都已排除 —— **那 29 筆 `RECOVERED_TO_TILED` 就沒有任何已知的成因**。
+
+最省事的解釋是：**那些成對的 drift/recovery 根本不是真的漂移，而是 `list-windows` 在某些
+瞬間把 tiled 視窗回報成 `floating` 的觀測假象。** 這也解釋了為什麼多數漂移發生時你並沒有
+回報畫面壞掉。
+
+但這不能解釋全部。9536 那筆（03:47:54 漂移、沒有回復、07:27 採證時仍是 floating，而且你
+確實看到視窗排版壞了）是真的。**所以日誌裡混了兩種東西**，而目前無法自動區分。
+
+下一步要驗的是假象假設：用 200ms 之類的高頻取樣跑一段時間，看 `floating` 是否會在完全沒有
+任何事件的情況下閃現一兩次又消失。若會，10 秒取樣的日誌就必須整批重新解讀，只有「持續
+floating 超過 N 次取樣」才算數。
+
+#### 高頻取樣（進行中）
+
+2026-07-28 21:53 起跑 20 分鐘的 200ms 取樣器，驗證上述假象假設。
+腳本與日誌都在該次 session 的 scratchpad：`burst-sample.sh` / `burst.log`
+（一次性診斷工具，沒有進 repo）。它記錄每次 transition 並附上「前一個狀態撐了幾個 sample」。
+
+判讀：
+
+| 觀察 | 結論 |
+|---|---|
+| floating `held` 只有 1–5 個 sample | 200ms–1 秒的閃現＝觀測假象，10 秒取樣那 30 筆要整批重新解讀 |
+| floating `held` 數百以上 | 真漂移，改看同時間的 AX dump |
+| 完全沒有 transition | 這段時間沒事發生，需要挑忙碌時段重跑 |
+
 ### 採證能力的已知盲點
 
 `aerodiag` 現在會印 `window-layout`，但那只擋得住第一種失效模式。第二種 ——
@@ -282,6 +335,18 @@ ERROR: Failed to parse <output-format>. Can't parse '...'
 | `DRIFTED_TO_FLOATING` | 本來 tiled、後來變 floating → 事後被重設，附視窗存活秒數 |
 | `RECOVERED_TO_TILED` | 變回 tiled（通常是手動修的） |
 | `AEROSPACE_DOWN` / `QUERY_FAILED` | 取樣失敗，避免日誌空白被誤讀成「沒漂移」 |
+
+進入 floating 的那一刻（`BORN_FLOATING` / `DRIFTED_TO_FLOATING`）會自動抓一份
+`aerospace debug-windows --window-id N`，連同 loadavg 與 AeroSpace／Ghostty 的 %CPU 存到
+`~/.local/state/aerospace-drift/ax/<時間戳>-<wid>.txt`。回復（`RECOVERED_TO_TILED`）不抓。
+
+這是驗證「AeroSpace 把視窗重新判定成不可 tile」的唯一手段：`window-layout` 只說得出
+「父容器現在是 floating」，說不出為什麼。比對的重點欄位是 `AXSubrole`、`AXFullScreen`、
+`AXMinimized`、以及 `Aero.AxFailed` 標記。
+
+對照組：`ax/CONTROL-manual-float-20260728-214237-9912.txt` 是**用指令手動 float** 的健康
+Ghostty 視窗，`subrole="AXStandardWindow"`、6 筆 `Aero.AxFailed` 全是按鈕的
+`get.AXTitle(noValue)`（無害）。真正的漂移若在這些欄位上長得不一樣，答案就出來了。
 
 只追蹤 config 歸類為 tiling 的三個終端機 app；其他 app 是 floating 屬設計如此，
 不是異常。app 被 cmd-h 隱藏時 layout 讀到 `macos_native_window_of_hidden_app`，
@@ -336,6 +401,16 @@ aerodiag
   fallback 空陣列；本 config 沒有任何 workspace 綁定（space 由 FlashSpace 管），
   推導值本來就是空的，所以此遷移不改變行為，也**不應**補上
   `persistent-workspaces`。與 floating 漂移無關，純粹清警告。
+- 2026-07-28 21:28：執行 `aerospace reload-config`。**這是 00:24 那份 config 第一次真正生效**
+  ——AeroSpace 不會自動重載，而進程從 07-27 22:16 起沒重啟過。
+- 2026-07-28 21:33：`aerospace-drift-log` 取樣間隔 60 秒 → 10 秒
+  （`scripts/macos/com.leoluyi.aerospace-drift-log.plist` 的 `StartInterval`）。
+- 2026-07-28 21:42：`aerospace-drift-log` 在視窗進入 floating 時自動抓 `debug-windows`
+  的 AX dump。已端到端測過（手動 float → 9 秒後採到 11KB 的 dump → 還原）。
+  測試自己造出來的三筆 transition 已從 `drift.log` 移除，AX dump 留下來當對照組。
+  **`alt-f` 與 `aerospace.toml` 皆未更動**，維持單一變因。
+- 2026-07-28：`0.21.2-Beta` → `0.21.3-Beta` 的升級**刻意先不做**。新的 callback 順序
+  21:28 才上線，同時升級會讓「漂移消失」無法歸因。
 - `common_dotfiles/.config/aerospace/aerospace.toml` 未改動。
 
 ## 參考

@@ -15,7 +15,8 @@ set -uo pipefail
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/aerospace-drift"
 SEEN="$STATE_DIR/seen.tsv"
 LOG="$STATE_DIR/drift.log"
-mkdir -p "$STATE_DIR"
+AX_DIR="$STATE_DIR/ax"
+mkdir -p "$STATE_DIR" "$AX_DIR"
 touch "$SEEN"
 
 # Apps the config puts under tiling. A floating window here is the anomaly;
@@ -26,6 +27,29 @@ NOW=$(date +%s)
 STAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 note() { printf '%s\t%s\n' "$STAMP" "$1" >>"$LOG"; }
+
+# Snapshot what AeroSpace itself sees for a window at the moment it leaves the
+# tiling tree. `window-layout` only reports that the parent container is now
+# `floating`; it never says why. The AX dump does: compare AXSubrole,
+# AXFullScreen, AXMinimized and any `Aero.AxFailed` markers against a healthy
+# window to test whether AeroSpace re-classified it as untileable -- the leading
+# hypothesis, since a busy app makes AX queries fail app-wide and every window
+# of that app drifts at once.
+#
+# Only the transition INTO floating is captured. Recoveries add no information
+# and the dumps are tens of KB each.
+capture_ax() {
+  local wid=$1 app=$2
+  local file="$AX_DIR/$(date '+%Y%m%d-%H%M%S')-$wid.txt"
+  {
+    printf 'captured:  %s\nwindow-id: %s\napp:       %s\nloadavg:   %s\n' \
+      "$STAMP" "$wid" "$app" "$(sysctl -n vm.loadavg 2>/dev/null)"
+    printf '\n=== CPU of the processes involved ===\n'
+    ps -Ao pid=,%cpu=,%mem=,comm= | grep -Ei 'AeroSpace|ghostty' | grep -v grep
+    printf '\n=== aerospace debug-windows --window-id %s ===\n' "$wid"
+    aerospace debug-windows --window-id "$wid" 2>&1
+  } >"$file"
+}
 
 if ! pgrep -x AeroSpace >/dev/null 2>&1; then
   # Recorded so a gap in the log is never mistaken for "nothing drifted".
@@ -67,7 +91,10 @@ while IFS=$'\t' read -r wid bundle layout app; do
       continue  # nothing learned yet; record on a later sample
     fi
     next_seen+="$wid"$'\t'"$NOW"$'\t'"$state"$'\t'"$state"$'\n'
-    [ "$state" = floating ] && note "BORN_FLOATING"$'\t'"$wid"$'\t'"$app"
+    if [ "$state" = floating ]; then
+      note "BORN_FLOATING"$'\t'"$wid"$'\t'"$app"
+      capture_ax "$wid" "$app"
+    fi
     continue
   fi
 
@@ -84,6 +111,7 @@ while IFS=$'\t' read -r wid bundle layout app; do
     age=$((NOW - first_seen))
     if [ "$state" = floating ]; then
       note "DRIFTED_TO_FLOATING"$'\t'"$wid"$'\t'"$app (age ${age}s, first seen as $first_state)"
+      capture_ax "$wid" "$app"
     else
       note "RECOVERED_TO_TILED"$'\t'"$wid"$'\t'"$app (age ${age}s)"
     fi
