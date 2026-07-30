@@ -35,6 +35,52 @@ and Dock into dark mode.
 
 ---
 
+## Startup apps (Login Items)
+
+[`login-items.tsv`](login-items.tsv) records the apps that should launch at
+login — the "Open at Login" entries under System Settings > General > Login
+Items & Extensions. It is the single source of truth; the list is deliberately
+not duplicated here, so read the TSV for the current set.
+
+On a new machine, check what is still missing:
+
+```bash
+../scripts/macos/check-login-items.sh
+```
+
+It reports only and never changes system state, exiting `1` on any drift. Two
+other modes: `--list` prints every startup app macOS knows about (including the
+ones switched off), and `--capture` rewrites the manifest from the current
+machine, preserving the hand-maintained `install` column.
+
+The script reads Background Task Management via `sfltool dumpbtm` rather than
+`System Events`. That covers both legacy login items and modern SMAppService
+registrations, needs no Automation consent prompt, and distinguishes "not
+registered at all" from "registered but switched off" — the latter being the
+usual state of an app that was installed but never enabled.
+
+Enabling is left to you on purpose. A modern app registers its own login item
+from inside itself through SMAppService, and several (AeroSpace, FlashSpace,
+Raycast) put the toggle in their own preferences. Injecting an entry from the
+outside with `System Events` either duplicates the app's own registration or
+gets overwritten the next time the app launches.
+
+Out of scope, and not tracked by the manifest: helper login items that apps
+register for themselves (1Password, Docker), launchd agents in
+`~/Library/LaunchAgents`, and app extensions (Quick Look, Spotlight importers,
+dock tiles, background app refresh).
+
+Two startup apps have no Homebrew cask and must be installed by hand — the
+manifest marks both `manual`:
+
+- **Raycast Beta** — only `cask "raycast"` (the stable channel) exists, and
+  installing it would give a different app with a different bundle id, so the
+  cask was dropped from the `Brewfile` rather than left to install the wrong
+  thing.
+- **AutoMounter** — no cask at all.
+
+---
+
 ## Espanso auto-start: "espanso is already running" popup on reboot
 
 If a **"espanso is already running"** dialog appears on every reboot, espanso is

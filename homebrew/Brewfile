@@ -85,10 +85,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -491,8 +491,6 @@ cask "qlstephen"
 cask "quicklook-video"
 # Quick Look generator for Adobe Swatch Exchange files
 cask "quicklookase"
-# Control your tools with a few keystrokes
-cask "raycast"
 # 7-Zip derivative GUI
 cask "shichizip"
 # Screenshot measurement and annotation tool
@@ -679,3 +677,4 @@ go "github.com/kyoh86/richgo"
 go "github.com/swaggo/swag/cmd/swag"
 uv "csvfaker"
 uv "img2pdf"
+uv "weasyprint"

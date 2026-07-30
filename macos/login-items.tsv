@@ -1,0 +1,25 @@
+# macOS startup apps -- source of truth for scripts/macos/check-login-items.sh
+#
+# The apps that should launch at login, i.e. the "Open at Login" entries under
+# System Settings > General > Login Items & Extensions. Deliberately out of
+# scope: helper login items apps register for themselves (1Password, Docker),
+# launchd agents in ~/Library/LaunchAgents, and app extensions (Quick Look,
+# Spotlight importers, dock tiles, background app refresh).
+#
+# Columns, tab-separated: bundle_id, name, app_path, install
+#
+# bundle_id is the match key -- stable across renames and localisation.
+# install records how the app gets onto a machine; it is hand-maintained and
+# --capture preserves it, defaulting new entries to "unknown".
+#
+# Regenerate from the current machine:  check-login-items.sh --capture
+
+bobko.aerospace	AeroSpace	/Applications/AeroSpace.app	brew:nikitabobko/tap/aerospace
+cc.ffitch.shottr	Shottr	/Applications/Shottr.app	brew:shottr
+com.getdropbox.dropbox	Dropbox	/Applications/Dropbox.app	brew:dropbox
+com.mowglii.ItsycalApp	Itsycal	/Applications/Itsycal.app	brew:itsycal
+com.raycast-x.macos	Raycast Beta	/Applications/Raycast Beta.app	manual
+com.stonerl.Thaw	Thaw	/Applications/Thaw.app	brew:thaw
+eu.exelban.Stats	Stats	/Applications/Stats.app	brew:stats
+nz.co.pixeleyes.AutoMounter	AutoMounter	/Applications/AutoMounter.app	manual
+pl.wojciechkulik.FlashSpace	FlashSpace	/Applications/FlashSpace.app	brew:flashspace
