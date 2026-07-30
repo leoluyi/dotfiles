@@ -86,46 +86,82 @@ which is nearly always.
    with real granularity, each item carrying its file scope. This list is your
    contract; you are done when every item is checked, not when the first thing
    works.
-4. **Isolate.** Never work on the default branch. Create a descriptive branch —
-   or a worktree, see *Isolation* below. This is the last moment the tree is
-   clean, so decide here and not later.
+4. **Isolate.** Never work on the default branch. Enter a worktree — or branch
+   in place, see *Isolation* below, and *Naming* for what to call it. This is
+   the last moment the tree is clean, so decide here and not later.
 5. **Build it.** Work the list top to bottom, dispatching per the delegation
    model. Read each returned diff before marking the item done. Fix what breaks.
    Keep going.
 6. **Review and verify.** See *Verification gate*.
 7. **Ship.** Commit, push, open a ready PR.
 
-## Isolation: branch by default, worktree for a big job
+## Isolation: worktree by default, branch when isolation can't apply
 
-A branch on the current tree is the default and covers most runs. A worktree is
-for the case where this run is going to occupy the repository for a long time
-and you should not be holding my working tree hostage while it does.
+A worktree is the default because the risk this section guards against is
+asymmetric: if this run and some other agent or session end up checked out in
+the same directory at the same time, that is not a merge conflict — it is one
+HEAD, one working tree, one index, silently overwritten or corrupted by
+whichever process touched it last. Neither side can detect it happening. A
+worktree run that turns out not to have needed the isolation costs one extra
+dependency install; a branch run that turns out to have needed it costs
+unrecoverable, undetected damage to my tree. Default to the side that fails
+cheap.
 
-Use `EnterWorktree` only when **all** of these hold — this command is the
-explicit instruction that authorises the tool, but the preconditions are not
-negotiable:
+Use `EnterWorktree` unless **either** of these holds — these are mechanical
+preconditions, not judgment calls, and if either fails, branch in place instead
+and move on. Do not try to make them true — do not stash, do not commit
+unrelated work to clear the tree, do not push local commits so the base ref
+will see them:
 
-- The working tree is clean. `EnterWorktree` does not carry uncommitted changes
+- The working tree is dirty. `EnterWorktree` does not carry uncommitted changes
   across; anything dirty stays behind in the original directory, stranded and
   invisible to the rest of this run.
-- $ARGUMENTS is non-empty. An empty invocation means "continue the plan already
-  under way in this conversation", which usually implies edits in flight — see
-  the previous point.
-- The job does not depend on unpushed local commits. The default base ref is
-  `fresh`, which branches from `origin/<default-branch>`, so local-only history
-  will not be there.
-- The plan from step 3 is genuinely large: many files, more than one subsystem,
-  or long enough that you would not want it interleaved with whatever else I am
-  doing in this repo. A handful of files in one directory is a branch, not a
-  worktree.
+- The job depends on unpushed local commits. The default base ref is `fresh`,
+  which branches from `origin/<default-branch>`, so local-only history will not
+  be there.
 
-If any of those fails, branch in place and move on. Do not try to make the
-conditions true — do not stash, do not commit unrelated work to clear the tree,
-do not push local commits so the base ref will see them.
+I decide concurrency, not you — you cannot observe from inside a run whether I
+will open another session against this repo before this one finishes, so don't
+try to infer it from job size or file count. If I say this run is solo, or I
+tell you up front to skip isolation, branch in place even when both
+preconditions above are clean. Absent that, worktree is the default because the
+failure mode of guessing wrong runs one direction.
 
 Once inside, everything else is unchanged: same sequence, same gate, same
 shipping. Do not call `ExitWorktree` yourself — the work lives there and I
 decide what happens to it. Put the worktree path in the final report.
+
+## Naming
+
+Both isolation paths start from the same two pieces: a `<type>` from the
+conventional-commit set CLAUDE.md already uses (feat, fix, refactor, docs, test,
+chore, perf, ci) so the branch agrees with the commits that will land on it, and
+a `<slug>` of two to four kebab-case words naming the *outcome* of the job, not
+the action you are about to take. Derive both from $ARGUMENTS.
+
+They are then assembled differently, because the two paths do not accept the
+same string:
+
+- **Worktree.** Pass `<type>-<slug>` to `EnterWorktree`, flat, **no slashes**.
+  The tool rewrites `/` to `+` and prefixes the branch with `worktree-`, so
+  `feat/token-refresh` becomes the branch `worktree-feat+token-refresh` — legal
+  in git, ugly in a PR URL. `feat-token-refresh` becomes
+  `worktree-feat-token-refresh`, which reads. The 64-character limit applies to
+  the name you pass, and the branch carries nine more on top, so stay under
+  about forty.
+- **Branch in place.** `git switch -c <type>/<slug>`, with the slash, as normal.
+
+Do not add a provenance prefix of your own on the worktree path. `worktree-` is
+applied automatically and already marks the branch as agent-created, which is
+what makes `git branch --list 'worktree-*'` a usable cleanup handle.
+
+Check for a collision before you create either one — `git branch --list` for the
+name you are about to take, and on the worktree path `git worktree list` as
+well. This is not hypothetical: two runs given similar jobs converge on the same
+slug, which is exactly the concurrency case the worktree default exists for. If
+the name is taken, append `-2`, then `-3`. Do not reach for a timestamp to force
+uniqueness — `date` is not in this command's `allowed-tools`, so it would stall
+the run on a permission prompt.
 
 Subagent-level isolation is a different mechanism, and `isolation: "worktree"`
 on an `Agent` call is **forbidden here**. Not because of its cost — because a
