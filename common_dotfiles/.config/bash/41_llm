@@ -4,28 +4,39 @@
 
 command -v llm >/dev/null || return 0
 
-LLM_MODEL="claude-sonnet-4.6"
+LLM_MODEL="gpt-5.6-luna"
+# Reasoning effort: none|minimal|low|medium|high|xhigh. Empty disables the flag.
+# Only models registered with `reasoning: true` accept this option.
+LLM_REASONING_EFFORT="xhigh"
 _LLM_CMD_SYSTEM="Output only a single bash command with no explanation, no markdown, and no backticks. The command must run on $(uname -s)."
 
 # Print model setup instructions when the configured model is unavailable.
 _llm_model_hint() {
     cat >&2 <<EOF
-Model '${LLM_MODEL}' not found. Install a plugin and set an API key, e.g.:
+Model '${LLM_MODEL}' not found. Check what is available:
+  llm models                                            # ids llm knows about
+  llm openai models                                     # ids the API serves
+
+A model the API serves but llm does not list is newer than llm's bundled
+registry; register it by hand in:
+  $(dirname "$(llm keys path)")/extra-openai-models.yaml
+
+Other providers need a plugin plus a key:
   llm install llm-anthropic && llm keys set anthropic   # Claude
   llm install llm-gemini    && llm keys set gemini      # Gemini
-  llm install llm-openai    && llm keys set openai      # OpenAI
-  llm models                                            # list available models
-  llm aliases set default <model>                       # change default model
   https://github.com/simonw/llm
 EOF
 }
 
-# Wrapper around llm that prints setup instructions on 'Unknown model' errors.
-# Passes stdin and all args through transparently; only stderr is intercepted.
+# Wrapper around llm that applies the configured model and reasoning effort,
+# and prints setup instructions on 'Unknown model' errors. Callers must not pass
+# -m themselves. Passes stdin and all args through; only stderr is intercepted.
 _llm() {
     local tmp_err rc
+    local -a opts=(-m "${LLM_MODEL}")
+    [ -n "${LLM_REASONING_EFFORT}" ] && opts+=(-o reasoning_effort "${LLM_REASONING_EFFORT}")
     tmp_err=$(mktemp)
-    llm "$@" 2>"$tmp_err"
+    llm "${opts[@]}" "$@" 2>"$tmp_err"
     rc=$?
     if [ $rc -ne 0 ] && grep -q "Unknown model" "$tmp_err" 2>/dev/null; then
         cat "$tmp_err" >&2
@@ -44,7 +55,7 @@ llm-cmd() {
         echo "Usage: llm-cmd <natural language description>" >&2
         return 1
     fi
-    _llm -m "${LLM_MODEL}" \
+    _llm \
         --system "${_LLM_CMD_SYSTEM}" \
         "$*"
 }
@@ -64,7 +75,7 @@ llm-explain() {
         input="$(cat)"
         [ -n "$1" ] && input="Command: $* -- Output: $input"
     fi
-    _llm -m "${LLM_MODEL}" \
+    _llm \
         --system "You are a concise shell expert. Explain the following bash command or output clearly and briefly." \
         "$input"
 }
@@ -78,12 +89,14 @@ llm-fix() {
         return 1
     fi
     input="$(cat)"
-    _llm -m "${LLM_MODEL}" \
+    _llm \
         --system "You are a concise shell expert. Given this error output, provide the corrected bash command or a brief fix. Output only the fix, no extra explanation." \
         "$input"
 }
 
 # Generate a commit message from staged changes.
+# Summarising a diff does not benefit from deep reasoning, so both git-* helpers
+# pin effort to low regardless of LLM_REASONING_EFFORT.
 # Usage: git-msg
 git-msg() {
     local diff
@@ -92,7 +105,7 @@ git-msg() {
         echo "No staged changes. Run \`git add\` first." >&2
         return 1
     fi
-    echo "$diff" | _llm -m "${LLM_MODEL}" \
+    echo "$diff" | LLM_REASONING_EFFORT=low _llm \
         --system "You are an expert at writing git commit messages. Output only a single conventional commit message (type: subject, optional body). No markdown, no backticks, no extra explanation." \
         "Write a commit message for this diff:"
 }
@@ -106,7 +119,7 @@ git-commit-ai() {
         echo "No staged changes. Run \`git add\` first." >&2
         return 1
     fi
-    msg=$(echo "$diff" | _llm -m "${LLM_MODEL}" \
+    msg=$(echo "$diff" | LLM_REASONING_EFFORT=low _llm \
         --system "You are an expert at writing git commit messages. Output only a single conventional commit message (type: subject, optional body). No markdown, no backticks, no extra explanation." \
         "Write a commit message for this diff:")
     [ -z "$msg" ] && return 1
@@ -116,16 +129,17 @@ git-commit-ai() {
 }
 
 # Alt+a: replace current readline line (treated as natural language) with a
-# generated bash command. Runs silently; leaves original text on failure.
+# generated bash command. Leaves the original text intact on failure and reports
+# why -- a swallowed error here is indistinguishable from a dead keybinding.
 _llm_inline_suggest() {
     [ -z "$READLINE_LINE" ] && return
     local suggestion
-    suggestion=$(llm -m "${LLM_MODEL}" \
-        --system "${_LLM_CMD_SYSTEM}" \
-        "$READLINE_LINE" 2>/dev/null)
+    suggestion=$(_llm --system "${_LLM_CMD_SYSTEM}" "$READLINE_LINE")
     if [ -n "$suggestion" ]; then
         READLINE_LINE="$suggestion"
         READLINE_POINT=${#READLINE_LINE}
+    else
+        echo "llm: no suggestion returned (model '${LLM_MODEL}')" >&2
     fi
 }
 # Only bind in interactive shells — readline is not available in non-interactive contexts.
