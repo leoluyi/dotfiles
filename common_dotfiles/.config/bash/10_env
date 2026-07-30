@@ -12,15 +12,16 @@ fi
 export GIT_EDITOR="${EDITOR}"
 
 # Pager.
-command -v most >/dev/null && export PAGER=most
+export PAGER=less
+
+# less: -R 讓 less 正確計算 ANSI 色碼寬度（-r 不算寬度，會導致折行與重繪錯位）。
+export LESS="-R -M -i --underline-special"
 
 # Enable syntax-highlighting in less.
 if command -v highlight >/dev/null; then
   export LESSOPEN="| $(command -v highlight) --out-format xterm256 --quiet --force --style=base16/gruvbox-dark-medium %s"
-  export LESS=" -R "
 elif command -v src-hilite-lesspipe.sh >/dev/null; then
   export LESSOPEN="| $(command -v src-hilite-lesspipe.sh) %s"
-  export LESS=" -R "
 fi
 
 # pipenv.

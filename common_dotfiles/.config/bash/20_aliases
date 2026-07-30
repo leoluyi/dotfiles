@@ -26,8 +26,7 @@ alias grep='grep --color=auto'
 alias fgrep='grep -F --color=auto'
 alias egrep='grep -E --color=auto'
 
-# More information for pager
-alias less='less -r -M -i --underline-special'
+# less 選項統一由 10_env 的 $LESS 提供，確保非互動情境（$PAGER）行為一致。
 
 # Neovim.
 if command -v nvim >/dev/null; then

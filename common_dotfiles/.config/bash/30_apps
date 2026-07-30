@@ -96,7 +96,7 @@ command -v thefuck >/dev/null && fuck() {
 
 # glow - A markdown TUI
 command -v glow >/dev/null \
-  && alias glow="PAGER='less -r' command glow -p"
+  && alias glow='command glow -p'
 
 # peaclock.
 command -v peaclock >/dev/null \
