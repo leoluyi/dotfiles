@@ -7,8 +7,9 @@
 # callback lost the race) or did it start tiled and change later (something is
 # resetting it post-detection)? Those two answers need different fixes.
 #
-# Runs from launchd every 60s. Writes only on state CHANGE, so a quiet log
-# means nothing drifted -- see docs/aerospace-hotkey-debug.md.
+# Runs from launchd every 10s. drift.log gets state CHANGES only, so a quiet log
+# means nothing drifted; samples/<date>.tsv gets EVERY sample, which is what
+# makes load correlation computable. See docs/aerospace-hotkey-debug.md.
 
 set -uo pipefail
 
@@ -16,7 +17,8 @@ STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/aerospace-drift"
 SEEN="$STATE_DIR/seen.tsv"
 LOG="$STATE_DIR/drift.log"
 AX_DIR="$STATE_DIR/ax"
-mkdir -p "$STATE_DIR" "$AX_DIR"
+SAMPLE_DIR="$STATE_DIR/samples"
+mkdir -p "$STATE_DIR" "$AX_DIR" "$SAMPLE_DIR"
 touch "$SEEN"
 
 # Apps the config puts under tiling. A floating window here is the anomaly;
@@ -27,6 +29,29 @@ NOW=$(date +%s)
 STAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 note() { printf '%s\t%s\n' "$STAMP" "$1" >>"$LOG"; }
+
+# `{ 5.11 3.62 8.51 }` -> `5.11<TAB>3.62<TAB>8.51`
+LOADAVG=$(sysctl -n vm.loadavg 2>/dev/null | tr -d '{}' | awk '{ printf "%s\t%s\t%s", $1, $2, $3 }')
+
+# Every sample is recorded here, not just the state changes that go to drift.log.
+#
+# drift.log answers "what was the load WHEN a window drifted"; on its own that
+# can never confirm or refute the load hypothesis, because there is nothing to
+# compare against -- a drift at loadavg 82 means nothing if the machine also
+# spends most of its day at 82. This series supplies the missing denominator:
+# with load and per-state window counts on every sample, P(drift | load bucket)
+# becomes computable.
+#
+# One file per day, because this is temporary investigation instrumentation:
+# no rotation logic to maintain, and cleanup is `rm -rf samples/`.
+# Roughly 8600 lines (~500 KB) per day at a 10s interval.
+# sample <status> [tiled] [floating] [unobservable]
+# Columns: epoch, stamp, load1, load5, load15, status, tiled, floating, unobservable
+sample() {
+  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+    "$NOW" "$STAMP" "$LOADAVG" "$1" "${2:--}" "${3:--}" "${4:--}" \
+    >>"$SAMPLE_DIR/$(date '+%Y%m%d').tsv"
+}
 
 # Snapshot what AeroSpace itself sees for a window at the moment it leaves the
 # tiling tree. `window-layout` only reports that the parent container is now
@@ -54,6 +79,7 @@ capture_ax() {
 if ! pgrep -x AeroSpace >/dev/null 2>&1; then
   # Recorded so a gap in the log is never mistaken for "nothing drifted".
   note $'AEROSPACE_DOWN\t-\t-'
+  sample aerospace_down
   exit 0
 fi
 
@@ -72,12 +98,19 @@ windows=$(aerospace list-windows --all \
   --format "%{window-id}${tab}%{app-bundle-id}${tab}%{window-layout}${tab}%{window-is-fullscreen}${tab}%{app-name}" 2>/dev/null)
 if [ -z "$windows" ]; then
   note $'QUERY_FAILED\t-\t-'
+  # A query that returns nothing while the process is alive is itself the
+  # starvation signal the load hypothesis predicts, so it must land in the
+  # series next to the load that produced it.
+  sample query_failed
   exit 0
 fi
 
 # Carry forward only the windows still alive, so the state file cannot grow
 # without bound and a recycled window-id starts clean.
 next_seen=""
+n_tiled=0
+n_floating=0
+n_unobservable=0
 
 while IFS=$'\t' read -r wid bundle layout fs app; do
   [ -n "$wid" ] || continue
@@ -90,6 +123,12 @@ while IFS=$'\t' read -r wid bundle layout fs app; do
     floating) state=floating ;;
     macos_native_window_of_hidden_app) state=unobservable ;;
     *) state=tiled ;;
+  esac
+
+  case "$state" in
+    tiled) n_tiled=$((n_tiled + 1)) ;;
+    floating) n_floating=$((n_floating + 1)) ;;
+    unobservable) n_unobservable=$((n_unobservable + 1)) ;;
   esac
 
   prev=$(awk -F'\t' -v w="$wid" '$1 == w { print; exit }' "$SEEN")
@@ -134,3 +173,5 @@ while IFS=$'\t' read -r wid bundle layout fs app; do
 done <<<"$windows"
 
 printf '%s' "$next_seen" >"$SEEN"
+
+sample ok "$n_tiled" "$n_floating" "$n_unobservable"

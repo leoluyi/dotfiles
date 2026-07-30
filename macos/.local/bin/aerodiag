@@ -46,12 +46,20 @@ collect() {
 
   # --- Hypothesis 1: macOS Secure Input blocks global hotkey interception ---
   section 'Secure Input'
-  local sipid
-  sipid=$(ioreg -l -d 1 -k IOConsoleUsers 2>/dev/null \
-    | sed -n 's/.*kCGSSessionSecureInputPID"=\([0-9]*\).*/\1/p' | head -1)
-  if [ -n "$sipid" ] && [ "$sipid" != "0" ]; then
-    printf 'STATUS: ON  (held by pid %s)\n' "$sipid"
-    ps -p "$sipid" -o pid=,ppid=,comm= 2>/dev/null || printf 'pid %s no longer exists (stale hold)\n' "$sipid"
+  # The key is absent entirely while secure input is off, so sed emits a line
+  # only for a session that actually holds it. Every holder is listed rather
+  # than just the first: with several login sessions on this machine, reporting
+  # one hides the others.
+  local sipids
+  sipids=$(ioreg -l -d 1 -k IOConsoleUsers 2>/dev/null \
+    | sed -n 's/.*kCGSSessionSecureInputPID"=\([0-9]*\).*/\1/p' | grep -v '^0$' | sort -u)
+  if [ -n "$sipids" ]; then
+    printf 'STATUS: ON\n'
+    local sipid
+    while read -r sipid; do
+      ps -p "$sipid" -o pid=,ppid=,comm= 2>/dev/null \
+        || printf '%s (no longer exists -- stale hold)\n' "$sipid"
+    done <<<"$sipids"
   else
     printf 'STATUS: OFF\n'
   fi
@@ -89,10 +97,22 @@ collect() {
 
   # --- Hypothesis 3: another app grabbed the hotkeys / focus context ---
   section 'Frontmost app'
-  local asn
+  local asn front
   asn=$(lsappinfo front 2>/dev/null)
   printf 'asn: %s\n' "${asn:-unknown}"
-  [ -n "$asn" ] && lsappinfo info -only name,bundleid,pid "$asn" 2>/dev/null
+  front=$([ -n "$asn" ] && lsappinfo info -only name,bundleid,pid "$asn" 2>/dev/null)
+  printf '%s\n' "$front"
+  # A system authentication dialog owns the keyboard while it is up, so EVERY
+  # global hotkey is dead for as long as it sits in front -- independently of
+  # secure input, which may well read OFF. This is also the missing half of the
+  # "restarting AeroSpace fixes it" puzzle: restarting means clicking elsewhere
+  # first, and that dismisses or backgrounds the dialog. Check for the dialog
+  # before believing AeroSpace is at fault at all.
+  if printf '%s' "$front" | grep -Eq 'com\.apple\.(SecurityAgent|loginwindow|ScreenSaver)'; then
+    printf '\nWARNING: a macOS system security dialog is frontmost.\n'
+    printf 'It swallows all global hotkeys while displayed. Dismiss it and retest\n'
+    printf 'BEFORE treating this as an AeroSpace fault.\n'
+  fi
 
   section 'Keyboard input source'
   defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSelectedInputSources 2>/dev/null \

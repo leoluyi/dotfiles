@@ -4,24 +4,31 @@
 
 狀態：**等待故障重現以取得證據**（2026-07-27 起）。
 升級後尚未重現。目前實際執行版本為 `0.21.2-Beta`（CLI 與 app 一致）。
-已有三次採證（07-27 18:38、07-28 00:04、07-28 07:27），皆屬誤報，真正原因都是 floating 視窗。
+已有四次採證（07-27 18:38、07-28 00:04、07-28 07:27、07-30 11:53），皆屬誤報，
+真正原因都是 floating 視窗。
 
 **floating 漂移已升格為獨立的主線問題**，而且它不是本文件原本追的 hotkey 案。
-目前確定的是：視窗**先 tiled、後來才變 floating**（漂移記錄器 31:0 壓倒性）。
+目前確定的是：視窗**先 tiled、後來才變 floating**（漂移記錄器 31:0 壓倒性，
+新 callback 順序上線後又累積 6 筆，仍是 `BORN_FLOATING` 掛零）。
 已被實測排除的機制：出生時的 callback race、FlashSpace 的 hide/show、sleep/wake、
 `enable off`、標題變動觸發 re-detection、`alt-f` 誤按、`alt-z`（fullscreen）。
-唯一還活著的假設是「Ghostty 忙到 AX 查詢逾時，AeroSpace 把視窗重判為不可 tile」，
-一次 140 秒的負載實驗沒能重現，但該次沒把 Ghostty 壓到滿載，不算推翻。
+唯一還活著的假設是負載 —— 但形狀已在 07-30 修正過一次：不是「Ghostty 忙到 AX 逾時」，
+而是**整台機器飽和把 AeroSpace 餓死**（漂移當下 Ghostty 與 AeroSpace 都是閒的）。
+07-30 11:41 首次抓到 loadavg **82.72**；07-28 那場實驗只推到 8.28，且施力點打在 Ghostty，
+現在知道那是打錯地方。
 
-自 2026-07-28 21:28 `reload-config`（新 callback 順序首次生效）至今**沒有再發生漂移**，
-但同期機器多半閒置，這段靜默沒有證據價值。
+**負載假設仍有一個反例**：07-29 23:18:14 的漂移 loadavg 只有 2.91。所以要嘛不只一個機制，
+要嘛負載只是加速因子。回溯日誌已榨乾（unified log 不記 CPU 歸屬也不記 AeroSpace 內部狀態），
+下一步只能靠 07-30 上線的取樣序列做相關性統計，見下方「漂移記錄器」。
 
-**先分流症狀**：目前兩次採證都不是本案，先排掉常見的那個再說。
+**先分流症狀**：四次採證全都不是本案，先排掉常見的那些再說。
 
-1. 視窗排版怪、併不起來、看起來像兩組 —— 先查 `window-layout`，多半是 floating。
+1. **前景有系統驗證對話框**（密碼框、`SecurityAgent`）—— 它獨占鍵盤，所有 hotkey 全死，
+   與 AeroSpace 無關。`aerodiag` 會示警。關掉對話框重測，不要往下追。
+2. 視窗排版怪、併不起來、看起來像兩組 —— 先查 `window-layout`，多半是 floating。
    `aerodiag` 現在會印這欄，直接看報告即可；命中就用下方的 `layout tiling` 修，
-   不必重啟 AeroSpace。
-2. 快捷鍵整組沒反應（按 `alt-z` 測，且 `alt-f` 也沒反應）—— 這才是本案。
+   不必重啟 AeroSpace。**四次採證都是這一類。**
+3. 快捷鍵整組沒反應（按 `alt-z` 測，且 `alt-f` 也沒反應），且前景沒有對話框 —— 這才是本案。
 
 ## 症狀
 
@@ -66,6 +73,17 @@ aerospace list-windows --all --format '%{window-id} | %{window-layout} | %{app-n
 **缺口**：Secure Input 是系統層狀態，重啟 AeroSpace 不會清除它，因此無法解釋
 「重啟就好」。若報告顯示 Secure Input 為 ON，需進一步解釋這個矛盾
 （例如重啟時其實伴隨了切換 app 的動作，而那才是真正解除的原因）。
+
+**缺口已於 2026-07-30 補上，答案是括號裡那個。** 真正的 hotkey 殺手不必是 Secure Input，
+一個**系統模態驗證框**就夠了：`SecurityAgent` 在前景時獨占鍵盤，所有 global hotkey 全死，
+而 Secure Input 可以完全是 `OFF`。它同時解釋了「重啟 AeroSpace 就好」—— 你為了重啟
+必然先點了別的視窗，那個動作才是解除的原因，重啟只是附帶發生。
+
+`aerodiag` 現在會在前景是 `com.apple.SecurityAgent` / `loginwindow` / `ScreenSaver` 時明確示警。
+**看到示警就先關掉對話框重測，不要當成 AeroSpace 的錯。**
+
+註：`kCGSSessionSecureInputPID` 這個 key 在 Secure Input 關閉時**根本不存在**於 `ioreg` 輸出，
+所以歷次報告的 `OFF` 是可信的陰性，不是取樣缺陷。
 
 ### 2. sleep/wake 後 hotkey registration 掉失
 
@@ -369,6 +387,84 @@ AeroSpace 遇到新視窗誕生、workspace 切換、unhide，都會無聲地把
 **「放大的視窗自己縮回去」不是 bug 也不是漏按，是這個行為。** 不影響 tiling，
 但會讓人誤以為 `alt-z` 沒生效。
 
+### 2026-07-30 11:53 — 第四次採證：負載假設復活，且形狀被修正
+
+報告：`~/.local/state/aerodiag/20260730-115345.txt`
+
+症狀經分流確認是**只有排版壞掉、快捷鍵正常**，第四度落在 floating 主線，
+原本的 hotkey 案至今仍未重現。四個舊假設同樣全部落空
+（Secure Input `OFF`、`responsive`、`already enabled (normal)`、`KeyboardLayout Name = ABC`）。
+
+報告可見 `52 | 1 | floating | Ghostty`，而 `drift.log` 指出它 11:41:07 漂移、
+到 11:53 採證時已持續 12 分鐘。這是新 callback 順序上線後**第一份「持續性漂移」的現場 AX 快照**。
+
+#### 決定性的一行在 AX dump 的表頭：loadavg
+
+| 漂移時刻 | loadavg（8 核） | 結果 |
+|---|---|---|
+| 07-29 22:19:50 | 9.37 / 29.74 / 17.00 | 10 秒後回復 |
+| 07-29 23:18:14 | 2.91 / 4.22 / 3.67 | 未回復 |
+| 07-30 10:41:10 | 4.21 / 6.91 / 10.87 | 5 分後回復 |
+| **07-30 11:41:07** | **82.72 / 72.11 / 42.71** | 持續 12 分鐘以上 |
+| CONTROL（健康對照） | 2.93 / 2.50 / 2.67 | — |
+
+82.72 是 8 核超訂 10 倍。07-28 那場實驗只推到 8.28 就收工，結論寫「曝露不足，不算推翻」
+—— 現在知道當時距離真實量級差一個數量級。
+
+**更重要的是施力點錯了。** 這筆 dump 裡 Ghostty 只有 0.8% CPU、AeroSpace 0.0%，
+兩個當事進程都是閒的。所以機制不是「Ghostty UI thread 忙到 AX 逾時」，
+而是**整台機器飽和把 AeroSpace 的 AX／IPC 往返餓死**。07-28 把負載打在 Ghostty 身上，
+方向本來就不對。
+
+負載來源已由使用者確認：**多個 Claude Code session 並行 fan-out ＋ 同時開著 System Settings**。
+日誌吻合 —— 11:38–11:39 有 spawn 爆量（23、40 筆/分），內含 System Settings 的一整排
+extension controller（`systemsettingsagent`、`SettingsSystemExtensionController`、
+`LegacyPluginEnablement`、`FSKitModuleManagement` 等）與 20 個 `mdworker_shared`，
+爆量結束約 2 分鐘後漂移。兩個來源都可控、可重現。
+
+#### AX 屬性與健康對照組逐項相同
+
+| 欄位 | 漂移的 52 | CONTROL |
+|---|---|---|
+| `subrole` | `AXStandardWindow` | `AXStandardWindow` |
+| `AXFullScreen` | 0 | 0 |
+| `AXMinimized` | 0 | 0 |
+| `AXModal` | 0 | 0 |
+| `Aero.AxFailed` 筆數 | 6 | 6 |
+
+**視窗在 macOS 眼中完全健康。** 所以不是「AeroSpace 依 AX 屬性把視窗重判為不可 tile」，
+是 AeroSpace 自己的模型翻掉了。注意 dump 是在偵測到漂移後幾秒才抓的，
+漂移瞬間的短暫 AX 失敗不會留在這份快照裡 —— 這條推論排除的是「持續性的 AX 異常」，
+不是「瞬時 AX 逾時」。
+
+#### 尚未解釋的反例
+
+07-29 23:18:14 那筆 loadavg 只有 2.91，卻同時打到 62 與 641 兩個視窗且沒有回復。
+該時段確實有 spawn 爆量（23:13 有 58 筆/分、23:15 有 38 筆），但 **CPU 沒有飽和**。
+純 CPU 餓死解釋不了這一筆。
+
+#### SecurityAgent 是干擾項，不是本次成因
+
+報告的 `Frontmost app` 是 `com.apple.SecurityAgent`（pid 6044），前所未見。查證結果：
+
+- 11:53:29.848 由 `authd` 觸發，right 是 `system.privilege.admin`（管理員密碼框），
+  `credential 501 expired '5330.973881 > 300'`，即 sudo 憑證過期後的重新驗證。
+- 與 System Settings 那波活動一致（使用者確認當時開著）。
+
+**時間對不上本次漂移**：對話框 11:53:29 才出現，漂移是 11:41:07，晚了 12 分鐘。
+所以它不是成因。但它本身是一個貨真價實的獨立 hotkey 殺手，並且補掉了假設 1 的缺口
+（見上方「假設 1」那節）。這是本次採證最有價值的副產品。
+
+#### 週期性：目前不算線索
+
+10:41:10 與 11:41:07 只差 3 秒不到一小時，看起來有週期。但 07-28 那 19 個時間點
+（01:21–03:47，間隔 10–40 分鐘）完全沒有這個規律，而已知的整點 launchd job 只有
+`com.dropbox.DropboxUpdater.wake` 與 `com.google.GoogleUpdater.wake`（皆 `StartInterval 3600`），
+兩者都是輕量喚醒。**先當巧合處理，除非取樣序列裡再看到同樣的間距。**
+
+順帶排除 Time Machine：`tmutil latestbackup` 回 `Failed to mount destination`，備份目的地根本掛不上，
+不可能是整點負載來源。
+
 ### 採證能力的已知盲點
 
 `aerodiag` 現在會印 `window-layout`，但那只擋得住第一種失效模式。第二種 ——
@@ -390,8 +486,39 @@ ERROR: Failed to parse <output-format>. Can't parse '...'
 
 ## 漂移記錄器
 
-`macos/.local/bin/aerospace-drift-log`，由 launchd 每 60 秒取樣一次。
-只在**狀態改變**時寫入，所以日誌空白代表沒有漂移。
+`macos/.local/bin/aerospace-drift-log`，由 launchd 每 10 秒取樣一次，寫兩份東西：
+
+| 檔案 | 寫入時機 | 用途 |
+|---|---|---|
+| `drift.log` | 只在**狀態改變**時 | 日誌空白代表沒有漂移 |
+| `samples/<日期>.tsv` | **每次取樣**都寫 | 負載相關性的分母 |
+
+### 為什麼需要 samples 序列
+
+`drift.log` 與 AX dump 只回答「漂移那一刻負載多少」。**光靠這個永遠無法證實或推翻負載假設**
+—— 漂移時 loadavg 82 不代表什麼，如果這台機器一天有一半時間都在 82。
+要算的是 `P(漂移 | 負載區間)`，那需要非漂移時的負載基線，也就是分母。
+
+欄位：`epoch`、`stamp`、`load1`、`load5`、`load15`、`status`、`tiled`、`floating`、`unobservable`。
+
+`status` 為 `ok` / `aerospace_down` / `query_failed`。**`query_failed` 特別重要**：
+進程活著但查詢回空，正是負載假設預測的餓死訊號，把它與當下負載並排記錄才對得起來。
+
+一天一個檔（10 秒間隔約 8600 行、500 KB），不做輪替 —— 這是臨時儀器，
+收工就 `rm -rf samples/`。
+
+判讀方式（收滿一兩天再做，樣本不足算不出東西）：
+
+```sh
+# 按 load1 分桶，看每桶的漂移取樣佔比
+awk -F'\t' '$6=="ok" { b=int($3/10)*10; n[b]++; if ($8>0) d[b]++ }
+            END { for (k in n) printf "load %3d-%3d  samples=%-6d floating=%-5d %.2f%%\n",
+                  k, k+9, n[k], d[k]+0, (d[k]+0)*100/n[k] }' \
+  ~/.local/state/aerospace-drift/samples/*.tsv | sort -n
+```
+
+負載假設要成立，高負載桶的百分比必須明顯高於低負載桶。若各桶差不多，
+82.72 那筆就只是巧合，得回頭找別的機制 —— 07-29 23:18 的 2.91 反例已經在暗示這個可能。
 
 | 事件 | 意義 |
 |---|---|
@@ -484,6 +611,22 @@ aerodiag
   **`alt-f` 與 `aerospace.toml` 皆未更動**，維持單一變因。
 - 2026-07-28：`0.21.2-Beta` → `0.21.3-Beta` 的升級**刻意先不做**。新的 callback 順序
   21:28 才上線，同時升級會讓「漂移消失」無法歸因。
+- 2026-07-30 12:24：手動 `aerospace layout tiling --window-id 52` 修掉 11:41 那筆持續漂移
+  （AX dump 已存檔，不損失證據）。**`drift.log` 裡 `12:24:36 RECOVERED_TO_TILED 52` 是這個
+  人工動作，不是自發回復。** 這筆必須排除在「回復是自發還是人工」那個未解問題的統計之外。
+- 2026-07-30 12:25：`aerospace-drift-log` 加寫 `samples/<日期>.tsv`，每次取樣都記
+  loadavg 與各狀態視窗數，補上負載相關性的分母。詳見上方「為什麼需要 samples 序列」。
+- 2026-07-30 12:26：`aerodiag` 在前景是 `com.apple.SecurityAgent` / `loginwindow` /
+  `ScreenSaver` 時明確示警 —— 系統模態驗證框獨占鍵盤，是與 Secure Input 無關的獨立
+  hotkey 殺手。正反向對照皆已測（SecurityAgent 與 loginwindow 觸發、Ghostty 靜默）。
+- 2026-07-30 12:26：`aerodiag` 的 Secure Input 改列出**所有**持有者而非只列第一個
+  （本機有多個 login session）。這不是修 bug：key 在關閉時不存在，原本的 `head -1`
+  取到的是第一個持有者而非第一個 session，歷次 `OFF` 都是可信的陰性。
+- 2026-07-30：**負載重現實驗尚未執行**。條件已確定：系統層飽和到 loadavg 60–90（不是 8）、
+  持續 20 分鐘以上、同時開 System Settings、3–4 個可見且已 tiled 的 Ghostty 視窗。
+  刻意後排 —— 平常跑 Claude Code 並行本來就會自然造出高負載，samples 序列會先累積基線。
+- 2026-07-30：**刻意不做**讓漂移記錄器自動下 `layout tiling` 修復。那會污染
+  `RECOVERED_TO_TILED` 的語意，而那恰好是目前唯一還沒有已知成因的現象。維持單一變因。
 - `common_dotfiles/.config/aerospace/aerospace.toml` 未改動。
 
 ## 參考
