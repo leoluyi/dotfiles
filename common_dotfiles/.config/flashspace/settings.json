@@ -25,7 +25,9 @@
   "loopWorkspaces" : true,
   "loopWorkspacesOnAllDisplays" : false,
   "menuBarDisplayAliases" : "",
+  "menuBarTitleScriptPath" : "",
   "menuBarTitleTemplate" : "$WORKSPACE",
+  "menuBarTitleUseScript" : false,
   "pipApps" : [
 
   ],

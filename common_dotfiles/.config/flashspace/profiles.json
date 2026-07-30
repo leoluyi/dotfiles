@@ -153,6 +153,11 @@
               "bundleIdentifier" : "com.apple.finder",
               "iconPath" : "/System/Library/CoreServices/Finder.app/Contents/Resources/Finder.icns",
               "name" : "Finder"
+            },
+            {
+              "bundleIdentifier" : "com.apple.podcasts",
+              "iconPath" : "/System/Applications/Podcasts.app/Contents/Resources/AppIcon.icns",
+              "name" : "Podcast"
             }
           ],
           "assignAppShortcut" : "opt+shift+9",
