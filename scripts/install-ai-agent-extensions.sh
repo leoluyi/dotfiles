@@ -26,14 +26,12 @@ done
 # otherwise the install fails with "not found in marketplace".
 run claude plugin marketplace add anthropics/claude-plugins-official
 run claude plugin marketplace add affaan-m/everything-claude-code
-# run claude plugin marketplace add alirezarezvani/claude-skills  # engineering-advanced-skills — removed, redundant with ECC + superpowers
 run claude plugin marketplace add anthropics/knowledge-work-plugins
 # WARNING: This command may silently fail due to a CLI bug — the marketplace
 # may not appear in known_marketplaces.json. Verify manually after running.
 run claude plugin marketplace add yvictor/skills
-# run claude plugin marketplace add shyuan/shyuan-marketplace  # writing-humanizer — removed, redundant with ECC avoid-ai-writing
 run claude plugin marketplace add jarrodwatts/claude-hud
-run claude plugin marketplace add forrestchang/andrej-karpathy-skills
+run claude plugin marketplace add multica-ai/andrej-karpathy-skills
 run claude plugin marketplace add JuliusBrussee/caveman
 # run claude plugin marketplace add jeffallan/claude-skills  # fullstack-dev-skills — removed, ~80% redundant with ECC
 # claude-statusline is installed via npx, not as a plugin
