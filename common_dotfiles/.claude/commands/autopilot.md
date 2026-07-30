@@ -86,50 +86,66 @@ which is nearly always.
    with real granularity, each item carrying its file scope. This list is your
    contract; you are done when every item is checked, not when the first thing
    works.
-4. **Isolate.** Never work on the default branch. Enter a worktree — or branch
-   in place, see *Isolation* below, and *Naming* for what to call it. This is
-   the last moment the tree is clean, so decide here and not later.
+4. **Isolate.** Never work on the default branch. Enter a worktree, branch in
+   place, or stay on the non-default branch you are already on — see *Isolation*
+   below for which, and *Naming* for what to call it when you create one. This
+   is the last moment the tree is clean, so decide here and not later.
 5. **Build it.** Work the list top to bottom, dispatching per the delegation
    model. Read each returned diff before marking the item done. Fix what breaks.
    Keep going.
 6. **Review and verify.** See *Verification gate*.
 7. **Ship.** Commit, push, open a ready PR.
 
-## Isolation: worktree by default, branch when isolation can't apply
+## Isolation
 
-A worktree is the default because the risk this section guards against is
-asymmetric: if this run and some other agent or session end up checked out in
-the same directory at the same time, that is not a merge conflict — it is one
-HEAD, one working tree, one index, silently overwritten or corrupted by
-whichever process touched it last. Neither side can detect it happening. A
-worktree run that turns out not to have needed the isolation costs one extra
-dependency install; a branch run that turns out to have needed it costs
-unrecoverable, undetected damage to my tree. Default to the side that fails
-cheap.
+Decide this once, at step 4, and stop at the first rule that matches:
 
-Use `EnterWorktree` unless **either** of these holds — these are mechanical
-preconditions, not judgment calls, and if either fails, branch in place instead
-and move on. Do not try to make them true — do not stash, do not commit
-unrelated work to clear the tree, do not push local commits so the base ref
-will see them:
+1. **HEAD is on a non-default branch and $ARGUMENTS is empty.** Stay on it and
+   keep committing there — an empty invocation continues the plan already under
+   way, and that plan is why this branch exists. Say in the final report that
+   you continued an existing branch rather than creating one.
+2. **You are already inside a worktree** — `git rev-parse --show-toplevel` lands
+   under `.claude/worktrees/`, or HEAD is on a `worktree-*` branch. Branch in
+   place.
+3. **I told you this run is solo, or to skip isolation.** Branch in place.
+4. **The working tree is dirty.** Branch in place.
+5. **The job builds on commits absent from `origin/<default-branch>`** —
+   `git rev-list --count origin/<default-branch>..HEAD` is non-zero and the plan
+   depends on those commits. Branch in place.
+6. **Otherwise.** `EnterWorktree`.
 
-- The working tree is dirty. `EnterWorktree` does not carry uncommitted changes
-  across; anything dirty stays behind in the original directory, stranded and
-  invisible to the rest of this run.
-- The job depends on unpushed local commits. The default base ref is `fresh`,
-  which branches from `origin/<default-branch>`, so local-only history will not
-  be there.
+Rule 6 is the default because the risk is asymmetric: two sessions checked out
+in one directory is not a merge conflict but one HEAD and one index silently
+overwritten, undetectable from either side, whereas a worktree that turns out
+not to have been needed costs one dependency install. Rules 4 and 5 exist
+because `EnterWorktree` carries no uncommitted changes across, and its default
+`fresh` base ref branches from `origin/<default-branch>` — the trap in rule 5 is
+a feature branch that is already pushed, whose commits are therefore not
+local-only yet are still absent from that base, so a worktree cut there starts
+on a tree missing the work the job builds on and nothing errors; you find out at
+merge. Rule 2 exists because nesting is refused outright within a session, and
+from a session launched inside the worktree `--show-toplevel` resolves to the
+worktree rather than the main checkout, so it would grow a second
+`.claude/worktrees/` under the first — and it buys nothing, since being in a
+worktree already keeps this run out of my main tree. Rule 3 is mine to make and
+not yours: you cannot observe from inside a run whether I will open another
+session against this repo, so never infer it from job size or file count.
 
-I decide concurrency, not you — you cannot observe from inside a run whether I
-will open another session against this repo before this one finishes, so don't
-try to infer it from job size or file count. If I say this run is solo, or I
-tell you up front to skip isolation, branch in place even when both
-preconditions above are clean. Absent that, worktree is the default because the
-failure mode of guessing wrong runs one direction.
+Never manufacture a passing condition — do not stash, do not commit unrelated
+work to clear the tree, do not push local commits so the base ref will see them.
+Inside a worktree everything else is unchanged: same sequence, same gate, same
+shipping. Do not call `ExitWorktree` yourself; the work lives there and I decide
+what happens to it. Put the worktree path in the final report.
 
-Once inside, everything else is unchanged: same sequence, same gate, same
-shipping. Do not call `ExitWorktree` yourself — the work lives there and I
-decide what happens to it. Put the worktree path in the final report.
+Subagent-level isolation is a different mechanism, and `isolation: "worktree"`
+on an `Agent` call is **forbidden here**. Not because of its cost — because a
+worktree branches from the remote default and therefore cannot see the edits you
+have made and not yet committed. Under this delegation model you keep the small
+and cross-cutting changes in the main loop, so an isolated agent would be
+writing against stale signatures, stale helpers and stale conventions, and you
+would not find out until you merged it back. On top of that it solves a problem
+you do not have: the parallelism rule already guarantees concurrent agents write
+to disjoint files. Let them work in the tree you are actually in.
 
 ## Naming
 
@@ -162,16 +178,6 @@ slug, which is exactly the concurrency case the worktree default exists for. If
 the name is taken, append `-2`, then `-3`. Do not reach for a timestamp to force
 uniqueness — `date` is not in this command's `allowed-tools`, so it would stall
 the run on a permission prompt.
-
-Subagent-level isolation is a different mechanism, and `isolation: "worktree"`
-on an `Agent` call is **forbidden here**. Not because of its cost — because a
-worktree branches from the remote default and therefore cannot see the edits you
-have made and not yet committed. Under this delegation model you keep the small
-and cross-cutting changes in the main loop, so an isolated agent would be
-writing against stale signatures, stale helpers and stale conventions, and you
-would not find out until you merged it back. On top of that it solves a problem
-you do not have: the parallelism rule already guarantees concurrent agents write
-to disjoint files. Let them work in the tree you are actually in.
 
 ## Briefing subagents
 

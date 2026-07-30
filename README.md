@@ -102,6 +102,12 @@ Shell functions via [`llm` CLI](https://llm.datasette.io/) (`llm-cmd`, `llm-expl
 
 See [docs/ai-workflow.md](./docs/ai-workflow.md) for full setup and usage details.
 
+## Claude Code
+
+Custom slash commands live in `common_dotfiles/.claude/commands/` and are symlinked via Stow.
+
+See [docs/autopilot.md](./docs/autopilot.md) for what `/autopilot` does — delegation model, branch/worktree isolation rules, naming, verification gate, and hard stops.
+
 ## Cheatsheets
 
 - [Vim](./cheatsheets/vim_shortcut_keys.md)
