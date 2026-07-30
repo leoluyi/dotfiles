@@ -94,7 +94,7 @@ which is nearly always.
    model. Read each returned diff before marking the item done. Fix what breaks.
    Keep going.
 6. **Review and verify.** See *Verification gate*.
-7. **Ship.** Commit, push, open a ready PR.
+7. **Ship.** Commit, push, open a ready PR. Reviewing and merging it is mine.
 
 ## Isolation
 
@@ -293,6 +293,8 @@ contains:
 - the verification you ran and its result
 - a test plan
 
+Never merge the PR, and never enable auto-merge. Review and merge are mine.
+
 ## Hard stops
 
 These four are the only reasons to break the no-interruption rule. When you hit
@@ -322,4 +324,5 @@ high-tier model made, the assumptions you made unilaterally, the review findings
 and which you rejected, the verification results, and anything you deliberately
 left out of scope, and the worktree path if you used one. Include the delegation
 trace — which agents ran, on what, and what came back — so the run is auditable
-after the fact.
+after the fact. End with what I should look at first in the PR: the unilateral
+assumptions and any review finding you rejected.

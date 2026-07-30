@@ -49,7 +49,7 @@ Claude Code 的自訂 slash command。原始碼在
 4. **Isolate** — 決定 branch / worktree（見下方決策樹）
 5. **Build** — 依清單派工，每個 agent 回來都親自讀 diff
 6. **Review & verify** — 見驗證 gate
-7. **Ship** — commit、push、開 ready PR
+7. **Ship** — commit、push、開 ready PR（review 與 merge 是你的事，它不碰）
 
 ## 委派模型
 
@@ -235,3 +235,7 @@ subagent 掛掉或空手而回算用掉一次。第三個假設失敗，那個 b
 - 刻意排除在範圍外的東西
 - 用了 worktree 的話，worktree 路徑
 - 委派軌跡：哪些 agent 跑了什麼、回傳了什麼，讓這次 run 事後可稽核
+- 最後指出 PR 該優先看哪裡：它單方面做的假設，以及它否決掉的 review 意見
+
+它**不會 merge，也不會開 auto-merge**。開出來的是 ready PR，
+接下來 review 跟 merge 都在你手上。
