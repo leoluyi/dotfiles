@@ -176,7 +176,7 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -boolean false
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -boolean false
 
 # Hide desktop icons.
-# defaults write com.apple.finder CreateDesktop -bool false
+defaults write com.apple.finder CreateDesktop -bool false
 
 # Show all filename extensions.
 defaults write NSGlobalDomain AppleShowAllExtensions -boolean true
