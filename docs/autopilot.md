@@ -4,7 +4,7 @@ Claude Code 的自訂 slash command。原始碼在
 [`common_dotfiles/.claude/commands/autopilot.md`](../common_dotfiles/.claude/commands/autopilot.md)，
 由 Stow 連結到 `~/.claude/commands/autopilot.md`。
 
-本文記錄「按下去會發生什麼」，用來取代直接閱讀 345 行的 command 原始碼。
+本文記錄「按下去會發生什麼」，用來取代直接閱讀 358 行的 command 原始碼。
 其中 `EnterWorktree` 的行為是實測結果（Claude Code `2.1.220`，2026-07-30）。
 
 ## 一句話
@@ -67,6 +67,38 @@ Subagent 永遠不 commit、不 push、不開 PR，這句要寫進每份 brief�
 
 平行化的判準是**檔案範圍是否互斥**，不是急不急：範圍不重疊的 todo 在同一個訊息裡
 一次發出去，重疊的排隊。講不出某個 todo 的檔案範圍，代表它還沒拆到可以派工。
+
+### 回傳壓縮
+
+省的是**主迴圈 context，不是總 token**。subagent 讀進去的檔案照樣要錢，
+壓縮 brief 只會製造歧義讓你重派一次；唯一能省的是回傳注入主 context 的那一段。
+剛好那一段就是長 run 的死因。一趟 run 量級大約 10-20k，有感但不是翻倍。
+
+採白名單，新環節預設不壓：
+
+| 環節 | 壓縮 | 理由 |
+|---|---|---|
+| recon 掃碼庫 | 是 | 要的就是 `path:line` 事實 |
+| 單一 todo 的實作回報 | 是 | 主迴圈本來就親自讀 diff，回報只是索引 |
+| 修 build / test / type 錯誤 | 否 | 三次上限按 blocker 計數，假設清單不能壓 |
+| 送 opus 的決策 | 否 | 要的就是 option space 與被淘汰的方案 |
+| ship 前的 review | 否 | 你可以否決意見，但壓掉 rationale 就無從否決 |
+| 產出散文的 todo（文件、README、commit body） | 否 | 精簡指令會滲進產物 |
+| 最終報告 | 否 | 給人看、要可稽核 |
+
+實作回報的格式是逐檔 `path:line-range — 一句話`，不覆述 brief、不寫開場與結尾段、
+驗證只引最短的決定性那一行。矛盾與「刻意沒做的事」仍寫完整句子——那是你要判斷的輸入。
+
+recon 的 agent 依序取這個 session 實際列出的第一個：`cavecrew-investigator`、
+`Explore`、`general-purpose`。第一個自帶 `path:line` 輸出契約，不必再寫格式要求；
+caveman plugin 沒裝就自然退到後面兩個，不產生依賴。
+
+`cavecrew-builder` 與 `cavecrew-reviewer` **不用**：builder 硬拒 3+ 檔會回 `too-big.`
+白費一輪，而 autopilot 的 todo 常常超過 2 檔；reviewer 只回 findings 不回 rationale，
+和 ship 前 review 的否決要求直接衝突。
+
+另外注意：caveman 的 SessionStart hook 只作用於主 session，**subagent 不繼承**。
+壓縮一定要寫進 brief，或走本身就帶輸出契約的 agent preset。
 
 `Agent` 呼叫上的 `isolation: "worktree"` 在這個 command 裡是**禁止**的——
 worktree 從遠端預設分支切出去，看不到主迴圈尚未 commit 的編輯，

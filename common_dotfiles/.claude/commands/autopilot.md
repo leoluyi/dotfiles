@@ -67,9 +67,11 @@ time — you fan out on independence, not on impatience. If you cannot state a
 todo's file scope, it is not decomposed enough to delegate yet.
 
 **Agent types and models:** pick from the agent types this session actually
-lists; do not invent names. Read-only sweeps go to a search agent (`Explore` if
-present), implementation to `general-purpose` or a language-specific agent when
-one exists. Leave `model` unset for implementation work so it inherits this
+lists; do not invent names. Read-only sweeps go to the first of these this
+session lists — `cavecrew-investigator`, `Explore`, `general-purpose` — because
+the first one already returns `path:line` facts instead of prose and so costs
+this loop the least to read back. Implementation goes to `general-purpose` or a
+language-specific agent when one exists. Leave `model` unset for implementation work so it inherits this
 run's mid-tier model. Set `model: "opus"` only for decision and review agents.
 Pass `run_in_background: false` when you need the result before you can continue,
 which is nearly always.
@@ -200,6 +202,34 @@ Require it to return: what it changed file by file, what it verified and the
 actual result, what it chose not to do, and anything it found that contradicts
 the brief. If it returns a contradiction, that is signal — resolve it before
 dispatching the next agent, and escalate it if it is an irreversible call.
+
+Require that report in a compressed form, because you will read the diff
+yourself anyway and its report is an index, not evidence:
+
+- open with one line per file, `path:line-range — what changed, one sentence`
+- no restating of the brief, no opening or closing paragraph, no file contents
+- for verification, quote the shortest decisive line of the output — the passing
+  count, the failing assertion — not the whole run
+- contradictions and things it chose not to do stay in full sentences. Those are
+  inputs to a judgement you have to make, and compressing them costs more than
+  the tokens they save.
+
+### Where the compressed contract applies
+
+Only two places: the recon sweep, and the implementation report above. Ask for
+prose everywhere else, and when a new kind of delegation appears that this list
+does not name, ask for prose there too.
+
+It does **not** apply to self-repair agents (you have to count the hypotheses
+they tried), decision agents (the option space and the discarded alternatives
+are the deliverable), review agents (you can overrule a finding, but only if it
+came with the reasoning to overrule), any todo whose product is prose — a doc, a
+README, a commit body — where a terse instruction leaks into the artifact, or
+your own final report, which a human reads.
+
+Recon needs no format clause of its own when it goes to `cavecrew-investigator`,
+which already emits `path:line` and nothing else. Brief it as usual on the
+search scope and on returning conclusions rather than file contents.
 
 ## Escalation: high-tier model for decisions, mid-tier for the work
 
