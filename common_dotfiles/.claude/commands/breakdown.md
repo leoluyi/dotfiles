@@ -1,0 +1,113 @@
+---
+description: Lay out every case in full, decompose the open questions for me to answer, then synthesize a recommendation
+argument-hint: [topic, or blank for whatever we're already discussing]
+effort: high
+---
+
+I don't want a conclusion yet. I want the ground laid out first, then the
+decisions separated out so I can make them, and only then your recommendation.
+
+Three phases, in order, and **phase 3 does not happen in this message**.
+
+## Scope
+
+If $ARGUMENTS is non-empty, that is the subject. If it is empty, the subject is
+whatever we are already working on — the thing you just proposed, the bug we are
+looking at, the decision in front of us. Don't restart the topic and don't ask
+me to restate it.
+
+Before writing anything, gather the facts. Read the actual code, config, docs or
+data that the subject depends on. If a fact matters to the breakdown, verify it
+rather than recalling it, and delegate the sweep to a subagent when it means
+reading widely. A breakdown built on assumed facts is worse than no breakdown,
+because it looks complete.
+
+## Phase 1 — every case, one at a time, in full
+
+Enumerate the distinct cases first, and enumerate them *before* you evaluate any
+of them. A case is anything that would be handled differently from its
+siblings: a candidate approach, a scenario or code path, an environment, a data
+shape, an affected user or system, a failure mode, an edge case. Whatever axis
+the subject actually varies on — name the axis explicitly so I can tell whether
+you cut it the right way.
+
+Then give each case its own section, and in each one cover:
+
+- **What it is** — one line, concrete enough that I could point at it.
+- **What is actually true about it** — the specifics, with file paths, values,
+  versions, error text, quantities. This is the part I want in full; do not
+  summarise it away. Mark each item as **fact** (you verified it, and where) or
+  **inference** (you reasoned it out, and from what). Never blur the two.
+- **Why it's on the list** — what makes it distinct from the neighbouring cases.
+- **What follows from it** — cost, risk, blast radius, what it forecloses, who
+  it affects.
+- **What you don't know about it** — the gaps, stated plainly.
+
+Rules for this phase:
+
+- Exhaustive before selective. Include the cases you think are wrong, the
+  do-nothing case, and the awkward one nobody wants. If you deliberately left
+  something out, list it under an "excluded" heading with the reason — a silent
+  omission reads as coverage.
+- No pre-ranking, no "obviously the best option is". That is phase 3.
+- Uniform depth. If one case gets four sentences and another gets a clause, that
+  asymmetry is you deciding for me. Either fill the thin one in or say why it
+  can't be filled in.
+- Don't pad. If the subject genuinely has two cases, give me two. Manufacturing
+  a fifth to look thorough wastes both our time — and say so when the space is
+  small.
+- If the list runs long, group the cases under headings, but never truncate.
+  "and others like it" is not a case.
+
+## Phase 2 — decompose it into questions I answer
+
+Now split the open problem into the individual decisions it actually contains.
+One question per decision, each one independently answerable, and each one
+carrying **what hinges on it** — which cases from phase 1 it selects between,
+and how the recommendation changes depending on my answer.
+
+Only ask what changes the outcome. If my answer would not move the
+recommendation, don't ask it — decide it yourself and note the call in phase 3.
+Likewise don't ask me anything you could establish by reading the code, and
+don't re-ask anything I have already told you in this conversation.
+
+Deliver them in whichever form fits the answer:
+
+- **AskUserQuestion** when the answer space is enumerable — 2-4 mutually
+  exclusive options, labelled by outcome, trade-off named in one line, the one
+  you'd recommend first and marked as such. Four is the tool's cap.
+- **A numbered prose list** when the answer is genuinely open: a number, a name,
+  a constraint, a priority I hold that you have no way to guess.
+
+Batch them into as few rounds as possible; if there are more than four closed
+questions, group the ones that share an axis. Order them by leverage, most
+consequential first, and say when one question's answer makes a later one moot.
+
+Then **stop**. Do not answer your own questions. Do not write code, do not edit
+files, do not start on the part you think is settled regardless — this command
+is for thinking, and an edit made before I have answered is an answer you gave
+yourself. Wait.
+
+If I reply "just decide", skip the questions, or tell you to proceed, go
+straight to phase 3 with every unanswered question converted into an explicit
+stated assumption.
+
+## Phase 3 — synthesize, after I answer
+
+Once I have answered, give me the recommendation. It has to visibly rest on
+phases 1 and 2:
+
+- **The recommendation**, stated as a decision, not a menu.
+- **Which of my answers drove it**, and where a different answer would have
+  flipped it.
+- **Every case from phase 1, accounted for.** Say what happens to each one —
+  chosen, rejected and why, folded into another, or deferred. A case that
+  quietly disappears between phase 1 and phase 3 is the failure mode I am trying
+  to avoid.
+- **What you decided without asking me**, and the reasoning.
+- **What is still uncertain**, and what would resolve it.
+- **The next concrete step**, and nothing more than the step. Wait for me to say
+  go before you take it.
+
+Keep phase 3 shorter than phase 1. By this point the detail is already on the
+table; repeating it is not synthesis.
