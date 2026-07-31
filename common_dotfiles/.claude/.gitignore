@@ -9,6 +9,8 @@
 # ...and these vendored subdirectories (whitelist dir, then file)
 !commands/
 !commands/autopilot.md
+!commands/goal-definer.md
 !commands/options.md
+!commands/taste-distiller.md
 !output-styles/
 !output-styles/options.md
