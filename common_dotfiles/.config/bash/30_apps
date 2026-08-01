@@ -140,6 +140,9 @@ command -v nnn >/dev/null \
 # Astro.
 # command -v astro >/dev/null && eval "$(astro completion bash 2>/dev/null | sed '0,/# bash completion/d')"
 
+# oh-my-pi (omp).
+command -v omp >/dev/null && eval "$(omp completions bash)"
+
 # Poetry.
 # https://python-poetry.org/docs/
 [ -d "$HOME/.poetry/bin" ] && export PATH="$HOME/.poetry/bin:$PATH"
