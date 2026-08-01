@@ -3,4 +3,9 @@
 model: openai:gpt-5.2
 clients:
 - type: openai
+  patch:
+    chat_completions:
+      'gpt-5\.6-luna.*':
+        body:
+          reasoning_effort: low
 - type: claude
