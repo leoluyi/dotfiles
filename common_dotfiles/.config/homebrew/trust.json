@@ -13,5 +13,8 @@
     "oven-sh/bun",
     "sdkman/tap",
     "slp/krunkit"
+  ],
+  "trustedformulae": [
+    "can1357/tap/omp"
   ]
 }
