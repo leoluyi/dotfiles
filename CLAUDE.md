@@ -2,9 +2,8 @@
 
 ## Skill routing
 
-When the user's request matches an available skill, ALWAYS invoke it using the Skill
-tool as your FIRST action. Do NOT answer directly, do NOT use other tools first.
-The skill has specialized workflows that produce better results than ad-hoc answers.
+Request match available skill → ALWAYS invoke via Skill tool, FIRST action. No direct
+answer, no other tools first. Skill workflows beat ad-hoc answers.
 
 Key routing rules:
 - Product ideas, "is this worth building", brainstorming → invoke office-hours
