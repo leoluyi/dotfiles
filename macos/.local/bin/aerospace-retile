@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+#
+# Force every window of the tiling apps back into the tiling tree.
+#
+# `alt-f` is bound to `layout floating tiling`, which is a strict two-state
+# toggle: on a mixed set of windows an even number of presses is a no-op, so
+# pressing it once per window cannot converge a drifted workspace. This walks
+# the window list instead and only touches the windows that actually report
+# `floating`, which makes it idempotent -- running it twice is the same as
+# running it once.
+#
+# Windows of a hidden app report `macos_native_window_of_hidden_app`, which
+# masks their real layout. They cannot be retiled while hidden, so they are
+# reported instead of silently skipped.
+#
+# The app ids below must match the `on-window-detected` tiling rules in
+# ~/.config/aerospace/aerospace.toml.
+
+set -uo pipefail
+
+readonly TILING_APP_IDS=' org.alacritty com.github.wez.wezterm com.mitchellh.ghostty '
+
+if ! windows=$(aerospace list-windows --all \
+  --format '%{window-id}|%{app-bundle-id}|%{window-layout}' 2>/dev/null); then
+  echo "aerospace-retile: AeroSpace is not responding" >&2
+  exit 1
+fi
+
+retiled=0
+failed=0
+hidden=0
+
+while IFS='|' read -r window_id app_id layout; do
+  [ -n "$window_id" ] || continue
+  case "$TILING_APP_IDS" in
+    *" $app_id "*) ;;
+    *) continue ;;
+  esac
+
+  if [ "$layout" = 'macos_native_window_of_hidden_app' ]; then
+    hidden=$((hidden + 1))
+    continue
+  fi
+
+  [ "$layout" = 'floating' ] || continue
+
+  if aerospace layout tiling --window-id "$window_id" >/dev/null 2>&1; then
+    retiled=$((retiled + 1))
+  else
+    failed=$((failed + 1))
+    echo "aerospace-retile: could not retile window $window_id ($app_id)" >&2
+  fi
+done <<EOF
+$windows
+EOF
+
+echo "aerospace-retile: retiled $retiled window(s)"
+
+if [ "$hidden" -gt 0 ]; then
+  echo "aerospace-retile: $hidden window(s) of hidden apps were skipped;" \
+    "unhide the app and run again to check them" >&2
+fi
+
+[ "$failed" -eq 0 ]

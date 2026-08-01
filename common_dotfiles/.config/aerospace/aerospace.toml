@@ -87,9 +87,12 @@ outer.right = 6
 # then per-app tiling overrides) is upstream's own documented example, but it
 # makes every terminal window depend on TWO callbacks both firing: float, then
 # rescue back to tiling. If the second one does not take effect the window is
-# left floating and drops out of the tiling tree. That is the failure mode
-# tracked in docs/aerospace-hotkey-debug.md -- both captured incidents were
-# Ghostty windows stuck in `floating`.
+# left floating and drops out of the tiling tree, which is exactly the failure
+# that kept showing up here (Ghostty windows stuck in `floating`).
+#
+# Note this ordering did NOT stop the drift: windows are observed to start
+# tiled and turn floating later, so the cause is not the callback chain. It is
+# still the better ordering. Use `alt-shift-t` to recover.
 #
 # With this ordering each window is handled by exactly one callback, so there is
 # no second step left to fail. End behaviour is identical.
@@ -163,6 +166,11 @@ alt-l = '''exec-and-forget bash -c '[ "$(aerospace list-windows --focused --form
 
 alt-f = 'layout floating tiling'
 alt-z = 'fullscreen'
+
+# Pull every terminal window that drifted out of the tiling tree back in.
+# Unlike `alt-f` this is not a toggle -- it only touches windows that actually
+# report `floating`, so it always converges.
+alt-shift-t = '''exec-and-forget bash -c '"$HOME"/.local/bin/aerospace-retile' '''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
