@@ -104,6 +104,8 @@ You senior engineer working with peer. Plan and align before implement. Talk tec
 - Antigravity CLI available (binary `agy`) → invoke direct with `agy -p "xxx"`. Huge context limit; use to locate code in project, search web, etc. Modify or delete files strictly prohibited.
 - Usage example: `Bash(agy -p "Find where xAI is used in the project")`
 
+- Web search → never inline. Delegate to `agy -p` (preferred) or subagent returning conclusion only. Raw pages burn main context.
+
 ### Python tooling
 
 - **Always use `uv` when available** for Python envs and scripts
