@@ -59,6 +59,8 @@ Config is stowed from `common_dotfiles/.config/aichat/config.yaml`. The `models-
 
 Default model: `openai:gpt-5.6-luna` at `reasoning_effort: xhigh` (set via `model` and the `patch` block in `config.yaml`).
 
+`commit.yaml` is a separate config used only by the `git aic` alias (selected through `AICHAT_CONFIG_FILE`). It pins the same model at `reasoning_effort: low` with `save: false`, so commit-message generation stays fast and stateless regardless of the interactive default.
+
 ### Shell Integration (`~/.config/bash/43_aichat`)
 
 | Alias | Usage | Description |

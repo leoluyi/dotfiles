@@ -1,0 +1,16 @@
+# Dedicated aichat config for `git aic` commit-message generation.
+#
+# Kept separate from config.yaml so that interactive usage can run at a high
+# reasoning effort without slowing down every commit. Selected via
+# AICHAT_CONFIG_FILE in the `aic` git alias.
+
+model: openai:gpt-5.6-luna
+save: false
+stream: false
+clients:
+- type: openai
+  patch:
+    chat_completions:
+      'gpt-5\.6-luna.*':
+        body:
+          reasoning_effort: low
