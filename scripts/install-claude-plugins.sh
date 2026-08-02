@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
-# CLI agent (Claude Code, Codex) plugin and skill installation script
-# Generated: 2026-03-10
+# Claude Code plugin marketplace + plugin installation.
+# Standalone: runnable directly (reports its own failures, exits 1 on any).
+# Sourced: install-agent-skills.sh sources this optionally — reuses caller's
+# FAILURES array/run() if present, and skips its own report/exit so the
+# caller aggregates failures across both scripts.
 
 set -uo pipefail
 
-FAILURES=()
+declare -p FAILURES &>/dev/null || FAILURES=()
 
-run() {
-  echo "+ $*"
-  if ! "$@"; then
-    FAILURES+=("$*")
-  fi
-}
+if ! declare -f run &>/dev/null; then
+  run() {
+    echo "+ $*"
+    if ! "$@"; then
+      FAILURES+=("$*")
+    fi
+  }
+fi
 
 echo "Installing Claude Code plugins..."
 
@@ -74,54 +79,14 @@ run claude plugin install dev-workflow@yvictor-skills
 # once, then re-apply the patch and re-vendor common_dotfiles/.claude/statusline.sh.
 # run npx @kamranahmedse/claude-statusline
 
-# Standalone skill repos (not marketplace plugins)
-mkdir -p ~/.claude/skills
-clone_or_pull() {
-  local repo="$1" dest="$2"
-  if git clone "$repo" "$dest" 2>/dev/null; then
-    return
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  if [[ ${#FAILURES[@]} -gt 0 ]]; then
+    echo ""
+    echo "WARNING: ${#FAILURES[@]} command(s) failed:"
+    for cmd in "${FAILURES[@]}"; do
+      echo "  - $cmd"
+    done
+    exit 1
   fi
-  git -C "$dest" pull --rebase --autostash || {
-    git -C "$dest" rebase --abort 2>/dev/null || true
-    git -C "$dest" merge --abort 2>/dev/null || true
-    git -C "$dest" reset --hard origin/HEAD
-    git -C "$dest" pull --rebase --autostash
-  }
-}
-# run clone_or_pull https://github.com/conorbronsdon/avoid-ai-writing ~/.claude/skills/avoid-ai-writing  # removed
-# run clone_or_pull https://github.com/garrytan/gstack ~/.claude/skills/gstack  # removed, ~90% redundant with ECC + superpowers (bare skill names clash)
-# echo "NOTE: gstack requires Bun v1.0+ (https://bun.sh)"
-# (cd ~/.claude/skills/gstack && ./setup)
-npx skills@latest add mattpocock/skills -g -y --all
-# mattpocock ships obsidian-vault pinned to their own vault path; drop it so our
-# forked version (in leoluyi/skills) installs cleanly instead of being skipped as
-# a name conflict. Order matters: remove AFTER mattpocock's --all, BEFORE leoluyi.
-npx skills@latest remove obsidian-vault -g -y 2>/dev/null || true
-npx skills@latest add leoluyi/skills -g -y
-# Official Anthropic writing skill: brainstorm -> curate -> draft -> polish, section by section
-npx skills@latest add anthropics/skills -g -y -s doc-coauthoring
-# caveman is also installed as a Claude Code plugin above; this line targets Codex CLI
-npx skills@latest add JuliusBrussee/caveman -g -a codex -y
-
-
-# --- ykdojo/claude-code-tips quick setup (Tip 45) ---
-# Installs cc-safe, configures MCP lazy-load, permissions, attribution, etc.
-# Default skips: 3 (status-line), 4 (auto-updates), 9 (aliases), 10 (fork-shortcut)
-read -p "Run ykdojo/claude-code-tips setup script? [y/N]: " run_tips_setup
-if [[ "$run_tips_setup" =~ ^[Yy]$ ]]; then
-  echo "Running setup with skip: 3 4 9 10..."
-  if ! echo "3 4 9 10" | bash <(curl -s https://raw.githubusercontent.com/ykdojo/claude-code-tips/main/scripts/setup.sh); then
-    FAILURES+=("ykdojo/claude-code-tips setup script")
-  fi
+  echo "Done! All plugins installed."
 fi
-
-if [[ ${#FAILURES[@]} -gt 0 ]]; then
-  echo ""
-  echo "WARNING: ${#FAILURES[@]} command(s) failed:"
-  for cmd in "${FAILURES[@]}"; do
-    echo "  - $cmd"
-  done
-  exit 1
-fi
-
-echo "Done! All plugins installed."
