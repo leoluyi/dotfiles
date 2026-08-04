@@ -54,6 +54,10 @@ npx skills@latest add anthropics/skills -g -y -s theme-factory
 # caveman is also installed as a Claude Code plugin above; this line targets Codex CLI
 npx skills@latest add JuliusBrussee/caveman -g -a codex -y
 
+# Claude-style SessionStart hooks do not all emit the single JSON object Codex
+# expects. Patch the installed Codex copies after plugin updates.
+"${_SCRIPT_DIR}/fix-codex-session-start-hooks.sh"
+
 
 # --- ykdojo/claude-code-tips quick setup (Tip 45) ---
 # Installs cc-safe, configures MCP lazy-load, permissions, attribution, etc.
