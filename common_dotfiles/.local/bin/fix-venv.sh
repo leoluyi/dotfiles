@@ -23,7 +23,7 @@ else
   files=$(grep -F -r "$old" "$venv" -l)
   echo "$files"
   echo "Replace $old with $new in the above files?"
-  read -rp "[Yn] ? " YN
+  read -rp "[Y/n] ? " YN
   if [[ "$YN" =~ [Yy] ]] || [[ -z "$YN" ]]; then
     grep -F -r "$old" "$venv" -l | xargs sed -i "s:$old:$new:g"
   fi
@@ -31,7 +31,7 @@ else
   files=$(grep -F -r "$old2" "$venv"/bin/activate* -l)
   echo "$files"
   echo "Replace $old2 with $new2 in the above files?"
-  read -rp "[Yn] ? " YN
+  read -rp "[Y/n] ? " YN
   if [[ "$YN" =~ [Yy] ]] || [[ -z "$YN" ]]; then
     grep -F -r "$old2" "$venv"/bin/activate* -l | xargs sed -i "s:$old:$new2:g"
   fi
@@ -39,7 +39,7 @@ fi
 
 python_path="$(which python)"
 venv_python_path="$PWD/$venv/bin/python"
-read -rp "Link '$venv_python_path' to '$python_path'? [yN]" YN
+read -rp "Link '$venv_python_path' to '$python_path'? [y/N]" YN
 if [[ "$YN" =~ [Yy] ]] && [ -f "$python_path"  ] ; then
   ln -sf "$python_path" "$venv_python_path"
 else
