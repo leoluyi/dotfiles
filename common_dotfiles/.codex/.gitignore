@@ -1,0 +1,9 @@
+# Codex generates caches, sessions, databases, logs, and plugin state here.
+# Track only the authored files explicitly allowlisted below.
+*
+!.gitignore
+!AGENTS.md
+!config.toml
+!hooks.json
+!rules/
+!rules/default.rules

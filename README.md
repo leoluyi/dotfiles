@@ -108,6 +108,18 @@ Custom slash commands live in `common_dotfiles/.claude/commands/` and are symlin
 
 See [docs/autopilot.md](./docs/autopilot.md) for what `/autopilot` does — delegation model, branch/worktree isolation rules, naming, verification gate, and hard stops.
 
+## Codex CLI
+
+Authored Codex configuration lives in `common_dotfiles/.codex/` and is symlinked into `~/.codex` by the existing `common_dotfiles` Stow package. Caches, sessions, databases, logs, plugin downloads, and credentials remain local and untracked.
+
+`config.toml` preserves this machine's current plugin and macOS notification settings, so Codex plugin changes can update the tracked file and some paths are intentionally machine-specific.
+
+```bash
+stow --dotfiles -R -t "$HOME" common_dotfiles
+```
+
+After Codex or agent plugin updates, run `scripts/fix-codex-session-start-hooks.sh` to keep Claude-style SessionStart hooks compatible with Codex's JSON output contract.
+
 ## Cheatsheets
 
 - [Vim](./cheatsheets/vim_shortcut_keys.md)
