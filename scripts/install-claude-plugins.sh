@@ -38,6 +38,7 @@ run claude plugin marketplace add yvictor/skills
 run claude plugin marketplace add jarrodwatts/claude-hud
 run claude plugin marketplace add multica-ai/andrej-karpathy-skills
 run claude plugin marketplace add JuliusBrussee/caveman
+run claude plugin marketplace add openai/codex-plugin-cc
 # run claude plugin marketplace add jeffallan/claude-skills  # fullstack-dev-skills — removed, ~80% redundant with ECC
 # claude-statusline is installed via npx, not as a plugin
 
@@ -63,6 +64,7 @@ run claude plugin install engineering@knowledge-work-plugins
 run claude plugin install claude-hud@claude-hud
 run claude plugin install andrej-karpathy-skills@karpathy-skills
 run claude plugin install caveman@caveman
+run claude plugin install codex@openai-codex
 
 # WARNING: This install may fail if the Yvictor/skills marketplace wasn't
 # registered successfully (see warning above).
