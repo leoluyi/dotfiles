@@ -110,11 +110,10 @@ See [docs/autopilot.md](./docs/autopilot.md) for what `/autopilot` does — dele
 
 ## Codex CLI
 
-Authored Codex configuration lives in `common_dotfiles/.codex/` and is symlinked into `~/.codex` by the existing `common_dotfiles` Stow package. Caches, sessions, databases, logs, plugin downloads, and credentials remain local and untracked.
-
-`config.toml` preserves this machine's current plugin and macOS notification settings, so Codex plugin changes can update the tracked file and some paths are intentionally machine-specific.
+Portable Codex guidance and approval rules live in `common_dotfiles/.codex/AGENTS.md` and `common_dotfiles/.codex/rules/default.rules`; those files are symlinked into `~/.codex` by the existing `common_dotfiles` Stow package. Hooks, `config.toml`, caches, sessions, databases, logs, plugin downloads, credentials, and other machine-specific state remain local and untracked. Stow ignores every `.codex` entry except the two portable files.
 
 ```bash
+mkdir -p "$HOME/.codex/rules"
 stow --dotfiles -R -t "$HOME" common_dotfiles
 ```
 

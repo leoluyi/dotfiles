@@ -3,7 +3,5 @@
 *
 !.gitignore
 !AGENTS.md
-!config.toml
-!hooks.json
 !rules/
 !rules/default.rules

@@ -1,5 +1,4 @@
 prefix_rule(pattern=["uv", "tool", "install"], decision="allow")
-prefix_rule(pattern=["/Users/leoluyi/.local/bin/tt", "setup"], decision="allow")
 prefix_rule(pattern=["codex", "mcp", "remove"], decision="allow")
 prefix_rule(pattern=["scripts/fix-codex-session-start-hooks.sh"], decision="allow")
 prefix_rule(pattern=["printf", "/exit\\n"], decision="allow")

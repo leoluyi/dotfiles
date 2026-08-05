@@ -105,6 +105,7 @@ _sync_dotfiles_stow() {
 
   mkdir -p "$config_home"
   mkdir -p "$HOME/.local/bin"
+  mkdir -p "$HOME/.codex/rules"
 
   home_src_folders=("common_dotfiles" "tmux" "$os")
 

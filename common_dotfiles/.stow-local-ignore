@@ -2,3 +2,4 @@
 .*\.DS_Store
 .*\.keep
 .*\.gitignore
+^/\.codex/(?!AGENTS\.md$|rules(?:/default\.rules)?$).*
