@@ -132,6 +132,11 @@
               "bundleIdentifier" : "com.apple.finder",
               "iconPath" : "/System/Library/CoreServices/Finder.app/Contents/Resources/Finder.icns",
               "name" : "Finder"
+            },
+            {
+              "bundleIdentifier" : "com.openai.codex",
+              "iconPath" : "/Applications/ChatGPT.app/Contents/Resources/electron.icns",
+              "name" : "ChatGPT"
             }
           ],
           "assignAppShortcut" : "opt+shift+4",
