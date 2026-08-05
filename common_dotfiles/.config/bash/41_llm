@@ -146,6 +146,7 @@ _llm_inline_suggest() {
 [[ $- == *i* ]] && bind -x '"\ea": _llm_inline_suggest'
 
 # Claude Code - project-free chat in a disposable temp directory.
+# -u ANTHROPIC_API_KEY: force subscription auth, never API-key billing.
 claude-chat() {
-  (cd "$(mktemp -d)" && claude "$@")
+  (cd "$(mktemp -d)" && env -u ANTHROPIC_API_KEY claude "$@")
 }

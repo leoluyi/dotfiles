@@ -5,14 +5,17 @@
 command -v aichat >/dev/null || return 0
 
 # aichat derives each client's key from <CLIENT>_API_KEY, so the `claude` client
-# reads CLAUDE_API_KEY and never sees ANTHROPIC_API_KEY. Mirror the value here.
+# reads CLAUDE_API_KEY and never sees ANTHROPIC_API_KEY. Mirror the value here
+# without exporting ANTHROPIC_API_KEY itself into the shell -- Claude Code CLI
+# switches from subscription auth to API-key billing whenever that var is set.
 # This file is sourced from ~/.config/bash/* before ~/.bash_profile loads
-# ~/.secrets/*, so pull the secret in directly when it is not set yet.
-if [ -z "$ANTHROPIC_API_KEY" ] && [ -r "$HOME/.secrets/ANTHROPIC_API_KEY" ]; then
-  . "$HOME/.secrets/ANTHROPIC_API_KEY"
-fi
-if [ -n "$ANTHROPIC_API_KEY" ]; then
-  export CLAUDE_API_KEY="${CLAUDE_API_KEY:-$ANTHROPIC_API_KEY}"
+# ~/.secrets/*, so pull the secret in via a subshell when it is not set yet.
+if [ -z "$CLAUDE_API_KEY" ]; then
+  if [ -n "$ANTHROPIC_API_KEY" ]; then
+    export CLAUDE_API_KEY="$ANTHROPIC_API_KEY"
+  elif [ -r "$HOME/.secrets/ANTHROPIC_API_KEY" ]; then
+    export CLAUDE_API_KEY="$(. "$HOME/.secrets/ANTHROPIC_API_KEY" >/dev/null 2>&1; printf '%s' "$ANTHROPIC_API_KEY")"
+  fi
 fi
 
 # Usage: ?? <question>
