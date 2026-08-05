@@ -84,11 +84,11 @@
 	sw = switch
 	type = cat-file -t
 	unchange = update-index --assume-unchanged  # Difference Between 'assume-unchanged' and 'skip-worktree'. < https://stackoverflow.com/a/13631525/3744499 >
-	unchanged = !"git ls-files -v | grep '^[[:lower:]]' || echo '(No unchanged files found)'"
+	unchanged = !"files=$(git ls-files -v | grep '^[[:lower:]]'); if [ -z \"$files\" ]; then echo '(No unchanged files found)'; else echo \"$files\"; echo; echo 'Recover: git no-unchange <file>'; fi"
 	undo = "!f() { if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo \"[undo] skip: not a git repository\"; exit 0; fi; echo \"[undo] Undo Last Commit: git reset HEAD~\"; git reset HEAD~; }; f"
 	unskip = update-index --no-skip-worktree
 	unstage = reset HEAD --
-	up = "!f() { git pull --rebase --prune \"$@\" && git submodule update --init --recursive ;}; f"
+	up = "!f() { dirty=$(for p in $(git ls-files -v | awk '/^[[:lower:]]/{print $2}'); do idx=$(git ls-files -s -- \"$p\" | awk '{print $2}'); wt=$(git hash-object -- \"$p\" 2>/dev/null); [ \"$idx\" != \"$wt\" ] && echo \"$p\"; done); [ -n \"$dirty\" ] && { echo 'Discarding local edits to unchanged files:'; echo \"$dirty\"; echo \"$dirty\" | xargs git checkout --; }; git pull --rebase --prune \"$@\" && git submodule update --init --recursive ;}; f"
 	wip = !"git add -A; git commit -m \"WIP: $(date)\""
 	wipe = "!gwipe() { git add -A && git commit -qm 'WIPE SAVEPOINT' --allow-empty && git reset HEAD~1 --hard && git clean -fdx ;}; read -p 'Wipe all changes? Tracked/untracked recoverable via git reflog; ignored files (.env, node_modules) are deleted permanently. (y/N) ' answer && [[ $answer == [Yy] ]] && gwipe"
 [color]
