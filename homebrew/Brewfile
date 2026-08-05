@@ -144,6 +144,8 @@ brew "grype"
 brew "gtk4"
 # Kubernetes package manager
 brew "helm"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
 # Convert source code to formatted text with syntax highlighting
 brew "highlight"
 # Improved top (interactive process viewer)
@@ -390,8 +392,6 @@ cask "arc"
 cask "bitwarden"
 # Virtual Audio Driver
 cask "blackhole-16ch"
-# OpenAI's official ChatGPT desktop app
-cask "chatgpt"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
