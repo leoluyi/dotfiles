@@ -2,5 +2,10 @@
   "env": {
     "ANTHROPIC_API_KEY": "",
     "OPENAI_API_KEY": ""
+  },
+  "permissions": {
+    "allow": [
+      "Bash(rg -ln -i '\\[y/n\\]|\\[Y/N\\]|y/n\\)|read -p.*y.*n|read -r.*ans' --type sh -g '*.sh')"
+    ]
   }
 }
