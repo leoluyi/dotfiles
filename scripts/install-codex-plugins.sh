@@ -16,6 +16,8 @@ echo "Installing Codex plugins..."
 
 run codex plugin marketplace add upstash/context7
 run codex plugin add context7@context7-marketplace
+run codex plugin marketplace add sergebulaev/x-skills
+run codex plugin add x-skills@x-skills
 
 if [[ ${#FAILURES[@]} -gt 0 ]]; then
   echo ""
