@@ -66,8 +66,8 @@ run "${_SCRIPT_DIR}/fix-codex-session-start-hooks.sh"
 # Default skips: 3 (status-line), 4 (auto-updates), 9 (aliases), 10 (fork-shortcut)
 read -p "Run ykdojo/claude-code-tips setup script? [y/N]: " run_tips_setup
 if [[ "$run_tips_setup" =~ ^[Yy]$ ]]; then
-  echo "Running setup with skip: 3 4 9 10..."
-  if ! echo "3 4 9 10" | bash <(curl -s https://raw.githubusercontent.com/ykdojo/claude-code-tips/main/scripts/setup.sh); then
+  echo "Running setup with skip: 3 4 8 9 10..."
+  if ! echo "3 4 8 9 10" | bash <(curl -s https://raw.githubusercontent.com/ykdojo/claude-code-tips/main/scripts/setup.sh); then
     FAILURES+=("ykdojo/claude-code-tips setup script")
   fi
 fi
