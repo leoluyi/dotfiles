@@ -18,6 +18,8 @@ run codex plugin marketplace add upstash/context7
 run codex plugin add context7@context7-marketplace
 run codex plugin marketplace add sergebulaev/x-skills
 run codex plugin add x-skills@x-skills
+run codex plugin marketplace add DannyMac180/sol-advisor --ref main
+run codex plugin add sol-advisor@sol-advisor
 
 if [[ ${#FAILURES[@]} -gt 0 ]]; then
   echo ""
