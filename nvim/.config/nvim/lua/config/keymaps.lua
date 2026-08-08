@@ -111,6 +111,23 @@ map("n", "<localleader>O", "O<Esc>^Da", { desc = "Insert line above no comment" 
 -- " https://vim.fandom.com/wiki/Selecting_your_pasted_text
 map("n", "gV", "`[v`]", { desc = "Select last changed" })
 
+-- Treesitter incremental selection (Neovim 0.12+).
+local function select_treesitter(target)
+  if not vim.treesitter.get_parser(0, nil, { error = false }) then
+    vim.notify("No Tree-sitter parser for this buffer", vim.log.levels.WARN)
+    return
+  end
+  vim.treesitter.select(target)
+end
+
+map({ "n", "x" }, "<C-Space>", function()
+  select_treesitter("parent")
+end, { desc = "Treesitter: expand selection" })
+
+map("x", "<BS>", function()
+  select_treesitter("child")
+end, { desc = "Treesitter: shrink selection" })
+
 -- Copy and paste stuffs =========================================================={{{2
 
 map(
