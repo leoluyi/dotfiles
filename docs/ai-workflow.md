@@ -19,7 +19,11 @@ Default model: `claude-sonnet-4.6` (set via `LLM_MODEL` in `41_llm`).
 
 Shell integration for [`fabric-ai`](https://github.com/danielmiessler/fabric).
 
-**Requirements:** `fabric-ai` installed and configured via `fabric-ai --setup`.
+**Requirements:** `fabric-ai` installed, an `OPENAI_API_KEY` in the environment, and Fabric patterns configured via `fabric-ai --setup`.
+
+Default provider: OpenAI API with `gpt-5.6-luna` (set by the shell wrapper in `~/.config/bash/42_fabric`).
+
+Use `fabric -V <vendor> -m <model>` to override the defaults for one invocation.
 
 | Function | Usage | Description |
 |---|---|---|

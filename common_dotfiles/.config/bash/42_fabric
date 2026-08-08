@@ -9,7 +9,15 @@ command -v fabric-ai >/dev/null || return 0
 # as a pattern to load, so a bare `fabric-ai` fails with "pattern 'fabric-ai'
 # not found". Re-exec under argv[0]=fabric (in a subshell so the interactive
 # shell is not replaced) to restore the upstream-intended behavior.
-fabric() { ( exec -a fabric fabric-ai "$@" ); }
+# Keep provider defaults here instead of tracking Fabric's `.env`, which also
+# contains API credentials. Explicit `-V` and `-m` flags still take precedence.
+fabric() {
+  (
+    export DEFAULT_VENDOR="${DEFAULT_VENDOR:-OpenAI}"
+    export DEFAULT_MODEL="${DEFAULT_MODEL:-gpt-5.6-luna}"
+    exec -a fabric fabric-ai "$@"
+  )
+}
 
 # --- Content consumption ---
 # Usage: pbpaste | wisdom
