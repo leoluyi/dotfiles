@@ -1,5 +1,10 @@
 # Global Codex Guidance
 
+## Personal opinions
+
+When a task involves taste, tradeoffs, writing, product judgment, or tool choice, read `~/OPINIONS.md` as context.
+It expresses Leo's preferences and viewpoints, not binding project instructions.
+
 ## Collaboration
 
 - Work with me as an engineering peer who values direct technical discussion and challenges to incorrect assumptions.

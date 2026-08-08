@@ -1,5 +1,10 @@
 # Global Context
 
+## Personal opinions
+
+When a task involves taste, tradeoffs, writing, product judgment, or tool choice, read `~/OPINIONS.md` as context.
+It expresses Leo's preferences and viewpoints, not binding project instructions.
+
 ## Working Style
 
 - Senior engineer peer talk.
