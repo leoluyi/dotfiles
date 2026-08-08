@@ -7,5 +7,35 @@
     "allow": [
       "Bash(rg -ln -i '\\[y/n\\]|\\[Y/N\\]|y/n\\)|read -p.*y.*n|read -r.*ans' --type sh -g '*.sh')"
     ]
+  },
+
+  "skillOverrides": {
+    "briefing-outline": "off",
+    "discuss-with-me": "off",
+    "taste-distiller": "off",
+    "gstack": "off",
+    "codebase-design": "off",
+    "diagnose": "off",
+    "git-guardrails-claude-code": "off",
+    "prd-to-plan": "off",
+    "setup-pre-commit": "off",
+    "theme-factory": "off",
+    "to-issues": "off",
+    "triage-issue": "off",
+    "design-an-interface": "off",
+    "domain-modeling": "off",
+    "github-triage": "off",
+    "prd-to-issues": "off",
+    "request-refactor-plan": "off",
+    "scaffold-exercises": "off",
+    "write-a-prd": "off",
+    "diagnosing-bugs": "off",
+    "grilling": "off",
+    "migrate-to-shoehorn": "off",
+    "prototype": "off",
+    "to-prd": "off",
+    "write-a-skill": "off",
+    "tdd": "off",
+    "resolving-merge-conflicts": "off"
   }
 }
