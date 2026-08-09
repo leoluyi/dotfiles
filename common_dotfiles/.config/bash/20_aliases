@@ -84,8 +84,8 @@ fi
 if command -v codex >/dev/null; then
   alias codex='env -u OPENAI_API_KEY codex'
   alias cx='env -u OPENAI_API_KEY codex'
-  alias cxs='env -u OPENAI_API_KEY codex --search'
-  alias cxa='env -u OPENAI_API_KEY codex --approve-for-me'
-  alias cxe='env -u OPENAI_API_KEY codex exec'
-  alias cxl='env -u OPENAI_API_KEY codex resume --last'
+  alias cx-search='env -u OPENAI_API_KEY codex --search'
+  alias cx-approve='env -u OPENAI_API_KEY codex --approve-for-me'
+  alias cx-exec='env -u OPENAI_API_KEY codex exec'
+  alias cx-resume='env -u OPENAI_API_KEY codex resume --last'
 fi
