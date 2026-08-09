@@ -49,6 +49,7 @@ model_name=""
 pct_used=""
 agent_state=""
 cwd=""
+mode=""
 
 if [ -n "$input" ] && echo "$input" | jq -e . >/dev/null 2>&1; then
     model_name=$(echo "$input" | jq -r '.model.display_name // .model.id // .model.name // (if (.model|type)=="string" then .model else empty end) // .session.model.display_name // .session.model.id // empty')
@@ -62,6 +63,7 @@ if [ -n "$input" ] && echo "$input" | jq -e . >/dev/null 2>&1; then
     fi
     agent_state=$(echo "$input" | jq -r '.session.state // .agent_state // .status // empty')
     cwd=$(echo "$input" | jq -r '.workspace.cwd // .cwd // empty')
+    mode=$(echo "$input" | jq -r '.cycle_mode // .mode // empty' 2>/dev/null)
 fi
 
 [ -z "$model_name" ] && model_name="Gemini 3.6 Flash"
@@ -86,6 +88,17 @@ ctx_bar=$(build_bar "$pct_used" 10)
 pct_color=$(color_for_pct "$pct_used")
 
 line="${blue}${model_name}${reset}"
+
+if [ -n "$mode" ] && [ "$mode" != "null" ]; then
+    case "$mode" in
+        accept-edits) line+=" ${yellow}[⚡ accept-edits]${reset}" ;;
+        plan)         line+=" ${magenta}[📋 plan]${reset}" ;;
+        yolo)         line+=" ${red}[🔥 yolo]${reset}" ;;
+        default)      line+=" ${dim}[🛡️ default]${reset}" ;;
+        *)            line+=" ${dim}[${mode}]${reset}" ;;
+    esac
+fi
+
 line+="${sep}"
 line+="✍️  ${ctx_bar} ${pct_color}${pct_used}%${reset}"
 line+="${sep}"
