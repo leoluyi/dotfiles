@@ -1,0 +1,20 @@
+{
+  "colorScheme": "solarized dark",
+  "enableTelemetry": false,
+  "model": "Gemini 3.6 Flash (High)",
+  "permissions": {
+    "allow": [
+      "command(ls)",
+      "command(cat)"
+    ]
+  },
+  "statusLine": {
+    "command": "~/.gemini/antigravity-cli/statusline.sh",
+    "enabled": true,
+    "type": "command"
+  },
+  "trustedWorkspaces": [
+    "/Users/leoluyi/.dotfiles",
+    "/Users/leoluyi/.skills"
+  ]
+}

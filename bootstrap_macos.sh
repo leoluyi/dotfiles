@@ -187,6 +187,12 @@ _sync_dotfiles_stow() {
   if [ -e "$HOME/.claude/statusline.sh" ] && [ ! -L "$HOME/.claude/statusline.sh" ]; then
     rm -f "$HOME/.claude/statusline.sh"
   fi
+  if [ -e "$HOME/.gemini/antigravity-cli/statusline.sh" ] && [ ! -L "$HOME/.gemini/antigravity-cli/statusline.sh" ]; then
+    rm -f "$HOME/.gemini/antigravity-cli/statusline.sh"
+  fi
+  if [ -e "$HOME/.gemini/antigravity-cli/settings.json" ] && [ ! -L "$HOME/.gemini/antigravity-cli/settings.json" ]; then
+    rm -f "$HOME/.gemini/antigravity-cli/settings.json"
+  fi
 
   for folder in "${home_src_folders[@]}"; do
     echo "$(tput setaf 3)Stow $folder ...$(tput sgr 0)"
