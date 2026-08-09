@@ -73,7 +73,7 @@ alias history-clear='[ -f "$HISTFILE" ] && cat /dev/null > "$HISTFILE" && histor
 # -u ANTHROPIC_API_KEY: force subscription auth, never API-key billing
 # even if something else in the environment exports the key.
 if command -v claude >/dev/null; then
-  alias cc='env -u ANTHROPIC_API_KEY claude'
+  alias c='env -u ANTHROPIC_API_KEY claude'
   alias ch='env -u ANTHROPIC_API_KEY claude --chrome'
   alias cs='env -u ANTHROPIC_API_KEY claude --dangerously-skip-permissions'
 fi
