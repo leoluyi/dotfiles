@@ -18,8 +18,8 @@ brew "ack"
 brew "aichat"
 # OpenType text shaping engine
 brew "harfbuzz"
-# Development kit for the Java programming language
-brew "openjdk"
+# TIFF library and utilities
+brew "libtiff"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
 # Download with resuming and segmented downloading
@@ -244,6 +244,8 @@ brew "p7zip"
 brew "pandoc"
 # PDF files password cracker
 brew "pdfcrack"
+# AI agent toolkit
+brew "pi-coding-agent"
 # Bash completion for Pip
 brew "pip-completion"
 # Locking and sync for Pip requirements files
