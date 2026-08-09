@@ -51,7 +51,7 @@ agent_state=""
 cwd=""
 
 if [ -n "$input" ] && echo "$input" | jq -e . >/dev/null 2>&1; then
-    model_name=$(echo "$input" | jq -r '.model.name // .model // .session.model // empty')
+    model_name=$(echo "$input" | jq -r '.model.display_name // .model.id // .model.name // (if (.model|type)=="string" then .model else empty end) // .session.model.display_name // .session.model.id // empty')
     pct_used=$(echo "$input" | jq -r '.context.pct // .context_usage // .usage.context_percent // empty' | awk '{printf "%.0f", $1}' 2>/dev/null)
     if [ -z "$pct_used" ]; then
         used=$(echo "$input" | jq -r '.context.used_tokens // .usage.input_tokens // 0' 2>/dev/null)
