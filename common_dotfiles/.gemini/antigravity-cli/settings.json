@@ -9,7 +9,7 @@
     ]
   },
   "statusLine": {
-    "command": "~/.gemini/antigravity-cli/statusline.sh",
+    "command": "/Users/leoluyi/.gemini/antigravity-cli/statusline.sh",
     "enabled": true,
     "type": "command"
   },
