@@ -193,13 +193,25 @@ if [ -n "$session_start" ] && [ "$session_start" != "null" ]; then
     fi
 fi
 
-skip_perms=""
+is_yolo=false
 parent_cmd=$(ps -o args= -p "$PPID" 2>/dev/null)
-if [[ "$parent_cmd" == *"--dangerously-skip-permissions"* ]]; then
-    skip_perms="⚡  "
+if [[ "$parent_cmd" == *"--dangerously-skip-permissions"* ]] || [[ "$parent_cmd" == *"--yolo"* ]] || [[ "$parent_cmd" =~ ( |^)-y( |$) ]]; then
+    is_yolo=true
+fi
+
+json_mode=$(echo "$input" | jq -r '.mode // .cycle_mode // .permission_mode // .permissionMode // empty' 2>/dev/null)
+json_yolo=$(echo "$input" | jq -r '.dangerously_skip_permissions // .dangerouslySkipPermissions // empty' 2>/dev/null)
+if [ "$json_mode" = "yolo" ] || [ "$json_mode" = "bypass" ] || [ "$json_mode" = "dangerously-skip-permissions" ] || [ "$json_yolo" = "true" ]; then
+    is_yolo=true
+fi
+if [ "${CLAUDE_CODE_YOLO:-0}" = "1" ] || [ "${PERMISSION_MODE:-}" = "bypass" ] || [ "${YOLO_MODE:-0}" = "1" ]; then
+    is_yolo=true
 fi
 
 line1="${blue}${model_name}${reset}"
+if $is_yolo; then
+    line1+=" ${red}[🔥 yolo]${reset}"
+fi
 line1+="${sep}"
 line1+="✍️ ${dim}${pct_used}%${reset}"
 if [ "$thr_pct" -ge 0 ] 2>/dev/null; then
@@ -207,7 +219,7 @@ if [ "$thr_pct" -ge 0 ] 2>/dev/null; then
     line1+="${dim}→${reset}${thr_color}${thr_pct}%${reset}"
 fi
 line1+="${sep}"
-line1+="${skip_perms}${cyan}${dirname}${reset}"
+line1+="${cyan}${dirname}${reset}"
 if [ -n "$git_branch" ]; then
     line1+=" ${green}(${git_branch}${red}${git_dirty}${green})${reset}"
 fi

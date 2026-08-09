@@ -66,6 +66,15 @@ if [ -n "$input" ] && echo "$input" | jq -e . >/dev/null 2>&1; then
     mode=$(echo "$input" | jq -r '.cycle_mode // .mode // empty' 2>/dev/null)
 fi
 
+if [ -z "$mode" ] || [ "$mode" = "null" ]; then
+    parent_cmd=$(ps -o args= -p "$PPID" 2>/dev/null)
+    if [[ "$parent_cmd" == *"--dangerously-skip-permissions"* ]] || [[ "$parent_cmd" == *"--yolo"* ]] || [[ "$parent_cmd" =~ ( |^)-y( |$) ]]; then
+        mode="yolo"
+    elif [ "${ANTIGRAVITY_YOLO:-0}" = "1" ] || [ "${YOLO_MODE:-0}" = "1" ]; then
+        mode="yolo"
+    fi
+fi
+
 [ -z "$model_name" ] && model_name="Gemini 3.6 Flash"
 [ -z "$pct_used" ] && pct_used=0
 [ -z "$cwd" ] && cwd="$PWD"

@@ -89,3 +89,9 @@ if command -v codex >/dev/null; then
   alias cx-exec='env -u OPENAI_API_KEY codex exec'
   alias cx-resume='env -u OPENAI_API_KEY codex resume --last'
 fi
+
+# Antigravity CLI (agy).
+if command -v agy >/dev/null; then
+  alias agy-yolo='agy --dangerously-skip-permissions'
+fi
+
