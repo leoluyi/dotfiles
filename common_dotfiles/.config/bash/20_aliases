@@ -84,6 +84,7 @@ fi
 if command -v codex >/dev/null; then
   alias codex='env -u OPENAI_API_KEY codex'
   alias cx='env -u OPENAI_API_KEY codex'
+  alias cx-yolo='env -u OPENAI_API_KEY codex --dangerously-bypass-approvals-and-sandbox'
   alias cx-search='env -u OPENAI_API_KEY codex --search'
   alias cx-approve='env -u OPENAI_API_KEY codex --approve-for-me'
   alias cx-exec='env -u OPENAI_API_KEY codex exec'
@@ -94,4 +95,3 @@ fi
 if command -v agy >/dev/null; then
   alias agy-yolo='agy --dangerously-skip-permissions'
 fi
-
