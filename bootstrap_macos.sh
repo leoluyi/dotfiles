@@ -176,6 +176,8 @@ _sync_dotfiles_stow() {
   mkdir -p "$config_home"
   mkdir -p "$HOME/.local/bin"
   mkdir -p "$HOME/.codex/rules"
+  mkdir -p "$HOME/.ssh"
+  chmod 700 "$HOME/.ssh"
 
   home_src_folders=("common_dotfiles" "$os")
 
@@ -199,10 +201,14 @@ _sync_dotfiles_stow() {
     stow -v --dotfiles -t "$HOME" -D "$folder" \
       2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2) \
       >/dev/null
-    stow --adopt -v --dotfiles -t "$HOME" --override='.' "$folder" \
+    stow --adopt -v --dotfiles -t "$HOME" --ignore='^\.ssh/\.gitignore$' --override='.' "$folder" \
       2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2) \
       >/dev/null
   done
+
+  find "$HOME/.ssh" -type d -exec chmod 700 {} +
+  find "$HOME/.ssh" -type f -exec chmod 600 {} +
+  [ ! -e "$HOME/.ssh/config" ] || chmod 600 "$HOME/.ssh/config"
 }
 
 _sync_dotfiles_rsync() {
