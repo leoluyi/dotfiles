@@ -1,4 +1,10 @@
+model = "gpt-5.6-luna"
+model_reasoning_effort = "xhigh"
 # Codex profile for the dotfiles-managed local environment.
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
 
 [shell_environment_policy.set]
 UV_CACHE_DIR = "/tmp/codex-uv-cache"
@@ -6,3 +12,20 @@ UV_CACHE_DIR = "/tmp/codex-uv-cache"
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "reasoning", "git-branch", "permissions", "approval-mode", "context-used", "five-hour-limit", "weekly-limit", "task-progress"]
 status_line_use_colors = true
+
+[projects."/Users/leoluyi/.skills"]
+trust_level = "trusted"
+
+[projects."/Users/leoluyi/.dotfiles"]
+trust_level = "trusted"
+
+[hooks.state]
+
+[hooks.state."ponytail@ponytail:hooks/claude-codex-hooks.json:session_start:0:0"]
+trusted_hash = "sha256:5f81d38f47448a1581c08ec877e044d9e04dd6f814dce3f2671f7a8edadd719b"
+
+[hooks.state."ponytail@ponytail:hooks/claude-codex-hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:6a6f42bc3b58d6262db38bfd74d7f340fcca2b09cdb134aad365063f0bfefca4"
+
+[hooks.state."ponytail@ponytail:hooks/claude-codex-hooks.json:subagent_start:0:0"]
+trusted_hash = "sha256:1423b56c1322f96c8f74c51c1e7ae9a047b904c1fa43ee9165d462fd7a6e70ef"
