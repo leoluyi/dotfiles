@@ -2,3 +2,7 @@
 
 [shell_environment_policy.set]
 UV_CACHE_DIR = "/tmp/codex-uv-cache"
+
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "reasoning", "git-branch", "permissions", "approval-mode", "context-used", "five-hour-limit", "weekly-limit", "task-progress"]
+status_line_use_colors = true
