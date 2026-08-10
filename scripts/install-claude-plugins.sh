@@ -32,6 +32,9 @@ done
 run claude plugin marketplace add anthropics/claude-plugins-official
 run claude plugin marketplace add affaan-m/everything-claude-code
 run claude plugin marketplace add anthropics/knowledge-work-plugins
+# Registers under the name `anthropic-agent-skills` (from its marketplace.json),
+# not `skills` — that's the name `plugin install`/`marketplace update` need.
+run claude plugin marketplace add anthropics/skills
 # WARNING: This command may silently fail due to a CLI bug — the marketplace
 # may not appear in known_marketplaces.json. Verify manually after running.
 run claude plugin marketplace add yvictor/skills

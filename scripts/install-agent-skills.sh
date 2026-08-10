@@ -15,13 +15,6 @@ run() {
 }
 
 _SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-plugins_script="${_SCRIPT_DIR}/install-claude-plugins.sh"
-if [[ -f "$plugins_script" ]]; then
-  # shellcheck source=install-claude-plugins.sh
-  source "$plugins_script"
-else
-  echo "NOTE: install-claude-plugins.sh not found at ${plugins_script}, skipping plugin install"
-fi
 
 # Standalone skill repos (not marketplace plugins)
 mkdir -p ~/.claude/skills
@@ -80,5 +73,3 @@ if [[ ${#FAILURES[@]} -gt 0 ]]; then
   done
   exit 1
 fi
-
-echo "Done! All plugins and skills installed."
