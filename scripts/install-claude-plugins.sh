@@ -46,6 +46,7 @@ run claude plugin marketplace add openai/codex-plugin-cc
 run claude plugin install ecc@everything-claude-code
 run claude plugin install superpowers@claude-plugins-official
 run claude plugin install security-guidance@claude-plugins-official
+run claude plugin install document-skills@anthropic-agent-skills
 # Lean mattpocock/skills: neutralize superpowers' SessionStart auto-fire (the
 # "You have superpowers / 1% rule" bootstrap injection) while keeping its skills
 # available for explicit invocation. Re-applied on every install because the
