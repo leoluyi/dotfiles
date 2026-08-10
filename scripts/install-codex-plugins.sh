@@ -20,6 +20,8 @@ run codex plugin marketplace add sergebulaev/x-skills
 run codex plugin add x-skills@x-skills
 run codex plugin marketplace add DannyMac180/sol-advisor --ref main
 run codex plugin add sol-advisor@sol-advisor
+run codex plugin marketplace add DietrichGebert/ponytail
+run codex plugin add ponytail@ponytail
 
 if [[ ${#FAILURES[@]} -gt 0 ]]; then
   echo ""
