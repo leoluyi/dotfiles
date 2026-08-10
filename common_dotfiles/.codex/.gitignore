@@ -3,3 +3,4 @@
 *
 !.gitignore
 !AGENTS.md
+!local.config.toml

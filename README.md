@@ -110,12 +110,20 @@ See [docs/autopilot.md](./docs/autopilot.md) for what `/autopilot` does — dele
 
 ## Codex CLI
 
-Portable Codex guidance and approval rules live in `common_dotfiles/.codex/AGENTS.md` and `common_dotfiles/.codex/rules/default.rules`; those files are symlinked into `~/.codex` by the existing `common_dotfiles` Stow package. Hooks, `config.toml`, caches, sessions, databases, logs, plugin downloads, credentials, and other machine-specific state remain local and untracked. Stow ignores every `.codex` entry except the two portable files.
+Portable Codex guidance and the local profile live in `common_dotfiles/.codex/AGENTS.md` and `common_dotfiles/.codex/local.config.toml`; those files are symlinked into `~/.codex` by the existing `common_dotfiles` Stow package. Hooks, the base `config.toml`, caches, sessions, databases, logs, plugin downloads, credentials, and other machine-specific state remain local and untracked.
 
 ```bash
 mkdir -p "$HOME/.codex/rules"
 stow --dotfiles -R -t "$HOME" common_dotfiles
 ```
+
+Start the CLI with the managed profile:
+
+```bash
+codex --profile local
+```
+
+The interactive `cx` and `cx-*` aliases use this profile automatically after the shell reloads.
 
 After Codex or agent plugin updates, run `scripts/fix-codex-session-start-hooks.sh` to keep Claude-style SessionStart hooks compatible with Codex's JSON output contract.
 

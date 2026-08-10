@@ -82,13 +82,12 @@ fi
 # -u OPENAI_API_KEY: force ChatGPT subscription auth, never API-key billing
 # even if something else in the environment exports the key.
 if command -v codex >/dev/null; then
-  alias codex='env -u OPENAI_API_KEY codex'
-  alias cx='env -u OPENAI_API_KEY codex'
-  alias cx-yolo='env -u OPENAI_API_KEY codex --dangerously-bypass-approvals-and-sandbox'
-  alias cx-search='env -u OPENAI_API_KEY codex --search'
-  alias cx-approve='env -u OPENAI_API_KEY codex --approve-for-me'
-  alias cx-exec='env -u OPENAI_API_KEY codex exec'
-  alias cx-resume='env -u OPENAI_API_KEY codex resume --last'
+  alias cx='env -u OPENAI_API_KEY codex --profile local'
+  alias cx-yolo='env -u OPENAI_API_KEY codex --profile local --dangerously-bypass-approvals-and-sandbox'
+  alias cx-search='env -u OPENAI_API_KEY codex --profile local --search'
+  alias cx-approve='env -u OPENAI_API_KEY codex --profile local --approve-for-me'
+  alias cx-exec='env -u OPENAI_API_KEY codex --profile local exec'
+  alias cx-resume='env -u OPENAI_API_KEY codex --profile local resume --last'
 fi
 
 # Antigravity CLI (agy).

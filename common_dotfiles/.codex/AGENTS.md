@@ -43,6 +43,14 @@ It expresses Leo's preferences and viewpoints, not binding project instructions.
 
 - Prefer `uv` for Python environments, dependencies, and scripts when the repository supports it.
 
+### Python and uv runtime
+
+- Use `/tmp/codex-uv-cache` as the uv cache directory for every `uv` command.
+- In projects with `pyproject.toml`, run Python with `UV_CACHE_DIR="/tmp/codex-uv-cache" uv run python ...`.
+- Outside a uv project, invoke the host interpreter as `python3`, including `python3 -m ...`.
+- Before Python work, verify `command -v uv` and `command -v python3`.
+- If the configured cache path fails, retry the individual command with `UV_NO_CACHE=1` and report the fallback.
+
 ### Shell Search Tools
 
 - Prefer `fd` over `find` and `rg` over `grep` when shell search is necessary.

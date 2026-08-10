@@ -1,0 +1,4 @@
+# Codex profile for the dotfiles-managed local environment.
+
+[shell_environment_policy.set]
+UV_CACHE_DIR = "/tmp/codex-uv-cache"
