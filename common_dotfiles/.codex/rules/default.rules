@@ -1,0 +1,5 @@
+prefix_rule(
+    pattern = ["agy", "-p"],
+    decision = "allow",
+    justification = "Allow Antigravity CLI prompts to run outside the sandbox",
+)
