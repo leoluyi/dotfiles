@@ -1,10 +1,11 @@
-# Dotfiles
-
 ## Skill routing
 
-Request match available skill → ALWAYS invoke via Skill tool, FIRST action. No direct
-answer, no other tools first. Skill workflows beat ad-hoc answers.
+A request matching an available skill → invoke it via the Skill tool as the first action,
+before answering and before any other tool.
 
-Key routing rules:
-- QA, test the site, find bugs → invoke qa
-- Code review, check my diff → invoke review
+Two skill names collide here; pick this one:
+
+- Report bugs conversationally, file them as issues, "QA session" → `qa`
+  (`diagnose` is for root-causing a bug already reported)
+- Review a diff, branch, or PR → `review`
+  (`code-review` is a near-duplicate copy of it)
