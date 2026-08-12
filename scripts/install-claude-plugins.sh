@@ -31,6 +31,7 @@ run claude plugin marketplace add multica-ai/andrej-karpathy-skills
 run claude plugin marketplace add JuliusBrussee/caveman
 run claude plugin marketplace add openai/codex-plugin-cc
 run claude plugin marketplace add DietrichGebert/ponytail
+run claude plugin marketplace add upstash/context7
 # run claude plugin marketplace add affaan-m/everything-claude-code  # ECC uninstalled 2026-08-11
 
 # Install and enable plugins
@@ -56,6 +57,7 @@ run claude plugin install caveman@caveman
 run claude plugin install codex@openai-codex
 run claude plugin install ponytail@ponytail
 run claude plugin install dev-workflow@yvictor-skills
+run claude plugin install context7@context7-marketplace
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   if [[ ${#FAILURES[@]} -gt 0 ]]; then
