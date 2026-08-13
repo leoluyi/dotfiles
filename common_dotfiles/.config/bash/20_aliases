@@ -132,6 +132,35 @@ if command -v codex >/dev/null; then
     git -C "$repo_root" worktree add -b "$name" "$worktree_path" HEAD || return
     cd "$worktree_path" || return
     printf 'entered worktree: %s\n' "$worktree_path"
+    env -u OPENAI_API_KEY codex --profile local --approve-for-me
+  }
+fi
+
+# Worktrunk.
+if command -v wt >/dev/null; then
+  cx-wt() {
+    local name="${1:-}"
+    local random_id
+
+    if [ "$#" -gt 1 ]; then
+      printf 'usage: cx-wt [name]\n' >&2
+      return 2
+    fi
+
+    if [ -z "$name" ]; then
+      if command -v uuidgen >/dev/null 2>&1; then
+        random_id="$(uuidgen | tr -d '-' | cut -c1-8 | tr '[:upper:]' '[:lower:]')"
+      elif command -v openssl >/dev/null 2>&1; then
+        random_id="$(openssl rand -hex 4)"
+      else
+        random_id="$(date +%s)"
+      fi
+      name="cx-$random_id"
+    fi
+
+    wt --config "$HOME/.dotfiles/common_dotfiles/.config/worktrunk/config.toml" \
+      -C "$HOME/.dotfiles" switch --create --base=@ --cd \
+      --execute 'env -u OPENAI_API_KEY codex --profile local --approve-for-me' "$name"
   }
 fi
 

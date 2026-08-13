@@ -3,6 +3,11 @@ worktree-path = "{{ repo_path }}/../{{ branch | sanitize }}"
 [post-start]
 copy = "wt step copy-ignored"
 
+# Keep the dotfiles worktrees inside the repository while preserving the
+# sibling-directory default for every other repository.
+[projects."github.com/leoluyi/dotfiles"]
+worktree-path = "{{ repo_path }}/.worktrees/{{ branch | sanitize }}"
+
 # # User Configuration
 #
 # Create with `wt config create`.
