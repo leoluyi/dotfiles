@@ -2,6 +2,7 @@
 
 # Others
 **/.claude/settings.local.json
+.worktrees/
 
 # =============== MacOS ================
 

@@ -140,7 +140,18 @@ fi
 if command -v wt >/dev/null; then
   cx-wt() {
     local name="${1:-}"
-    local random_id
+    local adjectives=(
+      amber bold brave bright calm clear clever crisp eager gentle grand
+      happy keen kind lively lucid mellow nimble noble quiet rapid ready
+      silver steady swift vivid warm wild wise
+    )
+    local nouns=(
+      acorn badger beacon birch cedar comet coral cypress ember falcon
+      fern fox grove harbor hawk heron island juniper lantern lark maple
+      meadow moon oak ocean otter panda pebble pine raven reef ridge river
+      robin shore sparrow star stone summit tiger valley whale willow wren
+    )
+    local attempt
 
     if [ "$#" -gt 1 ]; then
       printf 'usage: cx-wt [name]\n' >&2
@@ -148,18 +159,21 @@ if command -v wt >/dev/null; then
     fi
 
     if [ -z "$name" ]; then
-      if command -v uuidgen >/dev/null 2>&1; then
-        random_id="$(uuidgen | tr -d '-' | cut -c1-8 | tr '[:upper:]' '[:lower:]')"
-      elif command -v openssl >/dev/null 2>&1; then
-        random_id="$(openssl rand -hex 4)"
-      else
-        random_id="$(date +%s)"
+      for ((attempt = 0; attempt < 20; attempt++)); do
+        name="worktree-${adjectives[$((RANDOM % ${#adjectives[@]}))]}-${nouns[$((RANDOM % ${#nouns[@]}))]}"
+        if ! git show-ref --verify --quiet "refs/heads/$name" 2>/dev/null; then
+          break
+        fi
+      done
+
+      if [ "$attempt" -eq 20 ]; then
+        printf 'could not generate an unused worktree name\n' >&2
+        return 1
       fi
-      name="cx-$random_id"
     fi
 
     wt --config "$HOME/.dotfiles/common_dotfiles/.config/worktrunk/config.toml" \
-      -C "$HOME/.dotfiles" switch --create --base=@ --cd \
+      switch --create --base=@ --cd \
       --execute 'env -u OPENAI_API_KEY codex --profile local --approve-for-me' "$name"
   }
 fi
