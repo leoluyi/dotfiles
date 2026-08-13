@@ -3,7 +3,7 @@
 *
 !.gitignore
 !AGENTS.md
-!local.config.toml
+!config.toml
 !rules/
 rules/*
 !rules/default.rules

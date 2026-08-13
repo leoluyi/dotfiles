@@ -2,4 +2,4 @@
 .*\.DS_Store
 .*\.keep
 .*\.gitignore
-^/\.codex/(?!AGENTS\.md$|local\.config\.toml$).*
+^/\.codex/(?!AGENTS\.md$|config\.toml$).*

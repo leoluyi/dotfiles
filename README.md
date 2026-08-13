@@ -110,7 +110,9 @@ See [docs/autopilot.md](./docs/autopilot.md) for what `/autopilot` does — dele
 
 ## Codex CLI
 
-Portable Codex guidance and the local profile live in `common_dotfiles/.codex/AGENTS.md` and `common_dotfiles/.codex/local.config.toml`; those files are symlinked into `~/.codex` by the existing `common_dotfiles` Stow package. Hooks, the base `config.toml`, caches, sessions, databases, logs, plugin downloads, credentials, and other machine-specific state remain local and untracked.
+Portable Codex guidance and defaults live in `common_dotfiles/.codex/AGENTS.md` and `common_dotfiles/.codex/config.toml`.
+The `local` profile at `~/.codex/local.config.toml` is machine-local and untracked, so TUI-written trust decisions, hook hashes, permissions, absolute paths, and other local state do not modify the shared config.
+Stow installs the shared guidance and config; the local profile remains outside the package, while caches, sessions, databases, logs, plugin downloads, and credentials remain local.
 
 ```bash
 mkdir -p "$HOME/.codex/rules"
