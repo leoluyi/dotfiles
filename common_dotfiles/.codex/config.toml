@@ -45,6 +45,3 @@ enabled = true
 
 [plugins."template-creator@openai-primary-runtime"]
 enabled = true
-
-[projects."/Users/leoluyi/.dotfiles"]
-trust_level = "trusted"
