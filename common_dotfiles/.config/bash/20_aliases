@@ -82,12 +82,11 @@ fi
 # -u OPENAI_API_KEY: force ChatGPT subscription auth, never API-key billing
 # even if something else in the environment exports the key.
 if command -v codex >/dev/null; then
-  alias cx='env -u OPENAI_API_KEY codex --profile local'
-  alias cx-yolo='env -u OPENAI_API_KEY codex --profile local --dangerously-bypass-approvals-and-sandbox'
-  alias cx-search='env -u OPENAI_API_KEY codex --profile local --search'
-  alias cx-approve='env -u OPENAI_API_KEY codex --profile local --approve-for-me'
-  alias cx-exec='env -u OPENAI_API_KEY codex --profile local exec'
-  alias cx-resume='env -u OPENAI_API_KEY codex --profile local resume --last'
+  alias cx='env -u OPENAI_API_KEY codex --profile local --approve-for-me'
+  alias cx-yolo='cx --dangerously-bypass-approvals-and-sandbox'
+  alias cx-search='cx --search'
+  alias cx-exec='cx exec'
+  alias cx-resume='cx resume --last'
 
   # Create and enter an isolated worktree for the dotfiles repository.
   cx-worktree() {
