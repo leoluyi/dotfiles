@@ -7,9 +7,66 @@ FAILURES=()
 
 run() {
   echo "+ $*"
-  if ! "$@"; then
-    FAILURES+=("$*")
+  if "$@"; then
+    return 0
   fi
+
+  FAILURES+=("$*")
+  return 1
+}
+
+marketplace_configured() {
+  local marketplace="$1"
+
+  if command -v jq >/dev/null 2>&1; then
+    codex plugin marketplace list --json 2>/dev/null |
+      jq -e --arg name "$marketplace" '.marketplaces[]? | select(.name == $name)' >/dev/null
+    return
+  fi
+
+  codex plugin marketplace list --json 2>/dev/null |
+    awk -v name="$marketplace" '$0 ~ "\"name\": \"" name "\"" { found = 1 } END { exit !found }'
+}
+
+plugin_installed() {
+  local plugin_id="$1"
+
+  if command -v jq >/dev/null 2>&1; then
+    codex plugin list --json 2>/dev/null |
+      jq -e --arg id "$plugin_id" '.installed[]? | select(.pluginId == $id and .installed == true)' >/dev/null
+    return
+  fi
+
+  codex plugin list --json 2>/dev/null |
+    awk -v id="$plugin_id" '
+      /"pluginId":/ {
+        matching = ($0 ~ "\"pluginId\": \"" id "\"")
+      }
+      matching && /"installed": true/ { found = 1 }
+      END { exit !found }
+    '
+}
+
+install_plugin() {
+  local plugin="$1"
+  local marketplace="$2"
+  local source="$3"
+  shift 3
+
+  local plugin_id="${plugin}@${marketplace}"
+
+  if plugin_installed "$plugin_id"; then
+    echo "Codex plugin already installed: $plugin_id"
+    return 0
+  fi
+
+  if marketplace_configured "$marketplace"; then
+    echo "Codex plugin marketplace already configured: $marketplace"
+  elif ! run codex plugin marketplace add "$source" "$@"; then
+    return 1
+  fi
+
+  run codex plugin add "$plugin_id"
 }
 
 install_mcp_server() {
@@ -26,14 +83,10 @@ install_mcp_server() {
 
 echo "Installing Codex plugins..."
 
-run codex plugin marketplace add upstash/context7
-run codex plugin add context7@context7-marketplace
-run codex plugin marketplace add sergebulaev/x-skills
-run codex plugin add x-skills@x-skills
-run codex plugin marketplace add DannyMac180/sol-advisor --ref main
-run codex plugin add sol-advisor@sol-advisor
-run codex plugin marketplace add DietrichGebert/ponytail
-run codex plugin add ponytail@ponytail
+install_plugin context7 context7-marketplace upstash/context7
+install_plugin x-skills x-skills sergebulaev/x-skills
+install_plugin sol-advisor sol-advisor DannyMac180/sol-advisor --ref main
+install_plugin ponytail ponytail DietrichGebert/ponytail
 
 echo "Installing Codex MCP servers..."
 install_mcp_server playwright npx -y @playwright/mcp@latest
