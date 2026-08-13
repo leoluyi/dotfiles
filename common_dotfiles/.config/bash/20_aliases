@@ -87,6 +87,7 @@ if command -v codex >/dev/null; then
   alias cx-search='cx --search'
   alias cx-exec='cx exec'
   alias cx-resume='cx resume --last'
+  alias codex-reset-checker='npx -y @willh/codex-reset-checker'
 
   # Create and enter an isolated worktree for the dotfiles repository.
   cx-worktree() {
