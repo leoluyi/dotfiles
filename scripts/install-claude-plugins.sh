@@ -3,6 +3,8 @@
 
 set -uo pipefail
 
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
 declare -p FAILURES &>/dev/null || FAILURES=()
 
 if ! declare -f run &>/dev/null; then
@@ -58,6 +60,7 @@ run claude plugin install codex@openai-codex
 run claude plugin install ponytail@ponytail
 run claude plugin install dev-workflow@yvictor-skills
 run claude plugin install context7@context7-marketplace
+run "${script_dir}/install-claude-settings.sh"
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   if [[ ${#FAILURES[@]} -gt 0 ]]; then

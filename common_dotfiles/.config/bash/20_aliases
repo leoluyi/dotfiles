@@ -88,6 +88,51 @@ if command -v codex >/dev/null; then
   alias cx-approve='env -u OPENAI_API_KEY codex --profile local --approve-for-me'
   alias cx-exec='env -u OPENAI_API_KEY codex --profile local exec'
   alias cx-resume='env -u OPENAI_API_KEY codex --profile local resume --last'
+
+  # Create and enter an isolated worktree for the dotfiles repository.
+  cx-worktree() {
+    local repo_root="$HOME/.dotfiles"
+    local name="${1:-}"
+    local worktree_path
+    local random_id
+
+    if [ "$#" -gt 1 ]; then
+      printf 'usage: cx-worktree [name]\n' >&2
+      return 2
+    fi
+
+    if [ ! -e "$repo_root/.git" ]; then
+      printf 'dotfiles repository not found: %s\n' "$repo_root" >&2
+      return 1
+    fi
+
+    if [ -z "$name" ]; then
+      if command -v uuidgen >/dev/null 2>&1; then
+        random_id="$(uuidgen | tr -d '-' | cut -c1-8)"
+      elif command -v openssl >/dev/null 2>&1; then
+        random_id="$(openssl rand -hex 4)"
+      else
+        random_id="$(date +%s)"
+      fi
+      name="cx-$random_id"
+    fi
+
+    if ! git -C "$repo_root" check-ref-format --branch "$name" >/dev/null 2>&1; then
+      printf 'invalid branch name: %s\n' "$name" >&2
+      return 2
+    fi
+
+    worktree_path="$repo_root/.worktrees/$name"
+    if [ -e "$worktree_path" ]; then
+      printf 'worktree path already exists: %s\n' "$worktree_path" >&2
+      return 1
+    fi
+
+    mkdir -p "$(dirname "$worktree_path")" || return 1
+    git -C "$repo_root" worktree add -b "$name" "$worktree_path" HEAD || return
+    cd "$worktree_path" || return
+    printf 'entered worktree: %s\n' "$worktree_path"
+  }
 fi
 
 # Antigravity CLI (agy).

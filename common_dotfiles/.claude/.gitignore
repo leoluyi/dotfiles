@@ -4,7 +4,7 @@
 # But not these files...
 !.gitignore
 !CLAUDE.md
-!settings.local.json
+!settings.template.json
 !statusline.sh
 
 # ...and these vendored subdirectories (whitelist dir, then file)

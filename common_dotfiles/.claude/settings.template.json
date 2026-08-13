@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "opus",
+  "effortLevel": "medium",
+  "outputStyle": "Engineer TL;DR",
+  "theme": "dark-daltonized",
+  "tui": "fullscreen",
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "document-skills@anthropic-agent-skills": true,
+    "engineering@knowledge-work-plugins": true,
+    "claude-hud@claude-hud": true,
+    "andrej-karpathy-skills@karpathy-skills": true,
+    "caveman@caveman": true,
+    "codex@openai-codex": true,
+    "ponytail@ponytail": true,
+    "dev-workflow@yvictor-skills": true,
+    "context7@context7-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "knowledge-work-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/knowledge-work-plugins"
+      }
+    },
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "yvictor-skills": {
+      "source": {
+        "source": "github",
+        "repo": "yvictor/skills"
+      }
+    },
+    "claude-hud": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
+    },
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "multica-ai/andrej-karpathy-skills"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "context7-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "upstash/context7"
+      }
+    }
+  },
+  "skillOverrides": {
+    "briefing-outline": "off",
+    "discuss-with-me": "off",
+    "taste-distiller": "off",
+    "gstack": "off",
+    "codebase-design": "off",
+    "diagnose": "off",
+    "git-guardrails-claude-code": "off",
+    "prd-to-plan": "off",
+    "setup-pre-commit": "off",
+    "theme-factory": "off",
+    "to-issues": "off",
+    "triage-issue": "off",
+    "design-an-interface": "off",
+    "domain-modeling": "off",
+    "github-triage": "off",
+    "prd-to-issues": "off",
+    "request-refactor-plan": "off",
+    "scaffold-exercises": "off",
+    "write-a-prd": "off",
+    "diagnosing-bugs": "off",
+    "grilling": "off",
+    "migrate-to-shoehorn": "off",
+    "prototype": "off",
+    "to-prd": "off",
+    "write-a-skill": "off",
+    "tdd": "off",
+    "resolving-merge-conflicts": "off"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"$HOME/.claude/statusline.sh\""
+  }
+}
