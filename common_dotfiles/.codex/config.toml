@@ -25,6 +25,10 @@ enabled = true
 command = "npx"
 args = ["-y", "@upstash/context7-mcp"]
 
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest"]
+
 [shell_environment_policy.set]
 UV_CACHE_DIR = "/tmp/codex-uv-cache"
 
