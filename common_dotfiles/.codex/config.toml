@@ -2,6 +2,25 @@
 model = "gpt-5.6-luna"
 model_reasoning_effort = "xhigh"
 
+# Keep normal workspace sandbox while allowing GitHub CLI and API access.
+default_permissions = "github"
+
+[permissions]
+
+[permissions.github]
+description = "Workspace access with GitHub network access"
+extends = ":workspace"
+
+[permissions.github.network]
+enabled = true
+
+[permissions.github.network.domains]
+"github.com" = "allow"
+"api.github.com" = "allow"
+"codeload.github.com" = "allow"
+"objects.githubusercontent.com" = "allow"
+"raw.githubusercontent.com" = "allow"
+
 [mcp_servers.context7]
 command = "npx"
 args = ["-y", "@upstash/context7-mcp"]
