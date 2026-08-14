@@ -68,3 +68,36 @@ enabled = true
 
 [plugins."template-creator@openai-primary-runtime"]
 enabled = true
+
+[plugins."context7@context7-marketplace"]
+enabled = true
+
+[plugins."x-skills@x-skills"]
+enabled = true
+
+[plugins."sol-advisor@sol-advisor"]
+enabled = true
+
+[plugins."ponytail@ponytail"]
+enabled = true
+
+[marketplaces.context7-marketplace]
+last_updated = "2026-08-14T00:36:17Z"
+source_type = "git"
+source = "https://github.com/upstash/context7.git"
+
+[marketplaces.x-skills]
+last_updated = "2026-08-14T00:36:22Z"
+source_type = "git"
+source = "https://github.com/sergebulaev/x-skills.git"
+
+[marketplaces.sol-advisor]
+last_updated = "2026-08-14T00:36:24Z"
+source_type = "git"
+source = "https://github.com/DannyMac180/sol-advisor.git"
+ref = "main"
+
+[marketplaces.ponytail]
+last_updated = "2026-08-14T00:36:28Z"
+source_type = "git"
+source = "https://github.com/DietrichGebert/ponytail.git"
