@@ -47,6 +47,33 @@ plugin_installed() {
     '
 }
 
+add_marketplace() {
+  local marketplace="$1"
+  local source="$2"
+  shift 2
+
+  local -a add_command=(codex plugin marketplace add "$source" "$@")
+  local add_output add_status
+
+  echo "+ ${add_command[*]}"
+  add_output=$("${add_command[@]}" 2>&1)
+  add_status=$?
+  if [[ "$add_status" -eq 0 ]]; then
+    printf '%s\n' "$add_output"
+    return 0
+  fi
+
+  printf '%s\n' "$add_output" >&2
+
+  if [[ "$add_output" != *"already added from a different source"* ]]; then
+    FAILURES+=("${add_command[*]}")
+    return "$add_status"
+  fi
+
+  run codex plugin marketplace remove "$marketplace" || return 1
+  run "${add_command[@]}"
+}
+
 install_plugin() {
   local plugin="$1"
   local marketplace="$2"
@@ -62,7 +89,7 @@ install_plugin() {
 
   if marketplace_configured "$marketplace"; then
     echo "Codex plugin marketplace already configured: $marketplace"
-  elif ! run codex plugin marketplace add "$source" "$@"; then
+  elif ! add_marketplace "$marketplace" "$source" "$@"; then
     return 1
   fi
 
