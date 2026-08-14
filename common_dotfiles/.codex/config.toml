@@ -82,22 +82,26 @@ enabled = true
 enabled = true
 
 [marketplaces.context7-marketplace]
-last_updated = "2026-08-14T00:36:17Z"
+last_updated = "2026-08-14T00:37:10Z"
+last_revision = "7274d720fbc4c0fe95a270f3f3bb77685b1f88c2"
 source_type = "git"
 source = "https://github.com/upstash/context7.git"
 
 [marketplaces.x-skills]
-last_updated = "2026-08-14T00:36:22Z"
+last_updated = "2026-08-14T00:37:20Z"
+last_revision = "9d1ab14c2ee2cdbaf6c0a19e7ff342c9e3d01a18"
 source_type = "git"
 source = "https://github.com/sergebulaev/x-skills.git"
 
 [marketplaces.sol-advisor]
-last_updated = "2026-08-14T00:36:24Z"
+last_updated = "2026-08-14T00:37:16Z"
+last_revision = "676d200733ebd57caf1270ba94d892c95e9f8aee"
 source_type = "git"
 source = "https://github.com/DannyMac180/sol-advisor.git"
 ref = "main"
 
 [marketplaces.ponytail]
-last_updated = "2026-08-14T00:36:28Z"
+last_updated = "2026-08-14T00:37:13Z"
+last_revision = "2ed6c52c9d7e5e56942508591085fd45dea277d3"
 source_type = "git"
 source = "https://github.com/DietrichGebert/ponytail.git"

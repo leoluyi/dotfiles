@@ -63,15 +63,14 @@ add_marketplace() {
     return 0
   fi
 
-  printf '%s\n' "$add_output" >&2
-
-  if [[ "$add_output" != *"already added from a different source"* ]]; then
-    FAILURES+=("${add_command[*]}")
-    return "$add_status"
+  if [[ "$add_output" == *"already added from a different source"* ]]; then
+    printf 'WARNING: Codex plugin marketplace already exists from a different source: %s\n' "$marketplace" >&2
+    return 0
   fi
 
-  run codex plugin marketplace remove "$marketplace" || return 1
-  run "${add_command[@]}"
+  printf '%s\n' "$add_output" >&2
+  FAILURES+=("${add_command[*]}")
+  return "$add_status"
 }
 
 install_plugin() {
