@@ -82,8 +82,8 @@ enabled = true
 enabled = true
 
 [marketplaces.context7-marketplace]
-last_updated = "2026-08-14T00:37:10Z"
-last_revision = "7274d720fbc4c0fe95a270f3f3bb77685b1f88c2"
+last_updated = "2026-08-15T03:30:46Z"
+last_revision = "0e3298e6435f2506e26477d0798441b7ff4d1014"
 source_type = "git"
 source = "https://github.com/upstash/context7.git"
 
