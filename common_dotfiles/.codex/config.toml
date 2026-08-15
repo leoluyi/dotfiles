@@ -43,10 +43,10 @@ js_repl = false
 enabled = false
 
 [plugins."browser@openai-bundled"]
-enabled = true
+enabled = false
 
 [plugins."visualize@openai-bundled"]
-enabled = true
+enabled = false
 
 [plugins."google-calendar@openai-curated"]
 enabled = false
@@ -55,16 +55,16 @@ enabled = false
 enabled = false
 
 [plugins."documents@openai-primary-runtime"]
-enabled = true
+enabled = false
 
 [plugins."pdf@openai-primary-runtime"]
-enabled = true
+enabled = false
 
 [plugins."spreadsheets@openai-primary-runtime"]
-enabled = true
+enabled = false
 
 [plugins."presentations@openai-primary-runtime"]
-enabled = true
+enabled = false
 
 [plugins."template-creator@openai-primary-runtime"]
 enabled = false
@@ -109,245 +109,305 @@ source = "https://github.com/DietrichGebert/ponytail.git"
 # Keep the global skill catalog small enough for Codex to expose full
 # descriptions. Disabled skills remain installed and can be re-enabled here.
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/ask-matt"
+path = "/Users/leoluyi/.agents/skills/ask-matt/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/autopilot/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/blog-writing-zh/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/breakdown/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/autopilot"
+path = "/Users/leoluyi/.agents/skills/briefing-outline/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/blog-writing-zh"
+path = "/Users/leoluyi/.agents/skills/cavecrew/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/breakdown"
+path = "/Users/leoluyi/.agents/skills/caveman/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/briefing-outline"
+path = "/Users/leoluyi/.agents/skills/caveman-commit/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/cavecrew"
+path = "/Users/leoluyi/.agents/skills/caveman-compress/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman"
+path = "/Users/leoluyi/.agents/skills/caveman-discover/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-commit"
+path = "/Users/leoluyi/.agents/skills/caveman-evidence-review/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-compress"
+path = "/Users/leoluyi/.agents/skills/caveman-explore/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-discover"
+path = "/Users/leoluyi/.agents/skills/caveman-help/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-evidence-review"
+path = "/Users/leoluyi/.agents/skills/caveman-learn/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-explore"
+path = "/Users/leoluyi/.agents/skills/caveman-manage/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-help"
+path = "/Users/leoluyi/.agents/skills/caveman-optimize/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-learn"
+path = "/Users/leoluyi/.agents/skills/caveman-review/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-manage"
+path = "/Users/leoluyi/.agents/skills/caveman-setup/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-optimize"
+path = "/Users/leoluyi/.agents/skills/caveman-stats/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-review"
+path = "/Users/leoluyi/.agents/skills/claude-handoff/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/context7-mcp/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-setup"
+path = "/Users/leoluyi/.agents/skills/deck-consulting/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/deck-writer/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-stats"
+path = "/Users/leoluyi/.agents/skills/discuss-with-me/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/claude-handoff"
+path = "/Users/leoluyi/.agents/skills/formal-doc-structure/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/fourth-wall-repair/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/git-guardrails-claude-code/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/context7-mcp"
+path = "/Users/leoluyi/.agents/skills/goal-definer/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/deck-consulting"
+path = "/Users/leoluyi/.agents/skills/grill-me/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/grill-with-docs/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/grilling/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/deck-writer"
+path = "/Users/leoluyi/.agents/skills/handoff/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/implement/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/improve-codebase-architecture/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/learn-loop/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/loop-me/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/migrate-to-shoehorn/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/discuss-with-me"
+path = "/Users/leoluyi/.agents/skills/obsidian-vault/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/formal-doc-structure"
+path = "/Users/leoluyi/.agents/skills/options/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/plan-to-goal/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/ppt-agent/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/fourth-wall-repair"
+path = "/Users/leoluyi/.agents/skills/prototype/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/git-guardrails-claude-code"
+path = "/Users/leoluyi/.agents/skills/recover-deleted-claude-conversation/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/rfp-writing/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/scaffold-exercises/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/goal-definer"
+path = "/Users/leoluyi/.agents/skills/setup-matt-pocock-skills/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/setup-pre-commit/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/grill-me"
+path = "/Users/leoluyi/.agents/skills/setup-ts-deep-modules/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/taste-distiller/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/grill-with-docs"
+path = "/Users/leoluyi/.agents/skills/teach/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/to-questionnaire/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/to-spec/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/to-tickets/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/triage/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/tt-sidebar/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/wait-what/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/wayfinder/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/wizard/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/grilling"
+path = "/Users/leoluyi/.agents/skills/writing-beats/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/writing-fragments/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/writing-shape/SKILL.md"
+enabled = true
+
+[[skills.config]]
+path = "/Users/leoluyi/.agents/skills/avoid-china-writing/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/handoff"
+path = "/Users/leoluyi/.agents/skills/diagram-style/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/implement"
+path = "/Users/leoluyi/.agents/skills/doc-coauthoring/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/improve-codebase-architecture"
+path = "/Users/leoluyi/.agents/skills/humanizer-zh/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/learn-loop"
+path = "/Users/leoluyi/.agents/skills/infographic-design/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/loop-me"
+path = "/Users/leoluyi/.agents/skills/knowledge-doc-writing/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/migrate-to-shoehorn"
+path = "/Users/leoluyi/.agents/skills/plain-speak/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/obsidian-vault"
+path = "/Users/leoluyi/.agents/skills/research/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/options"
+path = "/Users/leoluyi/.agents/skills/theme-factory/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/plan-to-goal"
+path = "/Users/leoluyi/.agents/skills/visual-output-qa/SKILL.md"
 enabled = false
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/ppt-agent"
-enabled = false
+path = "/Users/leoluyi/.codex/plugins/cache/ponytail/ponytail/4.9.0/skills/ponytail-audit/SKILL.md"
+enabled = true
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/prototype"
-enabled = false
+path = "/Users/leoluyi/.codex/plugins/cache/ponytail/ponytail/4.9.0/skills/ponytail-debt/SKILL.md"
+enabled = true
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/recover-deleted-claude-conversation"
-enabled = false
+path = "/Users/leoluyi/.codex/plugins/cache/ponytail/ponytail/4.9.0/skills/ponytail-gain/SKILL.md"
+enabled = true
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/rfp-writing"
-enabled = false
+path = "/Users/leoluyi/.codex/plugins/cache/ponytail/ponytail/4.9.0/skills/ponytail-help/SKILL.md"
+enabled = true
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/scaffold-exercises"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/setup-matt-pocock-skills"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/setup-pre-commit"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/setup-ts-deep-modules"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/taste-distiller"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/teach"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/to-questionnaire"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/to-spec"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/to-tickets"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/triage"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/tt-sidebar"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/wait-what"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/wayfinder"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/wizard"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/writing-beats"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/writing-fragments"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/writing-shape"
-enabled = false
+path = "/Users/leoluyi/.codex/plugins/cache/ponytail/ponytail/4.9.0/skills/ponytail-review/SKILL.md"
+enabled = true
