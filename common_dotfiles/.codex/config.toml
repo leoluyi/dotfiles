@@ -82,8 +82,8 @@ enabled = false
 enabled = true
 
 [marketplaces.context7-marketplace]
-last_updated = "2026-08-15T03:30:46Z"
-last_revision = "0e3298e6435f2506e26477d0798441b7ff4d1014"
+last_updated = "2026-08-20T05:40:40Z"
+last_revision = "5284672feb575908efead6fcf1b5e542f8d607bb"
 source_type = "git"
 source = "https://github.com/upstash/context7.git"
 
@@ -94,8 +94,8 @@ source_type = "git"
 source = "https://github.com/sergebulaev/x-skills.git"
 
 [marketplaces.sol-advisor]
-last_updated = "2026-08-14T00:37:16Z"
-last_revision = "676d200733ebd57caf1270ba94d892c95e9f8aee"
+last_updated = "2026-08-20T05:40:43Z"
+last_revision = "37b75cad535abdd46531f0227483a8842d045ab8"
 source_type = "git"
 source = "https://github.com/DannyMac180/sol-advisor.git"
 ref = "main"
@@ -122,35 +122,35 @@ enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/breakdown/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/briefing-outline/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/cavecrew/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/caveman/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/caveman-commit/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/caveman-compress/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/caveman-discover/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/caveman-evidence-review/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/caveman-explore/SKILL.md"
@@ -174,15 +174,15 @@ enabled = false
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/caveman-review/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/caveman-setup/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/caveman-stats/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/claude-handoff/SKILL.md"
@@ -354,43 +354,43 @@ enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/avoid-china-writing/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/diagram-style/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/doc-coauthoring/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/humanizer-zh/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/infographic-design/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/knowledge-doc-writing/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/plain-speak/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/research/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/theme-factory/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.agents/skills/visual-output-qa/SKILL.md"
-enabled = false
+enabled = true
 
 [[skills.config]]
 path = "/Users/leoluyi/.codex/plugins/cache/ponytail/ponytail/4.9.0/skills/ponytail-audit/SKILL.md"
