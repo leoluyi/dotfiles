@@ -39,7 +39,15 @@ M.keymaps = function(client, bufnr)
   map("n", "gr",  vim.lsp.buf.references,     "Lsp [R]eferences")
   map("n", "gi",  vim.lsp.buf.implementation, "Lsp Go to [I]mplementation")
   map("n", "gK",  vim.lsp.buf.signature_help, "Lsp Signature Help")
-  map("n", "gF",  "<cmd>Lspsaga lsp_finder<CR>", "Lsp [F]inder (Lspsaga)")
+  map("n", "K", function()
+    vim.lsp.buf.hover({
+      border = "rounded",
+      max_width = 100,
+      max_height = 30,
+      title = " Hover ",
+      title_pos = "center",
+    })
+  end, "Lsp Hover")
 
   -- Workspace
   map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder,    "Lsp [W]orkspace [A]dd Folder")
@@ -50,22 +58,21 @@ M.keymaps = function(client, bufnr)
 
   -- Diagnostics
   map("n", "<leader>dd", function() vim.diagnostic.open_float({ scope = "line" }) end, "Lsp [D]iagnostics (current line)")
-  map("n", "[d", function() require("lspsaga.diagnostic"):goto_prev() end,                                             "Prev [D]iagnostic")
-  map("n", "]d", function() require("lspsaga.diagnostic"):goto_next() end,                                             "Next [D]iagnostic")
-  map("n", "[w", function() require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.WARN }) end,  "Prev [W]arn")
-  map("n", "]w", function() require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.WARN }) end,  "Next [W]arn")
-  map("n", "[e", function() require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, "Prev [E]rror")
-  map("n", "]e", function() require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR }) end, "Next [E]rror")
+  map("n", "[d", vim.diagnostic.goto_prev, "Prev [D]iagnostic")
+  map("n", "]d", vim.diagnostic.goto_next, "Next [D]iagnostic")
+  map("n", "[w", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN }) end, "Prev [W]arn")
+  map("n", "]w", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN }) end, "Next [W]arn")
+  map("n", "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, "Prev [E]rror")
+  map("n", "]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, "Next [E]rror")
 
   -- Code actions & rename
-  map("n", "<localleader>ca", "<cmd>Lspsaga code_action<cr>", "Lsp [C]ode [A]ction")
-  map("v", "<localleader>ca", "<cmd>Lspsaga code_action<cr>", "Lsp [C]ode [A]ction")
-  map("n", "<localleader>rn", "<cmd>Lspsaga rename<CR>",      "Lsp [R]ename")
+  map({ "n", "v" }, "<localleader>ca", vim.lsp.buf.code_action, "Lsp [C]ode [A]ction")
+  map("n", "<localleader>rn", vim.lsp.buf.rename, "Lsp [R]ename")
 
   -- Call hierarchy
-  if client.server_capabilities.documentHighlightProvider then
-    map("n", "<leader>lci", "<cmd>Lspsaga incoming_calls<CR>", "Lsp Incoming Calls")
-    map("n", "<leader>lco", "<cmd>Lspsaga outgoing_calls<CR>", "Lsp Outgoing Calls")
+  if client.server_capabilities.callHierarchyProvider then
+    map("n", "<leader>lci", vim.lsp.buf.incoming_calls, "Lsp Incoming Calls")
+    map("n", "<leader>lco", vim.lsp.buf.outgoing_calls, "Lsp Outgoing Calls")
   end
 
   -- Toggle inlay hints

@@ -117,7 +117,7 @@ nvim/
 | **Syntax** | nvim-treesitter + textobjects, refactor, playground |
 | **Completion** | nvim-cmp (LSP + snippets + path + buffer + dict) |
 | **Snippets** | LuaSnip + friendly-snippets |
-| **LSP** | nvim-lspconfig (native 0.11+ API), Mason, lspsaga |
+| **LSP** | nvim-lspconfig (native 0.11+ API), Mason |
 | **Formatting** | conform.nvim (stylua, prettier, ruff, black, google-java-format, ktlint) |
 | **Linting** | nvim-lint |
 
@@ -235,11 +235,11 @@ See **[docs/keymaps.md](docs/keymaps.md)** for the complete reference.
 
 | Key | Action |
 |---|---|
-| `K` | Hover documentation (lspsaga) |
+| `K` | Hover documentation (native LSP, styled float) |
 | `gd` | Go to definition |
 | `gr` | References |
-| `<leader>cr` | Rename symbol |
-| `<leader>ca` | Code action |
+| `<localleader>rn` | Rename symbol |
+| `<localleader>ca` | Code action |
 | `<localleader>f` | Format buffer |
 | `[d` / `]d` | Prev / next diagnostic |
 

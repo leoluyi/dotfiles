@@ -198,20 +198,20 @@ Leaders: `,` = `<leader>` · `<Space>` = `<localleader>`
 
 ## LSP
 
-These keymaps are set on LSP attach (defined in `lua/util/lsp_keymaps.lua` and lspsaga).
+These keymaps are set on LSP attach and defined in `lua/util/lsp_keymaps.lua`.
 
 | Key | Mode | Action |
 |---|---|---|
-| `K` | n | Hover documentation (lspsaga) |
+| `K` | n | Hover documentation (native LSP, styled float) |
 | `gd` | n | Go to definition |
 | `gD` | n | Go to declaration |
 | `gr` | n | References |
 | `gi` | n | Go to implementation |
 | `gy` | n | Go to type definition |
 | `gS` | n | Go to subject (Java super implementation) |
-| `<leader>cr` | n | Rename symbol (lspsaga) |
-| `<leader>ca` | n/v | Code action (lspsaga) |
-| `<leader>cd` | n | Show line diagnostics (lspsaga) |
+| `<localleader>rn` | n | Rename symbol (native LSP) |
+| `<localleader>ca` | n/v | Code action (native LSP) |
+| `<leader>dd` | n | Show line diagnostics (native LSP) |
 | `[d` / `]d` | n | Previous / next diagnostic |
 | `<localleader>f` | n | Format buffer (conform.nvim) |
 | `<leader>uo` | n | Toggle symbol outline (outline.nvim) |

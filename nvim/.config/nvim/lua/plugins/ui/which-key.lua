@@ -57,7 +57,7 @@ return {
       { "<leader>k", group = "Neotree" },
       { "<leader>K", group = "Cheat" },
       { "<leader>l", group = "Lsp" },
-      { "<leader>lc", group = "Lspsaga [C]all" },
+      { "<leader>lc", group = "Lsp [C]all hierarchy" },
       { "<leader>lw", group = "Lsp [W]orkspace" },
       { "<leader>q", group = "Quit" },
       { "<leader>r", group = "Resize|+Rotate" },
