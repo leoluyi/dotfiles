@@ -39,36 +39,6 @@ status_line_use_colors = true
 [features]
 js_repl = false
 
-[plugins."sites@openai-bundled"]
-enabled = false
-
-[plugins."browser@openai-bundled"]
-enabled = false
-
-[plugins."visualize@openai-bundled"]
-enabled = false
-
-[plugins."google-calendar@openai-curated"]
-enabled = false
-
-[plugins."slack@openai-curated"]
-enabled = false
-
-[plugins."documents@openai-primary-runtime"]
-enabled = false
-
-[plugins."pdf@openai-primary-runtime"]
-enabled = false
-
-[plugins."spreadsheets@openai-primary-runtime"]
-enabled = false
-
-[plugins."presentations@openai-primary-runtime"]
-enabled = false
-
-[plugins."template-creator@openai-primary-runtime"]
-enabled = false
-
 [plugins."context7@context7-marketplace"]
 enabled = true
 
