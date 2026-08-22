@@ -52,43 +52,7 @@ enabled = false
 enabled = true
 
 [[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-explore/SKILL.md"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-help/SKILL.md"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-learn/SKILL.md"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-manage/SKILL.md"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/caveman-optimize/SKILL.md"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/context7-mcp/SKILL.md"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/deck-writer/SKILL.md"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/discuss-with-me/SKILL.md"
-enabled = false
-
-[[skills.config]]
 path = "/Users/leoluyi/.agents/skills/git-guardrails-claude-code/SKILL.md"
-enabled = false
-
-[[skills.config]]
-path = "/Users/leoluyi/.agents/skills/goal-definer/SKILL.md"
 enabled = false
 
 [[skills.config]]
