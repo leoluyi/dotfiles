@@ -9,6 +9,10 @@ defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 8
 
 echo "Done. Log out and back in (or restart) for changes to take effect."
 
+# Fix bugss for Thaw menu bar spacing
+defaults write com.stonerl.Thaw NSStatusItemSpacing -int 4
+defaults write com.stonerl.Thaw NSStatusItemSelectionPadding -int 4
+
 # In Terminal/commandline, run:
 #
 # ```shell
