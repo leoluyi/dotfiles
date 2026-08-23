@@ -96,7 +96,6 @@ sync_sublimetext_config() {
   fi
 }
 
-
 _sync_dotfiles_stow() {
   echo "Syncing dotfiles ..."
   local config_home=${XDG_CONFIG_HOME:-$HOME/.config}
@@ -116,6 +115,8 @@ _sync_dotfiles_stow() {
       2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2) \
       >/dev/null
   done
+
+  bash "$_SCRIPT_DIR/scripts/sync-codex-config.sh" || return 1
 }
 
 
@@ -132,10 +133,13 @@ _sync_dotfiles_rsync() {
       ! -name .git \
       ! -name .DS_Store \
       ! -name .osx |
-      tee >(xargs -0 -I_ rsync -ar --no-perms _ "$HOME") \
+      tee >(xargs -0 -I_ rsync -ar --no-perms --include='.codex/' --include='.codex/AGENTS.md' --exclude='.codex/***' _ "$HOME") \
         >(xargs -0 -I_ basename _ | tr '\n' '\0' | xargs -0 -n1 printf "Updated %s\n") \
         >/dev/null
   done
+
+
+  bash "$_SCRIPT_DIR/scripts/sync-codex-config.sh" || return 1
 
   # echo "Sync config ..."
   # find ./common_dotfiles/.config -maxdepth 1 -mindepth 1 -print0 | \

@@ -111,12 +111,15 @@ See [docs/autopilot.md](./docs/autopilot.md) for what `/autopilot` does — dele
 ## Codex CLI
 
 Portable Codex guidance and defaults live in `common_dotfiles/.codex/AGENTS.md` and `common_dotfiles/.codex/config.toml`.
-The `local` profile at `~/.codex/local.config.toml` is machine-local and untracked, so TUI-written trust decisions, hook hashes, permissions, absolute paths, and other local state do not modify the shared config.
-Stow installs the shared guidance and config; the local profile remains outside the package, while caches, sessions, databases, logs, plugin downloads, and credentials remain local.
+Stow links only `AGENTS.md` into `~/.codex`.
+The bootstrap scripts install `~/.codex/config.toml` as a regular machine-local file because the Codex App writes to it.
+Later tracked changes are applied with a three-way merge, preserving App-written local changes and reporting overlapping edits as conflicts without replacing the working config.
+The optional `local` profile at `~/.codex/local.config.toml` also stays machine-local and untracked.
+The selected profile overlays the user config when both define the same key.
 
 ```bash
-mkdir -p "$HOME/.codex/rules"
-stow --dotfiles -R -t "$HOME" common_dotfiles
+./bootstrap_macos.sh
+# or ./bootstrap_ubuntu.sh / ./bootstrap_centos.sh
 ```
 
 Start the CLI with the managed profile:

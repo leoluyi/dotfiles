@@ -206,6 +206,8 @@ _sync_dotfiles_stow() {
       >/dev/null
   done
 
+  bash "$_SCRIPT_DIR/scripts/sync-codex-config.sh" || return 1
+
   find "$HOME/.ssh" -type d -exec chmod 700 {} +
   find "$HOME/.ssh" -type f -exec chmod 600 {} +
   [ ! -e "$HOME/.ssh/config" ] || chmod 600 "$HOME/.ssh/config"
@@ -224,10 +226,12 @@ _sync_dotfiles_rsync() {
       ! -name .git \
       ! -name .DS_Store \
       ! -name .osx |
-      tee >(xargs -0 -I_ rsync -ar --no-perms _ "$HOME") \
+      tee >(xargs -0 -I_ rsync -ar --no-perms --include='.codex/' --include='.codex/AGENTS.md' --exclude='.codex/***' _ "$HOME") \
         >(xargs -0 -I_ basename _ | tr '\n' '\0' | xargs -0 -n1 printf "Updated %s\n") \
         >/dev/null
   done
+
+  bash "$_SCRIPT_DIR/scripts/sync-codex-config.sh" || return 1
 
   # echo "Sync config ..."
   # find ./common_dotfiles/.config -maxdepth 1 -mindepth 1 -print0 | \
