@@ -20,8 +20,6 @@ brew "aichat"
 brew "harfbuzz"
 # TIFF library and utilities
 brew "libtiff"
-# Development kit for the Java programming language
-brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
 # Download with resuming and segmented downloading
@@ -90,10 +88,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -400,8 +398,6 @@ cask "arc"
 cask "bitwarden"
 # Virtual Audio Driver
 cask "blackhole-16ch"
-# OpenAI's official ChatGPT desktop app
-cask "chatgpt"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
@@ -506,8 +502,6 @@ cask "qlstephen"
 cask "quicklook-video"
 # Quick Look generator for Adobe Swatch Exchange files
 cask "quicklookase"
-# Control your tools with a few keystrokes
-cask "raycast"
 # 7-Zip derivative GUI
 cask "shichizip"
 # Screenshot measurement and annotation tool
@@ -606,7 +600,6 @@ vscode "editorconfig.editorconfig"
 vscode "fabiospampinato.vscode-open-in-finder"
 vscode "formulahendry.auto-close-tag"
 vscode "formulahendry.code-runner"
-vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "ibm.output-colorizer"
 vscode "jinhyuk.replace-curly-quotes"
@@ -620,11 +613,6 @@ vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.jupyter-keymap"
-vscode "ms-toolsai.jupyter-renderers"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
 vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vscode-remote.remote-ssh"
 vscode "ms-vscode-remote.remote-ssh-edit"
@@ -634,7 +622,6 @@ vscode "ms-vscode.remote-explorer"
 vscode "ms-vscode.remote-server"
 vscode "ms-vscode.sublime-keybindings"
 vscode "ms-vsliveshare.vsliveshare"
-vscode "mushan.vscode-open-iterm2"
 vscode "naumovs.color-highlight"
 vscode "njpwerner.autodocstring"
 vscode "patbenatar.advanced-new-file"
@@ -648,7 +635,6 @@ vscode "rickynormandeau.mariana-pro"
 vscode "ritwickdey.liveserver"
 vscode "samuelcolvin.jinjahtml"
 vscode "saoudrizwan.claude-dev"
-vscode "scala-lang.scala"
 vscode "shd101wyy.markdown-preview-enhanced"
 vscode "tomoki1207.pdf"
 vscode "vittorioromeo.expand-selection-to-scope"
