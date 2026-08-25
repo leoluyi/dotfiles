@@ -82,34 +82,11 @@ fi
 # -u OPENAI_API_KEY: force ChatGPT subscription auth, never API-key billing
 # even if something else in the environment exports the key.
 if command -v codex >/dev/null; then
-  codex_ensure_local_profile() {
-    local codex_home="${CODEX_HOME:-$HOME/.codex}"
-    local profile_path="$codex_home/local.config.toml"
-
-    if [ -f "$profile_path" ]; then
-      return 0
-    fi
-
-    if [ -L "$profile_path" ] || [ -e "$profile_path" ]; then
-      printf 'Codex local profile is not a regular file: %s\n' "$profile_path" >&2
-      return 1
-    fi
-
-    mkdir -p "$codex_home" || return 1
-    if ! (umask 077; set -C; : > "$profile_path") 2>/dev/null; then
-      if [ ! -f "$profile_path" ]; then
-        printf 'could not create Codex local profile: %s\n' "$profile_path" >&2
-        return 1
-      fi
-    fi
+  codex_with_defaults() {
+    env -u OPENAI_API_KEY codex --approve-for-me "$@"
   }
 
-  codex_local_profile() {
-    codex_ensure_local_profile || return 1
-    env -u OPENAI_API_KEY codex --profile local --approve-for-me "$@"
-  }
-
-  alias cx='codex_local_profile'
+  alias cx='codex_with_defaults'
   alias cx-yolo='cx --dangerously-bypass-approvals-and-sandbox'
   alias cx-search='cx --search'
   alias cx-exec='cx exec'
@@ -159,7 +136,7 @@ if command -v codex >/dev/null; then
     git -C "$repo_root" worktree add -b "$name" "$worktree_path" HEAD || return
     cd "$worktree_path" || return
     printf 'entered worktree: %s\n' "$worktree_path"
-    codex_local_profile
+    codex_with_defaults
   }
 fi
 
@@ -201,7 +178,7 @@ if command -v wt >/dev/null; then
 
     wt --config "$HOME/.dotfiles/common_dotfiles/.config/worktrunk/config.toml" \
       switch --create --base=@ --cd \
-      --execute 'env -u OPENAI_API_KEY codex --profile local --approve-for-me' "$name"
+      --execute 'env -u OPENAI_API_KEY codex --approve-for-me' "$name"
   }
 fi
 

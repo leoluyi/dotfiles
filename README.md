@@ -114,21 +114,20 @@ Portable Codex guidance and defaults live in `common_dotfiles/.codex/AGENTS.md` 
 Stow links only `AGENTS.md` into `~/.codex`.
 The bootstrap scripts install `~/.codex/config.toml` as a regular machine-local file because the Codex App writes to it.
 Later tracked changes are applied with a three-way merge, preserving App-written local changes and reporting overlapping edits as conflicts without replacing the working config.
-The optional `local` profile at `~/.codex/local.config.toml` also stays machine-local and untracked.
-The selected profile overlays the user config when both define the same key.
+An optional profile at `~/.codex/<name>.config.toml` can stay machine-local and untracked when a separate overlay is useful.
 
 ```bash
 ./bootstrap_macos.sh
 # or ./bootstrap_ubuntu.sh / ./bootstrap_centos.sh
 ```
 
-Start the CLI with the managed profile:
+Start the CLI with the merged user config:
 
 ```bash
-codex --profile local
+codex
 ```
 
-The interactive `cx` and `cx-*` aliases use this profile automatically after the shell reloads.
+The interactive `cx` and `cx-*` aliases use the merged user config automatically after the shell reloads.
 
 After Codex or agent plugin updates, run `scripts/fix-codex-session-start-hooks.sh` to keep Claude-style SessionStart hooks compatible with Codex's JSON output contract.
 
