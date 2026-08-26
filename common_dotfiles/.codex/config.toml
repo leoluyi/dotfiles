@@ -20,6 +20,7 @@ enabled = true
 "codeload.github.com" = "allow"
 "objects.githubusercontent.com" = "allow"
 "raw.githubusercontent.com" = "allow"
+"registry.npmjs.org" = "allow"
 
 [mcp_servers.context7]
 command = "npx"

@@ -17,15 +17,33 @@ run() {
 
 marketplace_configured() {
   local marketplace="$1"
+  local source="$2"
+  local expected_source
+
+  if [[ "$source" == *"://"* || "$source" == /* || "$source" == git@* ]]; then
+    expected_source="$source"
+  else
+    expected_source="https://github.com/$source"
+  fi
+  expected_source="${expected_source%.git}"
 
   if command -v jq >/dev/null 2>&1; then
     codex plugin marketplace list --json 2>/dev/null |
-      jq -e --arg name "$marketplace" '.marketplaces[]? | select(.name == $name)' >/dev/null
+      jq -e --arg name "$marketplace" --arg source "$expected_source" '
+        def normalized: rtrimstr("/") | rtrimstr(".git");
+        .marketplaces[]?
+        | select(.name == $name)
+        | (.marketplaceSource.source // "" | normalized) == ($source | normalized)
+      ' >/dev/null
     return
   fi
 
   codex plugin marketplace list --json 2>/dev/null |
-    awk -v name="$marketplace" '$0 ~ "\"name\": \"" name "\"" { found = 1 } END { exit !found }'
+    awk -v name="$marketplace" -v source="$expected_source" '
+      /"name":/ { matching = ($0 ~ "\"name\": \"" name "\"") }
+      matching && /"source":/ && $0 ~ source { found = 1 }
+      END { exit !found }
+    '
 }
 
 plugin_installed() {
@@ -64,8 +82,10 @@ add_marketplace() {
   fi
 
   if [[ "$add_output" == *"already added from a different source"* ]]; then
-    printf 'WARNING: Codex plugin marketplace already exists from a different source: %s\n' "$marketplace" >&2
-    return 0
+    printf 'Refreshing Codex plugin marketplace from the requested source: %s\n' "$marketplace" >&2
+    run codex plugin marketplace remove "$marketplace" || return 1
+    run "${add_command[@]}"
+    return
   fi
 
   printf '%s\n' "$add_output" >&2
@@ -86,7 +106,7 @@ install_plugin() {
     return 0
   fi
 
-  if marketplace_configured "$marketplace"; then
+  if marketplace_configured "$marketplace" "$source"; then
     echo "Codex plugin marketplace already configured: $marketplace"
   elif ! add_marketplace "$marketplace" "$source" "$@"; then
     return 1
