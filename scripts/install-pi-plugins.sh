@@ -15,6 +15,7 @@ run() {
 echo "Installing pi-agent plugins..."
 
 run pi install git:github.com/DietrichGebert/ponytail
+run pi install https://github.com/cathrynlavery/diagram-design
 
 if [[ ${#FAILURES[@]} -gt 0 ]]; then
   echo ""

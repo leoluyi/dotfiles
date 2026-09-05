@@ -133,6 +133,7 @@ install_plugin context7 context7-marketplace upstash/context7
 install_plugin x-skills x-skills sergebulaev/x-skills
 install_plugin sol-advisor sol-advisor DannyMac180/sol-advisor --ref main
 install_plugin ponytail ponytail DietrichGebert/ponytail
+install_plugin diagram-design diagram-design cathrynlavery/diagram-design
 
 echo "Installing Codex MCP servers..."
 install_mcp_server playwright npx -y @playwright/mcp@latest
