@@ -5,7 +5,9 @@
   "permissions": {
     "allow": [
       "command(ls)",
-      "command(cat)"
+      "command(cat)",
+      "command(python3)",
+      "command(uv)"
     ]
   },
   "statusLine": {

@@ -48,6 +48,7 @@ npx skills@latest add anthropics/skills -g -y -s theme-factory
 npx skills@latest add JuliusBrussee/caveman -g -a codex -y
 npx skills@latest add sunbigfly/ppt-agent-skills -g -y
 npx skills update -g -y
+run npx @playwright/cli install --skills
 
 # Claude-style SessionStart hooks do not all emit the single JSON object Codex
 # expects. Patch the installed Codex copies after plugin updates.
