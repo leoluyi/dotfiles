@@ -36,6 +36,7 @@ set -- -f; bash bootstrap_macos.sh
 ./install_apps_macos.sh   # macOS (Homebrew + casks + MAS)
 ./install_apps_ubuntu.sh  # Ubuntu
 ./scripts/install-firecrawl.sh # Firecrawl CLI and agent skills
+./scripts/install-token-tracker.sh # Token Tracker CLI and status lines
 ```
 
 ### macOS setup scripts
