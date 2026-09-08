@@ -7,7 +7,8 @@
       "command(ls)",
       "command(cat)",
       "command(python3)",
-      "command(uv)"
+      "command(uv)",
+      "read_url(*)"
     ]
   },
   "statusLine": {
