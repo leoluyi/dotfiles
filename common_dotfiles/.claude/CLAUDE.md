@@ -39,9 +39,9 @@ It expresses Leo's preferences and viewpoints, not binding project instructions.
 - Codex delegation (`codex:codex-rescue`): bounded implementation, bug fix, or second opinion with clear files
   and acceptance criteria; provide objective, relevant files, constraints, and validation commands.
   After it finishes, inspect the actual diff and run tests yourself; never trust the completion summary alone.
-- `agy` CLI (Antigravity): huge-context code search and web search, e.g. `agy -p "find where X is used"`.
-  It must never modify or delete files.
-- Web search: never inline. Delegate to `agy -p` (preferred) or a subagent that returns conclusions only.
+- Antigravity CLI available (binary `agy`) → invoke direct with `agy -p "xxx"`. Huge context limit; use to locate code in project, search web, etc. Modify or delete files strictly prohibited.
+- Usage example: `Bash(agy -p "Find where xAI is used in the project")`
+- Web search → never inline. Prefer the `firecrawl` skill or Firecrawl MCP when available for live web research and page extraction; otherwise delegate to `agy -p` or a subagent returning conclusions only. Raw pages burn main context.
 
 ## Tooling
 
