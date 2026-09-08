@@ -96,7 +96,7 @@ _sync_dotfiles_stow() {
       >/dev/null
   done
 
-  bash "$_SCRIPT_DIR/scripts/sync-codex-config.sh" || return 1
+  bash "$_SCRIPT_DIR/scripts/sync-codex-config.sh" -f || return 1
 }
 
 
@@ -119,7 +119,7 @@ _sync_dotfiles_rsync() {
   done
 
 
-  bash "$_SCRIPT_DIR/scripts/sync-codex-config.sh" || return 1
+  bash "$_SCRIPT_DIR/scripts/sync-codex-config.sh" -f || return 1
 
   # echo "Sync config ..."
   # find ./common_dotfiles/.config -maxdepth 1 -mindepth 1 -print0 | \

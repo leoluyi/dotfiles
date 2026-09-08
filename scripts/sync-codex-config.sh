@@ -19,6 +19,21 @@ copy_private() {
   mv -f "$temporary" "$destination"
 }
 
+case "${1:-}" in
+  '') force=false ;;
+  --check) force=false ;;
+  -f | --force) force=true ;;
+  *)
+    printf 'Usage: %s [--check|-f|--force]\n' "$0" >&2
+    exit 2
+    ;;
+esac
+
+if [ "$#" -gt 1 ]; then
+  printf 'Usage: %s [--check|-f|--force]\n' "$0" >&2
+  exit 2
+fi
+
 if [ ! -f "$tracked_config" ]; then
   printf 'Codex config source is missing: %s\n' "$tracked_config" >&2
   exit 1
@@ -58,6 +73,13 @@ fi
 if [ -e "$base_config" ] && { [ -L "$base_config" ] || [ ! -f "$base_config" ]; }; then
   printf 'Codex merge base is not a regular file: %s\n' "$base_config" >&2
   exit 1
+fi
+
+if [ "$force" = true ]; then
+  copy_private "$tracked_config" "$user_config"
+  copy_private "$tracked_config" "$base_config"
+  printf 'Replaced Codex user config with tracked defaults\n'
+  exit 0
 fi
 
 if [ ! -e "$user_config" ]; then
