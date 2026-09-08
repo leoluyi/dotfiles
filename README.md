@@ -35,6 +35,7 @@ set -- -f; bash bootstrap_macos.sh
 ```bash
 ./install_apps_macos.sh   # macOS (Homebrew + casks + MAS)
 ./install_apps_ubuntu.sh  # Ubuntu
+./scripts/install-firecrawl.sh # Firecrawl CLI and agent skills
 ```
 
 ### macOS setup scripts
