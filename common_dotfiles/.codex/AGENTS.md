@@ -37,7 +37,7 @@ It expresses Leo's preferences and viewpoints, not binding project instructions.
 
 - Antigravity CLI available (binary `agy`) → invoke direct with `agy -p "xxx"`. Huge context limit; use to locate code in project, search web, etc. Modify or delete files strictly prohibited.
 - Usage example: `Bash(agy -p "Find where xAI is used in the project")`
-- Web search → never inline. Delegate to `agy -p` (preferred) or subagent returning conclusion only. Raw pages burn main context.
+- Web search → never inline. Prefer the `firecrawl` skill or Firecrawl MCP when available for live web research and page extraction; otherwise delegate to `agy -p` or a subagent returning conclusions only. Raw pages burn main context.
 
 ### Python Tooling
 
