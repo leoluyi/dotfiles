@@ -5,17 +5,19 @@
 command -v llm >/dev/null || return 0
 
 LLM_MODEL="gpt-5.6-luna"
-# Reasoning effort: none|minimal|low|medium|high|xhigh. Empty disables the flag.
+# Reasoning effort: minimal|low|medium|high. Empty disables the flag.
 # Only models registered with `reasoning: true` accept this option.
-LLM_REASONING_EFFORT="xhigh"
+LLM_REASONING_EFFORT="high"
 _LLM_CMD_SYSTEM="Output only a single bash command with no explanation, no markdown, and no backticks. The command must run on $(uname -s)."
 
-# Print model setup instructions when the configured model is unavailable.
+# Print model setup instructions when the configured model is unavailable or obsolete.
 _llm_model_hint() {
     cat >&2 <<EOF
-Model '${LLM_MODEL}' not found. Check what is available:
+Model '${LLM_MODEL}' is unavailable or obsolete. Check what is available:
   llm models                                            # ids llm knows about
   llm openai models                                     # ids the API serves
+
+Update LLM_MODEL if the API no longer serves this model.
 
 A model the API serves but llm does not list is newer than llm's bundled
 registry; register it by hand in:
@@ -29,8 +31,9 @@ EOF
 }
 
 # Wrapper around llm that applies the configured model and reasoning effort,
-# and prints setup instructions on 'Unknown model' errors. Callers must not pass
-# -m themselves. Passes stdin and all args through; only stderr is intercepted.
+# and prints setup instructions on unknown, obsolete, or deprecated model errors.
+# Callers must not pass -m themselves. Passes stdin and all args through; only
+# stderr is intercepted.
 _llm() {
     local tmp_err rc
     local -a opts=(-m "${LLM_MODEL}")
@@ -38,7 +41,7 @@ _llm() {
     tmp_err=$(mktemp)
     llm "${opts[@]}" "$@" 2>"$tmp_err"
     rc=$?
-    if [ $rc -ne 0 ] && grep -q "Unknown model" "$tmp_err" 2>/dev/null; then
+    if [ $rc -ne 0 ] && grep -Eqi "Unknown model|model.*(obsolete|deprecated|retired|not found|does not exist)" "$tmp_err" 2>/dev/null; then
         cat "$tmp_err" >&2
         _llm_model_hint
     else
