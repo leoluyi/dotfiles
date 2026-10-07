@@ -181,6 +181,20 @@ _sync_dotfiles_stow() {
 
   home_src_folders=("common_dotfiles" "$os")
 
+  # Stow may have folded ~/.local/bin into a package directory on an older run.
+  # Unfold only links owned by this repository so uv installs into the real home bin.
+  if [ -L "$HOME/.local/bin" ]; then
+    local local_bin_target
+    local_bin_target="$(readlink -f "$HOME/.local/bin")"
+    for folder in "${home_src_folders[@]}"; do
+      if [ "$local_bin_target" = "$_SCRIPT_DIR/$folder/.local/bin" ]; then
+        rm -f "$HOME/.local/bin"
+        mkdir -p "$HOME/.local/bin"
+        break
+      fi
+    done
+  fi
+
   # statusline.sh is vendored (common_dotfiles/.claude/statusline.sh) and stow-linked.
   # A prior `npx @kamranahmedse/claude-statusline` (or the upstream default) leaves a
   # REAL file at ~/.claude/statusline.sh; `stow --adopt` would then absorb it and
