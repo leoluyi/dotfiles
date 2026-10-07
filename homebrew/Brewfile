@@ -10,6 +10,7 @@ tap "instantclienttap/instantclient", trusted: true
 tap "nikitabobko/tap", trusted: true
 tap "oven-sh/bun", trusted: true
 tap "sdkman/tap", trusted: true
+tap "shobhit99/tap"
 tap "slp/krunkit", trusted: true
 # Search tool like grep, but optimized for programmers
 brew "ack"
@@ -443,6 +444,8 @@ cask "font-ubuntu-nerd-font"
 cask "ghostty"
 # Web browser
 cask "google-chrome"
+# Keeps coding agents running with the laptop lid closed
+cask "shobhit99/tap/holdmylid", trusted: true
 # Menu bar application that displays the CPU speed limit due to thermal issues
 cask "hot"
 # Free and open-source media player

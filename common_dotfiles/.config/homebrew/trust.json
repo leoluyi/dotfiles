@@ -16,5 +16,8 @@
   ],
   "trustedformulae": [
     "can1357/tap/omp"
+  ],
+  "trustedcasks": [
+    "shobhit99/tap/holdmylid"
   ]
 }
