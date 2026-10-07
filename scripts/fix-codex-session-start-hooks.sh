@@ -51,3 +51,17 @@ for file in "${caveman_hooks[@]}"; do
       '(.hooks.SessionStart[]?.hooks[]? | select(.type == "command")).command = $command'
   fi
 done
+
+ponytail_runtime_hooks=(
+  "$HOME/.codex/.tmp/marketplaces/ponytail/hooks/ponytail-runtime.js"
+  "$HOME/.codex/plugins/cache/ponytail"/*/hooks/ponytail-runtime.js
+  "$HOME/.codex/plugins/cache/ponytail"/*/*/hooks/ponytail-runtime.js
+)
+
+for file in "${ponytail_runtime_hooks[@]}"; do
+  [ -f "$file" ] || continue
+  if ! rg -q 'codex: normalize hook context to ASCII' "$file"; then
+    perl -0pi -e 's#(function writeHookOutput[^\n]*\n)#$1  // codex: normalize hook context to ASCII for terminal compatibility.\n  context = String(context)\n    .replace(/[—–]/g, "-")\n    .replace(/[“”]/g, "\\\"")\n    .replace(/…/g, "...")\n    .replace(/→/g, "->")\n    .replace(/[^\\x00-\\x7F]/g, "");\n#' "$file"
+    echo "+ patched $file"
+  fi
+done

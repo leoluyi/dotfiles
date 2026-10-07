@@ -381,8 +381,6 @@ cask "1password"
 cask "1password-cli"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
-# GPU-accelerated terminal emulator
-cask "alacritty"
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Terminal interface for Antigravity agents
@@ -455,8 +453,6 @@ cask "input-source-pro"
 cask "itsycal"
 # Menu bar manager
 cask "jordanbaird-ice@beta"
-# Utility to render Jupyter notebooks
-cask "jupyter-notebook-viewer"
 # Open-source screen recorder built with web technology
 cask "kap"
 # File archiver
