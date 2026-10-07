@@ -563,7 +563,6 @@ cask "zen"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "Accelerate", id: 1459809092
-mas "AdGuard for Safari", id: 1440147259
 mas "AS Timer", id: 512464723
 mas "AutoMounter", id: 1160435653
 mas "Be Focused", id: 973134470
@@ -578,7 +577,6 @@ mas "Gifski", id: 1351639930
 mas "Hush", id: 1544743900
 mas "iMovie", id: 408981434
 mas "iPreview", id: 1519213509
-mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
 mas "Markdown Preview", id: 6739955340
 mas "Movist", id: 461788075
@@ -586,10 +584,10 @@ mas "NordVPN", id: 905953485
 mas "Obsidian Web Clipper", id: 6720708363
 mas "Owlfiles", id: 510282524
 mas "PDFgear", id: 6469021132
-mas "Perplexity", id: 6714467650
 mas "Prodrafts", id: 1545810067
 mas "Speedtest", id: 1153157709
 mas "Telegram", id: 747648890
+mas "uBlock Origin Lite", id: 6745342698
 mas "WeChat", id: 836500024
 mas "Welly", id: 1521402269
 mas "Windows App", id: 1295203466
@@ -666,7 +664,6 @@ go "github.com/abice/go-enum"
 go "mvdan.cc/gofumpt"
 go "golang.org/x/tools/cmd/goimports"
 go "github.com/twpayne/go-jsonstruct/v3/cmd/gojsonstruct"
-go "github.com/golangci/golangci-lint/v2/cmd/golangci-lint"
 go "github.com/segmentio/golines"
 go "github.com/fatih/gomodifytags"
 go "github.com/abenz1267/gomvp"
