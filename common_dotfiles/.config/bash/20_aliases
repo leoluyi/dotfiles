@@ -88,7 +88,7 @@ if command -v codex >/dev/null; then
 
   alias cx='codex_with_defaults'
   alias cx-yolo='cx --dangerously-bypass-approvals-and-sandbox'
-  alias cx-search='cx --search'
+  alias cx-search='cx --no-daemon --search'
   alias cx-exec='cx exec'
   alias cx-resume='cx resume --last'
   alias codex-reset-checker='npx -y @willh/codex-reset-checker'

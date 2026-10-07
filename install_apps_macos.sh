@@ -55,6 +55,16 @@ function install_xcodecli {
 }
 
 
+function install_rosetta {
+  echo "$(tput setaf 2)###### Install Rosetta ######$(tput sgr 0)"
+  if [ "$(uname -m)" = "arm64" ]; then
+    softwareupdate --install-rosetta --agree-to-license
+  else
+    echo "(Skip) Rosetta is only needed on Apple Silicon."
+  fi
+}
+
+
 function install_homebrew {
   echo "$(tput setaf 2)###### Install Homebrew ######$(tput sgr 0)"
 
@@ -221,6 +231,7 @@ post_install_config() {
 # Execute functions.
 validate_os macos
 install_xcodecli
+install_rosetta
 install_homebrew
 
 # Install brew apps.
@@ -232,6 +243,7 @@ post_install_config
 
 unset \
   install_xcodecli \
+  install_rosetta \
   install_homebrew \
   install_alacritty_theme_switch \
   post_install_config \

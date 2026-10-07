@@ -359,8 +359,6 @@ brew "zoxide"
 brew "can1357/tap/omp", trusted: true
 # Extract, view, and test RAR archives
 brew "carlocab/personal/unrar"
-# Launcher for Coursier
-brew "coursier/formulas/coursier"
 # It's like cat(1), but for images
 brew "eddieantonio/eddieantonio/imgcat"
 # FlyteCtl is a command line tool to interact with a Flyte cluster.
