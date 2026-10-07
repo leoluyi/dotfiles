@@ -33,8 +33,6 @@ brew "podman"
 brew "astro"
 # MPEG-4 command-line tool
 brew "atomicparsley"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
 # Automatically formats Python code to conform to the PEP 8 style guide
 brew "autopep8"
 # Bourne-Again SHell, a UNIX command interpreter
@@ -89,10 +87,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -271,6 +269,8 @@ brew "poppler-qt5"
 brew "pv"
 # Password generator
 brew "pwgen"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Generic machine emulator and virtualizer
 brew "qemu"
 # Tools for and transforming and inspecting PDF files
@@ -477,6 +477,8 @@ cask "mongodb-compass"
 cask "monitorcontrol"
 # Re-mounts write-protected NTFS volumes
 cask "mounty"
+# VPN client for secure internet access and private browsing
+cask "nordvpn"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Finder Toolbar app to open the current directory in Editor
@@ -601,7 +603,6 @@ vscode "editorconfig.editorconfig"
 vscode "fabiospampinato.vscode-open-in-finder"
 vscode "formulahendry.auto-close-tag"
 vscode "formulahendry.code-runner"
-vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "ibm.output-colorizer"
 vscode "jinhyuk.replace-curly-quotes"
@@ -615,6 +616,7 @@ vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
 vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vscode-remote.remote-ssh"
 vscode "ms-vscode-remote.remote-ssh-edit"
