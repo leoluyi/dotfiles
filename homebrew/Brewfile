@@ -133,6 +133,8 @@ brew "go"
 brew "pkgconf"
 # Generate introspection data for GObject libraries
 brew "gobject-introspection"
+# Fast linters runner for Go
+brew "golangci-lint"
 # Terminal based graphical activity monitor inspired by gtop and vtop
 brew "gotop"
 # Graph visualization software from AT&T and Bell Labs
@@ -581,6 +583,7 @@ mas "LINE", id: 539883307
 mas "Markdown Preview", id: 6739955340
 mas "Movist", id: 461788075
 mas "NordVPN", id: 905953485
+mas "Obsidian Web Clipper", id: 6720708363
 mas "Owlfiles", id: 510282524
 mas "PDFgear", id: 6469021132
 mas "Perplexity", id: 6714467650
