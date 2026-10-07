@@ -68,7 +68,7 @@ stow -n -t "$HOME" common_dotfiles
 
 ## Secrets & Local Overrides
 
-Never commit credentials or machine-specific settings to this repo. Two escape hatches are auto-sourced by `.bash_profile` on every shell startup:
+Never commit credentials or machine-specific settings to this repo. Two escape hatches are auto-sourced by the macOS shell startup files:
 
 ### `~/.secrets/` — credentials and API keys
 

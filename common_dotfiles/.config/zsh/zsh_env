@@ -1,2 +1,9 @@
-# vim: set ft=bash:
+# vim: set ft=zsh:
 export HISTFILE="$XDG_DATA_HOME"/zsh/history
+
+# Load credentials shared by shell tools, including `git aic` via aichat.
+if [ -d "$HOME/.secrets" ]; then
+  for secret in "$HOME"/.secrets/*(N); do
+    [ -f "$secret" ] && [ -r "$secret" ] && . "$secret"
+  done
+fi
