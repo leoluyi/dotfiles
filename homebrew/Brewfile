@@ -1,4 +1,3 @@
-tap "1password/tap", trusted: true
 tap "beeftornado/rmtree", trusted: true
 tap "can1357/tap"
 tap "carlocab/personal", trusted: true
@@ -20,6 +19,8 @@ brew "aichat"
 brew "harfbuzz"
 # TIFF library and utilities
 brew "libtiff"
+# Development kit for the Java programming language
+brew "openjdk"
 # Ammonite is a cleanroom re-implementation of the Scala REPL
 brew "ammonite-repl"
 # Download with resuming and segmented downloading
@@ -88,10 +89,10 @@ brew "fabric-ai"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# Play, record, convert, and stream select audio and video codecs
-brew "ffmpeg"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
 # Play, record, convert, and stream audio and video
@@ -398,6 +399,10 @@ cask "arc"
 cask "bitwarden"
 # Virtual Audio Driver
 cask "blackhole-16ch"
+# Open source IDE for exploring and testing APIs
+cask "bruno"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
@@ -502,6 +507,8 @@ cask "qlstephen"
 cask "quicklook-video"
 # Quick Look generator for Adobe Swatch Exchange files
 cask "quicklookase"
+# Control your tools with a few keystrokes
+cask "raycast"
 # 7-Zip derivative GUI
 cask "shichizip"
 # Screenshot measurement and annotation tool
@@ -600,6 +607,7 @@ vscode "editorconfig.editorconfig"
 vscode "fabiospampinato.vscode-open-in-finder"
 vscode "formulahendry.auto-close-tag"
 vscode "formulahendry.code-runner"
+vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "ibm.output-colorizer"
 vscode "jinhyuk.replace-curly-quotes"
