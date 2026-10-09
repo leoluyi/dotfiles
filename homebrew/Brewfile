@@ -7,6 +7,7 @@ tap "flyteorg/tap", trusted: true
 tap "gromgit/brewtils", trusted: true
 tap "gromgit/fuse", trusted: true
 tap "instantclienttap/instantclient", trusted: true
+tap "mycometg3/qlstephenswift", "https://github.com/MyCometG3/homebrew-qlstephenswift"
 tap "nikitabobko/tap", trusted: true
 tap "oven-sh/bun", trusted: true
 tap "sdkman/tap", trusted: true
@@ -16,14 +17,6 @@ tap "slp/krunkit", trusted: true
 brew "ack"
 # All-in-one AI-Powered CLI Chat & Copilot
 brew "aichat"
-# OpenType text shaping engine
-brew "harfbuzz"
-# TIFF library and utilities
-brew "libtiff"
-# Development kit for the Java programming language
-brew "openjdk"
-# Ammonite is a cleanroom re-implementation of the Scala REPL
-brew "ammonite-repl"
 # Download with resuming and segmented downloading
 brew "aria2"
 # Record and share terminal sessions
@@ -34,6 +27,8 @@ brew "podman"
 brew "astro"
 # MPEG-4 command-line tool
 brew "atomicparsley"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Automatically formats Python code to conform to the PEP 8 style guide
 brew "autopep8"
 # Bourne-Again SHell, a UNIX command interpreter
@@ -42,6 +37,12 @@ brew "bash"
 brew "bash-completion@2"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# OpenType text shaping engine
+brew "harfbuzz"
+# TIFF library and utilities
+brew "libtiff"
+# Development kit for the Java programming language
+brew "openjdk"
 # Remove large files or passwords from Git history like git-filter-branch
 brew "bfg"
 # Yet another cross-platform graphical process/system monitor
@@ -262,16 +263,10 @@ brew "plowshare"
 brew "pngquant"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
-# Cross-platform application and UI framework
-brew "qt@5"
-# PDF rendering library (based on the xpdf-3.0 code base)
-brew "poppler-qt5"
 # Monitor data's progress through a pipe
 brew "pv"
 # Password generator
 brew "pwgen"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
 # Generic machine emulator and virtualizer
 brew "qemu"
 # Tools for and transforming and inspecting PDF files
@@ -418,8 +413,6 @@ cask "dbeaver-community"
 cask "deckset"
 # UI to create reproducible developer environments based on a devcontainer.json
 cask "devpod"
-# App to build and share containerised applications and microservices
-cask "docker-desktop"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
 # Productivity app
@@ -502,8 +495,8 @@ cask "postman"
 cask "qladdict"
 # Quick Look generator for Markdown files
 cask "qlmarkdown"
-# Quick Look plugin for plaintext files without an extension
-cask "qlstephen"
+# Quick Look plugin app
+cask "mycometg3/qlstephenswift/qlstephenswift", trusted: true
 # Thumbnails, static previews, cover art and metadata for video files
 cask "quicklook-video"
 # Quick Look generator for Adobe Swatch Exchange files
@@ -606,6 +599,7 @@ vscode "editorconfig.editorconfig"
 vscode "fabiospampinato.vscode-open-in-finder"
 vscode "formulahendry.auto-close-tag"
 vscode "formulahendry.code-runner"
+vscode "github.copilot-chat"
 vscode "golang.go"
 vscode "ibm.output-colorizer"
 vscode "jinhyuk.replace-curly-quotes"
