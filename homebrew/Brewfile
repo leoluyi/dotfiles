@@ -379,6 +379,8 @@ cask "1password"
 cask "1password-cli"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
+# Menu bar system monitor
+cask "airstats"
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Terminal interface for Antigravity agents
