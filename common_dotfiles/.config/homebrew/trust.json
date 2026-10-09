@@ -18,6 +18,7 @@
     "can1357/tap/omp"
   ],
   "trustedcasks": [
+    "1password/tap/1password-cli",
     "mycometg3/qlstephenswift/qlstephenswift",
     "shobhit99/tap/holdmylid"
   ]
