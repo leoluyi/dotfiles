@@ -1,6 +1,5 @@
 {
   "trustedtaps": [
-    "1password/tap",
     "beeftornado/rmtree",
     "carlocab/personal",
     "coursier/formulas",
@@ -18,7 +17,6 @@
     "can1357/tap/omp"
   ],
   "trustedcasks": [
-    "1password/tap/1password-cli",
     "mycometg3/qlstephenswift/qlstephenswift",
     "shobhit99/tap/holdmylid"
   ]
