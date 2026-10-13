@@ -35,6 +35,7 @@ run claude plugin marketplace add openai/codex-plugin-cc
 run claude plugin marketplace add DietrichGebert/ponytail
 run claude plugin marketplace add upstash/context7
 run claude plugin marketplace add cathrynlavery/diagram-design
+run claude plugin marketplace add typesafe-ai/skills
 # run claude plugin marketplace add affaan-m/everything-claude-code  # ECC uninstalled 2026-08-11
 
 # Install and enable plugins
@@ -62,6 +63,7 @@ run claude plugin install ponytail@ponytail
 run claude plugin install dev-workflow@yvictor-skills
 run claude plugin install context7@context7-marketplace
 run claude plugin install diagram-design@diagram-design
+run claude plugin install typesafe@typesafe-ai
 run "${script_dir}/install-claude-settings.sh"
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
