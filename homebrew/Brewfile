@@ -517,8 +517,6 @@ cask "shichizip"
 cask "shottr"
 # React client for Simplenote
 cask "simplenote"
-# Utility to resize and position application windows
-cask "sizeup"
 # Music streaming service
 cask "spotify"
 # System monitor for the menu bar
@@ -531,8 +529,6 @@ cask "suspicious-package"
 cask "sweet-home3d"
 # Quicklook extension for source files
 cask "syntax-highlight"
-# Tool for liberating data tables trapped inside PDF files
-cask "tabula"
 # Spreadsheet style tag editor for audio files
 cask "tageditor"
 # JDK from the Eclipse Foundation (Adoptium)
@@ -574,12 +570,12 @@ mas "AutoMounter", id: 1160435653
 mas "Be Focused", id: 973134470
 mas "ColorSlurp", id: 1287239339
 mas "CotEditor", id: 1024640650
-mas "CSView", id: 1167193104
 mas "Dark Reader for Safari", id: 1438243180
 mas "Easy CSV Editor", id: 1171346381
 mas "Elmedia Video Player", id: 1044549675
 mas "Folder Preview", id: 6698876601
 mas "Gifski", id: 1351639930
+mas "Gridka", id: 6759612463
 mas "Hush", id: 1544743900
 mas "iMovie", id: 408981434
 mas "iPreview", id: 1519213509
