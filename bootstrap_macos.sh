@@ -181,6 +181,8 @@ _sync_dotfiles_stow() {
 
   home_src_folders=("common_dotfiles" "$os")
 
+  bash "$_SCRIPT_DIR/scripts/sync-antigravity-config.sh" || return 1
+
   # Stow may have folded ~/.local/bin into a package directory on an older run.
   # Unfold only links owned by this repository so uv installs into the real home bin.
   if [ -L "$HOME/.local/bin" ]; then
@@ -199,9 +201,7 @@ _sync_dotfiles_stow() {
   # repo file look like a real home file, so resolve before removing anything.
   local path resolved_path
   for path in \
-    "$HOME/.claude/statusline.sh" \
-    "$HOME/.gemini/antigravity-cli/statusline.sh" \
-    "$HOME/.gemini/antigravity-cli/settings.json"; do
+    "$HOME/.claude/statusline.sh"; do
     if [ -e "$path" ] && [ ! -L "$path" ]; then
       resolved_path="$(readlink -f "$path")"
       if [[ "$resolved_path" != "$_SCRIPT_DIR"/* ]]; then
@@ -212,10 +212,10 @@ _sync_dotfiles_stow() {
 
   for folder in "${home_src_folders[@]}"; do
     echo "$(tput setaf 3)Stow $folder ...$(tput sgr 0)"
-    stow -v --dotfiles -t "$HOME" -D "$folder" \
+    stow -v --dotfiles -t "$HOME" --ignore='^\.gemini$' -D "$folder" \
       2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2) \
       >/dev/null
-    stow --adopt -v --dotfiles -t "$HOME" --ignore='^\.ssh/\.gitignore$' --override='.' "$folder" \
+    stow --adopt -v --dotfiles -t "$HOME" --ignore='^\.gemini$' --ignore='^\.ssh/\.gitignore$' --override='.' "$folder" \
       2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2) \
       >/dev/null
   done
@@ -235,12 +235,14 @@ _sync_dotfiles_rsync() {
 
   home_src_folders=("common_dotfiles" "$os")
 
+  bash "$_SCRIPT_DIR/scripts/sync-antigravity-config.sh" || return 1
+
   for folder in "${home_src_folders[@]}"; do
     find "$folder" -maxdepth 1 -mindepth 1 \( -name '.[!.]*' -o -name '.local' -o -name '.config' \) -print0 \
       ! -name .git \
       ! -name .DS_Store \
       ! -name .osx |
-      tee >(xargs -0 -I_ rsync -ar --no-perms --include='.codex/' --include='.codex/AGENTS.md' --exclude='.codex/***' _ "$HOME") \
+      tee >(xargs -0 -I_ rsync -ar --no-perms --exclude='.gemini' --include='.codex/' --include='.codex/AGENTS.md' --exclude='.codex/***' _ "$HOME") \
         >(xargs -0 -I_ basename _ | tr '\n' '\0' | xargs -0 -n1 printf "Updated %s\n") \
         >/dev/null
   done
