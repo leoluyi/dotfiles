@@ -17,6 +17,7 @@
     "can1357/tap/omp"
   ],
   "trustedcasks": [
+    "https://github.com/louis-cfm/coucou/coucou",
     "mycometg3/qlstephenswift/qlstephenswift",
     "shobhit99/tap/holdmylid"
   ]
