@@ -14,7 +14,8 @@
     "slp/krunkit"
   ],
   "trustedformulae": [
-    "can1357/tap/omp"
+    "can1357/tap/omp",
+    "leoluyi/tap/b64split"
   ],
   "trustedcasks": [
     "https://github.com/louis-cfm/coucou/coucou",

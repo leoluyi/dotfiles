@@ -7,6 +7,7 @@ tap "flyteorg/tap", trusted: true
 tap "gromgit/brewtils", trusted: true
 tap "gromgit/fuse", trusted: true
 tap "instantclienttap/instantclient", trusted: true
+tap "leoluyi/tap"
 tap "louis-cfm/coucou", "https://github.com/Louis-CFM/coucou"
 tap "mycometg3/qlstephenswift", "https://github.com/MyCometG3/homebrew-qlstephenswift"
 tap "nikitabobko/tap", trusted: true
@@ -368,6 +369,8 @@ brew "gromgit/brewtils/taproom"
 brew "gromgit/fuse/ntfs-3g-mac"
 # Oracle Instant Client Basic Lite x64
 brew "instantclienttap/instantclient/instantclient-basiclite"
+# Split files into size-limited Base64 text parts
+brew "leoluyi/tap/b64split", trusted: true
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun"
 # SDKMAN! the Software Development Kit Manager
