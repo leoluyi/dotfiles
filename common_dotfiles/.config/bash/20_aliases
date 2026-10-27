@@ -83,7 +83,7 @@ fi
 # even if something else in the environment exports the key.
 if command -v codex >/dev/null; then
   codex_with_defaults() {
-    env -u OPENAI_API_KEY codex --approve-for-me "$@"
+    env -u OPENAI_API_KEY codex "$@"
   }
 
   alias cx='codex_with_defaults'
@@ -178,7 +178,7 @@ if command -v wt >/dev/null; then
 
     wt --config "$HOME/.dotfiles/common_dotfiles/.config/worktrunk/config.toml" \
       switch --create --base=@ --cd \
-      --execute 'env -u OPENAI_API_KEY codex --approve-for-me' "$name"
+      --execute 'env -u OPENAI_API_KEY codex' "$name"
   }
 fi
 

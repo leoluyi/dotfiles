@@ -2,6 +2,10 @@
 model = "gpt-5.6-luna"
 model_reasoning_effort = "xhigh"
 
+# Keep automatic approval review in config so launches can use the shared server.
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+
 # Keep normal workspace sandbox while allowing GitHub CLI and API access.
 default_permissions = "github"
 
