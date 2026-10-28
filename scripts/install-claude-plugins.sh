@@ -64,6 +64,7 @@ run claude plugin install dev-workflow@yvictor-skills
 run claude plugin install context7@context7-marketplace
 run claude plugin install diagram-design@diagram-design
 run claude plugin install typesafe@typesafe-ai
+run claude mcp add -s user playwright npx @playwright/mcp@latest
 run "${script_dir}/install-claude-settings.sh"
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
