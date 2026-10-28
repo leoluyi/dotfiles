@@ -327,6 +327,8 @@ brew "tldr"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Parser generator tool
+brew "tree-sitter-cli"
 # Vulnerability scanner for container images, file systems, and Git repos
 brew "trivy"
 # Digital clock in ncurses
@@ -582,6 +584,7 @@ mas "iPreview", id: 1519213509
 mas "LINE", id: 539883307
 mas "Markdown Preview", id: 6739955340
 mas "Movist", id: 461788075
+mas "NordVPN", id: 905953485
 mas "Obsidian Web Clipper", id: 6720708363
 mas "Owlfiles", id: 510282524
 mas "PDFgear", id: 6469021132
@@ -664,6 +667,7 @@ go "github.com/abice/go-enum"
 go "mvdan.cc/gofumpt"
 go "golang.org/x/tools/cmd/goimports"
 go "github.com/twpayne/go-jsonstruct/v3/cmd/gojsonstruct"
+go "github.com/golangci/golangci-lint/v2/cmd/golangci-lint"
 go "github.com/segmentio/golines"
 go "github.com/fatih/gomodifytags"
 go "github.com/abenz1267/gomvp"

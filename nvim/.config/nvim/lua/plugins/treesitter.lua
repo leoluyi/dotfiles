@@ -4,38 +4,21 @@
 local is_nvim_012 = vim.fn.has("nvim-0.12") == 1
 local load_textobjects = false
 local parsers = {
-  "bash",
-  "cpp",
-  "css",
-  "dockerfile",
-  "go",
-  "gomod",
-  "html",
-  "java",
-  "javascript",
-  "json",
-  "json5",
-  "latex",
-  "lua",
-  "make",
-  "markdown",
-  "markdown_inline",
-  "python",
-  "query",
-  "regex",
-  "rst",
-  "rust",
-  "scss",
-  "toml",
-  "vim",
-  "vimdoc",
-  "yaml",
+  "bash", "cpp", "css", "dockerfile", "go", "gomod", "html", "java",
+  "javascript", "json", "json5", "latex", "lua", "make", "markdown",
+  "markdown_inline", "python", "query", "regex", "rst", "rust", "scss",
+  "toml", "vim", "vimdoc", "yaml",
 }
+local build = { ":TSUpdate" }
+if is_nvim_012 then
+  build[#build + 1] = function()
+    require("nvim-treesitter").install(parsers):wait(300000)
+  end
+else
+  build[#build + 1] = ":TSInstallSync " .. table.concat(parsers, " ")
+end
 
 local legacy_opts = {
-  auto_install = true,
-  ensure_installed = parsers,
-
   ignore_install = {
     -- Don't install comment!! It's too laggy < https://github.com/nvim-treesitter/nvim-treesitter/issues/5057#issuecomment-1617844020 >
     "comment"
@@ -69,7 +52,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     branch = is_nvim_012 and "main" or "master",
-    build = ":TSUpdate",
+    build = build,
     lazy = is_nvim_012 and false or nil,
     event = is_nvim_012 and nil or { "BufReadPost", "BufNewFile" },
     dependencies = {
@@ -104,7 +87,7 @@ return {
       { "<bs>", desc = "(TS) Decrement selection", mode = "x" },
     },
 
-    opts = is_nvim_012 and { ensure_installed = parsers } or legacy_opts,
+    opts = is_nvim_012 and {} or legacy_opts,
 
     config = function(_, opts)
 
@@ -113,7 +96,6 @@ return {
         treesitter.setup({
           install_dir = vim.fn.stdpath("data") .. "/site",
         })
-        treesitter.install(opts.ensure_installed)
 
         vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
